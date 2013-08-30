@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# **********************************************************************
+# Preamble
+
 function absolute_path {
     (cd "$(dirname "$1")" && pwd)
 }
@@ -23,7 +26,7 @@ EOF
 
 
 # **********************************************************************
-# Program start
+# Entry point
 
 print_title "$*"
 
@@ -47,5 +50,22 @@ if [ -z "$input" ]; then
     exit 1
 fi
 
+system_dir=$(absolute_path $0)
 
+# Petri Net to network constraints C0
+echo
+echo '- Constructing C0'
+echo
+sicstus -l $system_dir/petri-net-to-constraints.pl -- `pwd`/$input 2>/dev/null | tee /tmp/constraints-c0.smt2
 
+# C0 is sat?
+echo
+echo '- Checking SAT(C0)'
+echo
+z3 -smt2 /tmp/constraints-c0.smt2 | tee /tmp/assignment-a1.smt2
+
+# Model A to trap conditions C_theta
+
+# C_theta is sat?
+
+# Model A_theta to refined constraints Cn+1
