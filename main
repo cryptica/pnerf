@@ -1,0 +1,51 @@
+#!/bin/bash
+
+function absolute_path {
+    (cd "$(dirname "$1")" && pwd)
+}
+
+function print_title {
+    cat <<EOF
+PETRINIZER: The checker for Petri Nets
+[$1]
+EOF
+}
+
+function print_usage {
+    cat <<EOF
+
+Usage: $0 [options] input_file
+Option list:
+ -h | --h | -help | --help    : Prints this help
+
+EOF
+}
+
+
+# **********************************************************************
+# Program start
+
+print_title "$*"
+
+# parse parameters
+for a in $@; do
+    case $a in
+        -h | --h | -help | --help)
+            print_usage
+            exit 0
+            ;;
+        -*)
+            echo 'ERROR: Unknown option '$a
+            exit 2
+            ;;
+        *) input=$a ;;
+    esac
+done
+
+if [ -z "$input" ]; then
+    echo 'ERROR: No input file was given'
+    exit 1
+fi
+
+
+
