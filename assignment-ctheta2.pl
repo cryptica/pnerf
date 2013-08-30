@@ -1,0 +1,14 @@
+assignment(bm1f, true).
+assignment(bhold1, true).
+assignment(bq1, false).
+assignment(bq2, false).
+assignment(bp1, false).
+assignment(bq3, true).
+assignment(bm2f, false).
+assignment(bp2, true).
+assignment(bhold2, false).
+assignment(bm2t, false).
+assignment(bm1t, false).
+assignment(bq4, false).
+assignment(bp4, false).
+assignment(bp3, false). 
