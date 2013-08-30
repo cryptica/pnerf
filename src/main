@@ -52,20 +52,48 @@ fi
 
 system_dir=$(absolute_path $0)
 
-# Petri Net to network constraints C0
-echo
-echo '- Constructing C0'
-echo
-sicstus -l $system_dir/petri-net-to-constraints.pl -- `pwd`/$input 2>/dev/null | tee /tmp/constraints-c0.smt2
+set -e
+set -o pipefail
 
-# C0 is sat?
+echo
+echo '- Constructing petri net N from input file'
+echo
+sicstus -l $system_dir/input-file-to-petri-net.pl -- `pwd`/$input 2>/dev/null | tee /tmp/petri-net.pl
+
+echo
+echo '- Constructing constraints C0 for petri net N'
+echo
+sicstus -l $system_dir/petri-net-to-constraints.pl -- /tmp/petri-net.pl 2>/dev/null | tee /tmp/constraints-c.smt2
+
 echo
 echo '- Checking SAT(C0)'
 echo
-z3 -smt2 /tmp/constraints-c0.smt2 | tee /tmp/assignment-a1.smt2
+if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
+# while ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
 
-# Model A to trap conditions C_theta
+    echo
+    echo '- Constructing trap conditions C_theta for model A'
+    echo
+    cat /tmp/model-a.smt2 | $system_dir/smt2-model-to-prolog-model.sh | tee /tmp/model-a.pl
+    sicstus -l $system_dir/trap-conditions.pl -- /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta.smt2
 
-# C_theta is sat?
+    echo
+    echo '- Checking SAT(C_theta)'
+    echo
+    if ! z3 -smt2 /tmp/constraints-ctheta.smt2 | tee /tmp/model-atheta.smt2; then
+        echo '-------------------------------------------'
+        echo 'The petri net may not satisfy the property'
+        echo '-------------------------------------------'
+        exit 1
+    fi
 
-# Model A_theta to refined constraints Cn+1
+    echo
+    echo '- Constructing trap conditions C_n+1 for model A_theta'
+    echo
+    cat /tmp/model-atheta.smt2 | $system_dir/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
+    sicstus -l $system_dir/delta-condition.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/delta-condition.smt2
+    
+# done
+
+set +o pipefail
+set +e
