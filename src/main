@@ -75,7 +75,9 @@ if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
     echo '- Constructing trap conditions C_theta for model A'
     echo
     cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-a.pl
-    sicstus -l "$sysdir"/trap-conditions.pl -- /tmp/petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta.smt2
+    sicstus -l "$sysdir"/trap-conditions.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl | tee /tmp/constraints-ctheta.smt2
+
+    exit 5
 
     echo
     echo '- Checking SAT(C_theta)'

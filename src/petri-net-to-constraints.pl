@@ -6,6 +6,7 @@
 :- use_module(library(ordsets)).
 
 :- ['load-pl-file.pl'].
+:- ['pretty-printing.pl'].
 
 z3_vars :-
         findall( _ , (
@@ -16,22 +17,6 @@ z3_vars :-
                        transition(T, _, _),
                        format('(declare-fun ~q () Int)\n', T)
                      ), _ ).
-z3_addition_seq(Xs) :-
-        (   Xs = [X1|Xs1] ->
-            print(X1),
-            (   foreach(X, Xs1)
-            do  format(' ~p', [X])
-            )
-        ;   true
-        ).
-z3_subtraction_seq(Xs) :-
-        (   Xs = [X1|Xs1] ->
-            format('(- ~p)', [X1]),
-            (   foreach(X, Xs1)
-            do  format(' (- ~p)', [X])
-            )
-        ;   true
-        ).
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
@@ -44,11 +29,10 @@ z3_place_eqs :-
                        ord_subtract(ISet, OSet, RelISet),
                        ord_subtract(OSet, ISet, RelOSet),
                        ( RelISet = [_|_] -> print(' ') ; true ),
-                       z3_addition_seq(RelISet),
+                       print_seq(RelISet),
                        ( RelOSet = [_|_] -> print(' ') ; true ),
-                       z3_subtraction_seq(RelOSet),
-                       print(')))'),
-                       nl
+                       format_seq('(- ~p)', RelOSet),
+                       print(')))\n')
                      ), _ ).
 z3_nat_ineqs :-
         findall( _ , (
