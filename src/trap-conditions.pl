@@ -2,9 +2,22 @@
 
 :- ['load-pl-file.pl'].
 
+%seq(Xs) :-
+%        (   Xs = [X1|Xs1] ->
+%            format('~p', [X1
+%            (   foreach(X, Xs1)
+%            do  format(' ~p', [X])
+%            )
+%        ;   true
+%        ).
+
 trap_conditions :-
         % 1. S is a trap
         % 2. An element of S is marked in the initial state
+%        findall( Place, init(Place), InitiallyMarked ),
+%        print('(assert (or '),
+%        seq(Initiall
+%        format('(assert ~p)\n', [InitiallyMarked]),
         % 3. No element of S is marked in the model
         findall( _,
                  (
