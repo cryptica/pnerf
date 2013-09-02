@@ -3,6 +3,8 @@
 :- dynamic init/1.         % init(PlaceId).
 :- dynamic cond/1.         % cond(Z3Atom).
 
+:- use_module(library(ordsets)).
+
 :- ['load-pl-file.pl'].
 
 z3_vars :-
@@ -14,26 +16,38 @@ z3_vars :-
                        transition(T, _, _),
                        format('(declare-fun ~q () Int)\n', T)
                      ), _ ).
-z3_plus(L) :-
-        (   foreach(X, L),
-            count(_, 1, N)
-        do  format('(+ ~q ', X)
-        ),
-        print(0),
-        (   for(_, 1, N)
-        do  print(')')
+z3_addition_seq(Xs) :-
+        (   Xs = [X1|Xs1] ->
+            print(X1),
+            (   foreach(X, Xs1)
+            do  format(' ~p', [X])
+            )
+        ;   true
+        ).
+z3_subtraction_seq(Xs) :-
+        (   Xs = [X1|Xs1] ->
+            format('(- ~p)', [X1]),
+            (   foreach(X, Xs1)
+            do  format(' (- ~p)', [X])
+            )
+        ;   true
         ).
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
                        (   init(P) ->
-                           format('(assert (= ~q (+ 1 (- ', [P])
-                       ;   format('(assert (= ~q (+ 0 (- ', [P])
+                           format('(assert (= ~q (+ 1', [P])
+                       ;   format('(assert (= ~q (+ 0', [P])
                        ),
-                       z3_plus(I),
-                       print(' '),
-                       z3_plus(O),
-                       print('))))'),
+                       list_to_ord_set(I, ISet),
+                       list_to_ord_set(O, OSet),
+                       ord_subtract(ISet, OSet, RelISet),
+                       ord_subtract(OSet, ISet, RelOSet),
+                       ( RelISet = [_|_] -> print(' ') ; true ),
+                       z3_addition_seq(RelISet),
+                       ( RelOSet = [_|_] -> print(' ') ; true ),
+                       z3_subtraction_seq(RelOSet),
+                       print(')))'),
                        nl
                      ), _ ).
 z3_nat_ineqs :-

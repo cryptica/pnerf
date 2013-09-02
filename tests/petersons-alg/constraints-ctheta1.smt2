@@ -1,5 +1,3 @@
-; variables for places being part of the trap
-
 (declare-const bp1 Bool)
 (declare-const bp2 Bool)
 (declare-const bp3 Bool)
@@ -17,7 +15,7 @@
 (declare-const bhold1 Bool)
 (declare-const bhold2 Bool)
 
-; constraints on theta being a trap
+; 1. S is a trap
 
 (assert (implies bp1 (or bp2 bm1t)))
 (assert (implies bp2 (and (or bp3 bhold1) (or bp3 bhold1))))
@@ -38,19 +36,18 @@
 (assert (implies bhold1 (and (or bq3 bhold2) (or bq4 bhold1) (or bp3 bhold1))))
 (assert (implies bhold2 (and (or bp3 bhold1) (or bp4 bhold2) (or bq3 bhold2))))
 
-; constraints on theta being marked initially
+; 2. An element of S is marked in the initial state
 
 (assert (or bp1 bq1 bm1f bm2f bhold1))
 
-; constraints on theta not being marked in the assignment
+; 3. No element of S is marked in the model A_theta
 
-(assert (and (not bp4) (not bq4) (not bm1t) (not bm2t) (not bhold1)))
-
-; check if sat
+(assert (not bp4))
+(assert (not bq4))
+(assert (not bm1t))
+(assert (not bm2t))
+(assert (not bhold1))
 
 (check-sat)
-
-; get model
-
 (get-model)
 

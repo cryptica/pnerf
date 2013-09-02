@@ -3,9 +3,9 @@ sat
   (define-fun v6 () Int
     0)
   (define-fun u4 () Int
-    1)
-  (define-fun u5 () Int
     0)
+  (define-fun u5 () Int
+    1)
   (define-fun v5 () Int
     0)
   (define-fun u2 () Int
@@ -20,10 +20,10 @@ sat
     1)
   (define-fun v3 () Int
     0)
-  (define-fun u6 () Int
-    0)
   (define-fun v1 () Int
     1)
+  (define-fun u6 () Int
+    0)
   (define-fun hold2 () Int
     0)
   (define-fun hold1 () Int
