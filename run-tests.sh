@@ -53,7 +53,7 @@ if test-checking-satC; then
     echo "petersons-alg/constraints-c0.smt2 ... PASS"
 else
     echo "petersons-alg/constraints-c0.smt2 ... FAILED"
-    #exit 3
+    exit 3
 fi
 
 echo
@@ -71,6 +71,19 @@ else
     exit 4
 fi
 
-#echo
-#echo '- Constructing trap conditions C_theta for model A'
-#echo
+echo
+echo '- Testing construction of trap conditions C_theta for model A'
+echo
+function test-trap-conditions {
+     set -e
+     sicstus -l "$sysdir/src/trap-conditions.pl" -- "$sysdir/tests/petersons-alg/pp-petri-net.pl" "$sysdir/tests/petersons-alg/model-a1.pl" 2>/dev/null >/tmp/constraints-ctheta1.smt2
+    sort "$sysdir/tests/petersons-alg/constraints-ctheta1.smt2" >/tmp/constraints-ctheta1-exp.smt2
+    sort /tmp/constraints-ctheta1.smt2 >/tmp/constraints-ctheta1-out.smt2
+    diff /tmp/constraints-ctheta1-exp.smt2 /tmp/constraints-ctheta1-out.smt2
+}
+if test-trap-conditions; then
+     echo "petersons-alg/model-a1.pl ... PASS"
+else
+    echo "petersons-alg/model-a1.pl ... FAILED"
+    exit 5
+fi
