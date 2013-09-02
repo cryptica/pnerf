@@ -1,6 +1,6 @@
 assignment(v6, 0).
-assignment(u4, 1).
-assignment(u5, 0).
+assignment(u4, 0).
+assignment(u5, 1).
 assignment(v5, 0).
 assignment(u2, 0).
 assignment(u3, 1).
@@ -8,8 +8,8 @@ assignment(v2, 1).
 assignment(u1, 1).
 assignment(v4, 1).
 assignment(v3, 0).
-assignment(u6, 0).
 assignment(v1, 1).
+assignment(u6, 0).
 assignment(hold2, 0).
 assignment(hold1, 1).
 assignment(m2t, 1).
