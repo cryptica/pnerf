@@ -62,8 +62,9 @@ echo
 function test-smt2-model-to-prolog-model {
     set -e
     cat "$sysdir"/tests/petersons-alg/model-a1.smt2 | "$sysdir"/src/smt2-model-to-prolog-model.sh >/tmp/model-a1.pl
-    # TODO: sort expected and out, then compare
-    diff "$sysdir"/tests/petersons-alg/model-a1.pl /tmp/model-a1.pl
+    sort "$sysdir"/tests/petersons-alg/model-a1.pl >/tmp/model-a1-exp.pl
+    sort  /tmp/model-a1.pl >/tmp/model-a1-out.pl
+    diff /tmp/model-a1-exp.pl /tmp/model-a1-out.pl
 }
 if test-smt2-model-to-prolog-model; then
     echo "petersons-alg/model-a1.smt2 ... PASS"
