@@ -5,9 +5,9 @@ sed -e '/sat/D' \
     -e '/(model/D' \
     -e '/^)$/D' | \
 tr '\n' '#' | \
-sed 's/)[[:space:]]*#/)\
-/g' | \
-sed 's/#//' | \
+sed -e 's/)#/)\
+/g' -e 's/#//g' | \
 sed -e 's/[[:space:]][[:space:]]*/ /g' \
-    -e 's/^ //' \
-    -e 's/(define-fun \([[:alnum:]][[:alnum:]]*\) () [[:alnum:]][[:alnum:]]* \([[:alnum:]][[:alnum:]]*\))/assignment(\1, \2)./'
+    -e 's/ (define-fun /assignment(/' \
+    -e 's/ () [[:alnum:]][[:alnum:]]*/,/' \
+    -e 's/)/)./'
