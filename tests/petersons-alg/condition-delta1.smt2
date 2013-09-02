@@ -1,0 +1,1 @@
+(assert (>= (+ p3 q2 hold1 m2f) 1))
