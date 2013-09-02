@@ -45,9 +45,14 @@ for a in $@; do
     esac
 done
 
-if [ -z "$input" ]; then
+if [ -z $input ]; then
     echo 'ERROR: No input file was given'
     exit 1
+fi
+
+if [ ! -e $input ]; then
+    echo "ERROR: The file $input does not exist"
+    exit 2
 fi
 
 sysdir=$(absolute_path $0)
@@ -56,44 +61,55 @@ set -e
 set -o pipefail
 
 echo
-echo '- Constructing petri net N from input file'
-echo
+echo '* Constructing petri net N from input file'
 sicstus -l "$sysdir"/input-file-to-petri-net.pl -- `pwd`/$input 2>/dev/null | tee /tmp/pp-petri-net.pl
 
 echo
-echo '- Constructing constraints C0 for petri net N'
-echo
+echo '* Constructing constraint C_0 for petri net N'
 sicstus -l "$sysdir"/petri-net-to-constraints.pl -- /tmp/pp-petri-net.pl 2>/dev/null | tee /tmp/constraints-c.smt2
 
+iter=0
 echo
-echo '- Checking SAT(C0)'
-echo
-if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
-# while ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
+echo '* Checking SAT(C0)'n
+# if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
+while z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
+    ((iter++))
 
     echo
-    echo '- Constructing trap conditions C_theta for model A'
-    echo
+    echo '* Constructing trap constraints C_theta for model A'
+    echo '- model A...'
     cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-a.pl
-    sicstus -l "$sysdir"/trap-conditions.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta.smt2
+    echo '- constraints C_theta...'
+    sicstus -l "$sysdir"/trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta.smt2
 
     echo
-    echo '- Checking SAT(C_theta)'
-    echo
+    echo '* Checking SAT(C_theta)'
     if ! z3 -smt2 /tmp/constraints-ctheta.smt2 | tee /tmp/model-atheta.smt2; then
+        echo
         echo '-------------------------------------------'
         echo 'The petri net may not satisfy the property'
         echo '-------------------------------------------'
+        echo
         exit 1
     fi
 
     echo
-    echo '- Constructing trap conditions C_n+1 for model A_theta'
-    echo
+    echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
+    echo '- model A_theta...'
     cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
-    sicstus -l "$sysdir"/delta-condition.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/delta-condition.smt2
+    echo "- constraint d_$iter..."
+    sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
+    echo "- constraints c_$iter..."
+    "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 | tee /tmp/constraints-cn.smt2
+    mv /tmp/constraints-cn.smt2 /tmp/constraints-c.smt2
     
-# done
+done
+
+echo
+echo '-------------------------------------------'
+echo 'The petri net satisfies the property!'
+echo '-------------------------------------------'
+echo
 
 set +o pipefail
 set +e

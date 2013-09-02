@@ -1,9 +1,13 @@
 :- dynamic assignment/2. % assignment(Preimage, Image).
 
 :- ['load-pl-file.pl'].
+:- ['pretty-printing.pl'].
 
 delta_condition :-
-        print('NYI: delta condition\n').
+        findall(P, assignment(P, true), Ps),
+        print('(assert (>= (+ '),
+        print_seq(Ps),
+        print(') 1))\n').
 
 % Entry point
 :-      prolog_flag(argv, Argv),
@@ -11,4 +15,4 @@ delta_condition :-
         do  load_pl_file(F)
         ),
         delta_condition,
-        halt(1).
+        halt.

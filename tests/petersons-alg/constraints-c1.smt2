@@ -66,6 +66,6 @@
 (assert (= hold2 (+ 0 v3 (- u2))))
 (assert (> p4 0))
 (assert (> q4 0))
-(assert (>= (+ p3 q2 hold1 m2f) 1))
+(assert (>= (+ hold2 m2f p3 q2) 1))
 (check-sat)
 (get-model)

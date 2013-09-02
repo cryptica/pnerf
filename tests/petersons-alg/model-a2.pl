@@ -23,4 +23,4 @@ assignment(q1, 0).
 assignment(p4, 1).
 assignment(p3, 0).
 assignment(p2, 0).
-assignment(p1, 0). 
+assignment(p1, 0).

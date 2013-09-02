@@ -7,7 +7,6 @@
 :- ['load-pl-file.pl'].
 :- ['pretty-printing.pl'].
 
-
 transition_successors(T) :-
         transition(T, _, OPs),
         (   OPs = [O] ->

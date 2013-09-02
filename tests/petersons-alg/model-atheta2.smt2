@@ -1,31 +1,31 @@
 sat
 (model 
-  (define-fun bm1f () Bool
+  (define-fun m1f () Bool
     true)
-  (define-fun bhold1 () Bool
+  (define-fun hold1 () Bool
     true)
-  (define-fun bq1 () Bool
+  (define-fun q1 () Bool
     false)
-  (define-fun bq2 () Bool
+  (define-fun q2 () Bool
     false)
-  (define-fun bp1 () Bool
+  (define-fun p1 () Bool
     false)
-  (define-fun bq3 () Bool
+  (define-fun q3 () Bool
     true)
-  (define-fun bm2f () Bool
+  (define-fun m2f () Bool
     false)
-  (define-fun bp2 () Bool
+  (define-fun p2 () Bool
     true)
-  (define-fun bhold2 () Bool
+  (define-fun hold2 () Bool
     false)
-  (define-fun bm2t () Bool
+  (define-fun m2t () Bool
     false)
-  (define-fun bm1t () Bool
+  (define-fun m1t () Bool
     false)
-  (define-fun bq4 () Bool
+  (define-fun q4 () Bool
     false)
-  (define-fun bp4 () Bool
+  (define-fun p4 () Bool
     false)
-  (define-fun bp3 () Bool
+  (define-fun p3 () Bool
     false)
 )
