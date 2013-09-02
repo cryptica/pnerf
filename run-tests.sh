@@ -33,6 +33,7 @@ function test-petri-net-to-constraints {
     sort "$sysdir"/tests/petersons-alg/constraints-c0.smt2 >/tmp/constraints-c0-exp.smt2
     sort /tmp/constraints-c0.smt2 >/tmp/constraints-c0-out.smt2
     diff /tmp/constraints-c0-exp.smt2 /tmp/constraints-c0-out.smt2
+    echo
 }
 if test-petri-net-to-constraints; then
     echo "petersons-alg/pp-petri-net.pl ... PASS"
@@ -48,6 +49,7 @@ function test-checking-satC {
     set -e
     z3 -smt2 "$sysdir"/tests/petersons-alg/constraints-c0.smt2 >/tmp/model-a1.smt2
     diff "$sysdir"/tests/petersons-alg/model-a1.smt2 /tmp/model-a1.smt2
+    echo
 }
 if test-checking-satC; then
     echo "petersons-alg/constraints-c0.smt2 ... PASS"
@@ -65,6 +67,7 @@ function test-smt2-model-to-prolog-model {
     sort "$sysdir"/tests/petersons-alg/model-a1.pl >/tmp/model-a1-exp.pl
     sort  /tmp/model-a1.pl >/tmp/model-a1-out.pl
     diff /tmp/model-a1-exp.pl /tmp/model-a1-out.pl
+    echo
 }
 if test-smt2-model-to-prolog-model; then
     echo "petersons-alg/model-a1.smt2 ... PASS"
@@ -78,10 +81,11 @@ echo '- Testing construction of trap conditions C_theta for model A'
 echo
 function test-trap-conditions {
     set -e
-    sicstus -l "$sysdir"/src/trap-conditions.pl -- "$sysdir"/tests/petersons-alg/pp-petri-net.pl "$sysdir"/tests/petersons-alg/model-a1.pl  >/tmp/constraints-ctheta1.smt2
+    sicstus -l "$sysdir"/src/trap-conditions.pl -- "$sysdir"/tests/petersons-alg/pp-petri-net.pl "$sysdir"/tests/petersons-alg/model-a1.pl 2>/dev/null >/tmp/constraints-ctheta1.smt2
     sort "$sysdir"/tests/petersons-alg/constraints-ctheta1.smt2 >/tmp/constraints-ctheta1-exp.smt2
     sort /tmp/constraints-ctheta1.smt2 >/tmp/constraints-ctheta1-out.smt2
     diff /tmp/constraints-ctheta1-exp.smt2 /tmp/constraints-ctheta1-out.smt2
+    echo
 }
 if test-trap-conditions; then
     echo "petersons-alg/model-a1.pl ... PASS"
