@@ -62,7 +62,7 @@ set -o pipefail
 
 echo
 echo '* Constructing petri net N from input file'
-sicstus -l "$sysdir"/input-file-to-petri-net.pl -- "`pwd`"/$input 2>/dev/null | tee /tmp/pp-petri-net.pl
+sicstus -l "$sysdir"/input-file-to-petri-net.pl -- `pwd`/$input 2>/dev/null | tee /tmp/pp-petri-net.pl
 
 echo
 echo '* Constructing constraint C_0 for petri net N'
