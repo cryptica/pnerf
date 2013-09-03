@@ -1,0 +1,5 @@
+benchmarks/cprover-PN/lamport.tts.spec.pl
+benchmarks/cprover-PN/newdekker.tts.spec.pl
+benchmarks/cprover-PN/peterson.tts.spec.pl
+benchmarks/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl
+benchmarks/cprover-PN/reaction5.tts.spec.pl

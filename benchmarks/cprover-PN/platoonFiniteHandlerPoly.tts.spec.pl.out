@@ -1,0 +1,314 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t1]).
+place(s1, [t1], [t2]).
+place(l3, [t4], []).
+place(l8, [t7], [t8]).
+place(l1, [t8], [t3]).
+place(l9, [t3], [t9]).
+place(l2, [t9], [t4]).
+place(l11, [t10], [t11]).
+place(l5, [t11], [t7,t6]).
+place(s3, [t8], [t12]).
+place(l4, [t12,t1], [t5]).
+place(l6, [t5], [t13]).
+place(s4, [t6], [t13]).
+place(s5, [t10], [t14]).
+place(l10, [t14,t2], [t10]).
+place(l7, [t6], [t15]).
+place(s6, [t7], [t15]).
+place(s2, [t15,t14,t13,t12,t2], [t11,t10,t9,t8,t7,t6,t5,t4,t3]).
+place(l0, [t15,t13], [t14,t12,t2,t1]).
+
+transition(t1, [l0,s0], [s1,l4]).
+transition(t2, [l0,s1], [s2,l10]).
+transition(t3, [l1,s2], [l9]).
+transition(t4, [l2,s2], [l3]).
+transition(t5, [l4,s2], [l6]).
+transition(t6, [l5,s2], [s4,l7]).
+transition(t7, [l5,s2], [s6,l8]).
+transition(t8, [l8,s2], [s3,l1]).
+transition(t9, [l9,s2], [l2]).
+transition(t10, [l10,s2], [s5,l11]).
+transition(t11, [l11,s2], [l5]).
+transition(t12, [l0,s3], [s2,l4]).
+transition(t13, [l6,s4], [s2,l0]).
+transition(t14, [l0,s5], [s2,l10]).
+transition(t15, [l7,s6], [s2,l0]).
+
+init(s0, 1).
+init(l0, init1).
+
+cond('(>= init1 1)').
+cond('(>= s2 1)').
+cond('(>= l11 2)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun init1 () Int)
+(declare-fun s0 () Int)
+(declare-fun s1 () Int)
+(declare-fun l3 () Int)
+(declare-fun l8 () Int)
+(declare-fun l1 () Int)
+(declare-fun l9 () Int)
+(declare-fun l2 () Int)
+(declare-fun l11 () Int)
+(declare-fun l5 () Int)
+(declare-fun s3 () Int)
+(declare-fun l4 () Int)
+(declare-fun l6 () Int)
+(declare-fun s4 () Int)
+(declare-fun s5 () Int)
+(declare-fun l10 () Int)
+(declare-fun l7 () Int)
+(declare-fun s6 () Int)
+(declare-fun s2 () Int)
+(declare-fun l0 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(declare-fun t13 () Int)
+(declare-fun t14 () Int)
+(declare-fun t15 () Int)
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= l3 0))
+(assert (>= l8 0))
+(assert (>= l1 0))
+(assert (>= l9 0))
+(assert (>= l2 0))
+(assert (>= l11 0))
+(assert (>= l5 0))
+(assert (>= s3 0))
+(assert (>= l4 0))
+(assert (>= l6 0))
+(assert (>= s4 0))
+(assert (>= s5 0))
+(assert (>= l10 0))
+(assert (>= l7 0))
+(assert (>= s6 0))
+(assert (>= s2 0))
+(assert (>= l0 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (>= t13 0))
+(assert (>= t14 0))
+(assert (>= t15 0))
+(assert (= s0 (+ 1 (- t1))))
+(assert (= s1 (+ 0 t1 (- t2))))
+(assert (= l3 (+ 0 t4)))
+(assert (= l8 (+ 0 t7 (- t8))))
+(assert (= l1 (+ 0 t8 (- t3))))
+(assert (= l9 (+ 0 t3 (- t9))))
+(assert (= l2 (+ 0 t9 (- t4))))
+(assert (= l11 (+ 0 t10 (- t11))))
+(assert (= l5 (+ 0 t11 (- t6) (- t7))))
+(assert (= s3 (+ 0 t8 (- t12))))
+(assert (= l4 (+ 0 t1 t12 (- t5))))
+(assert (= l6 (+ 0 t5 (- t13))))
+(assert (= s4 (+ 0 t6 (- t13))))
+(assert (= s5 (+ 0 t10 (- t14))))
+(assert (= l10 (+ 0 t14 t2 (- t10))))
+(assert (= l7 (+ 0 t6 (- t15))))
+(assert (= s6 (+ 0 t7 (- t15))))
+(assert (= s2 (+ 0 t12 t13 t14 t15 t2 (- t10) (- t11) (- t3) (- t4) (- t5) (- t6) (- t7) (- t8) (- t9))))
+(assert (= l0 (+ init1 t13 t15 (- t1) (- t12) (- t14) (- t2))))
+(assert (>= init1 1))
+(assert (>= s2 1))
+(assert (>= l11 2))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)n
+sat
+(model 
+  (define-fun t3 () Int
+    0)
+  (define-fun t5 () Int
+    0)
+  (define-fun t2 () Int
+    1)
+  (define-fun t15 () Int
+    0)
+  (define-fun t4 () Int
+    0)
+  (define-fun t12 () Int
+    0)
+  (define-fun t8 () Int
+    0)
+  (define-fun t6 () Int
+    0)
+  (define-fun init1 () Int
+    4)
+  (define-fun t14 () Int
+    2)
+  (define-fun t7 () Int
+    0)
+  (define-fun t13 () Int
+    0)
+  (define-fun t9 () Int
+    0)
+  (define-fun t11 () Int
+    0)
+  (define-fun t1 () Int
+    1)
+  (define-fun t10 () Int
+    2)
+  (define-fun l0 () Int
+    0)
+  (define-fun s2 () Int
+    1)
+  (define-fun s6 () Int
+    0)
+  (define-fun l7 () Int
+    0)
+  (define-fun l10 () Int
+    1)
+  (define-fun s5 () Int
+    0)
+  (define-fun s4 () Int
+    0)
+  (define-fun l6 () Int
+    0)
+  (define-fun l4 () Int
+    1)
+  (define-fun s3 () Int
+    0)
+  (define-fun l5 () Int
+    0)
+  (define-fun l11 () Int
+    2)
+  (define-fun l2 () Int
+    0)
+  (define-fun l9 () Int
+    0)
+  (define-fun l1 () Int
+    0)
+  (define-fun l8 () Int
+    0)
+  (define-fun l3 () Int
+    0)
+  (define-fun s1 () Int
+    0)
+  (define-fun s0 () Int
+    0)
+)
+
+* Constructing trap constraints C_theta for model A
+- model A...
+assignment(t3, 0).
+assignment(t5, 0).
+assignment(t2, 1).
+assignment(t15, 0).
+assignment(t4, 0).
+assignment(t12, 0).
+assignment(t8, 0).
+assignment(t6, 0).
+assignment(init1, 4).
+assignment(t14, 2).
+assignment(t7, 0).
+assignment(t13, 0).
+assignment(t9, 0).
+assignment(t11, 0).
+assignment(t1, 1).
+assignment(t10, 2).
+assignment(l0, 0).
+assignment(s2, 1).
+assignment(s6, 0).
+assignment(l7, 0).
+assignment(l10, 1).
+assignment(s5, 0).
+assignment(s4, 0).
+assignment(l6, 0).
+assignment(l4, 1).
+assignment(s3, 0).
+assignment(l5, 0).
+assignment(l11, 2).
+assignment(l2, 0).
+assignment(l9, 0).
+assignment(l1, 0).
+assignment(l8, 0).
+assignment(l3, 0).
+assignment(s1, 0).
+assignment(s0, 0).
+
+- constraints C_theta...
+(declare-fun s0 () Bool)
+(declare-fun s1 () Bool)
+(declare-fun l3 () Bool)
+(declare-fun l8 () Bool)
+(declare-fun l1 () Bool)
+(declare-fun l9 () Bool)
+(declare-fun l2 () Bool)
+(declare-fun l11 () Bool)
+(declare-fun l5 () Bool)
+(declare-fun s3 () Bool)
+(declare-fun l4 () Bool)
+(declare-fun l6 () Bool)
+(declare-fun s4 () Bool)
+(declare-fun s5 () Bool)
+(declare-fun l10 () Bool)
+(declare-fun l7 () Bool)
+(declare-fun s6 () Bool)
+(declare-fun s2 () Bool)
+(declare-fun l0 () Bool)
+
+(assert (implies s0 (or s1 l4)))
+(assert (implies s1 (or s2 l10)))
+(assert (implies l8 (or s3 l1)))
+(assert (implies l1 l9))
+(assert (implies l9 l2))
+(assert (implies l2 l3))
+(assert (implies l11 l5))
+(assert (implies l5 (and (or s6 l8) (or s4 l7))))
+(assert (implies s3 (or s2 l4)))
+(assert (implies l4 l6))
+(assert (implies l6 (or s2 l0)))
+(assert (implies s4 (or s2 l0)))
+(assert (implies s5 (or s2 l10)))
+(assert (implies l10 (or s5 l11)))
+(assert (implies l7 (or s2 l0)))
+(assert (implies s6 (or s2 l0)))
+(assert (implies s2 (and l5 (or s5 l11) l2 (or s3 l1) (or s6 l8) (or s4 l7) l6 l3 l9)))
+(assert (implies l0 (and (or s2 l10) (or s2 l4) (or s2 l10) (or s1 l4))))
+
+(assert (or s0 l0))
+
+(assert (not s2))
+(assert (not l10))
+(assert (not l4))
+(assert (not l11))
+
+(check-sat)
+(get-model)
+
+* Checking SAT(C_theta)
+unsat
+(error "line 48 column 10: model is not available")
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

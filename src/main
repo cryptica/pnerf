@@ -73,7 +73,7 @@ echo
 echo '* Checking SAT(C0)'n
 # if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
 while z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
-    ((iter++))
+    iter=$((iter+1))
 
     echo
     echo '* Constructing trap constraints C_theta for model A'
@@ -102,7 +102,6 @@ while z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
     echo "- constraints c_$iter..."
     "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 | tee /tmp/constraints-cn.smt2
     mv /tmp/constraints-cn.smt2 /tmp/constraints-c.smt2
-    
 done
 
 echo

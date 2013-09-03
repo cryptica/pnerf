@@ -1,7 +1,7 @@
 :- dynamic assignment/2.   % assignment(Preimage, Image).
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
-:- dynamic init/1.         % init(PlaceId).
+:- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
 
 :- ['load-pl-file.pl'].
@@ -72,7 +72,11 @@ trap_conditions :-
                  ), _ ),
         nl,
         % 2. An element of S is marked in the initial state
-        findall( P, init(P), Ps),
+        findall(P, (   init(P, V),
+                       (   integer(V) -> true
+                       ;   assignment(V, Val), Val>0
+                       )),
+                Ps),
         (   Ps = [_|_] ->
             print('(assert (or '),
             print_seq(Ps),

@@ -1,6 +1,6 @@
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
-:- dynamic init/1.         % init(PlaceId).
+:- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
 
 :- use_module(library(ordsets)).
@@ -9,6 +9,11 @@
 :- ['pretty-printing.pl'].
 
 z3_vars :-
+        findall( _ , (
+                       init(_, V),
+                       atom(V),
+                       format('(declare-fun ~q () Int)\n', V)
+                     ), _ ),
         findall( _ , (
                        place(P, _, _),
                        format('(declare-fun ~q () Int)\n', P)
@@ -20,8 +25,8 @@ z3_vars :-
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
-                       (   init(P) ->
-                           format('(assert (= ~q (+ 1', [P])
+                       (   init(P, V) ->
+                           format('(assert (= ~q (+ ~p', [P, V])
                        ;   format('(assert (= ~q (+ 0', [P])
                        ),
                        list_to_ord_set(I, ISet),

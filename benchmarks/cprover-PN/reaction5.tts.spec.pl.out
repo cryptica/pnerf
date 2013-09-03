@@ -1,0 +1,384 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/cprover-PN/reaction5.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t1]).
+place(s1, [t1], [t2]).
+place(s2, [t2], [t3]).
+place(s3, [t3], [t4]).
+place(l3, [t5], []).
+place(l2, [t2,t1], [t6]).
+place(l1, [t6], [t5]).
+place(l4, [t4,t3], [t7]).
+place(s5, [t6], [t7]).
+place(s4, [t7,t4], [t6,t5]).
+place(l0, [t7], [t4,t3,t2,t1]).
+
+transition(t1, [l0,s0], [s1,l2]).
+transition(t2, [l0,s1], [s2,l2]).
+transition(t3, [l0,s2], [s3,l4]).
+transition(t4, [l0,s3], [s4,l4]).
+transition(t5, [l1,s4], [l3]).
+transition(t6, [l2,s4], [s5,l1]).
+transition(t7, [l4,s5], [s4,l0]).
+
+init(s0, 1).
+init(l0, init1).
+
+cond('(>= init1 1)').
+cond('(>= s4 1)').
+cond('(>= l1 2)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun init1 () Int)
+(declare-fun s0 () Int)
+(declare-fun s1 () Int)
+(declare-fun s2 () Int)
+(declare-fun s3 () Int)
+(declare-fun l3 () Int)
+(declare-fun l2 () Int)
+(declare-fun l1 () Int)
+(declare-fun l4 () Int)
+(declare-fun s5 () Int)
+(declare-fun s4 () Int)
+(declare-fun l0 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= s2 0))
+(assert (>= s3 0))
+(assert (>= l3 0))
+(assert (>= l2 0))
+(assert (>= l1 0))
+(assert (>= l4 0))
+(assert (>= s5 0))
+(assert (>= s4 0))
+(assert (>= l0 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (= s0 (+ 1 (- t1))))
+(assert (= s1 (+ 0 t1 (- t2))))
+(assert (= s2 (+ 0 t2 (- t3))))
+(assert (= s3 (+ 0 t3 (- t4))))
+(assert (= l3 (+ 0 t5)))
+(assert (= l2 (+ 0 t1 t2 (- t6))))
+(assert (= l1 (+ 0 t6 (- t5))))
+(assert (= l4 (+ 0 t3 t4 (- t7))))
+(assert (= s5 (+ 0 t6 (- t7))))
+(assert (= s4 (+ 0 t4 t7 (- t5) (- t6))))
+(assert (= l0 (+ init1 t7 (- t1) (- t2) (- t3) (- t4))))
+(assert (>= init1 1))
+(assert (>= s4 1))
+(assert (>= l1 2))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)n
+sat
+(model 
+  (define-fun init1 () Int
+    2)
+  (define-fun t5 () Int
+    0)
+  (define-fun t2 () Int
+    1)
+  (define-fun t7 () Int
+    2)
+  (define-fun t4 () Int
+    1)
+  (define-fun t6 () Int
+    2)
+  (define-fun t1 () Int
+    1)
+  (define-fun t3 () Int
+    1)
+  (define-fun l0 () Int
+    0)
+  (define-fun s4 () Int
+    1)
+  (define-fun s5 () Int
+    0)
+  (define-fun l4 () Int
+    0)
+  (define-fun l1 () Int
+    2)
+  (define-fun l2 () Int
+    0)
+  (define-fun l3 () Int
+    0)
+  (define-fun s3 () Int
+    0)
+  (define-fun s2 () Int
+    0)
+  (define-fun s1 () Int
+    0)
+  (define-fun s0 () Int
+    0)
+)
+
+* Constructing trap constraints C_theta for model A
+- model A...
+assignment(init1, 2).
+assignment(t5, 0).
+assignment(t2, 1).
+assignment(t7, 2).
+assignment(t4, 1).
+assignment(t6, 2).
+assignment(t1, 1).
+assignment(t3, 1).
+assignment(l0, 0).
+assignment(s4, 1).
+assignment(s5, 0).
+assignment(l4, 0).
+assignment(l1, 2).
+assignment(l2, 0).
+assignment(l3, 0).
+assignment(s3, 0).
+assignment(s2, 0).
+assignment(s1, 0).
+assignment(s0, 0).
+
+- constraints C_theta...
+(declare-fun s0 () Bool)
+(declare-fun s1 () Bool)
+(declare-fun s2 () Bool)
+(declare-fun s3 () Bool)
+(declare-fun l3 () Bool)
+(declare-fun l2 () Bool)
+(declare-fun l1 () Bool)
+(declare-fun l4 () Bool)
+(declare-fun s5 () Bool)
+(declare-fun s4 () Bool)
+(declare-fun l0 () Bool)
+
+(assert (implies s0 (or s1 l2)))
+(assert (implies s1 (or s2 l2)))
+(assert (implies s2 (or s3 l4)))
+(assert (implies s3 (or s4 l4)))
+(assert (implies l2 (or s5 l1)))
+(assert (implies l1 l3))
+(assert (implies l4 (or s4 l0)))
+(assert (implies s5 (or s4 l0)))
+(assert (implies s4 (and (or s5 l1) l3)))
+(assert (implies l0 (and (or s4 l4) (or s3 l4) (or s2 l2) (or s1 l2))))
+
+(assert (or s0 l0))
+
+(assert (not s4))
+(assert (not l1))
+
+(check-sat)
+(get-model)
+
+* Checking SAT(C_theta)
+sat
+(model 
+  (define-fun s2 () Bool
+    true)
+  (define-fun s3 () Bool
+    false)
+  (define-fun s1 () Bool
+    true)
+  (define-fun l2 () Bool
+    false)
+  (define-fun l4 () Bool
+    true)
+  (define-fun s5 () Bool
+    false)
+  (define-fun l0 () Bool
+    true)
+  (define-fun s0 () Bool
+    false)
+  (define-fun l1 () Bool
+    false)
+  (define-fun s4 () Bool
+    false)
+)
+
+* Constructing constraints C_1 for C_0 and A_theta
+- model A_theta...
+assignment(s2, true).
+assignment(s3, false).
+assignment(s1, true).
+assignment(l2, false).
+assignment(l4, true).
+assignment(s5, false).
+assignment(l0, true).
+assignment(s0, false).
+assignment(l1, false).
+assignment(s4, false).
+
+- constraint d_1...
+(assert (>= (+ s2 s1 l4 l0) 1))
+- constraints c_1...
+(declare-fun init1 () Int)
+(declare-fun s0 () Int)
+(declare-fun s1 () Int)
+(declare-fun s2 () Int)
+(declare-fun s3 () Int)
+(declare-fun l3 () Int)
+(declare-fun l2 () Int)
+(declare-fun l1 () Int)
+(declare-fun l4 () Int)
+(declare-fun s5 () Int)
+(declare-fun s4 () Int)
+(declare-fun l0 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= s2 0))
+(assert (>= s3 0))
+(assert (>= l3 0))
+(assert (>= l2 0))
+(assert (>= l1 0))
+(assert (>= l4 0))
+(assert (>= s5 0))
+(assert (>= s4 0))
+(assert (>= l0 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (= s0 (+ 1 (- t1))))
+(assert (= s1 (+ 0 t1 (- t2))))
+(assert (= s2 (+ 0 t2 (- t3))))
+(assert (= s3 (+ 0 t3 (- t4))))
+(assert (= l3 (+ 0 t5)))
+(assert (= l2 (+ 0 t1 t2 (- t6))))
+(assert (= l1 (+ 0 t6 (- t5))))
+(assert (= l4 (+ 0 t3 t4 (- t7))))
+(assert (= s5 (+ 0 t6 (- t7))))
+(assert (= s4 (+ 0 t4 t7 (- t5) (- t6))))
+(assert (= l0 (+ init1 t7 (- t1) (- t2) (- t3) (- t4))))
+(assert (>= init1 1))
+(assert (>= s4 1))
+(assert (>= l1 2))
+(assert (>= (+ s2 s1 l4 l0) 1))
+(check-sat)
+(get-model)
+sat
+(model 
+  (define-fun init1 () Int
+    3)
+  (define-fun t5 () Int
+    0)
+  (define-fun t2 () Int
+    1)
+  (define-fun t7 () Int
+    2)
+  (define-fun t4 () Int
+    1)
+  (define-fun t6 () Int
+    2)
+  (define-fun t1 () Int
+    1)
+  (define-fun t3 () Int
+    1)
+  (define-fun l0 () Int
+    1)
+  (define-fun s4 () Int
+    1)
+  (define-fun s5 () Int
+    0)
+  (define-fun l4 () Int
+    0)
+  (define-fun l1 () Int
+    2)
+  (define-fun l2 () Int
+    0)
+  (define-fun l3 () Int
+    0)
+  (define-fun s3 () Int
+    0)
+  (define-fun s2 () Int
+    0)
+  (define-fun s1 () Int
+    0)
+  (define-fun s0 () Int
+    0)
+)
+
+* Constructing trap constraints C_theta for model A
+- model A...
+assignment(init1, 3).
+assignment(t5, 0).
+assignment(t2, 1).
+assignment(t7, 2).
+assignment(t4, 1).
+assignment(t6, 2).
+assignment(t1, 1).
+assignment(t3, 1).
+assignment(l0, 1).
+assignment(s4, 1).
+assignment(s5, 0).
+assignment(l4, 0).
+assignment(l1, 2).
+assignment(l2, 0).
+assignment(l3, 0).
+assignment(s3, 0).
+assignment(s2, 0).
+assignment(s1, 0).
+assignment(s0, 0).
+
+- constraints C_theta...
+(declare-fun s0 () Bool)
+(declare-fun s1 () Bool)
+(declare-fun s2 () Bool)
+(declare-fun s3 () Bool)
+(declare-fun l3 () Bool)
+(declare-fun l2 () Bool)
+(declare-fun l1 () Bool)
+(declare-fun l4 () Bool)
+(declare-fun s5 () Bool)
+(declare-fun s4 () Bool)
+(declare-fun l0 () Bool)
+
+(assert (implies s0 (or s1 l2)))
+(assert (implies s1 (or s2 l2)))
+(assert (implies s2 (or s3 l4)))
+(assert (implies s3 (or s4 l4)))
+(assert (implies l2 (or s5 l1)))
+(assert (implies l1 l3))
+(assert (implies l4 (or s4 l0)))
+(assert (implies s5 (or s4 l0)))
+(assert (implies s4 (and (or s5 l1) l3)))
+(assert (implies l0 (and (or s4 l4) (or s3 l4) (or s2 l2) (or s1 l2))))
+
+(assert (or s0 l0))
+
+(assert (not l0))
+(assert (not s4))
+(assert (not l1))
+
+(check-sat)
+(get-model)
+
+* Checking SAT(C_theta)
+unsat
+(error "line 31 column 10: model is not available")
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

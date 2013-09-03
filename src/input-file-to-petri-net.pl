@@ -3,6 +3,7 @@
 :- dynamic transition/2.   % transition(InPlaces, OutPlaces).
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
 :- dynamic init/1.         % init(PlaceId).
+:- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
@@ -49,6 +50,10 @@ connect_places_w_transitions :-
         connect_places_w_transitions,
         listing(place/3),
         listing(transition/3),
-        listing(init/1),
+        findall( _,
+                 (   init(P),
+                     portray_clause(init(P, 1))
+                 ), _),
+        listing(init/2),
         listing(cond/1),
         halt.

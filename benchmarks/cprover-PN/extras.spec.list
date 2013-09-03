@@ -1,0 +1,16 @@
+abp.spec
+bingham_h500.spec
+clientserver.spec
+gsm.spec
+handover.spec
+keycard.spec
+multipoll.spec
+phones.spec
+platoon.spec
+platoonFiniteHandlerPoly.spec
+reaction.spec
+reaction2.spec
+reaction3.spec
+reaction4.spec
+reaction5.spec
+restriction.spec

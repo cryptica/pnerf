@@ -1,0 +1,230 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/cprover-PN/leabasicapproach.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t3,t2,t1]).
+place(s1, [t3], [t4]).
+place(s2, [t4], [t5]).
+place(l0, [], [t6,t5,t4,t3,t2,t1]).
+place(s3, [t5], [t6]).
+place(l2, [t8,t7], [t10,t9]).
+place(l1, [t10,t9,t3], [t8,t7]).
+place(l4, [t12,t11], [t14,t13]).
+place(l3, [t14,t13,t4], [t12,t11]).
+place(l5, [t16,t5,t1], [t15]).
+place(l11, [t18,t6,t2], [t17]).
+place(l6, [t15], [t19]).
+place(s5, [t7], [t19]).
+place(l7, [t19], [t20]).
+place(s6, [t11], [t20]).
+place(l8, [t20], [t21]).
+place(s7, [t13], [t21]).
+place(l9, [t21], [t22]).
+place(s8, [t9], [t22]).
+place(l10, [t22], [t16]).
+place(l12, [t17], [t23]).
+place(s9, [t12], [t23]).
+place(l13, [t23], [t24]).
+place(s10, [t8], [t24]).
+place(l14, [t24], [t25]).
+place(s11, [t10], [t25]).
+place(l15, [t25], [t26]).
+place(s12, [t14], [t26]).
+place(s4, [t26,t25,t24,t23,t22,t21,t20,t19,t6], [t18,t17,t16,t15,t14,t13,t12,t11,t10,t9,t8,t7]).
+place(l16, [t26], [t18]).
+
+transition(t1, [l0,s0], [l5]).
+transition(t2, [l0,s0], [l11]).
+transition(t3, [l0,s0], [s1,l1]).
+transition(t4, [l0,s1], [s2,l3]).
+transition(t5, [l0,s2], [s3,l5]).
+transition(t6, [l0,s3], [s4,l11]).
+transition(t7, [l1,s4], [s5,l2]).
+transition(t8, [l1,s4], [s10,l2]).
+transition(t9, [l2,s4], [s8,l1]).
+transition(t10, [l2,s4], [s11,l1]).
+transition(t11, [l3,s4], [s6,l4]).
+transition(t12, [l3,s4], [s9,l4]).
+transition(t13, [l4,s4], [s7,l3]).
+transition(t14, [l4,s4], [s12,l3]).
+transition(t15, [l5,s4], [l6]).
+transition(t16, [l10,s4], [l5]).
+transition(t17, [l11,s4], [l12]).
+transition(t18, [l16,s4], [l11]).
+transition(t19, [l6,s5], [s4,l7]).
+transition(t20, [l7,s6], [s4,l8]).
+transition(t21, [l8,s7], [s4,l9]).
+transition(t22, [l9,s8], [s4,l10]).
+transition(t23, [l12,s9], [s4,l13]).
+transition(t24, [l13,s10], [s4,l14]).
+transition(t25, [l14,s11], [s4,l15]).
+transition(t26, [l15,s12], [s4,l16]).
+
+init(s0, 1).
+init(l0, init1).
+
+cond('(>= init1 1)').
+cond('(>= s4 1)').
+cond('(>= l7 1)').
+cond('(>= l13 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun init1 () Int)
+(declare-fun s0 () Int)
+(declare-fun s1 () Int)
+(declare-fun s2 () Int)
+(declare-fun l0 () Int)
+(declare-fun s3 () Int)
+(declare-fun l2 () Int)
+(declare-fun l1 () Int)
+(declare-fun l4 () Int)
+(declare-fun l3 () Int)
+(declare-fun l5 () Int)
+(declare-fun l11 () Int)
+(declare-fun l6 () Int)
+(declare-fun s5 () Int)
+(declare-fun l7 () Int)
+(declare-fun s6 () Int)
+(declare-fun l8 () Int)
+(declare-fun s7 () Int)
+(declare-fun l9 () Int)
+(declare-fun s8 () Int)
+(declare-fun l10 () Int)
+(declare-fun l12 () Int)
+(declare-fun s9 () Int)
+(declare-fun l13 () Int)
+(declare-fun s10 () Int)
+(declare-fun l14 () Int)
+(declare-fun s11 () Int)
+(declare-fun l15 () Int)
+(declare-fun s12 () Int)
+(declare-fun s4 () Int)
+(declare-fun l16 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(declare-fun t13 () Int)
+(declare-fun t14 () Int)
+(declare-fun t15 () Int)
+(declare-fun t16 () Int)
+(declare-fun t17 () Int)
+(declare-fun t18 () Int)
+(declare-fun t19 () Int)
+(declare-fun t20 () Int)
+(declare-fun t21 () Int)
+(declare-fun t22 () Int)
+(declare-fun t23 () Int)
+(declare-fun t24 () Int)
+(declare-fun t25 () Int)
+(declare-fun t26 () Int)
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= s2 0))
+(assert (>= l0 0))
+(assert (>= s3 0))
+(assert (>= l2 0))
+(assert (>= l1 0))
+(assert (>= l4 0))
+(assert (>= l3 0))
+(assert (>= l5 0))
+(assert (>= l11 0))
+(assert (>= l6 0))
+(assert (>= s5 0))
+(assert (>= l7 0))
+(assert (>= s6 0))
+(assert (>= l8 0))
+(assert (>= s7 0))
+(assert (>= l9 0))
+(assert (>= s8 0))
+(assert (>= l10 0))
+(assert (>= l12 0))
+(assert (>= s9 0))
+(assert (>= l13 0))
+(assert (>= s10 0))
+(assert (>= l14 0))
+(assert (>= s11 0))
+(assert (>= l15 0))
+(assert (>= s12 0))
+(assert (>= s4 0))
+(assert (>= l16 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (>= t13 0))
+(assert (>= t14 0))
+(assert (>= t15 0))
+(assert (>= t16 0))
+(assert (>= t17 0))
+(assert (>= t18 0))
+(assert (>= t19 0))
+(assert (>= t20 0))
+(assert (>= t21 0))
+(assert (>= t22 0))
+(assert (>= t23 0))
+(assert (>= t24 0))
+(assert (>= t25 0))
+(assert (>= t26 0))
+(assert (= s0 (+ 1 (- t1) (- t2) (- t3))))
+(assert (= s1 (+ 0 t3 (- t4))))
+(assert (= s2 (+ 0 t4 (- t5))))
+(assert (= l0 (+ init1 (- t1) (- t2) (- t3) (- t4) (- t5) (- t6))))
+(assert (= s3 (+ 0 t5 (- t6))))
+(assert (= l2 (+ 0 t7 t8 (- t10) (- t9))))
+(assert (= l1 (+ 0 t10 t3 t9 (- t7) (- t8))))
+(assert (= l4 (+ 0 t11 t12 (- t13) (- t14))))
+(assert (= l3 (+ 0 t13 t14 t4 (- t11) (- t12))))
+(assert (= l5 (+ 0 t1 t16 t5 (- t15))))
+(assert (= l11 (+ 0 t18 t2 t6 (- t17))))
+(assert (= l6 (+ 0 t15 (- t19))))
+(assert (= s5 (+ 0 t7 (- t19))))
+(assert (= l7 (+ 0 t19 (- t20))))
+(assert (= s6 (+ 0 t11 (- t20))))
+(assert (= l8 (+ 0 t20 (- t21))))
+(assert (= s7 (+ 0 t13 (- t21))))
+(assert (= l9 (+ 0 t21 (- t22))))
+(assert (= s8 (+ 0 t9 (- t22))))
+(assert (= l10 (+ 0 t22 (- t16))))
+(assert (= l12 (+ 0 t17 (- t23))))
+(assert (= s9 (+ 0 t12 (- t23))))
+(assert (= l13 (+ 0 t23 (- t24))))
+(assert (= s10 (+ 0 t8 (- t24))))
+(assert (= l14 (+ 0 t24 (- t25))))
+(assert (= s11 (+ 0 t10 (- t25))))
+(assert (= l15 (+ 0 t25 (- t26))))
+(assert (= s12 (+ 0 t14 (- t26))))
+(assert (= s4 (+ 0 t19 t20 t21 t22 t23 t24 t25 t26 t6 (- t10) (- t11) (- t12) (- t13) (- t14) (- t15) (- t16) (- t17) (- t18) (- t7) (- t8) (- t9))))
+(assert (= l16 (+ 0 t26 (- t18))))
+(assert (>= init1 1))
+(assert (>= s4 1))
+(assert (>= l7 1))
+(assert (>= l13 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)n
+unsat
+(error "line 149 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

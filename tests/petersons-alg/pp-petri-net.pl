@@ -26,12 +26,11 @@ transition(v4, [q3,m1f], [q4,m1f]).
 transition(v5, [q3,hold1], [q4,hold1]).
 transition(v6, [q4,m2t], [q1,m2f]).
 
-init(p1).
-init(q1).
-init(m1f).
-init(hold1).
-init(m2f).
+init(p1, 1).
+init(q1, 1).
+init(m1f, 1).
+init(hold1, 1).
+init(m2f, 1).
 
 cond('(> p4 0)').
 cond('(> q4 0)').
-
