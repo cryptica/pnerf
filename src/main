@@ -70,7 +70,7 @@ sicstus -l "$sysdir"/petri-net-to-constraints.pl -- /tmp/pp-petri-net.pl 2>/dev/
 
 iter=0
 echo
-echo '* Checking SAT(C0)'n
+echo '* Checking SAT(C0)'
 # if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
 while z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; do
     iter=$((iter+1))
