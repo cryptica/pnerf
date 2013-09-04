@@ -1,9 +1,13 @@
-rm -f benchmarks/cprover-PN/positive.list
-rm -f benchmarks/cprover-PN/negative.list
-for f in benchmarks/cprover-PN/*.pl; do
-    if (set -o pipefail; ./src/main $f | tee $f.out); then
-        echo $f >>benchmarks/cprover-PN/positive.list
+#!/bin/bash
+
+for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
+  rm -f $benchmark_dir/positive.list
+  rm -f $benchmark_dir/negative.list
+  for pl_file in `find $benchmark_dir -name "*.pl"`; do
+    if (set -o pipefail; ./src/main $pl_file | tee $pl_file.out); then
+        echo $pl_file >>$benchmark_dir/positive.list
     else
-        echo $f >>benchmarks/cprover-PN/negative.list
+        echo $pl_file >>$benchmark_dir/negative.list
     fi
+  done
 done

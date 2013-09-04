@@ -16,6 +16,6 @@ pnerf
     p. 16).
 
 * TODO
-  1. For the files benchmarks/cprover-PN/*.pl that became negative, check that *.pl is correct.
-  2. Extend run-benchmarks.sh to benchmarks/cprover_software-analysis/*.pl.
+  1. For the files benchmarks/cprover-PN/*.pl that became negative, check that *.pl is correct. - DONE
+  2. Extend run-benchmarks.sh to benchmarks/cprover_software-analysis/*.pl. - DONE
   3. Create {positive,negative}.list for the previous benchmarks.
