@@ -1,6 +1,9 @@
 pnerf
 =====
 
+* ./benchmarks/
+  * You obtain *.pl files by daisy chaining dk-to-pp-dk.sh and pp-dk-to-pl-petri-net.sh.
+
 * ./benchmarks/cprover_PN:
   * Files *.pl are input to the tool.
   * Conversion scripts are dk-to-pp-dk.sh and pp-dk-to-pl-petri-net.sh

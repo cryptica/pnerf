@@ -7212,6 +7212,7 @@ assignment(l296, 1).
 assignment(s8, 1).
 assignment(s7, 0).
 assignment(s6, 0).
+
 - constraints C_theta...
 (declare-fun s6 () Bool)
 (declare-fun s7 () Bool)
@@ -8682,6 +8683,7 @@ assignment(l59, false).
 assignment(l58, false).
 assignment(l57, false).
 assignment(l56, false).
+
 - constraint d_1...
 (assert (>= (+ l233 l271 l236 l157 l101 l90 l181 l91 l214 l98 l156 l159 s4 l232 l158 l237 l155 l132 l199 l267 l178 l208 l266 l180 l97 l176 l265 l131 l177 l264 l128 l215 l134 l99 l234 l235 s5 l209 l183 l103 l269 l153 l152 l130 l135 l93 l182 l179 l238 l133 l89 l268 l270 l239 l154 l195 l95 l110 l47 l45 l43 l42 l41 l279 l277 l275 l274 l273 l198 l197 l196 l203 l207 l202 l206 l194 l201 l205 l193 l200 l204 l192 l184 l185 l186 l187 l188 l189 l190 l191 l175 l231 l167 l174 l230 l166 l173 l229 l165 l172 l228 l164 l171 l227 l163 l170 l226 l162 l169 l225 l161 l168 l224 l160 l127 l126 l125 l124 l123 l122 l120 l119 l118 l117 l116 l115 l114 l112 l29 l25 l31 l27 l19 l18 l17 l23 l22 l21 l9 l10 l11 l12 l13 l14 l15 l216 l217 l218 l219 l240 l241 l242 l243 l244 l245 l246 l247 s3 s1 l38 l39 l36 l37 l34 l35 l32 l33 l28 l30 l24 l26 l16 l20 l8 l0) 1))
 - constraints c_1...
@@ -14737,6 +14739,7 @@ assignment(l296, 1).
 assignment(s8, 1).
 assignment(s7, 0).
 assignment(s6, 0).
+
 - constraints C_theta...
 (declare-fun s6 () Bool)
 (declare-fun s7 () Bool)
