@@ -19,6 +19,31 @@ pnerf
     p. 16).
 
 * TODO
-  1. For the files benchmarks/cprover-PN/*.pl that became negative, check that *.pl is correct. - DONE
-  2. Extend run-benchmarks.sh to benchmarks/cprover_software-analysis/*.pl. - DONE
-  3. Create {positive,negative}.list for the previous benchmarks. - DONE
+  1. Running ./run_with_animation.sh myjob and then pressing C-c stops myjob.
+  2. Let P be the properties of the terminal. Running
+     ./run_with_animation.sh myjob and then pressing C-c restores P.
+  3. Running ./run_with_animation.sh myjob prints the animation at the end of the output given by myjob.
+  
+     Example 1:
+     
+     $ ./run_with_animation.sh myjob
+     second 01 - step1
+     [ANIMATION]
+
+     $ ./run_with_animation.sh myjob
+     second 01 - step1
+     second 03 - step2
+     [ANIMATION]
+
+     $ ./run_with_animation.sh myjob
+     second 01 - step1
+     second 03 - step2
+     second 08 - step3
+     [ANIMATION]
+
+     ...and so on...
+
+     Example 2:
+
+     $ ./run_with_animation.sh 'myjob >/dev/null'
+     [ANIMATION]
