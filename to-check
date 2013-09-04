@@ -1,0 +1,5 @@
++benchmarks/cprover-PN/kanban.tts.spec.pl
++benchmarks/cprover-PN/leabasicapproach.tts.spec.pl
++benchmarks/cprover-PN/platoon.tts.spec.pl
++benchmarks/cprover-PN/pncsacover.tts.spec.pl
++benchmarks/cprover-PN/reaction2.tts.spec.pl

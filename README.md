@@ -14,3 +14,8 @@ pnerf
     Algorithm. Taken from Javier's notes on petri nets
     (http://www7.in.tum.de/um/courses/petri/SS2013/PNSkript.pdf,
     p. 16).
+
+* TODO
+  1. For the files benchmarks/cprover-PN/*.pl that became negative, check that *.pl is correct.
+  2. Extend run-benchmarks.sh to benchmarks/cprover_software-analysis/*.pl.
+  3. Create {positive,negative}.list for the previous benchmarks.

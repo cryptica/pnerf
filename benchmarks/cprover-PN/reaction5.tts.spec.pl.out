@@ -1,28 +1,5 @@
-place(s0).
-place(s1).
-place(s2).
-place(s3).
-place(s4).
-place(s5).
-place(l0).
-place(l1).
-place(l2).
-place(l3).
-place(l4).
-transition(t1, [l0, s0], [s1, l2]).
-transition(t2, [l0, s1], [s2, l2]).
-transition(t3, [l0, s2], [s3, l4]).
-transition(t4, [l0, s3], [s4, l4]).
-transition(t5, [l1, s4], [s4, l3]).
-transition(t6, [l2, s4], [s5, l1]).
-transition(t7, [l4, s5], [s4, l0]).
-init(l0, init1).
-cond('(>= init1 1)').
-init(s0).
-cond('(>= s4 1)').
-cond('(>= l1 2)').
 PETRINIZER: The checker for Petri Nets
-[reaction5.tts.spec.pl]
+[benchmarks/cprover-PN/reaction5.tts.spec.pl]
 
 * Constructing petri net N from input file
 place(s0, [], [t1]).
@@ -172,6 +149,7 @@ assignment(s3, 0).
 assignment(s2, 0).
 assignment(s1, 0).
 assignment(s0, 0).
+
 - constraints C_theta...
 (declare-fun s0 () Bool)
 (declare-fun s1 () Bool)
@@ -241,6 +219,7 @@ assignment(l0, true).
 assignment(s0, false).
 assignment(l1, false).
 assignment(s4, false).
+
 - constraint d_1...
 (assert (>= (+ s2 s1 l4 l0) 1))
 - constraints c_1...
@@ -361,6 +340,7 @@ assignment(s3, 0).
 assignment(s2, 0).
 assignment(s1, 0).
 assignment(s0, 0).
+
 - constraints C_theta...
 (declare-fun s0 () Bool)
 (declare-fun s1 () Bool)
