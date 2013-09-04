@@ -307,308 +307,308 @@ place(l150).
 place(l151).
 place(l152).
 place(l153).
-transition(t1, [l0, s0], [l1]).
+transition(t1, [l0, s0], [s0, l1]).
 transition(t2, [l0, s0], [s1, l1]).
 transition(t3, [l0, s1], [s2, l153]).
 transition(t4, [l1, s2], [s3, l2]).
-transition(t5, [l2, s2], [l3]).
+transition(t5, [l2, s2], [s2, l3]).
 transition(t6, [l2, s2], [s4, l1]).
 transition(t7, [l2, s2], [s5, l1]).
-transition(t8, [l3, s2], [l4]).
+transition(t8, [l3, s2], [s2, l4]).
 transition(t9, [l3, s2], [s6, l1]).
-transition(t10, [l4, s2], [l5]).
+transition(t10, [l4, s2], [s2, l5]).
 transition(t11, [l4, s2], [s7, l1]).
-transition(t12, [l5, s2], [l6]).
+transition(t12, [l5, s2], [s2, l6]).
 transition(t13, [l5, s2], [s8, l1]).
-transition(t14, [l6, s2], [l7]).
+transition(t14, [l6, s2], [s2, l7]).
 transition(t15, [l6, s2], [s9, l1]).
-transition(t16, [l7, s2], [l8]).
+transition(t16, [l7, s2], [s2, l8]).
 transition(t17, [l7, s2], [s10, l1]).
-transition(t18, [l8, s2], [l9]).
+transition(t18, [l8, s2], [s2, l9]).
 transition(t19, [l8, s2], [s11, l1]).
-transition(t20, [l9, s2], [l10]).
+transition(t20, [l9, s2], [s2, l10]).
 transition(t21, [l9, s2], [s12, l1]).
-transition(t22, [l10, s2], [l11]).
+transition(t22, [l10, s2], [s2, l11]).
 transition(t23, [l10, s2], [s13, l1]).
-transition(t24, [l11, s2], [l12]).
+transition(t24, [l11, s2], [s2, l12]).
 transition(t25, [l11, s2], [s14, l1]).
-transition(t26, [l12, s2], [l13]).
+transition(t26, [l12, s2], [s2, l13]).
 transition(t27, [l12, s2], [s15, l1]).
-transition(t28, [l13, s2], [l14]).
+transition(t28, [l13, s2], [s2, l14]).
 transition(t29, [l13, s2], [s16, l1]).
-transition(t30, [l14, s2], [l15]).
+transition(t30, [l14, s2], [s2, l15]).
 transition(t31, [l14, s2], [s17, l1]).
-transition(t32, [l15, s2], [l16]).
+transition(t32, [l15, s2], [s2, l16]).
 transition(t33, [l15, s2], [s18, l1]).
-transition(t34, [l16, s2], [l17]).
+transition(t34, [l16, s2], [s2, l17]).
 transition(t35, [l16, s2], [s19, l1]).
-transition(t36, [l17, s2], [l18]).
+transition(t36, [l17, s2], [s2, l18]).
 transition(t37, [l17, s2], [s20, l1]).
-transition(t38, [l18, s2], [l19]).
+transition(t38, [l18, s2], [s2, l19]).
 transition(t39, [l18, s2], [s21, l1]).
-transition(t40, [l19, s2], [l20]).
+transition(t40, [l19, s2], [s2, l20]).
 transition(t41, [l19, s2], [s22, l1]).
-transition(t42, [l20, s2], [l21]).
+transition(t42, [l20, s2], [s2, l21]).
 transition(t43, [l20, s2], [s23, l1]).
-transition(t44, [l21, s2], [l22]).
+transition(t44, [l21, s2], [s2, l22]).
 transition(t45, [l21, s2], [s24, l1]).
-transition(t46, [l22, s2], [l23]).
+transition(t46, [l22, s2], [s2, l23]).
 transition(t47, [l22, s2], [s25, l1]).
-transition(t48, [l23, s2], [l24]).
+transition(t48, [l23, s2], [s2, l24]).
 transition(t49, [l23, s2], [s26, l1]).
-transition(t50, [l24, s2], [l25]).
+transition(t50, [l24, s2], [s2, l25]).
 transition(t51, [l24, s2], [s27, l1]).
-transition(t52, [l25, s2], [l26]).
+transition(t52, [l25, s2], [s2, l26]).
 transition(t53, [l25, s2], [s28, l1]).
-transition(t54, [l26, s2], [l27]).
+transition(t54, [l26, s2], [s2, l27]).
 transition(t55, [l26, s2], [s29, l1]).
-transition(t56, [l27, s2], [l28]).
+transition(t56, [l27, s2], [s2, l28]).
 transition(t57, [l27, s2], [s30, l1]).
-transition(t58, [l28, s2], [l29]).
+transition(t58, [l28, s2], [s2, l29]).
 transition(t59, [l28, s2], [s31, l1]).
-transition(t60, [l29, s2], [l30]).
+transition(t60, [l29, s2], [s2, l30]).
 transition(t61, [l29, s2], [s32, l1]).
-transition(t62, [l30, s2], [l31]).
+transition(t62, [l30, s2], [s2, l31]).
 transition(t63, [l30, s2], [s33, l1]).
-transition(t64, [l31, s2], [l32]).
+transition(t64, [l31, s2], [s2, l32]).
 transition(t65, [l31, s2], [s34, l1]).
-transition(t66, [l32, s2], [l33]).
+transition(t66, [l32, s2], [s2, l33]).
 transition(t67, [l32, s2], [s35, l1]).
-transition(t68, [l33, s2], [l34]).
+transition(t68, [l33, s2], [s2, l34]).
 transition(t69, [l33, s2], [s36, l1]).
-transition(t70, [l34, s2], [l35]).
+transition(t70, [l34, s2], [s2, l35]).
 transition(t71, [l34, s2], [s37, l1]).
-transition(t72, [l35, s2], [l36]).
+transition(t72, [l35, s2], [s2, l36]).
 transition(t73, [l35, s2], [s38, l1]).
-transition(t74, [l36, s2], [l37]).
+transition(t74, [l36, s2], [s2, l37]).
 transition(t75, [l36, s2], [s39, l1]).
-transition(t76, [l37, s2], [l38]).
+transition(t76, [l37, s2], [s2, l38]).
 transition(t77, [l37, s2], [s40, l1]).
-transition(t78, [l38, s2], [l39]).
+transition(t78, [l38, s2], [s2, l39]).
 transition(t79, [l38, s2], [s41, l1]).
-transition(t80, [l39, s2], [l40]).
+transition(t80, [l39, s2], [s2, l40]).
 transition(t81, [l39, s2], [s42, l1]).
-transition(t82, [l40, s2], [l41]).
+transition(t82, [l40, s2], [s2, l41]).
 transition(t83, [l40, s2], [s43, l1]).
-transition(t84, [l41, s2], [l42]).
+transition(t84, [l41, s2], [s2, l42]).
 transition(t85, [l41, s2], [s44, l1]).
-transition(t86, [l42, s2], [l43]).
+transition(t86, [l42, s2], [s2, l43]).
 transition(t87, [l42, s2], [s45, l1]).
-transition(t88, [l43, s2], [l44]).
+transition(t88, [l43, s2], [s2, l44]).
 transition(t89, [l43, s2], [s46, l1]).
-transition(t90, [l44, s2], [l45]).
+transition(t90, [l44, s2], [s2, l45]).
 transition(t91, [l44, s2], [s47, l1]).
-transition(t92, [l45, s2], [l46]).
+transition(t92, [l45, s2], [s2, l46]).
 transition(t93, [l45, s2], [s48, l1]).
-transition(t94, [l46, s2], [l47]).
+transition(t94, [l46, s2], [s2, l47]).
 transition(t95, [l46, s2], [s49, l1]).
-transition(t96, [l47, s2], [l48]).
+transition(t96, [l47, s2], [s2, l48]).
 transition(t97, [l47, s2], [s50, l1]).
-transition(t98, [l48, s2], [l49]).
+transition(t98, [l48, s2], [s2, l49]).
 transition(t99, [l48, s2], [s51, l1]).
-transition(t100, [l49, s2], [l50]).
+transition(t100, [l49, s2], [s2, l50]).
 transition(t101, [l49, s2], [s52, l1]).
-transition(t102, [l50, s2], [l51]).
+transition(t102, [l50, s2], [s2, l51]).
 transition(t103, [l50, s2], [s53, l1]).
-transition(t104, [l51, s2], [l52]).
+transition(t104, [l51, s2], [s2, l52]).
 transition(t105, [l51, s2], [s54, l1]).
-transition(t106, [l52, s2], [l53]).
+transition(t106, [l52, s2], [s2, l53]).
 transition(t107, [l52, s2], [s55, l1]).
-transition(t108, [l53, s2], [l54]).
+transition(t108, [l53, s2], [s2, l54]).
 transition(t109, [l53, s2], [s56, l1]).
-transition(t110, [l54, s2], [l55]).
+transition(t110, [l54, s2], [s2, l55]).
 transition(t111, [l54, s2], [s57, l1]).
-transition(t112, [l55, s2], [l56]).
+transition(t112, [l55, s2], [s2, l56]).
 transition(t113, [l55, s2], [s58, l1]).
-transition(t114, [l56, s2], [l57]).
+transition(t114, [l56, s2], [s2, l57]).
 transition(t115, [l56, s2], [s59, l1]).
-transition(t116, [l57, s2], [l58]).
+transition(t116, [l57, s2], [s2, l58]).
 transition(t117, [l57, s2], [s60, l1]).
-transition(t118, [l58, s2], [l59]).
+transition(t118, [l58, s2], [s2, l59]).
 transition(t119, [l58, s2], [s61, l1]).
-transition(t120, [l59, s2], [l60]).
+transition(t120, [l59, s2], [s2, l60]).
 transition(t121, [l59, s2], [s62, l1]).
-transition(t122, [l60, s2], [l61]).
+transition(t122, [l60, s2], [s2, l61]).
 transition(t123, [l60, s2], [s63, l1]).
-transition(t124, [l61, s2], [l62]).
+transition(t124, [l61, s2], [s2, l62]).
 transition(t125, [l61, s2], [s64, l1]).
-transition(t126, [l62, s2], [l63]).
+transition(t126, [l62, s2], [s2, l63]).
 transition(t127, [l62, s2], [s65, l1]).
-transition(t128, [l63, s2], [l64]).
+transition(t128, [l63, s2], [s2, l64]).
 transition(t129, [l63, s2], [s66, l1]).
-transition(t130, [l64, s2], [l65]).
+transition(t130, [l64, s2], [s2, l65]).
 transition(t131, [l64, s2], [s67, l1]).
-transition(t132, [l65, s2], [l66]).
+transition(t132, [l65, s2], [s2, l66]).
 transition(t133, [l65, s2], [s68, l1]).
-transition(t134, [l66, s2], [l67]).
+transition(t134, [l66, s2], [s2, l67]).
 transition(t135, [l66, s2], [s69, l1]).
-transition(t136, [l67, s2], [l68]).
+transition(t136, [l67, s2], [s2, l68]).
 transition(t137, [l67, s2], [s70, l1]).
-transition(t138, [l68, s2], [l69]).
+transition(t138, [l68, s2], [s2, l69]).
 transition(t139, [l68, s2], [s71, l1]).
-transition(t140, [l69, s2], [l70]).
+transition(t140, [l69, s2], [s2, l70]).
 transition(t141, [l69, s2], [s72, l1]).
-transition(t142, [l70, s2], [l71]).
+transition(t142, [l70, s2], [s2, l71]).
 transition(t143, [l70, s2], [s73, l1]).
-transition(t144, [l71, s2], [l72]).
+transition(t144, [l71, s2], [s2, l72]).
 transition(t145, [l71, s2], [s74, l1]).
-transition(t146, [l72, s2], [l73]).
+transition(t146, [l72, s2], [s2, l73]).
 transition(t147, [l72, s2], [s75, l1]).
-transition(t148, [l73, s2], [l74]).
+transition(t148, [l73, s2], [s2, l74]).
 transition(t149, [l73, s2], [s76, l1]).
-transition(t150, [l74, s2], [l75]).
+transition(t150, [l74, s2], [s2, l75]).
 transition(t151, [l74, s2], [s77, l1]).
-transition(t152, [l75, s2], [l76]).
+transition(t152, [l75, s2], [s2, l76]).
 transition(t153, [l75, s2], [s78, l1]).
-transition(t154, [l76, s2], [l77]).
+transition(t154, [l76, s2], [s2, l77]).
 transition(t155, [l76, s2], [s79, l1]).
-transition(t156, [l77, s2], [l78]).
+transition(t156, [l77, s2], [s2, l78]).
 transition(t157, [l77, s2], [s80, l1]).
-transition(t158, [l78, s2], [l79]).
+transition(t158, [l78, s2], [s2, l79]).
 transition(t159, [l78, s2], [s81, l1]).
-transition(t160, [l79, s2], [l80]).
+transition(t160, [l79, s2], [s2, l80]).
 transition(t161, [l79, s2], [s82, l1]).
-transition(t162, [l80, s2], [l81]).
+transition(t162, [l80, s2], [s2, l81]).
 transition(t163, [l80, s2], [s83, l1]).
-transition(t164, [l81, s2], [l82]).
+transition(t164, [l81, s2], [s2, l82]).
 transition(t165, [l81, s2], [s84, l1]).
-transition(t166, [l82, s2], [l83]).
+transition(t166, [l82, s2], [s2, l83]).
 transition(t167, [l82, s2], [s85, l1]).
-transition(t168, [l83, s2], [l84]).
+transition(t168, [l83, s2], [s2, l84]).
 transition(t169, [l83, s2], [s86, l1]).
-transition(t170, [l84, s2], [l85]).
+transition(t170, [l84, s2], [s2, l85]).
 transition(t171, [l84, s2], [s87, l1]).
-transition(t172, [l85, s2], [l86]).
+transition(t172, [l85, s2], [s2, l86]).
 transition(t173, [l85, s2], [s88, l1]).
-transition(t174, [l86, s2], [l87]).
+transition(t174, [l86, s2], [s2, l87]).
 transition(t175, [l86, s2], [s89, l1]).
-transition(t176, [l87, s2], [l88]).
+transition(t176, [l87, s2], [s2, l88]).
 transition(t177, [l87, s2], [s90, l1]).
-transition(t178, [l88, s2], [l89]).
+transition(t178, [l88, s2], [s2, l89]).
 transition(t179, [l88, s2], [s91, l1]).
-transition(t180, [l89, s2], [l90]).
+transition(t180, [l89, s2], [s2, l90]).
 transition(t181, [l89, s2], [s92, l1]).
-transition(t182, [l90, s2], [l91]).
+transition(t182, [l90, s2], [s2, l91]).
 transition(t183, [l90, s2], [s93, l1]).
-transition(t184, [l91, s2], [l92]).
+transition(t184, [l91, s2], [s2, l92]).
 transition(t185, [l91, s2], [s94, l1]).
-transition(t186, [l92, s2], [l93]).
+transition(t186, [l92, s2], [s2, l93]).
 transition(t187, [l92, s2], [s95, l1]).
-transition(t188, [l93, s2], [l94]).
+transition(t188, [l93, s2], [s2, l94]).
 transition(t189, [l93, s2], [s96, l1]).
-transition(t190, [l94, s2], [l95]).
+transition(t190, [l94, s2], [s2, l95]).
 transition(t191, [l94, s2], [s97, l1]).
-transition(t192, [l95, s2], [l96]).
+transition(t192, [l95, s2], [s2, l96]).
 transition(t193, [l95, s2], [s98, l1]).
-transition(t194, [l96, s2], [l97]).
+transition(t194, [l96, s2], [s2, l97]).
 transition(t195, [l96, s2], [s99, l1]).
-transition(t196, [l97, s2], [l98]).
+transition(t196, [l97, s2], [s2, l98]).
 transition(t197, [l97, s2], [s100, l1]).
-transition(t198, [l98, s2], [l99]).
+transition(t198, [l98, s2], [s2, l99]).
 transition(t199, [l98, s2], [s101, l1]).
-transition(t200, [l99, s2], [l100]).
+transition(t200, [l99, s2], [s2, l100]).
 transition(t201, [l99, s2], [s102, l1]).
-transition(t202, [l100, s2], [l101]).
+transition(t202, [l100, s2], [s2, l101]).
 transition(t203, [l100, s2], [s103, l1]).
-transition(t204, [l101, s2], [l102]).
+transition(t204, [l101, s2], [s2, l102]).
 transition(t205, [l101, s2], [s104, l1]).
-transition(t206, [l102, s2], [l103]).
+transition(t206, [l102, s2], [s2, l103]).
 transition(t207, [l102, s2], [s105, l1]).
-transition(t208, [l103, s2], [l104]).
+transition(t208, [l103, s2], [s2, l104]).
 transition(t209, [l103, s2], [s106, l1]).
-transition(t210, [l104, s2], [l105]).
+transition(t210, [l104, s2], [s2, l105]).
 transition(t211, [l104, s2], [s107, l1]).
-transition(t212, [l105, s2], [l106]).
+transition(t212, [l105, s2], [s2, l106]).
 transition(t213, [l105, s2], [s108, l1]).
-transition(t214, [l106, s2], [l107]).
+transition(t214, [l106, s2], [s2, l107]).
 transition(t215, [l106, s2], [s109, l1]).
-transition(t216, [l107, s2], [l108]).
+transition(t216, [l107, s2], [s2, l108]).
 transition(t217, [l107, s2], [s110, l1]).
-transition(t218, [l108, s2], [l109]).
+transition(t218, [l108, s2], [s2, l109]).
 transition(t219, [l108, s2], [s111, l1]).
-transition(t220, [l109, s2], [l110]).
+transition(t220, [l109, s2], [s2, l110]).
 transition(t221, [l109, s2], [s112, l1]).
-transition(t222, [l110, s2], [l111]).
+transition(t222, [l110, s2], [s2, l111]).
 transition(t223, [l110, s2], [s113, l1]).
-transition(t224, [l111, s2], [l112]).
+transition(t224, [l111, s2], [s2, l112]).
 transition(t225, [l111, s2], [s114, l1]).
-transition(t226, [l112, s2], [l113]).
+transition(t226, [l112, s2], [s2, l113]).
 transition(t227, [l112, s2], [s115, l1]).
-transition(t228, [l113, s2], [l114]).
+transition(t228, [l113, s2], [s2, l114]).
 transition(t229, [l113, s2], [s116, l1]).
-transition(t230, [l114, s2], [l115]).
+transition(t230, [l114, s2], [s2, l115]).
 transition(t231, [l114, s2], [s117, l1]).
-transition(t232, [l115, s2], [l116]).
+transition(t232, [l115, s2], [s2, l116]).
 transition(t233, [l115, s2], [s118, l1]).
-transition(t234, [l116, s2], [l117]).
+transition(t234, [l116, s2], [s2, l117]).
 transition(t235, [l116, s2], [s119, l1]).
-transition(t236, [l117, s2], [l118]).
+transition(t236, [l117, s2], [s2, l118]).
 transition(t237, [l117, s2], [s120, l1]).
-transition(t238, [l118, s2], [l119]).
+transition(t238, [l118, s2], [s2, l119]).
 transition(t239, [l118, s2], [s121, l1]).
-transition(t240, [l119, s2], [l120]).
+transition(t240, [l119, s2], [s2, l120]).
 transition(t241, [l119, s2], [s122, l1]).
-transition(t242, [l120, s2], [l121]).
+transition(t242, [l120, s2], [s2, l121]).
 transition(t243, [l120, s2], [s123, l1]).
-transition(t244, [l121, s2], [l122]).
+transition(t244, [l121, s2], [s2, l122]).
 transition(t245, [l121, s2], [s124, l1]).
-transition(t246, [l122, s2], [l123]).
+transition(t246, [l122, s2], [s2, l123]).
 transition(t247, [l122, s2], [s125, l1]).
-transition(t248, [l123, s2], [l124]).
+transition(t248, [l123, s2], [s2, l124]).
 transition(t249, [l123, s2], [s126, l1]).
-transition(t250, [l124, s2], [l125]).
+transition(t250, [l124, s2], [s2, l125]).
 transition(t251, [l124, s2], [s127, l1]).
-transition(t252, [l125, s2], [l126]).
+transition(t252, [l125, s2], [s2, l126]).
 transition(t253, [l125, s2], [s128, l1]).
-transition(t254, [l126, s2], [l127]).
+transition(t254, [l126, s2], [s2, l127]).
 transition(t255, [l126, s2], [s129, l1]).
-transition(t256, [l127, s2], [l128]).
+transition(t256, [l127, s2], [s2, l128]).
 transition(t257, [l127, s2], [s130, l1]).
-transition(t258, [l128, s2], [l129]).
+transition(t258, [l128, s2], [s2, l129]).
 transition(t259, [l128, s2], [s131, l1]).
-transition(t260, [l129, s2], [l130]).
+transition(t260, [l129, s2], [s2, l130]).
 transition(t261, [l129, s2], [s132, l1]).
-transition(t262, [l130, s2], [l131]).
+transition(t262, [l130, s2], [s2, l131]).
 transition(t263, [l130, s2], [s133, l1]).
-transition(t264, [l131, s2], [l132]).
+transition(t264, [l131, s2], [s2, l132]).
 transition(t265, [l131, s2], [s134, l1]).
-transition(t266, [l132, s2], [l133]).
+transition(t266, [l132, s2], [s2, l133]).
 transition(t267, [l132, s2], [s135, l1]).
-transition(t268, [l133, s2], [l134]).
+transition(t268, [l133, s2], [s2, l134]).
 transition(t269, [l133, s2], [s136, l1]).
-transition(t270, [l134, s2], [l135]).
+transition(t270, [l134, s2], [s2, l135]).
 transition(t271, [l134, s2], [s137, l1]).
-transition(t272, [l135, s2], [l136]).
+transition(t272, [l135, s2], [s2, l136]).
 transition(t273, [l135, s2], [s138, l1]).
-transition(t274, [l136, s2], [l137]).
+transition(t274, [l136, s2], [s2, l137]).
 transition(t275, [l136, s2], [s139, l1]).
-transition(t276, [l137, s2], [l138]).
+transition(t276, [l137, s2], [s2, l138]).
 transition(t277, [l137, s2], [s140, l1]).
-transition(t278, [l138, s2], [l139]).
+transition(t278, [l138, s2], [s2, l139]).
 transition(t279, [l138, s2], [s141, l1]).
-transition(t280, [l139, s2], [l140]).
+transition(t280, [l139, s2], [s2, l140]).
 transition(t281, [l139, s2], [s142, l1]).
-transition(t282, [l140, s2], [l141]).
+transition(t282, [l140, s2], [s2, l141]).
 transition(t283, [l140, s2], [s143, l1]).
-transition(t284, [l141, s2], [l142]).
+transition(t284, [l141, s2], [s2, l142]).
 transition(t285, [l141, s2], [s144, l1]).
-transition(t286, [l142, s2], [l143]).
+transition(t286, [l142, s2], [s2, l143]).
 transition(t287, [l142, s2], [s145, l1]).
-transition(t288, [l143, s2], [l144]).
+transition(t288, [l143, s2], [s2, l144]).
 transition(t289, [l143, s2], [s146, l1]).
-transition(t290, [l144, s2], [l145]).
+transition(t290, [l144, s2], [s2, l145]).
 transition(t291, [l144, s2], [s147, l1]).
-transition(t292, [l145, s2], [l146]).
+transition(t292, [l145, s2], [s2, l146]).
 transition(t293, [l145, s2], [s148, l1]).
-transition(t294, [l146, s2], [l147]).
+transition(t294, [l146, s2], [s2, l147]).
 transition(t295, [l146, s2], [s149, l1]).
-transition(t296, [l147, s2], [l148]).
+transition(t296, [l147, s2], [s2, l148]).
 transition(t297, [l147, s2], [s150, l1]).
-transition(t298, [l148, s2], [l149]).
+transition(t298, [l148, s2], [s2, l149]).
 transition(t299, [l148, s2], [s151, l1]).
-transition(t300, [l149, s2], [l150]).
+transition(t300, [l149, s2], [s2, l150]).
 transition(t301, [l149, s2], [s152, l1]).
-transition(t302, [l150, s2], [l151]).
+transition(t302, [l150, s2], [s2, l151]).
 transition(t303, [l150, s2], [s153, l1]).
 transition(t304, [l151, s2], [s154, l1]).
 transition(t305, [l153, s3], [s2, l152]).

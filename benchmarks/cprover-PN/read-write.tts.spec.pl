@@ -38,13 +38,13 @@ transition(t1, [l0, s0], [s1, l3]).
 transition(t2, [l0, s1], [s2, l9]).
 transition(t3, [l0, s2], [s3, l12]).
 transition(t4, [l0, s3], [s4, l13]).
-transition(t5, [l1, s4], [l2]).
+transition(t5, [l1, s4], [s4, l2]).
 transition(t6, [l2, s4], [s5, l1]).
 transition(t7, [l2, s4], [s7, l3]).
 transition(t8, [l3, s4], [s6, l2]).
 transition(t9, [l4, s4], [s9, l5]).
 transition(t10, [l5, s4], [s15, l9]).
-transition(t11, [l7, s4], [l8]).
+transition(t11, [l7, s4], [s4, l8]).
 transition(t12, [l9, s4], [s10, l5]).
 transition(t13, [l10, s4], [s21, l12]).
 transition(t14, [l5, s5], [s4, l4]).

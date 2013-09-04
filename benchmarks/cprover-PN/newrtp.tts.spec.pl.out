@@ -1,5 +1,36 @@
+place(s0).
+place(s1).
+place(l0).
+place(l1).
+place(l2).
+place(l3).
+place(l4).
+place(l5).
+place(l6).
+place(l7).
+place(l8).
+place(l9).
+transition(t1, [l0, s0], [s1, l1]).
+transition(t2, [l1, s1], [s1, l2]).
+transition(t3, [l2, s1], [s1, l3]).
+transition(t4, [l3, s1], [s1, l4]).
+transition(t5, [l4, s1], [s1, l5]).
+transition(t6, [l4, s1], [s1, l9]).
+transition(t7, [l5, s1], [s1, l6]).
+transition(t8, [l6, s1], [s1, l7]).
+transition(t9, [l6, s1], [s1, l8]).
+transition(t10, [l6, s1], [s1, l9]).
+transition(t11, [l7, s1], [s1, l9]).
+transition(t12, [l8, s1], [s1, l9]).
+transition(t13, [l9, s1], [s1, l2]).
+init(l0, init1).
+cond('(>= init1 1)').
+init(s0).
+cond('(>= s1 1)').
+cond('(>= l5 1)').
+cond('(>= l9 1)').
 PETRINIZER: The checker for Petri Nets
-[benchmarks/cprover-PN/newrtp.tts.spec.pl]
+[newrtp.tts.spec.pl]
 
 * Constructing petri net N from input file
 place(l0, [], [t1]).
@@ -12,22 +43,22 @@ place(l6, [t7], [t10,t9,t8]).
 place(l7, [t8], [t11]).
 place(l8, [t9], [t12]).
 place(l9, [t12,t11,t10,t6], [t13]).
-place(s1, [t1], [t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2]).
+place(s1, [t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2,t1], [t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2]).
 place(l2, [t13,t2], [t3]).
 
 transition(t1, [l0,s0], [s1,l1]).
-transition(t2, [l1,s1], [l2]).
-transition(t3, [l2,s1], [l3]).
-transition(t4, [l3,s1], [l4]).
-transition(t5, [l4,s1], [l5]).
-transition(t6, [l4,s1], [l9]).
-transition(t7, [l5,s1], [l6]).
-transition(t8, [l6,s1], [l7]).
-transition(t9, [l6,s1], [l8]).
-transition(t10, [l6,s1], [l9]).
-transition(t11, [l7,s1], [l9]).
-transition(t12, [l8,s1], [l9]).
-transition(t13, [l9,s1], [l2]).
+transition(t2, [l1,s1], [s1,l2]).
+transition(t3, [l2,s1], [s1,l3]).
+transition(t4, [l3,s1], [s1,l4]).
+transition(t5, [l4,s1], [s1,l5]).
+transition(t6, [l4,s1], [s1,l9]).
+transition(t7, [l5,s1], [s1,l6]).
+transition(t8, [l6,s1], [s1,l7]).
+transition(t9, [l6,s1], [s1,l8]).
+transition(t10, [l6,s1], [s1,l9]).
+transition(t11, [l7,s1], [s1,l9]).
+transition(t12, [l8,s1], [s1,l9]).
+transition(t13, [l9,s1], [s1,l2]).
 
 init(s0, 1).
 init(l0, init1).
@@ -100,7 +131,7 @@ cond('(>= l9 1)').
 (assert (= l7 (+ 0 t8 (- t11))))
 (assert (= l8 (+ 0 t9 (- t12))))
 (assert (= l9 (+ 0 t10 t11 t12 t6 (- t13))))
-(assert (= s1 (+ 0 t1 (- t10) (- t11) (- t12) (- t13) (- t2) (- t3) (- t4) (- t5) (- t6) (- t7) (- t8) (- t9))))
+(assert (= s1 (+ 0 t1)))
 (assert (= l2 (+ 0 t13 t2 (- t3))))
 (assert (>= init1 1))
 (assert (>= s1 1))

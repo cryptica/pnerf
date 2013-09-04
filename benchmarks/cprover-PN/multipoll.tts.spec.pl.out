@@ -1,8 +1,91 @@
+place(s0).
+place(s1).
+place(s2).
+place(s3).
+place(s4).
+place(s5).
+place(s6).
+place(s7).
+place(s8).
+place(s9).
+place(s10).
+place(s11).
+place(s12).
+place(s13).
+place(s14).
+place(s15).
+place(l0).
+place(l1).
+place(l2).
+place(l3).
+place(l4).
+place(l5).
+place(l6).
+place(l7).
+place(l8).
+place(l9).
+place(l10).
+place(l11).
+place(l12).
+place(l13).
+place(l14).
+place(l15).
+place(l16).
+place(l17).
+place(l18).
+transition(t1, [l0, s0], [s0, l1]).
+transition(t2, [l0, s0], [s0, l2]).
+transition(t3, [l0, s0], [s0, l17]).
+transition(t4, [l0, s0], [s0, l18]).
+transition(t5, [l0, s0], [s1, l1]).
+transition(t6, [l0, s1], [s2, l2]).
+transition(t7, [l0, s2], [s3, l8]).
+transition(t8, [l0, s3], [s4, l8]).
+transition(t9, [l0, s4], [s5, l8]).
+transition(t10, [l0, s5], [s6, l17]).
+transition(t11, [l0, s6], [s7, l18]).
+transition(t12, [l1, s7], [s7, l3]).
+transition(t13, [l2, s7], [s7, l6]).
+transition(t14, [l3, s7], [s8, l4]).
+transition(t15, [l4, s7], [s9, l1]).
+transition(t16, [l5, s7], [s10, l2]).
+transition(t17, [l6, s7], [s11, l5]).
+transition(t18, [l7, s7], [s7, l8]).
+transition(t19, [l8, s7], [s7, l10]).
+transition(t20, [l9, s7], [s7, l8]).
+transition(t21, [l10, s7], [s7, l7]).
+transition(t22, [l10, s7], [s7, l9]).
+transition(t23, [l10, s7], [s7, l11]).
+transition(t24, [l10, s7], [s7, l12]).
+transition(t25, [l11, s7], [s7, l8]).
+transition(t26, [l11, s7], [s12, l14]).
+transition(t27, [l12, s7], [s7, l8]).
+transition(t28, [l12, s7], [s15, l15]).
+transition(t29, [l14, s7], [s13, l8]).
+transition(t30, [l15, s7], [s14, l8]).
+transition(t31, [l17, s7], [s7, l13]).
+transition(t32, [l18, s7], [s7, l16]).
+transition(t33, [l7, s8], [s7, l0]).
+transition(t34, [l0, s9], [s7, l8]).
+transition(t35, [l0, s10], [s7, l8]).
+transition(t36, [l9, s11], [s7, l0]).
+transition(t37, [l13, s12], [s7, l0]).
+transition(t38, [l0, s13], [s7, l17]).
+transition(t39, [l0, s14], [s7, l18]).
+transition(t40, [l16, s15], [s7, l0]).
+init(l0, init1).
+cond('(>= init1 1)').
+init(s0).
+cond('(>= s7 1)').
+cond('(>= l4 1)').
+cond('(>= l5 1)').
+cond('(>= l14 1)').
+cond('(>= l15 1)').
 PETRINIZER: The checker for Petri Nets
-[benchmarks/cprover-PN/multipoll.tts.spec.pl]
+[multipoll.tts.spec.pl]
 
 * Constructing petri net N from input file
-place(s0, [], [t5,t4,t3,t2,t1]).
+place(s0, [t4,t3,t2,t1], [t5,t4,t3,t2,t1]).
 place(s1, [t5], [t6]).
 place(s2, [t6], [t7]).
 place(s3, [t7], [t8]).
@@ -35,13 +118,13 @@ place(s14, [t30], [t39]).
 place(l18, [t39,t11,t4], [t32]).
 place(l16, [t32], [t40]).
 place(s15, [t28], [t40]).
-place(s7, [t40,t39,t38,t37,t36,t35,t34,t33,t11], [t32,t31,t30,t29,t28,t27,t26,t25,t24,t23,t22,t21,t20,t19,t18,t17,t16,t15,t14,t13,t12]).
+place(s7, [t40,t39,t38,t37,t36,t35,t34,t33,t32,t31,t27,t25,t24,t23,t22,t21,t20,t19,t18,t13,t12,t11], [t32,t31,t30,t29,t28,t27,t26,t25,t24,t23,t22,t21,t20,t19,t18,t17,t16,t15,t14,t13,t12]).
 place(l0, [t40,t37,t36,t33], [t39,t38,t35,t34,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2,t1]).
 
-transition(t1, [l0,s0], [l1]).
-transition(t2, [l0,s0], [l2]).
-transition(t3, [l0,s0], [l17]).
-transition(t4, [l0,s0], [l18]).
+transition(t1, [l0,s0], [s0,l1]).
+transition(t2, [l0,s0], [s0,l2]).
+transition(t3, [l0,s0], [s0,l17]).
+transition(t4, [l0,s0], [s0,l18]).
 transition(t5, [l0,s0], [s1,l1]).
 transition(t6, [l0,s1], [s2,l2]).
 transition(t7, [l0,s2], [s3,l8]).
@@ -49,27 +132,27 @@ transition(t8, [l0,s3], [s4,l8]).
 transition(t9, [l0,s4], [s5,l8]).
 transition(t10, [l0,s5], [s6,l17]).
 transition(t11, [l0,s6], [s7,l18]).
-transition(t12, [l1,s7], [l3]).
-transition(t13, [l2,s7], [l6]).
+transition(t12, [l1,s7], [s7,l3]).
+transition(t13, [l2,s7], [s7,l6]).
 transition(t14, [l3,s7], [s8,l4]).
 transition(t15, [l4,s7], [s9,l1]).
 transition(t16, [l5,s7], [s10,l2]).
 transition(t17, [l6,s7], [s11,l5]).
-transition(t18, [l7,s7], [l8]).
-transition(t19, [l8,s7], [l10]).
-transition(t20, [l9,s7], [l8]).
-transition(t21, [l10,s7], [l7]).
-transition(t22, [l10,s7], [l9]).
-transition(t23, [l10,s7], [l11]).
-transition(t24, [l10,s7], [l12]).
-transition(t25, [l11,s7], [l8]).
+transition(t18, [l7,s7], [s7,l8]).
+transition(t19, [l8,s7], [s7,l10]).
+transition(t20, [l9,s7], [s7,l8]).
+transition(t21, [l10,s7], [s7,l7]).
+transition(t22, [l10,s7], [s7,l9]).
+transition(t23, [l10,s7], [s7,l11]).
+transition(t24, [l10,s7], [s7,l12]).
+transition(t25, [l11,s7], [s7,l8]).
 transition(t26, [l11,s7], [s12,l14]).
-transition(t27, [l12,s7], [l8]).
+transition(t27, [l12,s7], [s7,l8]).
 transition(t28, [l12,s7], [s15,l15]).
 transition(t29, [l14,s7], [s13,l8]).
 transition(t30, [l15,s7], [s14,l8]).
-transition(t31, [l17,s7], [l13]).
-transition(t32, [l18,s7], [l16]).
+transition(t31, [l17,s7], [s7,l13]).
+transition(t32, [l18,s7], [s7,l16]).
 transition(t33, [l7,s8], [s7,l0]).
 transition(t34, [l0,s9], [s7,l8]).
 transition(t35, [l0,s10], [s7,l8]).
@@ -242,7 +325,7 @@ cond('(>= l15 1)').
 (assert (>= t38 0))
 (assert (>= t39 0))
 (assert (>= t40 0))
-(assert (= s0 (+ 1 (- t1) (- t2) (- t3) (- t4) (- t5))))
+(assert (= s0 (+ 1 (- t5))))
 (assert (= s1 (+ 0 t5 (- t6))))
 (assert (= s2 (+ 0 t6 (- t7))))
 (assert (= s3 (+ 0 t7 (- t8))))
@@ -275,7 +358,7 @@ cond('(>= l15 1)').
 (assert (= l18 (+ 0 t11 t39 t4 (- t32))))
 (assert (= l16 (+ 0 t32 (- t40))))
 (assert (= s15 (+ 0 t28 (- t40))))
-(assert (= s7 (+ 0 t11 t33 t34 t35 t36 t37 t38 t39 t40 (- t12) (- t13) (- t14) (- t15) (- t16) (- t17) (- t18) (- t19) (- t20) (- t21) (- t22) (- t23) (- t24) (- t25) (- t26) (- t27) (- t28) (- t29) (- t30) (- t31) (- t32))))
+(assert (= s7 (+ 0 t11 t33 t34 t35 t36 t37 t38 t39 t40 (- t14) (- t15) (- t16) (- t17) (- t26) (- t28) (- t29) (- t30))))
 (assert (= l0 (+ init1 t33 t36 t37 t40 (- t1) (- t10) (- t11) (- t2) (- t3) (- t34) (- t35) (- t38) (- t39) (- t4) (- t5) (- t6) (- t7) (- t8) (- t9))))
 (assert (>= init1 1))
 (assert (>= s7 1))

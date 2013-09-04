@@ -30,9 +30,9 @@ transition(t7, [l0, s6], [s7, l7]).
 transition(t8, [l0, s7], [s8, l7]).
 transition(t9, [l2, s8], [s9, l9]).
 transition(t10, [l3, s8], [s10, l1]).
-transition(t11, [l5, s8], [l8]).
-transition(t12, [l6, s8], [l2]).
-transition(t13, [l7, s8], [l3]).
+transition(t11, [l5, s8], [s8, l8]).
+transition(t12, [l6, s8], [s8, l2]).
+transition(t13, [l7, s8], [s8, l3]).
 transition(t14, [l8, s8], [s11, l4]).
 transition(t15, [l4, s9], [s8, l0]).
 transition(t16, [l9, s10], [s8, l6]).

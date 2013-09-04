@@ -13,7 +13,7 @@ transition(t1, [l0, s0], [s1, l2]).
 transition(t2, [l0, s1], [s2, l2]).
 transition(t3, [l0, s2], [s3, l4]).
 transition(t4, [l0, s3], [s4, l4]).
-transition(t5, [l1, s4], [l3]).
+transition(t5, [l1, s4], [s4, l3]).
 transition(t6, [l2, s4], [s5, l1]).
 transition(t7, [l4, s5], [s4, l0]).
 init(l0, init1).

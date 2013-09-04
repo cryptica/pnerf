@@ -1,5 +1,44 @@
+place(s0).
+place(s1).
+place(s2).
+place(s3).
+place(s4).
+place(s5).
+place(s6).
+place(l0).
+place(l1).
+place(l2).
+place(l3).
+place(l4).
+place(l5).
+place(l6).
+place(l7).
+place(l8).
+place(l9).
+place(l10).
+place(l11).
+transition(t1, [l0, s0], [s1, l4]).
+transition(t2, [l0, s1], [s2, l10]).
+transition(t3, [l1, s2], [s2, l9]).
+transition(t4, [l2, s2], [s2, l3]).
+transition(t5, [l4, s2], [s2, l6]).
+transition(t6, [l5, s2], [s4, l7]).
+transition(t7, [l5, s2], [s6, l8]).
+transition(t8, [l8, s2], [s3, l1]).
+transition(t9, [l9, s2], [s2, l2]).
+transition(t10, [l10, s2], [s5, l11]).
+transition(t11, [l11, s2], [s2, l5]).
+transition(t12, [l0, s3], [s2, l4]).
+transition(t13, [l6, s4], [s2, l0]).
+transition(t14, [l0, s5], [s2, l10]).
+transition(t15, [l7, s6], [s2, l0]).
+init(l0, init1).
+cond('(>= init1 1)').
+init(s0).
+cond('(>= s2 1)').
+cond('(>= l11 2)').
 PETRINIZER: The checker for Petri Nets
-[benchmarks/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
+[platoonFiniteHandlerPoly.tts.spec.pl]
 
 * Constructing petri net N from input file
 place(s0, [], [t1]).
@@ -19,20 +58,20 @@ place(s5, [t10], [t14]).
 place(l10, [t14,t2], [t10]).
 place(l7, [t6], [t15]).
 place(s6, [t7], [t15]).
-place(s2, [t15,t14,t13,t12,t2], [t11,t10,t9,t8,t7,t6,t5,t4,t3]).
+place(s2, [t15,t14,t13,t12,t11,t9,t5,t4,t3,t2], [t11,t10,t9,t8,t7,t6,t5,t4,t3]).
 place(l0, [t15,t13], [t14,t12,t2,t1]).
 
 transition(t1, [l0,s0], [s1,l4]).
 transition(t2, [l0,s1], [s2,l10]).
-transition(t3, [l1,s2], [l9]).
-transition(t4, [l2,s2], [l3]).
-transition(t5, [l4,s2], [l6]).
+transition(t3, [l1,s2], [s2,l9]).
+transition(t4, [l2,s2], [s2,l3]).
+transition(t5, [l4,s2], [s2,l6]).
 transition(t6, [l5,s2], [s4,l7]).
 transition(t7, [l5,s2], [s6,l8]).
 transition(t8, [l8,s2], [s3,l1]).
-transition(t9, [l9,s2], [l2]).
+transition(t9, [l9,s2], [s2,l2]).
 transition(t10, [l10,s2], [s5,l11]).
-transition(t11, [l11,s2], [l5]).
+transition(t11, [l11,s2], [s2,l5]).
 transition(t12, [l0,s3], [s2,l4]).
 transition(t13, [l6,s4], [s2,l0]).
 transition(t14, [l0,s5], [s2,l10]).
@@ -133,7 +172,7 @@ cond('(>= l11 2)').
 (assert (= l10 (+ 0 t14 t2 (- t10))))
 (assert (= l7 (+ 0 t6 (- t15))))
 (assert (= s6 (+ 0 t7 (- t15))))
-(assert (= s2 (+ 0 t12 t13 t14 t15 t2 (- t10) (- t11) (- t3) (- t4) (- t5) (- t6) (- t7) (- t8) (- t9))))
+(assert (= s2 (+ 0 t12 t13 t14 t15 t2 (- t10) (- t6) (- t7) (- t8))))
 (assert (= l0 (+ init1 t13 t15 (- t1) (- t12) (- t14) (- t2))))
 (assert (>= init1 1))
 (assert (>= s2 1))
@@ -253,7 +292,6 @@ assignment(l8, 0).
 assignment(l3, 0).
 assignment(s1, 0).
 assignment(s0, 0).
-
 - constraints C_theta...
 (declare-fun s0 () Bool)
 (declare-fun s1 () Bool)
@@ -278,20 +316,20 @@ assignment(s0, 0).
 (assert (implies s0 (or s1 l4)))
 (assert (implies s1 (or s2 l10)))
 (assert (implies l8 (or s3 l1)))
-(assert (implies l1 l9))
-(assert (implies l9 l2))
-(assert (implies l2 l3))
-(assert (implies l11 l5))
+(assert (implies l1 (or s2 l9)))
+(assert (implies l9 (or s2 l2)))
+(assert (implies l2 (or s2 l3)))
+(assert (implies l11 (or s2 l5)))
 (assert (implies l5 (and (or s6 l8) (or s4 l7))))
 (assert (implies s3 (or s2 l4)))
-(assert (implies l4 l6))
+(assert (implies l4 (or s2 l6)))
 (assert (implies l6 (or s2 l0)))
 (assert (implies s4 (or s2 l0)))
 (assert (implies s5 (or s2 l10)))
 (assert (implies l10 (or s5 l11)))
 (assert (implies l7 (or s2 l0)))
 (assert (implies s6 (or s2 l0)))
-(assert (implies s2 (and l5 (or s5 l11) l2 (or s3 l1) (or s6 l8) (or s4 l7) l6 l3 l9)))
+(assert (implies s2 (and (or s2 l5) (or s5 l11) (or s2 l2) (or s3 l1) (or s6 l8) (or s4 l7) (or s2 l6) (or s2 l3) (or s2 l9))))
 (assert (implies l0 (and (or s2 l10) (or s2 l4) (or s2 l10) (or s1 l4))))
 
 (assert (or s0 l0))

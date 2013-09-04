@@ -75,13 +75,13 @@ transition(t10, [l5, s2], [s13, l1]).
 transition(t11, [l6, s2], [s6, l7]).
 transition(t12, [l7, s2], [s7, l8]).
 transition(t13, [l7, s2], [s10, l9]).
-transition(t14, [l8, s2], [l10]).
+transition(t14, [l8, s2], [s2, l10]).
 transition(t15, [l8, s2], [s9, l7]).
-transition(t16, [l9, s2], [l10]).
+transition(t16, [l9, s2], [s2, l10]).
 transition(t17, [l9, s2], [s12, l1]).
 transition(t18, [l10, s2], [s8, l2]).
 transition(t19, [l10, s2], [s11, l1]).
-transition(t20, [l11, s2], [l3]).
+transition(t20, [l11, s2], [s2, l3]).
 transition(t21, [l11, s2], [s15, l3]).
 transition(t22, [l11, s2], [s16, l3]).
 transition(t23, [l11, s2], [s17, l1]).
@@ -90,15 +90,15 @@ transition(t25, [l15, s2], [s19, l16]).
 transition(t26, [l15, s2], [s28, l12]).
 transition(t27, [l16, s2], [s20, l17]).
 transition(t28, [l16, s2], [s25, l12]).
-transition(t29, [l17, s2], [l20]).
+transition(t29, [l17, s2], [s2, l20]).
 transition(t30, [l17, s2], [s21, l18]).
 transition(t31, [l17, s2], [s24, l20]).
-transition(t32, [l18, s2], [l19]).
+transition(t32, [l18, s2], [s2, l19]).
 transition(t33, [l18, s2], [s23, l17]).
-transition(t34, [l19, s2], [l20]).
+transition(t34, [l19, s2], [s2, l20]).
 transition(t35, [l19, s2], [s27, l12]).
 transition(t36, [l20, s2], [s26, l12]).
-transition(t37, [l21, s2], [l14]).
+transition(t37, [l21, s2], [s2, l14]).
 transition(t38, [l21, s2], [s31, l12]).
 transition(t39, [l0, s3], [s2, l22]).
 transition(t40, [l23, s4], [s2, l24]).

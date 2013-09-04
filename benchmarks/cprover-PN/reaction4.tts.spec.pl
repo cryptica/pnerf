@@ -16,7 +16,7 @@ place(l6).
 place(l7).
 transition(t1, [l0, s0], [s1, l1]).
 transition(t2, [l0, s1], [s2, l7]).
-transition(t3, [l1, s2], [l4]).
+transition(t3, [l1, s2], [s2, l4]).
 transition(t4, [l2, s2], [s4, l5]).
 transition(t5, [l2, s2], [s5, l3]).
 transition(t6, [l4, s2], [s3, l1]).

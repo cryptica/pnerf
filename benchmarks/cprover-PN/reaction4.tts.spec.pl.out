@@ -1,5 +1,38 @@
+place(s0).
+place(s1).
+place(s2).
+place(s3).
+place(s4).
+place(s5).
+place(s6).
+place(s7).
+place(l0).
+place(l1).
+place(l2).
+place(l3).
+place(l4).
+place(l5).
+place(l6).
+place(l7).
+transition(t1, [l0, s0], [s1, l1]).
+transition(t2, [l0, s1], [s2, l7]).
+transition(t3, [l1, s2], [s2, l4]).
+transition(t4, [l2, s2], [s4, l5]).
+transition(t5, [l2, s2], [s5, l3]).
+transition(t6, [l4, s2], [s3, l1]).
+transition(t7, [l4, s2], [s6, l1]).
+transition(t8, [l5, s3], [s2, l2]).
+transition(t9, [l7, s4], [s2, l6]).
+transition(t10, [l5, s5], [s2, l0]).
+transition(t11, [l7, s6], [s7, l2]).
+transition(t12, [l0, s7], [s2, l5]).
+init(l0, init1).
+cond('(>= init1 1)').
+init(s0).
+cond('(>= s2 1)').
+cond('(>= l7 2)').
 PETRINIZER: The checker for Petri Nets
-[benchmarks/cprover-PN/reaction4.tts.spec.pl]
+[reaction4.tts.spec.pl]
 
 * Constructing petri net N from input file
 place(s0, [], [t1]).
@@ -16,12 +49,12 @@ place(s6, [t7], [t11]).
 place(l2, [t11,t8], [t5,t4]).
 place(l0, [t10], [t12,t2,t1]).
 place(s7, [t11], [t12]).
-place(s2, [t12,t10,t9,t8,t2], [t7,t6,t5,t4,t3]).
+place(s2, [t12,t10,t9,t8,t3,t2], [t7,t6,t5,t4,t3]).
 place(l5, [t12,t4], [t10,t8]).
 
 transition(t1, [l0,s0], [s1,l1]).
 transition(t2, [l0,s1], [s2,l7]).
-transition(t3, [l1,s2], [l4]).
+transition(t3, [l1,s2], [s2,l4]).
 transition(t4, [l2,s2], [s4,l5]).
 transition(t5, [l2,s2], [s5,l3]).
 transition(t6, [l4,s2], [s3,l1]).
@@ -112,7 +145,7 @@ cond('(>= l7 2)').
 (assert (= l2 (+ 0 t11 t8 (- t4) (- t5))))
 (assert (= l0 (+ init1 t10 (- t1) (- t12) (- t2))))
 (assert (= s7 (+ 0 t11 (- t12))))
-(assert (= s2 (+ 0 t10 t12 t2 t8 t9 (- t3) (- t4) (- t5) (- t6) (- t7))))
+(assert (= s2 (+ 0 t10 t12 t2 t8 t9 (- t4) (- t5) (- t6) (- t7))))
 (assert (= l5 (+ 0 t12 t4 (- t10) (- t8))))
 (assert (>= init1 1))
 (assert (>= s2 1))

@@ -1,8 +1,49 @@
+place(s0).
+place(s1).
+place(s2).
+place(s3).
+place(s4).
+place(s5).
+place(s6).
+place(s7).
+place(s8).
+place(s9).
+place(s10).
+place(s11).
+place(l0).
+place(l1).
+place(l2).
+place(l3).
+place(l4).
+place(l5).
+transition(t1, [l0, s0], [s0, l1]).
+transition(t2, [l0, s0], [s1, l1]).
+transition(t3, [l0, s1], [s2, l2]).
+transition(t4, [l0, s2], [s3, l3]).
+transition(t5, [l1, s3], [s4, l4]).
+transition(t6, [l1, s3], [s7, l5]).
+transition(t7, [l4, s3], [s10, l1]).
+transition(t8, [l5, s3], [s11, l1]).
+transition(t9, [l2, s4], [s5, l0]).
+transition(t10, [l3, s5], [s6, l0]).
+transition(t11, [l0, s6], [s3, l2]).
+transition(t12, [l2, s7], [s8, l0]).
+transition(t13, [l3, s8], [s9, l0]).
+transition(t14, [l0, s9], [s3, l3]).
+transition(t15, [l0, s10], [s3, l3]).
+transition(t16, [l0, s11], [s3, l2]).
+init(l0, init1).
+cond('(>= init1 1)').
+init(s0).
+cond('(>= s3 1)').
+cond('(>= l1 1)').
+cond('(>= l3 1)').
+cond('(>= l4 2)').
 PETRINIZER: The checker for Petri Nets
-[benchmarks/cprover-PN/basicME.tts.spec.pl]
+[basicME.tts.spec.pl]
 
 * Constructing petri net N from input file
-place(s0, [], [t2,t1]).
+place(s0, [t1], [t2,t1]).
 place(s1, [t2], [t3]).
 place(s2, [t3], [t4]).
 place(l4, [t5], [t7]).
@@ -21,7 +62,7 @@ place(s11, [t8], [t16]).
 place(s3, [t16,t15,t14,t11,t4], [t8,t7,t6,t5]).
 place(l2, [t16,t11,t3], [t12,t9]).
 
-transition(t1, [l0,s0], [l1]).
+transition(t1, [l0,s0], [s0,l1]).
 transition(t2, [l0,s0], [s1,l1]).
 transition(t3, [l0,s1], [s2,l2]).
 transition(t4, [l0,s2], [s3,l3]).
@@ -118,7 +159,7 @@ cond('(>= l4 2)').
 (assert (>= t14 0))
 (assert (>= t15 0))
 (assert (>= t16 0))
-(assert (= s0 (+ 1 (- t1) (- t2))))
+(assert (= s0 (+ 1 (- t2))))
 (assert (= s1 (+ 0 t2 (- t3))))
 (assert (= s2 (+ 0 t3 (- t4))))
 (assert (= l4 (+ 0 t5 (- t7))))

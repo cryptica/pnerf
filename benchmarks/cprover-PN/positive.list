@@ -9,17 +9,12 @@ benchmarks/cprover-PN/clientserver.tts.spec.pl
 benchmarks/cprover-PN/csm.tts.spec.pl
 benchmarks/cprover-PN/gsm.tts.spec.pl
 benchmarks/cprover-PN/handover.tts.spec.pl
-benchmarks/cprover-PN/kanban.tts.spec.pl
 benchmarks/cprover-PN/keycard.tts.spec.pl
-benchmarks/cprover-PN/leabasicapproach.tts.spec.pl
 benchmarks/cprover-PN/mesh2x2.tts.spec.pl
 benchmarks/cprover-PN/multipoll.tts.spec.pl
 benchmarks/cprover-PN/newrtp.tts.spec.pl
 benchmarks/cprover-PN/phones.tts.spec.pl
-benchmarks/cprover-PN/platoon.tts.spec.pl
-benchmarks/cprover-PN/pncsacover.tts.spec.pl
 benchmarks/cprover-PN/reaction.tts.spec.pl
-benchmarks/cprover-PN/reaction2.tts.spec.pl
 benchmarks/cprover-PN/reaction3.tts.spec.pl
 benchmarks/cprover-PN/reaction4.tts.spec.pl
 benchmarks/cprover-PN/read-write.tts.spec.pl
