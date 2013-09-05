@@ -1,0 +1,113 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl]
+
+* Constructing petri net N from input file
+place(x0, [t2], [t1]).
+place(x1, [t3,t1], [t4,t2]).
+place(x2, [t4], [t3]).
+place(x5, [t4], []).
+place(x3, [t2], [t6]).
+place(x7, [t5], [t6]).
+place(x4, [t6], [t2]).
+place(x6, [t6], [t5]).
+place(x8, [], [t7]).
+place(x9, [t4], [t9]).
+place(x10, [], [t9]).
+place(x11, [t9], [t3]).
+place(x12, [t9], [t7]).
+
+transition(t1, [x0], [x1]).
+transition(t2, [x1,x4], [x0,x3]).
+transition(t3, [x2,x11], [x1]).
+transition(t4, [x1], [x2,x5,x9]).
+transition(t5, [x6], [x7]).
+transition(t6, [x3,x7], [x4,x6]).
+transition(t7, [x8,x12], [x4+5,x7]).
+transition(t8, [x4>=5,x5,x7], [x4>=5,x4-5,x8,x10]).
+transition(t9, [x9,x10], [x11,x12]).
+
+init(x2, 1).
+init(x8, 1).
+init(x11, 1).
+init(x12, 1).
+cond('(>= x3 1)').
+cond('(>= x10 1)').
+cond('(= x3 1)').
+cond('(= x4 1)').
+cond('(= x8 5)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun x0 () Int)
+(declare-fun x1 () Int)
+(declare-fun x2 () Int)
+(declare-fun x5 () Int)
+(declare-fun x3 () Int)
+(declare-fun x7 () Int)
+(declare-fun x4 () Int)
+(declare-fun x6 () Int)
+(declare-fun x8 () Int)
+(declare-fun x9 () Int)
+(declare-fun x10 () Int)
+(declare-fun x11 () Int)
+(declare-fun x12 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(assert (>= x0 0))
+(assert (>= x1 0))
+(assert (>= x2 0))
+(assert (>= x5 0))
+(assert (>= x3 0))
+(assert (>= x7 0))
+(assert (>= x4 0))
+(assert (>= x6 0))
+(assert (>= x8 0))
+(assert (>= x9 0))
+(assert (>= x10 0))
+(assert (>= x11 0))
+(assert (>= x12 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (= x0 (+ 0 t2 (- t1))))
+(assert (= x1 (+ 0 t1 t3 (- t2) (- t4))))
+(assert (= x2 (+ 1 t4 (- t3))))
+(assert (= x5 (+ 0 t4)))
+(assert (= x3 (+ 0 t2 (- t6))))
+(assert (= x7 (+ 0 t5 (- t6))))
+(assert (= x4 (+ 0 t6 (- t2))))
+(assert (= x6 (+ 0 t6 (- t5))))
+(assert (= x8 (+ 1 (- t7))))
+(assert (= x9 (+ 0 t4 (- t9))))
+(assert (= x10 (+ 0 (- t9))))
+(assert (= x11 (+ 1 t9 (- t3))))
+(assert (= x12 (+ 1 t9 (- t7))))
+(assert (>= x3 1))
+(assert (>= x10 1))
+(assert (= x3 1))
+(assert (= x4 1))
+(assert (= x8 5))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 64 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

@@ -1,0 +1,153 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl]
+
+* Constructing petri net N from input file
+place(begin, [], [t1]).
+place(sc1, [t2], [t3]).
+place(oh_ns, [t3], [t5,t4]).
+place(point1, [t4], [t6]).
+place(oh_a_dt, [t6], [t9,t8,t7]).
+place(sc2, [t8], [t10]).
+place(sc3, [t9], [t11]).
+place(point2, [t11,t10,t7,t5], [t12]).
+place(do, [t12,t1], [t2]).
+
+transition(t1, [begin], [do]).
+transition(t2, [do], [sc1]).
+transition(t3, [sc1], [oh_ns]).
+transition(t4, [oh_ns], [point1]).
+transition(t5, [oh_ns], [point2]).
+transition(t6, [point1], [oh_a_dt]).
+transition(t7, [oh_a_dt], [point2]).
+transition(t8, [oh_a_dt], [sc2]).
+transition(t9, [oh_a_dt], [sc3]).
+transition(t10, [sc2], [point2]).
+transition(t11, [sc3], [point2]).
+transition(t12, [point2], [do]).
+
+init(begin, 1).
+cond('(>= point1 1)').
+cond('(>= point2 1)').
+cond('(= begin 1)').
+cond('(= do 1)').
+cond('(= sc1 1)').
+cond('(= oh_ns 1)').
+cond('(= point1 1)').
+cond('(= oh_a_dt 1)').
+cond('(= sc2 1)').
+cond('(= point2 1)').
+cond('(= begin 1)').
+cond('(= do 1)').
+cond('(= sc1 1)').
+cond('(= oh_ns 1)').
+cond('(= point1 1)').
+cond('(= oh_a_dt 1)').
+cond('(= sc3 1)').
+cond('(= point2 1)').
+cond('(= begin 1)').
+cond('(= do 1)').
+cond('(= sc1 1)').
+cond('(= oh_ns 1)').
+cond('(= point1 1)').
+cond('(= oh_a_dt 1)').
+cond('(= point2 1)').
+cond('(= begin 1)').
+cond('(= do 1)').
+cond('(= sc1 1)').
+cond('(= oh_ns 1)').
+cond('(= point2 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun begin () Int)
+(declare-fun sc1 () Int)
+(declare-fun oh_ns () Int)
+(declare-fun point1 () Int)
+(declare-fun oh_a_dt () Int)
+(declare-fun sc2 () Int)
+(declare-fun sc3 () Int)
+(declare-fun point2 () Int)
+(declare-fun do () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(assert (>= begin 0))
+(assert (>= sc1 0))
+(assert (>= oh_ns 0))
+(assert (>= point1 0))
+(assert (>= oh_a_dt 0))
+(assert (>= sc2 0))
+(assert (>= sc3 0))
+(assert (>= point2 0))
+(assert (>= do 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (= begin (+ 1 (- t1))))
+(assert (= sc1 (+ 0 t2 (- t3))))
+(assert (= oh_ns (+ 0 t3 (- t4) (- t5))))
+(assert (= point1 (+ 0 t4 (- t6))))
+(assert (= oh_a_dt (+ 0 t6 (- t7) (- t8) (- t9))))
+(assert (= sc2 (+ 0 t8 (- t10))))
+(assert (= sc3 (+ 0 t9 (- t11))))
+(assert (= point2 (+ 0 t10 t11 t5 t7 (- t12))))
+(assert (= do (+ 0 t1 t12 (- t2))))
+(assert (>= point1 1))
+(assert (>= point2 1))
+(assert (= begin 1))
+(assert (= do 1))
+(assert (= sc1 1))
+(assert (= oh_ns 1))
+(assert (= point1 1))
+(assert (= oh_a_dt 1))
+(assert (= sc2 1))
+(assert (= point2 1))
+(assert (= begin 1))
+(assert (= do 1))
+(assert (= sc1 1))
+(assert (= oh_ns 1))
+(assert (= point1 1))
+(assert (= oh_a_dt 1))
+(assert (= sc3 1))
+(assert (= point2 1))
+(assert (= begin 1))
+(assert (= do 1))
+(assert (= sc1 1))
+(assert (= oh_ns 1))
+(assert (= point1 1))
+(assert (= oh_a_dt 1))
+(assert (= point2 1))
+(assert (= begin 1))
+(assert (= do 1))
+(assert (= sc1 1))
+(assert (= oh_ns 1))
+(assert (= point2 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 83 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

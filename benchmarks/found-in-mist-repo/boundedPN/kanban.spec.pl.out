@@ -1,0 +1,194 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl]
+
+* Constructing petri net N from input file
+place(x1, [t2], [t3]).
+place(x0, [t3,t1], [t4,t2]).
+place(x3, [t4], [t5]).
+place(x2, [t5], [t1]).
+place(x5, [t6], [t7]).
+place(x4, [t7,t5], [t8,t6]).
+place(x7, [t8], [t9]).
+place(x6, [t9], [t5]).
+place(x10, [t9], [t5]).
+place(x9, [t10], [t11]).
+place(x8, [t11,t5], [t12,t10]).
+place(x11, [t12], [t9]).
+place(x13, [t13], [t14]).
+place(x12, [t14,t9], [t15,t13]).
+place(x15, [t15], [t16]).
+place(x14, [t16], [t9]).
+
+transition(t1, [x2], [x0]).
+transition(t2, [x0], [x1]).
+transition(t3, [x1], [x0]).
+transition(t4, [x0], [x3]).
+transition(t5, [x3,x6,x10], [x2,x4,x8]).
+transition(t6, [x4], [x5]).
+transition(t7, [x5], [x4]).
+transition(t8, [x4], [x7]).
+transition(t9, [x7,x11,x14], [x6,x10,x12]).
+transition(t10, [x8], [x9]).
+transition(t11, [x9], [x8]).
+transition(t12, [x8], [x11]).
+transition(t13, [x12], [x13]).
+transition(t14, [x13], [x12]).
+transition(t15, [x12], [x15]).
+transition(t16, [x15], [x14]).
+
+init(x2, 1).
+init(x6, 1).
+init(x10, 1).
+init(x14, 1).
+cond('(>= x4 2)').
+cond('(>= x6 4)').
+cond('(>= x10 4)').
+cond('(>= x13 6)').
+cond('(>= x14 4)').
+cond('(= x6 1)').
+cond('(= x8 1)').
+cond('(= x9 1)').
+cond('(= x11 1)').
+cond('(= x8 1)').
+cond('(= x9 1)').
+cond('(= x10 1)').
+cond('(= x11 1)').
+cond('(= x4 1)').
+cond('(= x5 1)').
+cond('(= x6 1)').
+cond('(= x7 1)').
+cond('(= x4 1)').
+cond('(= x5 1)').
+cond('(= x7 1)').
+cond('(= x10 1)').
+cond('(= x12 1)').
+cond('(= x13 1)').
+cond('(= x14 1)').
+cond('(= x15 1)').
+cond('(= x0 1)').
+cond('(= x1 1)').
+cond('(= x2 1)').
+cond('(= x3 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun x1 () Int)
+(declare-fun x0 () Int)
+(declare-fun x3 () Int)
+(declare-fun x2 () Int)
+(declare-fun x5 () Int)
+(declare-fun x4 () Int)
+(declare-fun x7 () Int)
+(declare-fun x6 () Int)
+(declare-fun x10 () Int)
+(declare-fun x9 () Int)
+(declare-fun x8 () Int)
+(declare-fun x11 () Int)
+(declare-fun x13 () Int)
+(declare-fun x12 () Int)
+(declare-fun x15 () Int)
+(declare-fun x14 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(declare-fun t13 () Int)
+(declare-fun t14 () Int)
+(declare-fun t15 () Int)
+(declare-fun t16 () Int)
+(assert (>= x1 0))
+(assert (>= x0 0))
+(assert (>= x3 0))
+(assert (>= x2 0))
+(assert (>= x5 0))
+(assert (>= x4 0))
+(assert (>= x7 0))
+(assert (>= x6 0))
+(assert (>= x10 0))
+(assert (>= x9 0))
+(assert (>= x8 0))
+(assert (>= x11 0))
+(assert (>= x13 0))
+(assert (>= x12 0))
+(assert (>= x15 0))
+(assert (>= x14 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (>= t13 0))
+(assert (>= t14 0))
+(assert (>= t15 0))
+(assert (>= t16 0))
+(assert (= x1 (+ 0 t2 (- t3))))
+(assert (= x0 (+ 0 t1 t3 (- t2) (- t4))))
+(assert (= x3 (+ 0 t4 (- t5))))
+(assert (= x2 (+ 1 t5 (- t1))))
+(assert (= x5 (+ 0 t6 (- t7))))
+(assert (= x4 (+ 0 t5 t7 (- t6) (- t8))))
+(assert (= x7 (+ 0 t8 (- t9))))
+(assert (= x6 (+ 1 t9 (- t5))))
+(assert (= x10 (+ 1 t9 (- t5))))
+(assert (= x9 (+ 0 t10 (- t11))))
+(assert (= x8 (+ 0 t11 t5 (- t10) (- t12))))
+(assert (= x11 (+ 0 t12 (- t9))))
+(assert (= x13 (+ 0 t13 (- t14))))
+(assert (= x12 (+ 0 t14 t9 (- t13) (- t15))))
+(assert (= x15 (+ 0 t15 (- t16))))
+(assert (= x14 (+ 1 t16 (- t9))))
+(assert (>= x4 2))
+(assert (>= x6 4))
+(assert (>= x10 4))
+(assert (>= x13 6))
+(assert (>= x14 4))
+(assert (= x6 1))
+(assert (= x8 1))
+(assert (= x9 1))
+(assert (= x11 1))
+(assert (= x8 1))
+(assert (= x9 1))
+(assert (= x10 1))
+(assert (= x11 1))
+(assert (= x4 1))
+(assert (= x5 1))
+(assert (= x6 1))
+(assert (= x7 1))
+(assert (= x4 1))
+(assert (= x5 1))
+(assert (= x7 1))
+(assert (= x10 1))
+(assert (= x12 1))
+(assert (= x13 1))
+(assert (= x14 1))
+(assert (= x15 1))
+(assert (= x0 1))
+(assert (= x1 1))
+(assert (= x2 1))
+(assert (= x3 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 111 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

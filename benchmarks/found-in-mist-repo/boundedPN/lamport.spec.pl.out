@@ -1,0 +1,127 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl]
+
+* Constructing petri net N from input file
+place(p2, [t1], [t2]).
+place(p3, [t2], [t3]).
+place(p1, [t3], [t1]).
+place(x_eq_0, [t4,t2], [t4,t1]).
+place(q1, [t4], [t5]).
+place(q2, [t5], [t6]).
+place(x_eq_1, [t7,t6,t1], [t7,t6,t2]).
+place(q4, [t7], [t8]).
+place(y_eq_1, [t8,t5,t3], [t9,t3]).
+place(q5, [t8,t6], [t9]).
+place(q3, [t9], [t7,t4]).
+
+transition(t1, [p1,x_eq_0], [p2,x_eq_1]).
+transition(t2, [p2,x_eq_1], [p3,x_eq_0]).
+transition(t3, [p3,y_eq_1], [y_eq_1,p1]).
+transition(t4, [x_eq_0,q3], [x_eq_0,q1]).
+transition(t5, [q1], [y_eq_1,q2]).
+transition(t6, [x_eq_1,q2], [x_eq_1,q5]).
+transition(t7, [x_eq_1,q3], [x_eq_1,q4]).
+transition(t8, [q4], [y_eq_1,q5]).
+transition(t9, [y_eq_1,q5], [q3]).
+
+init(p2, 1).
+init(x_eq_1, 1).
+init(y_eq_1, 1).
+init(q5, 1).
+cond('(>= p1 1)').
+cond('(>= q4 1)').
+cond('(= p1 1)').
+cond('(= p2 1)').
+cond('(= p3 1)').
+cond('(= x_eq_0 1)').
+cond('(= x_eq_1 1)').
+cond('(= q1 1)').
+cond('(= q2 1)').
+cond('(= q3 1)').
+cond('(= q4 1)').
+cond('(= q5 1)').
+cond('(= y_eq_1 1)').
+cond('(= q2 1)').
+cond('(= q3 1)').
+cond('(= q4 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun p2 () Int)
+(declare-fun p3 () Int)
+(declare-fun p1 () Int)
+(declare-fun x_eq_0 () Int)
+(declare-fun q1 () Int)
+(declare-fun q2 () Int)
+(declare-fun x_eq_1 () Int)
+(declare-fun q4 () Int)
+(declare-fun y_eq_1 () Int)
+(declare-fun q5 () Int)
+(declare-fun q3 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(assert (>= p2 0))
+(assert (>= p3 0))
+(assert (>= p1 0))
+(assert (>= x_eq_0 0))
+(assert (>= q1 0))
+(assert (>= q2 0))
+(assert (>= x_eq_1 0))
+(assert (>= q4 0))
+(assert (>= y_eq_1 0))
+(assert (>= q5 0))
+(assert (>= q3 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (= p2 (+ 1 t1 (- t2))))
+(assert (= p3 (+ 0 t2 (- t3))))
+(assert (= p1 (+ 0 t3 (- t1))))
+(assert (= x_eq_0 (+ 0 t2 (- t1))))
+(assert (= q1 (+ 0 t4 (- t5))))
+(assert (= q2 (+ 0 t5 (- t6))))
+(assert (= x_eq_1 (+ 1 t1 (- t2))))
+(assert (= q4 (+ 0 t7 (- t8))))
+(assert (= y_eq_1 (+ 1 t5 t8 (- t9))))
+(assert (= q5 (+ 1 t6 t8 (- t9))))
+(assert (= q3 (+ 0 t9 (- t4) (- t7))))
+(assert (>= p1 1))
+(assert (>= q4 1))
+(assert (= p1 1))
+(assert (= p2 1))
+(assert (= p3 1))
+(assert (= x_eq_0 1))
+(assert (= x_eq_1 1))
+(assert (= q1 1))
+(assert (= q2 1))
+(assert (= q3 1))
+(assert (= q4 1))
+(assert (= q5 1))
+(assert (= y_eq_1 1))
+(assert (= q2 1))
+(assert (= q3 1))
+(assert (= q4 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 69 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

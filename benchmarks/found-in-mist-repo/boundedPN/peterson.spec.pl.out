@@ -1,0 +1,149 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl]
+
+* Constructing petri net N from input file
+place(x1, [t1], [t3,t2]).
+place(x2, [t3,t2], [t5,t4]).
+place(x3, [t5,t4], [t6]).
+place(x5, [t1], [t6]).
+place(x0, [t6], [t1]).
+place(x11, [t7], [t9,t8]).
+place(x6, [t9,t8,t5], [t9,t5,t2]).
+place(x4, [t10,t6], [t10,t1]).
+place(x12, [t9,t8], [t11,t10]).
+place(x7, [t11,t3,t2], [t11,t8,t3]).
+place(x8, [t7], [t12]).
+place(x13, [t11,t10], [t12]).
+place(x9, [t12,t4], [t7,t4]).
+place(x10, [t12], [t7]).
+
+transition(t1, [x0,x4], [x1,x5]).
+transition(t2, [x1,x6], [x2,x7]).
+transition(t3, [x1,x7], [x7,x2]).
+transition(t4, [x2,x9], [x9,x3]).
+transition(t5, [x2,x6], [x6,x3]).
+transition(t6, [x3,x5], [x0,x4]).
+transition(t7, [x9,x10], [x8,x11]).
+transition(t8, [x7,x11], [x6,x12]).
+transition(t9, [x6,x11], [x6,x12]).
+transition(t10, [x4,x12], [x4,x13]).
+transition(t11, [x7,x12], [x7,x13]).
+transition(t12, [x8,x13], [x9,x10]).
+
+init(x0, 1).
+init(x4, 1).
+init(x7, 1).
+init(x9, 1).
+init(x10, 1).
+cond('(>= x3 1)').
+cond('(>= x13 1)').
+cond('(= x0 1)').
+cond('(= x1 1)').
+cond('(= x2 1)').
+cond('(= x3 1)').
+cond('(= x4 1)').
+cond('(= x5 1)').
+cond('(= x6 1)').
+cond('(= x7 1)').
+cond('(= x8 1)').
+cond('(= x9 1)').
+cond('(= x10 1)').
+cond('(= x11 1)').
+cond('(= x12 1)').
+cond('(= x13 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun x1 () Int)
+(declare-fun x2 () Int)
+(declare-fun x3 () Int)
+(declare-fun x5 () Int)
+(declare-fun x0 () Int)
+(declare-fun x11 () Int)
+(declare-fun x6 () Int)
+(declare-fun x4 () Int)
+(declare-fun x12 () Int)
+(declare-fun x7 () Int)
+(declare-fun x8 () Int)
+(declare-fun x13 () Int)
+(declare-fun x9 () Int)
+(declare-fun x10 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(assert (>= x1 0))
+(assert (>= x2 0))
+(assert (>= x3 0))
+(assert (>= x5 0))
+(assert (>= x0 0))
+(assert (>= x11 0))
+(assert (>= x6 0))
+(assert (>= x4 0))
+(assert (>= x12 0))
+(assert (>= x7 0))
+(assert (>= x8 0))
+(assert (>= x13 0))
+(assert (>= x9 0))
+(assert (>= x10 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (= x1 (+ 0 t1 (- t2) (- t3))))
+(assert (= x2 (+ 0 t2 t3 (- t4) (- t5))))
+(assert (= x3 (+ 0 t4 t5 (- t6))))
+(assert (= x5 (+ 0 t1 (- t6))))
+(assert (= x0 (+ 1 t6 (- t1))))
+(assert (= x11 (+ 0 t7 (- t8) (- t9))))
+(assert (= x6 (+ 0 t8 (- t2))))
+(assert (= x4 (+ 1 t6 (- t1))))
+(assert (= x12 (+ 0 t8 t9 (- t10) (- t11))))
+(assert (= x7 (+ 1 t2 (- t8))))
+(assert (= x8 (+ 0 t7 (- t12))))
+(assert (= x13 (+ 0 t10 t11 (- t12))))
+(assert (= x9 (+ 1 t12 (- t7))))
+(assert (= x10 (+ 1 t12 (- t7))))
+(assert (>= x3 1))
+(assert (>= x13 1))
+(assert (= x0 1))
+(assert (= x1 1))
+(assert (= x2 1))
+(assert (= x3 1))
+(assert (= x4 1))
+(assert (= x5 1))
+(assert (= x6 1))
+(assert (= x7 1))
+(assert (= x8 1))
+(assert (= x9 1))
+(assert (= x10 1))
+(assert (= x11 1))
+(assert (= x12 1))
+(assert (= x13 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 84 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+
