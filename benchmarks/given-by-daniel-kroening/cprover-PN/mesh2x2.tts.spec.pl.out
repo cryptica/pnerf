@@ -1,0 +1,500 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [t4,t3,t2,t1], [t5,t4,t3,t2,t1]).
+place(s1, [t5], [t6]).
+place(s2, [t6], [t7]).
+place(s3, [t7], [t8]).
+place(s4, [t8], [t9]).
+place(s5, [t9], [t10]).
+place(s6, [t10], [t11]).
+place(s7, [t11], [t12]).
+place(l3, [t13], [t15]).
+place(l6, [t14], [t20]).
+place(l7, [t16], [t21]).
+place(l8, [t17], [t22]).
+place(l9, [t18], [t23]).
+place(l10, [t19], [t24]).
+place(l13, [t25], [t29]).
+place(l16, [t28], [t30]).
+place(l19, [t31], [t33]).
+place(l22, [t32], [t36]).
+place(l23, [t29], [t37]).
+place(l1, [t37,t23,t5,t1], [t13]).
+place(l24, [t34], [t38]).
+place(l25, [t35], [t39]).
+place(l26, [t30], [t40]).
+place(l2, [t40,t22,t6,t2], [t14]).
+place(s9, [t13], [t45]).
+place(s10, [t14], [t46]).
+place(l29, [t41], [t47]).
+place(s11, [t16], [t47]).
+place(l15, [t27], [t48]).
+place(s12, [t17], [t48]).
+place(l14, [t26], [t49]).
+place(s13, [t18], [t49]).
+place(l32, [t44], [t50]).
+place(s14, [t19], [t50]).
+place(s15, [t15], [t51]).
+place(l11, [t51], [t26,t25]).
+place(s16, [t20], [t52]).
+place(l12, [t52], [t28,t27]).
+place(s17, [t21], [t53]).
+place(l17, [t53,t39,t9,t3], [t31]).
+place(s18, [t22], [t54]).
+place(l4, [t54,t21,t15,t7], [t45,t17,t16]).
+place(s19, [t23], [t55]).
+place(l5, [t55,t24,t20,t8], [t46,t19,t18]).
+place(s20, [t24], [t56]).
+place(l18, [t56,t38,t10,t4], [t32]).
+place(s21, [t31], [t57]).
+place(s22, [t32], [t58]).
+place(s23, [t29], [t59]).
+place(l31, [t43], [t60]).
+place(s24, [t34], [t60]).
+place(l30, [t42], [t61]).
+place(s25, [t35], [t61]).
+place(s26, [t30], [t62]).
+place(s27, [t33], [t63]).
+place(l27, [t63], [t42,t41]).
+place(s28, [t36], [t64]).
+place(l28, [t64], [t44,t43]).
+place(s29, [t37], [t65]).
+place(s30, [t38], [t66]).
+place(l20, [t66,t65,t33,t11], [t59,t57,t34]).
+place(s31, [t39], [t67]).
+place(l0, [t62,t61,t60,t59,t58,t57,t50,t49,t48,t47,t46,t45], [t68,t67,t66,t65,t64,t63,t56,t55,t54,t53,t52,t51,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2,t1]).
+place(s32, [t40], [t68]).
+place(s8, [t68,t67,t66,t65,t64,t63,t62,t61,t60,t59,t58,t57,t56,t55,t54,t53,t52,t51,t50,t49,t48,t47,t46,t45,t44,t43,t42,t41,t28,t27,t26,t25,t12], [t44,t43,t42,t41,t40,t39,t38,t37,t36,t35,t34,t33,t32,t31,t30,t29,t28,t27,t26,t25,t24,t23,t22,t21,t20,t19,t18,t17,t16,t15,t14,t13]).
+place(l21, [t68,t67,t36,t12], [t62,t58,t35]).
+
+transition(t1, [l0,s0], [s0,l1]).
+transition(t2, [l0,s0], [s0,l2]).
+transition(t3, [l0,s0], [s0,l17]).
+transition(t4, [l0,s0], [s0,l18]).
+transition(t5, [l0,s0], [s1,l1]).
+transition(t6, [l0,s1], [s2,l2]).
+transition(t7, [l0,s2], [s3,l4]).
+transition(t8, [l0,s3], [s4,l5]).
+transition(t9, [l0,s4], [s5,l17]).
+transition(t10, [l0,s5], [s6,l18]).
+transition(t11, [l0,s6], [s7,l20]).
+transition(t12, [l0,s7], [s8,l21]).
+transition(t13, [l1,s8], [s9,l3]).
+transition(t14, [l2,s8], [s10,l6]).
+transition(t15, [l3,s8], [s15,l4]).
+transition(t16, [l4,s8], [s11,l7]).
+transition(t17, [l4,s8], [s12,l8]).
+transition(t18, [l5,s8], [s13,l9]).
+transition(t19, [l5,s8], [s14,l10]).
+transition(t20, [l6,s8], [s16,l5]).
+transition(t21, [l7,s8], [s17,l4]).
+transition(t22, [l8,s8], [s18,l2]).
+transition(t23, [l9,s8], [s19,l1]).
+transition(t24, [l10,s8], [s20,l5]).
+transition(t25, [l11,s8], [s8,l13]).
+transition(t26, [l11,s8], [s8,l14]).
+transition(t27, [l12,s8], [s8,l15]).
+transition(t28, [l12,s8], [s8,l16]).
+transition(t29, [l13,s8], [s23,l23]).
+transition(t30, [l16,s8], [s26,l26]).
+transition(t31, [l17,s8], [s21,l19]).
+transition(t32, [l18,s8], [s22,l22]).
+transition(t33, [l19,s8], [s27,l20]).
+transition(t34, [l20,s8], [s24,l24]).
+transition(t35, [l21,s8], [s25,l25]).
+transition(t36, [l22,s8], [s28,l21]).
+transition(t37, [l23,s8], [s29,l1]).
+transition(t38, [l24,s8], [s30,l18]).
+transition(t39, [l25,s8], [s31,l17]).
+transition(t40, [l26,s8], [s32,l2]).
+transition(t41, [l27,s8], [s8,l29]).
+transition(t42, [l27,s8], [s8,l30]).
+transition(t43, [l28,s8], [s8,l31]).
+transition(t44, [l28,s8], [s8,l32]).
+transition(t45, [l4,s9], [s8,l0]).
+transition(t46, [l5,s10], [s8,l0]).
+transition(t47, [l29,s11], [s8,l0]).
+transition(t48, [l15,s12], [s8,l0]).
+transition(t49, [l14,s13], [s8,l0]).
+transition(t50, [l32,s14], [s8,l0]).
+transition(t51, [l0,s15], [s8,l11]).
+transition(t52, [l0,s16], [s8,l12]).
+transition(t53, [l0,s17], [s8,l17]).
+transition(t54, [l0,s18], [s8,l4]).
+transition(t55, [l0,s19], [s8,l5]).
+transition(t56, [l0,s20], [s8,l18]).
+transition(t57, [l20,s21], [s8,l0]).
+transition(t58, [l21,s22], [s8,l0]).
+transition(t59, [l20,s23], [s8,l0]).
+transition(t60, [l31,s24], [s8,l0]).
+transition(t61, [l30,s25], [s8,l0]).
+transition(t62, [l21,s26], [s8,l0]).
+transition(t63, [l0,s27], [s8,l27]).
+transition(t64, [l0,s28], [s8,l28]).
+transition(t65, [l0,s29], [s8,l20]).
+transition(t66, [l0,s30], [s8,l20]).
+transition(t67, [l0,s31], [s8,l21]).
+transition(t68, [l0,s32], [s8,l21]).
+
+init(s0, 1).
+init(l0, init1).
+
+cond('(>= init1 1)').
+cond('(>= s8 1)').
+cond('(>= l3 1)').
+cond('(>= l8 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun init1 () Int)
+(declare-fun s0 () Int)
+(declare-fun s1 () Int)
+(declare-fun s2 () Int)
+(declare-fun s3 () Int)
+(declare-fun s4 () Int)
+(declare-fun s5 () Int)
+(declare-fun s6 () Int)
+(declare-fun s7 () Int)
+(declare-fun l3 () Int)
+(declare-fun l6 () Int)
+(declare-fun l7 () Int)
+(declare-fun l8 () Int)
+(declare-fun l9 () Int)
+(declare-fun l10 () Int)
+(declare-fun l13 () Int)
+(declare-fun l16 () Int)
+(declare-fun l19 () Int)
+(declare-fun l22 () Int)
+(declare-fun l23 () Int)
+(declare-fun l1 () Int)
+(declare-fun l24 () Int)
+(declare-fun l25 () Int)
+(declare-fun l26 () Int)
+(declare-fun l2 () Int)
+(declare-fun s9 () Int)
+(declare-fun s10 () Int)
+(declare-fun l29 () Int)
+(declare-fun s11 () Int)
+(declare-fun l15 () Int)
+(declare-fun s12 () Int)
+(declare-fun l14 () Int)
+(declare-fun s13 () Int)
+(declare-fun l32 () Int)
+(declare-fun s14 () Int)
+(declare-fun s15 () Int)
+(declare-fun l11 () Int)
+(declare-fun s16 () Int)
+(declare-fun l12 () Int)
+(declare-fun s17 () Int)
+(declare-fun l17 () Int)
+(declare-fun s18 () Int)
+(declare-fun l4 () Int)
+(declare-fun s19 () Int)
+(declare-fun l5 () Int)
+(declare-fun s20 () Int)
+(declare-fun l18 () Int)
+(declare-fun s21 () Int)
+(declare-fun s22 () Int)
+(declare-fun s23 () Int)
+(declare-fun l31 () Int)
+(declare-fun s24 () Int)
+(declare-fun l30 () Int)
+(declare-fun s25 () Int)
+(declare-fun s26 () Int)
+(declare-fun s27 () Int)
+(declare-fun l27 () Int)
+(declare-fun s28 () Int)
+(declare-fun l28 () Int)
+(declare-fun s29 () Int)
+(declare-fun s30 () Int)
+(declare-fun l20 () Int)
+(declare-fun s31 () Int)
+(declare-fun l0 () Int)
+(declare-fun s32 () Int)
+(declare-fun s8 () Int)
+(declare-fun l21 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(declare-fun t13 () Int)
+(declare-fun t14 () Int)
+(declare-fun t15 () Int)
+(declare-fun t16 () Int)
+(declare-fun t17 () Int)
+(declare-fun t18 () Int)
+(declare-fun t19 () Int)
+(declare-fun t20 () Int)
+(declare-fun t21 () Int)
+(declare-fun t22 () Int)
+(declare-fun t23 () Int)
+(declare-fun t24 () Int)
+(declare-fun t25 () Int)
+(declare-fun t26 () Int)
+(declare-fun t27 () Int)
+(declare-fun t28 () Int)
+(declare-fun t29 () Int)
+(declare-fun t30 () Int)
+(declare-fun t31 () Int)
+(declare-fun t32 () Int)
+(declare-fun t33 () Int)
+(declare-fun t34 () Int)
+(declare-fun t35 () Int)
+(declare-fun t36 () Int)
+(declare-fun t37 () Int)
+(declare-fun t38 () Int)
+(declare-fun t39 () Int)
+(declare-fun t40 () Int)
+(declare-fun t41 () Int)
+(declare-fun t42 () Int)
+(declare-fun t43 () Int)
+(declare-fun t44 () Int)
+(declare-fun t45 () Int)
+(declare-fun t46 () Int)
+(declare-fun t47 () Int)
+(declare-fun t48 () Int)
+(declare-fun t49 () Int)
+(declare-fun t50 () Int)
+(declare-fun t51 () Int)
+(declare-fun t52 () Int)
+(declare-fun t53 () Int)
+(declare-fun t54 () Int)
+(declare-fun t55 () Int)
+(declare-fun t56 () Int)
+(declare-fun t57 () Int)
+(declare-fun t58 () Int)
+(declare-fun t59 () Int)
+(declare-fun t60 () Int)
+(declare-fun t61 () Int)
+(declare-fun t62 () Int)
+(declare-fun t63 () Int)
+(declare-fun t64 () Int)
+(declare-fun t65 () Int)
+(declare-fun t66 () Int)
+(declare-fun t67 () Int)
+(declare-fun t68 () Int)
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= s2 0))
+(assert (>= s3 0))
+(assert (>= s4 0))
+(assert (>= s5 0))
+(assert (>= s6 0))
+(assert (>= s7 0))
+(assert (>= l3 0))
+(assert (>= l6 0))
+(assert (>= l7 0))
+(assert (>= l8 0))
+(assert (>= l9 0))
+(assert (>= l10 0))
+(assert (>= l13 0))
+(assert (>= l16 0))
+(assert (>= l19 0))
+(assert (>= l22 0))
+(assert (>= l23 0))
+(assert (>= l1 0))
+(assert (>= l24 0))
+(assert (>= l25 0))
+(assert (>= l26 0))
+(assert (>= l2 0))
+(assert (>= s9 0))
+(assert (>= s10 0))
+(assert (>= l29 0))
+(assert (>= s11 0))
+(assert (>= l15 0))
+(assert (>= s12 0))
+(assert (>= l14 0))
+(assert (>= s13 0))
+(assert (>= l32 0))
+(assert (>= s14 0))
+(assert (>= s15 0))
+(assert (>= l11 0))
+(assert (>= s16 0))
+(assert (>= l12 0))
+(assert (>= s17 0))
+(assert (>= l17 0))
+(assert (>= s18 0))
+(assert (>= l4 0))
+(assert (>= s19 0))
+(assert (>= l5 0))
+(assert (>= s20 0))
+(assert (>= l18 0))
+(assert (>= s21 0))
+(assert (>= s22 0))
+(assert (>= s23 0))
+(assert (>= l31 0))
+(assert (>= s24 0))
+(assert (>= l30 0))
+(assert (>= s25 0))
+(assert (>= s26 0))
+(assert (>= s27 0))
+(assert (>= l27 0))
+(assert (>= s28 0))
+(assert (>= l28 0))
+(assert (>= s29 0))
+(assert (>= s30 0))
+(assert (>= l20 0))
+(assert (>= s31 0))
+(assert (>= l0 0))
+(assert (>= s32 0))
+(assert (>= s8 0))
+(assert (>= l21 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (>= t13 0))
+(assert (>= t14 0))
+(assert (>= t15 0))
+(assert (>= t16 0))
+(assert (>= t17 0))
+(assert (>= t18 0))
+(assert (>= t19 0))
+(assert (>= t20 0))
+(assert (>= t21 0))
+(assert (>= t22 0))
+(assert (>= t23 0))
+(assert (>= t24 0))
+(assert (>= t25 0))
+(assert (>= t26 0))
+(assert (>= t27 0))
+(assert (>= t28 0))
+(assert (>= t29 0))
+(assert (>= t30 0))
+(assert (>= t31 0))
+(assert (>= t32 0))
+(assert (>= t33 0))
+(assert (>= t34 0))
+(assert (>= t35 0))
+(assert (>= t36 0))
+(assert (>= t37 0))
+(assert (>= t38 0))
+(assert (>= t39 0))
+(assert (>= t40 0))
+(assert (>= t41 0))
+(assert (>= t42 0))
+(assert (>= t43 0))
+(assert (>= t44 0))
+(assert (>= t45 0))
+(assert (>= t46 0))
+(assert (>= t47 0))
+(assert (>= t48 0))
+(assert (>= t49 0))
+(assert (>= t50 0))
+(assert (>= t51 0))
+(assert (>= t52 0))
+(assert (>= t53 0))
+(assert (>= t54 0))
+(assert (>= t55 0))
+(assert (>= t56 0))
+(assert (>= t57 0))
+(assert (>= t58 0))
+(assert (>= t59 0))
+(assert (>= t60 0))
+(assert (>= t61 0))
+(assert (>= t62 0))
+(assert (>= t63 0))
+(assert (>= t64 0))
+(assert (>= t65 0))
+(assert (>= t66 0))
+(assert (>= t67 0))
+(assert (>= t68 0))
+(assert (= s0 (+ 1 (- t5))))
+(assert (= s1 (+ 0 t5 (- t6))))
+(assert (= s2 (+ 0 t6 (- t7))))
+(assert (= s3 (+ 0 t7 (- t8))))
+(assert (= s4 (+ 0 t8 (- t9))))
+(assert (= s5 (+ 0 t9 (- t10))))
+(assert (= s6 (+ 0 t10 (- t11))))
+(assert (= s7 (+ 0 t11 (- t12))))
+(assert (= l3 (+ 0 t13 (- t15))))
+(assert (= l6 (+ 0 t14 (- t20))))
+(assert (= l7 (+ 0 t16 (- t21))))
+(assert (= l8 (+ 0 t17 (- t22))))
+(assert (= l9 (+ 0 t18 (- t23))))
+(assert (= l10 (+ 0 t19 (- t24))))
+(assert (= l13 (+ 0 t25 (- t29))))
+(assert (= l16 (+ 0 t28 (- t30))))
+(assert (= l19 (+ 0 t31 (- t33))))
+(assert (= l22 (+ 0 t32 (- t36))))
+(assert (= l23 (+ 0 t29 (- t37))))
+(assert (= l1 (+ 0 t1 t23 t37 t5 (- t13))))
+(assert (= l24 (+ 0 t34 (- t38))))
+(assert (= l25 (+ 0 t35 (- t39))))
+(assert (= l26 (+ 0 t30 (- t40))))
+(assert (= l2 (+ 0 t2 t22 t40 t6 (- t14))))
+(assert (= s9 (+ 0 t13 (- t45))))
+(assert (= s10 (+ 0 t14 (- t46))))
+(assert (= l29 (+ 0 t41 (- t47))))
+(assert (= s11 (+ 0 t16 (- t47))))
+(assert (= l15 (+ 0 t27 (- t48))))
+(assert (= s12 (+ 0 t17 (- t48))))
+(assert (= l14 (+ 0 t26 (- t49))))
+(assert (= s13 (+ 0 t18 (- t49))))
+(assert (= l32 (+ 0 t44 (- t50))))
+(assert (= s14 (+ 0 t19 (- t50))))
+(assert (= s15 (+ 0 t15 (- t51))))
+(assert (= l11 (+ 0 t51 (- t25) (- t26))))
+(assert (= s16 (+ 0 t20 (- t52))))
+(assert (= l12 (+ 0 t52 (- t27) (- t28))))
+(assert (= s17 (+ 0 t21 (- t53))))
+(assert (= l17 (+ 0 t3 t39 t53 t9 (- t31))))
+(assert (= s18 (+ 0 t22 (- t54))))
+(assert (= l4 (+ 0 t15 t21 t54 t7 (- t16) (- t17) (- t45))))
+(assert (= s19 (+ 0 t23 (- t55))))
+(assert (= l5 (+ 0 t20 t24 t55 t8 (- t18) (- t19) (- t46))))
+(assert (= s20 (+ 0 t24 (- t56))))
+(assert (= l18 (+ 0 t10 t38 t4 t56 (- t32))))
+(assert (= s21 (+ 0 t31 (- t57))))
+(assert (= s22 (+ 0 t32 (- t58))))
+(assert (= s23 (+ 0 t29 (- t59))))
+(assert (= l31 (+ 0 t43 (- t60))))
+(assert (= s24 (+ 0 t34 (- t60))))
+(assert (= l30 (+ 0 t42 (- t61))))
+(assert (= s25 (+ 0 t35 (- t61))))
+(assert (= s26 (+ 0 t30 (- t62))))
+(assert (= s27 (+ 0 t33 (- t63))))
+(assert (= l27 (+ 0 t63 (- t41) (- t42))))
+(assert (= s28 (+ 0 t36 (- t64))))
+(assert (= l28 (+ 0 t64 (- t43) (- t44))))
+(assert (= s29 (+ 0 t37 (- t65))))
+(assert (= s30 (+ 0 t38 (- t66))))
+(assert (= l20 (+ 0 t11 t33 t65 t66 (- t34) (- t57) (- t59))))
+(assert (= s31 (+ 0 t39 (- t67))))
+(assert (= l0 (+ init1 t45 t46 t47 t48 t49 t50 t57 t58 t59 t60 t61 t62 (- t1) (- t10) (- t11) (- t12) (- t2) (- t3) (- t4) (- t5) (- t51) (- t52) (- t53) (- t54) (- t55) (- t56) (- t6) (- t63) (- t64) (- t65) (- t66) (- t67) (- t68) (- t7) (- t8) (- t9))))
+(assert (= s32 (+ 0 t40 (- t68))))
+(assert (= s8 (+ 0 t12 t45 t46 t47 t48 t49 t50 t51 t52 t53 t54 t55 t56 t57 t58 t59 t60 t61 t62 t63 t64 t65 t66 t67 t68 (- t13) (- t14) (- t15) (- t16) (- t17) (- t18) (- t19) (- t20) (- t21) (- t22) (- t23) (- t24) (- t29) (- t30) (- t31) (- t32) (- t33) (- t34) (- t35) (- t36) (- t37) (- t38) (- t39) (- t40))))
+(assert (= l21 (+ 0 t12 t36 t67 t68 (- t35) (- t58) (- t62))))
+(assert (>= init1 1))
+(assert (>= s8 1))
+(assert (>= l3 1))
+(assert (>= l8 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+unsat
+(error "line 341 column 10: model is not available")
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

@@ -1,0 +1,81 @@
+#!/bin/bash
+
+sed '/#/D' >/tmp/pp-spec.pp
+echo "EOF" >>/tmp/pp-spec.pp
+
+# convert places
+</tmp/pp-spec.pp \
+sed -e '/vars/,/rules/!D' \
+    -e '/vars/D' \
+    -e '/rules/D' \
+    -e '/^[[:blank:]]*$/D' \
+    -e 's/ /\
+/g' | \
+sed -e 's/^/place(/' \
+    -e 's/$/)./'
+
+# convert transitions
+</tmp/pp-spec.pp \
+sed -e '/rules/,/init/!D' \
+    -e '/rules/D' \
+    -e '/init/D' | \
+tr '\n' ' ' | \
+sed -e 's/;/, \
+/g' | \
+sed -e '/^[[:blank:]]*$/D' \
+    -e 's/^[[:blank:]]*//' \
+    -e 's/>=1//g' \
+    -e "s/[[:alnum:]]*'=//g" \
+    -e 's/+1//g' \
+    -e 's/\( : \(.*\) -> \)/\1\2, /' \
+    -e ':loop' \
+    -e 's/\( -> .*\)\(\b[[:alpha:]][[:alnum:]]*\b\), \(.*\)\2-1, /\1\3/' \
+    -e 't loop' \
+    -e 's/, , /, /' \
+    -e 's/^/transition(/' \
+    -e 's/ : /, [/' \
+    -e 's/ -> /], [/' \
+    -e 's/, $/])./'
+
+# initial conditions
+</tmp/pp-spec.pp \
+sed -e '/init/,/target/!D' \
+    -e '/init/D' \
+    -e '/target/D' \
+    -e 's/, */\
+/g' | \
+sed -e '/^[[:blank:]]*$/D' \
+    -e '/[[:alnum:]]=0/D' \
+    -e 's/^/init(/' | \
+# Example for numbering:
+# init(l0>=1
+# ---------------------------------
+# init(l0, init1).
+# cond('(assert (>= init 1))').
+(
+    n=0
+    while read line; do
+        if echo $line | grep '>=1' >/dev/null; then
+            n=$((n+1))
+            echo $line | sed "s/>=1/, init$n)./"
+            echo "cond('(>= init$n 1)')."
+        else
+            echo $line
+        fi
+    done
+) | \
+sed -e 's/=1/)./'
+
+# target conditions
+</tmp/pp-spec.pp \
+sed -e '/invariants/D' \
+    -e '/target/,/EOF/!D' \
+    -e '/target/D' \
+    -e '/EOF/D' \
+    -e 's/,/\
+/g' | \
+sed -e 's/\([[:alnum:]]*\)>=/>= \1 /g' \
+    -e "s/^/cond('(/" \
+    -e "s/$/)')./"
+
+

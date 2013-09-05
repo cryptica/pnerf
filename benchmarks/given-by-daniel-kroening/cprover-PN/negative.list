@@ -1,0 +1,10 @@
+benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/newdekker.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/pncsacover.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec.pl
+benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec.pl
