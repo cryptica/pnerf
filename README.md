@@ -21,8 +21,8 @@ pnerf
 * TODO
   1. Running ./run_with_animation.sh myjob and then pressing C-c stops myjob.
   2. Let P be the properties of the terminal. Running
-     ./run_with_animation.sh myjob and then pressing C-c restores P.
-  3. Running ./run_with_animation.sh myjob prints the animation at the end of the output given by myjob.
+     ./run_with_animation.sh myjob and then pressing C-c restores P. - DONE
+  3. Running ./run_with_animation.sh myjob prints the animation at the end of the output given by myjob. - Example 1 DONE 
   
      Example 1:
      
