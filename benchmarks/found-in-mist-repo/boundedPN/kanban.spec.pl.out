@@ -45,30 +45,6 @@ cond('(>= x6 4)').
 cond('(>= x10 4)').
 cond('(>= x13 6)').
 cond('(>= x14 4)').
-cond('(= x6 1)').
-cond('(= x8 1)').
-cond('(= x9 1)').
-cond('(= x11 1)').
-cond('(= x8 1)').
-cond('(= x9 1)').
-cond('(= x10 1)').
-cond('(= x11 1)').
-cond('(= x4 1)').
-cond('(= x5 1)').
-cond('(= x6 1)').
-cond('(= x7 1)').
-cond('(= x4 1)').
-cond('(= x5 1)').
-cond('(= x7 1)').
-cond('(= x10 1)').
-cond('(= x12 1)').
-cond('(= x13 1)').
-cond('(= x14 1)').
-cond('(= x15 1)').
-cond('(= x0 1)').
-cond('(= x1 1)').
-cond('(= x2 1)').
-cond('(= x3 1)').
 
 
 * Constructing constraint C_0 for petri net N
@@ -157,36 +133,12 @@ cond('(= x3 1)').
 (assert (>= x10 4))
 (assert (>= x13 6))
 (assert (>= x14 4))
-(assert (= x6 1))
-(assert (= x8 1))
-(assert (= x9 1))
-(assert (= x11 1))
-(assert (= x8 1))
-(assert (= x9 1))
-(assert (= x10 1))
-(assert (= x11 1))
-(assert (= x4 1))
-(assert (= x5 1))
-(assert (= x6 1))
-(assert (= x7 1))
-(assert (= x4 1))
-(assert (= x5 1))
-(assert (= x7 1))
-(assert (= x10 1))
-(assert (= x12 1))
-(assert (= x13 1))
-(assert (= x14 1))
-(assert (= x15 1))
-(assert (= x0 1))
-(assert (= x1 1))
-(assert (= x2 1))
-(assert (= x3 1))
 (check-sat)
 (get-model)
 
 * Checking SAT(C0)
 unsat
-(error "line 111 column 10: model is not available")
+(error "line 87 column 10: model is not available")
 
 -------------------------------------------
 The petri net satisfies the property!

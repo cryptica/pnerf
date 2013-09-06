@@ -85,9 +85,10 @@ sed -e 's/[[:blank:]]*=[[:blank:]]*1/)./'
 
 # target conditions
 </tmp/pp-spec.pp \
-sed -e '/invariants/D' \
+sed -e '/target/,/invariants/!D' \
     -e '/target/,/EOF/!D' \
     -e '/target/D' \
+    -e '/invariants/D' \
     -e '/EOF/D' \
     -e 's/,/\
 /g' | \

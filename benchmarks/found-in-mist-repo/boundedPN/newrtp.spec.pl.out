@@ -28,34 +28,6 @@ transition(t12, [point2], [do]).
 init(begin, 1).
 cond('(>= point1 1)').
 cond('(>= point2 1)').
-cond('(= begin 1)').
-cond('(= do 1)').
-cond('(= sc1 1)').
-cond('(= oh_ns 1)').
-cond('(= point1 1)').
-cond('(= oh_a_dt 1)').
-cond('(= sc2 1)').
-cond('(= point2 1)').
-cond('(= begin 1)').
-cond('(= do 1)').
-cond('(= sc1 1)').
-cond('(= oh_ns 1)').
-cond('(= point1 1)').
-cond('(= oh_a_dt 1)').
-cond('(= sc3 1)').
-cond('(= point2 1)').
-cond('(= begin 1)').
-cond('(= do 1)').
-cond('(= sc1 1)').
-cond('(= oh_ns 1)').
-cond('(= point1 1)').
-cond('(= oh_a_dt 1)').
-cond('(= point2 1)').
-cond('(= begin 1)').
-cond('(= do 1)').
-cond('(= sc1 1)').
-cond('(= oh_ns 1)').
-cond('(= point2 1)').
 
 
 * Constructing constraint C_0 for petri net N
@@ -112,40 +84,12 @@ cond('(= point2 1)').
 (assert (= do (+ 0 t1 t12 (- t2))))
 (assert (>= point1 1))
 (assert (>= point2 1))
-(assert (= begin 1))
-(assert (= do 1))
-(assert (= sc1 1))
-(assert (= oh_ns 1))
-(assert (= point1 1))
-(assert (= oh_a_dt 1))
-(assert (= sc2 1))
-(assert (= point2 1))
-(assert (= begin 1))
-(assert (= do 1))
-(assert (= sc1 1))
-(assert (= oh_ns 1))
-(assert (= point1 1))
-(assert (= oh_a_dt 1))
-(assert (= sc3 1))
-(assert (= point2 1))
-(assert (= begin 1))
-(assert (= do 1))
-(assert (= sc1 1))
-(assert (= oh_ns 1))
-(assert (= point1 1))
-(assert (= oh_a_dt 1))
-(assert (= point2 1))
-(assert (= begin 1))
-(assert (= do 1))
-(assert (= sc1 1))
-(assert (= oh_ns 1))
-(assert (= point2 1))
 (check-sat)
 (get-model)
 
 * Checking SAT(C0)
 unsat
-(error "line 83 column 10: model is not available")
+(error "line 55 column 10: model is not available")
 
 -------------------------------------------
 The petri net satisfies the property!

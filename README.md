@@ -3,7 +3,7 @@ pnerf
 =====
 
 * ./benchmarks/
-  * You obtain *.pl files by daisy chaining dk-to-pp-dk.sh and pp-dk-to-pl-petri-net.sh.
+  * You obtain *.pl files by spec-to-pl-petrinet.sh.
 
 * ./benchmarks/cprover_PN:
   * Files *.pl are input to the tool.

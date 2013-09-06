@@ -31,17 +31,3 @@ init(x9).
 init(x10).
 cond('(>= x3 1)').
 cond('(>= x13 1)').
-cond('(= x0 1)').
-cond('(= x1 1)').
-cond('(= x2 1)').
-cond('(= x3 1)').
-cond('(= x4 1)').
-cond('(= x5 1)').
-cond('(= x6 1)').
-cond('(= x7 1)').
-cond('(= x8 1)').
-cond('(= x9 1)').
-cond('(= x10 1)').
-cond('(= x11 1)').
-cond('(= x12 1)').
-cond('(= x13 1)').

@@ -32,9 +32,6 @@ init(x11, 1).
 init(x12, 1).
 cond('(>= x3 1)').
 cond('(>= x10 1)').
-cond('(= x3 1)').
-cond('(= x4 1)').
-cond('(= x8 5)').
 
 
 * Constructing constraint C_0 for petri net N
@@ -97,15 +94,12 @@ cond('(= x8 5)').
 (assert (= x12 (+ 1 t9 (- t7))))
 (assert (>= x3 1))
 (assert (>= x10 1))
-(assert (= x3 1))
-(assert (= x4 1))
-(assert (= x8 5))
 (check-sat)
 (get-model)
 
 * Checking SAT(C0)
 unsat
-(error "line 64 column 10: model is not available")
+(error "line 61 column 10: model is not available")
 
 -------------------------------------------
 The petri net satisfies the property!

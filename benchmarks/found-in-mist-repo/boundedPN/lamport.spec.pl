@@ -24,17 +24,3 @@ init(y_eq_1).
 init(q5).
 cond('(>= p1 1)').
 cond('(>= q4 1)').
-cond('(= p1 1)').
-cond('(= p2 1)').
-cond('(= p3 1)').
-cond('(= x_eq_0 1)').
-cond('(= x_eq_1 1)').
-cond('(= q1 1)').
-cond('(= q2 1)').
-cond('(= q3 1)').
-cond('(= q4 1)').
-cond('(= q5 1)').
-cond('(= y_eq_1 1)').
-cond('(= q2 1)').
-cond('(= q3 1)').
-cond('(= q4 1)').

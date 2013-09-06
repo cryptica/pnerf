@@ -26,6 +26,3 @@ init(x11).
 init(x12).
 cond('(>= x3 1)').
 cond('(>= x10 1)').
-cond('(= x3 1)').
-cond('(= x4 1)').
-cond('(= x8 5)').

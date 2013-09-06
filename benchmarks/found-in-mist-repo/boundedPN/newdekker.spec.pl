@@ -35,19 +35,3 @@ init(c0eq1).
 init(c1eq1).
 cond('(>= cs0 1)').
 cond('(>= cs1 1)').
-cond('(= c0eq0 1)').
-cond('(= c0eq1 1)').
-cond('(= c1eq0 1)').
-cond('(= c1eq1 1)').
-cond('(= turneq0 1)').
-cond('(= turneq1 1)').
-cond('(= beg0 1)').
-cond('(= at20 1)').
-cond('(= testturn0 1)').
-cond('(= at30 1)').
-cond('(= cs0 1)').
-cond('(= beg1 1)').
-cond('(= at21 1)').
-cond('(= testturn1 1)').
-cond('(= at31 1)').
-cond('(= cs1 1)').
