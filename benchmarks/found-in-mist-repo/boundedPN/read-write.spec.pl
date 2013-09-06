@@ -17,8 +17,8 @@ transition(t3, [x2, x11], [x1]).
 transition(t4, [x1], [x2, x5, x9]).
 transition(t5, [x6], [x7]).
 transition(t6, [x3, x7], [x4, x6]).
-transition(t7, [x8, x12], [x4+5, x7]).
-transition(t8, [x4 >= 5, x5, x7], [x4 >= 5, x4-5, x8, x10]).
+transition(t7, [x8, x12], [(x4, 5), x7]).
+transition(t8, [(x4, 5), x5, x7], [x8, x10]).
 transition(t9, [x9, x10], [x11, x12]).
 init(x2).
 init(x8).

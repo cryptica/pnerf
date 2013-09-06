@@ -26,7 +26,7 @@ sed -e 's/;/, \
 (
     n=0
     while read line; do
-        if [[ "$line" =~ "->" ]]; then
+        if [[ $line =~ "->" ]]; then
             n=$((n+1))
             echo "t$n : $line"
         else
@@ -36,15 +36,28 @@ sed -e 's/;/, \
 ) | \
 sed -e '/^[[:blank:]]*$/D' \
     -e 's/^[[:blank:]]*//' \
-    -e 's/>=[[:blank:]]*1//g' \
+    -e 's/\([[:alpha:]][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:digit:]][[:digit:]]*\)/(\1, \2)/g' \
     -e "s/[[:alpha:]][[:alnum:]_]*'[[:blank:]]*=//g" \
-    -e 's/+[[:blank:]]*1//g' \
-    -e 's/\([[:blank:]]*:[[:blank:]]*\(.*\)->[[:blank:]]*\)/\1\2, /' \
-    -e ':loop' \
-    -e 's/\(->.*\)\(\b[[:alpha:]][[:alnum:]_]*\b\)[[:blank:]]*,[[:blank:]]*\(.*\)\2[[:blank:]]*-[[:blank:]]*1[[:blank:]]*,[[:blank:]]*/\1\3/' \
-    -e 't loop' \
-    -e 's/,[[:blank:]]*,[[:blank:]]*/, /' \
+    -e 's/\([[:alpha:]][[:alnum:]_]*\)[[:blank:]]*+[[:blank:]]*\([[:digit:]][[:digit:]]*\)/(\1, \2)/g' \
+    -e 's/\([[:blank:]]*:[[:blank:]]*\(.*\)->[[:blank:]]*\)/\1\2, /' |\
+(
+    n=0
+    while read line; do
+      re="(^.*->.*)\(([[:alpha:]][[:alnum:]_]*), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\2[[:blank:]]*-[[:blank:]]*([[:digit:]]+)[[:blank:]]*,[[:blank:]]*(.*)$"
+      while [[ $line =~ $re ]]; do
+        out_weight=$((BASH_REMATCH[3] - BASH_REMATCH[5]))
+        if [[ $out_weight -gt 0 ]]; then
+          line=${BASH_REMATCH[1]}"("${BASH_REMATCH[2]}", "$out_weight"), "${BASH_REMATCH[4]}${BASH_REMATCH[6]}
+        else
+          line=${BASH_REMATCH[1]}${BASH_REMATCH[4]}${BASH_REMATCH[6]}
+        fi
+      done
+      echo $line
+    done
+) | \
+sed -e 's/,[[:blank:]]*,[[:blank:]]*/, /' \
     -e 's/[[:blank:]]*,[[:blank:]]*/, /g' \
+    -e 's/(\([[:alpha:]][[:alnum:]_]*\), 1)/\1/g' \
     -e 's/^/transition(/' \
     -e 's/[[:blank:]]*:[[:blank:]]*/, [/' \
     -e 's/[[:blank:]]*->[[:blank:]]*/], [/' \
@@ -72,9 +85,9 @@ sed -e '/^[[:blank:]]*$/D' \
 (
     n=0
     while read line; do
-        if [[ "$line" =~ (>=[[:blank:]]*1) ]]; then
+        if [[ $line =~ (>=[[:blank:]]*1) ]]; then
             n=$((n+1))
-            echo $line | sed "s/>=[[:blank:]]*1/, init$n)./"
+            echo $line | sed "s/[[:blank:]]*>=[[:blank:]]*1/, init$n)./"
             echo "cond('(>= init$n 1)')."
         else
             echo $line
