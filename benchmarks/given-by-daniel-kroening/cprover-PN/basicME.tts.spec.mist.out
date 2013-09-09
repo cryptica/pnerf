@@ -1,0 +1,193 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has  18 variables,  16 transitions and  0 actual invariants
+abs: 18 variables.
+abs: For the merging:
+100000000000000000
+010000000000000000
+001000000000000000
+000100000000000000
+000010000000000000
+000001000000000000
+000000100000000000
+000000010000000000
+000000001000000000
+000000000100000000
+000000000010000000
+000000000001000000
+000000000000100000
+000000000000010000
+000000000000001000
+000000000000000100
+000000000000000010
+000000000000000001
+abs: For the bounds:
+111111111111111111
+transition system
+Elems:      16 Nodes:   142 Arcs:   156 Layers: 19
+<<< Printing the elements of the IST: 0x19b1a980
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 18 variables.
+abs: For the merging:
+100000000000000000
+010000000000000000
+001000000000000000
+000100000000000000
+000010000000000000
+000001000000000000
+000000100000000000
+000000010000000000
+000000001000000000
+000000000100000000
+000000000010000000
+000000000001000000
+000000000000100000
+000000000000010000
+000000000000001000
+000000000000000100
+000000000000000010
+000000000000000001
+abs: For the bounds:
+000100000000010120
+eec: ENLARGE begin	
+Elems:       1 Nodes:    20 Arcs:    19 Layers: 19
+Elems:       2 Nodes:    33 Arcs:    33 Layers: 19
+Elems:       2 Nodes:    33 Arcs:    33 Layers: 19
+Elems:       4 Nodes:    61 Arcs:    63 Layers: 19
+Elems:       7 Nodes:    84 Arcs:    89 Layers: 19
+Elems:      10 Nodes:   101 Arcs:   109 Layers: 19
+Elems:      15 Nodes:   116 Arcs:   129 Layers: 19
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    20 Arcs:    19 Layers: 19
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       1 Nodes:    20 Arcs:    19 Layers: 19
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       9 Nodes:    76 Arcs:    83 Layers: 19
+After union, the reached symbolic state space is:
+Elems:      10 Nodes:    86 Arcs:    94 Layers: 19
+The reached symbolic state space is:
+Elems:      10 Nodes:    86 Arcs:    94 Layers: 19
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 18 variables.
+abs: For the merging:
+100000000000000000
+010000000000000000
+001000000000000000
+000100000000000000
+000010000000000000
+000001000000000000
+000000100000000000
+000000010000000000
+000000001000000000
+000000000100000000
+000000000010000000
+000000000001000000
+000000000000100000
+000000000000010000
+000000000000001000
+000000000000000100
+000000000000000010
+000000000000000001
+abs: For the bounds:
+101200100111120131
+eec: ENLARGE begin	
+Elems:       2 Nodes:    22 Arcs:    22 Layers: 19
+Elems:       3 Nodes:    35 Arcs:    36 Layers: 19
+Elems:       5 Nodes:    61 Arcs:    64 Layers: 19
+Elems:       7 Nodes:   100 Arcs:   105 Layers: 19
+Elems:      10 Nodes:   105 Arcs:   113 Layers: 19
+Elems:      15 Nodes:   149 Arcs:   162 Layers: 19
+Elems:      20 Nodes:   168 Arcs:   186 Layers: 19
+Elems:      26 Nodes:   196 Arcs:   220 Layers: 19
+Elems:      38 Nodes:   196 Arcs:   232 Layers: 19
+end
+eec: EXPAND begin	Elems:       1 Nodes:    20 Arcs:    19 Layers: 19
+Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       2 Nodes:    22 Arcs:    22 Layers: 19
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:      10 Nodes:    86 Arcs:    94 Layers: 19
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:      38 Nodes:   227 Arcs:   259 Layers: 19
+After union, the reached symbolic state space is:
+Elems:      48 Nodes:   263 Arcs:   305 Layers: 19
+The reached symbolic state space is:
+Elems:      48 Nodes:   263 Arcs:   305 Layers: 19
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 18 variables.
+abs: For the merging:
+100000000000000000
+010000000000000000
+001000000000000000
+000100000000000000
+000010000000000000
+000001000000000000
+000000100000000000
+000000010000000000
+000000001000000000
+000000000100000000
+000000000010000000
+000000000001000000
+000000000000100000
+000000000000010000
+000000000000001000
+000000000000000100
+000000000000000010
+000000000000000001
+abs: For the bounds:
+111311111111231231
+eec: ENLARGE begin	
+Elems:       2 Nodes:    22 Arcs:    22 Layers: 19
+Elems:       3 Nodes:    36 Arcs:    37 Layers: 19
+Elems:       4 Nodes:    50 Arcs:    52 Layers: 19
+Elems:       6 Nodes:    78 Arcs:    82 Layers: 19
+Elems:       8 Nodes:    96 Arcs:   102 Layers: 19
+Elems:       7 Nodes:    84 Arcs:    89 Layers: 19
+Elems:       8 Nodes:    82 Arcs:    88 Layers: 19
+Elems:       8 Nodes:    77 Arcs:    83 Layers: 19
+Elems:      11 Nodes:    91 Arcs:   100 Layers: 19
+Elems:      11 Nodes:    92 Arcs:   101 Layers: 19
+Elems:       9 Nodes:    85 Arcs:    92 Layers: 19
+Elems:       3 Nodes:    47 Arcs:    48 Layers: 19
+Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+end
+TSI time of computation (user)   ->  0.020 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool

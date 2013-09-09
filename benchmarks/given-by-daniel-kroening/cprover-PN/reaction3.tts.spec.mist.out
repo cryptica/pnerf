@@ -1,0 +1,362 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has  22 variables,  17 transitions and  0 actual invariants
+abs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+1111111111111111111111
+transition system
+Elems:      17 Nodes:   159 Arcs:   174 Layers: 23
+<<< Printing the elements of the IST: 0x18010370
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+0000000010000000000002
+eec: ENLARGE begin	
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       4 Nodes:    39 Arcs:    41 Layers: 23
+Elems:       9 Nodes:    68 Arcs:    75 Layers: 23
+Elems:      13 Nodes:    90 Arcs:   101 Layers: 23
+Elems:      11 Nodes:    87 Arcs:    96 Layers: 23
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       5 Nodes:    63 Arcs:    66 Layers: 23
+After union, the reached symbolic state space is:
+Elems:       6 Nodes:    68 Arcs:    72 Layers: 23
+The reached symbolic state space is:
+Elems:       6 Nodes:    68 Arcs:    72 Layers: 23
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+0000000121111010100003
+eec: ENLARGE begin	
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       2 Nodes:    26 Arcs:    26 Layers: 23
+Elems:       4 Nodes:    40 Arcs:    42 Layers: 23
+Elems:      11 Nodes:    77 Arcs:    86 Layers: 23
+Elems:      22 Nodes:   113 Arcs:   133 Layers: 23
+Elems:      31 Nodes:   134 Arcs:   163 Layers: 23
+Elems:      37 Nodes:   156 Arcs:   191 Layers: 23
+Elems:      39 Nodes:   184 Arcs:   220 Layers: 23
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       6 Nodes:    68 Arcs:    72 Layers: 23
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       6 Nodes:    76 Arcs:    80 Layers: 23
+After union, the reached symbolic state space is:
+Elems:      12 Nodes:   105 Arcs:   115 Layers: 23
+The reached symbolic state space is:
+Elems:      12 Nodes:   105 Arcs:   115 Layers: 23
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+0000001131112020101003
+eec: ENLARGE begin	
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       2 Nodes:    41 Arcs:    41 Layers: 23
+Elems:       2 Nodes:    39 Arcs:    39 Layers: 23
+Elems:       2 Nodes:    38 Arcs:    38 Layers: 23
+Elems:       2 Nodes:    37 Arcs:    37 Layers: 23
+Elems:       3 Nodes:    39 Arcs:    40 Layers: 23
+Elems:       4 Nodes:    40 Arcs:    42 Layers: 23
+Elems:       7 Nodes:    59 Arcs:    64 Layers: 23
+Elems:      15 Nodes:   103 Arcs:   115 Layers: 23
+Elems:      29 Nodes:   141 Arcs:   165 Layers: 23
+Elems:      47 Nodes:   184 Arcs:   223 Layers: 23
+Elems:      66 Nodes:   222 Arcs:   278 Layers: 23
+Elems:      83 Nodes:   252 Arcs:   325 Layers: 23
+Elems:      94 Nodes:   285 Arcs:   366 Layers: 23
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:      12 Nodes:   105 Arcs:   115 Layers: 23
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:      19 Nodes:   151 Arcs:   168 Layers: 23
+After union, the reached symbolic state space is:
+Elems:      31 Nodes:   166 Arcs:   193 Layers: 23
+The reached symbolic state space is:
+Elems:      31 Nodes:   166 Arcs:   193 Layers: 23
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+0100011231123020201003
+eec: ENLARGE begin	
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       2 Nodes:    42 Arcs:    42 Layers: 23
+Elems:       2 Nodes:    43 Arcs:    43 Layers: 23
+Elems:       3 Nodes:    45 Arcs:    46 Layers: 23
+Elems:       3 Nodes:    44 Arcs:    45 Layers: 23
+Elems:       4 Nodes:    45 Arcs:    47 Layers: 23
+Elems:       5 Nodes:    48 Arcs:    51 Layers: 23
+Elems:       7 Nodes:    51 Arcs:    56 Layers: 23
+Elems:      10 Nodes:    73 Arcs:    81 Layers: 23
+Elems:      19 Nodes:   125 Arcs:   142 Layers: 23
+Elems:      35 Nodes:   180 Arcs:   210 Layers: 23
+Elems:      56 Nodes:   243 Arcs:   291 Layers: 23
+Elems:      82 Nodes:   309 Arcs:   377 Layers: 23
+Elems:     114 Nodes:   367 Arcs:   462 Layers: 23
+Elems:     151 Nodes:   439 Arcs:   568 Layers: 23
+Elems:     186 Nodes:   502 Arcs:   661 Layers: 23
+Elems:     215 Nodes:   551 Arcs:   734 Layers: 23
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:      31 Nodes:   166 Arcs:   193 Layers: 23
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:      35 Nodes:   236 Arcs:   269 Layers: 23
+After union, the reached symbolic state space is:
+Elems:      65 Nodes:   260 Arcs:   313 Layers: 23
+The reached symbolic state space is:
+Elems:      65 Nodes:   260 Arcs:   313 Layers: 23
+Total time of computation (user)   ->  0.020 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 22 variables.
+abs: For the merging:
+1000000000000000000000
+0100000000000000000000
+0010000000000000000000
+0001000000000000000000
+0000100000000000000000
+0000010000000000000000
+0000001000000000000000
+0000000100000000000000
+0000000010000000000000
+0000000001000000000000
+0000000000100000000000
+0000000000010000000000
+0000000000001000000000
+0000000000000100000000
+0000000000000010000000
+0000000000000001000000
+0000000000000000100000
+0000000000000000010000
+0000000000000000001000
+0000000000000000000100
+0000000000000000000010
+0000000000000000000001
+abs: For the bounds:
+1100111231124020202013
+eec: ENLARGE begin	
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       1 Nodes:    24 Arcs:    23 Layers: 23
+Elems:       2 Nodes:    26 Arcs:    26 Layers: 23
+Elems:       2 Nodes:    27 Arcs:    27 Layers: 23
+Elems:       3 Nodes:    30 Arcs:    31 Layers: 23
+Elems:       3 Nodes:    32 Arcs:    33 Layers: 23
+Elems:       6 Nodes:    53 Arcs:    57 Layers: 23
+Elems:      12 Nodes:   100 Arcs:   110 Layers: 23
+Elems:      23 Nodes:   147 Arcs:   168 Layers: 23
+Elems:      34 Nodes:   187 Arcs:   218 Layers: 23
+Elems:      43 Nodes:   217 Arcs:   255 Layers: 23
+Elems:      54 Nodes:   250 Arcs:   297 Layers: 23
+Elems:      65 Nodes:   276 Arcs:   332 Layers: 23
+Elems:      77 Nodes:   310 Arcs:   376 Layers: 23
+Elems:      85 Nodes:   333 Arcs:   404 Layers: 23
+Elems:      88 Nodes:   361 Arcs:   437 Layers: 23
+Elems:      85 Nodes:   358 Arcs:   432 Layers: 23
+Elems:      81 Nodes:   345 Arcs:   418 Layers: 23
+Elems:      72 Nodes:   316 Arcs:   380 Layers: 23
+Elems:      56 Nodes:   273 Arcs:   323 Layers: 23
+Elems:      41 Nodes:   235 Arcs:   273 Layers: 23
+Elems:      29 Nodes:   199 Arcs:   225 Layers: 23
+Elems:      22 Nodes:   159 Arcs:   179 Layers: 23
+Elems:      17 Nodes:   140 Arcs:   155 Layers: 23
+Elems:      12 Nodes:   100 Arcs:   110 Layers: 23
+Elems:       8 Nodes:    77 Arcs:    83 Layers: 23
+Elems:       4 Nodes:    51 Arcs:    53 Layers: 23
+Elems:       3 Nodes:    36 Arcs:    37 Layers: 23
+Elems:       3 Nodes:    40 Arcs:    41 Layers: 23
+Elems:       2 Nodes:    32 Arcs:    32 Layers: 23
+end
+TSI time of computation (user)   ->  0.350 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool

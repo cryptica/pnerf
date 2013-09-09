@@ -1,0 +1,6 @@
+benchmarks/found-in-mist-repo/boundedPN/peterson.spec
+benchmarks/found-in-mist-repo/boundedPN/lamport.spec
+benchmarks/found-in-mist-repo/boundedPN/newdekker.spec
+benchmarks/found-in-mist-repo/boundedPN/kanban.spec
+benchmarks/found-in-mist-repo/boundedPN/newrtp.spec
+benchmarks/found-in-mist-repo/boundedPN/read-write.spec

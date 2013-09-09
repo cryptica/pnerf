@@ -1,0 +1,204 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has  13 variables,  10 transitions and  0 actual invariants
+abs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+1111111111111
+transition system
+Elems:      10 Nodes:    76 Arcs:    84 Layers: 14
+<<< Printing the elements of the IST: 0x19a55250
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+0001000000002
+eec: ENLARGE begin	
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       2 Nodes:    23 Arcs:    23 Layers: 14
+Elems:       3 Nodes:    26 Arcs:    27 Layers: 14
+Elems:       5 Nodes:    42 Arcs:    45 Layers: 14
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       3 Nodes:    36 Arcs:    37 Layers: 14
+After union, the reached symbolic state space is:
+Elems:       4 Nodes:    36 Arcs:    38 Layers: 14
+The reached symbolic state space is:
+Elems:       4 Nodes:    36 Arcs:    38 Layers: 14
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+0011110000103
+eec: ENLARGE begin	
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       2 Nodes:    23 Arcs:    23 Layers: 14
+Elems:       2 Nodes:    24 Arcs:    24 Layers: 14
+Elems:       5 Nodes:    36 Arcs:    39 Layers: 14
+Elems:       7 Nodes:    53 Arcs:    58 Layers: 14
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       4 Nodes:    36 Arcs:    38 Layers: 14
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       5 Nodes:    50 Arcs:    53 Layers: 14
+After union, the reached symbolic state space is:
+Elems:       9 Nodes:    53 Arcs:    60 Layers: 14
+The reached symbolic state space is:
+Elems:       9 Nodes:    53 Arcs:    60 Layers: 14
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+0111120100203
+eec: ENLARGE begin	
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       2 Nodes:    23 Arcs:    23 Layers: 14
+Elems:       2 Nodes:    24 Arcs:    24 Layers: 14
+Elems:       3 Nodes:    33 Arcs:    34 Layers: 14
+Elems:       4 Nodes:    38 Arcs:    40 Layers: 14
+Elems:       6 Nodes:    47 Arcs:    51 Layers: 14
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       9 Nodes:    53 Arcs:    60 Layers: 14
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       9 Nodes:    70 Arcs:    77 Layers: 14
+After union, the reached symbolic state space is:
+Elems:      18 Nodes:    74 Arcs:    88 Layers: 14
+The reached symbolic state space is:
+Elems:      18 Nodes:    74 Arcs:    88 Layers: 14
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+1111130101203
+eec: ENLARGE begin	
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       3 Nodes:    22 Arcs:    23 Layers: 14
+Elems:       5 Nodes:    28 Arcs:    31 Layers: 14
+end
+eec: EXPAND begin	Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       2 Nodes:    19 Arcs:    19 Layers: 14
+Elems:       2 Nodes:    21 Arcs:    21 Layers: 14
+Elems:       7 Nodes:    44 Arcs:    49 Layers: 14
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes unsafe
+Thanks for using this tool

@@ -748,113 +748,112 @@ init(l0, init1).
 cond('(>= init1 1)').
 cond('(>= s32 1)').
 cond('(>= l72 1)').
-cond('(s0=0)').
-cond('( s1=0)').
-cond('( s2=0)').
-cond('( s3=0)').
-cond('( s4=0)').
-cond('( s5=0)').
-cond('( s6=0)').
-cond('( s7=0)').
-cond('( s8=0)').
-cond('( s9=0)').
-cond('( s10=0)').
-cond('( s11=0)').
-cond('( s12=0)').
-cond('( s13=0)').
-cond('( s14=0)').
-cond('( s15=0)').
-cond('( s16=0)').
-cond('( s17=0)').
-cond('( s18=0)').
-cond('( s19=0)').
-cond('( s20=0)').
-cond('( s21=0)').
-cond('( s22=0)').
-cond('( s23=0)').
-cond('( s24=0)').
-cond('( s25=0)').
-cond('( s26=0)').
-cond('( s27=0)').
-cond('( s28=0)').
-cond('( s29=0)').
-cond('( s30=0)').
-cond('( s31=0)').
-cond('( s32=0)').
-cond('( l0=0)').
-cond('( l1=0)').
-cond('( l2=0)').
-cond('( l3=0)').
-cond('( l4=0)').
-cond('( l5=0)').
-cond('( l6=0)').
-cond('( l7=0)').
-cond('( l8=0)').
-cond('( l9=0)').
-cond('( l10=0)').
-cond('( l11=0)').
-cond('( l12=0)').
-cond('( l13=0)').
-cond('( l14=0)').
-cond('( l15=0)').
-cond('( l16=0)').
-cond('( l17=0)').
-cond('( l18=0)').
-cond('( l19=0)').
-cond('( l20=0)').
-cond('( l21=0)').
-cond('( l22=0)').
-cond('( l23=0)').
-cond('( l24=0)').
-cond('( l25=0)').
-cond('( l26=0)').
-cond('( l27=0)').
-cond('( l28=0)').
-cond('( l29=0)').
-cond('( l30=0)').
-cond('( l31=0)').
-cond('( l32=0)').
-cond('( l33=0)').
-cond('( l34=0)').
-cond('( l35=0)').
-cond('( l36=0)').
-cond('( l37=0)').
-cond('( l38=0)').
-cond('( l39=0)').
-cond('( l40=0)').
-cond('( l41=0)').
-cond('( l42=0)').
-cond('( l43=0)').
-cond('( l44=0)').
-cond('( l45=0)').
-cond('( l46=0)').
-cond('( l47=0)').
-cond('( l48=0)').
-cond('( l49=0)').
-cond('( l50=0)').
-cond('( l51=0)').
-cond('( l52=0)').
-cond('( l53=0)').
-cond('( l54=0)').
-cond('( l55=0)').
-cond('( l56=0)').
-cond('( l57=0)').
-cond('( l58=0)').
-cond('( l59=0)').
-cond('( l60=0)').
-cond('( l61=0)').
-cond('( l62=0)').
-cond('( l63=0)').
-cond('( l64=0)').
-cond('( l65=0)').
-cond('( l66=0)').
-cond('( l67=0)').
-cond('( l68=0)').
-cond('( l69=0)').
-cond('( l70=0)').
-cond('( l71=0)').
-cond('( l72=0)').
-cond('()').
+cond('(= s0 0)').
+cond('(= s1 0)').
+cond('(= s2 0)').
+cond('(= s3 0)').
+cond('(= s4 0)').
+cond('(= s5 0)').
+cond('(= s6 0)').
+cond('(= s7 0)').
+cond('(= s8 0)').
+cond('(= s9 0)').
+cond('(= s10 0)').
+cond('(= s11 0)').
+cond('(= s12 0)').
+cond('(= s13 0)').
+cond('(= s14 0)').
+cond('(= s15 0)').
+cond('(= s16 0)').
+cond('(= s17 0)').
+cond('(= s18 0)').
+cond('(= s19 0)').
+cond('(= s20 0)').
+cond('(= s21 0)').
+cond('(= s22 0)').
+cond('(= s23 0)').
+cond('(= s24 0)').
+cond('(= s25 0)').
+cond('(= s26 0)').
+cond('(= s27 0)').
+cond('(= s28 0)').
+cond('(= s29 0)').
+cond('(= s30 0)').
+cond('(= s31 0)').
+cond('(= s32 0)').
+cond('(= l0 0)').
+cond('(= l1 0)').
+cond('(= l2 0)').
+cond('(= l3 0)').
+cond('(= l4 0)').
+cond('(= l5 0)').
+cond('(= l6 0)').
+cond('(= l7 0)').
+cond('(= l8 0)').
+cond('(= l9 0)').
+cond('(= l10 0)').
+cond('(= l11 0)').
+cond('(= l12 0)').
+cond('(= l13 0)').
+cond('(= l14 0)').
+cond('(= l15 0)').
+cond('(= l16 0)').
+cond('(= l17 0)').
+cond('(= l18 0)').
+cond('(= l19 0)').
+cond('(= l20 0)').
+cond('(= l21 0)').
+cond('(= l22 0)').
+cond('(= l23 0)').
+cond('(= l24 0)').
+cond('(= l25 0)').
+cond('(= l26 0)').
+cond('(= l27 0)').
+cond('(= l28 0)').
+cond('(= l29 0)').
+cond('(= l30 0)').
+cond('(= l31 0)').
+cond('(= l32 0)').
+cond('(= l33 0)').
+cond('(= l34 0)').
+cond('(= l35 0)').
+cond('(= l36 0)').
+cond('(= l37 0)').
+cond('(= l38 0)').
+cond('(= l39 0)').
+cond('(= l40 0)').
+cond('(= l41 0)').
+cond('(= l42 0)').
+cond('(= l43 0)').
+cond('(= l44 0)').
+cond('(= l45 0)').
+cond('(= l46 0)').
+cond('(= l47 0)').
+cond('(= l48 0)').
+cond('(= l49 0)').
+cond('(= l50 0)').
+cond('(= l51 0)').
+cond('(= l52 0)').
+cond('(= l53 0)').
+cond('(= l54 0)').
+cond('(= l55 0)').
+cond('(= l56 0)').
+cond('(= l57 0)').
+cond('(= l58 0)').
+cond('(= l59 0)').
+cond('(= l60 0)').
+cond('(= l61 0)').
+cond('(= l62 0)').
+cond('(= l63 0)').
+cond('(= l64 0)').
+cond('(= l65 0)').
+cond('(= l66 0)').
+cond('(= l67 0)').
+cond('(= l68 0)').
+cond('(= l69 0)').
+cond('(= l70 0)').
+cond('(= l71 0)').
+cond('(= l72 0)').
 
 
 * Constructing constraint C_0 for petri net N
@@ -2444,1705 +2443,118 @@ cond('()').
 (assert (>= init1 1))
 (assert (>= s32 1))
 (assert (>= l72 1))
-(assert (s0=0))
-(assert ( s1=0))
-(assert ( s2=0))
-(assert ( s3=0))
-(assert ( s4=0))
-(assert ( s5=0))
-(assert ( s6=0))
-(assert ( s7=0))
-(assert ( s8=0))
-(assert ( s9=0))
-(assert ( s10=0))
-(assert ( s11=0))
-(assert ( s12=0))
-(assert ( s13=0))
-(assert ( s14=0))
-(assert ( s15=0))
-(assert ( s16=0))
-(assert ( s17=0))
-(assert ( s18=0))
-(assert ( s19=0))
-(assert ( s20=0))
-(assert ( s21=0))
-(assert ( s22=0))
-(assert ( s23=0))
-(assert ( s24=0))
-(assert ( s25=0))
-(assert ( s26=0))
-(assert ( s27=0))
-(assert ( s28=0))
-(assert ( s29=0))
-(assert ( s30=0))
-(assert ( s31=0))
-(assert ( s32=0))
-(assert ( l0=0))
-(assert ( l1=0))
-(assert ( l2=0))
-(assert ( l3=0))
-(assert ( l4=0))
-(assert ( l5=0))
-(assert ( l6=0))
-(assert ( l7=0))
-(assert ( l8=0))
-(assert ( l9=0))
-(assert ( l10=0))
-(assert ( l11=0))
-(assert ( l12=0))
-(assert ( l13=0))
-(assert ( l14=0))
-(assert ( l15=0))
-(assert ( l16=0))
-(assert ( l17=0))
-(assert ( l18=0))
-(assert ( l19=0))
-(assert ( l20=0))
-(assert ( l21=0))
-(assert ( l22=0))
-(assert ( l23=0))
-(assert ( l24=0))
-(assert ( l25=0))
-(assert ( l26=0))
-(assert ( l27=0))
-(assert ( l28=0))
-(assert ( l29=0))
-(assert ( l30=0))
-(assert ( l31=0))
-(assert ( l32=0))
-(assert ( l33=0))
-(assert ( l34=0))
-(assert ( l35=0))
-(assert ( l36=0))
-(assert ( l37=0))
-(assert ( l38=0))
-(assert ( l39=0))
-(assert ( l40=0))
-(assert ( l41=0))
-(assert ( l42=0))
-(assert ( l43=0))
-(assert ( l44=0))
-(assert ( l45=0))
-(assert ( l46=0))
-(assert ( l47=0))
-(assert ( l48=0))
-(assert ( l49=0))
-(assert ( l50=0))
-(assert ( l51=0))
-(assert ( l52=0))
-(assert ( l53=0))
-(assert ( l54=0))
-(assert ( l55=0))
-(assert ( l56=0))
-(assert ( l57=0))
-(assert ( l58=0))
-(assert ( l59=0))
-(assert ( l60=0))
-(assert ( l61=0))
-(assert ( l62=0))
-(assert ( l63=0))
-(assert ( l64=0))
-(assert ( l65=0))
-(assert ( l66=0))
-(assert ( l67=0))
-(assert ( l68=0))
-(assert ( l69=0))
-(assert ( l70=0))
-(assert ( l71=0))
-(assert ( l72=0))
-(assert ())
+(assert (= s0 0))
+(assert (= s1 0))
+(assert (= s2 0))
+(assert (= s3 0))
+(assert (= s4 0))
+(assert (= s5 0))
+(assert (= s6 0))
+(assert (= s7 0))
+(assert (= s8 0))
+(assert (= s9 0))
+(assert (= s10 0))
+(assert (= s11 0))
+(assert (= s12 0))
+(assert (= s13 0))
+(assert (= s14 0))
+(assert (= s15 0))
+(assert (= s16 0))
+(assert (= s17 0))
+(assert (= s18 0))
+(assert (= s19 0))
+(assert (= s20 0))
+(assert (= s21 0))
+(assert (= s22 0))
+(assert (= s23 0))
+(assert (= s24 0))
+(assert (= s25 0))
+(assert (= s26 0))
+(assert (= s27 0))
+(assert (= s28 0))
+(assert (= s29 0))
+(assert (= s30 0))
+(assert (= s31 0))
+(assert (= s32 0))
+(assert (= l0 0))
+(assert (= l1 0))
+(assert (= l2 0))
+(assert (= l3 0))
+(assert (= l4 0))
+(assert (= l5 0))
+(assert (= l6 0))
+(assert (= l7 0))
+(assert (= l8 0))
+(assert (= l9 0))
+(assert (= l10 0))
+(assert (= l11 0))
+(assert (= l12 0))
+(assert (= l13 0))
+(assert (= l14 0))
+(assert (= l15 0))
+(assert (= l16 0))
+(assert (= l17 0))
+(assert (= l18 0))
+(assert (= l19 0))
+(assert (= l20 0))
+(assert (= l21 0))
+(assert (= l22 0))
+(assert (= l23 0))
+(assert (= l24 0))
+(assert (= l25 0))
+(assert (= l26 0))
+(assert (= l27 0))
+(assert (= l28 0))
+(assert (= l29 0))
+(assert (= l30 0))
+(assert (= l31 0))
+(assert (= l32 0))
+(assert (= l33 0))
+(assert (= l34 0))
+(assert (= l35 0))
+(assert (= l36 0))
+(assert (= l37 0))
+(assert (= l38 0))
+(assert (= l39 0))
+(assert (= l40 0))
+(assert (= l41 0))
+(assert (= l42 0))
+(assert (= l43 0))
+(assert (= l44 0))
+(assert (= l45 0))
+(assert (= l46 0))
+(assert (= l47 0))
+(assert (= l48 0))
+(assert (= l49 0))
+(assert (= l50 0))
+(assert (= l51 0))
+(assert (= l52 0))
+(assert (= l53 0))
+(assert (= l54 0))
+(assert (= l55 0))
+(assert (= l56 0))
+(assert (= l57 0))
+(assert (= l58 0))
+(assert (= l59 0))
+(assert (= l60 0))
+(assert (= l61 0))
+(assert (= l62 0))
+(assert (= l63 0))
+(assert (= l64 0))
+(assert (= l65 0))
+(assert (= l66 0))
+(assert (= l67 0))
+(assert (= l68 0))
+(assert (= l69 0))
+(assert (= l70 0))
+(assert (= l71 0))
+(assert (= l72 0))
 (check-sat)
 (get-model)
 
 * Checking SAT(C0)
-(error "line 1587 column 13: invalid function application, arguments missing")
-(error "line 1588 column 14: invalid function application, arguments missing")
-(error "line 1589 column 14: invalid function application, arguments missing")
-(error "line 1590 column 14: invalid function application, arguments missing")
-(error "line 1591 column 14: invalid function application, arguments missing")
-(error "line 1592 column 14: invalid function application, arguments missing")
-(error "line 1593 column 14: invalid function application, arguments missing")
-(error "line 1594 column 14: invalid function application, arguments missing")
-(error "line 1595 column 14: invalid function application, arguments missing")
-(error "line 1596 column 14: invalid function application, arguments missing")
-(error "line 1597 column 15: invalid function application, arguments missing")
-(error "line 1598 column 15: invalid function application, arguments missing")
-(error "line 1599 column 15: invalid function application, arguments missing")
-(error "line 1600 column 15: invalid function application, arguments missing")
-(error "line 1601 column 15: invalid function application, arguments missing")
-(error "line 1602 column 15: invalid function application, arguments missing")
-(error "line 1603 column 15: invalid function application, arguments missing")
-(error "line 1604 column 15: invalid function application, arguments missing")
-(error "line 1605 column 15: invalid function application, arguments missing")
-(error "line 1606 column 15: invalid function application, arguments missing")
-(error "line 1607 column 15: invalid function application, arguments missing")
-(error "line 1608 column 15: invalid function application, arguments missing")
-(error "line 1609 column 15: invalid function application, arguments missing")
-(error "line 1610 column 15: invalid function application, arguments missing")
-(error "line 1611 column 15: invalid function application, arguments missing")
-(error "line 1612 column 15: invalid function application, arguments missing")
-(error "line 1613 column 15: invalid function application, arguments missing")
-(error "line 1614 column 15: invalid function application, arguments missing")
-(error "line 1615 column 15: invalid function application, arguments missing")
-(error "line 1616 column 15: invalid function application, arguments missing")
-(error "line 1617 column 15: invalid function application, arguments missing")
-(error "line 1618 column 15: invalid function application, arguments missing")
-(error "line 1619 column 15: invalid function application, arguments missing")
-(error "line 1620 column 14: invalid function application, arguments missing")
-(error "line 1621 column 14: invalid function application, arguments missing")
-(error "line 1622 column 14: invalid function application, arguments missing")
-(error "line 1623 column 14: invalid function application, arguments missing")
-(error "line 1624 column 14: invalid function application, arguments missing")
-(error "line 1625 column 14: invalid function application, arguments missing")
-(error "line 1626 column 14: invalid function application, arguments missing")
-(error "line 1627 column 14: invalid function application, arguments missing")
-(error "line 1628 column 14: invalid function application, arguments missing")
-(error "line 1629 column 14: invalid function application, arguments missing")
-(error "line 1630 column 15: invalid function application, arguments missing")
-(error "line 1631 column 15: invalid function application, arguments missing")
-(error "line 1632 column 15: invalid function application, arguments missing")
-(error "line 1633 column 15: invalid function application, arguments missing")
-(error "line 1634 column 15: invalid function application, arguments missing")
-(error "line 1635 column 15: invalid function application, arguments missing")
-(error "line 1636 column 15: invalid function application, arguments missing")
-(error "line 1637 column 15: invalid function application, arguments missing")
-(error "line 1638 column 15: invalid function application, arguments missing")
-(error "line 1639 column 15: invalid function application, arguments missing")
-(error "line 1640 column 15: invalid function application, arguments missing")
-(error "line 1641 column 15: invalid function application, arguments missing")
-(error "line 1642 column 15: invalid function application, arguments missing")
-(error "line 1643 column 15: invalid function application, arguments missing")
-(error "line 1644 column 15: invalid function application, arguments missing")
-(error "line 1645 column 15: invalid function application, arguments missing")
-(error "line 1646 column 15: invalid function application, arguments missing")
-(error "line 1647 column 15: invalid function application, arguments missing")
-(error "line 1648 column 15: invalid function application, arguments missing")
-(error "line 1649 column 15: invalid function application, arguments missing")
-(error "line 1650 column 15: invalid function application, arguments missing")
-(error "line 1651 column 15: invalid function application, arguments missing")
-(error "line 1652 column 15: invalid function application, arguments missing")
-(error "line 1653 column 15: invalid function application, arguments missing")
-(error "line 1654 column 15: invalid function application, arguments missing")
-(error "line 1655 column 15: invalid function application, arguments missing")
-(error "line 1656 column 15: invalid function application, arguments missing")
-(error "line 1657 column 15: invalid function application, arguments missing")
-(error "line 1658 column 15: invalid function application, arguments missing")
-(error "line 1659 column 15: invalid function application, arguments missing")
-(error "line 1660 column 15: invalid function application, arguments missing")
-(error "line 1661 column 15: invalid function application, arguments missing")
-(error "line 1662 column 15: invalid function application, arguments missing")
-(error "line 1663 column 15: invalid function application, arguments missing")
-(error "line 1664 column 15: invalid function application, arguments missing")
-(error "line 1665 column 15: invalid function application, arguments missing")
-(error "line 1666 column 15: invalid function application, arguments missing")
-(error "line 1667 column 15: invalid function application, arguments missing")
-(error "line 1668 column 15: invalid function application, arguments missing")
-(error "line 1669 column 15: invalid function application, arguments missing")
-(error "line 1670 column 15: invalid function application, arguments missing")
-(error "line 1671 column 15: invalid function application, arguments missing")
-(error "line 1672 column 15: invalid function application, arguments missing")
-(error "line 1673 column 15: invalid function application, arguments missing")
-(error "line 1674 column 15: invalid function application, arguments missing")
-(error "line 1675 column 15: invalid function application, arguments missing")
-(error "line 1676 column 15: invalid function application, arguments missing")
-(error "line 1677 column 15: invalid function application, arguments missing")
-(error "line 1678 column 15: invalid function application, arguments missing")
-(error "line 1679 column 15: invalid function application, arguments missing")
-(error "line 1680 column 15: invalid function application, arguments missing")
-(error "line 1681 column 15: invalid function application, arguments missing")
-(error "line 1682 column 15: invalid function application, arguments missing")
-(error "line 1683 column 15: invalid function application, arguments missing")
-(error "line 1684 column 15: invalid function application, arguments missing")
-(error "line 1685 column 15: invalid function application, arguments missing")
-(error "line 1686 column 15: invalid function application, arguments missing")
-(error "line 1687 column 15: invalid function application, arguments missing")
-(error "line 1688 column 15: invalid function application, arguments missing")
-(error "line 1689 column 15: invalid function application, arguments missing")
-(error "line 1690 column 15: invalid function application, arguments missing")
-(error "line 1691 column 15: invalid function application, arguments missing")
-(error "line 1692 column 15: invalid function application, arguments missing")
-(error "line 1693 column 9: invalid expression, '(' or symbol expected")
-sat
-(model 
-  (define-fun t125 () Int
-    0)
-  (define-fun t306 () Int
-    0)
-  (define-fun t438 () Int
-    0)
-  (define-fun t100 () Int
-    0)
-  (define-fun t5 () Int
-    0)
-  (define-fun t90 () Int
-    0)
-  (define-fun t66 () Int
-    0)
-  (define-fun t230 () Int
-    0)
-  (define-fun t571 () Int
-    0)
-  (define-fun t378 () Int
-    0)
-  (define-fun t409 () Int
-    0)
-  (define-fun t596 () Int
-    0)
-  (define-fun t14 () Int
-    0)
-  (define-fun t51 () Int
-    0)
-  (define-fun t531 () Int
-    0)
-  (define-fun t173 () Int
-    0)
-  (define-fun t492 () Int
-    0)
-  (define-fun t196 () Int
-    0)
-  (define-fun t534 () Int
-    0)
-  (define-fun t217 () Int
-    0)
-  (define-fun t190 () Int
-    0)
-  (define-fun t286 () Int
-    0)
-  (define-fun t195 () Int
-    0)
-  (define-fun t212 () Int
-    0)
-  (define-fun t119 () Int
-    0)
-  (define-fun t468 () Int
-    0)
-  (define-fun t440 () Int
-    0)
-  (define-fun t193 () Int
-    1)
-  (define-fun t160 () Int
-    0)
-  (define-fun t407 () Int
-    0)
-  (define-fun t319 () Int
-    0)
-  (define-fun t335 () Int
-    0)
-  (define-fun t561 () Int
-    1)
-  (define-fun t560 () Int
-    0)
-  (define-fun t74 () Int
-    0)
-  (define-fun t220 () Int
-    0)
-  (define-fun t144 () Int
-    0)
-  (define-fun t439 () Int
-    0)
-  (define-fun t162 () Int
-    0)
-  (define-fun t80 () Int
-    0)
-  (define-fun t398 () Int
-    0)
-  (define-fun t180 () Int
-    0)
-  (define-fun t584 () Int
-    0)
-  (define-fun t108 () Int
-    0)
-  (define-fun t12 () Int
-    0)
-  (define-fun t356 () Int
-    0)
-  (define-fun t498 () Int
-    0)
-  (define-fun t419 () Int
-    1)
-  (define-fun t21 () Int
-    0)
-  (define-fun t493 () Int
-    1)
-  (define-fun t293 () Int
-    0)
-  (define-fun t395 () Int
-    0)
-  (define-fun t488 () Int
-    0)
-  (define-fun t593 () Int
-    0)
-  (define-fun t453 () Int
-    1)
-  (define-fun t512 () Int
-    0)
-  (define-fun t107 () Int
-    0)
-  (define-fun t551 () Int
-    0)
-  (define-fun t397 () Int
-    0)
-  (define-fun t215 () Int
-    0)
-  (define-fun t563 () Int
-    0)
-  (define-fun t384 () Int
-    0)
-  (define-fun t227 () Int
-    0)
-  (define-fun t628 () Int
-    0)
-  (define-fun t57 () Int
-    0)
-  (define-fun t219 () Int
-    0)
-  (define-fun t214 () Int
-    0)
-  (define-fun t78 () Int
-    0)
-  (define-fun t50 () Int
-    0)
-  (define-fun t380 () Int
-    0)
-  (define-fun t359 () Int
-    1)
-  (define-fun t406 () Int
-    0)
-  (define-fun t328 () Int
-    0)
-  (define-fun t132 () Int
-    0)
-  (define-fun t483 () Int
-    0)
-  (define-fun t298 () Int
-    0)
-  (define-fun t358 () Int
-    0)
-  (define-fun t478 () Int
-    0)
-  (define-fun t606 () Int
-    0)
-  (define-fun t105 () Int
-    0)
-  (define-fun t235 () Int
-    0)
-  (define-fun t254 () Int
-    0)
-  (define-fun t568 () Int
-    0)
-  (define-fun t578 () Int
-    0)
-  (define-fun t582 () Int
-    0)
-  (define-fun t75 () Int
-    0)
-  (define-fun t548 () Int
-    0)
-  (define-fun t545 () Int
-    0)
-  (define-fun t599 () Int
-    0)
-  (define-fun t81 () Int
-    0)
-  (define-fun t581 () Int
-    0)
-  (define-fun t151 () Int
-    0)
-  (define-fun t370 () Int
-    0)
-  (define-fun t270 () Int
-    0)
-  (define-fun t207 () Int
-    0)
-  (define-fun t165 () Int
-    1)
-  (define-fun t136 () Int
-    0)
-  (define-fun t65 () Int
-    0)
-  (define-fun t264 () Int
-    0)
-  (define-fun t168 () Int
-    0)
-  (define-fun t381 () Int
-    0)
-  (define-fun t382 () Int
-    0)
-  (define-fun t251 () Int
-    0)
-  (define-fun t386 () Int
-    0)
-  (define-fun t127 () Int
-    0)
-  (define-fun t421 () Int
-    0)
-  (define-fun t31 () Int
-    0)
-  (define-fun t579 () Int
-    0)
-  (define-fun t39 () Int
-    0)
-  (define-fun t367 () Int
-    0)
-  (define-fun t583 () Int
-    0)
-  (define-fun t523 () Int
-    0)
-  (define-fun t522 () Int
-    0)
-  (define-fun t519 () Int
-    0)
-  (define-fun t203 () Int
-    0)
-  (define-fun t109 () Int
-    0)
-  (define-fun t334 () Int
-    0)
-  (define-fun t163 () Int
-    0)
-  (define-fun t433 () Int
-    0)
-  (define-fun t156 () Int
-    0)
-  (define-fun t344 () Int
-    0)
-  (define-fun t379 () Int
-    0)
-  (define-fun t280 () Int
-    0)
-  (define-fun t484 () Int
-    0)
-  (define-fun t20 () Int
-    0)
-  (define-fun t442 () Int
-    0)
-  (define-fun t331 () Int
-    0)
-  (define-fun t588 () Int
-    0)
-  (define-fun t110 () Int
-    0)
-  (define-fun t25 () Int
-    0)
-  (define-fun t102 () Int
-    0)
-  (define-fun t191 () Int
-    0)
-  (define-fun t360 () Int
-    0)
-  (define-fun t550 () Int
-    0)
-  (define-fun t1 () Int
-    0)
-  (define-fun t318 () Int
-    0)
-  (define-fun t315 () Int
-    0)
-  (define-fun t285 () Int
-    0)
-  (define-fun t329 () Int
-    0)
-  (define-fun t266 () Int
-    1)
-  (define-fun t451 () Int
-    0)
-  (define-fun t252 () Int
-    0)
-  (define-fun t549 () Int
-    0)
-  (define-fun t45 () Int
-    0)
-  (define-fun t434 () Int
-    0)
-  (define-fun t604 () Int
-    0)
-  (define-fun t619 () Int
-    0)
-  (define-fun t19 () Int
-    1)
-  (define-fun t84 () Int
-    0)
-  (define-fun t320 () Int
-    0)
-  (define-fun t137 () Int
-    0)
-  (define-fun t625 () Int
-    0)
-  (define-fun t435 () Int
-    0)
-  (define-fun t178 () Int
-    0)
-  (define-fun t287 () Int
-    0)
-  (define-fun t612 () Int
-    0)
-  (define-fun t98 () Int
-    0)
-  (define-fun t189 () Int
-    1)
-  (define-fun t231 () Int
-    0)
-  (define-fun t348 () Int
-    0)
-  (define-fun t330 () Int
-    0)
-  (define-fun t135 () Int
-    0)
-  (define-fun t211 () Int
-    0)
-  (define-fun t89 () Int
-    0)
-  (define-fun t420 () Int
-    0)
-  (define-fun t213 () Int
-    0)
-  (define-fun t441 () Int
-    0)
-  (define-fun t288 () Int
-    0)
-  (define-fun t115 () Int
-    0)
-  (define-fun t260 () Int
-    0)
-  (define-fun t346 () Int
-    0)
-  (define-fun t7 () Int
-    0)
-  (define-fun t354 () Int
-    0)
-  (define-fun t53 () Int
-    0)
-  (define-fun t68 () Int
-    0)
-  (define-fun t365 () Int
-    1)
-  (define-fun t417 () Int
-    0)
-  (define-fun t411 () Int
-    0)
-  (define-fun t454 () Int
-    0)
-  (define-fun t499 () Int
-    0)
-  (define-fun t631 () Int
-    0)
-  (define-fun t543 () Int
-    1)
-  (define-fun t103 () Int
-    0)
-  (define-fun t366 () Int
-    0)
-  (define-fun t533 () Int
-    0)
-  (define-fun t340 () Int
-    0)
-  (define-fun t71 () Int
-    0)
-  (define-fun t185 () Int
-    0)
-  (define-fun t622 () Int
-    0)
-  (define-fun t148 () Int
-    0)
-  (define-fun t204 () Int
-    0)
-  (define-fun t161 () Int
-    0)
-  (define-fun t542 () Int
-    0)
-  (define-fun t292 () Int
-    0)
-  (define-fun t614 () Int
-    0)
-  (define-fun t324 () Int
-    0)
-  (define-fun t310 () Int
-    0)
-  (define-fun t524 () Int
-    0)
-  (define-fun t339 () Int
-    0)
-  (define-fun t114 () Int
-    0)
-  (define-fun t124 () Int
-    0)
-  (define-fun t572 () Int
-    0)
-  (define-fun t511 () Int
-    0)
-  (define-fun t112 () Int
-    0)
-  (define-fun init1 () Int
-    2)
-  (define-fun t295 () Int
-    0)
-  (define-fun t99 () Int
-    0)
-  (define-fun t82 () Int
-    0)
-  (define-fun t418 () Int
-    0)
-  (define-fun t576 () Int
-    0)
-  (define-fun t517 () Int
-    0)
-  (define-fun t608 () Int
-    0)
-  (define-fun t342 () Int
-    0)
-  (define-fun t516 () Int
-    0)
-  (define-fun t273 () Int
-    0)
-  (define-fun t291 () Int
-    0)
-  (define-fun t326 () Int
-    0)
-  (define-fun t56 () Int
-    0)
-  (define-fun t201 () Int
-    0)
-  (define-fun t142 () Int
-    0)
-  (define-fun t58 () Int
-    0)
-  (define-fun t121 () Int
-    0)
-  (define-fun t510 () Int
-    0)
-  (define-fun t372 () Int
-    0)
-  (define-fun t502 () Int
-    0)
-  (define-fun t466 () Int
-    0)
-  (define-fun t11 () Int
-    0)
-  (define-fun t585 () Int
-    0)
-  (define-fun t377 () Int
-    0)
-  (define-fun t410 () Int
-    0)
-  (define-fun t3 () Int
-    0)
-  (define-fun t489 () Int
-    0)
-  (define-fun t233 () Int
-    0)
-  (define-fun t541 () Int
-    0)
-  (define-fun t497 () Int
-    0)
-  (define-fun t170 () Int
-    0)
-  (define-fun t96 () Int
-    0)
-  (define-fun t248 () Int
-    0)
-  (define-fun t246 () Int
-    0)
-  (define-fun t610 () Int
-    0)
-  (define-fun t6 () Int
-    0)
-  (define-fun t171 () Int
-    0)
-  (define-fun t172 () Int
-    0)
-  (define-fun t321 () Int
-    0)
-  (define-fun t277 () Int
-    0)
-  (define-fun t67 () Int
-    0)
-  (define-fun t157 () Int
-    0)
-  (define-fun t609 () Int
-    0)
-  (define-fun t16 () Int
-    0)
-  (define-fun t70 () Int
-    0)
-  (define-fun t603 () Int
-    1)
-  (define-fun t569 () Int
-    0)
-  (define-fun t33 () Int
-    0)
-  (define-fun t41 () Int
-    0)
-  (define-fun t574 () Int
-    0)
-  (define-fun t349 () Int
-    0)
-  (define-fun t414 () Int
-    0)
-  (define-fun t158 () Int
-    0)
-  (define-fun t412 () Int
-    0)
-  (define-fun t312 () Int
-    0)
-  (define-fun t430 () Int
-    0)
-  (define-fun t352 () Int
-    0)
-  (define-fun t24 () Int
-    0)
-  (define-fun t54 () Int
-    0)
-  (define-fun t513 () Int
-    0)
-  (define-fun t276 () Int
-    0)
-  (define-fun t289 () Int
-    0)
-  (define-fun t184 () Int
-    0)
-  (define-fun t37 () Int
-    0)
-  (define-fun t253 () Int
-    1)
-  (define-fun t140 () Int
-    0)
-  (define-fun t55 () Int
-    0)
-  (define-fun t85 () Int
-    0)
-  (define-fun t399 () Int
-    0)
-  (define-fun t387 () Int
-    1)
-  (define-fun t592 () Int
-    0)
-  (define-fun t422 () Int
-    0)
-  (define-fun t556 () Int
-    0)
-  (define-fun t626 () Int
-    0)
-  (define-fun t503 () Int
-    0)
-  (define-fun t518 () Int
-    0)
-  (define-fun t333 () Int
-    0)
-  (define-fun t530 () Int
-    0)
-  (define-fun t343 () Int
-    0)
-  (define-fun t242 () Int
-    0)
-  (define-fun t535 () Int
-    0)
-  (define-fun t209 () Int
-    0)
-  (define-fun t313 () Int
-    0)
-  (define-fun t429 () Int
-    0)
-  (define-fun t393 () Int
-    1)
-  (define-fun t457 () Int
-    0)
-  (define-fun t353 () Int
-    0)
-  (define-fun t445 () Int
-    0)
-  (define-fun t500 () Int
-    0)
-  (define-fun t325 () Int
-    0)
-  (define-fun t586 () Int
-    0)
-  (define-fun t538 () Int
-    0)
-  (define-fun t210 () Int
-    0)
-  (define-fun t43 () Int
-    1)
-  (define-fun t350 () Int
-    0)
-  (define-fun t294 () Int
-    0)
-  (define-fun t351 () Int
-    0)
-  (define-fun t557 () Int
-    0)
-  (define-fun t42 () Int
-    0)
-  (define-fun t123 () Int
-    0)
-  (define-fun t415 () Int
-    0)
-  (define-fun t36 () Int
-    0)
-  (define-fun t383 () Int
-    0)
-  (define-fun t282 () Int
-    0)
-  (define-fun t405 () Int
-    0)
-  (define-fun t255 () Int
-    0)
-  (define-fun t508 () Int
-    0)
-  (define-fun t464 () Int
-    0)
-  (define-fun t389 () Int
-    0)
-  (define-fun t234 () Int
-    0)
-  (define-fun t355 () Int
-    0)
-  (define-fun t198 () Int
-    0)
-  (define-fun t307 () Int
-    0)
-  (define-fun t101 () Int
-    0)
-  (define-fun t303 () Int
-    0)
-  (define-fun t222 () Int
-    0)
-  (define-fun t91 () Int
-    0)
-  (define-fun t336 () Int
-    0)
-  (define-fun t323 () Int
-    0)
-  (define-fun t428 () Int
-    0)
-  (define-fun t396 () Int
-    0)
-  (define-fun t262 () Int
-    0)
-  (define-fun t228 () Int
-    0)
-  (define-fun t139 () Int
-    0)
-  (define-fun t479 () Int
-    0)
-  (define-fun t159 () Int
-    0)
-  (define-fun t177 () Int
-    0)
-  (define-fun t425 () Int
-    0)
-  (define-fun t591 () Int
-    0)
-  (define-fun t567 () Int
-    0)
-  (define-fun t627 () Int
-    0)
-  (define-fun t444 () Int
-    0)
-  (define-fun t300 () Int
-    0)
-  (define-fun t400 () Int
-    0)
-  (define-fun t474 () Int
-    0)
-  (define-fun t317 () Int
-    0)
-  (define-fun t205 () Int
-    0)
-  (define-fun t465 () Int
-    0)
-  (define-fun t304 () Int
-    0)
-  (define-fun t629 () Int
-    0)
-  (define-fun t182 () Int
-    0)
-  (define-fun t390 () Int
-    0)
-  (define-fun t149 () Int
-    0)
-  (define-fun t267 () Int
-    0)
-  (define-fun t594 () Int
-    0)
-  (define-fun t218 () Int
-    0)
-  (define-fun t95 () Int
-    0)
-  (define-fun t250 () Int
-    0)
-  (define-fun t566 () Int
-    0)
-  (define-fun t515 () Int
-    0)
-  (define-fun t564 () Int
-    0)
-  (define-fun t361 () Int
-    0)
-  (define-fun t496 () Int
-    0)
-  (define-fun t570 () Int
-    0)
-  (define-fun t225 () Int
-    0)
-  (define-fun t447 () Int
-    0)
-  (define-fun t616 () Int
-    0)
-  (define-fun t437 () Int
-    0)
-  (define-fun t186 () Int
-    0)
-  (define-fun t152 () Int
-    0)
-  (define-fun t200 () Int
-    0)
-  (define-fun t265 () Int
-    0)
-  (define-fun t169 () Int
-    0)
-  (define-fun t575 () Int
-    0)
-  (define-fun t554 () Int
-    0)
-  (define-fun t376 () Int
-    0)
-  (define-fun t618 () Int
-    0)
-  (define-fun t97 () Int
-    0)
-  (define-fun t448 () Int
-    0)
-  (define-fun t117 () Int
-    1)
-  (define-fun t301 () Int
-    0)
-  (define-fun t375 () Int
-    0)
-  (define-fun t607 () Int
-    0)
-  (define-fun t224 () Int
-    0)
-  (define-fun t539 () Int
-    0)
-  (define-fun t528 () Int
-    0)
-  (define-fun t402 () Int
-    0)
-  (define-fun t155 () Int
-    0)
-  (define-fun t249 () Int
-    0)
-  (define-fun t459 () Int
-    0)
-  (define-fun t61 () Int
-    0)
-  (define-fun t309 () Int
-    0)
-  (define-fun t509 () Int
-    0)
-  (define-fun t32 () Int
-    0)
-  (define-fun t221 () Int
-    0)
-  (define-fun t79 () Int
-    0)
-  (define-fun t281 () Int
-    0)
-  (define-fun t34 () Int
-    0)
-  (define-fun t620 () Int
-    1)
-  (define-fun t64 () Int
-    0)
-  (define-fun t514 () Int
-    0)
-  (define-fun t562 () Int
-    0)
-  (define-fun t363 () Int
-    0)
-  (define-fun t490 () Int
-    0)
-  (define-fun t197 () Int
-    0)
-  (define-fun t271 () Int
-    0)
-  (define-fun t60 () Int
-    0)
-  (define-fun t573 () Int
-    0)
-  (define-fun t138 () Int
-    0)
-  (define-fun t416 () Int
-    0)
-  (define-fun t537 () Int
-    0)
-  (define-fun t532 () Int
-    0)
-  (define-fun t577 () Int
-    0)
-  (define-fun t605 () Int
-    0)
-  (define-fun t83 () Int
-    0)
-  (define-fun t72 () Int
-    0)
-  (define-fun t436 () Int
-    0)
-  (define-fun t62 () Int
-    0)
-  (define-fun t520 () Int
-    0)
-  (define-fun t86 () Int
-    0)
-  (define-fun t216 () Int
-    0)
-  (define-fun t495 () Int
-    0)
-  (define-fun t595 () Int
-    0)
-  (define-fun t597 () Int
-    0)
-  (define-fun t232 () Int
-    0)
-  (define-fun t49 () Int
-    0)
-  (define-fun t482 () Int
-    0)
-  (define-fun t476 () Int
-    0)
-  (define-fun t540 () Int
-    0)
-  (define-fun t206 () Int
-    0)
-  (define-fun t9 () Int
-    0)
-  (define-fun t283 () Int
-    0)
-  (define-fun t237 () Int
-    0)
-  (define-fun t630 () Int
-    0)
-  (define-fun t424 () Int
-    0)
-  (define-fun t521 () Int
-    0)
-  (define-fun t621 () Int
-    0)
-  (define-fun t183 () Int
-    0)
-  (define-fun t615 () Int
-    0)
-  (define-fun t239 () Int
-    1)
-  (define-fun t401 () Int
-    0)
-  (define-fun t63 () Int
-    0)
-  (define-fun t113 () Int
-    0)
-  (define-fun t426 () Int
-    0)
-  (define-fun t126 () Int
-    0)
-  (define-fun t48 () Int
-    0)
-  (define-fun t26 () Int
-    0)
-  (define-fun t245 () Int
-    0)
-  (define-fun t458 () Int
-    0)
-  (define-fun t475 () Int
-    0)
-  (define-fun t446 () Int
-    0)
-  (define-fun t611 () Int
-    1)
-  (define-fun t263 () Int
-    0)
-  (define-fun t452 () Int
-    0)
-  (define-fun t130 () Int
-    0)
-  (define-fun t187 () Int
-    0)
-  (define-fun t403 () Int
-    1)
-  (define-fun t290 () Int
-    0)
-  (define-fun t491 () Int
-    0)
-  (define-fun t590 () Int
-    0)
-  (define-fun t244 () Int
-    0)
-  (define-fun t174 () Int
-    0)
-  (define-fun t247 () Int
-    0)
-  (define-fun t413 () Int
-    0)
-  (define-fun t388 () Int
-    0)
-  (define-fun t194 () Int
-    0)
-  (define-fun t345 () Int
-    0)
-  (define-fun t166 () Int
-    0)
-  (define-fun t179 () Int
-    0)
-  (define-fun t116 () Int
-    0)
-  (define-fun t275 () Int
-    0)
-  (define-fun t369 () Int
-    0)
-  (define-fun t299 () Int
-    0)
-  (define-fun t427 () Int
-    0)
-  (define-fun t257 () Int
-    1)
-  (define-fun t134 () Int
-    0)
-  (define-fun t385 () Int
-    0)
-  (define-fun t470 () Int
-    0)
-  (define-fun t145 () Int
-    1)
-  (define-fun t28 () Int
-    0)
-  (define-fun t129 () Int
-    0)
-  (define-fun t15 () Int
-    0)
-  (define-fun t322 () Int
-    0)
-  (define-fun t347 () Int
-    0)
-  (define-fun t404 () Int
-    0)
-  (define-fun t147 () Int
-    0)
-  (define-fun t240 () Int
-    0)
-  (define-fun t274 () Int
-    0)
-  (define-fun t143 () Int
-    0)
-  (define-fun t40 () Int
-    0)
-  (define-fun t175 () Int
-    0)
-  (define-fun t146 () Int
-    0)
-  (define-fun t601 () Int
-    0)
-  (define-fun t69 () Int
-    1)
-  (define-fun t46 () Int
-    0)
-  (define-fun t4 () Int
-    0)
-  (define-fun t52 () Int
-    0)
-  (define-fun t104 () Int
-    0)
-  (define-fun t552 () Int
-    0)
-  (define-fun t8 () Int
-    0)
-  (define-fun t106 () Int
-    1)
-  (define-fun t314 () Int
-    0)
-  (define-fun t122 () Int
-    0)
-  (define-fun t226 () Int
-    0)
-  (define-fun t77 () Int
-    0)
-  (define-fun t432 () Int
-    0)
-  (define-fun t449 () Int
-    0)
-  (define-fun t477 () Int
-    0)
-  (define-fun t408 () Int
-    0)
-  (define-fun t450 () Int
-    0)
-  (define-fun t374 () Int
-    0)
-  (define-fun t559 () Int
-    1)
-  (define-fun t150 () Int
-    0)
-  (define-fun t120 () Int
-    0)
-  (define-fun t256 () Int
-    0)
-  (define-fun t241 () Int
-    0)
-  (define-fun t598 () Int
-    0)
-  (define-fun t473 () Int
-    0)
-  (define-fun t613 () Int
-    0)
-  (define-fun t305 () Int
-    0)
-  (define-fun t624 () Int
-    0)
-  (define-fun t154 () Int
-    0)
-  (define-fun t238 () Int
-    0)
-  (define-fun t208 () Int
-    0)
-  (define-fun t88 () Int
-    0)
-  (define-fun t505 () Int
-    0)
-  (define-fun t460 () Int
-    0)
-  (define-fun t341 () Int
-    0)
-  (define-fun t485 () Int
-    0)
-  (define-fun t555 () Int
-    0)
-  (define-fun t243 () Int
-    0)
-  (define-fun t296 () Int
-    0)
-  (define-fun t261 () Int
-    0)
-  (define-fun t338 () Int
-    0)
-  (define-fun t236 () Int
-    0)
-  (define-fun t504 () Int
-    1)
-  (define-fun t269 () Int
-    0)
-  (define-fun t469 () Int
-    0)
-  (define-fun t192 () Int
-    0)
-  (define-fun t527 () Int
-    0)
-  (define-fun t461 () Int
-    0)
-  (define-fun t463 () Int
-    0)
-  (define-fun t394 () Int
-    0)
-  (define-fun t481 () Int
-    0)
-  (define-fun t188 () Int
-    0)
-  (define-fun t297 () Int
-    0)
-  (define-fun t272 () Int
-    0)
-  (define-fun t47 () Int
-    0)
-  (define-fun t617 () Int
-    0)
-  (define-fun t13 () Int
-    0)
-  (define-fun t455 () Int
-    0)
-  (define-fun t443 () Int
-    0)
-  (define-fun t27 () Int
-    1)
-  (define-fun t38 () Int
-    0)
-  (define-fun t29 () Int
-    0)
-  (define-fun t10 () Int
-    0)
-  (define-fun t546 () Int
-    0)
-  (define-fun t284 () Int
-    0)
-  (define-fun t302 () Int
-    0)
-  (define-fun t544 () Int
-    0)
-  (define-fun t507 () Int
-    0)
-  (define-fun t487 () Int
-    0)
-  (define-fun t371 () Int
-    0)
-  (define-fun t167 () Int
-    0)
-  (define-fun t456 () Int
-    0)
-  (define-fun t279 () Int
-    0)
-  (define-fun t199 () Int
-    0)
-  (define-fun t202 () Int
-    0)
-  (define-fun t525 () Int
-    0)
-  (define-fun t536 () Int
-    0)
-  (define-fun t164 () Int
-    0)
-  (define-fun t327 () Int
-    0)
-  (define-fun t87 () Int
-    0)
-  (define-fun t176 () Int
-    0)
-  (define-fun t486 () Int
-    0)
-  (define-fun t311 () Int
-    0)
-  (define-fun t2 () Int
-    0)
-  (define-fun t223 () Int
-    0)
-  (define-fun t392 () Int
-    0)
-  (define-fun t59 () Int
-    0)
-  (define-fun t558 () Int
-    0)
-  (define-fun t153 () Int
-    0)
-  (define-fun t472 () Int
-    0)
-  (define-fun t423 () Int
-    0)
-  (define-fun t471 () Int
-    0)
-  (define-fun t501 () Int
-    0)
-  (define-fun t526 () Int
-    0)
-  (define-fun t462 () Int
-    0)
-  (define-fun t332 () Int
-    0)
-  (define-fun t93 () Int
-    0)
-  (define-fun t373 () Int
-    0)
-  (define-fun t18 () Int
-    0)
-  (define-fun t529 () Int
-    0)
-  (define-fun t580 () Int
-    0)
-  (define-fun t35 () Int
-    0)
-  (define-fun t131 () Int
-    0)
-  (define-fun t73 () Int
-    0)
-  (define-fun t259 () Int
-    0)
-  (define-fun t133 () Int
-    0)
-  (define-fun t506 () Int
-    0)
-  (define-fun t632 () Int
-    0)
-  (define-fun t589 () Int
-    1)
-  (define-fun t118 () Int
-    0)
-  (define-fun t337 () Int
-    0)
-  (define-fun t357 () Int
-    0)
-  (define-fun t111 () Int
-    0)
-  (define-fun t44 () Int
-    0)
-  (define-fun t17 () Int
-    0)
-  (define-fun t600 () Int
-    0)
-  (define-fun t128 () Int
-    0)
-  (define-fun t467 () Int
-    0)
-  (define-fun t268 () Int
-    0)
-  (define-fun t565 () Int
-    0)
-  (define-fun t181 () Int
-    0)
-  (define-fun t494 () Int
-    0)
-  (define-fun t94 () Int
-    0)
-  (define-fun t258 () Int
-    0)
-  (define-fun t308 () Int
-    0)
-  (define-fun t23 () Int
-    0)
-  (define-fun t76 () Int
-    0)
-  (define-fun t364 () Int
-    0)
-  (define-fun t316 () Int
-    0)
-  (define-fun t368 () Int
-    0)
-  (define-fun t30 () Int
-    0)
-  (define-fun t587 () Int
-    0)
-  (define-fun t553 () Int
-    0)
-  (define-fun t480 () Int
-    0)
-  (define-fun t391 () Int
-    0)
-  (define-fun t602 () Int
-    0)
-  (define-fun t92 () Int
-    0)
-  (define-fun t141 () Int
-    0)
-  (define-fun t229 () Int
-    0)
-  (define-fun t278 () Int
-    0)
-  (define-fun t22 () Int
-    0)
-  (define-fun t431 () Int
-    0)
-  (define-fun t362 () Int
-    0)
-  (define-fun t547 () Int
-    0)
-  (define-fun t623 () Int
-    0)
-  (define-fun l19 () Int
-    0)
-  (define-fun s15 () Int
-    0)
-  (define-fun l17 () Int
-    0)
-  (define-fun s7 () Int
-    0)
-  (define-fun l18 () Int
-    0)
-  (define-fun l16 () Int
-    0)
-  (define-fun s14 () Int
-    0)
-  (define-fun s6 () Int
-    0)
-  (define-fun s13 () Int
-    0)
-  (define-fun s5 () Int
-    0)
-  (define-fun s12 () Int
-    0)
-  (define-fun s4 () Int
-    0)
-  (define-fun s11 () Int
-    0)
-  (define-fun s3 () Int
-    0)
-  (define-fun s10 () Int
-    0)
-  (define-fun s2 () Int
-    0)
-  (define-fun s9 () Int
-    0)
-  (define-fun s1 () Int
-    0)
-  (define-fun s8 () Int
-    0)
-  (define-fun s0 () Int
-    0)
-  (define-fun l61 () Int
-    0)
-  (define-fun s23 () Int
-    0)
-  (define-fun l59 () Int
-    0)
-  (define-fun l60 () Int
-    0)
-  (define-fun l58 () Int
-    0)
-  (define-fun s21 () Int
-    0)
-  (define-fun l57 () Int
-    0)
-  (define-fun l56 () Int
-    0)
-  (define-fun l51 () Int
-    0)
-  (define-fun l49 () Int
-    0)
-  (define-fun l50 () Int
-    0)
-  (define-fun l48 () Int
-    0)
-  (define-fun s22 () Int
-    0)
-  (define-fun l47 () Int
-    0)
-  (define-fun l46 () Int
-    0)
-  (define-fun l35 () Int
-    0)
-  (define-fun l33 () Int
-    0)
-  (define-fun l34 () Int
-    0)
-  (define-fun l32 () Int
-    0)
-  (define-fun l31 () Int
-    0)
-  (define-fun l30 () Int
-    0)
-  (define-fun l29 () Int
-    0)
-  (define-fun l28 () Int
-    0)
-  (define-fun l27 () Int
-    0)
-  (define-fun l26 () Int
-    0)
-  (define-fun l25 () Int
-    0)
-  (define-fun l24 () Int
-    0)
-  (define-fun l55 () Int
-    0)
-  (define-fun l54 () Int
-    0)
-  (define-fun l45 () Int
-    0)
-  (define-fun l44 () Int
-    0)
-  (define-fun s20 () Int
-    0)
-  (define-fun s19 () Int
-    0)
-  (define-fun s17 () Int
-    0)
-  (define-fun s18 () Int
-    0)
-  (define-fun s16 () Int
-    0)
-  (define-fun l67 () Int
-    0)
-  (define-fun l66 () Int
-    0)
-  (define-fun l71 () Int
-    0)
-  (define-fun l69 () Int
-    0)
-  (define-fun l70 () Int
-    0)
-  (define-fun l68 () Int
-    0)
-  (define-fun l15 () Int
-    0)
-  (define-fun l14 () Int
-    0)
-  (define-fun l72 () Int
-    1)
-  (define-fun s32 () Int
-    1)
-  (define-fun l63 () Int
-    0)
-  (define-fun l62 () Int
-    0)
-  (define-fun l53 () Int
-    0)
-  (define-fun l52 () Int
-    0)
-  (define-fun l43 () Int
-    0)
-  (define-fun l42 () Int
-    0)
-  (define-fun l41 () Int
-    0)
-  (define-fun l40 () Int
-    0)
-  (define-fun l39 () Int
-    0)
-  (define-fun l38 () Int
-    0)
-  (define-fun l37 () Int
-    0)
-  (define-fun l23 () Int
-    0)
-  (define-fun l22 () Int
-    0)
-  (define-fun l21 () Int
-    0)
-  (define-fun l20 () Int
-    0)
-  (define-fun l13 () Int
-    0)
-  (define-fun l12 () Int
-    1)
-  (define-fun l11 () Int
-    0)
-  (define-fun l10 () Int
-    0)
-  (define-fun l9 () Int
-    0)
-  (define-fun l8 () Int
-    0)
-  (define-fun l7 () Int
-    0)
-  (define-fun l6 () Int
-    0)
-  (define-fun l5 () Int
-    0)
-  (define-fun l4 () Int
-    0)
-  (define-fun l3 () Int
-    0)
-  (define-fun l2 () Int
-    1)
-  (define-fun l1 () Int
-    0)
-  (define-fun l0 () Int
-    0)
-  (define-fun l65 () Int
-    0)
-  (define-fun l64 () Int
-    0)
-  (define-fun l36 () Int
-    0)
-  (define-fun s31 () Int
-    0)
-  (define-fun s30 () Int
-    0)
-  (define-fun s29 () Int
-    0)
-  (define-fun s28 () Int
-    0)
-  (define-fun s27 () Int
-    0)
-  (define-fun s26 () Int
-    0)
-  (define-fun s25 () Int
-    0)
-  (define-fun s24 () Int
-    0)
-)
+unsat
+(error "line 1694 column 10: model is not available")
 
 -------------------------------------------
 The petri net satisfies the property!
