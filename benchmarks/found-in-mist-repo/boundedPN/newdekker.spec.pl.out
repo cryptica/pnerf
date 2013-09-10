@@ -222,6 +222,7 @@ assignment(at31, 0).
 assignment(at30, 0).
 assignment(testturn1, 0).
 assignment(testturn0, 0).
+
 - constraints C_theta...
 (declare-fun testturn0 () Bool)
 (declare-fun testturn1 () Bool)
@@ -323,6 +324,7 @@ assignment(c0eq0, false).
 assignment(cs1, false).
 assignment(c1eq0, false).
 assignment(turneq0, false).
+
 - constraint d_1...
 (assert (>= (+ at21 c1eq1 at20 c0eq1 testturn1 testturn0) 1))
 - constraints c_1...

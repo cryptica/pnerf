@@ -196,6 +196,7 @@ assignment(x5, 1).
 assignment(x3, 1).
 assignment(x2, 0).
 assignment(x1, 0).
+
 - constraints C_theta...
 (declare-fun x1 () Bool)
 (declare-fun x2 () Bool)
@@ -287,6 +288,7 @@ assignment(x7, false).
 assignment(x8, false).
 assignment(x13, false).
 assignment(x12, false).
+
 - constraint d_1...
 (assert (>= (+ x9 x2 x6 x11) 1))
 - constraints c_1...
@@ -445,6 +447,7 @@ assignment(x5, 1).
 assignment(x3, 1).
 assignment(x2, 0).
 assignment(x1, 0).
+
 - constraints C_theta...
 (declare-fun x1 () Bool)
 (declare-fun x2 () Bool)
@@ -536,6 +539,7 @@ assignment(x6, false).
 assignment(x8, false).
 assignment(x13, false).
 assignment(x2, false).
+
 - constraint d_2...
 (assert (>= (+ x7 x12 x1 x4) 1))
 - constraints c_2...

@@ -3056,6 +3056,7 @@ assignment(s27, 0).
 assignment(s26, 0).
 assignment(s25, 0).
 assignment(s24, 0).
+
 - constraints C_theta...
 (declare-fun s24 () Bool)
 (declare-fun s25 () Bool)

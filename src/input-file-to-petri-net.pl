@@ -8,6 +8,7 @@
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
 :- ['load-pl-file.pl'].
+:- ['misc.pl'].
 
 trans_count(0).
 new_trans_sy(Sy) :-
@@ -24,6 +25,19 @@ label_transitions :-
                        assert( transition(Tsy, I, O) )
                      ), _ ).
 
+remove_weight(Pi, Po) :-
+        (   Pi = (Po,_) ->
+            true
+        ;   Po = Pi
+        ).
+remove_weight_from_transitions :-
+        findall( _ , (
+                       retract( transition(Id, Iw, Ow) ),
+                       map(remove_weight, Iw, I),
+                       map(remove_weight, Ow, O),
+                       assert( transition(Id, I, O) )
+                     ), _ ).
+
 connect_places_w_transitions :-
         findall( _ , (
                        retract( place(P) ),
@@ -32,12 +46,20 @@ connect_places_w_transitions :-
         findall( _ , (
                        transition(T, Psi, Pso),
                        (   foreach(I, Psi)
-                       do  retract( place(I, Ii, Io) ),
-                           assert( place(I, Ii, [T|Io]) )
+                       do  (   I = (Ip, Iw) ->
+                               retract( place(Ip, Ii, Io) ),
+                               assert( place(Ip, Ii, [(T, Iw)|Io]) )
+                           ;   retract( place(I, Ii, Io) ),
+                               assert( place(I, Ii, [T|Io]) )
+                           )
                        ),
                        (  foreach(O, Pso)
-                       do  retract( place(O, Oi, Oo) ),
-                           assert( place(O, [T|Oi], Oo) )
+                       do  (   O = (Op, Ow) ->
+                               retract( place(Op, Oi, Oo) ),
+                               assert( place(Op, [(T, Ow)|Oi], Oo) )
+                           ;   retract( place(O, Oi, Oo) ),
+                               assert( place(O, [T|Oi], Oo) )
+                           )
                        )
                      ), _ ).
 
@@ -48,6 +70,7 @@ connect_places_w_transitions :-
         ),
         label_transitions,
         connect_places_w_transitions,
+        remove_weight_from_transitions,
         listing(place/3),
         listing(transition/3),
         findall( _,

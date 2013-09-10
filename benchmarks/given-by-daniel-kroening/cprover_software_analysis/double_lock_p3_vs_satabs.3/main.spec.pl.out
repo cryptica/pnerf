@@ -20988,6 +20988,7 @@ assignment(s195, 0).
 assignment(s194, 0).
 assignment(s193, 0).
 assignment(s192, 0).
+
 - constraints C_theta...
 (declare-fun s192 () Bool)
 (declare-fun s193 () Bool)

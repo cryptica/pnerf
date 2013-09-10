@@ -156,6 +156,7 @@ assignment(x_eq_0, 1).
 assignment(p1, 1).
 assignment(p3, 0).
 assignment(p2, 0).
+
 - constraints C_theta...
 (declare-fun p2 () Bool)
 (declare-fun p3 () Bool)
@@ -230,6 +231,7 @@ assignment(q1, true).
 assignment(p1, false).
 assignment(x_eq_0, false).
 assignment(q4, false).
+
 - constraint d_1...
 (assert (>= (+ q3 p3 x_eq_1 y_eq_1 q1) 1))
 - constraints c_1...

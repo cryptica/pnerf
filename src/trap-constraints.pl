@@ -5,7 +5,7 @@
 :- dynamic cond/1.         % cond(Z3Atom).
 
 :- ['load-pl-file.pl'].
-:- ['pretty-printing.pl'].
+:- ['misc.pl'].
 
 transition_successors(T) :-
         transition(T, _, OPs),

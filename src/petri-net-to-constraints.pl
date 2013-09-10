@@ -6,7 +6,7 @@
 :- use_module(library(ordsets)).
 
 :- ['load-pl-file.pl'].
-:- ['pretty-printing.pl'].
+:- ['misc.pl'].
 
 z3_vars :-
         findall( _ , (
@@ -22,6 +22,11 @@ z3_vars :-
                        transition(T, _, _),
                        format('(declare-fun ~q () Int)\n', T)
                      ), _ ).
+z3_transition_terms(T, Z3) :-
+        (   T = (Tn, Tw) ->
+            format_atom('(* ~p ~p)', [Tn,Tw], Z3)
+        ;   Z3 = T
+        ).
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
@@ -34,9 +39,11 @@ z3_place_eqs :-
                        ord_subtract(ISet, OSet, RelISet),
                        ord_subtract(OSet, ISet, RelOSet),
                        ( RelISet = [_|_] -> print(' ') ; true ),
-                       print_seq(RelISet),
+                       map(z3_transition_terms, RelISet, RelITerms),
+                       print_seq(RelITerms),
                        ( RelOSet = [_|_] -> print(' ') ; true ),
-                       format_seq('(- ~p)', RelOSet),
+                       map(z3_transition_terms, RelOSet, RelOTerms),
+                       format_seq('(- ~p)', RelOTerms),
                        print(')))\n')
                      ), _ ).
 z3_nat_ineqs :-
