@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#for benchmark_dir in `find benchmarks -mindepth 2 -maxdepth 2 -type d`; do
-for benchmark_dir in `find benchmarks/found-in-mist-repo -mindepth 1 -maxdepth 1 -type d`; do
+for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   rm -f $benchmark_dir/positive.list
   rm -f $benchmark_dir/negative.list
   rm -f $benchmark_dir/error.list

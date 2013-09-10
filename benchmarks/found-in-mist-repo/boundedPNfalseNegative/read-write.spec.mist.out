@@ -1,0 +1,64 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has  13 variables,   9 transitions and  1 actual invariants
+abs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+1111111111111
+transition system
+Elems:       9 Nodes:    76 Arcs:    83 Layers: 14
+<<< Printing the elements of the IST: 0x17f98490
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 1,-1][ 0, 1][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 5][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 5,-5][ 1,-1][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 1, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0]>-
+-<[ 0, 1][ 1,-1][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 13 variables.
+abs: For the merging:
+1000000000000
+0100000000000
+0010000000000
+0001000000000
+0000100000000
+0000010000000
+0000001000000
+0000000100000
+0000000010000
+0000000001000
+0000000000100
+0000000000010
+0000000000001
+abs: For the bounds:
+0100000000000
+eec: ENLARGE begin	
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+Elems:       1 Nodes:    15 Arcs:    14 Layers: 14
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool

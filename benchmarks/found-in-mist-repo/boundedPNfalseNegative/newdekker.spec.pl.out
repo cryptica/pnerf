@@ -1,0 +1,276 @@
+PETRINIZER: The checker for Petri Nets
+[benchmarks/found-in-mist-repo/boundedPNfalseNegative/newdekker.spec.pl]
+
+* Constructing petri net N from input file
+place(testturn0, [t3], [t7,t5]).
+place(testturn1, [t4], [t8,t6]).
+place(at30, [t7], [t9]).
+place(at31, [t8], [t10]).
+place(at20, [t5,t1], [t11,t3]).
+place(at21, [t6,t2], [t12,t4]).
+place(cs0, [t11], [t13]).
+place(c0eq0, [t4,(t1,2)], [t13,t7,t4,t1]).
+place(beg0, [t13,t9], [t1]).
+place(c0eq1, [t13,t12,t7], [t12,t1]).
+place(cs1, [t12], [t14]).
+place(c1eq0, [t3,t2], [t14,t8,t3]).
+place(turneq1, [t13,t10,t7,t6], [t14,t10,t7,t6]).
+place(beg1, [t14,t10], [t2]).
+place(c1eq1, [t14,t11,t8], [t11,t2]).
+place(turneq0, [t14,t9,t8,t5], [t13,t9,t8,t5]).
+
+transition(t1, [beg0,c0eq1,c0eq0], [c0eq0,at20]).
+transition(t2, [beg1,c1eq1], [c1eq0,at21]).
+transition(t3, [at20,c1eq0], [c1eq0,testturn0]).
+transition(t4, [at21,c0eq0], [c0eq0,testturn1]).
+transition(t5, [testturn0,turneq0], [turneq0,at20]).
+transition(t6, [testturn1,turneq1], [turneq1,at21]).
+transition(t7, [testturn0,c0eq0,turneq1], [turneq1,c0eq1,at30]).
+transition(t8, [testturn1,c1eq0,turneq0], [turneq0,c1eq1,at31]).
+transition(t9, [at30,turneq0], [turneq0,beg0]).
+transition(t10, [at31,turneq1], [turneq1,beg1]).
+transition(t11, [at20,c1eq1], [c1eq1,cs0]).
+transition(t12, [at21,c0eq1], [c0eq1,cs1]).
+transition(t13, [cs0,c0eq0,turneq0], [beg0,c0eq1,turneq1]).
+transition(t14, [cs1,c1eq0,turneq1], [beg1,c1eq1,turneq0]).
+
+init(beg0, 1).
+init(beg1, 1).
+init(turneq0, 1).
+init(c0eq1, 1).
+init(c1eq1, 1).
+cond('(>= c0eq0 1)').
+
+
+* Constructing constraint C_0 for petri net N
+(declare-fun testturn0 () Int)
+(declare-fun testturn1 () Int)
+(declare-fun at30 () Int)
+(declare-fun at31 () Int)
+(declare-fun at20 () Int)
+(declare-fun at21 () Int)
+(declare-fun cs0 () Int)
+(declare-fun c0eq0 () Int)
+(declare-fun beg0 () Int)
+(declare-fun c0eq1 () Int)
+(declare-fun cs1 () Int)
+(declare-fun c1eq0 () Int)
+(declare-fun turneq1 () Int)
+(declare-fun beg1 () Int)
+(declare-fun c1eq1 () Int)
+(declare-fun turneq0 () Int)
+(declare-fun t1 () Int)
+(declare-fun t2 () Int)
+(declare-fun t3 () Int)
+(declare-fun t4 () Int)
+(declare-fun t5 () Int)
+(declare-fun t6 () Int)
+(declare-fun t7 () Int)
+(declare-fun t8 () Int)
+(declare-fun t9 () Int)
+(declare-fun t10 () Int)
+(declare-fun t11 () Int)
+(declare-fun t12 () Int)
+(declare-fun t13 () Int)
+(declare-fun t14 () Int)
+(assert (>= testturn0 0))
+(assert (>= testturn1 0))
+(assert (>= at30 0))
+(assert (>= at31 0))
+(assert (>= at20 0))
+(assert (>= at21 0))
+(assert (>= cs0 0))
+(assert (>= c0eq0 0))
+(assert (>= beg0 0))
+(assert (>= c0eq1 0))
+(assert (>= cs1 0))
+(assert (>= c1eq0 0))
+(assert (>= turneq1 0))
+(assert (>= beg1 0))
+(assert (>= c1eq1 0))
+(assert (>= turneq0 0))
+(assert (>= t1 0))
+(assert (>= t2 0))
+(assert (>= t3 0))
+(assert (>= t4 0))
+(assert (>= t5 0))
+(assert (>= t6 0))
+(assert (>= t7 0))
+(assert (>= t8 0))
+(assert (>= t9 0))
+(assert (>= t10 0))
+(assert (>= t11 0))
+(assert (>= t12 0))
+(assert (>= t13 0))
+(assert (>= t14 0))
+(assert (= testturn0 (+ 0 t3 (- t5) (- t7))))
+(assert (= testturn1 (+ 0 t4 (- t6) (- t8))))
+(assert (= at30 (+ 0 t7 (- t9))))
+(assert (= at31 (+ 0 t8 (- t10))))
+(assert (= at20 (+ 0 t1 t5 (- t11) (- t3))))
+(assert (= at21 (+ 0 t2 t6 (- t12) (- t4))))
+(assert (= cs0 (+ 0 t11 (- t13))))
+(assert (= c0eq0 (+ 0 (* t1 2) (- t1) (- t13) (- t7))))
+(assert (= beg0 (+ 1 t13 t9 (- t1))))
+(assert (= c0eq1 (+ 1 t13 t7 (- t1))))
+(assert (= cs1 (+ 0 t12 (- t14))))
+(assert (= c1eq0 (+ 0 t2 (- t14) (- t8))))
+(assert (= turneq1 (+ 0 t13 (- t14))))
+(assert (= beg1 (+ 1 t10 t14 (- t2))))
+(assert (= c1eq1 (+ 1 t14 t8 (- t2))))
+(assert (= turneq0 (+ 1 t14 (- t13))))
+(assert (>= c0eq0 1))
+(check-sat)
+(get-model)
+
+* Checking SAT(C0)
+sat
+(model 
+  (define-fun t3 () Int
+    0)
+  (define-fun t5 () Int
+    0)
+  (define-fun t2 () Int
+    0)
+  (define-fun t4 () Int
+    0)
+  (define-fun t12 () Int
+    0)
+  (define-fun t8 () Int
+    0)
+  (define-fun t6 () Int
+    0)
+  (define-fun t14 () Int
+    0)
+  (define-fun t7 () Int
+    0)
+  (define-fun t13 () Int
+    0)
+  (define-fun t9 () Int
+    0)
+  (define-fun t11 () Int
+    0)
+  (define-fun t1 () Int
+    1)
+  (define-fun t10 () Int
+    0)
+  (define-fun turneq0 () Int
+    1)
+  (define-fun c1eq1 () Int
+    1)
+  (define-fun beg1 () Int
+    1)
+  (define-fun turneq1 () Int
+    0)
+  (define-fun c1eq0 () Int
+    0)
+  (define-fun cs1 () Int
+    0)
+  (define-fun c0eq1 () Int
+    0)
+  (define-fun beg0 () Int
+    0)
+  (define-fun c0eq0 () Int
+    1)
+  (define-fun cs0 () Int
+    0)
+  (define-fun at21 () Int
+    0)
+  (define-fun at20 () Int
+    1)
+  (define-fun at31 () Int
+    0)
+  (define-fun at30 () Int
+    0)
+  (define-fun testturn1 () Int
+    0)
+  (define-fun testturn0 () Int
+    0)
+)
+
+* Constructing trap constraints C_theta for model A
+- model A...
+assignment(t3, 0).
+assignment(t5, 0).
+assignment(t2, 0).
+assignment(t4, 0).
+assignment(t12, 0).
+assignment(t8, 0).
+assignment(t6, 0).
+assignment(t14, 0).
+assignment(t7, 0).
+assignment(t13, 0).
+assignment(t9, 0).
+assignment(t11, 0).
+assignment(t1, 1).
+assignment(t10, 0).
+assignment(turneq0, 1).
+assignment(c1eq1, 1).
+assignment(beg1, 1).
+assignment(turneq1, 0).
+assignment(c1eq0, 0).
+assignment(cs1, 0).
+assignment(c0eq1, 0).
+assignment(beg0, 0).
+assignment(c0eq0, 1).
+assignment(cs0, 0).
+assignment(at21, 0).
+assignment(at20, 1).
+assignment(at31, 0).
+assignment(at30, 0).
+assignment(testturn1, 0).
+assignment(testturn0, 0).
+- constraints C_theta...
+(declare-fun testturn0 () Bool)
+(declare-fun testturn1 () Bool)
+(declare-fun at30 () Bool)
+(declare-fun at31 () Bool)
+(declare-fun at20 () Bool)
+(declare-fun at21 () Bool)
+(declare-fun cs0 () Bool)
+(declare-fun c0eq0 () Bool)
+(declare-fun beg0 () Bool)
+(declare-fun c0eq1 () Bool)
+(declare-fun cs1 () Bool)
+(declare-fun c1eq0 () Bool)
+(declare-fun turneq1 () Bool)
+(declare-fun beg1 () Bool)
+(declare-fun c1eq1 () Bool)
+(declare-fun turneq0 () Bool)
+
+(assert (implies testturn0 (and (or turneq1 c0eq1 at30) (or turneq0 at20))))
+(assert (implies testturn1 (and (or turneq0 c1eq1 at31) (or turneq1 at21))))
+(assert (implies at30 (or turneq0 beg0)))
+(assert (implies at31 (or turneq1 beg1)))
+(assert (implies at20 (and (or c1eq1 cs0) (or c1eq0 testturn0))))
+(assert (implies at21 (and (or c0eq1 cs1) (or c0eq0 testturn1))))
+(assert (implies cs0 (or beg0 c0eq1 turneq1)))
+(assert (implies c0eq0 (and (or beg0 c0eq1 turneq1) (or turneq1 c0eq1 at30) (or c0eq0 testturn1) (or c0eq0 at20))))
+(assert (implies beg0 (or c0eq0 at20)))
+(assert (implies c0eq1 (and (or c0eq1 cs1) (or c0eq0 at20))))
+(assert (implies cs1 (or beg1 c1eq1 turneq0)))
+(assert (implies c1eq0 (and (or beg1 c1eq1 turneq0) (or turneq0 c1eq1 at31) (or c1eq0 testturn0))))
+(assert (implies turneq1 (and (or beg1 c1eq1 turneq0) (or turneq1 beg1) (or turneq1 c0eq1 at30) (or turneq1 at21))))
+(assert (implies beg1 (or c1eq0 at21)))
+(assert (implies c1eq1 (and (or c1eq1 cs0) (or c1eq0 at21))))
+(assert (implies turneq0 (and (or beg0 c0eq1 turneq1) (or turneq0 beg0) (or turneq0 c1eq1 at31) (or turneq0 at20))))
+
+(assert (or beg0 beg1 turneq0 c0eq1 c1eq1))
+
+(assert (not turneq0))
+(assert (not c1eq1))
+(assert (not beg1))
+(assert (not c0eq0))
+(assert (not at20))
+
+(check-sat)
+(get-model)
+
+* Checking SAT(C_theta)
+unsat
+(error "line 44 column 10: model is not available")
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

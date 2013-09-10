@@ -41,7 +41,7 @@ abs: For the bounds:
 1111111111111111111111111111
 transition system
 Elems:      26 Nodes:   341 Arcs:   365 Layers: 29
-<<< Printing the elements of the IST: 0x19a73520
+<<< Printing the elements of the IST: 0x194c8520
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
@@ -311,7 +311,7 @@ Elems:      22 Nodes:    99 Arcs:   112 Layers: 29
 Elems:      10 Nodes:    81 Arcs:    89 Layers: 29
 Elems:       2 Nodes:    39 Arcs:    39 Layers: 29
 end
-TSI time of computation (user)   ->  0.130 sec.
+TSI time of computation (user)   ->  0.140 sec.
                           (system) ->  0.000 sec.
 TSI concludes safe
 Thanks for using this tool

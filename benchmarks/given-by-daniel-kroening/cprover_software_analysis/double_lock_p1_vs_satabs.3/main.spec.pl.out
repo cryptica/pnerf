@@ -49428,7 +49428,6 @@ assignment(s387, 0).
 assignment(s386, 0).
 assignment(s385, 0).
 assignment(s384, 0).
-
 - constraints C_theta...
 (declare-fun s384 () Bool)
 (declare-fun s385 () Bool)

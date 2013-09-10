@@ -123,7 +123,7 @@ abs: For the bounds:
 11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 transition system
 Elems:     288 Nodes:  1766 Arcs:  1927 Layers: 111
-<<< Printing the elements of the IST: 0x18a46770
+<<< Printing the elements of the IST: 0x18fb3770
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
@@ -552,7 +552,7 @@ After union, the reached symbolic state space is:
 Elems:       5 Nodes:   227 Arcs:   230 Layers: 111
 The reached symbolic state space is:
 Elems:       5 Nodes:   227 Arcs:   230 Layers: 111
-Total time of computation (user)   ->  0.070 sec.
+Total time of computation (user)   ->  0.080 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 110 variables.
@@ -693,8 +693,8 @@ After union, the reached symbolic state space is:
 Elems:     109 Nodes:   507 Arcs:   546 Layers: 111
 The reached symbolic state space is:
 Elems:     109 Nodes:   507 Arcs:   546 Layers: 111
-Total time of computation (user)   ->  0.140 sec.
-                          (system) ->  0.000 sec.
+Total time of computation (user)   ->  0.190 sec.
+                          (system) ->  0.010 sec.
 
 New boundsabs: 110 variables.
 abs: For the merging:
@@ -836,7 +836,7 @@ After union, the reached symbolic state space is:
 Elems:     841 Nodes:   973 Arcs:  1095 Layers: 111
 The reached symbolic state space is:
 Elems:     841 Nodes:   973 Arcs:  1095 Layers: 111
-Total time of computation (user)   ->  0.680 sec.
+Total time of computation (user)   ->  0.900 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 110 variables.
@@ -978,7 +978,7 @@ After union, the reached symbolic state space is:
 Elems:    1863 Nodes:  1422 Arcs:  1644 Layers: 111
 The reached symbolic state space is:
 Elems:    1863 Nodes:  1422 Arcs:  1644 Layers: 111
-Total time of computation (user)   ->  1.790 sec.
+Total time of computation (user)   ->  1.960 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 110 variables.
@@ -1135,8 +1135,8 @@ After union, the reached symbolic state space is:
 Elems:    3697 Nodes:  1958 Arcs:  2311 Layers: 111
 The reached symbolic state space is:
 Elems:    3697 Nodes:  1958 Arcs:  2311 Layers: 111
-Total time of computation (user)   ->  3.290 sec.
-                          (system) ->  0.010 sec.
+Total time of computation (user)   ->  4.140 sec.
+                          (system) ->  0.000 sec.
 
 New boundsabs: 110 variables.
 abs: For the merging:

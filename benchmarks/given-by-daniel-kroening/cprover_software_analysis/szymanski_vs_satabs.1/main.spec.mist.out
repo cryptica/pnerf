@@ -74,7 +74,7 @@ abs: For the bounds:
 1111111111111111111111111111111111111111111111111111111111111
 transition system
 Elems:     224 Nodes:   763 Arcs:   917 Layers: 62
-<<< Printing the elements of the IST: 0x19e1a490
+<<< Printing the elements of the IST: 0x19275490
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0]>-
@@ -394,7 +394,7 @@ After union, the reached symbolic state space is:
 Elems:       5 Nodes:   206 Arcs:   209 Layers: 62
 The reached symbolic state space is:
 Elems:       5 Nodes:   206 Arcs:   209 Layers: 62
-Total time of computation (user)   ->  0.040 sec.
+Total time of computation (user)   ->  0.050 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -491,7 +491,7 @@ After union, the reached symbolic state space is:
 Elems:      33 Nodes:   432 Arcs:   458 Layers: 62
 The reached symbolic state space is:
 Elems:      33 Nodes:   432 Arcs:   458 Layers: 62
-Total time of computation (user)   ->  0.130 sec.
+Total time of computation (user)   ->  0.140 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -592,7 +592,7 @@ After union, the reached symbolic state space is:
 Elems:     107 Nodes:   711 Arcs:   782 Layers: 62
 The reached symbolic state space is:
 Elems:     107 Nodes:   711 Arcs:   782 Layers: 62
-Total time of computation (user)   ->  0.530 sec.
+Total time of computation (user)   ->  0.550 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -692,7 +692,7 @@ After union, the reached symbolic state space is:
 Elems:     239 Nodes:   926 Arcs:  1046 Layers: 62
 The reached symbolic state space is:
 Elems:     239 Nodes:   926 Arcs:  1046 Layers: 62
-Total time of computation (user)   ->  1.210 sec.
+Total time of computation (user)   ->  1.270 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -791,8 +791,8 @@ After union, the reached symbolic state space is:
 Elems:     440 Nodes:  1012 Arcs:  1179 Layers: 62
 The reached symbolic state space is:
 Elems:     440 Nodes:  1012 Arcs:  1179 Layers: 62
-Total time of computation (user)   ->  2.110 sec.
-                          (system) ->  0.010 sec.
+Total time of computation (user)   ->  2.230 sec.
+                          (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
 abs: For the merging:
@@ -889,8 +889,8 @@ After union, the reached symbolic state space is:
 Elems:     710 Nodes:  1073 Arcs:  1290 Layers: 62
 The reached symbolic state space is:
 Elems:     710 Nodes:  1073 Arcs:  1290 Layers: 62
-Total time of computation (user)   ->  2.540 sec.
-                          (system) ->  0.010 sec.
+Total time of computation (user)   ->  2.640 sec.
+                          (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
 abs: For the merging:

@@ -1702,7 +1702,6 @@ assignment(s15, 0).
 assignment(s14, 0).
 assignment(s13, 0).
 assignment(s12, 0).
-
 - constraints C_theta...
 (declare-fun s12 () Bool)
 (declare-fun s13 () Bool)
@@ -2020,7 +2019,6 @@ assignment(s8, false).
 assignment(l43, false).
 assignment(l9, false).
 assignment(l5, false).
-
 - constraint d_1...
 (assert (>= (+ l42 l32 l41 l31 l40 l30 s11 l28 l29 l38 l39 s7 s3 l2 l1 l0) 1))
 - constraints c_1...
@@ -3444,7 +3442,6 @@ assignment(s15, 0).
 assignment(s14, 0).
 assignment(s13, 0).
 assignment(s12, 0).
-
 - constraints C_theta...
 (declare-fun s12 () Bool)
 (declare-fun s13 () Bool)

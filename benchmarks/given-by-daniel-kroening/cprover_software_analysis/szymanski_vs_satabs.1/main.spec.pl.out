@@ -1801,7 +1801,6 @@ assignment(s11, 0).
 assignment(s10, 0).
 assignment(s9, 0).
 assignment(s8, 0).
-
 - constraints C_theta...
 (declare-fun s8 () Bool)
 (declare-fun s9 () Bool)

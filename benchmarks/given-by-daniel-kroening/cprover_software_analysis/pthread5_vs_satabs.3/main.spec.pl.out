@@ -12691,7 +12691,6 @@ assignment(s99, 0).
 assignment(s98, 0).
 assignment(s97, 0).
 assignment(s96, 0).
-
 - constraints C_theta...
 (declare-fun s96 () Bool)
 (declare-fun s97 () Bool)
