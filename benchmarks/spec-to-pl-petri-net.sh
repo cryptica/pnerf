@@ -43,8 +43,13 @@ sed -e '/^[[:blank:]]*$/D' \
 (
     n=0
     while read line; do
-      re="(^.*->.*)\(([[:alpha:]][[:alnum:]_]*), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\2[[:blank:]]*-[[:blank:]]*([[:digit:]]+)[[:blank:]]*,[[:blank:]]*(.*)$"
-      while [[ $line =~ $re ]]; do
+      re1="(^.*->.*)\(([[:alpha:]][[:alnum:]_]*), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\(\2, ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)$"
+      while [[ $line =~ $re1 ]]; do
+        out_weight=$((BASH_REMATCH[3] + BASH_REMATCH[5]))
+        line=${BASH_REMATCH[1]}"("${BASH_REMATCH[2]}", "$out_weight"), "${BASH_REMATCH[4]}${BASH_REMATCH[6]}
+      done
+      re2="(^.*->.*)\(([[:alpha:]][[:alnum:]_]*), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\2[[:blank:]]*-[[:blank:]]*([[:digit:]]+)[[:blank:]]*,[[:blank:]]*(.*)$"
+      while [[ $line =~ $re2 ]]; do
         out_weight=$((BASH_REMATCH[3] - BASH_REMATCH[5]))
         if [[ $out_weight -gt 0 ]]; then
           line=${BASH_REMATCH[1]}"("${BASH_REMATCH[2]}", "$out_weight"), "${BASH_REMATCH[4]}${BASH_REMATCH[6]}

@@ -29,7 +29,7 @@ abs: For the bounds:
 1111111111111111
 transition system
 Elems:      16 Nodes:    80 Arcs:    94 Layers: 17
-<<< Printing the elements of the IST: 0x18244ce0
+<<< Printing the elements of the IST: 0x18632ce0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1]>-
@@ -147,7 +147,7 @@ Elems:      30 Nodes:    71 Arcs:    87 Layers: 17
 Elems:      17 Nodes:    60 Arcs:    71 Layers: 17
 Elems:      10 Nodes:    37 Arcs:    42 Layers: 17
 end
-TSI time of computation (user)   ->  0.430 sec.
+TSI time of computation (user)   ->  0.410 sec.
                           (system) ->  0.000 sec.
 TSI concludes safe
 Thanks for using this tool
