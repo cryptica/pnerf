@@ -188,7 +188,8 @@ assignment(x0, 0).
 (assert (implies x2 x1))
 (assert (implies x3 (or x4 x6)))
 (assert (implies x6 x7))
-(assert (implies x4 (and (assert (implies x5 (or x8 x10)))
+(assert (implies x4 (and (or x8 x10) (or x0 x3))))
+(assert (implies x5 (or x8 x10)))
 (assert (implies x7 (and (or x8 x10) (or x4 x6))))
 (assert (implies x8 (or x4 x7)))
 (assert (implies x9 (or x11 x12)))
@@ -207,7 +208,8 @@ assignment(x0, 0).
 (get-model)
 
 * Checking SAT(C_theta)
-(error "line 20 column 57: unknown function/constant assert")
+unsat
+(error "line 37 column 10: model is not available")
 
 -------------------------------------------
 The petri net may not satisfy the property
