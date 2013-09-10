@@ -1,0 +1,59 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has   9 variables,  12 transitions and  1 actual invariants
+abs: 9 variables.
+abs: For the merging:
+100000000
+010000000
+001000000
+000100000
+000010000
+000001000
+000000100
+000000010
+000000001
+abs: For the bounds:
+111111111
+transition system
+Elems:      12 Nodes:    45 Arcs:    55 Layers: 10
+<<< Printing the elements of the IST: 0x18ce9080
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 9 variables.
+abs: For the merging:
+100000000
+010000000
+001000000
+000100000
+000010000
+000001000
+000000100
+000000010
+000000001
+abs: For the bounds:
+100000000
+eec: ENLARGE begin	
+end
+eec: EXPAND begin	Elems:       1 Nodes:    11 Arcs:    10 Layers: 10
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes unsafe
+Thanks for using this tool

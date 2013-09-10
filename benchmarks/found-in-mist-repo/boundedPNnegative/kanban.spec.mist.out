@@ -29,7 +29,7 @@ abs: For the bounds:
 1111111111111111
 transition system
 Elems:      16 Nodes:    80 Arcs:    94 Layers: 17
-<<< Printing the elements of the IST: 0x19828ce0
+<<< Printing the elements of the IST: 0x180ef6a0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1]>-
@@ -66,88 +66,12 @@ abs: For the merging:
 0000000000000010
 0000000000000001
 abs: For the bounds:
-0000204000400640
-eec: ENLARGE begin	
-Elems:       1 Nodes:    18 Arcs:    17 Layers: 17
-Elems:       2 Nodes:    21 Arcs:    21 Layers: 17
-Elems:       2 Nodes:    28 Arcs:    28 Layers: 17
-Elems:       6 Nodes:    42 Arcs:    46 Layers: 17
-Elems:      10 Nodes:    44 Arcs:    50 Layers: 17
-Elems:      13 Nodes:    56 Arcs:    65 Layers: 17
-Elems:      19 Nodes:    77 Arcs:    91 Layers: 17
-Elems:      28 Nodes:   100 Arcs:   121 Layers: 17
-Elems:      37 Nodes:   117 Arcs:   142 Layers: 17
-Elems:      50 Nodes:   129 Arcs:   160 Layers: 17
-Elems:      71 Nodes:   149 Arcs:   189 Layers: 17
-Elems:     102 Nodes:   175 Arcs:   229 Layers: 17
-Elems:     138 Nodes:   191 Arcs:   259 Layers: 17
-Elems:     179 Nodes:   225 Arcs:   311 Layers: 17
-Elems:     221 Nodes:   274 Arcs:   381 Layers: 17
-Elems:     261 Nodes:   326 Arcs:   456 Layers: 17
-Elems:     292 Nodes:   362 Arcs:   510 Layers: 17
-Elems:     309 Nodes:   387 Arcs:   546 Layers: 17
-Elems:     311 Nodes:   400 Arcs:   560 Layers: 17
-Elems:     296 Nodes:   398 Arcs:   551 Layers: 17
-Elems:     265 Nodes:   378 Arcs:   517 Layers: 17
-Elems:     224 Nodes:   334 Arcs:   453 Layers: 17
-Elems:     178 Nodes:   277 Arcs:   371 Layers: 17
-Elems:     130 Nodes:   216 Arcs:   284 Layers: 17
-end
-eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
-Elems:       1 Nodes:    18 Arcs:    17 Layers: 17
-end
-eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
-Elems:       1 Nodes:    18 Arcs:    17 Layers: 17
-
-
-Iteration	  1
-Computation of the symbolic predecessors states ...
-The new frontier counts :
-Elems:       5 Nodes:    49 Arcs:    52 Layers: 17
-After union, the reached symbolic state space is:
-Elems:       6 Nodes:    49 Arcs:    53 Layers: 17
-The reached symbolic state space is:
-Elems:       6 Nodes:    49 Arcs:    53 Layers: 17
-Total time of computation (user)   ->  0.000 sec.
-                          (system) ->  0.000 sec.
-
-New boundsabs: 16 variables.
-abs: For the merging:
-1000000000000000
-0100000000000000
-0010000000000000
-0001000000000000
-0000100000000000
-0000010000000000
 0000001000000000
-0000000100000000
-0000000010000000
-0000000001000000
-0000000000100000
-0000000000010000
-0000000000001000
-0000000000000100
-0000000000000010
-0000000000000001
-abs: For the bounds:
-0001215100511651
 eec: ENLARGE begin	
-Elems:       1 Nodes:    18 Arcs:    17 Layers: 17
-Elems:       2 Nodes:    21 Arcs:    21 Layers: 17
-Elems:       3 Nodes:    29 Arcs:    30 Layers: 17
-Elems:       7 Nodes:    44 Arcs:    49 Layers: 17
-Elems:      16 Nodes:    58 Arcs:    68 Layers: 17
-Elems:      22 Nodes:    69 Arcs:    81 Layers: 17
-Elems:      24 Nodes:    76 Arcs:    91 Layers: 17
-Elems:      25 Nodes:    79 Arcs:    93 Layers: 17
-Elems:      30 Nodes:    85 Arcs:   102 Layers: 17
-Elems:      37 Nodes:    88 Arcs:   107 Layers: 17
-Elems:      37 Nodes:    75 Arcs:    91 Layers: 17
-Elems:      30 Nodes:    71 Arcs:    87 Layers: 17
-Elems:      17 Nodes:    60 Arcs:    71 Layers: 17
-Elems:      10 Nodes:    37 Arcs:    42 Layers: 17
 end
-TSI time of computation (user)   ->  0.430 sec.
+eec: EXPAND begin	Elems:       1 Nodes:    18 Arcs:    17 Layers: 17
+end
+TSI time of computation (user)   ->  0.000 sec.
                           (system) ->  0.000 sec.
-TSI concludes safe
+TSI concludes unsafe
 Thanks for using this tool

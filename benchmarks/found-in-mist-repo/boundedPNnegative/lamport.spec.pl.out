@@ -1,5 +1,5 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl]
+[benchmarks/found-in-mist-repo/boundedPNnegative/lamport.spec.pl]
 
 * Constructing petri net N from input file
 place(p2, [t1], [t2]).
@@ -28,8 +28,7 @@ init(p2, 1).
 init(x_eq_1, 1).
 init(y_eq_1, 1).
 init(q5, 1).
-cond('(>= p1 1)').
-cond('(>= q4 1)').
+cond('(>= x_eq_1 1)').
 
 
 * Constructing constraint C_0 for petri net N
@@ -84,8 +83,7 @@ cond('(>= q4 1)').
 (assert (= y_eq_1 (+ 1 t5 t8 (- t9))))
 (assert (= q5 (+ 1 t6 t8 (- t9))))
 (assert (= q3 (+ 0 t9 (- t4) (- t7))))
-(assert (>= p1 1))
-(assert (>= q4 1))
+(assert (>= x_eq_1 1))
 (check-sat)
 (get-model)
 
@@ -95,13 +93,13 @@ sat
   (define-fun t5 () Int
     0)
   (define-fun t2 () Int
-    1)
+    0)
   (define-fun t7 () Int
-    1)
+    0)
   (define-fun t4 () Int
     0)
   (define-fun t9 () Int
-    1)
+    0)
   (define-fun t8 () Int
     0)
   (define-fun t6 () Int
@@ -109,53 +107,53 @@ sat
   (define-fun t1 () Int
     0)
   (define-fun t3 () Int
-    1)
+    0)
   (define-fun q3 () Int
     0)
   (define-fun q5 () Int
-    0)
-  (define-fun y_eq_1 () Int
-    0)
-  (define-fun q4 () Int
     1)
-  (define-fun x_eq_1 () Int
+  (define-fun y_eq_1 () Int
+    1)
+  (define-fun q4 () Int
     0)
+  (define-fun x_eq_1 () Int
+    1)
   (define-fun q2 () Int
     0)
   (define-fun q1 () Int
     0)
   (define-fun x_eq_0 () Int
-    1)
+    0)
   (define-fun p1 () Int
-    1)
+    0)
   (define-fun p3 () Int
     0)
   (define-fun p2 () Int
-    0)
+    1)
 )
 
 * Constructing trap constraints C_theta for model A
 - model A...
 assignment(t5, 0).
-assignment(t2, 1).
-assignment(t7, 1).
+assignment(t2, 0).
+assignment(t7, 0).
 assignment(t4, 0).
-assignment(t9, 1).
+assignment(t9, 0).
 assignment(t8, 0).
 assignment(t6, 0).
 assignment(t1, 0).
-assignment(t3, 1).
+assignment(t3, 0).
 assignment(q3, 0).
-assignment(q5, 0).
-assignment(y_eq_1, 0).
-assignment(q4, 1).
-assignment(x_eq_1, 0).
+assignment(q5, 1).
+assignment(y_eq_1, 1).
+assignment(q4, 0).
+assignment(x_eq_1, 1).
 assignment(q2, 0).
 assignment(q1, 0).
-assignment(x_eq_0, 1).
-assignment(p1, 1).
+assignment(x_eq_0, 0).
+assignment(p1, 0).
 assignment(p3, 0).
-assignment(p2, 0).
+assignment(p2, 1).
 - constraints C_theta...
 (declare-fun p2 () Bool)
 (declare-fun p3 () Bool)
@@ -183,116 +181,19 @@ assignment(p2, 0).
 
 (assert (or p2 x_eq_1 y_eq_1 q5))
 
-(assert (not q4))
-(assert (not x_eq_0))
-(assert (not p1))
+(assert (not q5))
+(assert (not y_eq_1))
+(assert (not x_eq_1))
+(assert (not p2))
 
 (check-sat)
 (get-model)
 
 * Checking SAT(C_theta)
-sat
-(model 
-  (define-fun q5 () Bool
-    false)
-  (define-fun q3 () Bool
-    true)
-  (define-fun p2 () Bool
-    false)
-  (define-fun q2 () Bool
-    false)
-  (define-fun p3 () Bool
-    true)
-  (define-fun x_eq_1 () Bool
-    true)
-  (define-fun y_eq_1 () Bool
-    true)
-  (define-fun q1 () Bool
-    true)
-  (define-fun p1 () Bool
-    false)
-  (define-fun x_eq_0 () Bool
-    false)
-  (define-fun q4 () Bool
-    false)
-)
-
-* Constructing constraints C_1 for C_0 and A_theta
-- model A_theta...
-assignment(q5, false).
-assignment(q3, true).
-assignment(p2, false).
-assignment(q2, false).
-assignment(p3, true).
-assignment(x_eq_1, true).
-assignment(y_eq_1, true).
-assignment(q1, true).
-assignment(p1, false).
-assignment(x_eq_0, false).
-assignment(q4, false).
-- constraint d_1...
-(assert (>= (+ q3 p3 x_eq_1 y_eq_1 q1) 1))
-- constraints c_1...
-(declare-fun p2 () Int)
-(declare-fun p3 () Int)
-(declare-fun p1 () Int)
-(declare-fun x_eq_0 () Int)
-(declare-fun q1 () Int)
-(declare-fun q2 () Int)
-(declare-fun x_eq_1 () Int)
-(declare-fun q4 () Int)
-(declare-fun y_eq_1 () Int)
-(declare-fun q5 () Int)
-(declare-fun q3 () Int)
-(declare-fun t1 () Int)
-(declare-fun t2 () Int)
-(declare-fun t3 () Int)
-(declare-fun t4 () Int)
-(declare-fun t5 () Int)
-(declare-fun t6 () Int)
-(declare-fun t7 () Int)
-(declare-fun t8 () Int)
-(declare-fun t9 () Int)
-(assert (>= p2 0))
-(assert (>= p3 0))
-(assert (>= p1 0))
-(assert (>= x_eq_0 0))
-(assert (>= q1 0))
-(assert (>= q2 0))
-(assert (>= x_eq_1 0))
-(assert (>= q4 0))
-(assert (>= y_eq_1 0))
-(assert (>= q5 0))
-(assert (>= q3 0))
-(assert (>= t1 0))
-(assert (>= t2 0))
-(assert (>= t3 0))
-(assert (>= t4 0))
-(assert (>= t5 0))
-(assert (>= t6 0))
-(assert (>= t7 0))
-(assert (>= t8 0))
-(assert (>= t9 0))
-(assert (= p2 (+ 1 t1 (- t2))))
-(assert (= p3 (+ 0 t2 (- t3))))
-(assert (= p1 (+ 0 t3 (- t1))))
-(assert (= x_eq_0 (+ 0 t2 (- t1))))
-(assert (= q1 (+ 0 t4 (- t5))))
-(assert (= q2 (+ 0 t5 (- t6))))
-(assert (= x_eq_1 (+ 1 t1 (- t2))))
-(assert (= q4 (+ 0 t7 (- t8))))
-(assert (= y_eq_1 (+ 1 t5 t8 (- t9))))
-(assert (= q5 (+ 1 t6 t8 (- t9))))
-(assert (= q3 (+ 0 t9 (- t4) (- t7))))
-(assert (>= p1 1))
-(assert (>= q4 1))
-(assert (>= (+ q3 p3 x_eq_1 y_eq_1 q1) 1))
-(check-sat)
-(get-model)
 unsat
-(error "line 56 column 10: model is not available")
+(error "line 33 column 10: model is not available")
 
 -------------------------------------------
-The petri net satisfies the property!
+The petri net may not satisfy the property
 -------------------------------------------
 
