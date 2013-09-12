@@ -5,15 +5,6 @@ format_atom(Format, Arguments, Atom) :-
 	format_to_codes(Format, Arguments, Codes),
 	atom_codes(Atom, Codes).
 
-map(F, Xs, Ys) :-
-        same_length(Xs, Ys),
-        (   foreach(X, Xs),
-            foreach(Y, Ys),
-            param(F)
-        do  Goal =.. [F|[X,Y]],
-            Goal
-        ).        
-
 format_seq(F, Xs) :-
         (   Xs = [X1|Xs1] ->
             format(F, [X1]),
@@ -28,3 +19,8 @@ format_seq(F, Xs) :-
 print_seq(Xs) :-
         format_seq('~p', Xs).
 
+remove_weight(Pi, Po) :-
+        (   Pi = (Po,_) ->
+            true
+        ;   Po = Pi
+        ).

@@ -25,16 +25,11 @@ label_transitions :-
                        assert( transition(Tsy, I, O) )
                      ), _ ).
 
-remove_weight(Pi, Po) :-
-        (   Pi = (Po,_) ->
-            true
-        ;   Po = Pi
-        ).
 remove_weight_from_transitions :-
         findall( _ , (
                        retract( transition(Id, Iw, Ow) ),
-                       map(remove_weight, Iw, I),
-                       map(remove_weight, Ow, O),
+                       maplist(remove_weight, Iw, I),
+                       maplist(remove_weight, Ow, O),
                        assert( transition(Id, I, O) )
                      ), _ ).
 

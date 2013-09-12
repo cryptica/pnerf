@@ -4,6 +4,7 @@
 :- dynamic cond/1.         % cond(Z3Atom).
 
 :- use_module(library(ordsets)).
+:- use_module(library(lists)).
 
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
@@ -39,10 +40,10 @@ z3_place_eqs :-
                        ord_subtract(ISet, OSet, RelISet),
                        ord_subtract(OSet, ISet, RelOSet),
                        ( RelISet = [_|_] -> print(' ') ; true ),
-                       map(z3_transition_terms, RelISet, RelITerms),
+                       maplist(z3_transition_terms, RelISet, RelITerms),
                        print_seq(RelITerms),
                        ( RelOSet = [_|_] -> print(' ') ; true ),
-                       map(z3_transition_terms, RelOSet, RelOTerms),
+                       maplist(z3_transition_terms, RelOSet, RelOTerms),
                        format_seq('(- ~p)', RelOTerms),
                        print(')))\n')
                      ), _ ).

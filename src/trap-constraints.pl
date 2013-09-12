@@ -7,13 +7,8 @@
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
-transition_name(T, Tn) :-
-        ( T = (Tn, _) ->
-          true
-        ; Tn = T
-        ).
 transition_successors(T) :-
-        transition_name(T, Tn),
+        remove_weight(T, Tn),
         transition(Tn, _, OPs),
         (   OPs = [O] ->
             print(O)
