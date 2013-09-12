@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\section*{Method}
+\section{Method}
 
 \begin{tikzpicture}[
     state/.style   = {draw, ellipse, aspect=2},
@@ -47,7 +47,7 @@
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 
-\section*{Constraints $C_0$}
+\section{Constraints $C_0$}
 
 %p_1 &=& 1 &{}-{}& u_1& u_2& u_3& u_4& u_5& &{}+{}& u_6&\\
 %p_1 &=& 1 &{}-{}& u_1 &{}-{}& u_2 &{}-{}& u_3 &{}-{}& u_4 &{}-{}& u_5 &{}+{}& u_6 \\
@@ -101,11 +101,11 @@
 \end{alignat*}
 
 \begin{align*}
-  \delta_1 &= p_3 \lor q_2 \lor (m_2=f) \lor (hold=1) \\
-  \delta_2 &= p_2 \lor q_3 \lor (m_1=f) \lor (hold=2)
+  \delta_1 &= p_3 \lor q_2 \lor (m_2=f) \lor (hold=2) \\
+  \delta_2 &= p_2 \lor q_3 \lor (m_1=f) \lor (hold=1)
 \end{align*}
 
-\section*{$A_1$}
+\section{$A_1$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -136,7 +136,7 @@
   v_6 &= 0
 \end{align*}
 
-\section*{$A_2$}
+\section{$A_2$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -167,7 +167,7 @@
   v_6 &= 0
 \end{align*}
 
-\section*{$A_{\theta 1}$}
+\section{$A_{\theta 1}$}
 \begin{align*}
   bp_1 &= 0 \\
   bp_2 &= 0 \\
@@ -185,7 +185,7 @@
   b(hold=2) &= 1
 \end{align*}
 
-\section*{$A_{\theta 2}$}
+\section{$A_{\theta 2}$}
 \begin{align*}
   bp_1 &= 0 \\
   bp_2 &= 1 \\
@@ -203,7 +203,7 @@
   b(hold=2) &= 0
 \end{align*}
 
-\section*{$C_\theta$}
+\section{$C_\theta$}
 
 \circled{1}
 \begin{align*}

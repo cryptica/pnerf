@@ -1,0 +1,10 @@
+assignment(s1, 1).
+assignment(s2, 1).
+assignment(s3, 0).
+assignment(s4, 1).
+assignment(s5, 1).
+assignment(s6, 0).
+assignment(t1, 1).
+assignment(t2, 0).
+assignment(t3, 1).
+assignment(t4, 0).

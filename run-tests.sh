@@ -10,37 +10,41 @@ sysdir=$(absolute_path $0)
 # echo '- Testing construction of petri net N from input file'
 # echo
 function test-input-file-to-petri-net {
-    set -e
-    sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- "$sysdir"/tests/petersons-alg/input-petri-net.pl 2>/dev/null >/tmp/pp-petri-net.pl
-    sort "$sysdir"/tests/petersons-alg/pp-petri-net.pl >/tmp/pp-petri-net-exp.pl
-    sort /tmp/pp-petri-net.pl >/tmp/pp-petri-net-out.pl
-    diff /tmp/pp-petri-net-exp.pl /tmp/pp-petri-net-out.pl
+    if (
+      set -e
+      sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- "$sysdir"/tests/$1 2>/dev/null >/tmp/pp-petri-net.pl
+      sort "$sysdir"/tests/$2 >/tmp/pp-petri-net-exp.pl
+      sort /tmp/pp-petri-net.pl >/tmp/pp-petri-net-out.pl
+      diff /tmp/pp-petri-net-exp.pl /tmp/pp-petri-net-out.pl
+    ); then
+      echo $2' ... PASS'
+    else
+      echo $2' ... FAILED'
+      exit 1
+    fi
 }
-if test-input-file-to-petri-net; then
-    echo 'petersons-alg/pp-petri-net.pl ... PASS'
-else
-    echo
-    echo 'petersons-alg/pp-petri-net.pl ... FAILED'
-    exit 1
-fi
+test-input-file-to-petri-net petersons-alg/input-petri-net.pl petersons-alg/pp-petri-net.pl
+test-input-file-to-petri-net cyclic-net/input-petri-net.pl cyclic-net/pp-petri-net.pl
 
 # echo
 # echo '- Testing construction of constraints C0 for petri net N'
 # echo
 function test-petri-net-to-constraints {
-    set -e
-    sicstus -l "$sysdir"/src/petri-net-to-constraints.pl -- "$sysdir"/tests/petersons-alg/pp-petri-net.pl 2>/dev/null >/tmp/constraints-c0.smt2
-    sort "$sysdir"/tests/petersons-alg/constraints-c0.smt2 >/tmp/constraints-c0-exp.smt2
-    sort /tmp/constraints-c0.smt2 >/tmp/constraints-c0-out.smt2
-    diff /tmp/constraints-c0-exp.smt2 /tmp/constraints-c0-out.smt2
+    if (
+      set -e
+      sicstus -l "$sysdir"/src/petri-net-to-constraints.pl -- "$sysdir"/tests/$1 2>/dev/null >/tmp/constraints-c0.smt2
+      sort "$sysdir"/tests/$2 >/tmp/constraints-c0-exp.smt2
+      sort /tmp/constraints-c0.smt2 >/tmp/constraints-c0-out.smt2
+      diff /tmp/constraints-c0-exp.smt2 /tmp/constraints-c0-out.smt2
+    ); then
+      echo $2' ... PASS'
+    else
+      echo $2' ... FAILED'
+      exit 2
+    fi
 }
-if test-petri-net-to-constraints; then
-    echo 'petersons-alg/constraints-c0.smt2 ... PASS'
-else
-    echo
-    echo 'petersons-alg/constraints-c0.smt2 ... FAILED'
-    exit 2
-fi
+test-petri-net-to-constraints petersons-alg/pp-petri-net.pl petersons-alg/constraints-c0.smt2
+test-petri-net-to-constraints cyclic-net/pp-petri-net.pl cyclic-net/constraints-c0.smt2
 
 # echo
 # echo '- Testing checking of SAT(C)'
@@ -50,7 +54,7 @@ function test-checking-sat {
         set -e
         z3 -smt2 "$sysdir"/tests/$1 >/tmp/model-out.smt2
         diff "$sysdir"/tests/$2 /tmp/model-out.smt2
-        ) then
+        ); then
         echo $2' ... PASS'
     else
         echo $2' ... FAILED'
@@ -59,6 +63,7 @@ function test-checking-sat {
 }
 test-checking-sat petersons-alg/constraints-c0.smt2 petersons-alg/model-a1.smt2
 test-checking-sat petersons-alg/constraints-ctheta1.smt2 petersons-alg/model-atheta1.smt2
+test-checking-sat cyclic-net/constraints-c0.smt2 cyclic-net/model-a1.smt2
 # test-checking-sat petersons-alg/constraints-c1.smt2 petersons-alg/model-a2.smt2 # TODO: PASS ME
 # test-checking-sat petersons-alg/constraints-ctheta2.smt2 petersons-alg/model-atheta2.smt2 # TODO: PASS ME
 
@@ -81,6 +86,7 @@ function test-smt2-model-to-prolog-model {
 }
 test-smt2-model-to-prolog-model petersons-alg/model-a1.smt2 petersons-alg/model-a1.pl
 test-smt2-model-to-prolog-model petersons-alg/model-atheta1.smt2 petersons-alg/model-atheta1.pl
+test-smt2-model-to-prolog-model cyclic-net/model-a1.smt2 cyclic-net/model-a1.pl
 # test-smt2-model-to-prolog-model petersons-alg/model-a2.smt2 petersons-alg/model-a2.pl # TODO: PASS ME
 # test-smt2-model-to-prolog-model petersons-alg/model-atheta2.smt2 petersons-alg/model-atheta2.pl # TODO: PASS ME
 
@@ -102,6 +108,7 @@ function test-trap-constraints {
     fi    
 }
 test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a1.pl petersons-alg/constraints-ctheta1.smt2
+test-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta1.smt2
 # test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a2.pl petersons-alg/constraints-ctheta2.smt2 # TODO: PASS ME
 
 # echo

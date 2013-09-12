@@ -1,0 +1,29 @@
+digraph petrinet {
+size="7,7"
+s2 [label="s2"] ;
+s6 [label="s6"] ;
+s5 [label="s5(1)"] ;
+s3 [label="s3"] ;
+s4 [label="s4"] ;
+s1 [label="s1(1)"] ;
+t1 [label="t1", shape=box] ;
+s1 -> t1;
+s5 -> t1;
+t1 -> s1;
+t1 -> s2;
+t1 -> s6;
+t2 [label="t2", shape=box] ;
+s1 -> t2;
+s2 -> t2;
+t2 -> s3;
+t3 [label="t3", shape=box] ;
+s3 -> t3;
+s6 -> t3;
+t3 -> s3;
+t3 -> s4;
+t3 -> s5;
+t4 [label="t4", shape=box] ;
+s3 -> t4;
+s4 -> t4;
+t4 -> s1;
+}
