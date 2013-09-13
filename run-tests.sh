@@ -6,9 +6,9 @@ function absolute_path {
 
 sysdir=$(absolute_path $0)
 
-# echo
-# echo '- Testing construction of petri net N from input file'
-# echo
+#
+# Testing construction of petri net N from input file
+#
 function test-input-file-to-petri-net {
     if (
       set -e
@@ -26,9 +26,9 @@ function test-input-file-to-petri-net {
 test-input-file-to-petri-net petersons-alg/input-petri-net.pl petersons-alg/pp-petri-net.pl
 test-input-file-to-petri-net cyclic-net/input-petri-net.pl cyclic-net/pp-petri-net.pl
 
-# echo
-# echo '- Testing construction of constraints C0 for petri net N'
-# echo
+#
+# Testing construction of constraints C0 for petri net N
+#
 function test-petri-net-to-constraints {
     if (
       set -e
@@ -46,9 +46,9 @@ function test-petri-net-to-constraints {
 test-petri-net-to-constraints petersons-alg/pp-petri-net.pl petersons-alg/constraints-c0.smt2
 test-petri-net-to-constraints cyclic-net/pp-petri-net.pl cyclic-net/constraints-c0.smt2
 
-# echo
-# echo '- Testing checking of SAT(C)'
-# echo
+#
+# Testing checking of SAT(C)
+#
 function test-checking-sat {
     if (
         set -e
@@ -64,12 +64,13 @@ function test-checking-sat {
 test-checking-sat petersons-alg/constraints-c0.smt2 petersons-alg/model-a1.smt2
 test-checking-sat petersons-alg/constraints-ctheta1.smt2 petersons-alg/model-atheta1.smt2
 test-checking-sat cyclic-net/constraints-c0.smt2 cyclic-net/model-a1.smt2
+test-checking-sat cyclic-net/constraints-ctheta-prime1.smt2 cyclic-net/model-atheta-prime1.smt2
 # test-checking-sat petersons-alg/constraints-c1.smt2 petersons-alg/model-a2.smt2 # TODO: PASS ME
 # test-checking-sat petersons-alg/constraints-ctheta2.smt2 petersons-alg/model-atheta2.smt2 # TODO: PASS ME
 
-# echo
-# echo '- Testing smt2 model to prolog model'
-# echo
+#
+# Testing smt2 model to prolog model
+#
 function test-smt2-model-to-prolog-model {
     if (
             set -e
@@ -87,12 +88,13 @@ function test-smt2-model-to-prolog-model {
 test-smt2-model-to-prolog-model petersons-alg/model-a1.smt2 petersons-alg/model-a1.pl
 test-smt2-model-to-prolog-model petersons-alg/model-atheta1.smt2 petersons-alg/model-atheta1.pl
 test-smt2-model-to-prolog-model cyclic-net/model-a1.smt2 cyclic-net/model-a1.pl
+test-smt2-model-to-prolog-model cyclic-net/model-atheta-prime1.smt2 cyclic-net/model-atheta-prime1.pl
 # test-smt2-model-to-prolog-model petersons-alg/model-a2.smt2 petersons-alg/model-a2.pl # TODO: PASS ME
 # test-smt2-model-to-prolog-model petersons-alg/model-atheta2.smt2 petersons-alg/model-atheta2.pl # TODO: PASS ME
 
-# echo
-# echo '- Testing construction of trap constraints C_theta for model A'
-# echo
+#
+# Testing construction of trap constraints C_theta for model A
+#
 function test-trap-constraints {
     if (
             set -e
@@ -111,9 +113,9 @@ test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a1.pl pe
 test-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta1.smt2
 # test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a2.pl petersons-alg/constraints-ctheta2.smt2 # TODO: PASS ME
 
-# echo
-# echo '- Testing construction of constraint delta for C and A_theta'
-# echo
+#
+# Testing construction of constraint delta for A_theta
+#
 function test-delta-constraint {
     if (
             set -e
@@ -129,9 +131,9 @@ function test-delta-constraint {
 test-delta-constraint petersons-alg/model-atheta1.pl petersons-alg/constraint-delta1.smt2
 # test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/constraint-delta2.smt2 # TODO: PASS ME
 
-# echo
-# echo '- Testing construction of constraints C_n+1 for C_n and A_theta_n'
-# echo
+#
+# Testing construction of constraints C_n+1 for C_n and A_theta_n
+#
 function test-succ-constraints {
     if (
             set -e
@@ -146,3 +148,40 @@ function test-succ-constraints {
 }
 test-succ-constraints petersons-alg/constraints-c0.smt2 petersons-alg/constraint-delta1.smt2 petersons-alg/constraints-c1.smt2
 # test-succ-constraints petersons-alg/constraints-c1.smt2 petersons-alg/constraint-delta2.smt2 petersons-alg/constraints-c2.smt2 # TODO: PASS ME
+
+#
+# Testing construction of subnet trap constraints C_theta' for model A
+#
+function test-subnet-trap-constraints {
+    if (
+            set -e
+            sicstus -l "$sysdir"/src/subnet-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
+            sort "$sysdir"/tests/$3 >/tmp/constraints-ctheta-prime-exp.smt2
+            sort /tmp/constraints-ctheta-prime.smt2 >/tmp/constraints-ctheta-prime-out.smt2
+            diff /tmp/constraints-ctheta-prime-exp.smt2 /tmp/constraints-ctheta-prime-out.smt2
+        ); then
+        echo $3' ... PASS'
+    else
+        echo $3' ... FAILED'
+        exit 8
+    fi    
+}
+test-subnet-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta-prime1.smt2
+
+#
+# Testing construction of constraint delta' for N and A_theta'
+#
+function test-delta-prime-constraint {
+    if (
+            set -e
+            sicstus -l "$sysdir"/src/delta-prime-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
+            diff "$sysdir"/tests/$3 /tmp/constraint-delta-out.smt2
+        ); then
+        echo $3' ... PASS'
+    else
+        echo $3' ... FAILED'
+        exit 9
+    fi
+}
+test-delta-prime-constraint cyclic-net/pp-petri-net.pl cyclic-net/model-atheta-prime1.pl cyclic-net/constraint-delta-prime1.smt2
+# test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/constraint-delta2.smt2 # TODO: PASS ME

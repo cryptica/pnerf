@@ -98,6 +98,10 @@ while
     fi
 ); do
     iter=$((iter+1))
+    if [[ $iter -gt 500 ]]; then
+      echo "Timeout on $input"
+      exit 3
+    fi
 
     vecho
     vecho '* Constructing trap constraints C_theta for model A'
@@ -124,28 +128,62 @@ while
                 ! z3 -smt2 /tmp/constraints-ctheta.smt2 | tee /tmp/model-atheta.smt2
             fi
         ); then
-        echo
-        echo '-------------------------------------------'
-        echo 'The petri net may not satisfy the property'
-        echo '-------------------------------------------'
-        echo
-        exit 1
+        vecho
+        vecho "* Constructing trap constraints C_theta' for model A"
+        if [ -z "$verbose" ]; then
+            sicstus -l "$sysdir"/subnet-trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
+        else
+            sicstus -l "$sysdir"/subnet-trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta-prime.smt2
+        fi
+        vecho
+        vecho "* Checking SAT(C_theta')"
+        if
+          (
+            if [ -z "$verbose" ]; then
+                ! z3 -smt2 /tmp/constraints-ctheta-prime.smt2 >/tmp/model-atheta-prime.smt2
+            else
+                ! z3 -smt2 /tmp/constraints-ctheta-prime.smt2 | tee /tmp/model-atheta-prime.smt2
+            fi
+          ); then
+            echo
+            echo '-------------------------------------------'
+            echo 'The petri net may not satisfy the property'
+            echo '-------------------------------------------'
+            echo
+            exit 1
+        else
+            vecho
+            echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta'"
+            vecho "- model A_theta'..."
+            if [ -z "$verbose" ]; then
+                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta-prime.pl
+            else
+                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta-prime.pl
+            fi
+            vecho "- constraint d'_$iter..."
+            if [ -z "$verbose" ]; then
+                sicstus -l "$sysdir"/delta-prime-constraint.pl -- /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl 2>/dev/null >/tmp/constraint-delta.smt2
+            else
+                sicstus -l "$sysdir"/delta-prime-constraint.pl -- /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
+            fi
+        fi
+    else
+        vecho
+        echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
+        vecho '- model A_theta...'
+        if [ -z "$verbose" ]; then
+            cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
+        else
+            cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
+        fi
+        vecho "- constraint d_$iter..."
+        if [ -z "$verbose" ]; then
+            sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null >/tmp/constraint-delta.smt2
+        else
+            sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
+        fi
     fi
 
-    vecho
-    vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
-    vecho '- model A_theta...'
-    if [ -z "$verbose" ]; then
-        cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
-    else
-        cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
-    fi
-    vecho "- constraint d_$iter..."
-    if [ -z "$verbose" ]; then
-        sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null >/tmp/constraint-delta.smt2
-    else
-        sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
-    fi
     vecho "- constraints c_$iter..."
     if [ -z "$verbose" ]; then    
         "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 >/tmp/constraints-cn.smt2
