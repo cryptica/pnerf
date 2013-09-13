@@ -9,21 +9,9 @@
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
-%transition_successors(T) :-
-  %        remove_weight(T, Tn),
-  %        transition(Tn, _, OPs),
-  %      (   OPs = [O] ->
-  %          print(O)
-  %      ;   OPs = [_|_] ->
-  %          print('(or '),
-  %          print_seq(OPs),
-  %          print(')')
-  %      ;   print(false)
-  %      ).
-
 subnet_transition(T) :-
-        remove_weight(Elem, T),
-        assignment(T, N),
+        remove_weight(T, Tn),
+        assignment(Tn, N),
         N > 0.
 
 trap_conditions :-
@@ -73,15 +61,15 @@ trap_conditions :-
         findall(P,
                 (
                   place(P, Ts, _),
-                  maplist(remove_weight, Ts, Tns),
                   include(subnet_transition, Ts, TsSub),
+                  assignment(t1, N),
                   TsSub = [_|_]
                 ), Ps),
         (   Ps = [_|_] ->
             print('(assert (or '),
             print_seq(Ps),
             print('))\n')
-        ;   true
+        ;   print('(assert false)')
         ),
         nl,
         % 3. No element of S is marked in the model
