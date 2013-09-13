@@ -1,2 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/multipoll.tts.spec.pl]
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

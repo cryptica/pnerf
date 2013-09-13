@@ -1,2 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl]
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

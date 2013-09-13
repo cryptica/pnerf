@@ -1,2 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.2/main.spec.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

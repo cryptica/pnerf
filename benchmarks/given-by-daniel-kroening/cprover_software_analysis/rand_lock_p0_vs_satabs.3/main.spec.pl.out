@@ -1,2 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.3/main.spec.pl]
+* Constructing constraints C_1 for C_0 and A_theta'
+* Constructing constraints C_2 for C_1 and A_theta
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

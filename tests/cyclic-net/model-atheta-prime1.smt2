@@ -20,12 +20,12 @@ sat
     false)
   (define-fun s1 () Bool
     false)
-  (define-fun _t4 () Bool
+  (define-fun b_t4 () Bool
     true)
-  (define-fun _t3 () Bool
+  (define-fun b_t3 () Bool
     true)
-  (define-fun _t2 () Bool
+  (define-fun b_t2 () Bool
     true)
-  (define-fun _t1 () Bool
+  (define-fun b_t1 () Bool
     false)
 )

@@ -1,2 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/newdekker.tts.spec.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+

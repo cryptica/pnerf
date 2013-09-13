@@ -1,2 +1,8 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl]
+* Constructing constraints C_1 for C_0 and A_theta
+
+-------------------------------------------
+The petri net satisfies the property!
+-------------------------------------------
+

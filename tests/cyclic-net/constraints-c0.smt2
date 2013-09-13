@@ -26,7 +26,7 @@
 (assert (= s6 (+ 0 t1 (- t3))))
 (assert (> s1 0))
 (assert (> s2 0))
-(assert (> s5 0))
 (assert (> s4 0))
+(assert (> s5 0))
 (check-sat)
 (get-model)
