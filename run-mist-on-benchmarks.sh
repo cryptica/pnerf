@@ -6,10 +6,10 @@ if ! which mist >/dev/null; then
 fi
 
 for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
-  rm -f $benchmark_dir/positive-mist.list
-  rm -f $benchmark_dir/negative-mist.list
-  rm -f $benchmark_dir/error-mist.list
-  rm -f $benchmark_dir/timeout-mist.list
+  >$benchmark_dir/positive-mist.list
+  >$benchmark_dir/negative-mist.list
+  >$benchmark_dir/error-mist.list
+  >$benchmark_dir/timeout-mist.list
   for spec_file in `find $benchmark_dir -name "*.spec"`; do
     echo $spec_file
     cat $spec_file | sed '/#.*/D' >/tmp/mist.in
