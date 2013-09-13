@@ -21,4 +21,3 @@ benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec
 benchmarks/given-by-daniel-kroening/cprover-PN/restriction.tts.spec
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.2/main.spec
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec

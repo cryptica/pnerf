@@ -1,4 +1,3 @@
-benchmarks/given-by-daniel-kroening/modified-by-hand/stack_lock_p0_vs_satabs.2.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl
@@ -36,6 +35,7 @@ benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_sa
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.1/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.2/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.3/main.spec.pl
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec.pl
 benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec.pl
 benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl

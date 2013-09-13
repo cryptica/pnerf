@@ -22,4 +22,3 @@ benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec
-benchmarks/given-by-daniel-kroening/modified-by-hand/stack_lock_p0_vs_satabs.2.spec

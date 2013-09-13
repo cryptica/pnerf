@@ -22,4 +22,3 @@ benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec
 benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec
-benchmarks/given-by-daniel-kroening/modified-by-hand/stack_lock_p0_vs_satabs.2.spec
