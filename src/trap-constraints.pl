@@ -74,7 +74,7 @@ trap_conditions :-
         nl,
         % 2. An element of S is marked in the initial state
         findall(P, (   init(P, V),
-                       (   integer(V) -> true
+                       (   integer(V) -> V>0
                        ;   assignment(V, Val), Val>0
                        )),
                 Ps),
@@ -82,7 +82,7 @@ trap_conditions :-
             print('(assert (or '),
             print_seq(Ps),
             print('))\n')
-        ;   true
+        ;   print('(assert false)\n')
         ),
         nl,
         % 3. No element of S is marked in the model

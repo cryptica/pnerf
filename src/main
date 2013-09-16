@@ -20,6 +20,8 @@ function print_usage {
 Usage: $0 [options] input_file
 Option list:
  -h | --h | -help | --help    : Prints this help
+ -v | --v                     : Verbose output
+ -t timing_file               : Append timing information to timing_file
 
 EOF
 }
@@ -38,20 +40,30 @@ print_title "$*"
 
 
 # parse parameters
+get_timing_file=false
 for a in $@; do
     case $a in
-        -h | --h | -help | --help)
+        h | --h | -help | --help)
             print_usage
             exit 0
             ;;
         -v | --v)
             verbose=true
             ;;
+        -t)
+            timing=true
+            get_timing_file=true
+            ;;
         -*)
             echo 'ERROR: Unknown option '$a
             exit 2
             ;;
-        *) input=$a ;;
+        *) if $get_timing_file ; then
+             timing_file=$a
+             get_timing_file=false
+           else
+             input=$a
+           fi ;;
     esac
 done
 
@@ -70,34 +82,105 @@ sysdir=$(absolute_path $0)
 set -e
 set -o pipefail
 
+if [ -n "$timing" ]; then
+  >/tmp/z3_time
+  >/tmp/sicstus_time
+  T_start="$(date +%s%N)"
+fi
+
+function exit_with {
+  result=$1
+  iterations=$2
+  set +o pipefail
+  set +e
+  echo
+  echo '-------------------------------------------'
+  if [[ $result -eq 0 ]]; then
+    echo 'The petri net satisfies the property!'
+  else
+    echo 'The petri net may not satisfy the property'
+  fi
+  if [ -n "$timing" ]; then
+    T_total="$(($(date +%s%N)-T_start))"
+    T_z3=0
+    while read num ; do
+      T_z3=$((T_z3 + num))
+    done < /tmp/z3_time
+    P_z3=$((100*T_z3/T_total))
+    T_sicstus=0
+    while read num ; do
+      T_sicstus=$((T_z3 + num))
+    done < /tmp/sicstus_time
+    P_sicstus=$((100*T_sisctus/T_total))
+    echo "Iterations: $iterations"
+    echo "Total time: $T_total"
+    echo "Z3 time: $T_z3 ($P_z3 %)"
+    echo "Sicstus time: $T_sicstus ($P_sicstus %)"
+    if [ -n "$timing_file" ]; then
+      echo "$input $iterations $T_total $T_z3 $T_sicstus ($P_z3 %) ($P_sicstus %)" >>$timing_file
+    fi
+  fi
+  echo '-------------------------------------------'
+  echo
+  echo
+  exit $result
+}
+
+function run_z3 {
+  z3_input=$1
+  z3_output=$2
+  if [ -n "$timing" ]; then
+    T="$(date +%s%N)"
+  fi
+  if [ -z "$verbose" ]; then
+    z3 -smt2 $z3_input >$z3_output
+    res=$?
+  else
+    z3 -smt2 $z3_input | tee $z3_output
+    res=$?
+  fi
+  if [ -n "$timing" ]; then
+    T=$(($(date +%s%N)-T))
+    echo $T >>/tmp/z3_time
+  fi
+  return $res
+}
+
+function run_sicstus {
+  prolog_file=$1
+  pl_output=$2
+  pl_input=${@:3}
+  if [ -n "$timing" ]; then
+    T="$(date +%s%N)"
+  fi
+  if [ -z "$verbose" ]; then
+    sicstus -l "$sysdir"/$prolog_file -- $pl_input 2>/dev/null >$pl_output
+    res=$?
+  else
+    sicstus -l "$sysdir"/$prolog_file -- $pl_input 2>/dev/null | tee $pl_output
+    res=$?
+  fi
+  if [ -n "$timing" ]; then
+    T=$(($(date +%s%N)-T))
+    echo $T >>/tmp/sicstus_time
+  fi
+  return $res
+}
+
 vecho
 vecho '* Constructing petri net N from input file'
-if [ -z "$verbose" ]; then
-    sicstus -l "$sysdir"/input-file-to-petri-net.pl -- `pwd`/$input 2>/dev/null >/tmp/pp-petri-net.pl
-else
-    sicstus -l "$sysdir"/input-file-to-petri-net.pl -- `pwd`/$input 2>/dev/null | tee /tmp/pp-petri-net.pl
-fi
+run_sicstus input-file-to-petri-net.pl /tmp/pp-petri-net.pl `pwd`/$input
 
 vecho
 vecho '* Constructing constraint C_0 for petri net N'
-if [ -z "$verbose" ]; then
-    sicstus -l "$sysdir"/petri-net-to-constraints.pl -- /tmp/pp-petri-net.pl 2>/dev/null >/tmp/constraints-c.smt2
-else
-    sicstus -l "$sysdir"/petri-net-to-constraints.pl -- /tmp/pp-petri-net.pl 2>/dev/null | tee /tmp/constraints-c.smt2
-fi
+run_sicstus petri-net-to-constraints.pl /tmp/constraints-c.smt2 /tmp/pp-petri-net.pl
+
 iter=0
 vecho
 vecho '* Checking SAT(C0)'
-# if ! z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2; then exit; fi
-while
-(
-    if [ -z "$verbose" ]; then
-        z3 -smt2 /tmp/constraints-c.smt2 >/tmp/model-a.smt2
-    else
-        z3 -smt2 /tmp/constraints-c.smt2 | tee /tmp/model-a.smt2
-    fi
-); do
+while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
     iter=$((iter+1))
+    echo "Iteration $iter"
 
     vecho
     vecho '* Constructing trap constraints C_theta for model A'
@@ -108,48 +191,22 @@ while
         cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-a.pl
     fi
     vecho '- constraints C_theta...'
-    if [ -z "$verbose" ]; then
-        sicstus -l "$sysdir"/trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null >/tmp/constraints-ctheta.smt2
-    else
-        sicstus -l "$sysdir"/trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta.smt2
-    fi
+    run_sicstus trap-constraints.pl /tmp/constraints-ctheta.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
 
     vecho
     vecho '* Checking SAT(C_theta)'
-    if
-        (
-            if [ -z "$verbose" ]; then
-                ! z3 -smt2 /tmp/constraints-ctheta.smt2 >/tmp/model-atheta.smt2
-            else
-                ! z3 -smt2 /tmp/constraints-ctheta.smt2 | tee /tmp/model-atheta.smt2
-            fi
-        ); then
+    if ( ! run_z3 /tmp/constraints-ctheta.smt2 /tmp/model-atheta.smt2 ); then
         vecho
         vecho "* Constructing trap constraints C_theta' for model A"
-        if [ -z "$verbose" ]; then
-            sicstus -l "$sysdir"/subnet-trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
-        else
-            sicstus -l "$sysdir"/subnet-trap-constraints.pl -- /tmp/pp-petri-net.pl /tmp/model-a.pl 2>/dev/null | tee /tmp/constraints-ctheta-prime.smt2
-        fi
+        run_sicstus subnet-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
+
         vecho
         vecho "* Checking SAT(C_theta')"
-        if
-          (
-            if [ -z "$verbose" ]; then
-                ! z3 -smt2 /tmp/constraints-ctheta-prime.smt2 >/tmp/model-atheta-prime.smt2
-            else
-                ! z3 -smt2 /tmp/constraints-ctheta-prime.smt2 | tee /tmp/model-atheta-prime.smt2
-            fi
-          ); then
-            echo
-            echo '-------------------------------------------'
-            echo 'The petri net may not satisfy the property'
-            echo '-------------------------------------------'
-            echo
-            exit 1
+        if ( ! run_z3 /tmp/constraints-ctheta-prime.smt2 /tmp/model-atheta-prime.smt2 ); then
+          exit_with 1 $iter
         else
             vecho
-            echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta'"
+            vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta'"
             vecho "- model A_theta'..."
             if [ -z "$verbose" ]; then
                 cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta-prime.pl
@@ -157,15 +214,11 @@ while
                 cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta-prime.pl
             fi
             vecho "- constraint d'_$iter..."
-            if [ -z "$verbose" ]; then
-                sicstus -l "$sysdir"/delta-prime-constraint.pl -- /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl 2>/dev/null >/tmp/constraint-delta.smt2
-            else
-                sicstus -l "$sysdir"/delta-prime-constraint.pl -- /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
-            fi
+            run_sicstus delta-prime-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl
         fi
     else
         vecho
-        echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
+        vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
         vecho '- model A_theta...'
         if [ -z "$verbose" ]; then
             cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
@@ -173,11 +226,7 @@ while
             cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
         fi
         vecho "- constraint d_$iter..."
-        if [ -z "$verbose" ]; then
-            sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null >/tmp/constraint-delta.smt2
-        else
-            sicstus -l "$sysdir"/delta-constraint.pl -- /tmp/model-atheta.pl 2>/dev/null | tee /tmp/constraint-delta.smt2
-        fi
+        run_sicstus delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/model-atheta.pl
     fi
 
     vecho "- constraints c_$iter..."
@@ -189,11 +238,4 @@ while
     mv /tmp/constraints-cn.smt2 /tmp/constraints-c.smt2
 done
 
-echo
-echo '-------------------------------------------'
-echo 'The petri net satisfies the property!'
-echo '-------------------------------------------'
-echo
-
-set +o pipefail
-set +e
+exit_with 0 $iter
