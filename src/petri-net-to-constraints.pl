@@ -1,5 +1,6 @@
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
+:- dynamic weight/3.       % weight(In, Out, Weight).
 :- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
 
@@ -24,10 +25,7 @@ z3_vars :-
                        format('(declare-fun ~q () Int)\n', T)
                      ), _ ).
 z3_transition_terms(T, Z3) :-
-        (   T = (Tn, Tw) ->
-            format_atom('(* ~p ~p)', [Tn,Tw], Z3)
-        ;   Z3 = T
-        ).
+        Z3 = T.
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
@@ -37,14 +35,21 @@ z3_place_eqs :-
                        ),
                        list_to_ord_set(I, ISet),
                        list_to_ord_set(O, OSet),
-                       ord_subtract(ISet, OSet, RelISet),
-                       ord_subtract(OSet, ISet, RelOSet),
-                       ( RelISet = [_|_] -> print(' ') ; true ),
-                       maplist(z3_transition_terms, RelISet, RelITerms),
-                       print_seq(RelITerms),
-                       ( RelOSet = [_|_] -> print(' ') ; true ),
-                       maplist(z3_transition_terms, RelOSet, RelOTerms),
-                       format_seq('(- ~p)', RelOTerms),
+                       ord_union(ISet, OSet, TSet),
+                       %( TSet = [_|_] -> print(' ') ; true ),
+                       (  foreach(T, TSet),
+                          param(P)
+                       do ( weight(P, T, Wo) -> true; Wo = 0 ),
+                          ( weight(T, P, Wi) -> true; Wi = 0 ),
+                          W is Wi - Wo,
+                          ( W = 0 -> true
+                          ; W = 1 -> format(' ~p', [T])
+                          ; W = -1 -> format(' (- ~p)', [T])
+                          ; format(' (* ~p ~p)', [W, T])
+                          )
+                       ),
+                       %maplist(z3_transition_terms, TSet, TTerms),
+                       %print_seq(TTerms),
                        print(')))\n')
                      ), _ ).
 z3_nat_ineqs :-

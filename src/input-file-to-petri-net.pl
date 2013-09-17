@@ -2,6 +2,7 @@
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic transition/2.   % transition(InPlaces, OutPlaces).
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
+:- dynamic weight/3.       % weight(In, Out, Weight).
 :- dynamic init/1.         % init(PlaceId).
 :- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
@@ -25,6 +26,12 @@ label_transitions :-
                        assert( transition(Tsy, I, O) )
                      ), _ ).
 
+remove_weight(Pi, Po) :-
+        (   Pi = (Po,_) ->
+            true
+        ;   Po = Pi
+        ).
+
 remove_weight_from_transitions :-
         findall( _ , (
                        retract( transition(Id, Iw, Ow) ),
@@ -43,17 +50,21 @@ connect_places_w_transitions :-
                        (   foreach(I, Psi)
                        do  (   I = (Ip, Iw) ->
                                retract( place(Ip, Ii, Io) ),
-                               assert( place(Ip, Ii, [(T, Iw)|Io]) )
+                               assert( place(Ip, Ii, [T|Io]) ),
+                               assert( weight(Ip, T, Iw) )
                            ;   retract( place(I, Ii, Io) ),
-                               assert( place(I, Ii, [T|Io]) )
+                               assert( place(I, Ii, [T|Io]) ),
+                               assert( weight(I, T, 1) )
                            )
                        ),
                        (  foreach(O, Pso)
                        do  (   O = (Op, Ow) ->
                                retract( place(Op, Oi, Oo) ),
-                               assert( place(Op, [(T, Ow)|Oi], Oo) )
+                               assert( place(Op, [T|Oi], Oo) ),
+                               assert( weight(T, Op, Ow) )
                            ;   retract( place(O, Oi, Oo) ),
-                               assert( place(O, [T|Oi], Oo) )
+                               assert( place(O, [T|Oi], Oo) ),
+                               assert( weight(T, O, 1) )
                            )
                        )
                      ), _ ).
@@ -68,6 +79,7 @@ connect_places_w_transitions :-
         remove_weight_from_transitions,
         listing(place/3),
         listing(transition/3),
+        listing(weight/3),
         findall( _,
                  (   init(P),
                      portray_clause(init(P, 1))

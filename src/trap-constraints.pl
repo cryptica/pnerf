@@ -8,8 +8,7 @@
 :- ['misc.pl'].
 
 transition_successors(T) :-
-        remove_weight(T, Tn),
-        transition(Tn, _, OPs),
+        transition(T, _, OPs),
         (   OPs = [O] ->
             print(O)
         ;   OPs = [_|_] ->

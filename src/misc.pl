@@ -19,8 +19,22 @@ format_seq(F, Xs) :-
 print_seq(Xs) :-
         format_seq('~p', Xs).
 
-remove_weight(Pi, Po) :-
-        (   Pi = (Po,_) ->
-            true
-        ;   Po = Pi
+print_conjunct(Xs) :-
+        (  Xs = [X] ->
+           format('~p', X)
+        ;  Xs = [_,_|_] ->
+           print('(and '),
+           print_seq(Xs),
+           print(')')
+        ;  print('true')
+        ).
+
+print_disjunct(Xs) :-
+        (  Xs = [X] ->
+           format('~p', X)
+        ;  Xs = [_,_|_] ->
+           print('(or '),
+           print_seq(Xs),
+           print(')')
+        ;  print('false')
         ).

@@ -10,8 +10,7 @@
 :- ['misc.pl'].
 
 subnet_transition(T) :-
-        remove_weight(T, Tn),
-        assignment(Tn, N),
+        assignment(T, N),
         N > 0.
 
 trap_conditions :-
@@ -31,12 +30,11 @@ trap_conditions :-
         findall( _,
                  (
                    place(P, _, Ts),
-                   maplist(remove_weight, Ts, Tns),
-                   (   Tns = [T] ->
+                   (   Ts = [T] ->
                        format('(assert (implies ~p b_~p))\n', [P, T])
-                   ;   Tns = [_|_] ->
+                   ;   Ts = [_|_] ->
                        format('(assert (implies ~p (and ', [P]),
-                       format_seq('b_~p', Tns),
+                       format_seq('b_~p', Ts),
                        print(')))\n')
                    ;   true
                    )
@@ -62,15 +60,11 @@ trap_conditions :-
                 (
                   place(P, Ts, _),
                   include(subnet_transition, Ts, TsSub),
-                  assignment(t1, N),
                   TsSub = [_|_]
                 ), Ps),
-        (   Ps = [_|_] ->
-            print('(assert (or '),
-            print_seq(Ps),
-            print('))\n')
-        ;   print('(assert false)')
-        ),
+        print('(assert '),
+        print_disjunct(Ps),
+        print(')\n'),
         nl,
         % 3. No element of S is marked in the model
         findall( _,
