@@ -183,7 +183,7 @@ while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
     echo "Iteration $iter"
 
     vecho
-    vecho '* Constructing trap constraints C_theta for model A'
+    echo '* Constructing trap constraints C_theta for model A'
     vecho '- model A...'
     if [ -z "$verbose" ]; then
         cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-a.pl
@@ -197,14 +197,21 @@ while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
     vecho '* Checking SAT(C_theta)'
     if ( ! run_z3 /tmp/constraints-ctheta.smt2 /tmp/model-atheta.smt2 ); then
         vecho
-        vecho "* Constructing trap constraints C_theta' for model A"
-        run_sicstus subnet-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
+        echo "* Constructing empty trap constraints C_theta'' for model A"
+        run_sicstus empty-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
 
         vecho
-        vecho "* Checking SAT(C_theta')"
+        vecho "* Checking SAT(C_theta'')"
         if ( ! run_z3 /tmp/constraints-ctheta-prime.smt2 /tmp/model-atheta-prime.smt2 ); then
-          exit_with 1 $iter
-        else
+          vecho
+          echo "* Constructing subnet trap constraints C_theta' for model A"
+          run_sicstus subnet-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
+
+          vecho
+          vecho "* Checking SAT(C_theta')"
+          if ( ! run_z3 /tmp/constraints-ctheta-prime.smt2 /tmp/model-atheta-prime.smt2 ); then
+            exit_with 1 $iter
+          else
             vecho
             vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta'"
             vecho "- model A_theta'..."
@@ -215,10 +222,22 @@ while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
             fi
             vecho "- constraint d'_$iter..."
             run_sicstus delta-prime-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl
+          fi
+        else
+            vecho
+            vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta''"
+            vecho "- model A_theta''..."
+            if [ -z "$verbose" ]; then
+                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta-prime.pl
+            else
+                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta-prime.pl
+            fi
+            vecho "- constraint d'_$iter..."
+            run_sicstus empty-trap-delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl
         fi
     else
         vecho
-        vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
+        echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
         vecho '- model A_theta...'
         if [ -z "$verbose" ]; then
             cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
