@@ -1,6 +1,8 @@
 \documentclass{scrartcl}
 
 \usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{dot2texi}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes, shapes.multipart, shapes.geometric}
@@ -11,7 +13,9 @@
 
 \begin{document}
 
-\section{Method}
+\section{Peterson's Algorithm}
+
+\subsection{Method}
 
 \begin{tikzpicture}[
     state/.style   = {draw, ellipse, aspect=2},
@@ -47,11 +51,8 @@
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 
-\section{Constraints $C_0$}
+\subsection{Constraints $C_0$}
 
-%p_1 &=& 1 &{}-{}& u_1& u_2& u_3& u_4& u_5& &{}+{}& u_6&\\
-%p_1 &=& 1 &{}-{}& u_1 &{}-{}& u_2 &{}-{}& u_3 &{}-{}& u_4 &{}-{}& u_5 &{}+{}& u_6 \\
-%p_1 &=& 1 &     &     &     &     &     &     &     &     &     &     &     &     \\
 \begin{alignat*}{15}
 && p_1 &{}={}& 1
   &{}-{}& u_1 &     &     &     &     &     &     &     &     &{}+{}& u_6 
@@ -105,7 +106,7 @@
   \delta_2 &= p_2 \lor q_3 \lor (m_1=f) \lor (hold=1)
 \end{align*}
 
-\section{$A_1$}
+\subsection{$A_1$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -136,7 +137,7 @@
   v_6 &= 0
 \end{align*}
 
-\section{$A_2$}
+\subsection{$A_2$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -167,74 +168,443 @@
   v_6 &= 0
 \end{align*}
 
-\section{$A_{\theta 1}$}
+\subsection{$A_{\theta 1}$}
 \begin{align*}
-  bp_1 &= 0 \\
-  bp_2 &= 0 \\
-  bp_3 &= 1 \\
-  bp_4 &= 0 \\
-  bq_1 &= 0 \\
-  bq_2 &= 1 \\
-  bq_3 &= 0 \\
-  bq_4 &= 0 \\
-  b(m_1=f) &= 0 \\
-  b(m_1=t) &= 0 \\
-  b(m_2=f) &= 1 \\
-  b(m_2=t) &= 0 \\
-  b(hold=1) &= 0 \\
-  b(hold=2) &= 1
+  p_1 &= 0 \\
+  p_2 &= 0 \\
+  p_3 &= 1 \\
+  p_4 &= 0 \\
+  q_1 &= 0 \\
+  q_2 &= 1 \\
+  q_3 &= 0 \\
+  q_4 &= 0 \\
+  (m_1=f) &= 0 \\
+  (m_1=t) &= 0 \\
+  (m_2=f) &= 1 \\
+  (m_2=t) &= 0 \\
+  (hold=1) &= 0 \\
+  (hold=2) &= 1
 \end{align*}
 
-\section{$A_{\theta 2}$}
+\subsection{$A_{\theta 2}$}
 \begin{align*}
-  bp_1 &= 0 \\
-  bp_2 &= 1 \\
-  bp_3 &= 0 \\
-  bp_4 &= 0 \\
-  bq_1 &= 0 \\
-  bq_2 &= 0 \\
-  bq_3 &= 1 \\
-  bq_4 &= 0 \\
-  b(m_1=f) &= 1 \\
-  b(m_1=t) &= 0 \\
-  b(m_2=f) &= 0 \\
-  b(m_2=t) &= 0 \\
-  b(hold=1) &= 1 \\
-  b(hold=2) &= 0
+  p_1 &= 0 \\
+  p_2 &= 1 \\
+  p_3 &= 0 \\
+  p_4 &= 0 \\
+  q_1 &= 0 \\
+  q_2 &= 0 \\
+  q_3 &= 1 \\
+  q_4 &= 0 \\
+  (m_1=f) &= 1 \\
+  (m_1=t) &= 0 \\
+  (m_2=f) &= 0 \\
+  (m_2=t) &= 0 \\
+  (hold=1) &= 1 \\
+  (hold=2) &= 0
 \end{align*}
 
-\section{$C_\theta$}
+\subsection{$C_\theta$}
 
 \circled{1}
 \begin{align*}
-  bp_1 &\implies (bp_2 \lor b(m_1=t)) \\
-  bp_2 &\implies (bp_3 \lor b(hold=1)) \land (bp_3 \lor b(hold=1)) \\
-  bp_3 &\implies (bp_4 \lor b(m_2=f)) \land (bp_4 \lor b(hold=2)) \\
-  bp_4 &\implies (bp_1 \lor b(m_1=f)) \\
-  bq_1 &\implies (bq_2 \lor b(m_2=t)) \\
-  bq_2 &\implies (bq_3 \lor b(hold=2)) \land (bq_3 \lor b(hold=2)) \\
-  bq_3 &\implies (bq_4 \lor b(m_1=f)) \land (bp_4 \lor b(hold=1)) \\
-  bq_4 &\implies (bq_1 \lor b(m_2=f)) \\
-  b(m_1=f) &\implies (bp_2 \lor b(m_1=t)) \land (bq_4 \lor b(m_1=f)) \\
-  b(m_1=t) &\implies (bp_1 \lor b(m_1=f)) \\
-  b(m_2=f) &\implies (bq_2 \lor b(m_2=t)) \land (bp_4 \lor b(m_2=f)) \\
-  b(m_2=t) &\implies (bq_1 \lor b(m_2=f)) \\
-  b(hold=1) &\implies (bq_3 \lor b(hold=2)) \land (bq_4 \lor b(hold=1)) \land (bp_3 \lor b(hold=1)) \\
-  b(hold=2) &\implies (bp_3 \lor b(hold=1)) \land (bp_4 \lor b(hold=2)) \land (bq_3 \lor b(hold=2))
+  p_1 &\implies o\_u_1 \\
+  p_2 &\implies o\_u_2 \land o\_u_3 \\
+  p_3 &\implies o\_u_4 \land o\_u_5 \\
+  p_4 &\implies o\_u_6 \\
+  q_1 &\implies o\_v_1 \\
+  q_2 &\implies o\_v_2 \land o\_v_3 \\
+  q_3 &\implies o\_v_4 \land o\_v_5 \\
+  q_4 &\implies o\_v_6 \\
+  (m_1=f) &\implies o\_u_1 \land o\_v_4 \\
+  (m_1=t) &\implies o\_u_6 \\
+  (m_2=f) &\implies o\_v_1 \land o\_u_4  \\
+  (m_2=t) &\implies o\_v_6 \\
+  (hold=1) &\implies o\_v_3 \land o\_v_5 \land o\_u_3 \\
+  (hold=2) &\implies o\_u_3 \land o\_u_5 \land o\_v_3 \\
+  o\_u_1 &\implies (p_2 \lor (m_1=t)) \\
+  o\_u_2 &\implies (p_3 \lor (hold=1)) \\
+  o\_u_3 &\implies (p_3 \lor (hold=1)) \\
+  o\_u_4 &\implies (p_4 \lor (m_2=f)) \\
+  o\_u_5 &\implies (p_4 \lor (hold=2)) \\
+  o\_u_6 &\implies (p_1 \lor (m_1=f)) \\
+  o\_v_1 &\implies (q_2 \lor (m_2=t)) \\
+  o\_v_2 &\implies (q_3 \lor (hold=2)) \\
+  o\_v_3 &\implies (q_3 \lor (hold=2)) \\
+  o\_v_4 &\implies (q_4 \lor (m_1=f)) \\
+  o\_v_5 &\implies (p_4 \lor (hold=1)) \\
+  o\_v_6 &\implies (q_1 \lor (m_2=f))
 \end{align*}
 \circled{2}
 \begin{align*}
-  bp_1 \lor bq_1 \lor b(m_1=f) \lor b(m_2=f) \lor b(hold=1)
+  p_1 \lor q_1 \lor (m_1=f) \lor (m_2=f) \lor (hold=1)
 \end{align*}
 $\circled{3}_1$
 \begin{align*}
-  \neg bp_4 \land \neg bq_4 \land \neg b(m_1=t) \land
-  \neg b(m_2=t) \land \neg b(hold=1)
+  \neg p_4 \land \neg q_4 \land \neg (m_1=t) \land
+  \neg (m_2=t) \land \neg (hold=1)
 \end{align*}
 $\circled{3}_2$
 \begin{align*}
-  \neg bp_4 \land \neg bq_4 \land \neg b(m_1=t) \land
-  \neg b(m_2=t) \land \neg b(hold=2)
+  \neg p_4 \land \neg q_4 \land \neg (m_1=t) \land
+  \neg (m_2=t) \land \neg (hold=2)
 \end{align*}
+
+\subsection{Benchmark}
+
+Give by Daniel Kroening:
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 23 & 0 & 38 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} & 23 & 54 & 0 & 77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+
+\section{Cyclic net}
+
+\subsection{Method}
+
+\begin{tikzpicture}[
+    state/.style   = {draw, ellipse, aspect=2},
+    action/.style  = {draw, rectangle, align=center},
+    decision/.style= {draw, diamond, aspect=2, align=center},
+    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
+    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
+  ]
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+                                   $C_{\theta}:=\text{TrapConditions}(N, A)$};
+  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+                                        $\delta:=\Delta(A_\theta)$\\
+                                        $C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {YES};
+  \node[action, right=of satctheta] (cthetaprime) {$C_{\theta'}:=\text{SubnetTrapConditions}(N, A)$};
+  \node[decision, below=of cthetaprime] (satcthetaprime) {$\text{SAT}(C_{\theta'})$};
+  \node[action, below=of satcthetaprime] (modelcthetaprime)
+      {$A_{\theta'}:=\text{Model}(C_\theta)$\\
+       $\delta':=\Delta'(A_{\theta'})$\\
+       $C:=C \cup \{\delta'\}$};
+  \node[print, right=of satcthetaprime] (dontknow) {Don't know};
+  \node[state, right=of yes] (end1) {END};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge[edge] (c);
+  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge[edge] node[above]{NO} (yes);
+  \draw (yes) edge[edge] (end1);
+  \draw (satc) edge[edge] node[right]{YES} (modelc);
+  \draw (modelc) edge[edge] (satctheta);
+  \draw (satctheta) edge[edge] node[above]{NO} (cthetaprime);
+  \draw (cthetaprime) edge[edge] (satcthetaprime);
+  \draw (satcthetaprime) edge[edge] node[above]{NO} (dontknow);
+  \draw (dontknow) edge[edge] (end2);
+  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
+  \draw (satcthetaprime) edge[edge] node[right]{YES} (modelcthetaprime);
+  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+  \draw[edge] (modelcthetaprime.south) -- ([yshift=-0.5cm] modelcthetaprime.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+
+\subsection{Petri net}
+
+\begin{dot2tex}[dot,options=-tmath]
+\input{cyclic-net.dot}
+\end{dot2tex}
+
+\subsection{Constraints $C_0$}
+
+\begin{alignat*}{6}
+&& s_1 &{}={}&   1 &     &     &{}-{}& t_2 &     &     \\
+&& s_2 &{}={}&   0 &{}+{}& t_1 &{}-{}& t_2 &     &     \\
+&& s_3 &{}={}&   0 &     &     &{}+{}& t_2 &     &     \\
+&& s_4 &{}={}&   0 &     &     &     &     &{}+{}& t_3 \\
+&& s_5 &{}={}&   1 &{}-{}& t_1 &     &     &{}+{}& t_3 \\
+&& s_6 &{}={}&   0 &{}+{}& t_1 &     &     &{}-{}& t_3 \\
+&& s_1 &{}\ge{}& 1 \\
+&& s_2 &{}\ge{}& 1 \
+&& s_4 &{}\ge{}& 1 \\
+&& s_5 &{}\ge{}& 1 \\
+&\forall p \in S \cup T:& p &{}\ge{}& 0
+\end{alignat*}
+
+\begin{align*}
+  \delta'_1 &= (t_1 > 0) \land (t_2 = 0) \land (t_3 > 0) \implies (s_3 > 0)
+\end{align*}
+
+\subsection{$A_1$}
+\begin{align*}
+  s_1 &= 1 \\
+  s_2 &= 1 \\
+  s_3 &= 0 \\
+  s_4 &= 1 \\
+  s_5 &= 1 \\
+  s_6 &= 0 \\
+  t_1 &= 1 \\
+  t_2 &= 0 \\
+  t_3 &= 1
+\end{align*}
+
+\subsection{$A_{\theta'1}$}
+\begin{align*}
+  s_1 &= 0 \\
+  s_2 &= 0 \\
+  s_3 &= 1 \\
+  s_4 &= 0 \\
+  s_5 &= 0 \\
+  s_6 &= 0
+\end{align*}
+
+\subsection{$C_\theta$}
+
+\begin{align*}
+  s_1 &\implies o\_t_1 \land o\_t_2 \\
+  s_2 &\implies o\_t_2 \\
+  s_3 &\implies o\_t_3 \\
+  s_4 &\implies true \\
+  s_5 &\implies o\_t_1 \\
+  s_6 &\implies o\_t_2 \\
+  o\_t_1 &\implies (s_1 \lor s_2 \lor s_6) \\
+  o\_t_2 &\implies s_3 \\
+  o\_t_3 &\implies (s_3 \lor s_4 \lor s_5)
+\end{align*}
+
+\begin{align*}
+  s_1 \lor s_5
+\end{align*}
+
+\begin{align*}
+  \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
+\end{align*}
+
+\subsection{$C_{\theta'}$}
+
+\begin{align*}
+  s_1 &\implies o\_t_1 \land o\_t_2 \\
+  s_2 &\implies o\_t_2 \\
+  s_3 &\implies o\_t_3 \\
+  s_4 &\implies true \\
+  s_5 &\implies o\_t_1 \\
+  s_6 &\implies o\_t_2 \\
+  o\_t_1 &= (t_1 > 0) \implies (s_1 \lor s_2 \lor s_6) \\
+  o\_t_2 &= (t_2 > 0) \implies s_3 \\
+  o\_t_3 &= (t_3 > 0) \implies (s_3 \lor s_4 \lor s_5)
+\end{align*}
+
+\begin{align*}
+  (t_1 = 1) \land (t_2 = 0) \land (t_3 = 1)
+\end{align*}
+
+\begin{align*}
+  s_1 \lor s_2 \lor s_3 \lor s_4 \lor s_5 \lor s_6
+\end{align*}
+
+\begin{align*}
+  \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
+\end{align*}
+
+\subsection{Benchmark}
+
+Give by Daniel Kroening:
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 19 & 4 & 38 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} & 23 & 50 & 4 & 77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+
+\section{Empty trap net}
+
+\subsection{Method}
+
+\begin{tikzpicture}[
+    state/.style   = {draw, ellipse, aspect=2},
+    action/.style  = {draw, rectangle, align=center},
+    decision/.style= {draw, diamond, aspect=2, align=center},
+    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
+    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
+  ]
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+                                   $C_{\theta}:=\text{TrapConditions}(N, A)$};
+  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+                                        $\delta:=\Delta(A_\theta)$\\
+                                        $C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {YES};
+  \node[action, right=of satctheta] (cthetaprime) {$C_{\theta'}:=\text{SubnetTrapConditions}(N, A)$};
+  \node[decision, below=of cthetaprime] (satcthetaprime) {$\text{SAT}(C_{\theta'})$};
+  \node[action, below=of satcthetaprime] (modelcthetaprime)
+      {$A_{\theta'}:=\text{Model}(C_\theta)$\\
+       $\delta':=\Delta'(A_{\theta'})$\\
+       $C:=C \cup \{\delta'\}$};
+  \node[print, right=of satcthetaprime] (dontknow) {Don't know};
+  \node[state, right=of yes] (end1) {END};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge[edge] (c);
+  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge[edge] node[above]{NO} (yes);
+  \draw (yes) edge[edge] (end1);
+  \draw (satc) edge[edge] node[right]{YES} (modelc);
+  \draw (modelc) edge[edge] (satctheta);
+  \draw (satctheta) edge[edge] node[above]{NO} (cthetaprime);
+  \draw (cthetaprime) edge[edge] (satcthetaprime);
+  \draw (satcthetaprime) edge[edge] node[above]{NO} (dontknow);
+  \draw (dontknow) edge[edge] (end2);
+  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
+  \draw (satcthetaprime) edge[edge] node[right]{YES} (modelcthetaprime);
+  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+  \draw[edge] (modelcthetaprime.south) -- ([yshift=-0.5cm] modelcthetaprime.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+
+\subsection{Petri net}
+
+\begin{dot2tex}[dot,options=-tmath]
+\input{cyclic-net.dot}
+\end{dot2tex}
+
+\subsection{Constraints $C_0$}
+
+\begin{alignat*}{6}
+&& s_1 &{}={}&   1 &     &     &{}-{}& t_2 &     &     \\
+&& s_2 &{}={}&   0 &{}+{}& t_1 &{}-{}& t_2 &     &     \\
+&& s_3 &{}={}&   0 &     &     &{}+{}& t_2 &     &     \\
+&& s_4 &{}={}&   0 &     &     &     &     &{}+{}& t_3 \\
+&& s_5 &{}={}&   1 &{}-{}& t_1 &     &     &{}+{}& t_3 \\
+&& s_6 &{}={}&   0 &{}+{}& t_1 &     &     &{}-{}& t_3 \\
+&& s_1 &{}\ge{}& 1 \\
+&& s_2 &{}\ge{}& 1 \
+&& s_4 &{}\ge{}& 1 \\
+&& s_5 &{}\ge{}& 1 \\
+&\forall p \in S \cup T:& p &{}\ge{}& 0
+\end{alignat*}
+
+\begin{align*}
+  \delta'_1 &= (t_1 > 0) \land (t_2 = 0) \land (t_3 > 0) \implies (s_3 > 0)
+\end{align*}
+
+\subsection{$A_1$}
+\begin{align*}
+  s_1 &= 1 \\
+  s_2 &= 1 \\
+  s_3 &= 0 \\
+  s_4 &= 1 \\
+  s_5 &= 1 \\
+  s_6 &= 0 \\
+  t_1 &= 1 \\
+  t_2 &= 0 \\
+  t_3 &= 1
+\end{align*}
+
+\subsection{$A_{\theta'1}$}
+\begin{align*}
+  s_1 &= 0 \\
+  s_2 &= 0 \\
+  s_3 &= 1 \\
+  s_4 &= 0 \\
+  s_5 &= 0 \\
+  s_6 &= 0
+\end{align*}
+
+\subsection{$C_\theta$}
+
+\begin{align*}
+  s_1 &\implies o\_t_1 \land o\_t_2 \\
+  s_2 &\implies o\_t_2 \\
+  s_3 &\implies o\_t_3 \\
+  s_4 &\implies true \\
+  s_5 &\implies o\_t_1 \\
+  s_6 &\implies o\_t_2 \\
+  o\_t_1 &\implies (s_1 \lor s_2 \lor s_6) \\
+  o\_t_2 &\implies s_3 \\
+  o\_t_3 &\implies (s_3 \lor s_4 \lor s_5)
+\end{align*}
+
+\begin{align*}
+  s_1 \lor s_5
+\end{align*}
+
+\begin{align*}
+  \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
+\end{align*}
+
+\subsection{$C_{\theta'}$}
+
+\begin{align*}
+  s_1 &\implies o\_t_1 \land o\_t_2 \\
+  s_2 &\implies o\_t_2 \\
+  s_3 &\implies o\_t_3 \\
+  s_4 &\implies true \\
+  s_5 &\implies o\_t_1 \\
+  s_6 &\implies o\_t_2 \\
+  o\_t_1 &= (t_1 > 0) \implies (s_1 \lor s_2 \lor s_6) \\
+  o\_t_2 &= (t_2 > 0) \implies s_3 \\
+  o\_t_3 &= (t_3 > 0) \implies (s_3 \lor s_4 \lor s_5)
+\end{align*}
+
+\begin{align*}
+  (t_1 = 1) \land (t_2 = 0) \land (t_3 = 1)
+\end{align*}
+
+\begin{align*}
+  s_1 \lor s_2 \lor s_3 \lor s_4 \lor s_5 \lor s_6
+\end{align*}
+
+\begin{align*}
+  \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
+\end{align*}
+
+\subsection{Benchmark}
+
+Give by Daniel Kroening:
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 19 & 4 & 38 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} & 23 & 50 & 4 & 77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+
+\end{document}
 
 \end{document}
