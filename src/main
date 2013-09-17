@@ -226,7 +226,7 @@ while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
             cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
         fi
         vecho "- constraint d_$iter..."
-        run_sicstus delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/model-atheta.pl
+        run_sicstus delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta.pl
     fi
 
     vecho "- constraints c_$iter..."
