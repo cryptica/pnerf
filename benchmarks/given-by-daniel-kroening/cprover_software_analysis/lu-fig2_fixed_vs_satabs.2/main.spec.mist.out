@@ -74,7 +74,7 @@ abs: For the bounds:
 1111111111111111111111111111111111111111111111111111111111111
 transition system
 Elems:     184 Nodes:   936 Arcs:  1044 Layers: 62
-<<< Printing the elements of the IST: 0x18900ed0
+<<< Printing the elements of the IST: 0x18020ed0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0]>-
@@ -354,7 +354,7 @@ After union, the reached symbolic state space is:
 Elems:       9 Nodes:   147 Arcs:   151 Layers: 62
 The reached symbolic state space is:
 Elems:       9 Nodes:   147 Arcs:   151 Layers: 62
-Total time of computation (user)   ->  0.030 sec.
+Total time of computation (user)   ->  0.040 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -450,7 +450,7 @@ After union, the reached symbolic state space is:
 Elems:      63 Nodes:   288 Arcs:   308 Layers: 62
 The reached symbolic state space is:
 Elems:      63 Nodes:   288 Arcs:   308 Layers: 62
-Total time of computation (user)   ->  0.110 sec.
+Total time of computation (user)   ->  0.120 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -547,7 +547,7 @@ After union, the reached symbolic state space is:
 Elems:     167 Nodes:   487 Arcs:   538 Layers: 62
 The reached symbolic state space is:
 Elems:     167 Nodes:   487 Arcs:   538 Layers: 62
-Total time of computation (user)   ->  0.360 sec.
+Total time of computation (user)   ->  0.320 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -643,7 +643,7 @@ After union, the reached symbolic state space is:
 Elems:     322 Nodes:   783 Arcs:   877 Layers: 62
 The reached symbolic state space is:
 Elems:     322 Nodes:   783 Arcs:   877 Layers: 62
-Total time of computation (user)   ->  0.670 sec.
+Total time of computation (user)   ->  0.620 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -739,7 +739,7 @@ After union, the reached symbolic state space is:
 Elems:     529 Nodes:  1131 Arcs:  1293 Layers: 62
 The reached symbolic state space is:
 Elems:     529 Nodes:  1131 Arcs:  1293 Layers: 62
-Total time of computation (user)   ->  1.530 sec.
+Total time of computation (user)   ->  1.510 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -834,7 +834,7 @@ After union, the reached symbolic state space is:
 Elems:     800 Nodes:  1470 Arcs:  1726 Layers: 62
 The reached symbolic state space is:
 Elems:     800 Nodes:  1470 Arcs:  1726 Layers: 62
-Total time of computation (user)   ->  2.400 sec.
+Total time of computation (user)   ->  2.330 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 61 variables.
@@ -927,7 +927,7 @@ Elems:       5 Nodes:   153 Arcs:   156 Layers: 62
 Elems:       8 Nodes:   223 Arcs:   229 Layers: 62
 Elems:      45 Nodes:   376 Arcs:   404 Layers: 62
 end
-TSI time of computation (user)   ->  6.880 sec.
+TSI time of computation (user)   ->  6.640 sec.
                           (system) ->  0.000 sec.
 TSI concludes unsafe
 Thanks for using this tool

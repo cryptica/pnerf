@@ -54,7 +54,7 @@ abs: For the bounds:
 11111111111111111111111111111111111111111
 transition system
 Elems:      70 Nodes:   441 Arcs:   497 Layers: 42
-<<< Printing the elements of the IST: 0x18331e70
+<<< Printing the elements of the IST: 0x18df3e70
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
@@ -209,7 +209,7 @@ After union, the reached symbolic state space is:
 Elems:       2 Nodes:    83 Arcs:    83 Layers: 42
 The reached symbolic state space is:
 Elems:       2 Nodes:    83 Arcs:    83 Layers: 42
-Total time of computation (user)   ->  0.010 sec.
+Total time of computation (user)   ->  0.000 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -294,7 +294,7 @@ After union, the reached symbolic state space is:
 Elems:       9 Nodes:   159 Arcs:   166 Layers: 42
 The reached symbolic state space is:
 Elems:       9 Nodes:   159 Arcs:   166 Layers: 42
-Total time of computation (user)   ->  0.010 sec.
+Total time of computation (user)   ->  0.020 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -470,7 +470,7 @@ After union, the reached symbolic state space is:
 Elems:      78 Nodes:   389 Arcs:   429 Layers: 42
 The reached symbolic state space is:
 Elems:      78 Nodes:   389 Arcs:   429 Layers: 42
-Total time of computation (user)   ->  0.080 sec.
+Total time of computation (user)   ->  0.100 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -559,7 +559,7 @@ After union, the reached symbolic state space is:
 Elems:     141 Nodes:   531 Arcs:   594 Layers: 42
 The reached symbolic state space is:
 Elems:     141 Nodes:   531 Arcs:   594 Layers: 42
-Total time of computation (user)   ->  0.120 sec.
+Total time of computation (user)   ->  0.150 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -657,7 +657,7 @@ After union, the reached symbolic state space is:
 Elems:     214 Nodes:   682 Arcs:   777 Layers: 42
 The reached symbolic state space is:
 Elems:     214 Nodes:   682 Arcs:   777 Layers: 42
-Total time of computation (user)   ->  0.220 sec.
+Total time of computation (user)   ->  0.250 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -754,7 +754,7 @@ After union, the reached symbolic state space is:
 Elems:     291 Nodes:   824 Arcs:   954 Layers: 42
 The reached symbolic state space is:
 Elems:     291 Nodes:   824 Arcs:   954 Layers: 42
-Total time of computation (user)   ->  0.400 sec.
+Total time of computation (user)   ->  0.450 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 41 variables.
@@ -836,7 +836,7 @@ Elems:      10 Nodes:   142 Arcs:   150 Layers: 42
 Elems:       8 Nodes:   147 Arcs:   153 Layers: 42
 Elems:      34 Nodes:   204 Arcs:   236 Layers: 42
 end
-TSI time of computation (user)   ->  2.180 sec.
+TSI time of computation (user)   ->  2.470 sec.
                           (system) ->  0.000 sec.
 TSI concludes unsafe
 Thanks for using this tool

@@ -1,8 +1,101 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.2/main.spec.pl]
-* Constructing constraints C_1 for C_0 and A_theta'
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
+[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.2/main.spec.pl]
+Iteration 1
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 2
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 3
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 4
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 5
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 6
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 7
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 8
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 9
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 10
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 11
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 12
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 13
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 14
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 15
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 16
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 17
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 18
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 19
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 20
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 21
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 22
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 23
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 24
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 25
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
+Iteration 26
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A

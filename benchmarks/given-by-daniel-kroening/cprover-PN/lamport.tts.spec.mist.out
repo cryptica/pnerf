@@ -43,7 +43,7 @@ abs: For the bounds:
 111111111111111111111111111111
 transition system
 Elems:      26 Nodes:   410 Arcs:   434 Layers: 31
-<<< Printing the elements of the IST: 0x1904c4a0
+<<< Printing the elements of the IST: 0x188744a0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
@@ -130,7 +130,7 @@ After union, the reached symbolic state space is:
 Elems:      13 Nodes:   144 Arcs:   155 Layers: 31
 The reached symbolic state space is:
 Elems:      13 Nodes:   144 Arcs:   155 Layers: 31
-Total time of computation (user)   ->  0.000 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 30 variables.
@@ -193,7 +193,7 @@ After union, the reached symbolic state space is:
 Elems:      42 Nodes:   342 Arcs:   377 Layers: 31
 The reached symbolic state space is:
 Elems:      42 Nodes:   342 Arcs:   377 Layers: 31
-Total time of computation (user)   ->  0.010 sec.
+Total time of computation (user)   ->  0.020 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 30 variables.
@@ -258,7 +258,7 @@ After union, the reached symbolic state space is:
 Elems:     209 Nodes:   835 Arcs:   973 Layers: 31
 The reached symbolic state space is:
 Elems:     209 Nodes:   835 Arcs:   973 Layers: 31
-Total time of computation (user)   ->  0.080 sec.
+Total time of computation (user)   ->  0.070 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 30 variables.
@@ -405,7 +405,7 @@ Elems:       4 Nodes:    87 Arcs:    89 Layers: 31
 Elems:       2 Nodes:    58 Arcs:    58 Layers: 31
 Elems:       1 Nodes:    32 Arcs:    31 Layers: 31
 end
-TSI time of computation (user)   ->  0.610 sec.
+TSI time of computation (user)   ->  0.640 sec.
                           (system) ->  0.000 sec.
 TSI concludes safe
 Thanks for using this tool

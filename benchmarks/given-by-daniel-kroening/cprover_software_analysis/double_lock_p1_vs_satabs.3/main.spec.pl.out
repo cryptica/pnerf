@@ -1,8 +1,19 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec.pl]
-* Constructing constraints C_1 for C_0 and A_theta'
+[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec.pl]
+Iteration 1
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+Iteration 2
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
 
 -------------------------------------------
 The petri net may not satisfy the property
+Iterations: 2
+Total time: 27218386579
+Z3 time: 13513284296 (49 %)
+Sicstus time: 15261602150 (0 %)
 -------------------------------------------
+
 

@@ -1,7 +1,16 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl]
+[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl]
+Iteration 1
+* Constructing trap constraints C_theta for model A
+* Constructing empty trap constraints C_theta'' for model A
+* Constructing subnet trap constraints C_theta' for model A
 
 -------------------------------------------
 The petri net may not satisfy the property
+Iterations: 1
+Total time: 329172114
+Z3 time: 52186660 (15 %)
+Sicstus time: 101121065 (0 %)
 -------------------------------------------
+
 

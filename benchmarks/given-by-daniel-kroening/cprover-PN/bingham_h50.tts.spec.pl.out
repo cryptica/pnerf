@@ -1,7 +1,12 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50.tts.spec.pl]
+[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50.tts.spec.pl]
 
 -------------------------------------------
 The petri net satisfies the property!
+Iterations: 0
+Total time: 158513455
+Z3 time: 17871138 (11 %)
+Sicstus time: 92556423 (0 %)
 -------------------------------------------
+
 

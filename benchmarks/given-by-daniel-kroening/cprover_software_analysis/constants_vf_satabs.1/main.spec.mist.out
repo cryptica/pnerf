@@ -39,7 +39,7 @@ abs: For the bounds:
 11111111111111111111111111
 transition system
 Elems:      24 Nodes:   115 Arcs:   137 Layers: 27
-<<< Printing the elements of the IST: 0x19cbb790
+<<< Printing the elements of the IST: 0x196f8790
 -<[ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
 -<[ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
@@ -120,7 +120,7 @@ After union, the reached symbolic state space is:
 Elems:       2 Nodes:    54 Arcs:    54 Layers: 27
 The reached symbolic state space is:
 Elems:       2 Nodes:    54 Arcs:    54 Layers: 27
-Total time of computation (user)   ->  0.000 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 26 variables.
@@ -288,7 +288,7 @@ After union, the reached symbolic state space is:
 Elems:       6 Nodes:    64 Arcs:    68 Layers: 27
 The reached symbolic state space is:
 Elems:       6 Nodes:    64 Arcs:    68 Layers: 27
-Total time of computation (user)   ->  0.010 sec.
+Total time of computation (user)   ->  0.000 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 26 variables.
@@ -447,7 +447,7 @@ After union, the reached symbolic state space is:
 Elems:      12 Nodes:    76 Arcs:    86 Layers: 27
 The reached symbolic state space is:
 Elems:      12 Nodes:    76 Arcs:    86 Layers: 27
-Total time of computation (user)   ->  0.000 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 26 variables.
@@ -498,7 +498,7 @@ After union, the reached symbolic state space is:
 Elems:      14 Nodes:    80 Arcs:    92 Layers: 27
 The reached symbolic state space is:
 Elems:      14 Nodes:    80 Arcs:    92 Layers: 27
-Total time of computation (user)   ->  0.010 sec.
+Total time of computation (user)   ->  0.000 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 26 variables.
@@ -535,7 +535,7 @@ eec: ENLARGE begin
 end
 eec: EXPAND begin	Elems:       1 Nodes:    28 Arcs:    27 Layers: 27
 end
-TSI time of computation (user)   ->  0.060 sec.
+TSI time of computation (user)   ->  0.080 sec.
                           (system) ->  0.000 sec.
 TSI concludes unsafe
 Thanks for using this tool

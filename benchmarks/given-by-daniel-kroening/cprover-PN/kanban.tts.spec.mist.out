@@ -39,7 +39,7 @@ abs: For the bounds:
 11111111111111111111111111
 transition system
 Elems:      28 Nodes:   251 Arcs:   277 Layers: 27
-<<< Printing the elements of the IST: 0x18fd5d60
+<<< Printing the elements of the IST: 0x18c6bd60
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1][ 0, 0]>-
@@ -182,4 +182,98 @@ abs: For the merging:
 00000000000000000000000001
 abs: For the bounds:
 11112111110000215100511651
+eec: ENLARGE begin	
+Elems:       5 Nodes:    55 Arcs:    58 Layers: 27
+Elems:      13 Nodes:    82 Arcs:    90 Layers: 27
+Elems:      26 Nodes:   113 Arcs:   128 Layers: 27
+Elems:      45 Nodes:   148 Arcs:   173 Layers: 27
+Elems:      71 Nodes:   178 Arcs:   217 Layers: 27
+Elems:     106 Nodes:   210 Arcs:   268 Layers: 27
+Elems:     149 Nodes:   243 Arcs:   321 Layers: 27
+Elems:     195 Nodes:   276 Arcs:   374 Layers: 27
+Elems:     242 Nodes:   292 Arcs:   400 Layers: 27
+Elems:     292 Nodes:   309 Arcs:   433 Layers: 27
+Elems:     358 Nodes:   336 Arcs:   477 Layers: 27
+Elems:     459 Nodes:   358 Arcs:   519 Layers: 27
+Elems:     617 Nodes:   381 Arcs:   566 Layers: 27
+Elems:     856 Nodes:   377 Arcs:   578 Layers: 27
+Elems:    1208 Nodes:   419 Arcs:   673 Layers: 27
+Elems:    1703 Nodes:   461 Arcs:   775 Layers: 27
+Elems:    2359 Nodes:   502 Arcs:   880 Layers: 27
+Elems:    3190 Nodes:   551 Arcs:  1007 Layers: 27
+Elems:    4224 Nodes:   589 Arcs:  1134 Layers: 27
+Elems:    5517 Nodes:   643 Arcs:  1295 Layers: 27
+Elems:    7097 Nodes:   691 Arcs:  1461 Layers: 27
+Elems:    8959 Nodes:   773 Arcs:  1687 Layers: 27
+Elems:   11041 Nodes:   883 Arcs:  1968 Layers: 27
+Elems:   13260 Nodes:   996 Arcs:  2245 Layers: 27
+Elems:   15509 Nodes:  1128 Arcs:  2561 Layers: 27
+Elems:   17628 Nodes:  1274 Arcs:  2888 Layers: 27
+Elems:   19454 Nodes:  1429 Arcs:  3236 Layers: 27
+Elems:   20893 Nodes:  1577 Arcs:  3558 Layers: 27
+Elems:   21933 Nodes:  1727 Arcs:  3887 Layers: 27
+Elems:   22610 Nodes:  1861 Arcs:  4185 Layers: 27
+Elems:   22974 Nodes:  1930 Arcs:  4291 Layers: 27
+Elems:   23101 Nodes:  1977 Arcs:  4343 Layers: 27
+Elems:   23067 Nodes:  1965 Arcs:  4264 Layers: 27
+Elems:   22960 Nodes:  1884 Arcs:  4023 Layers: 27
+Elems:   22823 Nodes:  1746 Arcs:  3645 Layers: 27
+Elems:   22714 Nodes:  1611 Arcs:  3286 Layers: 27
+Elems:   22614 Nodes:  1452 Arcs:  2912 Layers: 27
+Elems:   22454 Nodes:  1295 Arcs:  2545 Layers: 27
+Elems:   22103 Nodes:  1149 Arcs:  2199 Layers: 27
+Elems:   21423 Nodes:  1036 Arcs:  1947 Layers: 27
+Elems:   20263 Nodes:   908 Arcs:  1687 Layers: 27
+Elems:   18576 Nodes:   823 Arcs:  1516 Layers: 27
+Elems:   16384 Nodes:   743 Arcs:  1349 Layers: 27
+end
+eec: EXPAND begin	Elems:       4 Nodes:    55 Arcs:    57 Layers: 27
+Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       5 Nodes:    56 Arcs:    59 Layers: 27
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:      15 Nodes:   196 Arcs:   209 Layers: 27
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:      98 Nodes:   774 Arcs:   859 Layers: 27
+After union, the reached symbolic state space is:
+Elems:     112 Nodes:   774 Arcs:   864 Layers: 27
+The reached symbolic state space is:
+Elems:     112 Nodes:   774 Arcs:   864 Layers: 27
+Total time of computation (user)   ->  0.060 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 26 variables.
+abs: For the merging:
+10000000000000000000000000
+01000000000000000000000000
+00100000000000000000000000
+00010000000000000000000000
+00001000000000000000000000
+00000100000000000000000000
+00000010000000000000000000
+00000001000000000000000000
+00000000100000000000000000
+00000000010000000000000000
+00000000001000000000000000
+00000000000100000000000000
+00000000000010000000000000
+00000000000001000000000000
+00000000000000100000000000
+00000000000000010000000000
+00000000000000001000000000
+00000000000000000100000000
+00000000000000000010000000
+00000000000000000001000000
+00000000000000000000100000
+00000000000000000000010000
+00000000000000000000001000
+00000000000000000000000100
+00000000000000000000000010
+00000000000000000000000001
+abs: For the bounds:
+12223212120001326210522652
 eec: ENLARGE begin	

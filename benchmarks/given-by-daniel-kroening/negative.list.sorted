@@ -1,2 +1,10 @@
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/newdekker.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/pncsacover.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec

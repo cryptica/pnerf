@@ -25,7 +25,7 @@ abs: For the bounds:
 111111111111
 transition system
 Elems:      13 Nodes:    53 Arcs:    64 Layers: 13
-<<< Printing the elements of the IST: 0x192be8a0
+<<< Printing the elements of the IST: 0x181448a0
 -<[ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1]>-
 -<[ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1]>-
 -<[ 0, 0][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1]>-
@@ -165,7 +165,7 @@ After union, the reached symbolic state space is:
 Elems:      32 Nodes:    42 Arcs:    56 Layers: 13
 The reached symbolic state space is:
 Elems:      32 Nodes:    42 Arcs:    56 Layers: 13
-Total time of computation (user)   ->  0.000 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 12 variables.
@@ -237,7 +237,7 @@ Elems:       2 Nodes:    19 Arcs:    19 Layers: 13
 Elems:       3 Nodes:    18 Arcs:    19 Layers: 13
 Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
 end
-TSI time of computation (user)   ->  0.000 sec.
+TSI time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 TSI concludes safe
 Thanks for using this tool

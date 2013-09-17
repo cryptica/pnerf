@@ -1,7 +1,6 @@
 benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec
 benchmarks/found-in-mist-repo/boundedPNfalseNegative/lamport.spec
 benchmarks/found-in-mist-repo/boundedPNfalseNegative/newdekker.spec
-benchmarks/found-in-mist-repo/boundedPNfalseNegative/newrtp.spec
 benchmarks/found-in-mist-repo/boundedPNfalseNegative/peterson.spec
 benchmarks/found-in-mist-repo/boundedPNfalseNegative/read-write.spec
 benchmarks/found-in-mist-repo/boundedPNnegative/kanban.spec

@@ -1,7 +1,12 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/reaction4.tts.spec.pl]
+[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover-PN/reaction4.tts.spec.pl]
 
 -------------------------------------------
 The petri net satisfies the property!
+Iterations: 0
+Total time: 108898077
+Z3 time: 10173300 (9 %)
+Sicstus time: 59715198 (0 %)
 -------------------------------------------
+
 

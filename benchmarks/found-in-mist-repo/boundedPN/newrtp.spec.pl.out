@@ -1,7 +1,12 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl]
+[-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl]
 
 -------------------------------------------
 The petri net satisfies the property!
+Iterations: 0
+Total time: 103401264
+Z3 time: 10898111 (10 %)
+Sicstus time: 54478086 (0 %)
 -------------------------------------------
+
 

@@ -52,7 +52,7 @@ abs: For the bounds:
 111111111111111111111111111111111111111
 transition system
 Elems:      35 Nodes:   660 Arcs:   693 Layers: 40
-<<< Printing the elements of the IST: 0x18179f40
+<<< Printing the elements of the IST: 0x19824f40
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0]>-
@@ -233,7 +233,7 @@ After union, the reached symbolic state space is:
 Elems:      62 Nodes:   580 Arcs:   630 Layers: 40
 The reached symbolic state space is:
 Elems:      62 Nodes:   580 Arcs:   630 Layers: 40
-Total time of computation (user)   ->  0.040 sec.
+Total time of computation (user)   ->  0.070 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 39 variables.
@@ -310,7 +310,7 @@ After union, the reached symbolic state space is:
 Elems:     358 Nodes:  1672 Arcs:  1891 Layers: 40
 The reached symbolic state space is:
 Elems:     358 Nodes:  1672 Arcs:  1891 Layers: 40
-Total time of computation (user)   ->  0.230 sec.
+Total time of computation (user)   ->  0.260 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 39 variables.
@@ -386,7 +386,7 @@ Elems:       6 Nodes:   125 Arcs:   129 Layers: 40
 Elems:       1 Nodes:    41 Arcs:    40 Layers: 40
 Elems:       1 Nodes:    41 Arcs:    40 Layers: 40
 end
-TSI time of computation (user)   ->  1.070 sec.
+TSI time of computation (user)   ->  1.320 sec.
                           (system) ->  0.000 sec.
 TSI concludes safe
 Thanks for using this tool

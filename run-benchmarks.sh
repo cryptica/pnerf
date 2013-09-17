@@ -5,8 +5,12 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   >$benchmark_dir/negative.list
   >$benchmark_dir/timeout.list
   >$benchmark_dir/error.list
+  >$benchmark_dir/timing.log
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
-    (set -o pipefail; timeout 1m ./src/main $pl_file | tee $pl_file.out)
+    (
+      set -o pipefail;
+      timeout 1m ./src/main -t $benchmark_dir/timing.log $pl_file | tee $pl_file.out
+    )
     result=$?
     if [[ result -eq 0 ]]; then
         echo $pl_file >>$benchmark_dir/positive.list
