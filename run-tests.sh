@@ -126,16 +126,16 @@ test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl 
 function test-delta-constraint {
     if (
             set -e
-            sicstus -l "$sysdir"/src/delta-constraint.pl -- "$sysdir"/tests/$1 2>/dev/null >/tmp/constraint-delta-out.smt2
-            diff "$sysdir"/tests/$2 /tmp/constraint-delta-out.smt2
+            sicstus -l "$sysdir"/src/delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
+            diff "$sysdir"/tests/$3 /tmp/constraint-delta-out.smt2
         ); then
-        echo $2' ... PASS'
+        echo $3' ... PASS'
     else
-        echo $2' ... FAILED'
+        echo $3' ... FAILED'
         exit 6
     fi
 }
-test-delta-constraint petersons-alg/model-atheta1.pl petersons-alg/constraint-delta1.smt2
+test-delta-constraint petersons-alg/model-atheta1.pl petersons-alg/pp-petri-net.pl petersons-alg/constraint-delta1.smt2
 # test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/constraint-delta2.smt2 # TODO: PASS ME
 
 #
@@ -154,6 +154,8 @@ function test-succ-constraints {
     fi
 }
 test-succ-constraints petersons-alg/constraints-c0.smt2 petersons-alg/constraint-delta1.smt2 petersons-alg/constraints-c1.smt2
+test-succ-constraints cyclic-net/constraints-c0.smt2 cyclic-net/constraint-delta-prime1.smt2 cyclic-net/constraints-c1.smt2
+test-succ-constraints empty-trap-net/constraints-c0.smt2 empty-trap-net/constraint-delta2.smt2 empty-trap-net/constraints-c1.smt2
 # test-succ-constraints petersons-alg/constraints-c1.smt2 petersons-alg/constraint-delta2.smt2 petersons-alg/constraints-c2.smt2 # TODO: PASS ME
 
 #

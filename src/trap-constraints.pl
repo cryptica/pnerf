@@ -7,44 +7,6 @@
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
-transition_successors(T) :-
-        transition(T, _, OPs),
-        (   OPs = [O] ->
-            print(O)
-        ;   OPs = [_|_] ->
-            print('(or '),
-            print_seq(OPs),
-            print(')')
-        ;   print(false)
-        ).
-
- % place(p2, [u1], [u3]).
- % transition(u3, [p2,hold1], [p3]).
- % ---------------------------------------
- % p2 -> p3
-
- % place(p2, [u1], [u3]).
- % transition(u3, [p2,hold1], [p3, p4]).
- % ---------------------------------------
- % p2 -> (p3 | p4)
-
- % place(p2, [u1], [u3]).
- % transition(u3, [p2,hold1], []).
- % ---------------------------------------
- % p2 -> false
-
- % place(p2, [u1], [u2,u3]).
- % transition(u2, [p2,hold2], [p3]).
- % transition(u3, [p2,hold1], []).
- % ---------------------------------------
- % p2 -> p3 ^ false
-
- % place(p2, [u1], [u3,u2]).
- % transition(u2, [p2,hold2], [p3,hold1]).
- % transition(u3, [p2,hold1], [p3,hold1]).
- % ---------------------------------------
- % p2 -> (p3 | hold1) ^ (p3 | hold1)
-
 trap_conditions :-
         findall( _,
                  (
@@ -52,23 +14,27 @@ trap_conditions :-
                    format('(declare-fun ~p () Bool)\n', [P])
                  ), _ ),
         nl,
+        findall( _,
+                 (
+                   transition(T, _, _),
+                   format('(declare-fun o_~p () Bool)\n', [T])
+                 ), _ ),
+        nl,
         % 1. S is a trap
         findall( _,
                  (
                    place(P, _, Ts),
-                   (   Ts = [T] ->
-                       format('(assert (implies ~p ', [P]),
-                       transition_successors(T),
-                       print('))\n')
-                   ;   Ts = [_|_] ->
-                       format('(assert (implies ~p (and', [P]),
-                       (   foreach(T, Ts)
-                       do  print(' '),
-                           transition_successors(T)
-                       ),
-                       print(')))\n')
-                   ;   true
-                   )
+                   format('(assert (implies ~p ', [P]),
+                   format_conjunct('o_~p', Ts),
+                   print('))\n')
+                 ), _ ),
+        nl,
+        findall( _,
+                 (
+                   transition(T, _, Ps),
+                   format('(assert (implies o_~p ', [T]),
+                   format_disjunct('~p', Ps),
+                   print('))\n')
                  ), _ ),
         nl,
         % 2. An element of S is marked in the initial state

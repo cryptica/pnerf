@@ -4,7 +4,10 @@
 :- ['misc.pl'].
 
 delta_condition :-
-        findall(P, assignment(P, true), Ps),
+        findall(P, (
+            place(P, _, _),
+            assignment(P, true)
+          ), Ps),
         print('(assert (>= (+ '),
         print_seq(Ps),
         print(') 1))\n').

@@ -22,7 +22,7 @@ trap_conditions :-
         findall( _,
                  (
                    transition(T, _, _),
-                   format('(declare-fun b_~p () Bool)\n', [T]),
+                   format('(declare-fun o_~p () Bool)\n', [T]),
                    format('(declare-fun ~p () Int)\n', [T])
                  ), _ ),
         nl,
@@ -31,16 +31,16 @@ trap_conditions :-
                  (
                    place(P, _, Ts),
                    format('(assert (implies ~p ', [P]),
-                   format_conjunct('b_~p', Ts),
+                   format_conjunct('o_~p', Ts),
                    print('))\n')
                  ), _ ),
         nl,
         findall( _,
                  (
                    transition(T, _, Ps),
-                   format('(assert (= b_~p (implies (> ~p 0) ', [T, T]),
+                   format('(assert (implies (and o_~p (> ~p 0)) ', [T, T]),
                    format_disjunct('~p', Ps),
-                   print(')))\n')
+                   print('))\n')
                  ), _ ),
         nl,
         % 2. S contains a place with an incoming transition in the subnet

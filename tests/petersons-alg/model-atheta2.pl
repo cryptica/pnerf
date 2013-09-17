@@ -12,3 +12,15 @@ assignment(m1t, false).
 assignment(q4, false).
 assignment(p4, false).
 assignment(p3, false).
+assignment(o_u1, true).
+assignment(o_u2, true).
+assignment(o_u3, true).
+assignment(o_u4, false).
+assignment(o_u5, false).
+assignment(o_u6, true).
+assignment(o_v1, false).
+assignment(o_v2, true).
+assignment(o_v3, true).
+assignment(o_v4, true).
+assignment(o_v5, true).
+assignment(o_v6, false).
