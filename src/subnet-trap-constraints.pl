@@ -38,9 +38,13 @@ trap_conditions :-
         findall( _,
                  (
                    transition(T, _, Ps),
-                   format('(assert (implies (and o_~p (> ~p 0)) ', [T, T]),
+                   % TODO: have a look at this
+                   %format('(assert (implies (and o_~p (> ~p 0)) ', [T, T]),
+                   %format_disjunct('~p', Ps),
+                   %print('))\n')
+                   format('(assert (= o_~p (implies (> ~p 0) ', [T, T]),
                    format_disjunct('~p', Ps),
-                   print('))\n')
+                   print(')))\n')
                  ), _ ),
         nl,
         % 2. S contains a place with an incoming transition in the subnet

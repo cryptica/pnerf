@@ -18,9 +18,9 @@
 (assert (implies s5 o_t1))
 (assert (implies s6 o_t3))
 
-(assert (implies (and o_t1 (> t1 0)) (or s1 s2 s6)))
-(assert (implies (and o_t2 (> t2 0)) s3))
-(assert (implies (and o_t3 (> t3 0)) (or s3 s4 s5)))
+(assert (= o_t1 (implies (> t1 0) (or s1 s2 s6))))
+(assert (= o_t2 (implies (> t2 0) s3)))
+(assert (= o_t3 (implies (> t3 0) (or s3 s4 s5))))
 
 (assert (or s1 s2 s3 s4 s5 s6))
 
