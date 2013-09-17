@@ -19,6 +19,10 @@
 (assert (implies s3 (and i_t3 i_t2)))
 (assert (implies s4 i_t3))
 
+(assert (implies o_t1 i_t1))
+(assert (implies o_t2 i_t2))
+(assert (implies o_t3 i_t3))
+
 (assert (implies i_t1 s2))
 (assert (implies i_t2 (or s2 s3)))
 (assert (implies i_t3 (or s3 s4)))
@@ -26,10 +30,6 @@
 (assert (implies o_t1 s1))
 (assert (implies o_t2 s3))
 (assert (implies o_t3 s2))
-
-(assert (implies o_t1 s2))
-(assert (implies o_t2 (or s2 s3)))
-(assert (implies o_t3 (or s3 s4)))
 
 (assert (or o_t2 o_t3))
 

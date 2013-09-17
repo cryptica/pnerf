@@ -46,9 +46,7 @@ trap_conditions :-
         findall( _,
                  (
                    transition(T, _, Ps),
-                   format('(assert (implies o_~p ', [T]),
-                   format_disjunct('~p', Ps),
-                   print('))\n')
+                   format('(assert (implies o_~p i_~p))\n', [T, T])
                  ), _ ),
         nl,
         findall( _,

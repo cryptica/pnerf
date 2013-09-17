@@ -2,6 +2,8 @@ sat
 (model 
   (define-fun s4 () Bool
     false)
+  (define-fun i_t2 () Bool
+    true)
   (define-fun s2 () Bool
     true)
   (define-fun o_t1 () Bool
@@ -17,7 +19,5 @@ sat
   (define-fun o_t3 () Bool
     true)
   (define-fun i_t1 () Bool
-    true)
-  (define-fun i_t2 () Bool
     true)
 )
