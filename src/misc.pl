@@ -19,22 +19,22 @@ format_seq(F, Xs) :-
 print_seq(Xs) :-
         format_seq('~p', Xs).
 
-print_conjunct(Xs) :-
+format_conjunct(F, Xs) :-
         (  Xs = [X] ->
-           format('~p', X)
+           format(F, X)
         ;  Xs = [_,_|_] ->
            print('(and '),
-           print_seq(Xs),
+           format_seq(F, Xs),
            print(')')
         ;  print('true')
         ).
 
-print_disjunct(Xs) :-
+format_disjunct(F, Xs) :-
         (  Xs = [X] ->
-           format('~p', X)
+           format(F, X)
         ;  Xs = [_,_|_] ->
            print('(or '),
-           print_seq(Xs),
+           format_seq(F, Xs),
            print(')')
         ;  print('false')
         ).

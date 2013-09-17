@@ -14,6 +14,7 @@
 (assert (implies s1 (and b_t2 b_t1)))
 (assert (implies s2 b_t2))
 (assert (implies s3 b_t3))
+(assert (implies s4 true))
 (assert (implies s5 b_t1))
 (assert (implies s6 b_t3))
 

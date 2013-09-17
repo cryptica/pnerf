@@ -30,28 +30,16 @@ trap_conditions :-
         findall( _,
                  (
                    place(P, _, Ts),
-                   (   Ts = [T] ->
-                       format('(assert (implies ~p b_~p))\n', [P, T])
-                   ;   Ts = [_|_] ->
-                       format('(assert (implies ~p (and ', [P]),
-                       format_seq('b_~p', Ts),
-                       print(')))\n')
-                   ;   true
-                   )
+                   format('(assert (implies ~p ', [P]),
+                   format_conjunct('b_~p', Ts),
+                   print('))\n')
                  ), _ ),
         nl,
         findall( _,
                  (
                    transition(T, _, Ps),
                    format('(assert (= b_~p (implies (> ~p 0) ', [T, T]),
-                   (   Ps = [P] ->
-                       format('~p', [P])
-                   ;   Ps = [_|_] ->
-                       print('(or '),
-                       print_seq(Ps),
-                       print(')')
-                   ;   print('false')
-                   ),
+                   format_disjunct('~p', Ps),
                    print(')))\n')
                  ), _ ),
         nl,
@@ -63,24 +51,24 @@ trap_conditions :-
                   TsSub = [_|_]
                 ), Ps),
         print('(assert '),
-        print_disjunct(Ps),
+        format_disjunct('~p', Ps),
         print(')\n'),
         nl,
         % 3. No element of S is marked in the model
         findall( _,
                  (
-                   place(Place, _, _),
-                   assignment(Place, N),
+                   place(P, _, _),
+                   assignment(P, N),
                    N > 0,
-                   format('(assert (not ~p))\n', [Place])
+                   format('(assert (not ~p))\n', [P])
                  ), _ ),
         nl,
         % 4. Only used transitions are enabled
         findall( _,
                  (
-                   transition(Transition, _, _),
-                   assignment(Transition, N),
-                   format('(assert (= ~p ~p))\n', [Transition, N])
+                   transition(T, _, _),
+                   assignment(T, N),
+                   format('(assert (= ~p ~p))\n', [T, N])
                  ), _ ).
 
  % Entry point

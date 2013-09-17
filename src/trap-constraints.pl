@@ -77,12 +77,9 @@ trap_conditions :-
                        ;   assignment(V, Val), Val>0
                        )),
                 Ps),
-        (   Ps = [_|_] ->
-            print('(assert (or '),
-            print_seq(Ps),
-            print('))\n')
-        ;   print('(assert false)\n')
-        ),
+        print('(assert '),
+        format_disjunct('~p', Ps),
+        print(')\n'),
         nl,
         % 3. No element of S is marked in the model
         findall( _,

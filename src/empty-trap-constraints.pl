@@ -26,7 +26,7 @@ trap_conditions :-
                    format('(declare-fun o_~p () Bool)\n', [T])
                  ), _ ),
         nl,
-        % 1. S is a trap
+        % 1. S is a trap with corresponding input and output transitions
         findall( _,
                  (
                    place(P, _, Ts),
@@ -46,6 +46,22 @@ trap_conditions :-
         findall( _,
                  (
                    transition(T, _, Ps),
+                   format('(assert (implies o_~p ', [T]),
+                   format_disjunct('~p', Ps),
+                   print('))\n')
+                 ), _ ),
+        nl,
+        findall( _,
+                 (
+                   transition(T, _, Ps),
+                   format('(assert (implies i_~p ', [T]),
+                   format_disjunct('~p', Ps),
+                   print('))\n')
+                 ), _ ),
+        nl,
+        findall( _,
+                 (
+                   transition(T, Ps, _),
                    format('(assert (implies o_~p ', [T]),
                    format_disjunct('~p', Ps),
                    print('))\n')
