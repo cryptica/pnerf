@@ -2,8 +2,6 @@ sat
 (model 
   (define-fun t2 () Int
     0)
-  (define-fun t4 () Int
-    0)
   (define-fun t1 () Int
     1)
   (define-fun t3 () Int

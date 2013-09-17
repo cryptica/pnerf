@@ -7,4 +7,3 @@ assignment(s6, 0).
 assignment(t1, 1).
 assignment(t2, 0).
 assignment(t3, 1).
-assignment(t4, 0).

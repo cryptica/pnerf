@@ -7,8 +7,7 @@
 
 (assert (implies s1 (and s3 (or s1 s2 s6))))
 (assert (implies s2 s3))
-(assert (implies s3 (and s1 (or s3 s4 s5))))
-(assert (implies s4 s1))
+(assert (implies s3 (or s3 s4 s5)))
 (assert (implies s5 (or s1 s2 s6)))
 (assert (implies s6 (or s3 s4 s5)))
 

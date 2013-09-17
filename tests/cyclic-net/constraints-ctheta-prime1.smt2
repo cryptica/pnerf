@@ -10,20 +10,16 @@
 (declare-fun t2 () Int)
 (declare-fun b_t3 () Bool)
 (declare-fun t3 () Int)
-(declare-fun b_t4 () Bool)
-(declare-fun t4 () Int)
 
 (assert (implies s1 (and b_t2 b_t1)))
 (assert (implies s2 b_t2))
-(assert (implies s3 (and b_t4 b_t3)))
-(assert (implies s4 b_t4))
+(assert (implies s3 b_t3))
 (assert (implies s5 b_t1))
 (assert (implies s6 b_t3))
 
 (assert (= b_t1 (implies (> t1 0) (or s1 s2 s6))))
 (assert (= b_t2 (implies (> t2 0) s3)))
 (assert (= b_t3 (implies (> t3 0) (or s3 s4 s5))))
-(assert (= b_t4 (implies (> t4 0) s1)))
 
 (assert (or s1 s2 s3 s4 s5 s6))
 
@@ -35,7 +31,6 @@
 (assert (= t1 1))
 (assert (= t2 0))
 (assert (= t3 1))
-(assert (= t4 0))
 
 (check-sat)
 (get-model)
