@@ -605,6 +605,153 @@ Give by Daniel Kroening:
   \end{tabular}
 \end{center}
 
-\end{document}
+\section{Empty trap net}
+
+\subsection{Method}
+
+\begin{tikzpicture}[
+    state/.style   = {draw, ellipse, aspect=2},
+    action/.style  = {draw, rectangle, align=center},
+    decision/.style= {draw, diamond, aspect=2, align=center},
+    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
+    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
+  ]
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc)
+    {$A:=\text{Model}(C \cup \{\neg P\})$ \\
+     $\text{Methods}:=\text{RefinementMethods}$};
+  \node[decision, below=of modelc] (methods) {$Methods \neq \emptyset$};
+  \node[action, below=of methods] (ctheta)
+    {$\text{Refinement} \leftarrow \text{Methods}$ \\
+     $\text{Methods}:= \text{Methods} \setminus \{\text{Refinement}\}$ \\
+     $C_{\theta}:=C_{\text{Refinement}}(N, A)$};
+  \node[decision, below=of ctheta] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta)
+    {$A_\theta:=\text{Model}(C_\theta)$\\
+     $\delta:=\Delta(A_\theta)$\\
+     $C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {YES};
+  \node[state, right=of yes] (end1) {END};
+  \node[print, right=of methods] (dontknow) {Don't know};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge[edge] (c);
+  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge[edge] node[above]{NO} (yes);
+  \draw (yes) edge[edge] (end1);
+  \draw (satc) edge[edge] node[right]{YES} (modelc);
+  \draw (modelc) edge[edge] (methods);
+  \draw (methods) edge[edge] node[right]{YES}  (ctheta);
+  \draw (methods) edge[edge] node[above]{NO} (dontknow);
+  \draw (ctheta) edge[edge] (satctheta);
+  \draw (dontknow) edge[edge] (end2);
+  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
+  \draw[edge] (satctheta.west) node[above,xshift=-1cm]{NO}
+  -| ([xshift=-2cm] satctheta.west) |- (methods.west);
+  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-3cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+
+\subsection{Petri net}
+
+\begin{dot2tex}[dot,options=-tmath]
+\input{empty-trap-net.dot}
+\end{dot2tex}
+
+\subsection{Constraints $C_0$}
+
+\begin{alignat*}{6}
+&& s_1 &{}={}&   1 &     &     &     &     &     &     \\
+&& s_2 &{}={}&   0 &     &     &     &     &     &     \\
+&& s_3 &{}={}&   0 &{}+{}& t_1 &{}+{}& t_2 &{}-{}& t_3 \\
+&& s_4 &{}={}&   0 &     &     &     &     &{}+{}& t_3 \\
+&& s_5 &{}={}&   0 &     &     &     &     &{}+{}& t_3 \\
+&& s_5 &{}\ge{}& 1 \\
+&\forall p \in S \cup T:& p &{}\ge{}& 0
+\end{alignat*}
+
+\begin{align*}
+  \delta_1 &= (t_1 > 0) \land (t_3 > 0) \implies (t_1 > 0)
+  \delta_2 &= (t_1 > 0) \implies false
+\end{align*}
+
+\subsection{$A_1$}
+\begin{align*}
+  s_1 &= 1 \\
+  s_2 &= 0 \\
+  s_3 &= 0 \\
+  s_4 &= 1 \\
+  s_5 &= 1 \\
+  t_1 &= 0 \\
+  t_2 &= 1 \\
+  t_3 &= 1
+\end{align*}
+
+\subsection{$A_2$}
+\begin{align*}
+  s_1 &= 1 \\
+  s_2 &= 0 \\
+  s_3 &= 1 \\
+  s_4 &= 1 \\
+  s_5 &= 1 \\
+  t_1 &= 1 \\
+  t_2 &= 1 \\
+  t_3 &= 1
+\end{align*}
+
+\subsection{Empty trap $A_{\theta 1}$}
+\begin{align*}
+  s_1 &= false \\
+  s_2 &= false \\
+  s_3 &= true \\
+  s_4 &= true \\
+  s_5 &= false \\
+  s_6 &= false \\
+  o\_t_1 &= false \\
+  o\_t_2 &= true \\
+  o\_t_3 &= true \\
+  i\_t_1 &= true \\
+  i\_t_2 &= true \\
+  i\_t_3 &= true
+\end{align*}
+
+\subsection{Empty trap $A_{\theta 2}$}
+\begin{align*}
+  s_1 &= false \\
+  s_2 &= true \\
+  s_3 &= false \\
+  s_4 &= false \\
+  s_5 &= false \\
+  s_6 &= false \\
+  o\_t_1 &= true \\
+  o\_t_2 &= true \\
+  o\_t_3 &= true \\
+  i\_t_1 &= true \\
+  i\_t_2 &= true \\
+  i\_t_3 &= true
+\end{align*}
+
+\subsection{Benchmark}
+
+Give by Daniel Kroening:
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} & 0 & 27 & 1 & 28 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 16 & 7 & 38 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} & 23 & 46 & 8 & 77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
 
 \end{document}
