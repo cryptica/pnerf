@@ -3,7 +3,7 @@ sat
   (define-fun t2 () Int
     1)
   (define-fun t1 () Int
-    0)
+    1)
   (define-fun t3 () Int
     1)
   (define-fun s5 () Int
@@ -11,7 +11,7 @@ sat
   (define-fun s4 () Int
     1)
   (define-fun s3 () Int
-    0)
+    1)
   (define-fun s2 () Int
     0)
   (define-fun s1 () Int

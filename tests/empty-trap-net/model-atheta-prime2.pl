@@ -1,7 +1,8 @@
 assignment(s1, false).
-assignment(s2, true).
+assignment(s2, false).
 assignment(s3, true).
-assignment(s4, false).
+assignment(s4, true).
+assignment(s5, false).
 assignment(i_t1, true).
 assignment(i_t2, true).
 assignment(i_t3, true).

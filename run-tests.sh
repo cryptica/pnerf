@@ -66,9 +66,11 @@ function test-checking-sat {
 test-checking-sat petersons-alg/constraints-c0.smt2 petersons-alg/model-a1.smt2
 test-checking-sat petersons-alg/constraints-ctheta1.smt2 petersons-alg/model-atheta1.smt2
 test-checking-sat cyclic-net/constraints-c0.smt2 cyclic-net/model-a1.smt2
-test-checking-sat cyclic-net/constraints-ctheta-prime1.smt2 cyclic-net/model-atheta-prime1.smt2
 test-checking-sat empty-trap-net/constraints-c0.smt2 empty-trap-net/model-a1.smt2
+test-checking-sat cyclic-net/constraints-ctheta-prime1.smt2 cyclic-net/model-atheta-prime1.smt2
 test-checking-sat empty-trap-net/constraints-ctheta-prime2.smt2 empty-trap-net/model-atheta-prime2.smt2
+test-checking-sat empty-trap-net/constraints-c1.smt2 empty-trap-net/model-a2.smt2
+test-checking-sat empty-trap-net/constraints-ctheta-prime4.smt2 empty-trap-net/model-atheta-prime4.smt2
 # test-checking-sat petersons-alg/constraints-c1.smt2 petersons-alg/model-a2.smt2 # TODO: PASS ME
 # test-checking-sat petersons-alg/constraints-ctheta2.smt2 petersons-alg/model-atheta2.smt2 # TODO: PASS ME
 
@@ -95,6 +97,8 @@ test-smt2-model-to-prolog-model cyclic-net/model-a1.smt2 cyclic-net/model-a1.pl
 test-smt2-model-to-prolog-model cyclic-net/model-atheta-prime1.smt2 cyclic-net/model-atheta-prime1.pl
 test-smt2-model-to-prolog-model empty-trap-net/model-a1.smt2 empty-trap-net/model-a1.pl
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime2.smt2 empty-trap-net/model-atheta-prime2.pl
+test-smt2-model-to-prolog-model empty-trap-net/model-a2.smt2 empty-trap-net/model-a2.pl
+test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime4.smt2 empty-trap-net/model-atheta-prime4.pl
 # test-smt2-model-to-prolog-model petersons-alg/model-a2.smt2 petersons-alg/model-a2.pl # TODO: PASS ME
 # test-smt2-model-to-prolog-model petersons-alg/model-atheta2.smt2 petersons-alg/model-atheta2.pl # TODO: PASS ME
 
@@ -118,6 +122,7 @@ function test-trap-constraints {
 test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a1.pl petersons-alg/constraints-ctheta1.smt2
 test-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta1.smt2
 test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl empty-trap-net/constraints-ctheta1.smt2
+test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta2.smt2
 # test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a2.pl petersons-alg/constraints-ctheta2.smt2 # TODO: PASS ME
 
 #
@@ -177,6 +182,7 @@ function test-subnet-trap-constraints {
 }
 test-subnet-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta-prime1.smt2
 test-subnet-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl empty-trap-net/constraints-ctheta-prime1.smt2
+test-subnet-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta-prime3.smt2
 
 #
 # Testing construction of constraint delta' for N and A_theta'
@@ -199,7 +205,7 @@ test-delta-prime-constraint cyclic-net/pp-petri-net.pl cyclic-net/model-atheta-p
 #
 # Testing construction of empty trap constraints C_theta' for model A
 #
-function test-subnet-trap-constraints {
+function test-empty-trap-constraints {
     if (
             set -e
             sicstus -l "$sysdir"/src/empty-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
@@ -213,7 +219,8 @@ function test-subnet-trap-constraints {
         exit 8
     fi    
 }
-test-subnet-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl empty-trap-net/constraints-ctheta-prime2.smt2
+test-empty-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl empty-trap-net/constraints-ctheta-prime2.smt2
+test-empty-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta-prime4.smt2
 
 #
 # Testing construction of constraint delta' for N and A_theta'
@@ -231,3 +238,4 @@ function test-empty-trap-delta-constraint {
     fi
 }
 test-empty-trap-delta-constraint empty-trap-net/pp-petri-net.pl empty-trap-net/model-atheta-prime2.pl empty-trap-net/constraint-delta2.smt2
+test-empty-trap-delta-constraint empty-trap-net/pp-petri-net.pl empty-trap-net/model-atheta-prime4.pl empty-trap-net/constraint-delta4.smt2

@@ -21,6 +21,7 @@
 (assert s1)
 
 (assert (not s1))
+(assert (not s3))
 (assert (not s4))
 (assert (not s5))
 
