@@ -4,8 +4,8 @@
 
 :- use_module(library(lists)).
 
-:- ['load-pl-file.pl'].
-:- ['misc.pl'].
+:- ['../load-pl-file.pl'].
+:- ['../misc.pl'].
 
 delta_condition :-
         findall(T, (

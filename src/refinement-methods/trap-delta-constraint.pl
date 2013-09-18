@@ -1,7 +1,7 @@
 :- dynamic assignment/2. % assignment(Preimage, Image).
 
-:- ['load-pl-file.pl'].
-:- ['misc.pl'].
+:- ['../load-pl-file.pl'].
+:- ['../misc.pl'].
 
 delta_condition :-
         findall(P, (

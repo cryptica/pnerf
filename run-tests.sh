@@ -108,7 +108,7 @@ test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime4.smt2 empty-tr
 function test-trap-constraints {
     if (
             set -e
-            sicstus -l "$sysdir"/src/trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta.smt2
             sort "$sysdir"/tests/$3 >/tmp/constraints-ctheta-exp.smt2
             sort /tmp/constraints-ctheta.smt2 >/tmp/constraints-ctheta-out.smt2
             diff /tmp/constraints-ctheta-exp.smt2 /tmp/constraints-ctheta-out.smt2
@@ -131,7 +131,7 @@ test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl 
 function test-delta-constraint {
     if (
             set -e
-            sicstus -l "$sysdir"/src/delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/trap-delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
             diff "$sysdir"/tests/$3 /tmp/constraint-delta-out.smt2
         ); then
         echo $3' ... PASS'
@@ -164,12 +164,12 @@ test-succ-constraints empty-trap-net/constraints-c0.smt2 empty-trap-net/constrai
 # test-succ-constraints petersons-alg/constraints-c1.smt2 petersons-alg/constraint-delta2.smt2 petersons-alg/constraints-c2.smt2 # TODO: PASS ME
 
 #
-# Testing construction of subnet trap constraints C_theta' for model A
+# Testing construction of subnet trap constraints C_theta for model A
 #
 function test-subnet-trap-constraints {
     if (
             set -e
-            sicstus -l "$sysdir"/src/subnet-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/subnet-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
             sort "$sysdir"/tests/$3 >/tmp/constraints-ctheta-prime-exp.smt2
             sort /tmp/constraints-ctheta-prime.smt2 >/tmp/constraints-ctheta-prime-out.smt2
             diff /tmp/constraints-ctheta-prime-exp.smt2 /tmp/constraints-ctheta-prime-out.smt2
@@ -185,12 +185,12 @@ test-subnet-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model
 test-subnet-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta-prime3.smt2
 
 #
-# Testing construction of constraint delta' for N and A_theta'
+# Testing construction of constraint delta for N and A_theta
 #
 function test-delta-prime-constraint {
     if (
             set -e
-            sicstus -l "$sysdir"/src/delta-prime-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/subnet-delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
             diff "$sysdir"/tests/$3 /tmp/constraint-delta-out.smt2
         ); then
         echo $3' ... PASS'
@@ -203,12 +203,12 @@ test-delta-prime-constraint cyclic-net/pp-petri-net.pl cyclic-net/model-atheta-p
 # test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/constraint-delta2.smt2 # TODO: PASS ME
 
 #
-# Testing construction of empty trap constraints C_theta' for model A
+# Testing construction of empty trap constraints C_theta for model A
 #
 function test-empty-trap-constraints {
     if (
             set -e
-            sicstus -l "$sysdir"/src/empty-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/empty-trap-constraints.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraints-ctheta-prime.smt2
             sort "$sysdir"/tests/$3 >/tmp/constraints-ctheta-prime-exp.smt2
             sort /tmp/constraints-ctheta-prime.smt2 >/tmp/constraints-ctheta-prime-out.smt2
             diff /tmp/constraints-ctheta-prime-exp.smt2 /tmp/constraints-ctheta-prime-out.smt2
@@ -223,12 +223,12 @@ test-empty-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-
 test-empty-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta-prime4.smt2
 
 #
-# Testing construction of constraint delta' for N and A_theta'
+# Testing construction of empty trap constraint delta for N and A_theta
 #
 function test-empty-trap-delta-constraint {
     if (
             set -e
-            sicstus -l "$sysdir"/src/empty-trap-delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
+            sicstus -l "$sysdir"/src/refinement-methods/empty-trap-delta-constraint.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >/tmp/constraint-delta-out.smt2
             diff "$sysdir"/tests/$3 /tmp/constraint-delta-out.smt2
         ); then
         echo $3' ... PASS'

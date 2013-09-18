@@ -20,7 +20,7 @@ function print_usage {
 Usage: $0 [options] input_file
 Option list:
  -h | --h | -help | --help    : Prints this help
- -v | --v                     : Verbose output
+ -v                           : Verbose output
  -t timing_file               : Append timing information to timing_file
 
 EOF
@@ -172,89 +172,67 @@ vecho '* Constructing petri net N from input file'
 run_sicstus input-file-to-petri-net.pl /tmp/pp-petri-net.pl `pwd`/$input
 
 vecho
-vecho '* Constructing constraint C_0 for petri net N'
+vecho '* Constructing constraints C_0 for petri net N'
 run_sicstus petri-net-to-constraints.pl /tmp/constraints-c.smt2 /tmp/pp-petri-net.pl
 
+refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+method_count=${#refinement_methods[@]}
+method_index=0
 iter=0
-vecho
-vecho '* Checking SAT(C0)'
-while ( run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2 ); do
-    iter=$((iter+1))
-    echo "Iteration $iter"
-
+while
+  (
     vecho
-    echo '* Constructing trap constraints C_theta for model A'
-    vecho '- model A...'
+    echo "* Iteration $iter"
+    vecho
+    vecho "* Checking SAT(C_$iter)"
+    run_z3 /tmp/constraints-c.smt2 /tmp/model-a.smt2
+  ); do
+    vecho
+    vecho "- sat, getting model A for C_$iter"
     if [ -z "$verbose" ]; then
         cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-a.pl
     else
         cat /tmp/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-a.pl
     fi
-    vecho '- constraints C_theta...'
-    run_sicstus trap-constraints.pl /tmp/constraints-ctheta.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
 
-    vecho
-    vecho '* Checking SAT(C_theta)'
-    if ( ! run_z3 /tmp/constraints-ctheta.smt2 /tmp/model-atheta.smt2 ); then
+    while [[ $method_index -lt $method_count ]]; do
+        method=${refinement_methods[$method_index]}
         vecho
-        echo "* Constructing empty trap constraints C_theta'' for model A"
-        run_sicstus empty-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
+        echo "* Applying refinement method '$method'"
 
-        vecho
-        vecho "* Checking SAT(C_theta'')"
-        if ( ! run_z3 /tmp/constraints-ctheta-prime.smt2 /tmp/model-atheta-prime.smt2 ); then
-          vecho
-          echo "* Constructing subnet trap constraints C_theta' for model A"
-          run_sicstus subnet-trap-constraints.pl /tmp/constraints-ctheta-prime.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
-
-          vecho
-          vecho "* Checking SAT(C_theta')"
-          if ( ! run_z3 /tmp/constraints-ctheta-prime.smt2 /tmp/model-atheta-prime.smt2 ); then
-            exit_with 1 $iter
-          else
-            vecho
-            vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta'"
-            vecho "- model A_theta'..."
+        vecho "- constructing $method constraints C_theta for petri net N and model A"
+        run_sicstus refinement-methods/$method-constraints.pl /tmp/constraints-ctheta.smt2 /tmp/pp-petri-net.pl /tmp/model-a.pl
+        vecho '- checking SAT(C_theta)'
+        if ( run_z3 /tmp/constraints-ctheta.smt2 /tmp/model-atheta.smt2 ); then
+            vecho "- sat, getting model A_theta for C_theta"
             if [ -z "$verbose" ]; then
-                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta-prime.pl
+                cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
             else
-                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta-prime.pl
+                cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
             fi
-            vecho "- constraint d'_$iter..."
-            run_sicstus delta-prime-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl
-          fi
-        else
-            vecho
-            vecho "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta''"
-            vecho "- model A_theta''..."
-            if [ -z "$verbose" ]; then
-                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta-prime.pl
-            else
-                cat /tmp/model-atheta-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta-prime.pl
-            fi
-            vecho "- constraint d'_$iter..."
-            run_sicstus empty-trap-delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta-prime.pl
-        fi
-    else
-        vecho
-        echo "* Constructing constraints C_$iter for C_$((iter-1)) and A_theta"
-        vecho '- model A_theta...'
-        if [ -z "$verbose" ]; then
-            cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >/tmp/model-atheta.pl
-        else
-            cat /tmp/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee /tmp/model-atheta.pl
-        fi
-        vecho "- constraint d_$iter..."
-        run_sicstus delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta.pl
-    fi
 
-    vecho "- constraints c_$iter..."
-    if [ -z "$verbose" ]; then    
-        "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 >/tmp/constraints-cn.smt2
-    else
-        "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 | tee /tmp/constraints-cn.smt2
+            vecho "- constructing $method constraint delta for petri net N and model A_theta"
+            run_sicstus refinement-methods/$method-delta-constraint.pl /tmp/constraint-delta.smt2 /tmp/pp-petri-net.pl /tmp/model-atheta.pl
+
+            vecho "- constructing constraints C_$((iter+1)) for C_$iter and delta"
+            if [ -z "$verbose" ]; then    
+                "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 >/tmp/constraints-cn.smt2
+            else
+                "$sysdir"/succ-constraints.sh /tmp/constraints-c.smt2 /tmp/constraint-delta.smt2 | tee /tmp/constraints-cn.smt2
+            fi
+            mv /tmp/constraints-cn.smt2 /tmp/constraints-c.smt2
+            break
+        else
+            vecho " - unsat"
+            method_index=$((method_index+1))
+        fi
+        vecho
+    done
+    if [[ $method_index -ge $method_count ]]; then
+        exit_with 1 $iter
     fi
-    mv /tmp/constraints-cn.smt2 /tmp/constraints-c.smt2
+    iter=$((iter+1))
 done
+vecho " - unsat"
 
 exit_with 0 $iter

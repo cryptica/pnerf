@@ -6,8 +6,8 @@
 
 :- use_module(library(lists)).
 
-:- ['load-pl-file.pl'].
-:- ['misc.pl'].
+:- ['../load-pl-file.pl'].
+:- ['../misc.pl'].
 
 subnet_transition(T) :-
         assignment(T, N),
