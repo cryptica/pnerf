@@ -34,8 +34,9 @@
 (assert (implies o_t2 s4))
 (assert (implies o_t3 s3))
 
-(assert (or o_t2 o_t3))
+(assert (or o_t1 o_t2 o_t3))
 
+(assert (or o_t1 (not i_t1)))
 (assert (or o_t2 (not i_t2)))
 (assert (or o_t3 (not i_t3)))
 

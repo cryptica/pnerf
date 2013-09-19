@@ -1,21 +1,17 @@
-; variables for places being part of the trap
-
-(declare-const p1 Bool)
-(declare-const p2 Bool)
-(declare-const p3 Bool)
-(declare-const p4 Bool)
-
-(declare-const q1 Bool)
-(declare-const q2 Bool)
-(declare-const q3 Bool)
-(declare-const q4 Bool)
-
-(declare-const m1f Bool)
-(declare-const m1t Bool)
-(declare-const m2t Bool)
-(declare-const m2f Bool)
-(declare-const hold1 Bool)
-(declare-const hold2 Bool)
+(declare-fun p1 () Bool)
+(declare-fun p2 () Bool)
+(declare-fun p3 () Bool)
+(declare-fun p4 () Bool)
+(declare-fun q1 () Bool)
+(declare-fun q2 () Bool)
+(declare-fun q3 () Bool)
+(declare-fun q4 () Bool)
+(declare-fun m1f () Bool)
+(declare-fun m1t () Bool)
+(declare-fun m2t () Bool)
+(declare-fun m2f () Bool)
+(declare-fun hold1 () Bool)
+(declare-fun hold2 () Bool)
 
 (declare-fun o_u1 () Bool)
 (declare-fun o_u2 () Bool)
@@ -29,8 +25,6 @@
 (declare-fun o_v4 () Bool)
 (declare-fun o_v5 () Bool)
 (declare-fun o_v6 () Bool)
-
-; constraints on theta being a trap
 
 (assert (implies p1 o_u1))
 (assert (implies p2 (and o_u3 o_u2)))
@@ -60,20 +54,13 @@
 (assert (implies o_v5 (or q4 hold1)))
 (assert (implies o_v6 (or q1 m2f)))
 
+(assert (or p1 q1 m1f hold1 m2f))
 
-; constraints on theta being marked initially
-
-(assert (or p1 q1 m1f m2f hold1))
-
-; constraints on theta not being marked in the assignment
-
-(assert (and (not p4) (not q4) (not m1t) (not m2t) (not hold2)))
-
-; check if sat
+(assert (not p4))
+(assert (not q4))
+(assert (not m1t))
+(assert (not m2t))
+(assert (not hold2))
 
 (check-sat)
-
-; get model
-
 (get-model)
-
