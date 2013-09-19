@@ -1,20 +1,35 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.2/main.spec.pl]
-Iteration 1
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 2
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 3
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 4
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 5
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 6
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
+* Iteration 0
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 1
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 2
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 3
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 4
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 5
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 6
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+
+-------------------------------------------
+The petri net may not satisfy the property
+Iterations: 6
+Total time: 83180882286
+Z3 time: 40891287624 (49 %)
+Sicstus time: 42625313840 (0 %)
+-------------------------------------------
+
+

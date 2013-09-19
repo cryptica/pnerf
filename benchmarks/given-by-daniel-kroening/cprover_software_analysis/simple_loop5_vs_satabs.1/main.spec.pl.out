@@ -1,20 +1,20 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.1/main.spec.pl]
-Iteration 1
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 2
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
+* Iteration 0
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 1
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
 
 -------------------------------------------
 The petri net may not satisfy the property
-Iterations: 2
-Total time: 632013577
-Z3 time: 95921185 (15 %)
-Sicstus time: 152385859 (0 %)
+Iterations: 1
+Total time: 616982559
+Z3 time: 97718563 (15 %)
+Sicstus time: 150037393 (0 %)
 -------------------------------------------
 
 

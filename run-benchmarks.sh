@@ -9,7 +9,7 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
     (
       set -o pipefail;
-      timeout 1m ./src/main -t $benchmark_dir/timing.log $pl_file | tee $pl_file.out
+      timeout 10m ./src/main -t $benchmark_dir/timing.log $pl_file | tee $pl_file.out
     )
     result=$?
     if [[ result -eq 0 ]]; then

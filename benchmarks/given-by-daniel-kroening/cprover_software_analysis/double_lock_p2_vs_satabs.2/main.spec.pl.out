@@ -1,101 +1,795 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.2/main.spec.pl]
-Iteration 1
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 2
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 3
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 4
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 5
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 6
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-Iteration 7
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 8
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 9
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 10
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 11
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 12
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 13
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 14
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 15
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 16
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 17
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 18
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 19
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 20
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 21
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 22
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 23
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 24
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 25
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
-Iteration 26
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
+* Iteration 0
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 1
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 2
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 3
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 4
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 5
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 6
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 7
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 8
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 9
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 10
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 11
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 12
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 13
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 14
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 15
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 16
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 17
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 18
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 19
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 20
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 21
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 22
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 23
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 24
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 25
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 26
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 27
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 28
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 29
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 30
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 31
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 32
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 33
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 34
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 35
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 36
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 37
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 38
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 39
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 40
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 41
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 42
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 43
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 44
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 45
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 46
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 47
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 48
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 49
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 50
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 51
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 52
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 53
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 54
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 55
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 56
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 57
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 58
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 59
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 60
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 61
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 62
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 63
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 64
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 65
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 66
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 67
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 68
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 69
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 70
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 71
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 72
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 73
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 74
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 75
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 76
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 77
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 78
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 79
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 80
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 81
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 82
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 83
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 84
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 85
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 86
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 87
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 88
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 89
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 90
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 91
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 92
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 93
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 94
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 95
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 96
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 97
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 98
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 99
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 100
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 101
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 102
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 103
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 104
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 105
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 106
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 107
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 108
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 109
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 110
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 111
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 112
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 113
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 114
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 115
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 116
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 117
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 118
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 119
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 120
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 121
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 122
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 123
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 124
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 125
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 126
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 127
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 128
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 129
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 130
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 131
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 132
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 133
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 134
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 135
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 136
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 137
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 138
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 139
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 140
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 141
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 142
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 143
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 144
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 145
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 146
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 147
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 148
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 149
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 150
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 151
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 152
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 153
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 154
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 155
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 156
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 157
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 158
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 159
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 160
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 161
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 162
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 163
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 164
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 165
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 166
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 167
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 168
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 169
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 170
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 171
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 172
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 173
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 174
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 175
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 176
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 177
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 178
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 179
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 180
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 181
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 182
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 183
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 184
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 185
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 186
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 187
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 188
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 189
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 190
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 191
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 192
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 193
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 194
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 195
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 196
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 197
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 198
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
+* Iteration 199
+* Applying refinement method 'trap'

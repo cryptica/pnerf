@@ -1,16 +1,16 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec.pl]
-Iteration 1
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
-* Constructing subnet trap constraints C_theta' for model A
+* Iteration 0
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Applying refinement method 'subnet-trap'
 
 -------------------------------------------
 The petri net may not satisfy the property
-Iterations: 1
-Total time: 279941849
-Z3 time: 44716908 (15 %)
-Sicstus time: 87989413 (0 %)
+Iterations: 0
+Total time: 275535965
+Z3 time: 40606486 (14 %)
+Sicstus time: 83515142 (0 %)
 -------------------------------------------
 
 

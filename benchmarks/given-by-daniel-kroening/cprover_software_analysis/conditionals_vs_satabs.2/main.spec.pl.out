@@ -1,12 +1,13 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl]
+* Iteration 0
 
 -------------------------------------------
 The petri net satisfies the property!
 Iterations: 0
-Total time: 205654301
-Z3 time: 21227079 (10 %)
-Sicstus time: 117352778 (0 %)
+Total time: 203903572
+Z3 time: 20472696 (10 %)
+Sicstus time: 118813386 (0 %)
 -------------------------------------------
 
 

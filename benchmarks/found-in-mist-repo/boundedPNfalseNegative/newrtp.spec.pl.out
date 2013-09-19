@@ -1,15 +1,16 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPNfalseNegative/newrtp.spec.pl]
-Iteration 1
-* Constructing trap constraints C_theta for model A
-* Constructing empty trap constraints C_theta'' for model A
+* Iteration 0
+* Applying refinement method 'trap'
+* Applying refinement method 'empty-trap'
+* Iteration 1
 
 -------------------------------------------
 The petri net satisfies the property!
 Iterations: 1
-Total time: 288172546
-Z3 time: 41037151 (14 %)
-Sicstus time: 81017502 (0 %)
+Total time: 324973739
+Z3 time: 40936382 (12 %)
+Sicstus time: 81106473 (0 %)
 -------------------------------------------
 
 
