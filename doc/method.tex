@@ -13,6 +13,7 @@
 
 \begin{document}
 
+
 \section{Peterson's Algorithm}
 
 \subsection{Method}
@@ -753,5 +754,57 @@ Give by Daniel Kroening:
     \multicolumn{1}{ c| }{} & 23 & 46 & 8 & 77 \\ \cline{3-6}
   \end{tabular}
 \end{center}
+
+\section{Refinement methods}
+
+\subsection{TrapConditions}
+
+For a petri net $N$ and an assignment $A$,
+find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the net $N$.
+  \item $S$ is marked in the initial marking $M_0$.
+  \item $S$ is unmarked in the assignment $A$.
+\end{enumerate}
+
+For such a set $S$, generate a constraint
+$\delta = \left( \sum_{s \in S} s \ge 1 \right)$, ensuring the
+trap is marked in any assignment.
+
+\subsection{SubnetTrapConditions}
+
+For a petri net $N$ and an assignment $A$,
+construct a subnet $N'$ from $N$ that contains only
+the transitions that are fired in $A$.
+For the net $N'$, find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the subnet $N'$.
+  \item $S$ contains a place with an incoming transition in $N'$.
+  \item $S$ is unmarked in the assignment $A$.
+\end{enumerate}
+
+For such a set $S$, generate a constraint
+$\delta = \left( \bigwedge_{t \in T_1} (t > 0) \land
+\bigwedge_{t \in T_2} (t = 0) \implies \sum_{s \in S} s \ge 1 \right)$,
+where $T_1$ are the transitions fired in $A$ and $T_2$ are the
+transitions not fired in $A$. This ensures the trap is marked in the
+corresponding subnet.
+
+\subsection{EmptyTrapConditions}
+
+For a petri net $N$ and an assignment $A$,
+find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the net $N$.
+  \item $S$ is unmarked in the inital marking $M_0$.
+  \item a transition in $S^\bullet$ is fired in $A$
+  \item no transition in $S^\bullet \setminus ^\bullet S$ is fired in $A$
+\end{enumerate}
+
+For such a set $S$, generate a constraint
+$\delta = \left( \bigvee_{t \in S^\bullet} (t > 0) \implies
+\bigvee_{t \in ^\bullet S \setminus S^\bullet} (t > 0) \right)$
+to ensure a proper incoming transition
+is fired if an outgoing transition is fired.
 
 \end{document}
