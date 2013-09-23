@@ -2,6 +2,7 @@
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
 :- dynamic weight/3.       % weight(In, Out, Weight).
 :- dynamic init/2.         % init(PlaceId, InitVal).
+:- dynamic target/2.       % target(PlaceId, TargetVal).
 :- dynamic cond/1.         % cond(Z3Atom).
 
 :- use_module(library(avl)).
@@ -12,6 +13,16 @@
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
+unsafe(M):-
+  forall(
+    target(P, N),
+    ( avl_fetch(P, M, N2),
+      ( integer(N2) ->
+        N2 >= N
+      ; true
+      )
+    )
+  ).
 safe(M) :-
   File = ('/tmp/pp-exp-petri-net.pl'),
   tell(File),
@@ -60,7 +71,10 @@ successor_marking(M, Msucc) :-
        avl_store(Po, Min2, Nnext2, Mout2)
      ; Mout2 = Min2
      )
-  ).
+  ),
+  avl_to_list(M, Ml),
+  avl_to_list(Msucc, Msuccl),
+  format('~p - ~p -> ~p\n', [Ml, T, Msuccl]).
 
 initial_marking(M) :-
   findall(Pm , (
@@ -69,28 +83,40 @@ initial_marking(M) :-
   ), Ml),
   list_to_avl(Ml, M).
 
-% TODO: method is unsound if M is unsafe
-test_safety(M, _) :-
-  safe(M).
-test_safety(M, N) :-
-  N > 0,
-  Nsucc is N - 1,
-  forall(
-    successor_marking(M, Msucc),
-    test_safety(Msucc, Nsucc)
-  ).
+test_safety(M, N, R) :-
+  ( unsafe(M) ->
+    R = unsafe
+  ; safe(M) ->
+    R = safe
+  ; N = 0 ->
+    R = dontknow
+  ; Nsucc is N - 1,
+    ( successor_marking(M, Msucc),
+      test_safety(Msucc, Nsucc, Rsucc),
+      Rsucc \== safe ->
+      R = Rsucc
+    ; R = safe
+    )
+  ),
+  avl_to_list(M, Ml),
+  format('~p is ~p!\n', [Ml, R]).
 
-test_net(N) :-
+test_net(N, R) :-
   initial_marking(M),
-  test_safety(M, N).
+  test_safety(M, N, R).
 
 % Entry point
 :-
-  prolog_flag(argv, Argv),
+  prolog_flag(argv, [ArgN|Argv]),
   (  foreach(F, Argv)
   do load_pl_file(F)
   ),
-  ( test_net(10) ->
+  atom_codes(ArgN, CodeN),
+  number_codes(N, CodeN),
+  test_net(N, R),
+  ( R = safe ->
     halt(0)
-  ; halt(1)
+  ; R = unsafe ->
+    halt(1)
+  ; halt(2)
   ).

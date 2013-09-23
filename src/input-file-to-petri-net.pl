@@ -6,6 +6,7 @@
 :- dynamic init/1.         % init(PlaceId).
 :- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
+:- dynamic target/2.       % target(PlaceId, TargetVal).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
 :- ['load-pl-file.pl'].
@@ -86,4 +87,5 @@ connect_places_w_transitions :-
                  ), _),
         listing(init/2),
         listing(cond/1),
+        listing(target/2),
         halt.
