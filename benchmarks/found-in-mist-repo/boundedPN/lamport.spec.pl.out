@@ -1,13 +1,15 @@
 PETRINIZER: The checker for Petri Nets
-[-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl]
- - unsat
+[10 benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl]
+
+* Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
 
 -------------------------------------------
 The petri net satisfies the property!
-Iterations: 1
-Total time: 226086729
-Z3 time: 32196373 (14 %)
-Sicstus time: 69914656 (0 %)
 -------------------------------------------
 
 
+The petri net satisfies the property!

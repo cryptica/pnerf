@@ -1,12 +1,103 @@
 PETRINIZER: The checker for Petri Nets
-[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl]
+[10 benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl]
+
+* Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
 
 -------------------------------------------
 The petri net may not satisfy the property
-Iterations: 1
-Total time: 578121044
-Z3 time: 95810403 (16 %)
-Sicstus time: 145564483 (0 %)
 -------------------------------------------
 
 
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
+
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
+
+
+The petri net may not satisfy the property

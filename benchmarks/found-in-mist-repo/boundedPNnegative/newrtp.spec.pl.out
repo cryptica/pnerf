@@ -1,12 +1,7 @@
 PETRINIZER: The checker for Petri Nets
-[-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPNnegative/newrtp.spec.pl]
+[10 benchmarks/found-in-mist-repo/boundedPNnegative/newrtp.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
-Iterations: 0
-Total time: 265117120
-Z3 time: 39499670 (14 %)
-Sicstus time: 81246230 (0 %)
--------------------------------------------
+* Constructing petri net N from input file
 
-
+* Starting state space exploration for petri net N
+The petri does not satisfy the property

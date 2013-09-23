@@ -1,12 +1,15 @@
 PETRINIZER: The checker for Petri Nets
-[-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
+[10 benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
+
+* Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+PETRINIZER: The checker for Petri Nets
+[/tmp/pp-exp-petri-net.pl]
 
 -------------------------------------------
 The petri net satisfies the property!
-Iterations: 0
-Total time: 124240749
-Z3 time: 14079729 (11 %)
-Sicstus time: 71116967 (0 %)
 -------------------------------------------
 
 
+The petri net satisfies the property!
