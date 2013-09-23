@@ -172,19 +172,20 @@ function run_sicstus {
 
 vecho
 vecho '* Constructing petri net N from input file'
-run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl `pwd`/$input
+run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $(realpath $input)
 
 vecho
 vecho '* Constructing constraints C_0 for petri net N'
 run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $tmpdir/pp-petri-net.pl
 
 refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+
 method_count=${#refinement_methods[@]}
 iter=0
 while
   (
     vecho
-    echo "* Iteration $iter"
+    vecho "* Iteration $iter"
     vecho
     vecho "* Checking SAT(C_$iter)"
     run_z3 $tmpdir/constraints-c.smt2 $tmpdir/model-a.smt2
@@ -201,7 +202,7 @@ while
     while [[ $method_index -lt $method_count ]]; do
         method=${refinement_methods[$method_index]}
         vecho
-        echo "* Applying refinement method '$method'"
+        vecho "* Applying refinement method '$method'"
 
         vecho "- constructing $method constraints C_theta for petri net N and model A"
         run_sicstus refinement-methods/$method-constraints.pl $tmpdir/constraints-ctheta.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a.pl
@@ -236,6 +237,6 @@ while
     fi
     iter=$((iter+1))
 done
-vecho " - unsat"
+echo " - unsat"
 
 exit_with 0 $iter
