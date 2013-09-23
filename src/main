@@ -237,6 +237,6 @@ while
     fi
     iter=$((iter+1))
 done
-echo " - unsat"
+vecho " - unsat"
 
 exit_with 0 $iter

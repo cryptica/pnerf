@@ -60,10 +60,7 @@ successor_marking(M, Msucc) :-
        avl_store(Po, Min2, Nnext2, Mout2)
      ; Mout2 = Min2
      )
-   ),
-  avl_to_list(M, Ml),
-  avl_to_list(Msucc, Msuccl),
-  format('M - ~p -> Msucc ( ~p -> ~p )\n', [T, Ml, Msuccl]).
+  ).
 
 initial_marking(M) :-
   findall(Pm , (
@@ -72,11 +69,11 @@ initial_marking(M) :-
   ), Ml),
   list_to_avl(Ml, M).
 
+% TODO: method is unsound if M is unsafe
 test_safety(M, _) :-
   safe(M).
 test_safety(M, N) :-
   N > 0,
-  format('testing safety at level ~p\n', N),
   Nsucc is N - 1,
   forall(
     successor_marking(M, Msucc),
