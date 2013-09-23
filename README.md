@@ -20,31 +20,5 @@ pnerf
     p. 16).
 
 * TODO
-  1. Running ./run_with_animation.sh myjob and then pressing C-c stops myjob.
-  2. Let P be the properties of the terminal. Running
-     ./run_with_animation.sh myjob and then pressing C-c restores P. - DONE
-  3. Running ./run_with_animation.sh myjob prints the animation at the end of the output given by myjob. - Example 1 DONE 
-  
-     Example 1:
-     
-     $ ./run_with_animation.sh myjob
-     second 01 - step1
-     [ANIMATION]
-
-     $ ./run_with_animation.sh myjob
-     second 01 - step1
-     second 03 - step2
-     [ANIMATION]
-
-     $ ./run_with_animation.sh myjob
-     second 01 - step1
-     second 03 - step2
-     second 08 - step3
-     [ANIMATION]
-
-     ...and so on...
-
-     Example 2:
-
-     $ ./run_with_animation.sh 'myjob >/dev/null'
-     [ANIMATION]
+  * Analyze runtime and number of iterations of the tool on the benchmarks.
+  * Compare results with results of Daniel Kroening's tool
