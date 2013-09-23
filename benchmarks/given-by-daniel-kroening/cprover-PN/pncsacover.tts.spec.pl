@@ -133,8 +133,14 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s2 1)').
+target(s2, 1).
 cond('(>= l13 1)').
+target(l13, 1).
 cond('(>= l22 1)').
+target(l22, 1).
 cond('(>= l24 1)').
+target(l24, 1).
 cond('(>= l29 1)').
+target(l29, 1).
 cond('(>= l31 1)').
+target(l31, 1).

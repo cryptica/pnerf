@@ -70,3 +70,6 @@ init(s5, 1).
 cond('(>= s5 1)').
 cond('(>= l4 1)').
 cond('(>= l14 1)').
+target(s5, 1).
+target(l4, 1).
+target(l14, 1).

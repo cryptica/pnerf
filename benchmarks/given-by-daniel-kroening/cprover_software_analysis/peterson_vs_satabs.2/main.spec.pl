@@ -2270,4 +2270,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s256 1)').
+target(s256, 1).
 cond('(>= l26 1)').
+target(l26, 1).

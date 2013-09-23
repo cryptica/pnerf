@@ -2018,4 +2018,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s128 1)').
+target(s128, 1).
 cond('(>= l54 1)').
+target(l54, 1).

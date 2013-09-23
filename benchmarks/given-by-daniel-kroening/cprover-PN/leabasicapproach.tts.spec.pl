@@ -58,5 +58,8 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s4 1)').
+target(s4, 1).
 cond('(>= l7 1)').
+target(l7, 1).
 cond('(>= l13 1)').
+target(l13, 1).

@@ -23,4 +23,6 @@ init(x_eq_1).
 init(y_eq_1).
 init(q5).
 cond('(>= p1 1)').
+target(p1, 1).
 cond('(>= q4 1)').
+target(q4, 1).

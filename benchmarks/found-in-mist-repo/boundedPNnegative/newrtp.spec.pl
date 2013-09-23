@@ -21,3 +21,4 @@ transition(t11, [sc3], [point2]).
 transition(t12, [point2], [do]).
 init(begin).
 cond('(>= begin 1)').
+target(begin, 1).

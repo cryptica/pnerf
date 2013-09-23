@@ -30,3 +30,4 @@ init(x7).
 init(x9).
 init(x10).
 cond('(>= x5 1)').
+target(x5, 1).

@@ -100,5 +100,8 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s5 1)').
+target(s5, 1).
 cond('(>= l5 1)').
+target(l5, 1).
 cond('(>= l10 1)').
+target(l10, 1).

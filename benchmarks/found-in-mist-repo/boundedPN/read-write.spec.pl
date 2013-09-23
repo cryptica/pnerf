@@ -25,4 +25,6 @@ init(x8).
 init(x11).
 init(x12).
 cond('(>= x3 1)').
+target(x3, 1).
 cond('(>= x10 1)').
+target(x10, 1).

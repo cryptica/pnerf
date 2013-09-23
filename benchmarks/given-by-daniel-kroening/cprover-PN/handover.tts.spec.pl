@@ -382,4 +382,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s1 1)').
+target(s1, 1).
 cond('(>= l123 2)').
+target(l123, 2).

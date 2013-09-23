@@ -25,4 +25,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s3 1)').
+target(s3, 1).
 cond('(>= l7 2)').
+target(l7, 2).

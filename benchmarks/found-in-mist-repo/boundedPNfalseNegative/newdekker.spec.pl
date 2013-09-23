@@ -34,3 +34,4 @@ init(turneq0).
 init(c0eq1).
 init(c1eq1).
 cond('(>= c0eq0 1)').
+target(c0eq0, 1).

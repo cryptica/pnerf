@@ -163,4 +163,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s16 1)').
+target(s16, 1).
 cond('(>= l23 1)').
+target(l23, 1).

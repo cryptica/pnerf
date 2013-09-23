@@ -579,4 +579,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s64 1)').
+target(s64, 1).
 cond('(>= l27 1)').
+target(l27, 1).

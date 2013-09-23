@@ -238,4 +238,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s32 1)').
+target(s32, 1).
 cond('(>= l22 1)').
+target(l22, 1).

@@ -1796,4 +1796,6 @@ init(l0, init1).
 cond('(>= init1 1)').
 init(s0).
 cond('(>= s128 1)').
+target(s128, 1).
 cond('(>= l48 1)').
+target(l48, 1).
