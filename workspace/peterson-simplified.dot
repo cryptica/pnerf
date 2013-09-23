@@ -1,0 +1,168 @@
+digraph petrinet {
+size="297,420"
+ratio=1.4141
+l2 [label="l2"] ;
+l3 [label="l3"] ;
+l4 [label="l4"] ;
+l1 [label="l1(1)"] ;
+l9 [label="l9"] ;
+s6 [label="s6"] ;
+s7 [label="s7"] ;
+s8 [label="s8"] ;
+s9 [label="s9"] ;
+s10 [label="s10"] ;
+s11 [label="s11"] ;
+l10 [label="l10(1)"] ;
+s12 [label="s12"] ;
+s13 [label="s13"] ;
+l6 [label="l6"] ;
+s14 [label="s14"] ;
+s15 [label="s15"] ;
+s16 [label="s16"] ;
+l12 [label="l12"] ;
+s17 [label="s17"] ;
+s18 [label="s18"] ;
+l7 [label="l7"] ;
+s19 [label="s19"] ;
+s20 [label="s20"] ;
+l5 [label="l5(1)"] ;
+l13 [label="l13"] ;
+s21 [label="s21"] ;
+
+s22 [label="s22"] ;
+l8 [label="l8(1)"] ;
+l14 [label="l14"] ;
+s23 [label="s23"] ;
+l11 [label="l11(1)"] ;
+
+
+
+
+
+t6 [label="t6 -", shape=box] ;
+l1 -> t6;
+t6 -> s6;
+t6 -> l2;
+t7 [label="t7 -", shape=box] ;
+l2 -> t7;
+t7 -> s7;
+t7 -> l3;
+t8 [label="t8 -", shape=box] ;
+l2 -> t8;
+t8 -> s8;
+t8 -> l3;
+t9 [label="t9 -", shape=box] ;
+l3 -> t9;
+t9 -> s10;
+t9 -> l4;
+t10 [label="t10 -", shape=box] ;
+l3 -> t10;
+t10 -> s12;
+t10 -> l4;
+t11 [label="t11 -", shape=box] ;
+l4 -> t11;
+t11 -> s14;
+t11 -> l1;
+t12 [label="t12 -", shape=box] ;
+l5 -> t12;
+t12 -> s19;
+t12 -> l14;
+t13 [label="t13 -", shape=box] ;
+l7 -> t13;
+t13 -> s17;
+t13 -> l13;
+t14 [label="t14 -", shape=box] ;
+l8 -> t14;
+t14 -> s16;
+t14 -> l7;
+t15 [label="t15 -", shape=box] ;
+l8 -> t15;
+t15 -> s21;
+t15 -> l14;
+t16 [label="t16 -", shape=box] ;
+l9 -> t16;
+t16 -> s23;
+t16 -> l10;
+t17 [label="t17 -", shape=box] ;
+l10 -> t17;
+t17 -> s15;
+t17 -> l9;
+t18 [label="t18 +", shape=box] ;
+l5 -> t18;
+s6 -> t18;
+t18 -> l6;
+t19 [label="t19 +", shape=box] ;
+l7 -> t19;
+s7 -> t19;
+t19 -> l8;
+t20 [label="t20", shape=box] ;
+l8 -> t20;
+s8 -> t20;
+t20 -> s9;
+
+t21 [label="t21 +", shape=box] ;
+
+s9 -> t21;
+t21 -> l8;
+t22 [label="t22", shape=box] ;
+l10 -> t22;
+s10 -> t22;
+t22 -> s11;
+
+t23 [label="t23 +", shape=box] ;
+
+s11 -> t23;
+t23 -> l10;
+t24 [label="t24", shape=box] ;
+l7 -> t24;
+s12 -> t24;
+t24 -> s13;
+
+t25 [label="t25 +", shape=box] ;
+
+s13 -> t25;
+t25 -> l7;
+t26 [label="t26 +", shape=box] ;
+l6 -> t26;
+s14 -> t26;
+t26 -> l5;
+t27 [label="t27 +", shape=box] ;
+l11 -> t27;
+s15 -> t27;
+t27 -> l12;
+t28 [label="t28 +", shape=box] ;
+l12 -> t28;
+s16 -> t28;
+t28 -> l13;
+t29 [label="t29", shape=box] ;
+l12 -> t29;
+s17 -> t29;
+t29 -> s18;
+
+t30 [label="t30 +", shape=box] ;
+
+s18 -> t30;
+t30 -> l7;
+t31 [label="t31", shape=box] ;
+l13 -> t31;
+s19 -> t31;
+t31 -> s20;
+
+t32 [label="t32 +", shape=box] ;
+
+s20 -> t32;
+t32 -> l5;
+t33 [label="t33", shape=box] ;
+l13 -> t33;
+s21 -> t33;
+t33 -> s22;
+
+t34 [label="t34 +", shape=box] ;
+
+s22 -> t34;
+t34 -> l8;
+t35 [label="t35 +", shape=box] ;
+l14 -> t35;
+s23 -> t35;
+t35 -> l11;
+}
