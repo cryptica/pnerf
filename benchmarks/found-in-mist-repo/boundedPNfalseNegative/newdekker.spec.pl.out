@@ -1,16 +1,12 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPNfalseNegative/newdekker.spec.pl]
-* Iteration 0
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
 
 -------------------------------------------
 The petri net may not satisfy the property
 Iterations: 0
-Total time: 280906451
-Z3 time: 40510855 (14 %)
-Sicstus time: 85047246 (0 %)
+Total time: 277980449
+Z3 time: 40973525 (14 %)
+Sicstus time: 85087584 (0 %)
 -------------------------------------------
 
 

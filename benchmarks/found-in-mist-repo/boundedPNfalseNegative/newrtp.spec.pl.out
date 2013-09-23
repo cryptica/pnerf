@@ -1,16 +1,13 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPNfalseNegative/newrtp.spec.pl]
-* Iteration 0
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 1
+ - unsat
 
 -------------------------------------------
 The petri net satisfies the property!
 Iterations: 1
-Total time: 324973739
-Z3 time: 40936382 (12 %)
-Sicstus time: 81106473 (0 %)
+Total time: 314320100
+Z3 time: 76034785 (24 %)
+Sicstus time: 115513634 (0 %)
 -------------------------------------------
 
 

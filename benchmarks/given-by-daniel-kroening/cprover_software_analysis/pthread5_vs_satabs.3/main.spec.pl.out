@@ -1,74 +1,12 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.3/main.spec.pl]
-* Iteration 0
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 1
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 2
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 3
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 4
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 5
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 6
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 7
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 8
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 9
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 10
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 11
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 12
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 13
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 14
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 15
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 16
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
-* Iteration 17
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
 
 -------------------------------------------
 The petri net may not satisfy the property
 Iterations: 17
-Total time: 38875598829
-Z3 time: 8695249329 (22 %)
-Sicstus time: 9159250109 (0 %)
+Total time: 38437278112
+Z3 time: 8563372855 (22 %)
+Sicstus time: 9037296081 (0 %)
 -------------------------------------------
 
 

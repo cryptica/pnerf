@@ -1,27 +1,12 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/given-by-daniel-kroening/timing.log benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.1/main.spec.pl]
-* Iteration 0
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 1
-* Applying refinement method 'trap'
-* Iteration 2
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 3
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Iteration 4
-* Applying refinement method 'trap'
-* Applying refinement method 'empty-trap'
-* Applying refinement method 'subnet-trap'
 
 -------------------------------------------
 The petri net may not satisfy the property
 Iterations: 4
-Total time: 1139045413
-Z3 time: 188881265 (16 %)
-Sicstus time: 238386271 (0 %)
+Total time: 1050384010
+Z3 time: 172814677 (16 %)
+Sicstus time: 221084595 (0 %)
 -------------------------------------------
 
 

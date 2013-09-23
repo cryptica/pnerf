@@ -1,13 +1,13 @@
 PETRINIZER: The checker for Petri Nets
 [-t benchmarks/found-in-mist-repo/timing.log benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl]
-* Iteration 0
+ - unsat
 
 -------------------------------------------
 The petri net satisfies the property!
 Iterations: 0
-Total time: 143750801
-Z3 time: 14478830 (10 %)
-Sicstus time: 75224651 (0 %)
+Total time: 183021916
+Z3 time: 31835994 (17 %)
+Sicstus time: 82691486 (0 %)
 -------------------------------------------
 
 
