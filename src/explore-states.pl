@@ -71,10 +71,7 @@ successor_marking(M, Msucc) :-
        avl_store(Po, Min2, Nnext2, Mout2)
      ; Mout2 = Min2
      )
-  ),
-  avl_to_list(M, Ml),
-  avl_to_list(Msucc, Msuccl),
-  format('~p - ~p -> ~p\n', [Ml, T, Msuccl]).
+  ).
 
 initial_marking(M) :-
   findall(Pm , (
@@ -97,9 +94,7 @@ test_safety(M, N, R) :-
       R = Rsucc
     ; R = safe
     )
-  ),
-  avl_to_list(M, Ml),
-  format('~p is ~p!\n', [Ml, R]).
+  ).
 
 test_net(N, R) :-
   initial_marking(M),

@@ -6,10 +6,12 @@ function absolute_path {
 
 sysdir=$(absolute_path $0)
 
-cat <<EOF
-PETRINIZER-EXP: The checker for Petri Nets with state exploration
+function print_title {
+    cat <<EOF
+PETRINIZER: The checker for Petri Nets
 [$1]
 EOF
+}
 
 function print_usage {
     cat <<EOF
@@ -18,10 +20,13 @@ Usage: $0 exploration_depth input_file
 
 EOF
 }
-echo count $#
+
+# Entry point
+print_title "$*"
+
 if [ $# -lt 2 ]; then
     print_usage
-    exit 2
+    exit 3
 fi
 
 depth=$1
@@ -29,9 +34,8 @@ input=$2
 
 if [ ! -e $input ]; then
     echo "ERROR: The file $input does not exist"
-    exit 2
+    exit 3
 fi
-
 
 echo
 echo '* Constructing petri net N from input file'
