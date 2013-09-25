@@ -101,7 +101,7 @@
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 
-\subsection{General refinement method}
+\subsection{General refinement method $\text{Check}(N, M, P)$}
 
 \begin{tikzpicture}[
     state/.style   = {draw, ellipse, aspect=2},
@@ -111,23 +111,24 @@
     edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
   ]
   \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N, M)$};
   \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                                   $C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                        $\delta:=\Delta(A_\theta)$\\
-                                        $C:=C \cup \{\delta\}$};
+  \node[action, below=of satc] (modelc)
+    {$A:=\text{Model}(C \cup \{\neg P\})$ \\
+     $\text{Techniques}:=\text{RefinementTechniques}$};
+     \node[decision, below=of modelc] (methods) {$\text{Techniques} \neq ()$};
+  \node[action, below=of methods] (ctheta)
+    {$\text{Refinement} := \text{Techniques}[0]$ \\
+     $\text{Techniques}:= \text{Techniques} \setminus \{\text{Refinement}\}$ \\
+     $C_{\theta}:=C_{\text{Refinement}}(N, M, A)$};
+  \node[decision, below=of ctheta] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta)
+    {$A_\theta:=\text{Model}(C_\theta)$\\
+     $\delta:=\Delta(N, M, A_\theta)$\\
+     $C:=C \cup \{\delta\}$};
   \node[print, right=of satc] (yes) {YES};
-  \node[action, right=of satctheta] (cthetaprime) {$C_{\theta'}:=\text{SubnetTrapConditions}(N, A)$};
-  \node[decision, below=of cthetaprime] (satcthetaprime) {$\text{SAT}(C_{\theta'})$};
-  \node[action, below=of satcthetaprime] (modelcthetaprime)
-      {$A_{\theta'}:=\text{Model}(C_\theta)$\\
-       $\delta':=\Delta'(A_{\theta'})$\\
-       $C:=C \cup \{\delta'\}$};
-  \node[print, right=of satcthetaprime] (dontknow) {Don't know};
   \node[state, right=of yes] (end1) {END};
+  \node[print, right=of methods] (dontknow) {Don't know};
   \node[state, right=of dontknow] (end2) {END};
 
   \draw (begin) edge[edge] (c);
@@ -135,36 +136,36 @@
   \draw (satc) edge[edge] node[above]{NO} (yes);
   \draw (yes) edge[edge] (end1);
   \draw (satc) edge[edge] node[right]{YES} (modelc);
-  \draw (modelc) edge[edge] (satctheta);
-  \draw (satctheta) edge[edge] node[above]{NO} (cthetaprime);
-  \draw (cthetaprime) edge[edge] (satcthetaprime);
-  \draw (satcthetaprime) edge[edge] node[above]{NO} (dontknow);
+  \draw (modelc) edge[edge] (methods);
+  \draw (methods) edge[edge] node[right]{YES}  (ctheta);
+  \draw (methods) edge[edge] node[above]{NO} (dontknow);
+  \draw (ctheta) edge[edge] (satctheta);
   \draw (dontknow) edge[edge] (end2);
   \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
-  \draw (satcthetaprime) edge[edge] node[right]{YES} (modelcthetaprime);
+  \draw[edge] (satctheta.west) node[above,xshift=-1cm]{NO}
+  -| ([xshift=-2.5cm] satctheta.west) |- (methods.west);
   \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-  \draw[edge] (modelcthetaprime.south) -- ([yshift=-0.5cm] modelcthetaprime.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+  -| ([xshift=-3cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 
 \subsection{State space exploration}
+
 \begin{algorithmic}[1]
-\Function{safety}{$N, M, D$}
-  \If {$unsafe(N, M)$}
-    \State \Return \text{unsafe}
-  \ElsIf {$safe(N, M)$}
-    \State \Return \text{safe}
+\Function{Explore}{$N, M, P, D$}
+  \If {$unsafe(M, P)$}
+    \State \Return \text{No}
+  \ElsIf {$Check(N, M, P) = \text{Yes}$}
+    \State \Return \text{Yes}
   \ElsIf {$D = 0$}
-    \State \Return \text{don't know}
+    \State \Return \text{Don't know}
   \Else
-    \State $\forall M \rightarrow M_i: R_i \gets \Call{safety}{N, M, D-1}$
-    \If {$\exists R_i: R_i = \text{unsafe}$}
-      \State \Return \text{unsafe}
-    \ElsIf {$\exists R_i: R_i = \text{don't know}$}
-      \State \Return \text{don't know}
-    \Else \ShortComment{$\forall R_i: R_i = safe$}
-      \State \Return \text{safe}
+    \State $\forall M \rightarrow M_i: R_i \gets \Call{Explore}{N, M_i, P, D-1}$
+    \If {$\exists R_i: R_i = \text{No}$}
+      \State \Return \text{No}
+    \ElsIf {$\exists R_i: R_i = \text{Don't know}$}
+      \State \Return \text{Don't know}
+    \Else \ShortComment{$\forall R_i: R_i = \text{Yes}$}
+      \State \Return \text{Yes}
     \EndIf
   \EndIf
 \EndFunction
@@ -603,7 +604,7 @@ find a set $S$ that satisfies
   \item $S$ is a trap in the net $N$.
   \item $S$ is unmarked in the inital marking $M_0$.
   \item a transition in $S^\bullet$ is fired in $A$
-  \item no transition in $S^\bullet \setminus ^\bullet S$ is fired in $A$
+  \item no transition in $^\bullet S \setminus S^\bullet$ is fired in $A$
 \end{enumerate}
 
 For such a set $S$, generate a constraint
