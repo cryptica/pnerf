@@ -38,3 +38,8 @@ format_disjunct(F, Xs) :-
            print(')')
         ;  print('false')
         ).
+
+rev_append([], L2, L2).
+rev_append([H|T], L2, [H|T2]) :-
+  rev_append(T, L2, T2).
+
