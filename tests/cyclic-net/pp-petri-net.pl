@@ -25,8 +25,13 @@ weight(t3, s5, 1).
 
 init(s1, 1).
 init(s5, 1).
-cond('(> s1 0)').
-cond('(> s2 0)').
-cond('(> s4 0)').
-cond('(> s5 0)').
 
+cond('(>= s1 1)').
+cond('(>= s2 1)').
+cond('(>= s4 1)').
+cond('(>= s5 1)').
+
+target(s1, 1).
+target(s2, 1).
+target(s4, 1).
+target(s5, 1).

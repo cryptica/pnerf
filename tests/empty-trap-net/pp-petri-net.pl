@@ -22,4 +22,6 @@ weight(t3, s5, 1).
 
 init(s1, 1).
 
-cond('(> s5 0)').
+cond('(>= s5 1)').
+
+target(s5, 1).

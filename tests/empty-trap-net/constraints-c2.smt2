@@ -19,7 +19,7 @@
 (assert (>= t1 0))
 (assert (>= t2 0))
 (assert (>= t3 0))
-(assert (> s5 0))
+(assert (>= s5 1))
 (assert (implies (or (> t2 0) (> t3 0)) (> t1 0)))
 (assert (implies (> t1 0) false))
 (check-sat)
