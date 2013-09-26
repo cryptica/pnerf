@@ -1,15 +1,14 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec.pl]
+[30 benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+starting bfs
+bfs exploring [x10-1,x14-1,x2-1,x6-1]
+exploration depth 0
+queue size 0
+visited size 0
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
+ended bfs with safe
 The petri net satisfies the property!

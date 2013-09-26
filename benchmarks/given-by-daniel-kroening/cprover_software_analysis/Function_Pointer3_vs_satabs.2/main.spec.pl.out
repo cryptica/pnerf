@@ -1,95 +1,278 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl]
+[30 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+starting bfs
+bfs exploring [l0-init1,s0-1]
+exploration depth 0
+queue size 0
+visited size 0
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l8-1,s1-1]
+exploration depth 1
+queue size 1
+visited size 1
 
+bfs exploring [l0-init1,l8-1,s0-1]
+exploration depth 1
+queue size 4
+visited size 2
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l20-1,s1-1]
+exploration depth 2
+queue size 5
+visited size 3
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l16-1,s1-1]
+exploration depth 2
+queue size 8
+visited size 4
 
+bfs exploring [l0-init1,l8-2,s1-1]
+exploration depth 2
+queue size 11
+visited size 5
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l8-2,s0-1]
+exploration depth 2
+queue size 12
+visited size 6
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l20-1,s0-1]
+exploration depth 2
+queue size 11
+visited size 7
 
+bfs exploring [l0-init1,l16-1,s0-1]
+exploration depth 2
+queue size 12
+visited size 8
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l30-1,s1-1]
+exploration depth 3
+queue size 13
+visited size 9
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l28-1,s1-1]
+exploration depth 3
+queue size 16
+visited size 10
 
+bfs exploring [l0-init1,l20-1,l8-1,s1-1]
+exploration depth 3
+queue size 19
+visited size 11
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l20-1,l8-1,s0-1]
+exploration depth 3
+queue size 22
+visited size 12
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l26-1,s1-1]
+exploration depth 3
+queue size 23
+visited size 13
 
+bfs exploring [l0-init1,l24-1,s1-1]
+exploration depth 3
+queue size 26
+visited size 14
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l16-1,l8-1,s1-1]
+exploration depth 3
+queue size 29
+visited size 15
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l16-1,l8-1,s0-1]
+exploration depth 3
+queue size 31
+visited size 16
 
+bfs exploring [l0-init1,l8-3,s1-1]
+exploration depth 3
+queue size 31
+visited size 17
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l8-3,s0-1]
+exploration depth 3
+queue size 32
+visited size 18
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l30-1,s0-1]
+exploration depth 3
+queue size 31
+visited size 19
 
+bfs exploring [l0-init1,l28-1,s0-1]
+exploration depth 3
+queue size 32
+visited size 20
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l26-1,s0-1]
+exploration depth 3
+queue size 33
+visited size 21
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l24-1,s0-1]
+exploration depth 3
+queue size 34
+visited size 22
 
+bfs exploring [l0-init1,l39-1,s1-1]
+exploration depth 4
+queue size 35
+visited size 23
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l38-1,s1-1]
+exploration depth 4
+queue size 37
+visited size 24
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l30-1,l8-1,s1-1]
+exploration depth 4
+queue size 39
+visited size 25
 
+bfs exploring [l0-init1,l30-1,l8-1,s0-1]
+exploration depth 4
+queue size 42
+visited size 26
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l37-1,s1-1]
+exploration depth 4
+queue size 43
+visited size 27
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l36-1,s1-1]
+exploration depth 4
+queue size 45
+visited size 28
 
+bfs exploring [l0-init1,l28-1,l8-1,s1-1]
+exploration depth 4
+queue size 47
+visited size 29
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+bfs exploring [l0-init1,l28-1,l8-1,s0-1]
+exploration depth 4
+queue size 50
+visited size 30
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [l0-init1,l20-2,s1-1]
+exploration depth 4
+queue size 51
+visited size 31
 
+bfs exploring [l0-init1,l16-1,l20-1,s1-1]
+exploration depth 4
+queue size 52
+visited size 32
 
-The petri net may not satisfy the property
+bfs exploring [l0-init1,l20-1,l8-2,s1-1]
+exploration depth 4
+queue size 55
+visited size 33
+
+bfs exploring [l0-init1,l20-1,l8-2,s0-1]
+exploration depth 4
+queue size 56
+visited size 34
+
+bfs exploring [l0-init1,l20-2,s0-1]
+exploration depth 4
+queue size 55
+visited size 35
+
+bfs exploring [l0-init1,l16-1,l20-1,s0-1]
+exploration depth 4
+queue size 54
+visited size 36
+
+bfs exploring [l0-init1,l35-1,s1-1]
+exploration depth 4
+queue size 55
+visited size 37
+
+bfs exploring [l0-init1,l34-1,s1-1]
+exploration depth 4
+queue size 57
+visited size 38
+
+bfs exploring [l0-init1,l26-1,l8-1,s1-1]
+exploration depth 4
+queue size 59
+visited size 39
+
+bfs exploring [l0-init1,l26-1,l8-1,s0-1]
+exploration depth 4
+queue size 61
+visited size 40
+
+bfs exploring [l0-init1,l33-1,s1-1]
+exploration depth 4
+queue size 61
+visited size 41
+
+bfs exploring [l0-init1,l32-1,s1-1]
+exploration depth 4
+queue size 63
+visited size 42
+
+bfs exploring [l0-init1,l24-1,l8-1,s1-1]
+exploration depth 4
+queue size 65
+visited size 43
+
+bfs exploring [l0-init1,l24-1,l8-1,s0-1]
+exploration depth 4
+queue size 67
+visited size 44
+
+bfs exploring [l0-init1,l16-2,s1-1]
+exploration depth 4
+queue size 67
+visited size 45
+
+bfs exploring [l0-init1,l16-1,l8-2,s1-1]
+exploration depth 4
+queue size 68
+visited size 46
+
+bfs exploring [l0-init1,l16-1,l8-2,s0-1]
+exploration depth 4
+queue size 69
+visited size 47
+
+bfs exploring [l0-init1,l16-2,s0-1]
+exploration depth 4
+queue size 68
+visited size 48
+
+bfs exploring [l0-init1,l8-4,s1-1]
+exploration depth 4
+queue size 67
+visited size 49
+
+bfs exploring [l0-init1,l8-4,s0-1]
+exploration depth 4
+queue size 68
+visited size 50
+
+bfs exploring [l0-init1,l39-1,s0-1]
+exploration depth 4
+queue size 67
+visited size 51
+
+bfs exploring [l0-init1,l38-1,s0-1]
+exploration depth 4
+queue size 66
+visited size 52
+
+bfs exploring [l0-init1,l37-1,s0-1]
+exploration depth 4
+queue size 65
+visited size 53
+
+bfs exploring [l0-

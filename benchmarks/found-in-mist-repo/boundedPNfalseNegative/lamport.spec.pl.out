@@ -1,95 +1,24 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/found-in-mist-repo/boundedPNfalseNegative/lamport.spec.pl]
+[30 benchmarks/found-in-mist-repo/boundedPNfalseNegative/lamport.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+starting bfs
+bfs exploring [p2-1,q5-1,x_eq_1-1,y_eq_1-1]
+exploration depth 0
+queue size 0
+visited size 0
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [p2-1,q3-1,x_eq_1-1]
+exploration depth 1
+queue size 0
+visited size 1
 
+bfs exploring [p2-1,q4-1,x_eq_1-1]
+exploration depth 2
+queue size 0
+visited size 2
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-The petri net may not satisfy the property
+ended bfs with safe
+The petri net satisfies the property!

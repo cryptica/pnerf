@@ -1,31 +1,24 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/found-in-mist-repo/boundedPNfalseNegative/newdekker.spec.pl]
+[30 benchmarks/found-in-mist-repo/boundedPNfalseNegative/newdekker.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
+starting bfs
+bfs exploring [beg0-1,beg1-1,c0eq1-1,c1eq1-1,turneq0-1]
+exploration depth 0
+queue size 0
+visited size 0
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+bfs exploring [at21-1,beg0-1,c0eq1-1,c1eq0-1,turneq0-1]
+exploration depth 1
+queue size 0
+visited size 1
 
+bfs exploring [beg0-1,c0eq1-1,c1eq0-1,cs1-1,turneq0-1]
+exploration depth 2
+queue size 0
+visited size 2
 
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
+ended bfs with safe
 The petri net satisfies the property!

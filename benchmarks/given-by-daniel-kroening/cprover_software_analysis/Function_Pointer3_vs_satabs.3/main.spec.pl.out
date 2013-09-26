@@ -1,24 +1,6 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.3/main.spec.pl]
+[30 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.3/main.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
-
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
-
-
-PETRINIZER: The checker for Petri Nets
-[/tmp/pp-exp-petri-net.pl]
