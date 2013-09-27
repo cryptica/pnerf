@@ -11,7 +11,7 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
     (
       set -o pipefail;
-      timeout 10m ./src/explore-states.sh 10 $pl_file | tee $pl_file.out
+      timeout 1m ./src/explore-states.sh 10 $pl_file | tee $pl_file.out
     )
     result=$?
     if [[ result -eq 0 ]]; then
