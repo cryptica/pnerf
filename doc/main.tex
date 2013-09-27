@@ -173,24 +173,29 @@ Figure~\ref{fig-procedure-explore}.
 
 \begin{figure}[h]
 \begin{algorithmic}[1]
-\Function{Explore}{$N, M, P, D$}
-  \If {$unsafe(M, P)$}
-    \State \Return \text{No}
-  \ElsIf {$Check(N, M, P) = \text{Yes}$}
-    \State \Return \text{Yes}
-  \ElsIf {$D = 0$}
-    \State \Return \text{Don't know}
-  \Else
-    \State $\forall M \rightarrow M_i: R_i \gets \Call{Explore}{N, M_i, P, D-1}$
-    \If {$\exists R_i: R_i = \text{No}$}
-      \State \Return \text{No}
-    \ElsIf {$\exists R_i: R_i = \text{Don't know}$}
+\Procedure{Explore}{$N, M_0, P, MaxDepth$}
+  \State $Queue \gets ( M_0 )$
+  \State $Depth[M_0] \gets 0$
+  \State $Visited \gets \emptyset$
+  \While {$\neg empty(Queue)$}
+    \State $M \gets dequeue(Queue)$
+    \State $Visited \gets Visited \cup \{ M \}$
+    \If {$Depth[M] = MaxDepth$}
       \State \Return \text{Don't know}
-    \Else \ShortComment{$\forall R_i: R_i = \text{Yes}$}
-      \State \Return \text{Yes}
     \EndIf
-  \EndIf
-\EndFunction
+    \If {$unsafe(M, P)$}
+      \State \Return \text{No}
+    \EndIf
+    \If {$\text{\bf Check}(N, M, P) = \text{Don't know}$}
+      \For{$M \rightarrow M_i$}
+        \If{$M_i \notin Visited \land M_i \notin Queue$}
+          \State $Depth[M_i] \gets Depth[M] + 1$
+          \State $enqueue(Queue, M_i)$
+        \EndIf
+      \EndFor
+    \EndIf
+  \EndWhile
+\EndProcedure
 \end{algorithmic}
 \caption{Procedure {\bf Explore}}
 \label{fig-procedure-explore}
@@ -267,31 +272,31 @@ We obtained the results in Table~\ref{table-results-explore}.
     \multicolumn{1}{ |c }{} \\ \cline{1-7}
     \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
     \multicolumn{1}{ |c| }{positive} &
-    \textcolor{WildStrawberry}{10} \textcolor{NavyBlue}{?} \textcolor{orange}{8} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
-    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{?} \textcolor{orange}{3} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{10} \textcolor{NavyBlue}{8} \textcolor{orange}{8} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{0} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{3} \textcolor{orange}{3} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{0} \textcolor{orange}{0} &
     11 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{negative} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
-    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{?} \textcolor{orange}{10} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
-    \textcolor{WildStrawberry}{20} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{0} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{8} \textcolor{orange}{10} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{6} \textcolor{orange}{18} &
+    \textcolor{WildStrawberry}{20} \textcolor{NavyBlue}{14} \textcolor{orange}{0} &
     28 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{timeout 1 min} &
-    \textcolor{WildStrawberry}{15} \textcolor{NavyBlue}{?} \textcolor{orange}{15} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
-    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{5} &
-    \textcolor{WildStrawberry}{23} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
+    \textcolor{WildStrawberry}{15} \textcolor{NavyBlue}{15} \textcolor{orange}{15} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{0} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{1} \textcolor{orange}{5} &
+    \textcolor{WildStrawberry}{23} \textcolor{NavyBlue}{22} \textcolor{orange}{18} &
     38 \\ \cline{1-7}
     \multicolumn{1}{ c }{} &
     \multicolumn{1}{ c| }{} &
-    \textcolor{WildStrawberry}{25} \textcolor{NavyBlue}{?} \textcolor{orange}{23} &
-    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{?} \textcolor{orange}{10} &
-    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{?} \textcolor{orange}{26} &
-    \textcolor{WildStrawberry}{43} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
+    \textcolor{WildStrawberry}{25} \textcolor{NavyBlue}{23} \textcolor{orange}{23} &
+    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{8} \textcolor{orange}{10} &
+    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{10} \textcolor{orange}{26} &
+    \textcolor{WildStrawberry}{43} \textcolor{NavyBlue}{36} \textcolor{orange}{18} &
     77 \\ \cline{3-7}
   \end{tabular}
 \end{center}
