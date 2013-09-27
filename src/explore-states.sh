@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Preamble
+
 function absolute_path {
     (cd "$(dirname "$1")" && pwd)
 }
@@ -16,21 +18,43 @@ EOF
 function print_usage {
     cat <<EOF
 
-Usage: $0 exploration_depth input_file
+Usage: $0 [options] input_file
+Option list:
+ -h | --h | -help | --help    : Prints this help
+ -d exploration_depth         : Set exploration depth (default: 0)
 
 EOF
 }
 
 # Entry point
+
 print_title "$*"
 
-if [ $# -lt 2 ]; then
-    print_usage
+# parse parameters
+depth=0
+get_depth=false
+for a in $@; do
+    case $a in
+        -h | --h | -help | --help)
+            print_usage
+            exit 0
+            ;;
+        -d)
+            get_depth=true
+            ;;
+        *) if $get_depth ; then
+             depth=$a
+             get_depth=false
+           else
+             input=$a
+           fi ;;
+    esac
+done
+
+if [ -z $input ]; then
+    echo 'ERROR: No input file was given'
     exit 3
 fi
-
-depth=$1
-input=$2
 
 if [ ! -e $input ]; then
     echo "ERROR: The file $input does not exist"
@@ -39,7 +63,7 @@ fi
 
 echo
 echo '* Constructing petri net N from input file'
-sicstus -l "$sysdir"/input-file-to-petri-net.pl -- $(realpath $input) 2>/dev/null >/tmp/pp-petri-net.pl
+sicstus -l "$sysdir"/input-file-to-petri-net.pl -- $(absolute_path $input)/$(basename $input) 2>/dev/null >/tmp/pp-petri-net.pl
 echo
 echo '* Starting state space exploration for petri net N'
 

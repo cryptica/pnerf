@@ -173,7 +173,7 @@ function run_sicstus {
 
 vecho
 vecho '* Constructing petri net N from input file'
-run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $(realpath $input)
+run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $(absolute_path $input)/$(basename $input)
 
 vecho
 vecho '* Constructing constraints C_0 for petri net N'
