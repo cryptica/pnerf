@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath}
-\usepackage{color}
+\usepackage[usenames,dvipsnames]{color}
 \usepackage{multirow}
 \usepackage{dot2texi}
 \usepackage{algpseudocode}
@@ -17,10 +17,16 @@
 
 \begin{document}
 
-\title{Model checker for Petri nets}
+\title{Implementation Report \\ \mbox{ } \\ Model checker for Petri nets}
 \author{Philipp Meyer \and Rusl\'{a}n Ledesma-Garza}
 % \institute{Technische Universit\"at M\"unchen}
+\date{Fri Sep 27 15:30:20 CEST 2013}
 
+\maketitle
+
+\tableofcontents
+
+\iffalse
 \begin{verbatim}
 - Introduction
   - Diagram of method
@@ -47,11 +53,12 @@
   - Trap, subnet trap, and empty trap conditions
   - State space exploration and trap conditions
 \end{verbatim}
+\fi
 
 \section{Introduction}
 
-This is a report on the development of the model checker Pnerf. We
-report the design of Pnerf and its corresponding experimental
+We report on the implementation of the model checker Pnerf. We
+present the design of Pnerf and its corresponding experimental
 evaluation.
 
 \section{Design}
@@ -106,7 +113,7 @@ $\delta$ that becomes part of abstraction $C$.
   \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
   -| ([xshift=-3cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
-\caption{Design of Pnerf}
+\caption{Method {\bf Check}}
 \label{fig-method}
 \end{figure}
 
@@ -158,13 +165,13 @@ is fired if an outgoing transition is fired.
 
 \subsection{State space exploration}
 
-Pnerf applies the method in Figure~\ref{fig-method} as a subprocedure of
+Pnerf applies method {\bf Check} in Figure~\ref{fig-method} as a subprocedure of
 the state space exploration procedure {\bf Explore} in
 Figure~\ref{fig-procedure-explore}.
 
 \verb?TODO: update?
 
-\begin{figure}
+\begin{figure}[h]
 \begin{algorithmic}[1]
 \Function{Explore}{$N, M, P, D$}
   \If {$unsafe(M, P)$}
@@ -197,13 +204,13 @@ We applied Pnerf to the set of benchmarks
 four configurations for the refinement sequence.
 \begin{itemize}
   \item No refinement
-  \item \textcolor{green}{Trap conditions}
+  \item \textcolor{OliveGreen}{Trap conditions}
   \item \textcolor{red}{Trap conditions, subnet trap conditions}
   \item \textcolor{blue}{Trap conditions, subnet trap conditions, empty trap conditions}
 \end{itemize}
 We obtained the results in Table~\ref{table-results-method}.
 
-\begin{table}
+\begin{table}[h]
 \begin{center}
   \begin{tabular}{ cc | r | r | r | r | }
     \cline{3-5}
@@ -213,27 +220,27 @@ We obtained the results in Table~\ref{table-results-method}.
     \multicolumn{1}{ |c }{} \\ \cline{1-6}
     \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
     \multicolumn{1}{ |c| }{positive} &
-    8 \textcolor{green}{8} \textcolor{red}{8} \textcolor{blue}{8} &
-    3 \textcolor{green}{3} \textcolor{red}{3} \textcolor{blue}{3} &
-    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    8 \textcolor{OliveGreen}{8} \textcolor{red}{8} \textcolor{blue}{8} &
+    3 \textcolor{OliveGreen}{3} \textcolor{red}{3} \textcolor{blue}{3} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
     11 \\ \cline{2-6}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{negative} &
-    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{0} &
-    28 \textcolor{green}{28} \textcolor{red}{28} \textcolor{blue}{27} &
-    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{1} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    28 \textcolor{OliveGreen}{28} \textcolor{red}{28} \textcolor{blue}{27} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{1} &
     28 \\ \cline{2-6}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{timeout 1 min} &
-    15 \textcolor{green}{15} \textcolor{red}{15} \textcolor{blue}{15} &
-    23 \textcolor{green}{23} \textcolor{red}{19} \textcolor{blue}{16} &
-    0 \textcolor{green}{0} \textcolor{red}{4} \textcolor{blue}{7} &
+    15 \textcolor{OliveGreen}{15} \textcolor{red}{15} \textcolor{blue}{15} &
+    23 \textcolor{OliveGreen}{23} \textcolor{red}{19} \textcolor{blue}{16} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{4} \textcolor{blue}{7} &
     38 \\ \cline{1-6}
     \multicolumn{1}{ c }{} &
     \multicolumn{1}{ c| }{} &
-    23 \textcolor{green}{23} \textcolor{red}{23} \textcolor{blue}{23} &
-    54 \textcolor{green}{54} \textcolor{red}{50} \textcolor{blue}{46} &
-    0 \textcolor{green}{0} \textcolor{red}{4} \textcolor{blue}{8} &
+    23 \textcolor{OliveGreen}{23} \textcolor{red}{23} \textcolor{blue}{23} &
+    54 \textcolor{OliveGreen}{54} \textcolor{red}{50} \textcolor{blue}{46} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{4} \textcolor{blue}{8} &
     77 \\ \cline{3-6}
   \end{tabular}
 \end{center}
@@ -244,13 +251,13 @@ We obtained the results in Table~\ref{table-results-method}.
 For the purpose of checking the remaining 3 `don't know` benchmarks,
 we applied the procedure {\bf Explore} with the following parameters.
 \begin{itemize}
-  \item Depth = 30, RefinementTechniques=(Trap conditions), timeout=1min
-  \item \textcolor{red}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=1min}
-  \item \textcolor{blue}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=10min}
+  \item \textcolor{WildStrawberry}{Depth = 30, RefinementTechniques=(Trap conditions), timeout=1min}
+  \item \textcolor{NavyBlue}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=1min}
+  \item \textcolor{orange}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=10min}
 \end{itemize}
 We obtained the results in Table~\ref{table-results-explore}.
 
-\begin{table}
+\begin{table}[h]
 \begin{center}
   \begin{tabular}{ cc | r | r | r | r | r | }
     \cline{3-6}
@@ -260,31 +267,31 @@ We obtained the results in Table~\ref{table-results-explore}.
     \multicolumn{1}{ |c }{} \\ \cline{1-7}
     \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
     \multicolumn{1}{ |c| }{positive} &
-    10 \textcolor{red}{?} \textcolor{blue}{8} &
-    0 \textcolor{red}{?} \textcolor{blue}{0} &
-    1 \textcolor{red}{?} \textcolor{blue}{3} &
-    0 \textcolor{red}{?} \textcolor{blue}{0} &
+    \textcolor{WildStrawberry}{10} \textcolor{NavyBlue}{?} \textcolor{orange}{8} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{?} \textcolor{orange}{3} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
     11 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{negative} &
-    0 \textcolor{red}{?} \textcolor{blue}{0} &
-    8 \textcolor{red}{?} \textcolor{blue}{10} &
-    0 \textcolor{red}{?} \textcolor{blue}{18} &
-    20 \textcolor{red}{?} \textcolor{blue}{0} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{?} \textcolor{orange}{10} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
+    \textcolor{WildStrawberry}{20} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
     28 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{timeout 1 min} &
-    15 \textcolor{red}{?} \textcolor{blue}{15} &
-    0 \textcolor{red}{?} \textcolor{blue}{0} &
-    0 \textcolor{red}{?} \textcolor{blue}{5} &
-    23 \textcolor{red}{?} \textcolor{blue}{18} &
+    \textcolor{WildStrawberry}{15} \textcolor{NavyBlue}{?} \textcolor{orange}{15} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{0} &
+    \textcolor{WildStrawberry}{0} \textcolor{NavyBlue}{?} \textcolor{orange}{5} &
+    \textcolor{WildStrawberry}{23} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
     38 \\ \cline{1-7}
     \multicolumn{1}{ c }{} &
     \multicolumn{1}{ c| }{} &
-    25 \textcolor{red}{?} \textcolor{blue}{23} &
-    8 \textcolor{red}{?} \textcolor{blue}{10} &
-    1 \textcolor{red}{?} \textcolor{blue}{26} &
-    43 \textcolor{red}{?} \textcolor{blue}{18} &
+    \textcolor{WildStrawberry}{25} \textcolor{NavyBlue}{?} \textcolor{orange}{23} &
+    \textcolor{WildStrawberry}{8} \textcolor{NavyBlue}{?} \textcolor{orange}{10} &
+    \textcolor{WildStrawberry}{1} \textcolor{NavyBlue}{?} \textcolor{orange}{26} &
+    \textcolor{WildStrawberry}{43} \textcolor{NavyBlue}{?} \textcolor{orange}{18} &
     77 \\ \cline{3-7}
   \end{tabular}
 \end{center}
@@ -292,35 +299,18 @@ We obtained the results in Table~\ref{table-results-explore}.
 \label{table-results-explore}
 \end{table}
 
+\subsection{Observations}
+
+
+
+
 \section{Experimental setups}
 
 \subsection{Trap conditons}
-\begin{verbatim}
-    - diagram
-    - example: Peterson's
-\end{verbatim}
 
-\subsection{Trap and subnet trap conditions}
-\begin{verbatim}
-    - diagram
-    - example: cyclic net
-\end{verbatim}
+The corresponding method appears in Figure~\ref{fig-method-trap}.
 
-\subsection{With trap refinement}
-\begin{verbatim}
-    - diagram placeholder
-    - example: Empty trap condition net
-\end{verbatim}
-
-\subsection{State space exploration and trap conditions}
-\begin{verbatim}
-    - diagram placeholder
-    - example: Empty trap condition net
-\end{verbatim}
-
-
-\newpage
-
+\begin{figure}[h]
 \begin{tikzpicture}[
     state/.style   = {draw, ellipse, aspect=2},
     action/.style  = {draw, rectangle, align=center},
@@ -354,70 +344,17 @@ We obtained the results in Table~\ref{table-results-explore}.
   \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
+\caption{Method {\bf Check} with RefinementTechniques=({\bf Trap
+    conditions})}
+\label{fig-method-trap}
+\end{figure}
 
-\subsection{With trap and subnet trap refinement}
-
-\begin{tikzpicture}[
-    state/.style   = {draw, ellipse, aspect=2},
-    action/.style  = {draw, rectangle, align=center},
-    decision/.style= {draw, diamond, aspect=2, align=center},
-    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
-    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
-  ]
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                                   $C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                        $\delta:=\Delta(A_\theta)$\\
-                                        $C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {YES};
-  \node[action, right=of satctheta] (cthetaprime) {$C_{\theta'}:=\text{SubnetTrapConditions}(N, A)$};
-  \node[decision, below=of cthetaprime] (satcthetaprime) {$\text{SAT}(C_{\theta'})$};
-  \node[action, below=of satcthetaprime] (modelcthetaprime)
-      {$A_{\theta'}:=\text{Model}(C_\theta)$\\
-       $\delta':=\Delta'(A_{\theta'})$\\
-       $C:=C \cup \{\delta'\}$};
-  \node[print, right=of satcthetaprime] (dontknow) {Don't know};
-  \node[state, right=of yes] (end1) {END};
-  \node[state, right=of dontknow] (end2) {END};
-
-  \draw (begin) edge[edge] (c);
-  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge[edge] node[above]{NO} (yes);
-  \draw (yes) edge[edge] (end1);
-  \draw (satc) edge[edge] node[right]{YES} (modelc);
-  \draw (modelc) edge[edge] (satctheta);
-  \draw (satctheta) edge[edge] node[above]{NO} (cthetaprime);
-  \draw (cthetaprime) edge[edge] (satcthetaprime);
-  \draw (satcthetaprime) edge[edge] node[above]{NO} (dontknow);
-  \draw (dontknow) edge[edge] (end2);
-  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
-  \draw (satcthetaprime) edge[edge] node[right]{YES} (modelcthetaprime);
-  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-  \draw[edge] (modelcthetaprime.south) -- ([yshift=-0.5cm] modelcthetaprime.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-
-\subsection{General refinement method $\text{Check}(N, M, P)$}
-
-
-\subsection{State space exploration}
-
-
-
-\section{Petri nets tested}
-
-\subsection{Peterson's Algorithm}
+\subsubsection{Example: Peterson's Algorithm}
 
 Taken from Javier's notes on petri nets
 (http://www7.in.tum.de/um/courses/petri/SS2013/PNSkript.pdf, p. 16).
-Tested with trap refinement.
 
-\subsubsection{Constraints $C_0$}
+\paragraph{Constraints $C_0$}
 
 \begin{alignat*}{15}
 && p_1 &{}={}& 1
@@ -472,7 +409,7 @@ Tested with trap refinement.
   \delta_2 &= p_2 \lor q_3 \lor (m_1=f) \lor (hold=1)
 \end{align*}
 
-\subsubsection{$A_1$}
+\paragraph{$A_1$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -503,7 +440,7 @@ Tested with trap refinement.
   v_6 &= 0
 \end{align*}
 
-\subsubsection{$A_2$}
+\paragraph{$A_2$}
 
 \begin{align*}
   p_1 &= 0 \\
@@ -534,7 +471,7 @@ Tested with trap refinement.
   v_6 &= 1
 \end{align*}
 
-\subsubsection{$A_{\theta 1}$}
+\paragraph{$A_{\theta 1}$}
 \begin{align*}
   p_1 &= 0 \\
   p_2 &= 0 \\
@@ -552,7 +489,7 @@ Tested with trap refinement.
   (hold=2) &= 1
 \end{align*}
 
-\subsubsection{$A_{\theta 2}$}
+\paragraph{$A_{\theta 2}$}
 \begin{align*}
   p_1 &= 0 \\
   p_2 &= 1 \\
@@ -570,7 +507,7 @@ Tested with trap refinement.
   (hold=2) &= 0
 \end{align*}
 
-\subsubsection{$C_\theta$}
+\paragraph{$C_\theta$}
 
 \circled{1}
 \begin{align*}
@@ -617,17 +554,71 @@ $\circled{3}_2$
 \end{align*}
 
 
-\subsection{Cyclic net}
 
-Taken and modified from Stephan Melzer's Dissertation, p. 140.
 
-Tested with trap and subnet trap refinement.
+\subsection{Trap conditions and subnet trap conditions}
+
+The corresponding method appears in Figure~\ref{fig-method-trap-subnet}.
+
+\begin{figure}[h]
+  \begin{tikzpicture}[
+    state/.style   = {draw, ellipse, aspect=2},
+    action/.style  = {draw, rectangle, align=center},
+    decision/.style= {draw, diamond, aspect=2, align=center},
+    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
+    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
+    ]
+    \node[state] (begin) {BEGIN};
+    \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+    \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+    \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+      $C_{\theta}:=\text{TrapConditions}(N, A)$};
+    \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+    \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+      $\delta:=\Delta(A_\theta)$\\
+      $C:=C \cup \{\delta\}$};
+    \node[print, right=of satc] (yes) {YES};
+    \node[action, right=of satctheta] (cthetaprime) {$C_{\theta'}:=\text{SubnetTrapConditions}(N, A)$};
+    \node[decision, below=of cthetaprime] (satcthetaprime) {$\text{SAT}(C_{\theta'})$};
+    \node[action, below=of satcthetaprime] (modelcthetaprime)
+    {$A_{\theta'}:=\text{Model}(C_\theta)$\\
+      $\delta':=\Delta'(A_{\theta'})$\\
+      $C:=C \cup \{\delta'\}$};
+    \node[print, right=of satcthetaprime] (dontknow) {Don't know};
+    \node[state, right=of yes] (end1) {END};
+    \node[state, right=of dontknow] (end2) {END};
+
+    \draw (begin) edge[edge] (c);
+    \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
+    \draw (satc) edge[edge] node[above]{NO} (yes);
+    \draw (yes) edge[edge] (end1);
+    \draw (satc) edge[edge] node[right]{YES} (modelc);
+    \draw (modelc) edge[edge] (satctheta);
+    \draw (satctheta) edge[edge] node[above]{NO} (cthetaprime);
+    \draw (cthetaprime) edge[edge] (satcthetaprime);
+    \draw (satcthetaprime) edge[edge] node[above]{NO} (dontknow);
+    \draw (dontknow) edge[edge] (end2);
+    \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
+    \draw (satcthetaprime) edge[edge] node[right]{YES} (modelcthetaprime);
+    \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+    -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+    \draw[edge] (modelcthetaprime.south) -- ([yshift=-0.5cm] modelcthetaprime.south)
+    -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+  \end{tikzpicture}
+  \caption{Method {\bf Check} with RefinementTechniques=({\bf Trap
+      conditions}, {\bf Subnet trap conditions})}
+  \label{fig-method-trap-subnet}
+\end{figure}
+
+\subsubsection{Example: Cyclic net}
+
+Modified version of Stephan Melzer's Dissertation, p. 140.
 
 \begin{dot2tex}[dot,options=-tmath]
 \input{cyclic-net.dot}
 \end{dot2tex}
 
-\subsubsection{Constraints $C_0$}
+\paragraph{Constraints $C_0$}
 
 \begin{alignat*}{6}
 && s_1 &{}={}&   1 &     &     &{}-{}& t_2 &     &     \\
@@ -647,7 +638,7 @@ Tested with trap and subnet trap refinement.
   \delta'_1 &= (t_1 > 0) \land (t_2 = 0) \land (t_3 > 0) \implies (s_3 > 0)
 \end{align*}
 
-\subsubsection{$A_1$}
+\paragraph{$A_1$}
 \begin{align*}
   s_1 &= 1 \\
   s_2 &= 1 \\
@@ -660,7 +651,7 @@ Tested with trap and subnet trap refinement.
   t_3 &= 1
 \end{align*}
 
-\subsubsection{$A_{\theta'1}$}
+\paragraph{$A_{\theta'1}$}
 \begin{align*}
   s_1 &= 0 \\
   s_2 &= 0 \\
@@ -670,7 +661,7 @@ Tested with trap and subnet trap refinement.
   s_6 &= 0
 \end{align*}
 
-\subsubsection{$C_\theta$}
+\paragraph{$C_\theta$}
 
 \begin{align*}
   s_1 &\implies o\_t_1 \land o\_t_2 \\
@@ -692,7 +683,7 @@ Tested with trap and subnet trap refinement.
   \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
 \end{align*}
 
-\subsubsection{$C_{\theta'}$}
+\paragraph{$C_{\theta'}$}
 
 \begin{align*}
   s_1 &\implies o\_t_1 \land o\_t_2 \\
@@ -718,15 +709,30 @@ Tested with trap and subnet trap refinement.
   \neg s_1 \land \neg s_2 \land \neg s_4 \land \neg s_5
 \end{align*}
 
-\subsection{Empty trap condition net}
 
-Tested with trap, subnet trap and empty trap refinement.
+\subsection{Trap conditions, subnet trap conditions, and empty trap
+  conditions}
+
+The corresponding method appears in
+Figure~\ref{fig-method-trap-subnet-empty}.
+
+\begin{figure}[h]
+  \verb?TODO: figure?
+  \caption{Method {\bf Check} with RefinementTechniques=({\bf Trap
+      conditions}, {\bf Subnet trap conditions}, {\bf Empty trap
+      conditions})}
+  \label{fig-method-trap-subnet-empty}
+\end{figure}
+
+\subsubsection{Example: Empty trap condition net}
+
+This example was created by Philipp.
 
 \begin{dot2tex}[dot,options=-tmath]
 \input{empty-trap-net.dot}
 \end{dot2tex}
 
-\subsection{Constraints $C_0$}
+\paragraph{Constraints $C_0$}
 
 \begin{alignat*}{6}
 && s_1 &{}={}&   1 &     &     &     &     &     &     \\
@@ -743,7 +749,7 @@ Tested with trap, subnet trap and empty trap refinement.
   \delta_2 &= (t_1 > 0) \implies false
 \end{align*}
 
-\subsection{$A_1$}
+\paragraph{$A_1$}
 \begin{align*}
   s_1 &= 1 \\
   s_2 &= 0 \\
@@ -755,7 +761,7 @@ Tested with trap, subnet trap and empty trap refinement.
   t_3 &= 1
 \end{align*}
 
-\subsection{$A_2$}
+\paragraph{$A_2$}
 \begin{align*}
   s_1 &= 1 \\
   s_2 &= 0 \\
@@ -767,7 +773,7 @@ Tested with trap, subnet trap and empty trap refinement.
   t_3 &= 1
 \end{align*}
 
-\subsection{Empty trap $A_{\theta 1}$}
+\paragraph{Empty trap $A_{\theta 1}$}
 \begin{align*}
   s_1 &= false \\
   s_2 &= false \\
@@ -783,7 +789,7 @@ Tested with trap, subnet trap and empty trap refinement.
   i\_t_3 &= true
 \end{align*}
 
-\subsection{Empty trap $A_{\theta 2}$}
+\paragraph{Empty trap $A_{\theta 2}$}
 \begin{align*}
   s_1 &= false \\
   s_2 &= true \\
@@ -798,5 +804,13 @@ Tested with trap, subnet trap and empty trap refinement.
   i\_t_2 &= true \\
   i\_t_3 &= true
 \end{align*}
+
+\subsection{State space exploration and trap conditions}
+
+The design of the state space exploration is given in Figure~\ref{fig-procedure-explore}.
+
+% \subsubsection{Example: TBA}
+
+% \verb?TODO: intermediate results for this example?
 
 \end{document}
