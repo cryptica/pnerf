@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass{article}
 
 \usepackage{amsmath}
 \usepackage{multirow}
@@ -16,9 +16,233 @@
 
 \begin{document}
 
-\section{Method}
+\title{Model checker for Petri nets}
+\author{Philipp Meyer \and Rusl\'{a}n Ledesma-Garza}
+% \institute{Technische Universit\"at M\"unchen}
+
+\begin{verbatim}
+- Introduction
+  - Diagram of method
+- Refinement techniques
+  - Trap conditions
+  - Subnet trap conditions
+  - Empty trap conditions
+- State space exploration
+- Experiments
+  - Trap conditions
+    - diagram
+    - example: Peterson's
+  - Trap and subnet trap conditions
+    - diagram
+    - example: cyclic net
+  - Trap, subnet trap, and empty trap conditions
+    - diagram placeholder
+    - example: Empty trap condition net
+  - State space exploration & trap conditions
+- Benchmarks
+  - No refinement technique
+  - Trap conditions
+  - Trap and subnet trap conditions
+  - Trap, subnet trap, and empty trap conditions
+  - State space exploration and trap conditions
+\end{verbatim}
+
+\section{Introduction}
+
+This is a report on the development of the model checker Pnerf. We
+report the design of Pnerf and its corresponding experimental
+evaluation.
+
+\section{Design}
+
+Pnerf implements the method in Figure~\ref{fig-method}. Pnerf applies
+a given sequence of refinement techniques in each iteration of the
+main loop. Each refinement technique tries to produce additional condition
+$\delta$ that becomes part of abstraction $C$.
+
+\begin{figure}
+\begin{tikzpicture}[
+    state/.style   = {draw, ellipse, aspect=2},
+    action/.style  = {draw, rectangle, align=center},
+    decision/.style= {draw, diamond, aspect=2, align=center},
+    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
+    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
+  ]
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N, M)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc)
+    {$A:=\text{Model}(C \cup \{\neg P\})$ \\
+     $\text{Techniques}:=\text{RefinementTechniques}$};
+     \node[decision, below=of modelc] (methods) {$\text{Techniques} \neq ()$};
+  \node[action, below=of methods] (ctheta)
+    {$\text{Refinement} := \text{Techniques}[0]$ \\
+     $\text{Techniques}:= \text{Techniques} \setminus \{\text{Refinement}\}$ \\
+     $C_{\theta}:=C_{\text{Refinement}}(N, M, A)$};
+  \node[decision, below=of ctheta] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta)
+    {$A_\theta:=\text{Model}(C_\theta)$\\
+     $\delta:=\Delta(N, M, A_\theta)$\\
+     $C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {YES};
+  \node[state, right=of yes] (end1) {END};
+  \node[print, right=of methods] (dontknow) {Don't know};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge[edge] (c);
+  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge[edge] node[above]{NO} (yes);
+  \draw (yes) edge[edge] (end1);
+  \draw (satc) edge[edge] node[right]{YES} (modelc);
+  \draw (modelc) edge[edge] (methods);
+  \draw (methods) edge[edge] node[right]{YES}  (ctheta);
+  \draw (methods) edge[edge] node[above]{NO} (dontknow);
+  \draw (ctheta) edge[edge] (satctheta);
+  \draw (dontknow) edge[edge] (end2);
+  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
+  \draw[edge] (satctheta.west) node[above,xshift=-1cm]{NO}
+  -| ([xshift=-2.5cm] satctheta.west) |- (methods.west);
+  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-3cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+\caption{Design of Pnerf}
+\label{fig-method}
+\end{figure}
+
+\subsection{Refinement techniques}
+
+We implemented the following refinement techniques.
+
+\paragraph{Trap conditions} For a petri net $N$ and an assignment $A$,
+find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the net $N$.
+  \item $S$ is marked in the initial marking $M_0$.
+  \item $S$ is unmarked in the assignment $A$.
+\end{enumerate}
+For such a set $S$, generate a constraint
+$\delta = \left( \sum_{s \in S} s \ge 1 \right)$, ensuring the
+trap is marked in any assignment.
+
+\paragraph{Subnet trap conditions} For a petri net $N$ and an assignment $A$,
+construct a subnet $N'$ from $N$ that contains only
+the transitions that are fired in $A$.
+For the net $N'$, find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the subnet $N'$.
+  \item $S$ contains a place with an incoming transition in $N'$.
+  \item $S$ is unmarked in the assignment $A$.
+\end{enumerate}
+For such a set $S$, generate a constraint
+$\delta = \left( \bigwedge_{t \in T_1} (t > 0) \land
+\bigwedge_{t \in T_2} (t = 0) \implies \sum_{s \in S} s \ge 1 \right)$,
+where $T_1$ are the transitions fired in $A$ and $T_2$ are the
+transitions not fired in $A$. This ensures the trap is marked in the
+corresponding subnet.
+
+\paragraph{Empty trap conditions} For a petri net $N$ and an assignment $A$,
+find a set $S$ that satisfies
+\begin{enumerate}
+  \item $S$ is a trap in the net $N$.
+  \item $S$ is unmarked in the inital marking $M_0$.
+  \item a transition in $S^\bullet$ is fired in $A$
+  \item no transition in $^\bullet S \setminus S^\bullet$ is fired in $A$
+\end{enumerate}
+For such a set $S$, generate a constraint
+$\delta = \left( \bigvee_{t \in S^\bullet} (t > 0) \implies
+\bigvee_{t \in ^\bullet S \setminus S^\bullet} (t > 0) \right)$
+to ensure a proper incoming transition
+is fired if an outgoing transition is fired.
+
+
+\subsection{State space exploration}
+
+Pnerf applies the method in Figure~\ref{fig-method} as a subprocedure of
+the state space exploration procedure \verb?Explore? in
+Figure~\ref{fig-procedure-explore}.
+
+\verb?TODO: update?
+
+\begin{figure}
+\begin{algorithmic}[1]
+\Function{Explore}{$N, M, P, D$}
+  \If {$unsafe(M, P)$}
+    \State \Return \text{No}
+  \ElsIf {$Check(N, M, P) = \text{Yes}$}
+    \State \Return \text{Yes}
+  \ElsIf {$D = 0$}
+    \State \Return \text{Don't know}
+  \Else
+    \State $\forall M \rightarrow M_i: R_i \gets \Call{Explore}{N, M_i, P, D-1}$
+    \If {$\exists R_i: R_i = \text{No}$}
+      \State \Return \text{No}
+    \ElsIf {$\exists R_i: R_i = \text{Don't know}$}
+      \State \Return \text{Don't know}
+    \Else \ShortComment{$\forall R_i: R_i = \text{Yes}$}
+      \State \Return \text{Yes}
+    \EndIf
+  \EndIf
+\EndFunction
+\end{algorithmic}
+\caption{Procedure \verb?Explore?}
+\label{fig-procedure-explore}
+\end{figure}
+
+
+\section{Experiments}
+
+We applied Pnerf to the set of benchmarks
+\verb?benchmarks/given-by-daniel-kroening/?. We applied the following
+four configurations for the refinement sequence.
+\begin{itemize}
+\item No refinement
+\item Trap conditions
+\item Trap conditions, subnet trap conditions
+\item Trap conditions, subnet trap conditions, empty trap conditions
+\end{itemize}
+We obtained the following results.
+
+\verb?TODO: table of experiments on the board?
+
+For the purpose of checking the remaining 3 `don't know` benchmarks,
+we applied the procedure \verb?Explore? with the following parameters.
+\begin{itemize}
+\item Depth = 30, RefinementTechniques=(Trap conditions), timeout=1min
+\item Depth = 10, RefinementTechniques=(Trap conditions), timeout=1min
+\item Depth = 10, RefinementTechniques=(Trap conditions), timeout=10min
+\end{itemize}
+We obtained the following results.
+
+\verb?TODO: table of experiments on the board?
+
+\section{Experimental setups}
+
+\subsection{Trap conditons}
+\begin{verbatim}
+    - diagram
+    - example: Peterson's
+\end{verbatim}
+
+\subsection{Trap and subnet trap conditions}
+\begin{verbatim}
+    - diagram
+    - example: cyclic net
+\end{verbatim}
 
 \subsection{With trap refinement}
+\begin{verbatim}
+    - diagram placeholder
+    - example: Empty trap condition net
+\end{verbatim}
+
+\subsection{State space exploration and trap conditions}
+\begin{verbatim}
+    - diagram placeholder
+    - example: Empty trap condition net
+\end{verbatim}
+
+
+\newpage
 
 \begin{tikzpicture}[
     state/.style   = {draw, ellipse, aspect=2},
@@ -103,73 +327,10 @@
 
 \subsection{General refinement method $\text{Check}(N, M, P)$}
 
-\begin{tikzpicture}[
-    state/.style   = {draw, ellipse, aspect=2},
-    action/.style  = {draw, rectangle, align=center},
-    decision/.style= {draw, diamond, aspect=2, align=center},
-    print/.style   = {draw, trapezium, trapezium left angle=70, trapezium right angle=-70},
-    edge/.style    = {draw, ->, shorten >=2pt, shorten <=2pt},
-  ]
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N, M)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc)
-    {$A:=\text{Model}(C \cup \{\neg P\})$ \\
-     $\text{Techniques}:=\text{RefinementTechniques}$};
-     \node[decision, below=of modelc] (methods) {$\text{Techniques} \neq ()$};
-  \node[action, below=of methods] (ctheta)
-    {$\text{Refinement} := \text{Techniques}[0]$ \\
-     $\text{Techniques}:= \text{Techniques} \setminus \{\text{Refinement}\}$ \\
-     $C_{\theta}:=C_{\text{Refinement}}(N, M, A)$};
-  \node[decision, below=of ctheta] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta)
-    {$A_\theta:=\text{Model}(C_\theta)$\\
-     $\delta:=\Delta(N, M, A_\theta)$\\
-     $C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {YES};
-  \node[state, right=of yes] (end1) {END};
-  \node[print, right=of methods] (dontknow) {Don't know};
-  \node[state, right=of dontknow] (end2) {END};
-
-  \draw (begin) edge[edge] (c);
-  \draw (c) edge[edge] coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge[edge] node[above]{NO} (yes);
-  \draw (yes) edge[edge] (end1);
-  \draw (satc) edge[edge] node[right]{YES} (modelc);
-  \draw (modelc) edge[edge] (methods);
-  \draw (methods) edge[edge] node[right]{YES}  (ctheta);
-  \draw (methods) edge[edge] node[above]{NO} (dontknow);
-  \draw (ctheta) edge[edge] (satctheta);
-  \draw (dontknow) edge[edge] (end2);
-  \draw (satctheta) edge[edge] node[right]{YES} (modelctheta);
-  \draw[edge] (satctheta.west) node[above,xshift=-1cm]{NO}
-  -| ([xshift=-2.5cm] satctheta.west) |- (methods.west);
-  \draw[edge] (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-3cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
 
 \subsection{State space exploration}
 
-\begin{algorithmic}[1]
-\Function{Explore}{$N, M, P, D$}
-  \If {$unsafe(M, P)$}
-    \State \Return \text{No}
-  \ElsIf {$Check(N, M, P) = \text{Yes}$}
-    \State \Return \text{Yes}
-  \ElsIf {$D = 0$}
-    \State \Return \text{Don't know}
-  \Else
-    \State $\forall M \rightarrow M_i: R_i \gets \Call{Explore}{N, M_i, P, D-1}$
-    \If {$\exists R_i: R_i = \text{No}$}
-      \State \Return \text{No}
-    \ElsIf {$\exists R_i: R_i = \text{Don't know}$}
-      \State \Return \text{Don't know}
-    \Else \ShortComment{$\forall R_i: R_i = \text{Yes}$}
-      \State \Return \text{Yes}
-    \EndIf
-  \EndIf
-\EndFunction
-\end{algorithmic}
+
 
 \section{Petri nets tested}
 
@@ -560,58 +721,6 @@ Tested with trap, subnet trap and empty trap refinement.
   i\_t_2 &= true \\
   i\_t_3 &= true
 \end{align*}
-
-\section{Refinement methods}
-
-\subsection{TrapConditions}
-
-For a petri net $N$ and an assignment $A$,
-find a set $S$ that satisfies
-\begin{enumerate}
-  \item $S$ is a trap in the net $N$.
-  \item $S$ is marked in the initial marking $M_0$.
-  \item $S$ is unmarked in the assignment $A$.
-\end{enumerate}
-
-For such a set $S$, generate a constraint
-$\delta = \left( \sum_{s \in S} s \ge 1 \right)$, ensuring the
-trap is marked in any assignment.
-
-\subsection{SubnetTrapConditions}
-
-For a petri net $N$ and an assignment $A$,
-construct a subnet $N'$ from $N$ that contains only
-the transitions that are fired in $A$.
-For the net $N'$, find a set $S$ that satisfies
-\begin{enumerate}
-  \item $S$ is a trap in the subnet $N'$.
-  \item $S$ contains a place with an incoming transition in $N'$.
-  \item $S$ is unmarked in the assignment $A$.
-\end{enumerate}
-
-For such a set $S$, generate a constraint
-$\delta = \left( \bigwedge_{t \in T_1} (t > 0) \land
-\bigwedge_{t \in T_2} (t = 0) \implies \sum_{s \in S} s \ge 1 \right)$,
-where $T_1$ are the transitions fired in $A$ and $T_2$ are the
-transitions not fired in $A$. This ensures the trap is marked in the
-corresponding subnet.
-
-\subsection{EmptyTrapConditions}
-
-For a petri net $N$ and an assignment $A$,
-find a set $S$ that satisfies
-\begin{enumerate}
-  \item $S$ is a trap in the net $N$.
-  \item $S$ is unmarked in the inital marking $M_0$.
-  \item a transition in $S^\bullet$ is fired in $A$
-  \item no transition in $^\bullet S \setminus S^\bullet$ is fired in $A$
-\end{enumerate}
-
-For such a set $S$, generate a constraint
-$\delta = \left( \bigvee_{t \in S^\bullet} (t > 0) \implies
-\bigvee_{t \in ^\bullet S \setminus S^\bullet} (t > 0) \right)$
-to ensure a proper incoming transition
-is fired if an outgoing transition is fired.
 
 \section{Benchmarks}
 
