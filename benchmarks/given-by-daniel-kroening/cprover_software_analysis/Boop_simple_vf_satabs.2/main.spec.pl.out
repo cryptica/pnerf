@@ -1,6 +1,409 @@
 PETRINIZER: The checker for Petri Nets
-[30 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.2/main.spec.pl]
+[10 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.2/main.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
+starting bfs
+bfs exploring [l0-init1,s0-1]
+exploration depth 0
+queue size 0
+visited size 0
+
+bfs exploring [l0-init1,l4-1,s16-1]
+exploration depth 1
+queue size 1
+visited size 1
+
+bfs exploring [l0-init1,l4-1,s0-1]
+exploration depth 1
+queue size 4
+visited size 2
+
+bfs exploring [l0-init1,l8-1,s24-1]
+exploration depth 2
+queue size 5
+visited size 3
+
+bfs exploring [l0-init1,l8-1,s16-1]
+exploration depth 2
+queue size 8
+visited size 4
+
+bfs exploring [l0-init1,l4-2,s16-1]
+exploration depth 2
+queue size 11
+visited size 5
+
+bfs exploring [l0-init1,l4-2,s0-1]
+exploration depth 2
+queue size 12
+visited size 6
+
+bfs exploring [l0-init1,l8-1,s8-1]
+exploration depth 2
+queue size 11
+visited size 7
+
+bfs exploring [l0-init1,l8-1,s0-1]
+exploration depth 2
+queue size 12
+visited size 8
+
+bfs exploring [l0-init1,l12-1,s28-1]
+exploration depth 3
+queue size 13
+visited size 9
+
+bfs exploring [l0-init1,l12-1,s24-1]
+exploration depth 3
+queue size 16
+visited size 10
+
+bfs exploring [l0-init1,l4-1,l8-1,s24-1]
+exploration depth 3
+queue size 19
+visited size 11
+
+bfs exploring [l0-init1,l4-1,l8-1,s8-1]
+exploration depth 3
+queue size 22
+visited size 12
+
+bfs exploring [l0-init1,l12-1,s20-1]
+exploration depth 3
+queue size 23
+visited size 13
+
+bfs exploring [l0-init1,l12-1,s16-1]
+exploration depth 3
+queue size 26
+visited size 14
+
+bfs exploring [l0-init1,l4-1,l8-1,s16-1]
+exploration depth 3
+queue size 29
+visited size 15
+
+bfs exploring [l0-init1,l4-1,l8-1,s0-1]
+exploration depth 3
+queue size 30
+visited size 16
+
+bfs exploring [l0-init1,l4-3,s16-1]
+exploration depth 3
+queue size 29
+visited size 17
+
+bfs exploring [l0-init1,l4-3,s0-1]
+exploration depth 3
+queue size 30
+visited size 18
+
+bfs exploring [l0-init1,l12-1,s12-1]
+exploration depth 3
+queue size 29
+visited size 19
+
+bfs exploring [l0-init1,l12-1,s8-1]
+exploration depth 3
+queue size 30
+visited size 20
+
+bfs exploring [l0-init1,l12-1,s4-1]
+exploration depth 3
+queue size 31
+visited size 21
+
+bfs exploring [l0-init1,l12-1,s0-1]
+exploration depth 3
+queue size 32
+visited size 22
+
+bfs exploring [l0-init1,l16-1,s30-1]
+exploration depth 4
+queue size 33
+visited size 23
+
+bfs exploring [l0-init1,l16-1,s28-1]
+exploration depth 4
+queue size 36
+visited size 24
+
+bfs exploring [l0-init1,l12-1,l4-1,s28-1]
+exploration depth 4
+queue size 39
+visited size 25
+
+bfs exploring [l0-init1,l12-1,l4-1,s12-1]
+exploration depth 4
+queue size 42
+visited size 26
+
+bfs exploring [l0-init1,l16-1,s26-1]
+exploration depth 4
+queue size 43
+visited size 27
+
+bfs exploring [l0-init1,l16-1,s24-1]
+exploration depth 4
+queue size 46
+visited size 28
+
+bfs exploring [l0-init1,l12-1,l4-1,s24-1]
+exploration depth 4
+queue size 49
+visited size 29
+
+bfs exploring [l0-init1,l12-1,l4-1,s8-1]
+exploration depth 4
+queue size 52
+visited size 30
+
+bfs exploring [l0-init1,l8-2,s24-1]
+exploration depth 4
+queue size 53
+visited size 31
+
+bfs exploring [l0-init1,l8-2,s16-1]
+exploration depth 4
+queue size 54
+visited size 32
+
+bfs exploring [l0-init1,l4-2,l8-1,s24-1]
+exploration depth 4
+queue size 55
+visited size 33
+
+bfs exploring [l0-init1,l4-2,l8-1,s8-1]
+exploration depth 4
+queue size 56
+visited size 34
+
+bfs exploring [l0-init1,l8-2,s8-1]
+exploration depth 4
+queue size 55
+visited size 35
+
+bfs exploring [l0-init1,l8-2,s0-1]
+exploration depth 4
+queue size 54
+visited size 36
+
+bfs exploring [l0-init1,l16-1,s22-1]
+exploration depth 4
+queue size 53
+visited size 37
+
+bfs exploring [l0-init1,l16-1,s20-1]
+exploration depth 4
+queue size 56
+visited size 38
+
+bfs exploring [l0-init1,l12-1,l4-1,s20-1]
+exploration depth 4
+queue size 59
+visited size 39
+
+bfs exploring [l0-init1,l12-1,l4-1,s4-1]
+exploration depth 4
+queue size 60
+visited size 40
+
+bfs exploring [l0-init1,l16-1,s18-1]
+exploration depth 4
+queue size 59
+visited size 41
+
+bfs exploring [l0-init1,l16-1,s16-1]
+exploration depth 4
+queue size 62
+visited size 42
+
+bfs exploring [l0-init1,l12-1,l4-1,s16-1]
+exploration depth 4
+queue size 65
+visited size 43
+
+bfs exploring [l0-init1,l12-1,l4-1,s0-1]
+exploration depth 4
+queue size 66
+visited size 44
+
+bfs exploring [l0-init1,l4-2,l8-1,s16-1]
+exploration depth 4
+queue size 65
+visited size 45
+
+bfs exploring [l0-init1,l4-2,l8-1,s0-1]
+exploration depth 4
+queue size 66
+visited size 46
+
+bfs exploring [l0-init1,l4-4,s16-1]
+exploration depth 4
+queue size 65
+visited size 47
+
+bfs exploring [l0-init1,l4-4,s0-1]
+exploration depth 4
+queue size 66
+visited size 48
+
+bfs exploring [l0-init1,l16-1,s14-1]
+exploration depth 4
+queue size 65
+visited size 49
+
+bfs exploring [l0-init1,l16-1,s12-1]
+exploration depth 4
+queue size 66
+visited size 50
+
+bfs exploring [l0-init1,l16-1,s10-1]
+exploration depth 4
+queue size 67
+visited size 51
+
+bfs exploring [l0-init1,l16-1,s8-1]
+exploration depth 4
+queue size 68
+visited size 52
+
+bfs exploring [l0-init1,l16-1,s6-1]
+exploration depth 4
+queue size 69
+visited size 53
+
+bfs exploring [l0-init1,l16-1,s4-1]
+exploration depth 4
+queue size 70
+visited size 54
+
+bfs exploring [l0-init1,l16-1,s2-1]
+exploration depth 4
+queue size 71
+visited size 55
+
+bfs exploring [l0-init1,l16-1,s0-1]
+exploration depth 4
+queue size 72
+visited size 56
+
+bfs exploring [l0-init1,l20-1,s31-1]
+exploration depth 5
+queue size 73
+visited size 57
+
+bfs exploring [l0-init1,l20-1,s30-1]
+exploration depth 5
+queue size 76
+visited size 58
+
+bfs exploring [l0-init1,l16-1,l4-1,s30-1]
+exploration depth 5
+queue size 79
+visited size 59
+
+bfs exploring [l0-init1,l16-1,l4-1,s14-1]
+exploration depth 5
+queue size 82
+visited size 60
+
+bfs exploring [l0-init1,l20-1,s29-1]
+exploration depth 5
+queue size 83
+visited size 61
+
+bfs exploring [l0-init1,l20-1,s28-1]
+exploration depth 5
+queue size 86
+visited size 62
+
+bfs exploring [l0-init1,l16-1,l4-1,s28-1]
+exploration depth 5
+queue size 89
+visited size 63
+
+bfs exploring [l0-init1,l16-1,l4-1,s12-1]
+exploration depth 5
+queue size 92
+visited size 64
+
+bfs exploring [l0-init1,l12-1,l8-1,s28-1]
+exploration depth 5
+queue size 93
+visited size 65
+
+bfs exploring [l0-init1,l12-1,l8-1,s20-1]
+exploration depth 5
+queue size 96
+visited size 66
+
+bfs exploring [l0-init1,l12-1,l4-2,s28-1]
+exploration depth 5
+queue size 99
+visited size 67
+
+bfs exploring [l0-init1,l12-1,l4-2,s12-1]
+exploration depth 5
+queue size 100
+visited size 68
+
+bfs exploring [l0-init1,l12-1,l8-1,s12-1]
+exploration depth 5
+queue size 99
+visited size 69
+
+bfs exploring [l0-init1,l12-1,l8-1,s4-1]
+exploration depth 5
+queue size 100
+visited size 70
+
+bfs exploring [l0-init1,l20-1,s27-1]
+exploration depth 5
+queue size 101
+visited size 71
+
+bfs exploring [l0-init1,l20-1,s26-1]
+exploration depth 5
+queue size 104
+visited size 72
+
+bfs exploring [l0-init1,l16-1,l4-1,s26-1]
+exploration depth 5
+queue size 107
+visited size 73
+
+bfs exploring [l0-init1,l16-1,l4-1,s10-1]
+exploration depth 5
+queue size 110
+visited size 74
+
+bfs exploring [l0-init1,l20-1,s25-1]
+exploration depth 5
+queue size 111
+visited size 75
+
+bfs exploring [l0-init1,l20-1,s24-1]
+exploration depth 5
+queue size 114
+visited size 76
+
+bfs exploring [l0-init1,l16-1,l4-1,s24-1]
+exploration depth 5
+queue size 117
+visited size 77
+
+bfs exploring [l0-init1,l16-1,l4-1,s8-1]
+exploration depth 5
+queue size 120
+visited size 78
+
+bfs exploring [l0-init1,l12-1,l8-1,s24-1]
+exploration depth 5
+queue size 121
+visited size 79
+
+bfs exploring [l0-init1,l12-1,l8-1,s16-1]
+explor
