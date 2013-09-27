@@ -15,10 +15,9 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   for result in "${results_mist[@]}"; do
     sort_file $benchmark_dir/$result"-mist.list"
   done
-  declare -A sums_tool
   echo -n "         | "
-  for rtool in "${results_tool[@]}"; do
-    printf "%8s | " $rtool
+  for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
+    printf "%8s | " ${results_tool[$rtool]}
     sums_tool[$rtool]=0
   done
   echo
@@ -30,8 +29,8 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   for rmist in "${results_mist[@]}"; do
     printf "%8s | " $rmist
     sum_mist=0
-    for rtool in "${results_tool[@]}"; do
-      n=`comm -12 $benchmark_dir/$rtool".list.sorted" $benchmark_dir/$rmist"-mist.list.sorted" | wc -l`
+    for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
+      n=`comm -12 $benchmark_dir/${results_tool[$rtool]}".list.sorted" $benchmark_dir/$rmist"-mist.list.sorted" | wc -l`
       printf "%8d | " $n
       sum_mist=$((sum_mist + n))
       sums_tool[$rtool]=$((${sums_tool[$rtool]} + n))
@@ -45,9 +44,9 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   echo "---------"
   total_sum=0
   echo -n "         | "
-  for rtool in "${results_tool[@]}"; do
-    printf "%8d | " ${sums_tool[$rtool] }
-    total_sum=$((total_sum + ${sums_tool[$rtool] }))
+  for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
+    printf "%8d | " ${sums_tool[$rtool]}
+    total_sum=$((total_sum + ${sums_tool[$rtool]}))
   done
   printf "%8d\n" $total_sum
   echo
