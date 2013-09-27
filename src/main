@@ -94,8 +94,6 @@ fi
 function exit_with {
   result=$1
   iterations=$2
-  set +o pipefail
-  set +e
   echo
   echo '-------------------------------------------'
   if [[ $result -eq 0 ]]; then
@@ -126,6 +124,9 @@ function exit_with {
   echo '-------------------------------------------'
   echo
   echo
+  set +o pipefail
+  set +e
+  rm -r $tmpdir
   exit $result
 }
 
@@ -178,7 +179,8 @@ vecho
 vecho '* Constructing constraints C_0 for petri net N'
 run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $tmpdir/pp-petri-net.pl
 
-refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+#refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+refinement_methods=( 'trap' )
 
 method_count=${#refinement_methods[@]}
 iter=0
