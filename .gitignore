@@ -1,6 +1,6 @@
 .*.swp
-method-dot2tex-fig*
-method.aux
-method.log
-method.toc
-method.pdf
+main-dot2tex-fig*
+main.aux
+main.log
+main.toc
+main.pdf

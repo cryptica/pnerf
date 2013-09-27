@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage{color}
 \usepackage{multirow}
 \usepackage{dot2texi}
 \usepackage{algpseudocode}
@@ -195,25 +196,101 @@ We applied Pnerf to the set of benchmarks
 \verb?benchmarks/given-by-daniel-kroening/?. We applied the following
 four configurations for the refinement sequence.
 \begin{itemize}
-\item No refinement
-\item Trap conditions
-\item Trap conditions, subnet trap conditions
-\item Trap conditions, subnet trap conditions, empty trap conditions
+  \item No refinement
+  \item \textcolor{green}{Trap conditions}
+  \item \textcolor{red}{Trap conditions, subnet trap conditions}
+  \item \textcolor{blue}{Trap conditions, subnet trap conditions, empty trap conditions}
 \end{itemize}
-We obtained the following results.
+We obtained the results in Table~\ref{table-results-method}.
 
-\verb?TODO: table of experiments on the board?
+\begin{table}
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} &
+    8 \textcolor{green}{8} \textcolor{red}{8} \textcolor{blue}{8} &
+    3 \textcolor{green}{3} \textcolor{red}{3} \textcolor{blue}{3} &
+    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    11 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    28 \textcolor{green}{28} \textcolor{red}{28} \textcolor{blue}{27} &
+    0 \textcolor{green}{0} \textcolor{red}{0} \textcolor{blue}{1} &
+    28 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+    15 \textcolor{green}{15} \textcolor{red}{15} \textcolor{blue}{15} &
+    23 \textcolor{green}{23} \textcolor{red}{19} \textcolor{blue}{16} &
+    0 \textcolor{green}{0} \textcolor{red}{4} \textcolor{blue}{7} &
+    38 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    23 \textcolor{green}{23} \textcolor{red}{23} \textcolor{blue}{23} &
+    54 \textcolor{green}{54} \textcolor{red}{50} \textcolor{blue}{46} &
+    0 \textcolor{green}{0} \textcolor{red}{4} \textcolor{blue}{8} &
+    77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+\caption{Results with different configurations of the refinement sequence}
+\label{table-results-method}
+\end{table}
 
 For the purpose of checking the remaining 3 `don't know` benchmarks,
-we applied the procedure \verb?Explore? with the following parameters.
+we applied the procedure {\bf Explore} with the following parameters.
 \begin{itemize}
-\item Depth = 30, RefinementTechniques=(Trap conditions), timeout=1min
-\item Depth = 10, RefinementTechniques=(Trap conditions), timeout=1min
-\item Depth = 10, RefinementTechniques=(Trap conditions), timeout=10min
+  \item Depth = 30, RefinementTechniques=(Trap conditions), timeout=1min
+  \item \textcolor{red}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=1min}
+  \item \textcolor{blue}{Depth = 10, RefinementTechniques=(Trap conditions), timeout=10min}
 \end{itemize}
-We obtained the following results.
+We obtained the results in Table~\ref{table-results-explore}.
 
-\verb?TODO: table of experiments on the board?
+\begin{table}
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | r | }
+    \cline{3-6}
+    & & \multicolumn{4}{ c| }{Our tool} \\
+    \cline{3-6}
+    & & positive & negative & don't know & timeout &
+    \multicolumn{1}{ |c }{} \\ \cline{1-7}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} &
+    10 \textcolor{red}{?} \textcolor{blue}{8} &
+    0 \textcolor{red}{?} \textcolor{blue}{0} &
+    1 \textcolor{red}{?} \textcolor{blue}{3} &
+    0 \textcolor{red}{?} \textcolor{blue}{0} &
+    11 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+    0 \textcolor{red}{?} \textcolor{blue}{0} &
+    2 \textcolor{red}{?} \textcolor{blue}{10} &
+    0 \textcolor{red}{?} \textcolor{blue}{18} &
+    20 \textcolor{red}{?} \textcolor{blue}{0} &
+    28 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+    15 \textcolor{red}{?} \textcolor{blue}{15} &
+    0 \textcolor{red}{?} \textcolor{blue}{0} &
+    0 \textcolor{red}{?} \textcolor{blue}{5} &
+    23 \textcolor{red}{?} \textcolor{blue}{18} &
+    38 \\ \cline{1-7}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    25 \textcolor{red}{?} \textcolor{blue}{23} &
+    8 \textcolor{red}{?} \textcolor{blue}{10} &
+    1 \textcolor{red}{?} \textcolor{blue}{26} &
+    43 \textcolor{red}{?} \textcolor{blue}{18} &
+    77 \\ \cline{3-7}
+  \end{tabular}
+\end{center}
+\caption{Results with the procedure {\bf Explore}}
+\label{table-results-explore}
+\end{table}
 
 \section{Experimental setups}
 
@@ -722,102 +799,4 @@ Tested with trap, subnet trap and empty trap refinement.
   i\_t_3 &= true
 \end{align*}
 
-\section{Benchmarks}
-
-All benchmarks run on petri nets given by Daniel Kroening.
-
-No refinement methods:
-\begin{center}
-  \begin{tabular}{ cc | r | r | r | r | }
-    \cline{3-5}
-    & & \multicolumn{3}{ c| }{Our tool} \\
-    \cline{3-5}
-    & & positive & don't know & timeout 10 min &
-    \multicolumn{1}{ |c }{} \\ \cline{1-6}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
-    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 23 & 0 & 38 \\ \cline{1-6}
-    \multicolumn{1}{ c }{} &
-    \multicolumn{1}{ c| }{} & 23 & 54 & 0 & 77 \\ \cline{3-6}
-  \end{tabular}
-\end{center}
-
-Trap refinement:
-\begin{center}
-  \begin{tabular}{ cc | r | r | r | r | }
-    \cline{3-5}
-    & & \multicolumn{3}{ c| }{Our tool} \\
-    \cline{3-5}
-    & & positive & don't know & timeout 10 min &
-    \multicolumn{1}{ |c }{} \\ \cline{1-6}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
-    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 23 & 0 & 38 \\ \cline{1-6}
-    \multicolumn{1}{ c }{} &
-    \multicolumn{1}{ c| }{} & 23 & 54 & 0 & 77 \\ \cline{3-6}
-  \end{tabular}
-\end{center}
-
-Trap refinement and subnet trap refinement:
-\begin{center}
-  \begin{tabular}{ cc | r | r | r | r | }
-    \cline{3-5}
-    & & \multicolumn{3}{ c| }{Our tool} \\
-    \cline{3-5}
-    & & positive & don't know & timeout 10 min &
-    \multicolumn{1}{ |c }{} \\ \cline{1-6}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
-    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{negative} & 0 & 28 & 0 & 28 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 19 & 4 & 38 \\ \cline{1-6}
-    \multicolumn{1}{ c }{} &
-    \multicolumn{1}{ c| }{} & 23 & 50 & 4 & 77 \\ \cline{3-6}
-  \end{tabular}
-\end{center}
-
-Trap refinement, subnet trap refinement and empty trap refinement:
-\begin{center}
-  \begin{tabular}{ cc | r | r | r | r | }
-    \cline{3-5}
-    & & \multicolumn{3}{ c| }{Our tool} \\
-    \cline{3-5}
-    & & positive & don't know & timeout 10 min &
-    \multicolumn{1}{ |c }{} \\ \cline{1-6}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
-    \multicolumn{1}{ |c| }{positive} & 8 & 3 & 0 & 11 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{negative} & 0 & 27 & 1 & 28 \\ \cline{2-6}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 16 & 7 & 38 \\ \cline{1-6}
-    \multicolumn{1}{ c }{} &
-    \multicolumn{1}{ c| }{} & 23 & 46 & 8 & 77 \\ \cline{3-6}
-  \end{tabular}
-\end{center}
-
-Trap refinement method and state space exploration up to depth 10:
-\begin{center}
-  \begin{tabular}{ cc | r | r | r | r | r | }
-    \cline{3-6}
-    & & \multicolumn{4}{ c| }{Our tool} \\
-    \cline{3-6}
-    & & positive & negative & don't know & timeout 1 min &
-    \multicolumn{1}{ |c }{} \\ \cline{1-7}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
-    \multicolumn{1}{ |c| }{positive} & 8 & 0 & 3 & 0 & 11 \\ \cline{2-7}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{negative} & 0 & 2 & 26 & 0 & 28 \\ \cline{2-7}
-    \multicolumn{1}{ |c  }{} &
-    \multicolumn{1}{ |c| }{timeout 1 min} & 15 & 0 & 18 & 5 & 38 \\ \cline{1-7}
-    \multicolumn{1}{ c }{} &
-    \multicolumn{1}{ c| }{} & 23 & 2 & 47 & 5 & 77 \\ \cline{3-7}
-  \end{tabular}
-\end{center}
 \end{document}
