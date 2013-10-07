@@ -1,14 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/found-in-mist-repo/boundedPNnegative/newrtp.spec.pl]
+[benchmarks/found-in-mist-repo/boundedPNnegative/newrtp.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-starting bfs
-bfs exploring [begin-1]
-exploration depth 0
-queue size 0
-visited size 0
 
-ended bfs with unsafe
-The petri does not satisfy the property

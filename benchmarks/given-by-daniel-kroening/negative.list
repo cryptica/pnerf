@@ -1,8 +1,0 @@
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl

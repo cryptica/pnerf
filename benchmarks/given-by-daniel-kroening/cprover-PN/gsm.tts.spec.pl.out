@@ -1,14 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[10 benchmarks/given-by-daniel-kroening/cprover-PN/gsm.tts.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover-PN/gsm.tts.spec.pl]
 
-* Constructing petri net N from input file
-
-* Starting state space exploration for petri net N
-starting bfs
-bfs exploring [l0-init1,s0-1]
-exploration depth 0
-queue size 0
-visited size 0
-
-ended bfs with safe
+-------------------------------------------
 The petri net satisfies the property!
+-------------------------------------------
+
+
