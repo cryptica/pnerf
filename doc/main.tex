@@ -169,8 +169,6 @@ Pnerf applies method {\bf Check} in Figure~\ref{fig-method} as a subprocedure of
 the state space exploration procedure {\bf Explore} in
 Figure~\ref{fig-procedure-explore}.
 
-\verb?TODO: update?
-
 \begin{figure}[h]
 \begin{algorithmic}[1]
 \Procedure{Explore}{$N, M_0, P, MaxDepth$}
@@ -195,6 +193,7 @@ Figure~\ref{fig-procedure-explore}.
       \EndFor
     \EndIf
   \EndWhile
+  \State \Return \text{Yes}
 \EndProcedure
 \end{algorithmic}
 \caption{Procedure {\bf Explore}}
