@@ -1,8 +1,94 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl]
+[-d 100 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+* Constructing petri net N from input file
 
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded don't know, starting search
+next exploration depth 1
+queue size 2
+visited size 1
 
+next exploration depth 2
+queue size 3
+visited size 3
+
+next exploration depth 3
+queue size 5
+visited size 6
+
+next exploration depth 4
+queue size 8
+visited size 11
+
+next exploration depth 5
+queue size 12
+visited size 19
+
+next exploration depth 6
+queue size 18
+visited size 31
+
+next exploration depth 7
+queue size 27
+visited size 49
+
+next exploration depth 8
+queue size 42
+visited size 76
+
+next exploration depth 9
+queue size 65
+visited size 118
+
+next exploration depth 10
+queue size 97
+visited size 183
+
+next exploration depth 11
+queue size 143
+visited size 280
+
+next exploration depth 12
+queue size 210
+visited size 423
+
+next exploration depth 13
+queue size 301
+visited size 633
+
+next exploration depth 14
+queue size 423
+visited size 934
+
+next exploration depth 15
+queue size 586
+visited size 1357
+
+next exploration depth 16
+queue size 804
+visited size 1943
+
+next exploration depth 17
+queue size 1095
+visited size 2747
+
+next exploration depth 18
+queue size 1480
+visited size 3842
+
+next exploration depth 19
+queue size 1977
+visited size 5322
+
+next exploration depth 20
+queue size 2618
+visited size 7299
+
+next exploration depth 21
+queue size 3444
+visited size 9917
+
+search concluded unsafe
+The petri does not satisfy the property

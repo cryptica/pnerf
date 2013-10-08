@@ -1,0 +1,16 @@
+benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec
+benchmarks/given-by-daniel-kroening/cprover-PN/pncsacover.tts.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.3/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.3/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.3/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.1/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.3/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/szymanski_vs_satabs.2/main.spec

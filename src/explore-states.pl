@@ -83,21 +83,16 @@ bfs(Depth, MaxDepth, [], [H|QueueNextLevel], Visited, Result) :-
   Depth < MaxDepth,
   NextDepth is Depth + 1,
   reverse([H|QueueNextLevel], QueueCurrentLevel),
+  length(QueueCurrentLevel, L1),
+  length(Visited, L2),
+  format('next exploration depth ~p\n', [NextDepth]),
+  format('queue size ~p\n', [L1]),
+  format('visited size ~p\n\n', [L2]),
   bfs(NextDepth, MaxDepth, QueueCurrentLevel, [], Visited, Result).
 bfs(Depth, MaxDepth, [M|QueueTail], QueueNextLevel, Visited, Result) :-
-  length(QueueTail, L1),
-  length(QueueNextLevel, L2),
-  length(Visited, L3),
-  L4 is L1 + L2,
-  format('bfs exploring ~p\n', [M]),
-  format('exploration depth ~p\n', [Depth]),
-  format('queue size ~p\n', [L4]),
-  format('visited size ~p\n\n', [L3]),
   Depth < MaxDepth,
   ( unsafe(M) ->
     Result = unsafe
-  ; safe(M) ->
-    bfs(Depth, MaxDepth, QueueTail, QueueNextLevel, [M|Visited], Result)
   ; findall(Msucc, (
       successor_marking(M, Msucc),
       \+ member(Msucc, [M|QueueTail]),
@@ -108,25 +103,33 @@ bfs(Depth, MaxDepth, [M|QueueTail], QueueNextLevel, Visited, Result) :-
     bfs(Depth, MaxDepth, QueueTail, QueueNextLevelWithSuccs, [M|Visited], Result)
   ).
 
-test_net(N, R) :-
+test_initial(MaxDepth, M, R) :-
+  print('testing inital marking for safety\n'),
+  ( safe(M) ->
+    print('check concluded safe\n'),
+    R = safe
+  ; print('check concluded don\'t know, starting search\n'),
+    bfs(0, MaxDepth, [M], [], [], R),
+    format('search concluded ~p\n', R)
+  ).
+
+test_net(MaxDepth, R) :-
   findall(Pm , (
     init(P, V),
     Pm = P-V
   ), Ml),
   list_to_ord_set(Ml, M),
-  print('starting bfs\n'),
-  bfs(0, N, [M], [], [], R),
-  format('ended bfs with ~p\n', R).
+  test_initial(MaxDepth, M, R).
 
 % Entry point
 :-
-  prolog_flag(argv, [ArgN|Argv]),
+  prolog_flag(argv, [ArgMaxDepth|Argv]),
   (  foreach(F, Argv)
   do load_pl_file(F)
   ),
-  atom_codes(ArgN, CodeN),
-  number_codes(N, CodeN),
-  test_net(N, R),
+  atom_codes(ArgMaxDepth, CodeMaxDepth),
+  number_codes(MaxDepth, CodeMaxDepth),
+  test_net(MaxDepth, R),
   ( R = safe ->
     halt(0)
   ; R = unsafe ->

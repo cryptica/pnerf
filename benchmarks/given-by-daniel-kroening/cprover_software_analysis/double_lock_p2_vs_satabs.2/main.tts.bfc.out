@@ -1,0 +1,38 @@
+Log: 
+INFO: performing optimistic backward exploration
+Running coverability engine...
+initializing complement data structure...
+initializing lowerset data structure...
+done
+waiting for fw...
+Additional info:
+counterexample
+96|25,49/0,2,50
+11|12,25/0,2,50
+75|11,25/0,2,50
+78|10,25/0,2,50
+78|9,25/0,2,50
+14|8,25/0,2,50
+46|7,8/0,2,50
+14|7/0,2,50
+14|6/0,2,50
+14|1,6/0,2,50
+30|6/0,2,50
+30|5/0,2,50
+30|4/0,2,50
+22|1,2,4/0,50
+6|2,4/0,50
+14|1,4/0,50
+30|4/0,50
+28|3/0,50
+24|2/0,50
+16|1/0,50
+0/0,50
+fw joined
+waiting for bw...
+bw joined
+Result: 
+VERIFICATION FAILED
+Ressources: 
+total time (conc): 0.02
+max. virt. memory usage (mb): 0

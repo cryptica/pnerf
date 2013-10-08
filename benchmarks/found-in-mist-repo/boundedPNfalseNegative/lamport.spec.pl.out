@@ -1,8 +1,18 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/boundedPNfalseNegative/lamport.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/boundedPNfalseNegative/lamport.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+* Constructing petri net N from input file
 
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded don't know, starting search
+next exploration depth 1
+queue size 1
+visited size 1
 
+next exploration depth 2
+queue size 1
+visited size 2
+
+search concluded safe
+The petri net satisfies the property!

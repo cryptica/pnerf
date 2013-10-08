@@ -1,8 +1,74 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.2/main.spec.pl]
+[-d 100 benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.2/main.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+* Constructing petri net N from input file
 
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded don't know, starting search
+next exploration depth 1
+queue size 2
+visited size 1
 
+next exploration depth 2
+queue size 6
+visited size 3
+
+next exploration depth 3
+queue size 14
+visited size 9
+
+next exploration depth 4
+queue size 34
+visited size 23
+
+next exploration depth 5
+queue size 46
+visited size 57
+
+next exploration depth 6
+queue size 76
+visited size 103
+
+next exploration depth 7
+queue size 107
+visited size 179
+
+next exploration depth 8
+queue size 165
+visited size 286
+
+next exploration depth 9
+queue size 231
+visited size 451
+
+next exploration depth 10
+queue size 338
+visited size 682
+
+next exploration depth 11
+queue size 463
+visited size 1020
+
+next exploration depth 12
+queue size 660
+visited size 1483
+
+next exploration depth 13
+queue size 904
+visited size 2143
+
+next exploration depth 14
+queue size 1272
+visited size 3047
+
+next exploration depth 15
+queue size 1745
+visited size 4319
+
+next exploration depth 16
+queue size 2420
+visited size 6064
+
+search concluded unsafe
+The petri does not satisfy the property

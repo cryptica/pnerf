@@ -1,8 +1,10 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/boundedPNfalseNegative/kanban.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+* Constructing petri net N from input file
 
-
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded don't know, starting search
+search concluded safe
+The petri net satisfies the property!

@@ -1,8 +1,46 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.1/main.spec.pl]
+[-d 100 benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.1/main.spec.pl]
 
--------------------------------------------
-The petri net may not satisfy the property
--------------------------------------------
+* Constructing petri net N from input file
 
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded don't know, starting search
+next exploration depth 1
+queue size 2
+visited size 1
 
+next exploration depth 2
+queue size 7
+visited size 3
+
+next exploration depth 3
+queue size 16
+visited size 10
+
+next exploration depth 4
+queue size 39
+visited size 26
+
+next exploration depth 5
+queue size 80
+visited size 65
+
+next exploration depth 6
+queue size 169
+visited size 145
+
+next exploration depth 7
+queue size 326
+visited size 314
+
+next exploration depth 8
+queue size 627
+visited size 640
+
+next exploration depth 9
+queue size 1147
+visited size 1267
+
+search concluded unsafe
+The petri does not satisfy the property
