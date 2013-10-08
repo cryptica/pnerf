@@ -1,52 +1,60 @@
 #!/bin/bash
 
 function sort_file {
-  cat $1 | sort | sed -e 's/spec\.pl/spec/' >$1.sorted
+  cat $1 | \
+  sort | \
+  sed -e 's/\.pl$//' | \
+  sed -e 's/\.spec$//' | \
+  sed -e 's/\.tts$//' \
+  >$1.sorted
 }
 
-results_tool=( positive negative dontknow error timeout )
-results_mist=( positive negative error timeout )
+results_our_tool=( positive negative dontknow error timeout )
+results_other_tool=( positive negative error timeout )
+
+our_tool=pnerf
+other_tool=bfc
 
 for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   echo "$benchmark_dir"
-  for result in "${results_tool[@]}"; do
-    sort_file $benchmark_dir/$result".list"
+  for result in "${results_our_tool[@]}"; do
+    sort_file $benchmark_dir/$result-$our_tool.list
   done
-  for result in "${results_mist[@]}"; do
-    sort_file $benchmark_dir/$result"-mist.list"
+  for result in "${results_other_tool[@]}"; do
+    sort_file $benchmark_dir/$result-$other_tool.list
   done
-  echo -n "         | "
-  for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
-    printf "%8s | " ${results_tool[$rtool]}
-    sums_tool[$rtool]=0
+  echo -n "other\\our| "
+  for ((rour=0;rour<${#results_our_tool[@]};rour++)); do
+    printf "%8s | " ${results_our_tool[$rour]}
+    sums_our_tool[$rour]=0
   done
   echo
   echo -n "---------+-"
-  for rtool in "${results_tool[@]}"; do
+  for rour in "${results_our_tool[@]}"; do
     echo -n "---------+-"
   done
   echo "---------"
-  for rmist in "${results_mist[@]}"; do
-    printf "%8s | " $rmist
-    sum_mist=0
-    for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
-      n=`comm -12 $benchmark_dir/${results_tool[$rtool]}".list.sorted" $benchmark_dir/$rmist"-mist.list.sorted" | wc -l`
+  for rother in "${results_other_tool[@]}"; do
+    printf "%8s | " $rother
+    sum_other_tool=0
+    for ((rour=0;rour<${#results_our_tool[@]};rour++)); do
+      n=`comm -12 $benchmark_dir/${results_our_tool[$rour]}-$our_tool.list.sorted $benchmark_dir/$rother-$other_tool.list.sorted | wc -l`
       printf "%8d | " $n
-      sum_mist=$((sum_mist + n))
-      sums_tool[$rtool]=$((${sums_tool[$rtool]} + n))
+      sum_other_tool=$((sum_other_tool + n))
+      sums_our_tool[$rour]=$((${sums_our_tool[$rour]} + n))
     done
-    printf "%8d\n" $sum_mist
+    printf "%8d\n" $sum_other_tool
   done
   echo -n "---------+-"
-  for rtool in "${results_tool[@]}"; do
+  for rour in "${results_our_tool[@]}"; do
     echo -n "---------+-"
   done
   echo "---------"
   total_sum=0
   echo -n "         | "
-  for ((rtool=0;rtool<${#results_tool[@]};rtool++)); do
-    printf "%8d | " ${sums_tool[$rtool]}
-    total_sum=$((total_sum + ${sums_tool[$rtool]}))
+  for ((rour=0;rour<${#results_our_tool[@]};rour++)); do
+    printf "%8d | " ${sums_our_tool[$rour]}
+    total_sum=$((total_sum + ${sums_our_tool[$rour]}))
   done
   printf "%8d\n" $total_sum
   echo
