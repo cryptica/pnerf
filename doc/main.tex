@@ -203,6 +203,8 @@ Figure~\ref{fig-procedure-explore}.
 
 \section{Experiments}
 
+\subsection{Method check}
+
 We applied Pnerf to the set of benchmarks
 \verb?benchmarks/given-by-daniel-kroening/?. We applied the following
 four configurations for the refinement sequence.
@@ -212,7 +214,8 @@ four configurations for the refinement sequence.
   \item \textcolor{red}{Trap conditions, subnet trap conditions}
   \item \textcolor{blue}{Trap conditions, subnet trap conditions, empty trap conditions}
 \end{itemize}
-We obtained the results in Table~\ref{table-results-method}.
+On the benchmark given by Daniel Kroening, we obtained the results in Table~\ref{table-results-method-dk}.
+On the benchmark given by mist, we obtained the results in Table~\ref{table-results-method-mist}.
 
 \begin{table}[h]
 \begin{center}
@@ -248,9 +251,51 @@ We obtained the results in Table~\ref{table-results-method}.
     77 \\ \cline{3-6}
   \end{tabular}
 \end{center}
-\caption{Results with different configurations of the refinement sequence}
-\label{table-results-method}
+\caption{Results with different configurations of the refinement sequence
+  on the benchmarks given by Daniel Kroening}
+\label{table-results-method-dk}
 \end{table}
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Our tool} \\
+    \cline{3-5}
+    & & positive & don't know & timeout 10 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} &
+    3 \textcolor{OliveGreen}{6} \textcolor{red}{6} \textcolor{blue}{6} &
+    3 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    6 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    3 \textcolor{OliveGreen}{6} \textcolor{red}{6} \textcolor{blue}{6} &
+    3 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    0 \textcolor{OliveGreen}{0} \textcolor{red}{0} \textcolor{blue}{0} &
+    6 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+\caption{Results with different configurations of the refinement sequence
+  on the benchmarks given by mist}
+\label{table-results-method-mist}
+\end{table}
+
+\subsection{Method explore}
 
 For the purpose of checking the remaining 3 `don't know` benchmarks,
 we applied the procedure {\bf Explore} with the following parameters.
@@ -303,10 +348,97 @@ We obtained the results in Table~\ref{table-results-explore}.
 \label{table-results-explore}
 \end{table}
 
+\subsection{Comparision of mist and bfc}
+
+We compared the tool mist with the tool bfc from http://www.cprover.org/bfc/.
+We obtained the results in Table~\ref{table-results-mist-bfc}.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | }
+    \cline{3-5}
+    & & \multicolumn{3}{ c| }{Mist} \\
+    \cline{3-5}
+    & & positive & negative & timeout 1 min &
+    \multicolumn{1}{ |c }{} \\ \cline{1-6}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Bfc}} &
+    \multicolumn{1}{ |c| }{positive} &
+    11 &  0 & 15 & 26 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+     0 & 28 & 23 & 51 \\ \cline{2-6}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+     0 &  0 &  0 &  0 \\ \cline{1-6}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    11 & 28 & 38 & 77 \\ \cline{3-6}
+  \end{tabular}
+\end{center}
+\caption{Results of comparing mist and bfc}
+\label{table-results-mist-bfc}
+\end{table}
+
+\subsection{Method check and explore}
+
+We modified the method {\bf Explore} to not call {\bf Check} on each marking
+and combined the method {\bf Check} on the initial marking with
+a call to the modified {\bf Explore} if {\bf Check} returns don't know.
+
+The parameters were
+\begin{itemize}
+  \item \textcolor{BrickRed}{RefinementTechniques=(), Depth = 100, timeout=1min}
+  \item \textcolor{NavyBlue}{RefinementTechniques=(), Depth = 100, timeout=10min}
+\end{itemize}
+After comparing the results with bfc, we obtained the results in Table~\ref{table-results-check-explore}.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | r | }
+    \cline{3-6}
+    & & \multicolumn{4}{ c| }{Our tool} \\
+    \cline{3-6}
+    & & positive & negative & don't know & timeout &
+    \multicolumn{1}{ |c }{} \\ \cline{1-7}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{positive} &
+    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    26 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{?} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{?} &
+    51 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    38 \\ \cline{1-7}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} &
+    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{?} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{?} &
+    77 \\ \cline{3-7}
+  \end{tabular}
+\end{center}
+\caption{Results with the procedure {\bf Check} and procedure {\bf Explore}}
+\label{table-results-check-explore}
+\end{table}
+
 \subsection{Observations}
 
+From table \ref{table-results-mist-bfc}, we see that there are no contradictions between mist and bfc.
 
-
+From table \ref{table-results-check-explore}, we see that there are no contradictions between our tool and bfc. Further our tool returns a positive result for all the positive benchmarks.
 
 \section{Experimental setups}
 
