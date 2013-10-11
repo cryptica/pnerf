@@ -1,6 +1,6 @@
-143166171 benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
-121270206 benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl
-110943190 benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
-113708261 benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl
-122191112 benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl
-102299575 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
+141843118 benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
+120397091 benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl
+108828309 benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
+116197955 benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl
+114940458 benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl
+106215629 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
