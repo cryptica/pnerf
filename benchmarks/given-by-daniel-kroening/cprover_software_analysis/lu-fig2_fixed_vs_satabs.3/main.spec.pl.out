@@ -55,4 +55,32 @@ queue size 1115
 visited size 2448
 
 next exploration depth 13
-queue si
+queue size 1533
+visited size 3563
+
+next exploration depth 14
+queue size 2101
+visited size 5096
+
+next exploration depth 15
+queue size 2855
+visited size 7197
+
+next exploration depth 16
+queue size 3860
+visited size 10052
+
+next exploration depth 17
+queue size 5195
+visited size 13912
+
+next exploration depth 18
+queue size 6948
+visited size 19107
+
+next exploration depth 19
+queue size 9223
+visited size 26055
+
+search concluded unsafe
+The petri does not satisfy the property

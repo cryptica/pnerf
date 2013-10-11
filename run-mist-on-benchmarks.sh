@@ -23,7 +23,7 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
           echo $spec_file >>$benchmark_dir/negative-mist.list
           echo "UNSAFE"
       fi
-    elif [[ result -ge 124 ]]; then
+    elif [[ result -eq 124 || result -eq 137 ]]; then
       echo $spec_file >>$benchmark_dir/timeout-mist.list
       echo "TIMEOUT"
     else

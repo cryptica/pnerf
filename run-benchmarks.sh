@@ -7,7 +7,7 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   >$benchmark_dir/timeout-pnerf.list
   >$benchmark_dir/error-pnerf.list
   >$benchmark_dir/timing.log
-  #timeout 600 ./src/main -t $benchmark_dir/timing.log $pl_file | tee $pl_file.out
+      #timeout 600 ./src/main $pl_file | tee $pl_file.out
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
     (
       set -o pipefail;

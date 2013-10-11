@@ -180,7 +180,7 @@ vecho '* Constructing constraints C_0 for petri net N'
 run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $tmpdir/pp-petri-net.pl
 
 #refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
-refinement_methods=( 'trap' )
+refinement_methods=( )
 
 method_count=${#refinement_methods[@]}
 iter=0
