@@ -58,4 +58,28 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   done
   printf "%8d\n" $total_sum
   echo
+  N=0
+  T_min=-1
+  T_max=0
+  T_sum=0
+  while read T file; do
+    N=$((N + 1))
+    if [[ $T -gt $T_max ]]; then
+      T_max=$T
+    fi
+    if [[ $T_min -lt 0 || $T -lt $T_min ]]; then
+      T_min=$T
+    fi
+    T_sum=$((T_sum + T))
+  done < $benchmark_dir/timing.log
+  T_avg=$((T_sum / N))
+  echo -n "Total   time: "
+  printf "%.1e\n" $T_sum
+  echo -n "Minimal time: "
+  printf "%.1e\n" $T_min
+  echo -n "Maximal time: "
+  printf "%.1e\n" $T_max
+  echo -n "Average time: "
+  printf "%.1e\n" $T_avg
+  echo
 done
