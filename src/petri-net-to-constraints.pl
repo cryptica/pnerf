@@ -14,15 +14,15 @@ z3_vars :-
         findall( _ , (
                        init(_, V),
                        atom(V),
-                       format('(declare-fun ~q () Int)\n', V)
+                       format('(declare-fun ~q () Real)\n', V)
                      ), _ ),
         findall( _ , (
                        place(P, _, _),
-                       format('(declare-fun ~q () Int)\n', P)
+                       format('(declare-fun ~q () Real)\n', P)
                      ), _ ),
         findall( _ , (
                        transition(T, _, _),
-                       format('(declare-fun ~q () Int)\n', T)
+                       format('(declare-fun ~q () Real)\n', T)
                      ), _ ).
 z3_transition_terms(T, Z3) :-
         Z3 = T.

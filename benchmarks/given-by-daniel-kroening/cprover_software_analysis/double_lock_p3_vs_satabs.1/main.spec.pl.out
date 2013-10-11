@@ -1,50 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.1/main.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.1/main.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded don't know, starting search
-next exploration depth 1
-queue size 2
-visited size 1
 
-next exploration depth 2
-queue size 3
-visited size 3
-
-next exploration depth 3
-queue size 5
-visited size 6
-
-next exploration depth 4
-queue size 8
-visited size 11
-
-next exploration depth 5
-queue size 13
-visited size 19
-
-next exploration depth 6
-queue size 21
-visited size 32
-
-next exploration depth 7
-queue size 34
-visited size 53
-
-next exploration depth 8
-queue size 55
-visited size 87
-
-next exploration depth 9
-queue size 89
-visited size 142
-
-next exploration depth 10
-queue size 149
-visited size 231
-
-search concluded unsafe
-The petri does not satisfy the property

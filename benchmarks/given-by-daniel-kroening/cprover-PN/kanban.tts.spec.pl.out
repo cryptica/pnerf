@@ -1,58 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded don't know, starting search
-next exploration depth 1
-queue size 5
-visited size 1
 
-next exploration depth 2
-queue size 15
-visited size 6
-
-next exploration depth 3
-queue size 35
-visited size 21
-
-next exploration depth 4
-queue size 70
-visited size 56
-
-next exploration depth 5
-queue size 126
-visited size 126
-
-next exploration depth 6
-queue size 211
-visited size 252
-
-next exploration depth 7
-queue size 335
-visited size 463
-
-next exploration depth 8
-queue size 511
-visited size 798
-
-next exploration depth 9
-queue size 758
-visited size 1309
-
-next exploration depth 10
-queue size 1105
-visited size 2067
-
-next exploration depth 11
-queue size 1599
-visited size 3172
-
-next exploration depth 12
-queue size 2313
-visited size 4771
-
-next exploration depth 13
-q

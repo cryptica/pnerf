@@ -1,58 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.2/main.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.2/main.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded don't know, starting search
-next exploration depth 1
-queue size 2
-visited size 1
 
-next exploration depth 2
-queue size 6
-visited size 3
-
-next exploration depth 3
-queue size 8
-visited size 9
-
-next exploration depth 4
-queue size 18
-visited size 17
-
-next exploration depth 5
-queue size 30
-visited size 35
-
-next exploration depth 6
-queue size 53
-visited size 65
-
-next exploration depth 7
-queue size 84
-visited size 118
-
-next exploration depth 8
-queue size 143
-visited size 202
-
-next exploration depth 9
-queue size 224
-visited size 345
-
-next exploration depth 10
-queue size 371
-visited size 569
-
-next exploration depth 11
-queue size 582
-visited size 940
-
-next exploration depth 12
-queue size 931
-visited size 1522
-
-next exploration depth 13
-queue size 1448

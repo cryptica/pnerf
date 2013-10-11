@@ -400,7 +400,7 @@ After comparing the results with bfc, we obtained the results in Table~\ref{tabl
     \cline{3-6}
     & & positive & negative & don't know & timeout &
     \multicolumn{1}{ |c }{} \\ \cline{1-7}
-    \multicolumn{1}{ |c| }{\multirow{3}{*}{Mist}} &
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Bfc}} &
     \multicolumn{1}{ |c| }{positive} &
     \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} &
     \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
@@ -432,6 +432,38 @@ After comparing the results with bfc, we obtained the results in Table~\ref{tabl
 \end{center}
 \caption{Results with the procedure {\bf Check} and procedure {\bf Explore}}
 \label{table-results-check-explore}
+\end{table}
+
+\subsection{State equation with real numbers}
+
+We modified the method {\bf Check} to use real numbers for the
+solution of the state equation and ran it without any refinement techniques.
+We obtained the results in Table~\ref{table-results-check-real}.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ cc | r | r | r | r | r | }
+    \cline{3-6}
+    & & \multicolumn{4}{ c| }{Our tool} \\
+    \cline{3-6}
+    & & positive & negative & don't know & timeout &
+    \multicolumn{1}{ |c }{} \\ \cline{1-7}
+    \multicolumn{1}{ |c| }{\multirow{3}{*}{Bfc}} &
+    \multicolumn{1}{ |c| }{positive} &
+    23 &  0 &  3 &  0 & 26 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{negative} &
+     0 &  0 & 51 &  0 & 51 \\ \cline{2-7}
+    \multicolumn{1}{ |c  }{} &
+    \multicolumn{1}{ |c| }{timeout 1 min} &
+     0 &  0 &  0 &  0 &  0 \\ \cline{1-7}
+    \multicolumn{1}{ c }{} &
+    \multicolumn{1}{ c| }{} &
+    23 &  0 & 54 &  0 & 77 \\ \cline{3-7}
+  \end{tabular}
+\end{center}
+\caption{Results with the procedure {\bf Check} with real numbers}
+\label{table-results-check-real}
 \end{table}
 
 \subsection{Observations}

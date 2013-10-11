@@ -1,34 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded don't know, starting search
-next exploration depth 1
-queue size 1
-visited size 1
 
-next exploration depth 2
-queue size 1
-visited size 2
-
-next exploration depth 3
-queue size 2
-visited size 3
-
-next exploration depth 4
-queue size 2
-visited size 5
-
-next exploration depth 5
-queue size 3
-visited size 7
-
-next exploration depth 6
-queue size 6
-visited size 10
-
-search concluded unsafe
-The petri does not satisfy the property
