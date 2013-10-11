@@ -7,12 +7,12 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   >$benchmark_dir/timeout-pnerf.list
   >$benchmark_dir/error-pnerf.list
   >$benchmark_dir/timing.log
-      #timeout 600 ./src/explore-states.sh -d 100 $pl_file | tee $pl_file.out
+      #timeout 600 ./src/main $pl_file | tee $pl_file.out
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
     T="$(date +%s%N)"
     (
       set -o pipefail;
-      timeout 600 ./src/main $pl_file | tee $pl_file.out
+      timeout 28800 ./src/explore-states.sh -d 100 $pl_file | tee $pl_file.out
     )
     result=$?
     T=$(($(date +%s%N)-T))
