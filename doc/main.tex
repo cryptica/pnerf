@@ -389,6 +389,7 @@ The parameters were
 \begin{itemize}
   \item \textcolor{BrickRed}{RefinementTechniques=(), Depth = 100, timeout=1min}
   \item \textcolor{NavyBlue}{RefinementTechniques=(), Depth = 100, timeout=10min}
+  \item \textcolor{ForestGreen}{RefinementTechniques=(), Depth = 100, timeout=8h}
 \end{itemize}
 After comparing the results with bfc, we obtained the results in Table~\ref{table-results-check-explore}.
 
@@ -402,31 +403,31 @@ After comparing the results with bfc, we obtained the results in Table~\ref{tabl
     \multicolumn{1}{ |c }{} \\ \cline{1-7}
     \multicolumn{1}{ |c| }{\multirow{3}{*}{Bfc}} &
     \multicolumn{1}{ |c| }{positive} &
-    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} \textcolor{ForestGreen}{26} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
     26 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{negative} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{39} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{12} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{39} \textcolor{ForestGreen}{45} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{12} \textcolor{ForestGreen}{6} &
     51 \\ \cline{2-7}
     \multicolumn{1}{ |c  }{} &
     \multicolumn{1}{ |c| }{timeout 1 min} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
     38 \\ \cline{1-7}
     \multicolumn{1}{ c }{} &
     \multicolumn{1}{ c| }{} &
-    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} &
-    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{39} &
-    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} &
-    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{12} &
+    \textcolor{BrickRed}{26} \textcolor{NavyBlue}{26} \textcolor{ForestGreen}{26} &
+    \textcolor{BrickRed}{34} \textcolor{NavyBlue}{39} \textcolor{ForestGreen}{45} &
+    \textcolor{BrickRed}{0} \textcolor{NavyBlue}{0} \textcolor{ForestGreen}{0} &
+    \textcolor{BrickRed}{17} \textcolor{NavyBlue}{12} \textcolor{ForestGreen}{6} &
     77 \\ \cline{3-7}
   \end{tabular}
 \end{center}
@@ -488,8 +489,9 @@ The compiled results of all methods are shown in table \ref{table-results-compil
     State space exploration with check, D=10, t=1min  & 23 &  8 & 10 &  36 & \\
     State space exploration with check, D=10, t=10min & 23 & 10 & 26 &  18 & \\
     \hline
-    Check + State space exploration without check, D=100, t=1min & 26 & 34 & 0 &  17 & \\
-    Check + State space exploration without check, D=100, t=1min & 26 & 39 & 0 &  12 & \\
+    Check + State space exploration without check, D=100, t=1min & 26 & 34 & 0 & 17 & \\
+    Check + State space exploration without check, D=100, t=1min & 26 & 39 & 0 & 12 & \\
+    Check + State space exploration without check, D=100, t=8h & 26 & 45 & 0 & 6 & \\
     \hline
     Mist tool & 11 & 28 & 0 & 38 & \\
     Bfc tool  & 26 & 51 & 0 &  0 & \\
