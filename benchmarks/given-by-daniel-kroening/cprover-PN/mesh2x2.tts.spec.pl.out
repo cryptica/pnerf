@@ -1,8 +1,9 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
+[-d 100 benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
 
--------------------------------------------
+* Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded safe
 The petri net satisfies the property!
--------------------------------------------
-
-

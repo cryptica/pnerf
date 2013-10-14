@@ -9,13 +9,13 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   >$benchmark_dir/timing.log
       #timeout 600 ./src/main $pl_file | tee $pl_file.out
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
-    T="$(date +%s%N)"
+    T="$(gdate +%s%N)"
     (
       set -o pipefail;
       timeout 28800 ./src/explore-states.sh -d 100 $pl_file | tee $pl_file.out
     )
     result=$?
-    T=$(($(date +%s%N)-T))
+    T=$(($(gdate +%s%N)-T))
     if [[ result -eq 0 ]]; then
         echo $pl_file >>$benchmark_dir/positive-pnerf.list
     elif [[ result -eq 1 ]]; then
