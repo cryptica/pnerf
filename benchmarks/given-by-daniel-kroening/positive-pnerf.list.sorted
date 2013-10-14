@@ -10,9 +10,12 @@ benchmarks/given-by-daniel-kroening/cprover-PN/csm
 benchmarks/given-by-daniel-kroening/cprover-PN/gsm
 benchmarks/given-by-daniel-kroening/cprover-PN/handover
 benchmarks/given-by-daniel-kroening/cprover-PN/keycard
+benchmarks/given-by-daniel-kroening/cprover-PN/lamport
 benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2
 benchmarks/given-by-daniel-kroening/cprover-PN/multipoll
+benchmarks/given-by-daniel-kroening/cprover-PN/newdekker
 benchmarks/given-by-daniel-kroening/cprover-PN/newrtp
+benchmarks/given-by-daniel-kroening/cprover-PN/peterson
 benchmarks/given-by-daniel-kroening/cprover-PN/phones
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction3
