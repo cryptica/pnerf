@@ -1,0 +1,111 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has  12 variables,  11 transitions and  0 actual invariants
+abs: 12 variables.
+abs: For the merging:
+100000000000
+010000000000
+001000000000
+000100000000
+000010000000
+000001000000
+000000100000
+000000010000
+000000001000
+000000000100
+000000000010
+000000000001
+abs: For the bounds:
+111111111111
+transition system
+Elems:      11 Nodes:    67 Arcs:    76 Layers: 13
+<<< Printing the elements of the IST: 0x18181500
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1]>-
+-<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0]>-
+-<[ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1]>-
+-<[ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 1][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 0, 1][ 0, 1][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 1, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 1,-1][ 1, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+-<[ 1,-1][ 1, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
+>>>
+abs: 12 variables.
+abs: For the merging:
+100000000000
+010000000000
+001000000000
+000100000000
+000010000000
+000001000000
+000000100000
+000000010000
+000000001000
+000000000100
+000000000010
+000000000001
+abs: For the bounds:
+000220000000
+eec: ENLARGE begin	
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       4 Nodes:    22 Arcs:    24 Layers: 13
+Elems:       8 Nodes:    29 Arcs:    34 Layers: 13
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       3 Nodes:    18 Arcs:    19 Layers: 13
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       2 Nodes:    16 Arcs:    16 Layers: 13
+After union, the reached symbolic state space is:
+Elems:       5 Nodes:    23 Arcs:    26 Layers: 13
+The reached symbolic state space is:
+Elems:       5 Nodes:    23 Arcs:    26 Layers: 13
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 12 variables.
+abs: For the merging:
+100000000000
+010000000000
+001000000000
+000100000000
+000010000000
+000001000000
+000000100000
+000000010000
+000000001000
+000000000100
+000000000010
+000000000001
+abs: For the bounds:
+111220000000
+eec: ENLARGE begin	
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       1 Nodes:    14 Arcs:    13 Layers: 13
+Elems:       5 Nodes:    30 Arcs:    33 Layers: 13
+Elems:       4 Nodes:    26 Arcs:    28 Layers: 13
+Elems:       5 Nodes:    26 Arcs:    28 Layers: 13
+Elems:       3 Nodes:    20 Arcs:    21 Layers: 13
+Elems:       3 Nodes:    20 Arcs:    21 Layers: 13
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool

@@ -1,0 +1,83 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has   6 variables,   6 transitions and  0 actual invariants
+abs: 6 variables.
+abs: For the merging:
+100000
+010000
+001000
+000100
+000010
+000001
+abs: For the bounds:
+111111
+transition system
+Elems:       6 Nodes:    25 Arcs:    29 Layers:  7
+<<< Printing the elements of the IST: 0x19a92e60
+-<[ 0, 0][ 0, 0][ 1, 0][ 0, 1][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 0, 1][ 1,-1][ 1,-1][ 0, 1][ 0, 0]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 1][ 0, 0][ 1,-1]>-
+-<[ 0, 0][ 1,-1][ 0, 1][ 0, 1][ 1,-1][ 0, 0]>-
+-<[ 1,-1][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 1]>-
+-<[ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 1]>-
+>>>
+abs: 6 variables.
+abs: For the merging:
+100000
+010000
+001000
+000100
+000010
+000001
+abs: For the bounds:
+001010
+eec: ENLARGE begin	
+Elems:       2 Nodes:    10 Arcs:    10 Layers:  7
+Elems:       2 Nodes:    11 Arcs:    11 Layers:  7
+Elems:       2 Nodes:    11 Arcs:    11 Layers:  7
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       4 Nodes:    19 Arcs:    21 Layers:  7
+After union, the reached symbolic state space is:
+Elems:       5 Nodes:    20 Arcs:    23 Layers:  7
+The reached symbolic state space is:
+Elems:       5 Nodes:    20 Arcs:    23 Layers:  7
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 6 variables.
+abs: For the merging:
+100000
+010000
+001000
+000100
+000010
+000001
+abs: For the bounds:
+112121
+eec: ENLARGE begin	
+Elems:       2 Nodes:    10 Arcs:    10 Layers:  7
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+Elems:       1 Nodes:     8 Arcs:     7 Layers:  7
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool

@@ -1,0 +1,74 @@
+Copyright (C) 2002-2013 Pierre Ganty, 2003-2008 Laurent Van Begin.
+mist is free software, covered by the GNU General Public License, and you are
+welcome to change it and/or distribute copies of it under certains conditions.
+There is absolutely no warranty for mist. See the COPYING for details.
+
+
+Parsing the problem instance.
+Allocating memory for data structure.. DONE
+System has   5 variables,   4 transitions and  0 actual invariants
+abs: 5 variables.
+abs: For the merging:
+10000
+01000
+00100
+00010
+00001
+abs: For the bounds:
+11111
+transition system
+Elems:       4 Nodes:    19 Arcs:    21 Layers:  6
+<<< Printing the elements of the IST: 0x19cce470
+-<[ 0, 1][ 0, 0][ 0, 1][ 1,-1][ 0, 0]>-
+-<[ 0, 1][ 0, 1][ 0, 0][ 0, 0][ 1,-1]>-
+-<[ 1,-1][ 1,-1][ 1, 0][ 0, 0][ 0, 1]>-
+-<[ 1,-1][ 1, 0][ 1,-1][ 0, 1][ 0, 0]>-
+>>>
+abs: 5 variables.
+abs: For the merging:
+10000
+01000
+00100
+00010
+00001
+abs: For the bounds:
+00022
+eec: ENLARGE begin	
+Elems:       2 Nodes:     9 Arcs:     9 Layers:  6
+Elems:       3 Nodes:    11 Arcs:    12 Layers:  6
+end
+eec: EXPAND begin	Elems:       0 Nodes:     1 Arcs:     0 Layers:  0
+Elems:       1 Nodes:     7 Arcs:     6 Layers:  6
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:       3 Nodes:    11 Arcs:    12 Layers:  6
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:       2 Nodes:     9 Arcs:     9 Layers:  6
+After union, the reached symbolic state space is:
+Elems:       5 Nodes:    16 Arcs:    19 Layers:  6
+The reached symbolic state space is:
+Elems:       5 Nodes:    16 Arcs:    19 Layers:  6
+Total time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 5 variables.
+abs: For the merging:
+10000
+01000
+00100
+00010
+00001
+abs: For the bounds:
+11122
+eec: ENLARGE begin	
+Elems:       2 Nodes:    11 Arcs:    11 Layers:  6
+Elems:       1 Nodes:     7 Arcs:     6 Layers:  6
+end
+TSI time of computation (user)   ->  0.000 sec.
+                          (system) ->  0.000 sec.
+TSI concludes safe
+Thanks for using this tool
