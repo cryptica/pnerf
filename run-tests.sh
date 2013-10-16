@@ -36,7 +36,7 @@ test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp
 function test-petri-net-to-constraints {
     if (
       set -e
-      sicstus -l "$sysdir"/src/petri-net-to-constraints.pl -- "$sysdir"/tests/$1 2>/dev/null >$tmpdir/constraints-c0.smt2
+      sicstus -l "$sysdir"/src/petri-net-to-constraints.pl -- 'Int' "$sysdir"/tests/$1 2>/dev/null >$tmpdir/constraints-c0.smt2
       sort "$sysdir"/tests/$2 >$tmpdir/constraints-c0-exp.smt2
       sort $tmpdir/constraints-c0.smt2 >$tmpdir/constraints-c0-out.smt2
       diff $tmpdir/constraints-c0-exp.smt2 $tmpdir/constraints-c0-out.smt2

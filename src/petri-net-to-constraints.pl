@@ -10,19 +10,19 @@
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
-z3_vars :-
+z3_vars(EquationType) :-
         findall( _ , (
                        init(_, V),
                        atom(V),
-                       format('(declare-fun ~q () Real)\n', V)
+                       format('(declare-fun ~q () ~p)\n', [V, EquationType])
                      ), _ ),
         findall( _ , (
                        place(P, _, _),
-                       format('(declare-fun ~q () Real)\n', P)
+                       format('(declare-fun ~q () ~p)\n', [P, EquationType])
                      ), _ ),
         findall( _ , (
                        transition(T, _, _),
-                       format('(declare-fun ~q () Real)\n', T)
+                       format('(declare-fun ~q () ~p)\n', [T, EquationType])
                      ), _ ).
 z3_transition_terms(T, Z3) :-
         Z3 = T.
@@ -67,8 +67,8 @@ z3_conditions :-
                        format('(assert ~p)\n', [C])
                      ), _ ).
 
-z3_constraints :-
-        z3_vars,
+z3_constraints(EquationType) :-
+        z3_vars(EquationType),
         z3_nat_ineqs,
         z3_place_eqs,
         z3_conditions,
@@ -76,9 +76,9 @@ z3_constraints :-
         print('(get-model)\n').
 
 % Entry point
-:-      prolog_flag(argv, Argv),
+:-      prolog_flag(argv, [EquationType|Argv]),
         (   foreach(F, Argv)
         do  load_pl_file(F)
         ),
-        z3_constraints,
+        z3_constraints(EquationType),
         halt.

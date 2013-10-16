@@ -121,16 +121,18 @@ function run_sicstus {
   return $res
 }
 
+#refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+refinement_methods=( )
+#equation_type='Int'
+equation_type='Real'
+
 vecho
 vecho '* Constructing petri net N from input file'
 run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $(absolute_path $input)/$(basename $input)
 
 vecho
 vecho '* Constructing constraints C_0 for petri net N'
-run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $tmpdir/pp-petri-net.pl
-
-#refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
-refinement_methods=( )
+run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $equation_type $tmpdir/pp-petri-net.pl
 
 method_count=${#refinement_methods[@]}
 iter=0
