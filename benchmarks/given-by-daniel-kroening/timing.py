@@ -2,8 +2,7 @@
 
 import sys
 
-times = open('timing.log.sorted')
-for line in times:
+for line in sys.stdin:
   time = int(line.split()[0]) / 1e9
   unit = 's'
   filename = line.split()[1]
