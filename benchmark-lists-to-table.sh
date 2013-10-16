@@ -71,15 +71,17 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
       T_min=$T
     fi
     T_sum=$((T_sum + T))
-  done < $benchmark_dir/timing.log
-  T_avg=$((T_sum / N))
-  echo -n "Total   time: "
-  printf "%.3e\n" $T_sum
-  echo -n "Minimal time: "
-  printf "%.3e\n" $T_min
-  echo -n "Maximal time: "
-  printf "%.3e\n" $T_max
-  echo -n "Average time: "
-  printf "%.3e\n" $T_avg
+  done < $benchmark_dir/timing-$our_tool.log
+  if [[ $N -gt 0 ]]; then
+    T_avg=$((T_sum / N))
+    echo -n "Total   time: "
+    printf "%.3e\n" $T_sum
+    echo -n "Minimal time: "
+    printf "%.3e\n" $T_min
+    echo -n "Maximal time: "
+    printf "%.3e\n" $T_max
+    echo -n "Average time: "
+    printf "%.3e\n" $T_avg
+  fi
   echo
 done
