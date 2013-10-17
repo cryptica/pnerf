@@ -6,6 +6,7 @@ benchmarks/found-in-mist-repo/boundedPN/newrtp.spec
 benchmarks/found-in-mist-repo/boundedPN/read-write.spec
 benchmarks/found-in-mist-repo/PN/bingham_h25.spec
 benchmarks/found-in-mist-repo/PN/MultiME.spec
+benchmarks/found-in-mist-repo/PN/extendedread-write-smallconsts.spec
 benchmarks/found-in-mist-repo/PN/csm.spec
 benchmarks/found-in-mist-repo/PN/bingham_h50.spec
 benchmarks/found-in-mist-repo/PN/manufacturing.spec

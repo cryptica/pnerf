@@ -37,7 +37,7 @@ abs: For the bounds:
 111111111111111111111111
 transition system
 Elems:      22 Nodes:   163 Arcs:   183 Layers: 25
-<<< Printing the elements of the IST: 0x19924cc0
+<<< Printing the elements of the IST: 0x1863dcc0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 1,-1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 1]>-
@@ -232,7 +232,7 @@ After union, the reached symbolic state space is:
 Elems:      83 Nodes:   240 Arcs:   292 Layers: 25
 The reached symbolic state space is:
 Elems:      83 Nodes:   240 Arcs:   292 Layers: 25
-Total time of computation (user)   ->  0.020 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 24 variables.
@@ -487,7 +487,7 @@ After union, the reached symbolic state space is:
 Elems:    1188 Nodes:   910 Arcs:  1350 Layers: 25
 The reached symbolic state space is:
 Elems:    1188 Nodes:   910 Arcs:  1350 Layers: 25
-Total time of computation (user)   ->  0.260 sec.
+Total time of computation (user)   ->  0.190 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 24 variables.
@@ -607,7 +607,7 @@ After union, the reached symbolic state space is:
 Elems:    1961 Nodes:  1195 Arcs:  1851 Layers: 25
 The reached symbolic state space is:
 Elems:    1961 Nodes:  1195 Arcs:  1851 Layers: 25
-Total time of computation (user)   ->  0.410 sec.
+Total time of computation (user)   ->  0.370 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 24 variables.
@@ -726,7 +726,7 @@ After union, the reached symbolic state space is:
 Elems:    2797 Nodes:  1484 Arcs:  2349 Layers: 25
 The reached symbolic state space is:
 Elems:    2797 Nodes:  1484 Arcs:  2349 Layers: 25
-Total time of computation (user)   ->  0.770 sec.
+Total time of computation (user)   ->  0.700 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 24 variables.
@@ -758,3 +758,447 @@ abs: For the merging:
 abs: For the bounds:
 612515131216710146682225222
 eec: ENLARGE begin	
+Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    79 Arcs:    82 Layers: 25
+Elems:       7 Nodes:    98 Arcs:   103 Layers: 25
+Elems:      11 Nodes:   125 Arcs:   133 Layers: 25
+Elems:      17 Nodes:   165 Arcs:   178 Layers: 25
+Elems:      28 Nodes:   214 Arcs:   236 Layers: 25
+Elems:      49 Nodes:   265 Arcs:   301 Layers: 25
+Elems:      85 Nodes:   334 Arcs:   391 Layers: 25
+Elems:     136 Nodes:   418 Arcs:   506 Layers: 25
+Elems:     202 Nodes:   523 Arcs:   653 Layers: 25
+Elems:     289 Nodes:   651 Arcs:   834 Layers: 25
+Elems:     397 Nodes:   800 Arcs:  1052 Layers: 25
+Elems:     547 Nodes:   963 Arcs:  1313 Layers: 25
+Elems:     761 Nodes:  1168 Arcs:  1644 Layers: 25
+Elems:    1040 Nodes:  1394 Arcs:  2034 Layers: 25
+Elems:    1391 Nodes:  1658 Arcs:  2519 Layers: 25
+Elems:    1815 Nodes:  1972 Arcs:  3076 Layers: 25
+Elems:    2324 Nodes:  2334 Arcs:  3759 Layers: 25
+Elems:    2943 Nodes:  2719 Arcs:  4539 Layers: 25
+Elems:    3749 Nodes:  3179 Arcs:  5480 Layers: 25
+Elems:    4753 Nodes:  3684 Arcs:  6591 Layers: 25
+Elems:    5967 Nodes:  4257 Arcs:  7933 Layers: 25
+Elems:    7407 Nodes:  4833 Arcs:  9329 Layers: 25
+Elems:    9136 Nodes:  5481 Arcs: 10899 Layers: 25
+Elems:   11151 Nodes:  6180 Arcs: 12681 Layers: 25
+Elems:   13423 Nodes:  6792 Arcs: 14256 Layers: 25
+Elems:   15878 Nodes:  7423 Arcs: 15840 Layers: 25
+Elems:   18345 Nodes:  8087 Arcs: 17476 Layers: 25
+end
+eec: EXPAND begin	Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    81 Arcs:    84 Layers: 25
+Elems:       7 Nodes:    99 Arcs:   104 Layers: 25
+Elems:      11 Nodes:   112 Arcs:   120 Layers: 25
+Elems:      17 Nodes:   134 Arcs:   147 Layers: 25
+Elems:      28 Nodes:   172 Arcs:   193 Layers: 25
+Elems:      48 Nodes:   207 Arcs:   240 Layers: 25
+Elems:      79 Nodes:   242 Arcs:   292 Layers: 25
+Elems:     126 Nodes:   289 Arcs:   361 Layers: 25
+Elems:     184 Nodes:   360 Arcs:   460 Layers: 25
+Elems:     258 Nodes:   424 Arcs:   555 Layers: 25
+Elems:     352 Nodes:   521 Arcs:   697 Layers: 25
+Elems:     474 Nodes:   598 Arcs:   832 Layers: 25
+Elems:     636 Nodes:   695 Arcs:  1001 Layers: 25
+Elems:     859 Nodes:   800 Arcs:  1194 Layers: 25
+Elems:    1143 Nodes:   952 Arcs:  1471 Layers: 25
+Elems:    1433 Nodes:  1099 Arcs:  1739 Layers: 25
+Elems:    1651 Nodes:  1244 Arcs:  2002 Layers: 25
+Elems:    1711 Nodes:  1358 Arcs:  2183 Layers: 25
+Elems:    1622 Nodes:  1416 Arcs:  2257 Layers: 25
+Elems:    1432 Nodes:  1421 Arcs:  2242 Layers: 25
+Elems:    1281 Nodes:  1385 Arcs:  2175 Layers: 25
+Elems:    1226 Nodes:  1322 Arcs:  2081 Layers: 25
+Elems:    1185 Nodes:  1241 Arcs:  1951 Layers: 25
+Elems:    1124 Nodes:  1191 Arcs:  1837 Layers: 25
+Elems:    1002 Nodes:  1137 Arcs:  1721 Layers: 25
+Elems:     854 Nodes:  1052 Arcs:  1581 Layers: 25
+Elems:     705 Nodes:   932 Arcs:  1398 Layers: 25
+Elems:     603 Nodes:   847 Arcs:  1268 Layers: 25
+Elems:     514 Nodes:   735 Arcs:  1087 Layers: 25
+Elems:     422 Nodes:   670 Arcs:   959 Layers: 25
+Elems:     361 Nodes:   627 Arcs:   871 Layers: 25
+Elems:     294 Nodes:   560 Arcs:   759 Layers: 25
+Elems:     227 Nodes:   495 Arcs:   651 Layers: 25
+Elems:     170 Nodes:   417 Arcs:   539 Layers: 25
+Elems:     116 Nodes:   344 Arcs:   428 Layers: 25
+Elems:      83 Nodes:   273 Arcs:   330 Layers: 25
+Elems:      56 Nodes:   211 Arcs:   246 Layers: 25
+Elems:      36 Nodes:   152 Arcs:   174 Layers: 25
+Elems:      16 Nodes:    87 Arcs:    96 Layers: 25
+Elems:       5 Nodes:    48 Arcs:    51 Layers: 25
+Elems:    3921 Nodes:   292 Arcs:   536 Layers: 25
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:    2797 Nodes:  1484 Arcs:  2349 Layers: 25
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:    1566 Nodes:  1521 Arcs:  2265 Layers: 25
+After union, the reached symbolic state space is:
+Elems:    3671 Nodes:  1770 Arcs:  2878 Layers: 25
+The reached symbolic state space is:
+Elems:    3671 Nodes:  1770 Arcs:  2878 Layers: 25
+Total time of computation (user)   ->  1.160 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 24 variables.
+abs: For the merging:
+100000000000000000000000
+010000000000000000000000
+001000000000000000000000
+000100000000000000000000
+000010000000000000000000
+000001000000000000000000
+000000100000000000000000
+000000010000000000000000
+000000001000000000000000
+000000000100000000000000
+000000000010000000000000
+000000000001000000000000
+000000000000100000000000
+000000000000010000000000
+000000000000001000000000
+000000000000000100000000
+000000000000000010000000
+000000000000000001000000
+000000000000000000100000
+000000000000000000010000
+000000000000000000001000
+000000000000000000000100
+000000000000000000000010
+000000000000000000000001
+abs: For the bounds:
+712515131217810147782225222
+eec: ENLARGE begin	
+Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    79 Arcs:    82 Layers: 25
+Elems:       7 Nodes:    98 Arcs:   103 Layers: 25
+Elems:      11 Nodes:   125 Arcs:   133 Layers: 25
+Elems:      17 Nodes:   165 Arcs:   178 Layers: 25
+Elems:      28 Nodes:   214 Arcs:   236 Layers: 25
+Elems:      49 Nodes:   265 Arcs:   301 Layers: 25
+Elems:      85 Nodes:   334 Arcs:   391 Layers: 25
+Elems:     136 Nodes:   418 Arcs:   506 Layers: 25
+Elems:     202 Nodes:   523 Arcs:   653 Layers: 25
+Elems:     289 Nodes:   651 Arcs:   834 Layers: 25
+Elems:     397 Nodes:   800 Arcs:  1052 Layers: 25
+Elems:     547 Nodes:   963 Arcs:  1313 Layers: 25
+Elems:     761 Nodes:  1168 Arcs:  1644 Layers: 25
+Elems:    1040 Nodes:  1394 Arcs:  2034 Layers: 25
+Elems:    1391 Nodes:  1658 Arcs:  2519 Layers: 25
+Elems:    1815 Nodes:  1972 Arcs:  3076 Layers: 25
+Elems:    2324 Nodes:  2334 Arcs:  3759 Layers: 25
+Elems:    2943 Nodes:  2719 Arcs:  4539 Layers: 25
+Elems:    3748 Nodes:  3174 Arcs:  5474 Layers: 25
+Elems:    4750 Nodes:  3679 Arcs:  6583 Layers: 25
+Elems:    5962 Nodes:  4256 Arcs:  7929 Layers: 25
+Elems:    7403 Nodes:  4830 Arcs:  9325 Layers: 25
+Elems:    9147 Nodes:  5497 Arcs: 10953 Layers: 25
+Elems:   11186 Nodes:  6203 Arcs: 12755 Layers: 25
+Elems:   13506 Nodes:  6870 Arcs: 14480 Layers: 25
+Elems:   16030 Nodes:  7548 Arcs: 16176 Layers: 25
+Elems:   18559 Nodes:  8269 Arcs: 17911 Layers: 25
+Elems:   20925 Nodes:  8846 Arcs: 19330 Layers: 25
+Elems:   23100 Nodes:  9378 Arcs: 20534 Layers: 25
+Elems:   25094 Nodes:  9923 Arcs: 21722 Layers: 25
+Elems:   26889 Nodes: 10263 Arcs: 22570 Layers: 25
+Elems:   28573 Nodes: 10535 Arcs: 23200 Layers: 25
+Elems:   30162 Nodes: 10844 Arcs: 23975 Layers: 25
+Elems:   31517 Nodes: 11005 Arcs: 24511 Layers: 25
+end
+eec: EXPAND begin	Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    81 Arcs:    84 Layers: 25
+Elems:       7 Nodes:    99 Arcs:   104 Layers: 25
+Elems:      11 Nodes:   112 Arcs:   120 Layers: 25
+Elems:      17 Nodes:   134 Arcs:   147 Layers: 25
+Elems:      28 Nodes:   172 Arcs:   193 Layers: 25
+Elems:      48 Nodes:   207 Arcs:   240 Layers: 25
+Elems:      79 Nodes:   242 Arcs:   292 Layers: 25
+Elems:     126 Nodes:   289 Arcs:   361 Layers: 25
+Elems:     184 Nodes:   360 Arcs:   460 Layers: 25
+Elems:     258 Nodes:   424 Arcs:   555 Layers: 25
+Elems:     352 Nodes:   521 Arcs:   697 Layers: 25
+Elems:     474 Nodes:   598 Arcs:   832 Layers: 25
+Elems:     636 Nodes:   695 Arcs:  1001 Layers: 25
+Elems:     859 Nodes:   800 Arcs:  1194 Layers: 25
+Elems:    1143 Nodes:   952 Arcs:  1471 Layers: 25
+Elems:    1433 Nodes:  1099 Arcs:  1739 Layers: 25
+Elems:    1653 Nodes:  1246 Arcs:  2005 Layers: 25
+Elems:    1717 Nodes:  1362 Arcs:  2189 Layers: 25
+Elems:    1633 Nodes:  1420 Arcs:  2263 Layers: 25
+Elems:    1450 Nodes:  1425 Arcs:  2249 Layers: 25
+Elems:    1317 Nodes:  1393 Arcs:  2191 Layers: 25
+Elems:    1294 Nodes:  1344 Arcs:  2122 Layers: 25
+Elems:    1293 Nodes:  1288 Arcs:  2035 Layers: 25
+Elems:    1273 Nodes:  1245 Arcs:  1943 Layers: 25
+Elems:    1211 Nodes:  1227 Arcs:  1901 Layers: 25
+Elems:    1085 Nodes:  1165 Arcs:  1793 Layers: 25
+Elems:     945 Nodes:  1065 Arcs:  1642 Layers: 25
+Elems:     798 Nodes:  1010 Arcs:  1555 Layers: 25
+Elems:     669 Nodes:   899 Arcs:  1375 Layers: 25
+Elems:     511 Nodes:   782 Arcs:  1138 Layers: 25
+Elems:     401 Nodes:   675 Arcs:   941 Layers: 25
+Elems:     321 Nodes:   607 Arcs:   826 Layers: 25
+Elems:     244 Nodes:   537 Arcs:   707 Layers: 25
+Elems:     176 Nodes:   437 Arcs:   564 Layers: 25
+Elems:     116 Nodes:   344 Arcs:   428 Layers: 25
+Elems:      83 Nodes:   273 Arcs:   330 Layers: 25
+Elems:      56 Nodes:   211 Arcs:   246 Layers: 25
+Elems:      36 Nodes:   152 Arcs:   174 Layers: 25
+Elems:      16 Nodes:    87 Arcs:    96 Layers: 25
+Elems:       5 Nodes:    48 Arcs:    51 Layers: 25
+Elems:    4215 Nodes:   294 Arcs:   547 Layers: 25
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:    3671 Nodes:  1770 Arcs:  2878 Layers: 25
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:    1767 Nodes:  1716 Arcs:  2601 Layers: 25
+After union, the reached symbolic state space is:
+Elems:    4630 Nodes:  2080 Arcs:  3457 Layers: 25
+The reached symbolic state space is:
+Elems:    4630 Nodes:  2080 Arcs:  3457 Layers: 25
+Total time of computation (user)   ->  1.870 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 24 variables.
+abs: For the merging:
+100000000000000000000000
+010000000000000000000000
+001000000000000000000000
+000100000000000000000000
+000010000000000000000000
+000001000000000000000000
+000000100000000000000000
+000000010000000000000000
+000000001000000000000000
+000000000100000000000000
+000000000010000000000000
+000000000001000000000000
+000000000000100000000000
+000000000000010000000000
+000000000000001000000000
+000000000000000100000000
+000000000000000010000000
+000000000000000001000000
+000000000000000000100000
+000000000000000000010000
+000000000000000000001000
+000000000000000000000100
+000000000000000000000010
+000000000000000000000001
+abs: For the bounds:
+812515131218910148882225222
+eec: ENLARGE begin	
+Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    79 Arcs:    82 Layers: 25
+Elems:       7 Nodes:    98 Arcs:   103 Layers: 25
+Elems:      11 Nodes:   125 Arcs:   133 Layers: 25
+Elems:      17 Nodes:   165 Arcs:   178 Layers: 25
+Elems:      28 Nodes:   214 Arcs:   236 Layers: 25
+Elems:      49 Nodes:   265 Arcs:   301 Layers: 25
+Elems:      85 Nodes:   334 Arcs:   391 Layers: 25
+Elems:     136 Nodes:   418 Arcs:   506 Layers: 25
+Elems:     202 Nodes:   523 Arcs:   653 Layers: 25
+Elems:     289 Nodes:   651 Arcs:   834 Layers: 25
+Elems:     397 Nodes:   800 Arcs:  1052 Layers: 25
+Elems:     547 Nodes:   963 Arcs:  1313 Layers: 25
+Elems:     761 Nodes:  1168 Arcs:  1644 Layers: 25
+Elems:    1040 Nodes:  1394 Arcs:  2034 Layers: 25
+Elems:    1391 Nodes:  1658 Arcs:  2519 Layers: 25
+Elems:    1815 Nodes:  1972 Arcs:  3076 Layers: 25
+Elems:    2324 Nodes:  2334 Arcs:  3759 Layers: 25
+Elems:    2943 Nodes:  2719 Arcs:  4539 Layers: 25
+Elems:    3748 Nodes:  3174 Arcs:  5474 Layers: 25
+Elems:    4750 Nodes:  3679 Arcs:  6583 Layers: 25
+Elems:    5962 Nodes:  4256 Arcs:  7929 Layers: 25
+Elems:    7403 Nodes:  4830 Arcs:  9325 Layers: 25
+Elems:    9151 Nodes:  5499 Arcs: 10957 Layers: 25
+Elems:   11199 Nodes:  6206 Arcs: 12762 Layers: 25
+Elems:   13532 Nodes:  6867 Arcs: 14484 Layers: 25
+Elems:   16077 Nodes:  7569 Arcs: 16215 Layers: 25
+Elems:   18636 Nodes:  8308 Arcs: 17980 Layers: 25
+Elems:   21025 Nodes:  8908 Arcs: 19441 Layers: 25
+Elems:   23228 Nodes:  9482 Arcs: 20703 Layers: 25
+Elems:   25245 Nodes: 10040 Arcs: 21911 Layers: 25
+Elems:   27054 Nodes: 10414 Arcs: 22831 Layers: 25
+Elems:   28746 Nodes: 10735 Arcs: 23537 Layers: 25
+Elems:   30331 Nodes: 11040 Arcs: 24303 Layers: 25
+Elems:   31668 Nodes: 11215 Arcs: 24878 Layers: 25
+Elems:   32761 Nodes: 11302 Arcs: 25169 Layers: 25
+end
+eec: EXPAND begin	Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    81 Arcs:    84 Layers: 25
+Elems:       7 Nodes:    99 Arcs:   104 Layers: 25
+Elems:      11 Nodes:   112 Arcs:   120 Layers: 25
+Elems:      17 Nodes:   134 Arcs:   147 Layers: 25
+Elems:      28 Nodes:   172 Arcs:   193 Layers: 25
+Elems:      48 Nodes:   207 Arcs:   240 Layers: 25
+Elems:      79 Nodes:   242 Arcs:   292 Layers: 25
+Elems:     126 Nodes:   289 Arcs:   361 Layers: 25
+Elems:     184 Nodes:   360 Arcs:   460 Layers: 25
+Elems:     258 Nodes:   424 Arcs:   555 Layers: 25
+Elems:     352 Nodes:   521 Arcs:   697 Layers: 25
+Elems:     474 Nodes:   598 Arcs:   832 Layers: 25
+Elems:     636 Nodes:   695 Arcs:  1001 Layers: 25
+Elems:     859 Nodes:   800 Arcs:  1194 Layers: 25
+Elems:    1143 Nodes:   952 Arcs:  1471 Layers: 25
+Elems:    1433 Nodes:  1099 Arcs:  1739 Layers: 25
+Elems:    1653 Nodes:  1246 Arcs:  2005 Layers: 25
+Elems:    1717 Nodes:  1362 Arcs:  2189 Layers: 25
+Elems:    1633 Nodes:  1420 Arcs:  2263 Layers: 25
+Elems:    1450 Nodes:  1425 Arcs:  2249 Layers: 25
+Elems:    1317 Nodes:  1393 Arcs:  2191 Layers: 25
+Elems:    1303 Nodes:  1346 Arcs:  2126 Layers: 25
+Elems:    1325 Nodes:  1306 Arcs:  2064 Layers: 25
+Elems:    1333 Nodes:  1280 Arcs:  1999 Layers: 25
+Elems:    1302 Nodes:  1264 Arcs:  1966 Layers: 25
+Elems:    1225 Nodes:  1240 Arcs:  1929 Layers: 25
+Elems:    1117 Nodes:  1167 Arcs:  1818 Layers: 25
+Elems:     994 Nodes:  1134 Arcs:  1777 Layers: 25
+Elems:     861 Nodes:  1070 Arcs:  1676 Layers: 25
+Elems:     724 Nodes:   995 Arcs:  1512 Layers: 25
+Elems:     588 Nodes:   889 Arcs:  1280 Layers: 25
+Elems:     480 Nodes:   800 Arcs:  1120 Layers: 25
+Elems:     369 Nodes:   722 Arcs:   989 Layers: 25
+Elems:     253 Nodes:   591 Arcs:   789 Layers: 25
+Elems:     159 Nodes:   452 Arcs:   571 Layers: 25
+Elems:     105 Nodes:   368 Arcs:   441 Layers: 25
+Elems:      74 Nodes:   294 Arcs:   344 Layers: 25
+Elems:      46 Nodes:   213 Arcs:   245 Layers: 25
+Elems:      20 Nodes:   126 Arcs:   139 Layers: 25
+Elems:       5 Nodes:    48 Arcs:    51 Layers: 25
+Elems:    4509 Nodes:   296 Arcs:   558 Layers: 25
+end
+eec: BOUNDS	<<<<<<<<<<<<<<<<<<<<< not fix point >>>>>>>>>>>>>>>>>>
+Elems:    4630 Nodes:  2080 Arcs:  3457 Layers: 25
+
+
+Iteration	  1
+Computation of the symbolic predecessors states ...
+The new frontier counts :
+Elems:    2042 Nodes:  1932 Arcs:  2998 Layers: 25
+After union, the reached symbolic state space is:
+Elems:    5640 Nodes:  2418 Arcs:  4112 Layers: 25
+The reached symbolic state space is:
+Elems:    5640 Nodes:  2418 Arcs:  4112 Layers: 25
+Total time of computation (user)   ->  2.880 sec.
+                          (system) ->  0.000 sec.
+
+New boundsabs: 24 variables.
+abs: For the merging:
+100000000000000000000000
+010000000000000000000000
+001000000000000000000000
+000100000000000000000000
+000010000000000000000000
+000001000000000000000000
+000000100000000000000000
+000000010000000000000000
+000000001000000000000000
+000000000100000000000000
+000000000010000000000000
+000000000001000000000000
+000000000000100000000000
+000000000000010000000000
+000000000000001000000000
+000000000000000100000000
+000000000000000010000000
+000000000000000001000000
+000000000000000000100000
+000000000000000000010000
+000000000000000000001000
+000000000000000000000100
+000000000000000000000010
+000000000000000000000001
+abs: For the bounds:
+9125151312191010149982225222
+eec: ENLARGE begin	
+Elems:       2 Nodes:    48 Arcs:    48 Layers: 25
+Elems:       5 Nodes:    79 Arcs:    82 Layers: 25
+Elems:       7 Nodes:    98 Arcs:   103 Layers: 25
+Elems:      11 Nodes:   125 Arcs:   133 Layers: 25
+Elems:      17 Nodes:   165 Arcs:   178 Layers: 25
+Elems:      28 Nodes:   214 Arcs:   236 Layers: 25
+Elems:      49 Nodes:   265 Arcs:   301 Layers: 25
+Elems:      85 Nodes:   334 Arcs:   391 Layers: 25
+Elems:     136 Nodes:   418 Arcs:   506 Layers: 25
+Elems:     202 Nodes:   523 Arcs:   653 Layers: 25
+Elems:     289 Nodes:   651 Arcs:   834 Layers: 25
+Elems:     397 Nodes:   800 Arcs:  1052 Layers: 25
+Elems:     547 Nodes:   963 Arcs:  1313 Layers: 25
+Elems:     761 Nodes:  1168 Arcs:  1644 Layers: 25
+Elems:    1040 Nodes:  1394 Arcs:  2034 Layers: 25
+Elems:    1391 Nodes:  1658 Arcs:  2519 Layers: 25
+Elems:    1815 Nodes:  1972 Arcs:  3076 Layers: 25
+Elems:    2324 Nodes:  2334 Arcs:  3759 Layers: 25
+Elems:    2943 Nodes:  2719 Arcs:  4539 Layers: 25
+Elems:    3748 Nodes:  3174 Arcs:  5474 Layers: 25
+Elems:    4750 Nodes:  3679 Arcs:  6583 Layers: 25
+Elems:    5962 Nodes:  4256 Arcs:  7929 Layers: 25
+Elems:    7403 Nodes:  4830 Arcs:  9325 Layers: 25
+Elems:    9151 Nodes:  5499 Arcs: 10957 Layers: 25
+Elems:   11199 Nodes:  6206 Arcs: 12762 Layers: 25
+Elems:   13529 Nodes:  6863 Arcs: 14476 Layers: 25
+Elems:   16062 Nodes:  7553 Arcs: 16192 Layers: 25
+Elems:   18594 Nodes:  8283 Arcs: 17939 Layers: 25
+Elems:   20930 Nodes:  8851 Arcs: 19349 Layers: 25
+Elems:   23034 Nodes:  9405 Arcs: 20581 Layers: 25
+Elems:   24894 Nodes:  9945 Arcs: 21745 Layers: 25
+Elems:   26481 Nodes: 10281 Arcs: 22597 Layers: 25
+Elems:   27896 Nodes: 10590 Arcs: 23281 Layers: 25
+Elems:   29159 Nodes: 10884 Arcs: 24005 Layers: 25
+Elems:   30119 Nodes: 11013 Arcs: 24477 Layers: 25
+Elems:   30782 Nodes: 11113 Arcs: 24771 Layers: 25
+Elems:   31295 Nodes: 11183 Arcs: 25024 Layers: 25
+Elems:   31634 Nodes: 11104 Arcs: 25083 Layers: 25
+Elems:   31662 Nodes: 10985 Arcs: 24863 Layers: 25
+Elems:   31535 Nodes: 10840 Arcs: 24584 Layers: 25
+Elems:   31188 Nodes: 10549 Arcs: 24105 Layers: 25
+Elems:   30475 Nodes: 10189 Arcs: 23275 Layers: 25
+Elems:   29552 Nodes:  9793 Arcs: 22348 Layers: 25
+Elems:   28371 Nodes:  9326 Arcs: 21304 Layers: 25
+Elems:   26750 Nodes:  8777 Arcs: 19887 Layers: 25
+Elems:   24884 Nodes:  8184 Arcs: 18369 Layers: 25
+Elems:   22744 Nodes:  7616 Arcs: 16970 Layers: 25
+Elems:   20277 Nodes:  7023 Arcs: 15441 Layers: 25
+Elems:   17863 Nodes:  6517 Arcs: 14164 Layers: 25
+Elems:   15633 Nodes:  5992 Arcs: 12940 Layers: 25
+Elems:   13587 Nodes:  5460 Arcs: 11657 Layers: 25
+Elems:   11816 Nodes:  4935 Arcs: 10423 Layers: 25
+Elems:   10229 Nodes:  4435 Arcs:  9271 Layers: 25
+Elems:    8717 Nodes:  4013 Arcs:  8288 Layers: 25
+Elems:    7318 Nodes:  3600 Arcs:  7365 Layers: 25
+Elems:    6141 Nodes:  3205 Arcs:  6466 Layers: 25
+Elems:    5154 Nodes:  2897 Arcs:  5718 Layers: 25
+Elems:    4282 Nodes:  2624 Arcs:  5085 Layers: 25
+Elems:    3517 Nodes:  2334 Arcs:  4411 Layers: 25
+Elems:    2910 Nodes:  2081 Arcs:  3864 Layers: 25
+Elems:    2377 Nodes:  1849 Arcs:  3366 Layers: 25
+Elems:    1875 Nodes:  1640 Arcs:  2896 Layers: 25
+Elems:    1485 Nodes:  1458 Arcs:  2498 Layers: 25
+Elems:    1191 Nodes:  1271 Arcs:  2141 Layers: 25
+Elems:     949 Nodes:  1110 Arcs:  1827 Layers: 25
+Elems:     758 Nodes:   975 Arcs:  1580 Layers: 25
+Elems:     590 Nodes:   834 Arcs:  1317 Layers: 25
+Elems:     452 Nodes:   704 Arcs:  1076 Layers: 25
+Elems:     344 Nodes:   584 Arcs:   867 Layers: 25
+Elems:     252 Nodes:   474 Arcs:   677 Layers: 25
+Elems:     176 Nodes:   391 Arcs:   538 Layers: 25
+Elems:     117 Nodes:   307 Arcs:   405 Layers: 25
+Elems:      69 Nodes:   225 Arcs:   281 Layers: 25
+Elems:      38 Nodes:   164 Arcs:   194 Layers: 25
+Elems:      17 Nodes:   111 Arcs:   125 Layers: 25
+Elems:       3 Nodes:    44 Arcs:    45 Layers: 25
+end
+TSI time of computation (user)   -> 966.940 sec.
+                          (system) ->  0.030 sec.
+TSI concludes safe
+Thanks for using this tool

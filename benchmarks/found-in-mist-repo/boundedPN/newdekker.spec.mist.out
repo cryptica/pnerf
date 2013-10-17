@@ -29,7 +29,7 @@ abs: For the bounds:
 1111111111111111
 transition system
 Elems:      14 Nodes:   139 Arcs:   151 Layers: 17
-<<< Printing the elements of the IST: 0x189f53b0
+<<< Printing the elements of the IST: 0x185d63b0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 1, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 1, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0]>-
@@ -135,7 +135,7 @@ After union, the reached symbolic state space is:
 Elems:      12 Nodes:   103 Arcs:   113 Layers: 17
 The reached symbolic state space is:
 Elems:      12 Nodes:   103 Arcs:   113 Layers: 17
-Total time of computation (user)   ->  0.000 sec.
+Total time of computation (user)   ->  0.010 sec.
                           (system) ->  0.000 sec.
 
 New boundsabs: 16 variables.

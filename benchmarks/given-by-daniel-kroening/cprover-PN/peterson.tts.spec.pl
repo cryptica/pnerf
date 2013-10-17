@@ -74,7 +74,7 @@ transition(t34, [l0, s22], [s5, l8]).
 transition(t35, [l14, s23], [s5, l11]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s5 1)').
 target(s5, 1).
 cond('(>= l4 1)').

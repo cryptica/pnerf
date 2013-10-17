@@ -41,7 +41,7 @@ init(x0, init1).
 cond('(>= init1 1)').
 init(x1, init2).
 cond('(>= init2 1)').
-init(x7 = 3
+init(x7, 3).
 init(x16, init3).
 cond('(>= init3 1)').
 init(x17, init4).

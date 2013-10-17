@@ -9,8 +9,8 @@ transition(t3, [x3], [x0, x2]).
 transition(t4, [x4], [x0, x1]).
 init(x0, init1).
 cond('(>= init1 1)').
-init(x1).
-init(x2).
+init(x1, 1).
+init(x2, 1).
 cond('(>= x3 1)').
 target(x3, 1).
 cond('(>= x4 1)').

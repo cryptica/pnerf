@@ -1146,7 +1146,7 @@ transition(t839, [l102, s1], [l102, s3, l110]).
 transition(t840, [l103, s1], [l103, s3, l111]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s8 1)').
 target(s8, 1).
 cond('(>= l296 1)').

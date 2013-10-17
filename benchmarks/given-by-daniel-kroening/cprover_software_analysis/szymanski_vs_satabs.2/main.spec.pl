@@ -8888,7 +8888,7 @@ transition(t8319, [l10, s126], [l10, s254, l11]).
 transition(t8320, [l10, s127], [l10, s255, l11]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s512 1)').
 target(s512, 1).
 cond('(>= l54 1)').

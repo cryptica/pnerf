@@ -2,10 +2,10 @@
 
 function sort_file {
   cat $1 | \
-  sort | \
-  sed -e 's/\.pl$//' | \
-  sed -e 's/\.spec$//' | \
-  sed -e 's/\.tts$//' \
+  sed -e 's/\.pl$//' \
+      -e 's/\.spec$//' \
+      -e 's/\.tts$//' | \
+  sort \
   >$1.sorted
 }
 
@@ -13,7 +13,7 @@ results_our_tool=( positive negative dontknow error timeout )
 results_other_tool=( positive negative error timeout )
 
 our_tool=pnerf
-other_tool=bfc
+other_tool=mist
 
 for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   echo "$benchmark_dir"

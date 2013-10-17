@@ -30,10 +30,10 @@ transition(t13, [x12], [x13]).
 transition(t14, [x13], [x12]).
 transition(t15, [x12], [x15]).
 transition(t16, [x15], [x14]).
-init(x2).
-init(x6).
-init(x10).
-init(x14).
+init(x2, 1).
+init(x6, 1).
+init(x10, 1).
+init(x14, 1).
 cond('(>= x4 2)').
 target(x4, 2).
 cond('(>= x6 4)').

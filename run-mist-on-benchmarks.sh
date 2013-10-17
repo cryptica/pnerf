@@ -16,7 +16,7 @@ for benchmark_dir in "benchmarks/found-in-mist-repo"; do
     echo $spec_file
     cat $spec_file | sed '/#.*/D' >/tmp/mist.in
     T="$(date +%s%N)"
-    timeout 1m mist --tsi /tmp/mist.in 2>&1 >$spec_file.mist.out
+    timeout 7200 mist --tsi /tmp/mist.in 2>&1 >$spec_file.mist.out
     result=$?
     T=$(($(date +%s%N)-T))
     if [[ result -eq 0 ]]; then

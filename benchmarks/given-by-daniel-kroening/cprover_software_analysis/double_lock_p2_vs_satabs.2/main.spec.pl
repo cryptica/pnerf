@@ -2016,7 +2016,7 @@ transition(t1831, [l29, s31], [l29, s63, l30]).
 transition(t1832, [l41, s31], [l41, s63, l42]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s128 1)').
 target(s128, 1).
 cond('(>= l54 1)').

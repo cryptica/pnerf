@@ -106,22 +106,22 @@ transition(t53, [x50], [x23, x49]).
 transition(t54, [x51], [x36, x49]).
 init(x0, init1).
 cond('(>= init1 1)').
-init(x3).
+init(x3, 1).
 init(x8, init2).
 cond('(>= init2 1)').
-init(x14).
-init(x21).
+init(x14, 1).
+init(x21, 1).
 init(x23, init3).
 cond('(>= init3 1)').
 init(x32, init4).
 cond('(>= init4 1)').
-init(x33).
+init(x33, 1).
 init(x36, init5).
 cond('(>= init5 1)').
-init(x41).
+init(x41, 1).
 init(x44, init6).
 cond('(>= init6 1)').
-init(x49).
+init(x49, 1).
 cond('(>= x1 1)').
 target(x1, 1).
 cond('(>= x4 1)').

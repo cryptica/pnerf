@@ -23,7 +23,7 @@ transition(t9, [l3, s4], [s3, l0]).
 transition(t10, [l0, s5], [s3, l5]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s3 1)').
 target(s3, 1).
 cond('(>= l6 2)').

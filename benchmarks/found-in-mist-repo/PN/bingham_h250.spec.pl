@@ -754,6 +754,6 @@ transition(t500, [x249], [x250]).
 transition(t501, [x250, x251], [x0, x252]).
 init(x0, init1).
 cond('(>= init1 1)').
-init(x252).
+init(x252, 1).
 cond('(>= x250 2)').
 target(x250, 2).

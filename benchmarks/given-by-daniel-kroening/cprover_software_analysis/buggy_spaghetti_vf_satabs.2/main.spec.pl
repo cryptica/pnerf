@@ -1022,7 +1022,7 @@ transition(t695, [l302, s0], [l302, s0]).
 transition(t696, [l303, s0], [l303, s0]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s4 1)').
 target(s4, 1).
 cond('(>= l320 1)').

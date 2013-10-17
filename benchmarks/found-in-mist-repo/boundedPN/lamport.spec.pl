@@ -18,10 +18,10 @@ transition(t6, [x_eq_1, q2], [x_eq_1, q5]).
 transition(t7, [x_eq_1, q3], [x_eq_1, q4]).
 transition(t8, [q4], [y_eq_1, q5]).
 transition(t9, [y_eq_1, q5], [q3]).
-init(p2).
-init(x_eq_1).
-init(y_eq_1).
-init(q5).
+init(p2, 1).
+init(x_eq_1, 1).
+init(y_eq_1, 1).
+init(q5, 1).
 cond('(>= p1 1)').
 target(p1, 1).
 cond('(>= q4 1)').

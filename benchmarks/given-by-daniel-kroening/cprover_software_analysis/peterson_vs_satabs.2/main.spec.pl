@@ -2268,7 +2268,7 @@ transition(t1983, [l10, s62], [l10, s126, l11]).
 transition(t1984, [l10, s63], [l10, s127, l11]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s256 1)').
 target(s256, 1).
 cond('(>= l26 1)').

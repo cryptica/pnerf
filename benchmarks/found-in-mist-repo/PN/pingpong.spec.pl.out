@@ -1,0 +1,4 @@
+PETRINIZER: The checker for Petri Nets
+[-d 0 benchmarks/found-in-mist-repo/PN/pingpong.spec.pl]
+
+* Constructing petri net N from input file

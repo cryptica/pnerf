@@ -2515,7 +2515,7 @@ transition(t1505, [l502, s503], [s2, l503]).
 transition(t1506, [l502, s504], [s2, l503]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s2 1)').
 target(s2, 1).
 cond('(>= l501 2)').

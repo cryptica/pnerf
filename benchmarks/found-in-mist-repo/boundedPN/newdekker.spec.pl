@@ -28,11 +28,11 @@ transition(t11, [at20, c1eq1], [c1eq1, cs0]).
 transition(t12, [at21, c0eq1], [c0eq1, cs1]).
 transition(t13, [cs0, c0eq0, turneq0], [beg0, c0eq1, turneq1]).
 transition(t14, [cs1, c1eq0, turneq1], [beg1, c1eq1, turneq0]).
-init(beg0).
-init(beg1).
-init(turneq0).
-init(c0eq1).
-init(c1eq1).
+init(beg0, 1).
+init(beg1, 1).
+init(turneq0, 1).
+init(c0eq1, 1).
+init(c1eq1, 1).
 cond('(>= cs0 1)').
 target(cs0, 1).
 cond('(>= cs1 1)').

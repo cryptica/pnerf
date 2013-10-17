@@ -65,8 +65,8 @@ transition(t33, [x1, x20], [x13]).
 transition(t34, [x0, x20], [x13]).
 transition(t35, [x20], [x13]).
 transition(t36, [x20], [x20, x11]).
-init(x2).
-init(x13).
+init(x2, 1).
+init(x13, 1).
 cond('(>= x12 1)').
 target(x12, 1).
 cond('(>= x21 1)').

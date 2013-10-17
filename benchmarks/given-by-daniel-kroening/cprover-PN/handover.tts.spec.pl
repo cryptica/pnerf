@@ -380,7 +380,7 @@ transition(t253, [l122, s1], [s1, l102]).
 transition(t254, [l123, s1], [s1, l82]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s1 1)').
 target(s1, 1).
 cond('(>= l123 2)').

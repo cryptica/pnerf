@@ -66,14 +66,14 @@ init(x0, init1).
 cond('(>= init1 1)').
 init(x1, init2).
 cond('(>= init2 1)').
-init(x3).
-init(x4).
+init(x3, 1).
+init(x4, 1).
 init(x16, init3).
 cond('(>= init3 1)').
 init(x17, init4).
 cond('(>= init4 1)').
-init(x19).
-init(x20).
+init(x19, 1).
+init(x20, 1).
 cond('(>= x2 1)').
 target(x2, 1).
 cond('(>= x7 1)').

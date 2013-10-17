@@ -42,14 +42,14 @@ transition(t17, [(x13, 46), x20], [(x13, 44), (x12, 2), x14, x15, x18]).
 transition(t18, [x19], [x21]).
 transition(t19, [x22, x23], [x21]).
 transition(t20, [x21], [x22, x23]).
-transition(t21, [(x0, 0)], [(x0, 0), x22]).
+transition(t21, [], [x22]).
 transition(t22, [x21], [x23]).
-init(x2).
-init(x4).
-init(x6 = 5
-init(x7).
-init(x10 = 45
-init(x12 = 90
+init(x2, 1).
+init(x4, 1).
+init(x6, 5).
+init(x7, 1).
+init(x10, 45).
+init(x12, 90).
 init(x23, init1).
 cond('(>= init1 1)').
 cond('(>= x2 1)').

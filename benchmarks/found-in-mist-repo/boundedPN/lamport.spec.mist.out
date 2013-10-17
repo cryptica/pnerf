@@ -24,7 +24,7 @@ abs: For the bounds:
 11111111111
 transition system
 Elems:       9 Nodes:    57 Arcs:    64 Layers: 12
-<<< Printing the elements of the IST: 0x19c432b0
+<<< Printing the elements of the IST: 0x184442b0
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 1]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 1][ 1,-1][ 0, 1][ 0, 0][ 0, 0][ 0, 0]>-
 -<[ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 0, 0][ 1,-1][ 0, 0][ 0, 0][ 0, 1][ 0, 0][ 1,-1]>-

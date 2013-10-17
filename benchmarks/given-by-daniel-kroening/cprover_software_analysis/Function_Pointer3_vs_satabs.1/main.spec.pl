@@ -110,7 +110,7 @@ transition(t69, [l2, s1], [l2, s3, l3]).
 transition(t70, [l9, s1], [l9, s3, l10]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s8 1)').
 target(s8, 1).
 cond('(>= l30 1)').

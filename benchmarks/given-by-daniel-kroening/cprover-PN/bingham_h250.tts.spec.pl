@@ -1265,7 +1265,7 @@ transition(t755, [l252, s253], [s2, l253]).
 transition(t756, [l252, s254], [s2, l253]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s2 1)').
 target(s2, 1).
 cond('(>= l251 2)').

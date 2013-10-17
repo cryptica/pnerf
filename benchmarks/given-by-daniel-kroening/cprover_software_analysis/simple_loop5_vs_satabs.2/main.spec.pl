@@ -577,7 +577,7 @@ transition(t483, [l7, s15], [l7, s31, l8]).
 transition(t484, [l22, s15], [l22, s31, l23]).
 init(l0, init1).
 cond('(>= init1 1)').
-init(s0).
+init(s0, 1).
 cond('(>= s64 1)').
 target(s64, 1).
 cond('(>= l27 1)').

@@ -46,9 +46,9 @@ init(x2, init2).
 cond('(>= init2 1)').
 init(x3, init3).
 cond('(>= init3 1)').
-init(x8 = 3
-init(x13).
-init(x16 = 2
+init(x8, 3).
+init(x13, 1).
+init(x16, 2).
 cond('(>= x9 4)').
 target(x9, 4).
 cond('(>= x12 2)').

@@ -24,11 +24,11 @@ transition(t9, [x6, x11], [x6, x12]).
 transition(t10, [x4, x12], [x4, x13]).
 transition(t11, [x7, x12], [x7, x13]).
 transition(t12, [x8, x13], [x9, x10]).
-init(x0).
-init(x4).
-init(x7).
-init(x9).
-init(x10).
+init(x0, 1).
+init(x4, 1).
+init(x7, 1).
+init(x9, 1).
+init(x10, 1).
 cond('(>= x3 1)').
 target(x3, 1).
 cond('(>= x13 1)').

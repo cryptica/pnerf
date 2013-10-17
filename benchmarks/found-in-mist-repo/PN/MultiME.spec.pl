@@ -21,11 +21,11 @@ transition(t8, [x8], [x0, x5]).
 transition(t9, [x9], [x10]).
 transition(t10, [x10], [x11]).
 transition(t11, [x11], [x10, x0]).
-init(x1).
-init(x2).
-init(x5).
-init(x6).
-init(x9).
+init(x1, 1).
+init(x2, 1).
+init(x5, 1).
+init(x6, 1).
+init(x9, 1).
 cond('(>= x3 1)').
 target(x3, 1).
 cond('(>= x4 1)').

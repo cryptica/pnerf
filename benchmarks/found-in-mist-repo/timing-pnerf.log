@@ -1,6 +1,10 @@
-224940000 benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
-218540000 benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl
-223764000 benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl
-211818000 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
-220349000 benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl
-211092000 benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
+234278142 benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
+221485758 benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl
+204376772 benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
+217395134 benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl
+217463105 benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl
+203233359 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
+215424852 benchmarks/found-in-mist-repo/PN/kanban.spec.pl
+221575855 benchmarks/found-in-mist-repo/PN/mesh2x2.spec.pl
+272317229 benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl
+207055448 benchmarks/found-in-mist-repo/PN/MultiME.spec.pl
