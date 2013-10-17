@@ -2,3 +2,8 @@ PETRINIZER: The checker for Petri Nets
 [-d 0 benchmarks/found-in-mist-repo/PN/multipool.spec.pl]
 
 * Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded safe
+The petri net satisfies the property!

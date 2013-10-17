@@ -12,8 +12,8 @@ sed -e '/vars/,/rules/!D' \
 /g' | \
 sed -e '/^[[:blank:]]*$/D' \
     -e 's/^[[:blank:]]*//' \
-    -e 's/^/place(/' \
-    -e 's/$/)./'
+    -e "s/^/place('/" \
+    -e "s/$/')./"
 
 # convert transitions
 </tmp/pp-spec.pp \
@@ -37,16 +37,16 @@ sed -e 's/;/, \
 sed -e '/^[[:blank:]]*$/D' \
     -e 's/^[[:blank:]]*//' \
     -e 's/[[:blank:]]$*//' \
-    -e 's/[[:alpha:]][[:alnum:]_]*[[:blank:]]*>=[[:blank:]]*0[[:blank:]]*//' \
-    -e 's/\([[:alpha:]][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:digit:]][[:digit:]]*\)/(\1, \2)/g' \
-    -e "s/[[:alpha:]][[:alnum:]_]*'[[:blank:]]*=//g" \
-    -e 's/\([[:alpha:]][[:alnum:]_]*\)[[:blank:]]*+[[:blank:]]*\([[:digit:]][[:digit:]]*\)/(\1, \2)/g' \
-    -e 's/\([[:alpha:]][[:alnum:]_]*\)[[:blank:]]*-[[:blank:]]*\([[:digit:]][[:digit:]]*\)/(\1, -\2)/g' \
-    -e 's/\([[:blank:]]*:[[:blank:]]*\(([[:alpha:]].*\)->[[:blank:]]*\)/\1\2, /' |\
+    -e 's/[[:alpha:]_][[:alnum:]_]*[[:blank:]]*>=[[:blank:]]*0[[:blank:]]*//' \
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:digit:]][[:digit:]]*\)/('\1', \2)/g" \
+    -e "s/[[:alpha:]_][[:alnum:]_]*'[[:blank:]]*=//g" \
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*+[[:blank:]]*\([[:digit:]][[:digit:]]*\)/('\1', \2)/g" \
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*-[[:blank:]]*\([[:digit:]][[:digit:]]*\)/('\1', -\2)/g" \
+    -e "s/\([[:blank:]]*:[[:blank:]]*\(('[[:alpha:]_].*\)->[[:blank:]]*\)/\1\2, /" |\
 (
     n=0
     while read line; do
-      re="(^.*->.*)\(([[:alpha:]][[:alnum:]_]*), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\(\2, (-?[[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)$"
+      re="(^.*->.*)\(('[[:alpha:]_][[:alnum:]_]*'), ([[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)\(\2, (-?[[:digit:]]+)\)[[:blank:]]*,[[:blank:]]*(.*)$"
       while [[ $line =~ $re ]]; do
         out_weight=$((BASH_REMATCH[3] + BASH_REMATCH[5]))
         if [[ $out_weight -gt 0 ]]; then
@@ -60,7 +60,7 @@ sed -e '/^[[:blank:]]*$/D' \
 ) | \
 sed -e 's/,[[:blank:]]*,[[:blank:]]*/, /' \
     -e 's/[[:blank:]]*,[[:blank:]]*/, /g' \
-    -e 's/(\([[:alpha:]][[:alnum:]_]*\), 1)/\1/g' \
+    -e "s/(\('[[:alpha:]_][[:alnum:]_]*'\), 1)/\1/g" \
     -e 's/^/transition(/' \
     -e 's/[[:blank:]]*:[[:blank:]]*/, [/' \
     -e 's/[[:blank:]]*->[[:blank:]]*/], [/' \
@@ -97,7 +97,7 @@ sed -e '/^[[:blank:]]*$/D' \
         fi
     done
 ) | \
-sed -e 's/\([[:alnum:]][[:alnum:]_]*\)[[:blank:]]*=[[:blank:]]*\([[:alnum:]][[:alnum:]_]*\)/init(\1, \2)./'
+sed -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)/init('\1', \2)./"
 
 # target conditions
 </tmp/pp-spec.pp \
@@ -109,5 +109,5 @@ sed -e '/target/,/invariants/!D' \
     -e 's/,/\
 /g' | \
 sed -e '/^[[:blank:]]*$/D' \
-    -e "s/[[:blank:]]*\([[:alnum:]][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]][[:alnum:]_]*\)[[:blank:]]*/cond('(>= \1 \2)').\ntarget(\1, \2)./g"
+    -e "s/[[:blank:]]*\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)[[:blank:]]*/cond('(>= \1 \2)').\ntarget('\1', \2)./g"
 

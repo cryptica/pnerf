@@ -7,7 +7,4 @@ sed -e '/sat/D' \
 tr '\n' '#' | \
 sed -e 's/)#/)\
 /g' -e 's/#//g' | \
-sed -e 's/[[:space:]][[:space:]]*/ /g' \
-    -e 's/ (define-fun /assignment(/' \
-    -e 's/ () [[:alnum:]][[:alnum:]]*/,/' \
-    -e 's/)/)./'
+sed -e "s/[[:blank:]]*(define-fun \([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*()[[:blank:]]*[[:alpha:]_][[:alnum:]_]*[[:blank:]]*\([[:alnum:]._][[:alnum:]._]*\))/assignment('\1', \2)./"

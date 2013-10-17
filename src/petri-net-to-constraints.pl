@@ -14,15 +14,15 @@ z3_vars(EquationType) :-
         findall( _ , (
                        init(_, V),
                        atom(V),
-                       format('(declare-fun ~q () ~p)\n', [V, EquationType])
+                       format('(declare-fun ~p () ~p)\n', [V, EquationType])
                      ), _ ),
         findall( _ , (
                        place(P, _, _),
-                       format('(declare-fun ~q () ~p)\n', [P, EquationType])
+                       format('(declare-fun ~p () ~p)\n', [P, EquationType])
                      ), _ ),
         findall( _ , (
                        transition(T, _, _),
-                       format('(declare-fun ~q () ~p)\n', [T, EquationType])
+                       format('(declare-fun ~p () ~p)\n', [T, EquationType])
                      ), _ ).
 z3_transition_terms(T, Z3) :-
         Z3 = T.
@@ -30,8 +30,8 @@ z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
                        (   init(P, V) ->
-                           format('(assert (= ~q (+ ~p', [P, V])
-                       ;   format('(assert (= ~q (+ 0', [P])
+                           format('(assert (= ~p (+ ~p', [P, V])
+                       ;   format('(assert (= ~p (+ 0', [P])
                        ),
                        list_to_ord_set(I, ISet),
                        list_to_ord_set(O, OSet),
@@ -55,11 +55,11 @@ z3_place_eqs :-
 z3_nat_ineqs :-
         findall( _ , (
                        place(P, _, _),
-                       format('(assert (>= ~q 0))\n', P)
+                       format('(assert (>= ~p 0))\n', P)
                      ), _ ),
         findall( _ , (
                        transition(T, _, _),
-                       format('(assert (>= ~q 0))\n', T)
+                       format('(assert (>= ~p 0))\n', T)
                      ), _ ).
 z3_conditions :-
         findall( _ , (
