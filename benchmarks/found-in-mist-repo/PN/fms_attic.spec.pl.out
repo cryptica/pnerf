@@ -1,4 +1,9 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl]
 
 * Constructing petri net N from input file
+
+* Starting state space exploration for petri net N
+testing inital marking for safety
+check concluded safe
+The petri net satisfies the property!

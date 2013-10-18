@@ -1,5 +1,5 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/PN/csm.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/PN/csm.spec.pl]
 
 * Constructing petri net N from input file
 

@@ -1,10 +1,59 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/PN/extendedread-write.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/PN/extendedread-write.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
 check concluded don't know, starting search
-search concluded dontknow
-The petri net may not satisfy the property
+next exploration depth 1
+queue size 2
+visited size 1
+
+next exploration depth 2
+queue size 5
+visited size 3
+
+next exploration depth 3
+queue size 7
+visited size 8
+
+next exploration depth 4
+queue size 12
+visited size 15
+
+next exploration depth 5
+queue size 19
+visited size 27
+
+next exploration depth 6
+queue size 31
+visited size 46
+
+next exploration depth 7
+queue size 51
+visited size 77
+
+next exploration depth 8
+queue size 86
+visited size 128
+
+next exploration depth 9
+queue size 136
+visited size 214
+
+next exploration depth 10
+queue size 213
+visited size 350
+
+next exploration depth 11
+queue size 327
+visited size 563
+
+next exploration depth 12
+queue size 495
+visited size 890
+
+next exploration depth 13
+queue size 723
+vis

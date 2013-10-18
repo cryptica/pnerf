@@ -1,4 +1,6 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/PN/extendedread-write-smallconsts.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/PN/extendedread-write-smallconsts.spec.pl]
 
 * Constructing petri net N from input file
+
+* Starting state space exploration for petri net N

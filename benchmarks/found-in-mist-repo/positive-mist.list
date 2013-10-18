@@ -7,13 +7,17 @@ benchmarks/found-in-mist-repo/boundedPN/read-write.spec
 benchmarks/found-in-mist-repo/PN/bingham_h25.spec
 benchmarks/found-in-mist-repo/PN/MultiME.spec
 benchmarks/found-in-mist-repo/PN/extendedread-write-smallconsts.spec
+benchmarks/found-in-mist-repo/PN/extendedread-write.spec
 benchmarks/found-in-mist-repo/PN/csm.spec
 benchmarks/found-in-mist-repo/PN/bingham_h50.spec
 benchmarks/found-in-mist-repo/PN/manufacturing.spec
 benchmarks/found-in-mist-repo/PN/fms_attic.spec
 benchmarks/found-in-mist-repo/PN/multipool.spec
 benchmarks/found-in-mist-repo/PN/mesh2x2.spec
+benchmarks/found-in-mist-repo/PN/mesh3x2.spec
 benchmarks/found-in-mist-repo/PN/basicME.spec
 benchmarks/found-in-mist-repo/PN/bingham_h250_attic.spec
+benchmarks/found-in-mist-repo/PN/bingham_h250.spec
+benchmarks/found-in-mist-repo/PN/bingham_h150.spec
 benchmarks/found-in-mist-repo/PN/fms.spec
 benchmarks/found-in-mist-repo/PN/pingpong.spec

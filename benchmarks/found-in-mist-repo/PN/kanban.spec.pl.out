@@ -1,10 +1,111 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/PN/kanban.spec.pl]
+[-d 100 benchmarks/found-in-mist-repo/PN/kanban.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
 check concluded don't know, starting search
-search concluded dontknow
-The petri net may not satisfy the property
+next exploration depth 1
+queue size 1
+visited size 1
+
+next exploration depth 2
+queue size 3
+visited size 2
+
+next exploration depth 3
+queue size 4
+visited size 5
+
+next exploration depth 4
+queue size 11
+visited size 9
+
+next exploration depth 5
+queue size 17
+visited size 20
+
+next exploration depth 6
+queue size 31
+visited size 37
+
+next exploration depth 7
+queue size 48
+visited size 68
+
+next exploration depth 8
+queue size 79
+visited size 116
+
+next exploration depth 9
+queue size 121
+visited size 195
+
+next exploration depth 10
+queue size 188
+visited size 316
+
+next exploration depth 11
+queue size 277
+visited size 504
+
+next exploration depth 12
+queue size 411
+visited size 781
+
+next exploration depth 13
+queue size 584
+visited size 1192
+
+next exploration depth 14
+queue size 840
+visited size 1776
+
+next exploration depth 15
+queue size 1168
+visited size 2616
+
+next exploration depth 16
+queue size 1630
+visited size 3784
+
+next exploration depth 17
+queue size 2218
+visited size 5414
+
+next exploration depth 18
+queue size 3016
+visited size 7632
+
+next exploration depth 19
+queue size 4034
+visited size 10648
+
+next exploration depth 20
+queue size 5375
+visited size 14682
+
+next exploration depth 21
+queue size 7069
+visited size 20057
+
+next exploration depth 22
+queue size 9256
+visited size 27126
+
+next exploration depth 23
+queue size 11987
+visited size 36382
+
+next exploration depth 24
+queue size 15466
+visited size 48369
+
+next exploration depth 25
+queue size 19763
+visited size 63835
+
+next exploration depth 26
+queue size 25159
+v
