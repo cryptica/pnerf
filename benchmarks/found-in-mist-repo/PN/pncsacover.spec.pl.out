@@ -1,59 +1,10 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/found-in-mist-repo/PN/pncsacover.spec.pl]
+[-d 0 benchmarks/found-in-mist-repo/PN/pncsacover.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
 check concluded don't know, starting search
-next exploration depth 1
-queue size 1
-visited size 1
-
-next exploration depth 2
-queue size 2
-visited size 2
-
-next exploration depth 3
-queue size 5
-visited size 4
-
-next exploration depth 4
-queue size 11
-visited size 9
-
-next exploration depth 5
-queue size 23
-visited size 20
-
-next exploration depth 6
-queue size 45
-visited size 43
-
-next exploration depth 7
-queue size 78
-visited size 88
-
-next exploration depth 8
-queue size 126
-visited size 166
-
-next exploration depth 9
-queue size 194
-visited size 292
-
-next exploration depth 10
-queue size 302
-visited size 486
-
-next exploration depth 11
-queue size 462
-visited size 788
-
-next exploration depth 12
-queue size 691
-visited size 1250
-
-next exploration depth 13
-queue size 1007
-v
+search concluded dontknow
+The petri net may not satisfy the property

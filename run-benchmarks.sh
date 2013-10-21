@@ -12,7 +12,7 @@ for benchmark_dir in "benchmarks/found-in-mist-repo"; do
     T="$(date +%s%N)"
     (
       set -o pipefail;
-      timeout 14400 ./src/explore-states.sh -d 100 $pl_file | tee $pl_file.out
+      timeout 600 ./src/explore-states.sh -d 0 $pl_file | tee $pl_file.out
     )
     result=$?
     T=$(($(date +%s%N)-T))

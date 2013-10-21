@@ -1,26 +1,10 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/found-in-mist-repo/PN/leabasicapproach.spec.pl]
+[-d 0 benchmarks/found-in-mist-repo/PN/leabasicapproach.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
 check concluded don't know, starting search
-next exploration depth 1
-queue size 2
-visited size 1
-
-next exploration depth 2
-queue size 5
-visited size 3
-
-next exploration depth 3
-queue size 10
-visited size 8
-
-next exploration depth 4
-queue size 18
-visited size 18
-
-search concluded unsafe
-The petri does not satisfy the property
+search concluded dontknow
+The petri net may not satisfy the property

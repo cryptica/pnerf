@@ -1,5 +1,5 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/found-in-mist-repo/PN/bingham_h150.spec.pl]
+[-d 0 benchmarks/found-in-mist-repo/PN/bingham_h150.spec.pl]
 
 * Constructing petri net N from input file
 

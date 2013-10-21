@@ -469,7 +469,11 @@ We obtained the results in Table~\ref{table-results-check-real}.
 
 \subsection{Observations}
 
-The compiled results of all methods are shown in table \ref{table-results-compiled}.
+From table \ref{table-results-mist-bfc}, we see that there are no contradictions between mist and bfc.
+
+From table \ref{table-results-check-explore}, we see that there are no contradictions between our tool and bfc. Further our tool returns a positive result for all the positive benchmarks.
+
+The compiled results of all methods applied on the benchmarks given by Daniel Kroening are shown in table \ref{table-results-compiled-dk}.
 \begin{table}[h]
 \begin{center}
   \begin{tabular}{ | p{5cm} | r | r | r | r | r | }
@@ -494,17 +498,47 @@ The compiled results of all methods are shown in table \ref{table-results-compil
     Check + State space exploration without check, D=100, t=8h & 26 & 45 & 0 & 6 & \\
     \hline
     Mist tool & 11 & 28 & 0 & 38 & \\
-    Bfc tool  & 26 & 51 & 0 &  0 & \\
+    Bfc tool  & 26 & 51 & 0 &  0 & 37\,sec\\
     \hline
   \end{tabular}
 \end{center}
-\caption{Compiled results}
-\label{table-results-compiled}
+\caption{Compiled results of the benchmarks given by Daniel Kroening}
+\label{table-results-compiled-dk}
 \end{table}
 
-From table \ref{table-results-mist-bfc}, we see that there are no contradictions between mist and bfc.
-
-From table \ref{table-results-check-explore}, we see that there are no contradictions between our tool and bfc. Further our tool returns a positive result for all the positive benchmarks.
+We also applied different methods to 27 benchmarks found in the mist repository.
+The compiled results are shown in table \ref{table-results-compiled-mist}.
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | p{5cm} | r | r | r | r | r | }
+    \hline
+    Method & positive & negative & don't know & timeout & total time \\
+    \hline
+    State equation with real numbers & 16 &  0 & 11 &  0 & \\
+    State equation with integers     & 16 &  0 & 11 &  0 & \\
+    \hline
+    RefinementTechniques = ( TrapConditions ) &
+    20 &  0 &  7 &  0 & \\
+    RefinementTechniques = ( TrapConditions, SubnetTrapConditions ) &
+    21 &  0 &  6 &  0 & \\
+    RefinementTechniques = ( TrapConditions, SubnetTrapConditions, EmptyTrapConditions ) &
+    21 &  0 &  6 &  0 & \\
+    \hline
+    State space exploration with check, D=30, t=1min  & 25 &  8 &  1 &  43 & \\
+    State space exploration with check, D=10, t=1min  & 23 &  8 & 10 &  36 & \\
+    State space exploration with check, D=10, t=10min & 23 & 10 & 26 &  18 & \\
+    \hline
+    Check with RefinimentTechniques = ( TrapConditions, SubnetTrapConditions ) +
+    State space exploration without check, D=100, t=4h
+    & 21 &  2 & 0 &  4 & \\
+    \hline
+    Mist tool with algorithms TSI and EEC & 23 &  4 & 0 &  0 & \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Compiled results of the benchmarks found in the mist repository}
+\label{table-results-compiled-mist}
+\end{table}
 
 \section{Experimental setups}
 
