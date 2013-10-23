@@ -1,10 +1,6 @@
 .*.swp
-main-dot2tex-fig*
-main.aux
-main.log
-main.toc
-main.pdf
-tables.aux
-tables.log
-tables.toc
-tables.pdf
+doc/*-dot2tex-fig*
+doc/*.aux
+doc/*.log
+doc/*.toc
+doc/*.pdf
