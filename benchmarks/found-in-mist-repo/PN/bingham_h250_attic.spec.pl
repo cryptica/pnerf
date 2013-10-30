@@ -752,8 +752,8 @@ transition(t498, ['x248'], ['x249']).
 transition(t499, ['x249', 'x251'], ['x0', 'x252']).
 transition(t500, ['x249'], ['x250']).
 transition(t501, ['x250', 'x251'], ['x0', 'x252']).
-init('x0', init1).
-cond('(>= init1 1)').
+init('x0', 1).
+transition(init1, [], ['x0']).
 init('x252', 1).
 cond('(>= x0 1)').
 target('x0', 1).

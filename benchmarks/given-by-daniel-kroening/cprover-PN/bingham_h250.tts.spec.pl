@@ -1263,8 +1263,8 @@ transition(t753, ['l252', 's251'], ['s2', 'l253']).
 transition(t754, ['l252', 's252'], ['s2', 'l253']).
 transition(t755, ['l252', 's253'], ['s2', 'l253']).
 transition(t756, ['l252', 's254'], ['s2', 'l253']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s2 1)').
 target('s2', 1).

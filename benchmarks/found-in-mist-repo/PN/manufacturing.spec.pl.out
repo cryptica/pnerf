@@ -5,5 +5,6 @@ PETRINIZER: The checker for Petri Nets
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
-check concluded safe
-The petri net satisfies the property!
+check concluded don't know, starting search
+search concluded dontknow
+The petri net may not satisfy the property

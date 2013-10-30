@@ -1,90 +1,10 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl]
+[-d 0 benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl]
 
 * Constructing petri net N from input file
 
 * Starting state space exploration for petri net N
 testing inital marking for safety
 check concluded don't know, starting search
-next exploration depth 1
-queue size 1
-visited size 1
-
-next exploration depth 2
-queue size 1
-visited size 2
-
-next exploration depth 3
-queue size 1
-visited size 3
-
-next exploration depth 4
-queue size 1
-visited size 4
-
-next exploration depth 5
-queue size 4
-visited size 5
-
-next exploration depth 6
-queue size 2
-visited size 9
-
-next exploration depth 7
-queue size 6
-visited size 11
-
-next exploration depth 8
-queue size 3
-visited size 17
-
-next exploration depth 9
-queue size 4
-visited size 20
-
-next exploration depth 10
-queue size 8
-visited size 24
-
-next exploration depth 11
-queue size 3
-visited size 32
-
-next exploration depth 12
-queue size 8
-visited size 35
-
-next exploration depth 13
-queue size 2
-visited size 43
-
-next exploration depth 14
-queue size 4
-visited size 45
-
-next exploration depth 15
-queue size 4
-visited size 49
-
-next exploration depth 16
-queue size 2
-visited size 53
-
-next exploration depth 17
-queue size 7
-visited size 55
-
-next exploration depth 18
-queue size 1
-visited size 62
-
-next exploration depth 19
-queue size 4
-visited size 63
-
-next exploration depth 20
-queue size 1
-visited size 67
-
-search concluded safe
-The petri net satisfies the property!
+search concluded dontknow
+The petri net may not satisfy the property

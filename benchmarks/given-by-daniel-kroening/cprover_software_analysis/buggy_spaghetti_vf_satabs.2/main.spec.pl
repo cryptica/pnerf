@@ -1020,8 +1020,8 @@ transition(t693, ['l300', 's0'], ['l300', 's0']).
 transition(t694, ['l301', 's0'], ['l301', 's0']).
 transition(t695, ['l302', 's0'], ['l302', 's0']).
 transition(t696, ['l303', 's0'], ['l303', 's0']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s4 1)').
 target('s4', 1).

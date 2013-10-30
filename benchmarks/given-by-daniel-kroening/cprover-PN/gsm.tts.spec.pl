@@ -226,8 +226,8 @@ transition(t152, ['l69', 's1'], ['s1', 'l61']).
 transition(t153, ['l69', 's1'], ['s1', 'l70']).
 transition(t154, ['l70', 's1'], ['s1', 'l1']).
 transition(t155, ['l70', 's1'], ['s1', 'l38']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s1 1)').
 target('s1', 1).

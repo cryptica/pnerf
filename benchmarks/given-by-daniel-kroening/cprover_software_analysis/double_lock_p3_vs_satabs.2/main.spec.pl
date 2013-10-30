@@ -854,8 +854,8 @@ transition(t741, ['l6', 's14'], ['l6', 's30', 'l7']).
 transition(t742, ['l21', 's14'], ['l21', 's30', 'l22']).
 transition(t743, ['l6', 's15'], ['l6', 's31', 'l7']).
 transition(t744, ['l21', 's15'], ['l21', 's31', 'l22']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s64 1)').
 target('s64', 1).

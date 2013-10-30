@@ -79,7 +79,8 @@ sed -e 's/,[[:blank:]]*/\
 sed -e '/^[[:blank:]]*$/D' \
     -e 's/^[[:blank:]]*//' \
     -e 's/[[:blank:]]*$//' \
-    -e '/[[:alnum:]_][[:blank:]]*=[[:blank:]]*0/D' | \
+    -e '/[[:alnum:]_][[:blank:]]*=[[:blank:]]*0/D' \
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*=[[:blank:]]*\([[:digit:]][[:digit:]_]*\)/init('\1', \2)./" | \
 # Example for numbering:
 # init(l0>=1
 # ---------------------------------
@@ -88,16 +89,17 @@ sed -e '/^[[:blank:]]*$/D' \
 (
     n=0
     while read line; do
-        if [[ $line =~ (>=[[:blank:]]*1) ]]; then
+        if [[ $line =~ (>=[[:blank:]]*[[:digit:]]) ]]; then
             n=$((n+1))
-            echo $line | sed "s/[[:blank:]]*>=[[:blank:]]*1/ = init$n/"
-            echo "cond('(>= init$n 1)')."
+            echo $line | \
+              sed -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\
+\([[:digit:]][[:digit:]_]*\)/init('\1', \2).\n\
+transition(init$n, [], ['\1'])./"
         else
             echo $line
         fi
     done
-) | \
-sed -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)/init('\1', \2)./"
+)
 
 # target conditions
 </tmp/pp-spec.pp \

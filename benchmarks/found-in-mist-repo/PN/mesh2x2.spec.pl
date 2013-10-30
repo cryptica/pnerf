@@ -62,16 +62,16 @@ transition(t29, ['x26'], ['x28']).
 transition(t30, ['x26'], ['x29']).
 transition(t31, ['x27'], ['x30']).
 transition(t32, ['x27'], ['x31']).
-init('x0', init1).
-cond('(>= init1 1)').
-init('x1', init2).
-cond('(>= init2 1)').
+init('x0', 1).
+transition(init1, [], ['x0']).
+init('x1', 1).
+transition(init2, [], ['x1']).
 init('x3', 1).
 init('x4', 1).
-init('x16', init3).
-cond('(>= init3 1)').
-init('x17', init4).
-cond('(>= init4 1)').
+init('x16', 1).
+transition(init3, [], ['x16']).
+init('x17', 1).
+transition(init4, [], ['x17']).
 init('x19', 1).
 init('x20', 1).
 cond('(>= x2 1)').

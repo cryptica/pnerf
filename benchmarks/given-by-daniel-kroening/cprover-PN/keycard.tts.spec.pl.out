@@ -1,5 +1,5 @@
 PETRINIZER: The checker for Petri Nets
-[-d 100 benchmarks/given-by-daniel-kroening/cprover-PN/keycard.tts.spec.pl]
+[-d 0 benchmarks/given-by-daniel-kroening/cprover-PN/keycard.tts.spec.pl]
 
 * Constructing petri net N from input file
 

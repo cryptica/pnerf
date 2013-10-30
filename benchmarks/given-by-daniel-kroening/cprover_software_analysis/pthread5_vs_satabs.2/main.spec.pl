@@ -489,8 +489,8 @@ transition(t408, ['l5', 's6'], ['l5', 's14', 'l6']).
 transition(t409, ['l17', 's6'], ['l17', 's14', 'l18']).
 transition(t410, ['l5', 's7'], ['l5', 's15', 'l6']).
 transition(t411, ['l17', 's7'], ['l17', 's15', 'l18']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s32 1)').
 target('s32', 1).

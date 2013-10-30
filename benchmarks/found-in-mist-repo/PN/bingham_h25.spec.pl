@@ -77,8 +77,8 @@ transition(t48, ['x23'], ['x24']).
 transition(t49, ['x24', 'x26'], ['x0', 'x27']).
 transition(t50, ['x24'], ['x25']).
 transition(t51, ['x25', 'x26'], ['x0', 'x27']).
-init('x0', init1).
-cond('(>= init1 1)').
+init('x0', 1).
+transition(init1, [], ['x0']).
 init('x27', 1).
 cond('(>= x25 2)').
 target('x25', 2).

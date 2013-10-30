@@ -8168,8 +8168,8 @@ transition(t7597, ['l43', 's126'], ['l43', 's254', 'l44']).
 transition(t7598, ['l9', 's127'], ['l9', 's255', 'l10']).
 transition(t7599, ['l31', 's127'], ['l31', 's255', 'l32']).
 transition(t7600, ['l43', 's127'], ['l43', 's255', 'l44']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s512 1)').
 target('s512', 1).

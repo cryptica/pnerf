@@ -40,12 +40,12 @@ transition(t17, ['x19'], ['x22']).
 transition(t18, ['x20'], ['x1']).
 transition(t19, ['x21'], ['x1', 'x3']).
 transition(t20, ['x22'], ['x3']).
-init('x1', init1).
-cond('(>= init1 1)').
-init('x3', init2).
-cond('(>= init2 1)').
-init('x4', init3).
-cond('(>= init3 1)').
+init('x1', 1).
+transition(init1, [], ['x1']).
+init('x3', 1).
+transition(init2, [], ['x3']).
+init('x4', 1).
+transition(init3, [], ['x4']).
 init('x9', 3).
 init('x14', 1).
 init('x17', 2).

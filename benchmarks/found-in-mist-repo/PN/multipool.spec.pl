@@ -37,15 +37,15 @@ transition(t18, ['x14'], ['x7', 'x17']).
 transition(t19, ['x11', 'x15'], ['x14']).
 transition(t20, ['x16'], ['x12']).
 transition(t21, ['x17'], ['x15']).
-init('x0', init1).
-cond('(>= init1 1)').
-init('x1', init2).
-cond('(>= init2 1)').
+init('x0', 1).
+transition(init1, [], ['x0']).
+init('x1', 1).
+transition(init2, [], ['x1']).
 init('x7', 3).
-init('x16', init3).
-cond('(>= init3 1)').
-init('x17', init4).
-cond('(>= init4 1)').
+init('x16', 1).
+transition(init3, [], ['x16']).
+init('x17', 1).
+transition(init4, [], ['x17']).
 cond('(>= x3 1)').
 target('x3', 1).
 cond('(>= x4 1)').

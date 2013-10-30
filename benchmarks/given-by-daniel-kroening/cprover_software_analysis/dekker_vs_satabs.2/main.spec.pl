@@ -1506,8 +1506,8 @@ transition(t1341, ['l8', 's28'], ['l8', 's60', 'l9']).
 transition(t1342, ['l8', 's29'], ['l8', 's61', 'l9']).
 transition(t1343, ['l8', 's30'], ['l8', 's62', 'l9']).
 transition(t1344, ['l8', 's31'], ['l8', 's63', 'l9']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s128 1)').
 target('s128', 1).

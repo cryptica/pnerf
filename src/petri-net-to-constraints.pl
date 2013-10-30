@@ -24,8 +24,6 @@ z3_vars(EquationType) :-
                        transition(T, _, _),
                        format('(declare-fun ~p () ~p)\n', [T, EquationType])
                      ), _ ).
-z3_transition_terms(T, Z3) :-
-        Z3 = T.
 z3_place_eqs :-
         findall( _ , (
                        place(P, I, O),
@@ -36,7 +34,6 @@ z3_place_eqs :-
                        list_to_ord_set(I, ISet),
                        list_to_ord_set(O, OSet),
                        ord_union(ISet, OSet, TSet),
-                       %( TSet = [_|_] -> print(' ') ; true ),
                        (  foreach(T, TSet),
                           param(P)
                        do ( weight(P, T, Wo) -> true; Wo = 0 ),
@@ -48,8 +45,6 @@ z3_place_eqs :-
                           ; format(' (* ~p ~p)', [W, T])
                           )
                        ),
-                       %maplist(z3_transition_terms, TSet, TTerms),
-                       %print_seq(TTerms),
                        print(')))\n')
                      ), _ ).
 z3_nat_ineqs :-

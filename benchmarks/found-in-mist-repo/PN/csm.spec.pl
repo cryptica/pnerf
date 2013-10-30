@@ -27,8 +27,8 @@ transition(t12, ['x12'], ['x9', 'x14']).
 transition(t13, ['x13', 'x14'], ['x12']).
 init('x6', 1).
 init('x7', 1).
-init('x8', init1).
-cond('(>= init1 1)').
+init('x8', 1).
+transition(init1, [], ['x8']).
 init('x14', 1).
 cond('(>= x10 2)').
 target('x10', 2).

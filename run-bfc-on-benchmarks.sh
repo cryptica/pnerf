@@ -5,7 +5,7 @@ if ! which bfc >/dev/null; then
     exit 1
 fi
 
-for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
+for benchmark_dir in "benchmarks/given-by-daniel-kroening"; do
   >$benchmark_dir/positive-bfc.list
   >$benchmark_dir/negative-bfc.list
   >$benchmark_dir/error-bfc.list

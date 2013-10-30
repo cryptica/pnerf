@@ -190,8 +190,8 @@ transition(t111, ['l64', 's0'], ['l64', 's0']).
 transition(t112, ['l65', 's0'], ['l65', 's0']).
 transition(t113, ['l66', 's0'], ['l66', 's0']).
 transition(t114, ['l67', 's0'], ['l67', 's0']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s4 1)').
 target('s4', 1).

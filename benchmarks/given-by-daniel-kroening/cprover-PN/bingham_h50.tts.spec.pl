@@ -263,8 +263,8 @@ transition(t153, ['l52', 's51'], ['s2', 'l53']).
 transition(t154, ['l52', 's52'], ['s2', 'l53']).
 transition(t155, ['l52', 's53'], ['s2', 'l53']).
 transition(t156, ['l52', 's54'], ['s2', 'l53']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s2 1)').
 target('s2', 1).

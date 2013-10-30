@@ -73,8 +73,8 @@ transition(t33, ['l29', 's2'], ['s2', 'l31']).
 transition(t34, ['l30', 's2'], ['s4', 'l33']).
 transition(t35, ['l31', 's2'], ['s0', 'l32']).
 transition(t36, ['l0', 's0'], ['l0', 's1', 'l1']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s4 1)').
 target('s4', 1).

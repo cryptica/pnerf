@@ -3440,8 +3440,8 @@ transition(t3133, ['l8', 's62'], ['l8', 's126', 'l9']).
 transition(t3134, ['l23', 's62'], ['l23', 's126', 'l24']).
 transition(t3135, ['l8', 's63'], ['l8', 's127', 'l9']).
 transition(t3136, ['l23', 's63'], ['l23', 's127', 'l24']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s256 1)').
 target('s256', 1).

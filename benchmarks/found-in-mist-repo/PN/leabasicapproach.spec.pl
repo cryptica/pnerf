@@ -28,10 +28,10 @@ transition(t11, ['Cafterin', 'lockC'], ['Cend', 'unlockC']).
 transition(t12, ['Cend'], ['Cwhile']).
 init('unlockS', 1).
 init('unlockC', 1).
-init('Swhile', init1).
-cond('(>= init1 1)').
-init('Cwhile', init2).
-cond('(>= init2 1)').
+init('Swhile', 1).
+transition(init1, [], ['Swhile']).
+init('Cwhile', 1).
+transition(init2, [], ['Cwhile']).
 cond('(>= Sbad 1)').
 target('Sbad', 1).
 cond('(>= Cbad 1)').

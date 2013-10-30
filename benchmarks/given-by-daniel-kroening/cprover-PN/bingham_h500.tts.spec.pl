@@ -2513,8 +2513,8 @@ transition(t1503, ['l502', 's501'], ['s2', 'l503']).
 transition(t1504, ['l502', 's502'], ['s2', 'l503']).
 transition(t1505, ['l502', 's503'], ['s2', 'l503']).
 transition(t1506, ['l502', 's504'], ['s2', 'l503']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s2 1)').
 target('s2', 1).

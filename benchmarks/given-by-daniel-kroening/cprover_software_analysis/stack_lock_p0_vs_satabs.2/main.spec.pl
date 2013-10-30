@@ -736,8 +736,8 @@ transition(t629, ['l16', 's6'], ['l16', 's14', 'l18']).
 transition(t630, ['l17', 's6'], ['l17', 's14', 'l19']).
 transition(t631, ['l16', 's7'], ['l16', 's15', 'l18']).
 transition(t632, ['l17', 's7'], ['l17', 's15', 'l19']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s32 1)').
 target('s32', 1).

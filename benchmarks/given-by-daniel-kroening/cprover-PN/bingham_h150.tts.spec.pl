@@ -763,8 +763,8 @@ transition(t453, ['l152', 's151'], ['s2', 'l153']).
 transition(t454, ['l152', 's152'], ['s2', 'l153']).
 transition(t455, ['l152', 's153'], ['s2', 'l153']).
 transition(t456, ['l152', 's154'], ['s2', 'l153']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s2 1)').
 target('s2', 1).

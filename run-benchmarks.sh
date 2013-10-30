@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
-for benchmark_dir in "benchmarks/found-in-mist-repo"; do
+for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   >$benchmark_dir/positive-pnerf.list
   >$benchmark_dir/dontknow-pnerf.list
   >$benchmark_dir/negative-pnerf.list

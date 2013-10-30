@@ -22,8 +22,8 @@ transition(t6, ['l3', 's3'], ['s5', 'l1']).
 transition(t7, ['l5', 's4'], ['s3', 'l6']).
 transition(t8, ['l0', 's5'], ['s6', 'l4']).
 transition(t9, ['l0', 's6'], ['s3', 'l7']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s3 1)').
 target('s3', 1).

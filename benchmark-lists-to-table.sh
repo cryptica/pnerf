@@ -13,7 +13,7 @@ results_our_tool=( positive negative dontknow error timeout )
 results_other_tool=( positive negative error timeout )
 
 our_tool=pnerf
-other_tool=mist
+other_tool=bfc
 
 for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
   echo "$benchmark_dir"

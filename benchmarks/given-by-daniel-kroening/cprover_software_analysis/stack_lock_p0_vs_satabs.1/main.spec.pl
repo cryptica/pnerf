@@ -93,8 +93,8 @@ transition(t55, ['l19', 's5'], ['s5', 'l20']).
 transition(t56, ['l20', 's5'], ['s1', 'l21']).
 transition(t57, ['l4', 's0'], ['l4', 's2', 'l5']).
 transition(t58, ['l4', 's1'], ['l4', 's3', 'l5']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s8 1)').
 target('s8', 1).

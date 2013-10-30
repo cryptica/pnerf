@@ -7816,8 +7816,8 @@ transition(t7485, ['l132', 's95'], ['s31', 'l136']).
 transition(t7486, ['l133', 's95'], ['s31', 'l137']).
 transition(t7487, ['l134', 's95'], ['s31', 'l138']).
 transition(t7488, ['l135', 's95'], ['s31', 'l139']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s128 1)').
 target('s128', 1).

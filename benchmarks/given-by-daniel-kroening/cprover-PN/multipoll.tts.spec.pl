@@ -73,8 +73,8 @@ transition(t37, ['l13', 's12'], ['s7', 'l0']).
 transition(t38, ['l0', 's13'], ['s7', 'l17']).
 transition(t39, ['l0', 's14'], ['s7', 'l18']).
 transition(t40, ['l16', 's15'], ['s7', 'l0']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s7 1)').
 target('s7', 1).

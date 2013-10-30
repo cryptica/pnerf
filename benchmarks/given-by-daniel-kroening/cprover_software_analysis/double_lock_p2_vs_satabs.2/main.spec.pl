@@ -2014,8 +2014,8 @@ transition(t1829, ['l41', 's30'], ['l41', 's62', 'l42']).
 transition(t1830, ['l7', 's31'], ['l7', 's63', 'l8']).
 transition(t1831, ['l29', 's31'], ['l29', 's63', 'l30']).
 transition(t1832, ['l41', 's31'], ['l41', 's63', 'l42']).
-init('l0', init1).
-cond('(>= init1 1)').
+init('l0', 1).
+transition(init1, [], ['l0']).
 init('s0', 1).
 cond('(>= s128 1)').
 target('s128', 1).

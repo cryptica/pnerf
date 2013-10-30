@@ -152,8 +152,8 @@ transition(t98, ['x48'], ['x49']).
 transition(t99, ['x49', 'x51'], ['x0', 'x52']).
 transition(t100, ['x49'], ['x50']).
 transition(t101, ['x50', 'x51'], ['x0', 'x52']).
-init('x0', init1).
-cond('(>= init1 1)').
+init('x0', 1).
+transition(init1, [], ['x0']).
 init('x52', 1).
 cond('(>= x50 2)').
 target('x50', 2).
