@@ -120,7 +120,21 @@ function run_sicstus {
   return $res
 }
 
-construct_invariant=true
+function run_bash {
+  bash_file=$1
+  bash_output=$2
+  bash_input=${@:3}
+  if [ -z "$verbose" ]; then
+    $bash_file $bash_input >$bash_output
+    res=$?
+  else
+    $bash_file $bash_input | tee $bash_output
+    res=$?
+  fi
+  return $res
+}
+
+construct_invariant=false
 
 refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
 #refinement_methods=( 'trap' 'empty-trap' )
@@ -177,11 +191,7 @@ else
     ); do
       vecho
       vecho "- sat, getting model A for C_$iter"
-      if [ -z "$verbose" ]; then
-          cat $tmpdir/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >$tmpdir/model-a.pl
-      else
-          cat $tmpdir/model-a.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee $tmpdir/model-a.pl
-      fi
+      run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a.pl $tmpdir/model-a.smt2 
 
       method_index=0
       while [[ $method_index -lt $method_count ]]; do
@@ -194,21 +204,13 @@ else
           vecho '- checking SAT(C_theta)'
           if ( run_z3 $tmpdir/constraints-ctheta.smt2 $tmpdir/model-atheta.smt2 ); then
               vecho "- sat, getting model A_theta for C_theta"
-              if [ -z "$verbose" ]; then
-                  cat $tmpdir/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >$tmpdir/model-atheta.pl
-              else
-                  cat $tmpdir/model-atheta.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee $tmpdir/model-atheta.pl
-              fi
+              run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-atheta.pl $tmpdir/model-atheta.smt2 
 
               vecho "- constructing $method constraint delta for petri net N and model A_theta"
               run_sicstus refinement-methods/$method-delta-constraint.pl $tmpdir/constraint-delta.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
 
               vecho "- constructing constraints C_$((iter+1)) for C_$iter and delta"
-              if [ -z "$verbose" ]; then    
-                  "$sysdir"/succ-constraints.sh $tmpdir/constraints-c.smt2 $tmpdir/constraint-delta.smt2 >$tmpdir/constraints-cn.smt2
-              else
-                  "$sysdir"/succ-constraints.sh $tmpdir/constraints-c.smt2 $tmpdir/constraint-delta.smt2 | tee $tmpdir/constraints-cn.smt2
-              fi
+              run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-cn.smt2 $tmpdir/constraints-c.smt2 $tmpdir/constraint-delta.smt2
               mv $tmpdir/constraints-cn.smt2 $tmpdir/constraints-c.smt2
               break
           else

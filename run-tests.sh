@@ -118,7 +118,7 @@ test-checking-sat rational-test/constraints-c0-prime.smt2 rational-test/model-a1
 function test-smt2-model-to-prolog-model {
     if (
             set -e
-            cat "$sysdir"/tests/$1 | "$sysdir"/src/smt2-model-to-prolog-model.sh >$tmpdir/model.pl
+            "$sysdir"/src/smt2-model-to-prolog-model.sh "$sysdir"/tests/$1 >$tmpdir/model.pl
             sort "$sysdir"/tests/$2 | sed '/^$/D' >$tmpdir/model-exp.pl
             sort  $tmpdir/model.pl | sed '/^$/D' >$tmpdir/model-out.pl
             diff $tmpdir/model-exp.pl $tmpdir/model-out.pl

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cat $1 | \
 sed -e '/sat/D' \
     -e '/unsat/D' \
     -e '/(model/D' \
