@@ -29,6 +29,8 @@ function test-input-file-to-petri-net {
 test-input-file-to-petri-net petersons-alg/input-petri-net.pl petersons-alg/pp-petri-net.pl
 test-input-file-to-petri-net cyclic-net/input-petri-net.pl cyclic-net/pp-petri-net.pl
 test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
+test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
+test-input-file-to-petri-net simple-net/input-petri-net.pl simple-net/pp-petri-net.pl
 
 #
 # Testing construction of constraints C0 for petri net N
@@ -50,6 +52,25 @@ function test-petri-net-to-constraints {
 test-petri-net-to-constraints petersons-alg/pp-petri-net.pl petersons-alg/constraints-c0.smt2
 test-petri-net-to-constraints cyclic-net/pp-petri-net.pl cyclic-net/constraints-c0.smt2
 test-petri-net-to-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/constraints-c0.smt2
+
+#
+# Testing construction of constraints C0' for petri net N
+#
+function test-petri-net-to-prime-constraints {
+    if (
+      set -e
+      sicstus -l "$sysdir"/src/petri-net-to-prime-constraints.pl -- "$sysdir"/tests/$1 2>/dev/null >$tmpdir/constraints-c0.smt2
+      sort "$sysdir"/tests/$2 >$tmpdir/constraints-c0-exp.smt2
+      sort $tmpdir/constraints-c0.smt2 >$tmpdir/constraints-c0-out.smt2
+      diff $tmpdir/constraints-c0-exp.smt2 $tmpdir/constraints-c0-out.smt2
+    ); then
+      echo $2' ... PASS'
+    else
+      echo $2' ... FAILED'
+      exit 2
+    fi
+}
+test-petri-net-to-prime-constraints simple-net/pp-petri-net.pl simple-net/constraints-c0.smt2
 
 #
 # Testing checking of SAT(C)
@@ -82,6 +103,7 @@ test-checking-sat empty-trap-net/constraints-ctheta1.smt2 empty-trap-net/model-a
 test-checking-sat empty-trap-net/constraints-ctheta2.smt2 empty-trap-net/model-atheta2.smt2
 test-checking-sat empty-trap-net/constraints-ctheta-prime1.smt2 empty-trap-net/model-atheta-prime1.smt2
 test-checking-sat empty-trap-net/constraints-ctheta-prime2.smt2 empty-trap-net/model-atheta-prime2.smt2
+test-checking-sat simple-net/constraints-c0.smt2 simple-net/model-a1.smt2
 
 #
 # Testing smt2 model to prolog model
@@ -110,6 +132,7 @@ test-smt2-model-to-prolog-model empty-trap-net/model-a1.smt2 empty-trap-net/mode
 test-smt2-model-to-prolog-model empty-trap-net/model-a2.smt2 empty-trap-net/model-a2.pl
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime1.smt2 empty-trap-net/model-atheta-prime1.pl
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime2.smt2 empty-trap-net/model-atheta-prime2.pl
+test-smt2-model-to-prolog-model simple-net/model-a1.smt2 simple-net/model-a1.pl
 
 #
 # Testing construction of trap constraints C_theta for model A
@@ -246,4 +269,21 @@ function test-empty-trap-delta-constraint {
 }
 test-empty-trap-delta-constraint empty-trap-net/pp-petri-net.pl empty-trap-net/model-atheta-prime1.pl empty-trap-net/constraint-delta1.smt2
 test-empty-trap-delta-constraint empty-trap-net/pp-petri-net.pl empty-trap-net/model-atheta-prime2.pl empty-trap-net/constraint-delta2.smt2
+
+#
+# Testing construction of y invariant for N and A'
+#
+function test-y-invariant {
+    if (
+            set -e
+            sicstus -l "$sysdir"/src/y-invariant.pl -- "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >$tmpdir/y-invariant-out.smt2
+            diff "$sysdir"/tests/$3 $tmpdir/y-invariant-out.smt2
+        ); then
+        echo $3' ... PASS'
+    else
+        echo $3' ... FAILED'
+        exit 9
+    fi
+}
+test-y-invariant simple-net/pp-petri-net.pl simple-net/model-a1.pl simple-net/y-invariant.smt2
 
