@@ -1,5 +1,307 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.1/main.spec.pl]
+[-v benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.1/main.spec.pl]
+
+* Constructing petri net N from input file
+place(s1, [], []).
+place(s3, [], []).
+place(l24, [], []).
+place(l1, [t1], [t3]).
+place(l2, [t2], [t4]).
+place(l3, [t4], [t5]).
+place(l7, [t7], [t9,t8]).
+place(l8, [t8], [t10]).
+place(l6, [t10,t6], [t7]).
+place(l10, [t11], [t13,t12]).
+place(l11, [t12], [t14]).
+place(l12, [t13], [t15]).
+place(l13, [t15], [t16]).
+place(l16, [t17], [t19,t18]).
+place(l17, [t18], [t20]).
+place(l18, [t19], [t21]).
+place(l9, [t22,t9], [t11]).
+place(l19, [t21,t20], [t23,t22]).
+place(l20, [t23], [t25,t24]).
+place(l21, [t24], [t26]).
+place(s4, [t26], []).
+place(l25, [t26], []).
+place(l22, [t27], [t27]).
+place(l23, [t28,t25], [t28]).
+place(l4, [t5], [t29]).
+place(l5, [t29,t3], [t6]).
+place(l14, [t16], [t30]).
+place(s2, [t16,t5], [t30,t29]).
+place(s0, [t30,t29,t28,t27,t25,t24,t23,t22,t21,t20,t19,t18,t17,t15,t14,t13,t12,t11,t10,t9,t8,t7,t6,t4,t3,t2,t1], [t28,t27,t26,t25,t24,t23,t22,t21,t20,t19,t18,t17,t16,t15,t14,t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2,t1]).
+place(l15, [t30,t14], [t17]).
+place(l0, [init1], [t2,t1]).
+
+transition(t1, [l0,s0], [s0,l1]).
+transition(t2, [l0,s0], [s0,l2]).
+transition(t3, [l1,s0], [s0,l5]).
+transition(t4, [l2,s0], [s0,l3]).
+transition(t5, [l3,s0], [s2,l4]).
+transition(t6, [l5,s0], [s0,l6]).
+transition(t7, [l6,s0], [s0,l7]).
+transition(t8, [l7,s0], [s0,l8]).
+transition(t9, [l7,s0], [s0,l9]).
+transition(t10, [l8,s0], [s0,l6]).
+transition(t11, [l9,s0], [s0,l10]).
+transition(t12, [l10,s0], [s0,l11]).
+transition(t13, [l10,s0], [s0,l12]).
+transition(t14, [l11,s0], [s0,l15]).
+transition(t15, [l12,s0], [s0,l13]).
+transition(t16, [l13,s0], [s2,l14]).
+transition(t17, [l15,s0], [s0,l16]).
+transition(t18, [l16,s0], [s0,l17]).
+transition(t19, [l16,s0], [s0,l18]).
+transition(t20, [l17,s0], [s0,l19]).
+transition(t21, [l18,s0], [s0,l19]).
+transition(t22, [l19,s0], [s0,l9]).
+transition(t23, [l19,s0], [s0,l20]).
+transition(t24, [l20,s0], [s0,l21]).
+transition(t25, [l20,s0], [s0,l23]).
+transition(t26, [l21,s0], [s4,l25]).
+transition(t27, [l22,s0], [l22,s0]).
+transition(t28, [l23,s0], [l23,s0]).
+transition(t29, [l4,s2], [s0,l5]).
+transition(t30, [l14,s2], [s0,l15]).
+transition(init1, [], [l0]).
+
+weight(l0, t1, 1).
+weight(s0, t1, 1).
+weight(t1, s0, 1).
+weight(t1, l1, 1).
+weight(l0, t2, 1).
+weight(s0, t2, 1).
+weight(t2, s0, 1).
+weight(t2, l2, 1).
+weight(l1, t3, 1).
+weight(s0, t3, 1).
+weight(t3, s0, 1).
+weight(t3, l5, 1).
+weight(l2, t4, 1).
+weight(s0, t4, 1).
+weight(t4, s0, 1).
+weight(t4, l3, 1).
+weight(l3, t5, 1).
+weight(s0, t5, 1).
+weight(t5, s2, 1).
+weight(t5, l4, 1).
+weight(l5, t6, 1).
+weight(s0, t6, 1).
+weight(t6, s0, 1).
+weight(t6, l6, 1).
+weight(l6, t7, 1).
+weight(s0, t7, 1).
+weight(t7, s0, 1).
+weight(t7, l7, 1).
+weight(l7, t8, 1).
+weight(s0, t8, 1).
+weight(t8, s0, 1).
+weight(t8, l8, 1).
+weight(l7, t9, 1).
+weight(s0, t9, 1).
+weight(t9, s0, 1).
+weight(t9, l9, 1).
+weight(l8, t10, 1).
+weight(s0, t10, 1).
+weight(t10, s0, 1).
+weight(t10, l6, 1).
+weight(l9, t11, 1).
+weight(s0, t11, 1).
+weight(t11, s0, 1).
+weight(t11, l10, 1).
+weight(l10, t12, 1).
+weight(s0, t12, 1).
+weight(t12, s0, 1).
+weight(t12, l11, 1).
+weight(l10, t13, 1).
+weight(s0, t13, 1).
+weight(t13, s0, 1).
+weight(t13, l12, 1).
+weight(l11, t14, 1).
+weight(s0, t14, 1).
+weight(t14, s0, 1).
+weight(t14, l15, 1).
+weight(l12, t15, 1).
+weight(s0, t15, 1).
+weight(t15, s0, 1).
+weight(t15, l13, 1).
+weight(l13, t16, 1).
+weight(s0, t16, 1).
+weight(t16, s2, 1).
+weight(t16, l14, 1).
+weight(l15, t17, 1).
+weight(s0, t17, 1).
+weight(t17, s0, 1).
+weight(t17, l16, 1).
+weight(l16, t18, 1).
+weight(s0, t18, 1).
+weight(t18, s0, 1).
+weight(t18, l17, 1).
+weight(l16, t19, 1).
+weight(s0, t19, 1).
+weight(t19, s0, 1).
+weight(t19, l18, 1).
+weight(l17, t20, 1).
+weight(s0, t20, 1).
+weight(t20, s0, 1).
+weight(t20, l19, 1).
+weight(l18, t21, 1).
+weight(s0, t21, 1).
+weight(t21, s0, 1).
+weight(t21, l19, 1).
+weight(l19, t22, 1).
+weight(s0, t22, 1).
+weight(t22, s0, 1).
+weight(t22, l9, 1).
+weight(l19, t23, 1).
+weight(s0, t23, 1).
+weight(t23, s0, 1).
+weight(t23, l20, 1).
+weight(l20, t24, 1).
+weight(s0, t24, 1).
+weight(t24, s0, 1).
+weight(t24, l21, 1).
+weight(l20, t25, 1).
+weight(s0, t25, 1).
+weight(t25, s0, 1).
+weight(t25, l23, 1).
+weight(l21, t26, 1).
+weight(s0, t26, 1).
+weight(t26, s4, 1).
+weight(t26, l25, 1).
+weight(l22, t27, 1).
+weight(s0, t27, 1).
+weight(t27, l22, 1).
+weight(t27, s0, 1).
+weight(l23, t28, 1).
+weight(s0, t28, 1).
+weight(t28, l23, 1).
+weight(t28, s0, 1).
+weight(l4, t29, 1).
+weight(s2, t29, 1).
+weight(t29, s0, 1).
+weight(t29, l5, 1).
+weight(l14, t30, 1).
+weight(s2, t30, 1).
+weight(t30, s0, 1).
+weight(t30, l15, 1).
+weight(init1, l0, 1).
+
+init(l0, 1).
+init(s0, 1).
+
+cond('(>= s4 1)').
+cond('(>= l25 1)').
+
+target(s4, 1).
+target(l25, 1).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun s1 () Real)
+(declare-fun s3 () Real)
+(declare-fun l24 () Real)
+(declare-fun l1 () Real)
+(declare-fun l2 () Real)
+(declare-fun l3 () Real)
+(declare-fun l7 () Real)
+(declare-fun l8 () Real)
+(declare-fun l6 () Real)
+(declare-fun l10 () Real)
+(declare-fun l11 () Real)
+(declare-fun l12 () Real)
+(declare-fun l13 () Real)
+(declare-fun l16 () Real)
+(declare-fun l17 () Real)
+(declare-fun l18 () Real)
+(declare-fun l9 () Real)
+(declare-fun l19 () Real)
+(declare-fun l20 () Real)
+(declare-fun l21 () Real)
+(declare-fun s4 () Real)
+(declare-fun l25 () Real)
+(declare-fun l22 () Real)
+(declare-fun l23 () Real)
+(declare-fun l4 () Real)
+(declare-fun l5 () Real)
+(declare-fun l14 () Real)
+(declare-fun s2 () Real)
+(declare-fun s0 () Real)
+(declare-fun l15 () Real)
+(declare-fun l0 () Real)
+(assert (>= 0 (+ (- l0) l1)))
+(assert (>= 0 (+ (- l0) l2)))
+(assert (>= 0 (+ (- l1) l5)))
+(assert (>= 0 (+ (- l2) l3)))
+(assert (>= 0 (+ (- l3) l4 (- s0) s2)))
+(assert (>= 0 (+ (- l5) l6)))
+(assert (>= 0 (+ (- l6) l7)))
+(assert (>= 0 (+ (- l7) l8)))
+(assert (>= 0 (+ (- l7) l9)))
+(assert (>= 0 (+ l6 (- l8))))
+(assert (>= 0 (+ l10 (- l9))))
+(assert (>= 0 (+ (- l10) l11)))
+(assert (>= 0 (+ (- l10) l12)))
+(assert (>= 0 (+ (- l11) l15)))
+(assert (>= 0 (+ (- l12) l13)))
+(assert (>= 0 (+ (- l13) l14 (- s0) s2)))
+(assert (>= 0 (+ (- l15) l16)))
+(assert (>= 0 (+ (- l16) l17)))
+(assert (>= 0 (+ (- l16) l18)))
+(assert (>= 0 (+ (- l17) l19)))
+(assert (>= 0 (+ (- l18) l19)))
+(assert (>= 0 (+ (- l19) l9)))
+(assert (>= 0 (+ (- l19) l20)))
+(assert (>= 0 (+ (- l20) l21)))
+(assert (>= 0 (+ (- l20) l23)))
+(assert (>= 0 (+ (- l21) l25 (- s0) s4)))
+(assert (>= 0 (+)))
+(assert (>= 0 (+)))
+(assert (>= 0 (+ (- l4) l5 s0 (- s2))))
+(assert (>= 0 (+ (- l14) l15 s0 (- s2))))
+(assert (>= 0 (+ l0)))
+(assert (= 1 (+ 0 s4 l25 (- s0) (- l0))))
+(assert (>= s1 0))
+(assert (>= s3 0))
+(assert (>= l24 0))
+(assert (>= l1 0))
+(assert (>= l2 0))
+(assert (>= l3 0))
+(assert (>= l7 0))
+(assert (>= l8 0))
+(assert (>= l6 0))
+(assert (>= l10 0))
+(assert (>= l11 0))
+(assert (>= l12 0))
+(assert (>= l13 0))
+(assert (>= l16 0))
+(assert (>= l17 0))
+(assert (>= l18 0))
+(assert (>= l9 0))
+(assert (>= l19 0))
+(assert (>= l20 0))
+(assert (>= l21 0))
+(assert (>= s4 0))
+(assert (>= l25 0))
+(assert (>= l22 0))
+(assert (>= l23 0))
+(assert (>= l4 0))
+(assert (>= l5 0))
+(assert (>= l14 0))
+(assert (>= s2 0))
+(assert (>= s0 0))
+(assert (>= l15 0))
+(assert (>= l0 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+(error "line 58 column 16: invalid function application, arguments missing")
+(error "line 59 column 16: invalid function application, arguments missing")
+unsat
+(error "line 96 column 10: model is not available")
+ - unsat
 
 -------------------------------------------
 The petri net may not satisfy the property

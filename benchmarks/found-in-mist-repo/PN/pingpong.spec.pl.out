@@ -1,5 +1,80 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/PN/pingpong.spec.pl]
+[-v benchmarks/found-in-mist-repo/PN/pingpong.spec.pl]
+
+* Constructing petri net N from input file
+place(start, [], [t2,t1]).
+place(main, [t2,t1], [t4,t3]).
+place(pong, [t5], [t6]).
+place(x, [t5,t1], [t6,t4]).
+place('_x', [t6,t4,t3,t2], [t5,t3]).
+place(ping, [t6,t4,t3], [t5]).
+
+transition(t1, [start], [x,main]).
+transition(t2, [start], ['_x',main]).
+transition(t3, [main,'_x'], ['_x',ping]).
+transition(t4, [main,x], ['_x',ping]).
+transition(t5, [ping,'_x'], [x,pong]).
+transition(t6, [pong,x], ['_x',ping]).
+
+weight(start, t1, 1).
+weight(t1, x, 1).
+weight(t1, main, 1).
+weight(start, t2, 1).
+weight(t2, '_x', 1).
+weight(t2, main, 1).
+weight(main, t3, 1).
+weight('_x', t3, 1).
+weight(t3, '_x', 1).
+weight(t3, ping, 1).
+weight(main, t4, 1).
+weight(x, t4, 1).
+weight(t4, '_x', 1).
+weight(t4, ping, 1).
+weight(ping, t5, 1).
+weight('_x', t5, 1).
+weight(t5, x, 1).
+weight(t5, pong, 1).
+weight(pong, t6, 1).
+weight(x, t6, 1).
+weight(t6, '_x', 1).
+weight(t6, ping, 1).
+
+init(start, 1).
+
+cond('(>= pong 1)').
+cond('(>= _x 1)').
+
+target(pong, 1).
+target('_x', 1).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun start () Real)
+(declare-fun main () Real)
+(declare-fun pong () Real)
+(declare-fun x () Real)
+(declare-fun _x () Real)
+(declare-fun ping () Real)
+(assert (>= 0 (+ main (- start) x)))
+(assert (>= 0 (+ _x main (- start))))
+(assert (>= 0 (+ (- main) ping)))
+(assert (>= 0 (+ _x (- main) ping (- x))))
+(assert (>= 0 (+ (- _x) (- ping) pong x)))
+(assert (>= 0 (+ _x ping (- pong) (- x))))
+(assert (= 1 (+ 0 (- start) pong _x)))
+(assert (>= start 0))
+(assert (>= main 0))
+(assert (>= pong 0))
+(assert (>= x 0))
+(assert (>= _x 0))
+(assert (>= ping 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+unsat
+(error "line 21 column 10: model is not available")
+ - unsat
 
 -------------------------------------------
 The petri net may not satisfy the property

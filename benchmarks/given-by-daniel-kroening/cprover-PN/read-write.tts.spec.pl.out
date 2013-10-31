@@ -1,5 +1,433 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec.pl]
+[-v benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t1]).
+place(s1, [t1], [t2]).
+place(s2, [t2], [t3]).
+place(s3, [t3], [t4]).
+place(l1, [t6], [t5]).
+place(l3, [t7,t1], [t8]).
+place(l2, [t8,t5], [t7,t6]).
+place(l9, [t10,t2], [t12]).
+place(s5, [t6], [t14]).
+place(l4, [t14], [t9]).
+place(l12, [t13,t3], [t15]).
+place(s6, [t8], [t15]).
+place(s7, [t7], [t16]).
+place(s8, [t16], [t17]).
+place(l10, [t17], [t13]).
+place(s9, [t9], [t18]).
+place(l7, [t18], [t11]).
+place(s10, [t12], [t19]).
+place(s11, [t19], [t20]).
+place(s12, [t20], [t21]).
+place(s13, [t21], [t22]).
+place(s14, [t22], [t23]).
+place(s15, [t10], [t24]).
+place(s16, [t24], [t25]).
+place(s17, [t25], [t26]).
+place(l5, [t22,t21,t20,t19,t12,t9], [t27,t26,t25,t24,t14,t10]).
+place(s18, [t26], [t27]).
+place(l6, [t16], [t28]).
+place(s19, [t27], [t28]).
+place(l8, [t23,t11], [t29,t18]).
+place(s20, [t28], [t29]).
+place(l11, [t24], [t30]).
+place(s21, [t13], [t30]).
+place(s4, [t30,t29,t23,t18,t17,t15,t14,t11,t5,t4], [t13,t12,t11,t10,t9,t8,t7,t6,t5]).
+place(l13, [t30,t4], [t19]).
+place(l0, [init1,t29,t28,t27,t26,t25,t15], [t23,t22,t21,t20,t17,t16,t4,t3,t2,t1]).
+
+transition(t1, [l0,s0], [s1,l3]).
+transition(t2, [l0,s1], [s2,l9]).
+transition(t3, [l0,s2], [s3,l12]).
+transition(t4, [l0,s3], [s4,l13]).
+transition(t5, [l1,s4], [s4,l2]).
+transition(t6, [l2,s4], [s5,l1]).
+transition(t7, [l2,s4], [s7,l3]).
+transition(t8, [l3,s4], [s6,l2]).
+transition(t9, [l4,s4], [s9,l5]).
+transition(t10, [l5,s4], [s15,l9]).
+transition(t11, [l7,s4], [s4,l8]).
+transition(t12, [l9,s4], [s10,l5]).
+transition(t13, [l10,s4], [s21,l12]).
+transition(t14, [l5,s5], [s4,l4]).
+transition(t15, [l12,s6], [s4,l0]).
+transition(t16, [l0,s7], [s8,l6]).
+transition(t17, [l0,s8], [s4,l10]).
+transition(t18, [l8,s9], [s4,l7]).
+transition(t19, [l13,s10], [s11,l5]).
+transition(t20, [l0,s11], [s12,l5]).
+transition(t21, [l0,s12], [s13,l5]).
+transition(t22, [l0,s13], [s14,l5]).
+transition(t23, [l0,s14], [s4,l8]).
+transition(t24, [l5,s15], [s16,l11]).
+transition(t25, [l5,s16], [s17,l0]).
+transition(t26, [l5,s17], [s18,l0]).
+transition(t27, [l5,s18], [s19,l0]).
+transition(t28, [l6,s19], [s20,l0]).
+transition(t29, [l8,s20], [s4,l0]).
+transition(t30, [l11,s21], [s4,l13]).
+transition(init1, [], [l0]).
+
+weight(l0, t1, 1).
+weight(s0, t1, 1).
+weight(t1, s1, 1).
+weight(t1, l3, 1).
+weight(l0, t2, 1).
+weight(s1, t2, 1).
+weight(t2, s2, 1).
+weight(t2, l9, 1).
+weight(l0, t3, 1).
+weight(s2, t3, 1).
+weight(t3, s3, 1).
+weight(t3, l12, 1).
+weight(l0, t4, 1).
+weight(s3, t4, 1).
+weight(t4, s4, 1).
+weight(t4, l13, 1).
+weight(l1, t5, 1).
+weight(s4, t5, 1).
+weight(t5, s4, 1).
+weight(t5, l2, 1).
+weight(l2, t6, 1).
+weight(s4, t6, 1).
+weight(t6, s5, 1).
+weight(t6, l1, 1).
+weight(l2, t7, 1).
+weight(s4, t7, 1).
+weight(t7, s7, 1).
+weight(t7, l3, 1).
+weight(l3, t8, 1).
+weight(s4, t8, 1).
+weight(t8, s6, 1).
+weight(t8, l2, 1).
+weight(l4, t9, 1).
+weight(s4, t9, 1).
+weight(t9, s9, 1).
+weight(t9, l5, 1).
+weight(l5, t10, 1).
+weight(s4, t10, 1).
+weight(t10, s15, 1).
+weight(t10, l9, 1).
+weight(l7, t11, 1).
+weight(s4, t11, 1).
+weight(t11, s4, 1).
+weight(t11, l8, 1).
+weight(l9, t12, 1).
+weight(s4, t12, 1).
+weight(t12, s10, 1).
+weight(t12, l5, 1).
+weight(l10, t13, 1).
+weight(s4, t13, 1).
+weight(t13, s21, 1).
+weight(t13, l12, 1).
+weight(l5, t14, 1).
+weight(s5, t14, 1).
+weight(t14, s4, 1).
+weight(t14, l4, 1).
+weight(l12, t15, 1).
+weight(s6, t15, 1).
+weight(t15, s4, 1).
+weight(t15, l0, 1).
+weight(l0, t16, 1).
+weight(s7, t16, 1).
+weight(t16, s8, 1).
+weight(t16, l6, 1).
+weight(l0, t17, 1).
+weight(s8, t17, 1).
+weight(t17, s4, 1).
+weight(t17, l10, 1).
+weight(l8, t18, 1).
+weight(s9, t18, 1).
+weight(t18, s4, 1).
+weight(t18, l7, 1).
+weight(l13, t19, 1).
+weight(s10, t19, 1).
+weight(t19, s11, 1).
+weight(t19, l5, 1).
+weight(l0, t20, 1).
+weight(s11, t20, 1).
+weight(t20, s12, 1).
+weight(t20, l5, 1).
+weight(l0, t21, 1).
+weight(s12, t21, 1).
+weight(t21, s13, 1).
+weight(t21, l5, 1).
+weight(l0, t22, 1).
+weight(s13, t22, 1).
+weight(t22, s14, 1).
+weight(t22, l5, 1).
+weight(l0, t23, 1).
+weight(s14, t23, 1).
+weight(t23, s4, 1).
+weight(t23, l8, 1).
+weight(l5, t24, 1).
+weight(s15, t24, 1).
+weight(t24, s16, 1).
+weight(t24, l11, 1).
+weight(l5, t25, 1).
+weight(s16, t25, 1).
+weight(t25, s17, 1).
+weight(t25, l0, 1).
+weight(l5, t26, 1).
+weight(s17, t26, 1).
+weight(t26, s18, 1).
+weight(t26, l0, 1).
+weight(l5, t27, 1).
+weight(s18, t27, 1).
+weight(t27, s19, 1).
+weight(t27, l0, 1).
+weight(l6, t28, 1).
+weight(s19, t28, 1).
+weight(t28, s20, 1).
+weight(t28, l0, 1).
+weight(l8, t29, 1).
+weight(s20, t29, 1).
+weight(t29, s4, 1).
+weight(t29, l0, 1).
+weight(l11, t30, 1).
+weight(s21, t30, 1).
+weight(t30, s4, 1).
+weight(t30, l13, 1).
+weight(init1, l0, 1).
+
+init(l0, 1).
+init(s0, 1).
+
+cond('(>= s4 1)').
+cond('(>= l4 1)').
+cond('(>= l11 1)').
+
+target(s4, 1).
+target(l4, 1).
+target(l11, 1).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun s0 () Real)
+(declare-fun s1 () Real)
+(declare-fun s2 () Real)
+(declare-fun s3 () Real)
+(declare-fun l1 () Real)
+(declare-fun l3 () Real)
+(declare-fun l2 () Real)
+(declare-fun l9 () Real)
+(declare-fun s5 () Real)
+(declare-fun l4 () Real)
+(declare-fun l12 () Real)
+(declare-fun s6 () Real)
+(declare-fun s7 () Real)
+(declare-fun s8 () Real)
+(declare-fun l10 () Real)
+(declare-fun s9 () Real)
+(declare-fun l7 () Real)
+(declare-fun s10 () Real)
+(declare-fun s11 () Real)
+(declare-fun s12 () Real)
+(declare-fun s13 () Real)
+(declare-fun s14 () Real)
+(declare-fun s15 () Real)
+(declare-fun s16 () Real)
+(declare-fun s17 () Real)
+(declare-fun l5 () Real)
+(declare-fun s18 () Real)
+(declare-fun l6 () Real)
+(declare-fun s19 () Real)
+(declare-fun l8 () Real)
+(declare-fun s20 () Real)
+(declare-fun l11 () Real)
+(declare-fun s21 () Real)
+(declare-fun s4 () Real)
+(declare-fun l13 () Real)
+(declare-fun l0 () Real)
+(assert (>= 0 (+ (- l0) l3 (- s0) s1)))
+(assert (>= 0 (+ (- l0) l9 (- s1) s2)))
+(assert (>= 0 (+ (- l0) l12 (- s2) s3)))
+(assert (>= 0 (+ (- l0) l13 (- s3) s4)))
+(assert (>= 0 (+ (- l1) l2)))
+(assert (>= 0 (+ l1 (- l2) (- s4) s5)))
+(assert (>= 0 (+ (- l2) l3 (- s4) s7)))
+(assert (>= 0 (+ l2 (- l3) (- s4) s6)))
+(assert (>= 0 (+ (- l4) l5 (- s4) s9)))
+(assert (>= 0 (+ (- l5) l9 s15 (- s4))))
+(assert (>= 0 (+ (- l7) l8)))
+(assert (>= 0 (+ l5 (- l9) s10 (- s4))))
+(assert (>= 0 (+ (- l10) l12 s21 (- s4))))
+(assert (>= 0 (+ l4 (- l5) s4 (- s5))))
+(assert (>= 0 (+ l0 (- l12) s4 (- s6))))
+(assert (>= 0 (+ (- l0) l6 (- s7) s8)))
+(assert (>= 0 (+ (- l0) l10 s4 (- s8))))
+(assert (>= 0 (+ l7 (- l8) s4 (- s9))))
+(assert (>= 0 (+ (- l13) l5 (- s10) s11)))
+(assert (>= 0 (+ (- l0) l5 (- s11) s12)))
+(assert (>= 0 (+ (- l0) l5 (- s12) s13)))
+(assert (>= 0 (+ (- l0) l5 (- s13) s14)))
+(assert (>= 0 (+ (- l0) l8 (- s14) s4)))
+(assert (>= 0 (+ l11 (- l5) (- s15) s16)))
+(assert (>= 0 (+ l0 (- l5) (- s16) s17)))
+(assert (>= 0 (+ l0 (- l5) (- s17) s18)))
+(assert (>= 0 (+ l0 (- l5) (- s18) s19)))
+(assert (>= 0 (+ l0 (- l6) (- s19) s20)))
+(assert (>= 0 (+ l0 (- l8) (- s20) s4)))
+(assert (>= 0 (+ (- l11) l13 (- s21) s4)))
+(assert (>= 0 (+ l0)))
+(assert (= 1 (+ 0 (- s0) l4 l11 s4 (- l0))))
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= s2 0))
+(assert (>= s3 0))
+(assert (>= l1 0))
+(assert (>= l3 0))
+(assert (>= l2 0))
+(assert (>= l9 0))
+(assert (>= s5 0))
+(assert (>= l4 0))
+(assert (>= l12 0))
+(assert (>= s6 0))
+(assert (>= s7 0))
+(assert (>= s8 0))
+(assert (>= l10 0))
+(assert (>= s9 0))
+(assert (>= l7 0))
+(assert (>= s10 0))
+(assert (>= s11 0))
+(assert (>= s12 0))
+(assert (>= s13 0))
+(assert (>= s14 0))
+(assert (>= s15 0))
+(assert (>= s16 0))
+(assert (>= s17 0))
+(assert (>= l5 0))
+(assert (>= s18 0))
+(assert (>= l6 0))
+(assert (>= s19 0))
+(assert (>= l8 0))
+(assert (>= s20 0))
+(assert (>= l11 0))
+(assert (>= s21 0))
+(assert (>= s4 0))
+(assert (>= l13 0))
+(assert (>= l0 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+sat
+(model 
+  (define-fun s7 () Real
+    3.0)
+  (define-fun s21 () Real
+    3.0)
+  (define-fun l5 () Real
+    1.0)
+  (define-fun l4 () Real
+    1.0)
+  (define-fun s8 () Real
+    3.0)
+  (define-fun s11 () Real
+    6.0)
+  (define-fun l9 () Real
+    0.0)
+  (define-fun s18 () Real
+    2.0)
+  (define-fun s2 () Real
+    8.0)
+  (define-fun l13 () Real
+    5.0)
+  (define-fun l10 () Real
+    0.0)
+  (define-fun s13 () Real
+    4.0)
+  (define-fun s12 () Real
+    5.0)
+  (define-fun l11 () Real
+    5.0)
+  (define-fun s19 () Real
+    3.0)
+  (define-fun l1 () Real
+    0.0)
+  (define-fun s10 () Real
+    2.0)
+  (define-fun l7 () Real
+    0.0)
+  (define-fun s9 () Real
+    3.0)
+  (define-fun s15 () Real
+    4.0)
+  (define-fun s17 () Real
+    1.0)
+  (define-fun s16 () Real
+    0.0)
+  (define-fun l2 () Real
+    0.0)
+  (define-fun s6 () Real
+    3.0)
+  (define-fun l6 () Real
+    0.0)
+  (define-fun l0 () Real
+    0.0)
+  (define-fun l12 () Real
+    0.0)
+  (define-fun s20 () Real
+    3.0)
+  (define-fun s0 () Real
+    8.0)
+  (define-fun s3 () Real
+    8.0)
+  (define-fun s1 () Real
+    8.0)
+  (define-fun l8 () Real
+    0.0)
+  (define-fun s5 () Real
+    3.0)
+  (define-fun s4 () Real
+    3.0)
+  (define-fun s14 () Real
+    3.0)
+  (define-fun l3 () Real
+    0.0)
+)
+- sat, getting model A' for C'
+assignment('s7', 3.0).
+assignment('s21', 3.0).
+assignment('l5', 1.0).
+assignment('l4', 1.0).
+assignment('s8', 3.0).
+assignment('s11', 6.0).
+assignment('l9', 0.0).
+assignment('s18', 2.0).
+assignment('s2', 8.0).
+assignment('l13', 5.0).
+assignment('l10', 0.0).
+assignment('s13', 4.0).
+assignment('s12', 5.0).
+assignment('l11', 5.0).
+assignment('s19', 3.0).
+assignment('l1', 0.0).
+assignment('s10', 2.0).
+assignment('l7', 0.0).
+assignment('s9', 3.0).
+assignment('s15', 4.0).
+assignment('s17', 1.0).
+assignment('s16', 0.0).
+assignment('l2', 0.0).
+assignment('s6', 3.0).
+assignment('l6', 0.0).
+assignment('l0', 0.0).
+assignment('l12', 0.0).
+assignment('s20', 3.0).
+assignment('s0', 8.0).
+assignment('s3', 8.0).
+assignment('s1', 8.0).
+assignment('l8', 0.0).
+assignment('s5', 3.0).
+assignment('s4', 3.0).
+assignment('s14', 3.0).
+assignment('l3', 0.0).
+- constructing invariant I for petri net N and model A'
+(assert (>= 8.0 (+ (* 8.0 s0) (* 8.0 s1) (* 8.0 s2) (* 8.0 s3) (* 3.0 s5) l4 (* 3.0 s6) (* 3.0 s7) (* 3.0 s8) (* 3.0 s9) (* 2.0 s10) (* 6.0 s11) (* 5.0 s12) (* 4.0 s13) (* 3.0 s14) (* 4.0 s15) s17 l5 (* 2.0 s18) (* 3.0 s19) (* 3.0 s20) (* 5.0 l11) (* 3.0 s21) (* 3.0 s4) (* 5.0 l13))))
 
 * Invariant I for the petri net:
 (assert (>= 8.0 (+ (* 8.0 s0) (* 8.0 s1) (* 8.0 s2) (* 8.0 s3) (* 3.0 s5) l4 (* 3.0 s6) (* 3.0 s7) (* 3.0 s8) (* 3.0 s9) (* 2.0 s10) (* 6.0 s11) (* 5.0 s12) (* 4.0 s13) (* 3.0 s14) (* 4.0 s15) s17 l5 (* 2.0 s18) (* 3.0 s19) (* 3.0 s20) (* 5.0 l11) (* 3.0 s21) (* 3.0 s4) (* 5.0 l13))))

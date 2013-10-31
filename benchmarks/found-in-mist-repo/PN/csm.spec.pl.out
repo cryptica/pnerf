@@ -1,5 +1,183 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/PN/csm.spec.pl]
+[-v benchmarks/found-in-mist-repo/PN/csm.spec.pl]
+
+* Constructing petri net N from input file
+place(x1, [t3,t2], [t1]).
+place(x4, [t3], [t4]).
+place(x2, [t1], [t5,t4]).
+place(x3, [t2], [t5]).
+place(x6, [t5,t4], [t6]).
+place(x5, [t6], [t3,t2]).
+place(x10, [t9,t5], [t10,t2]).
+place(x7, [t10,t4], [t9,t3]).
+place(x11, [t10], [t11,t7]).
+place(x9, [t12,t8], [t9]).
+place(x13, [t11], [t13]).
+place(x14, [t12], [t13]).
+place(x12, [t13], [t12]).
+place(x8, [init1,t7], [t8]).
+
+transition(t1, [x1], [x2]).
+transition(t2, [x5,x10], [x1,x3]).
+transition(t3, [x5,x7], [x1,x4]).
+transition(t4, [x2,x4], [x6,x7]).
+transition(t5, [x2,x3], [x6,x10]).
+transition(t6, [x6], [x5]).
+transition(t7, [x11], [x8]).
+transition(t8, [x8], [x9]).
+transition(t9, [x7,x9], [x10]).
+transition(t10, [x10], [x7,x11]).
+transition(t11, [x11], [x13]).
+transition(t12, [x12], [x9,x14]).
+transition(t13, [x13,x14], [x12]).
+transition(init1, [], [x8]).
+
+weight(x1, t1, 1).
+weight(t1, x2, 1).
+weight(x5, t2, 1).
+weight(x10, t2, 1).
+weight(t2, x1, 1).
+weight(t2, x3, 1).
+weight(x5, t3, 1).
+weight(x7, t3, 1).
+weight(t3, x1, 1).
+weight(t3, x4, 1).
+weight(x2, t4, 1).
+weight(x4, t4, 1).
+weight(t4, x6, 1).
+weight(t4, x7, 1).
+weight(x2, t5, 1).
+weight(x3, t5, 1).
+weight(t5, x6, 1).
+weight(t5, x10, 1).
+weight(x6, t6, 1).
+weight(t6, x5, 1).
+weight(x11, t7, 1).
+weight(t7, x8, 1).
+weight(x8, t8, 1).
+weight(t8, x9, 1).
+weight(x7, t9, 1).
+weight(x9, t9, 1).
+weight(t9, x10, 1).
+weight(x10, t10, 1).
+weight(t10, x7, 1).
+weight(t10, x11, 1).
+weight(x11, t11, 1).
+weight(t11, x13, 1).
+weight(x12, t12, 1).
+weight(t12, x9, 1).
+weight(t12, x14, 1).
+weight(x13, t13, 1).
+weight(x14, t13, 1).
+weight(t13, x12, 1).
+weight(init1, x8, 1).
+
+init(x6, 1).
+init(x7, 1).
+init(x8, 1).
+init(x14, 1).
+
+cond('(>= x10 2)').
+
+target(x10, 2).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun x1 () Real)
+(declare-fun x4 () Real)
+(declare-fun x2 () Real)
+(declare-fun x3 () Real)
+(declare-fun x6 () Real)
+(declare-fun x5 () Real)
+(declare-fun x10 () Real)
+(declare-fun x7 () Real)
+(declare-fun x11 () Real)
+(declare-fun x9 () Real)
+(declare-fun x13 () Real)
+(declare-fun x14 () Real)
+(declare-fun x12 () Real)
+(declare-fun x8 () Real)
+(assert (>= 0 (+ (- x1) x2)))
+(assert (>= 0 (+ x1 (- x10) x3 (- x5))))
+(assert (>= 0 (+ x1 x4 (- x5) (- x7))))
+(assert (>= 0 (+ (- x2) (- x4) x6 x7)))
+(assert (>= 0 (+ x10 (- x2) (- x3) x6)))
+(assert (>= 0 (+ x5 (- x6))))
+(assert (>= 0 (+ (- x11) x8)))
+(assert (>= 0 (+ (- x8) x9)))
+(assert (>= 0 (+ x10 (- x7) (- x9))))
+(assert (>= 0 (+ (- x10) x11 x7)))
+(assert (>= 0 (+ (- x11) x13)))
+(assert (>= 0 (+ (- x12) x14 x9)))
+(assert (>= 0 (+ x12 (- x13) (- x14))))
+(assert (>= 0 (+ x8)))
+(assert (= 1 (+ 0 (- x6) (* 2 x10) (- x7) (- x14) (- x8))))
+(assert (>= x1 0))
+(assert (>= x4 0))
+(assert (>= x2 0))
+(assert (>= x3 0))
+(assert (>= x6 0))
+(assert (>= x5 0))
+(assert (>= x10 0))
+(assert (>= x7 0))
+(assert (>= x11 0))
+(assert (>= x9 0))
+(assert (>= x13 0))
+(assert (>= x14 0))
+(assert (>= x12 0))
+(assert (>= x8 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+sat
+(model 
+  (define-fun x7 () Real
+    1.0)
+  (define-fun x9 () Real
+    0.0)
+  (define-fun x13 () Real
+    0.0)
+  (define-fun x8 () Real
+    0.0)
+  (define-fun x14 () Real
+    0.0)
+  (define-fun x2 () Real
+    0.0)
+  (define-fun x10 () Real
+    1.0)
+  (define-fun x6 () Real
+    0.0)
+  (define-fun x1 () Real
+    0.0)
+  (define-fun x3 () Real
+    1.0)
+  (define-fun x12 () Real
+    0.0)
+  (define-fun x4 () Real
+    1.0)
+  (define-fun x5 () Real
+    0.0)
+  (define-fun x11 () Real
+    0.0)
+)
+- sat, getting model A' for C'
+assignment('x7', 1.0).
+assignment('x9', 0.0).
+assignment('x13', 0.0).
+assignment('x8', 0.0).
+assignment('x14', 0.0).
+assignment('x2', 0.0).
+assignment('x10', 1.0).
+assignment('x6', 0.0).
+assignment('x1', 0.0).
+assignment('x3', 1.0).
+assignment('x12', 0.0).
+assignment('x4', 1.0).
+assignment('x5', 0.0).
+assignment('x11', 0.0).
+- constructing invariant I for petri net N and model A'
+(assert (>= 1.0 (+ x4 x3 x10 x7)))
 
 * Invariant I for the petri net:
 (assert (>= 1.0 (+ x4 x3 x10 x7)))

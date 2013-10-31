@@ -1,5 +1,628 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/PN/mesh3x2.spec.pl]
+[-v benchmarks/found-in-mist-repo/PN/mesh3x2.spec.pl]
+
+* Constructing petri net N from input file
+place(x1, [t1], [t2]).
+place(x4, [t3], [t5]).
+place(x5, [t4], [t6]).
+place(x3, [t6,t5,t2], [t4,t3,t1]).
+place(x2, [t2], [t8,t7]).
+place(x9, [t9], [t10]).
+place(x10, [t10], [t13,t12,t11]).
+place(x13, [t13], [t3]).
+place(x7, [t8], [t15]).
+place(x15, [t14], [t17]).
+place(x16, [t15], [t18]).
+place(x17, [t16], [t19]).
+place(x14, [t19,t18,t17,t10], [t16,t15,t14,t9]).
+place(x11, [t11], [t20]).
+place(x18, [t20], [t21]).
+place(x19, [t24], [t22]).
+place(x20, [t25], [t23]).
+place(x22, [t26], [t27]).
+place(x21, [t27,t23,t22,t21], [t26,t25,t24,t20]).
+place(x25, [t29], [t16]).
+place(x24, [t27], [t30,t29,t28]).
+place(x30, [t32], [t4]).
+place(x28, [t31], [t33,t32]).
+place(x29, [t33], [t25]).
+place(x31, [t34], [t31]).
+place(x27, [t30], [t35]).
+place(x6, [t7], [t36]).
+place(x34, [t35], [t37]).
+place(x35, [t36], [t38]).
+place(x33, [t38,t37,t31], [t36,t35,t34]).
+place(x37, [t39], [t40]).
+place(x39, [t41], [t14]).
+place(x38, [t40], [t42,t41]).
+place(x12, [t12], [t43]).
+place(x42, [t43], [t45]).
+place(x43, [t44], [t46]).
+place(x41, [t46,t45,t40], [t44,t43,t39]).
+place(x45, [t47], [t48]).
+place(x48, [t49], [t44]).
+place(x46, [t48], [t50,t49]).
+place(x47, [t50], [t24]).
+place(x26, [t28], [t51]).
+place(x40, [t42], [t52]).
+place(x50, [t51], [t53]).
+place(x51, [t52], [t54]).
+place(x49, [t54,t53,t48], [t52,t51,t47]).
+place(x0, [init1,t38,t17], [t1]).
+place(x8, [init2,t45,t21,t5], [t9]).
+place(x23, [init3,t53,t37,t19], [t26]).
+place(x32, [init4,t23,t6], [t34]).
+place(x36, [init5,t54,t18], [t39]).
+place(x44, [init6,t46,t22], [t47]).
+
+transition(t1, [x0,x3], [x1]).
+transition(t2, [x1], [x2,x3]).
+transition(t3, [x3,x13], [x4]).
+transition(t4, [x3,x30], [x5]).
+transition(t5, [x4], [x3,x8]).
+transition(t6, [x5], [x3,x32]).
+transition(t7, [x2], [x6]).
+transition(t8, [x2], [x7]).
+transition(t9, [x8,x14], [x9]).
+transition(t10, [x9], [x10,x14]).
+transition(t11, [x10], [x11]).
+transition(t12, [x10], [x12]).
+transition(t13, [x10], [x13]).
+transition(t14, [x14,x39], [x15]).
+transition(t15, [x7,x14], [x16]).
+transition(t16, [x14,x25], [x17]).
+transition(t17, [x15], [x0,x14]).
+transition(t18, [x16], [x14,x36]).
+transition(t19, [x17], [x14,x23]).
+transition(t20, [x11,x21], [x18]).
+transition(t21, [x18], [x8,x21]).
+transition(t22, [x19], [x21,x44]).
+transition(t23, [x20], [x21,x32]).
+transition(t24, [x21,x47], [x19]).
+transition(t25, [x21,x29], [x20]).
+transition(t26, [x21,x23], [x22]).
+transition(t27, [x22], [x21,x24]).
+transition(t28, [x24], [x26]).
+transition(t29, [x24], [x25]).
+transition(t30, [x24], [x27]).
+transition(t31, [x31], [x28,x33]).
+transition(t32, [x28], [x30]).
+transition(t33, [x28], [x29]).
+transition(t34, [x32,x33], [x31]).
+transition(t35, [x27,x33], [x34]).
+transition(t36, [x6,x33], [x35]).
+transition(t37, [x34], [x23,x33]).
+transition(t38, [x35], [x0,x33]).
+transition(t39, [x36,x41], [x37]).
+transition(t40, [x37], [x38,x41]).
+transition(t41, [x38], [x39]).
+transition(t42, [x38], [x40]).
+transition(t43, [x12,x41], [x42]).
+transition(t44, [x41,x48], [x43]).
+transition(t45, [x42], [x8,x41]).
+transition(t46, [x43], [x41,x44]).
+transition(t47, [x44,x49], [x45]).
+transition(t48, [x45], [x46,x49]).
+transition(t49, [x46], [x48]).
+transition(t50, [x46], [x47]).
+transition(t51, [x26,x49], [x50]).
+transition(t52, [x40,x49], [x51]).
+transition(t53, [x50], [x23,x49]).
+transition(t54, [x51], [x36,x49]).
+transition(init1, [], [x0]).
+transition(init2, [], [x8]).
+transition(init3, [], [x23]).
+transition(init4, [], [x32]).
+transition(init5, [], [x36]).
+transition(init6, [], [x44]).
+
+weight(x0, t1, 1).
+weight(x3, t1, 1).
+weight(t1, x1, 1).
+weight(x1, t2, 1).
+weight(t2, x2, 1).
+weight(t2, x3, 1).
+weight(x3, t3, 1).
+weight(x13, t3, 1).
+weight(t3, x4, 1).
+weight(x3, t4, 1).
+weight(x30, t4, 1).
+weight(t4, x5, 1).
+weight(x4, t5, 1).
+weight(t5, x3, 1).
+weight(t5, x8, 1).
+weight(x5, t6, 1).
+weight(t6, x3, 1).
+weight(t6, x32, 1).
+weight(x2, t7, 1).
+weight(t7, x6, 1).
+weight(x2, t8, 1).
+weight(t8, x7, 1).
+weight(x8, t9, 1).
+weight(x14, t9, 1).
+weight(t9, x9, 1).
+weight(x9, t10, 1).
+weight(t10, x10, 1).
+weight(t10, x14, 1).
+weight(x10, t11, 1).
+weight(t11, x11, 1).
+weight(x10, t12, 1).
+weight(t12, x12, 1).
+weight(x10, t13, 1).
+weight(t13, x13, 1).
+weight(x14, t14, 1).
+weight(x39, t14, 1).
+weight(t14, x15, 1).
+weight(x7, t15, 1).
+weight(x14, t15, 1).
+weight(t15, x16, 1).
+weight(x14, t16, 1).
+weight(x25, t16, 1).
+weight(t16, x17, 1).
+weight(x15, t17, 1).
+weight(t17, x0, 1).
+weight(t17, x14, 1).
+weight(x16, t18, 1).
+weight(t18, x14, 1).
+weight(t18, x36, 1).
+weight(x17, t19, 1).
+weight(t19, x14, 1).
+weight(t19, x23, 1).
+weight(x11, t20, 1).
+weight(x21, t20, 1).
+weight(t20, x18, 1).
+weight(x18, t21, 1).
+weight(t21, x8, 1).
+weight(t21, x21, 1).
+weight(x19, t22, 1).
+weight(t22, x21, 1).
+weight(t22, x44, 1).
+weight(x20, t23, 1).
+weight(t23, x21, 1).
+weight(t23, x32, 1).
+weight(x21, t24, 1).
+weight(x47, t24, 1).
+weight(t24, x19, 1).
+weight(x21, t25, 1).
+weight(x29, t25, 1).
+weight(t25, x20, 1).
+weight(x21, t26, 1).
+weight(x23, t26, 1).
+weight(t26, x22, 1).
+weight(x22, t27, 1).
+weight(t27, x21, 1).
+weight(t27, x24, 1).
+weight(x24, t28, 1).
+weight(t28, x26, 1).
+weight(x24, t29, 1).
+weight(t29, x25, 1).
+weight(x24, t30, 1).
+weight(t30, x27, 1).
+weight(x31, t31, 1).
+weight(t31, x28, 1).
+weight(t31, x33, 1).
+weight(x28, t32, 1).
+weight(t32, x30, 1).
+weight(x28, t33, 1).
+weight(t33, x29, 1).
+weight(x32, t34, 1).
+weight(x33, t34, 1).
+weight(t34, x31, 1).
+weight(x27, t35, 1).
+weight(x33, t35, 1).
+weight(t35, x34, 1).
+weight(x6, t36, 1).
+weight(x33, t36, 1).
+weight(t36, x35, 1).
+weight(x34, t37, 1).
+weight(t37, x23, 1).
+weight(t37, x33, 1).
+weight(x35, t38, 1).
+weight(t38, x0, 1).
+weight(t38, x33, 1).
+weight(x36, t39, 1).
+weight(x41, t39, 1).
+weight(t39, x37, 1).
+weight(x37, t40, 1).
+weight(t40, x38, 1).
+weight(t40, x41, 1).
+weight(x38, t41, 1).
+weight(t41, x39, 1).
+weight(x38, t42, 1).
+weight(t42, x40, 1).
+weight(x12, t43, 1).
+weight(x41, t43, 1).
+weight(t43, x42, 1).
+weight(x41, t44, 1).
+weight(x48, t44, 1).
+weight(t44, x43, 1).
+weight(x42, t45, 1).
+weight(t45, x8, 1).
+weight(t45, x41, 1).
+weight(x43, t46, 1).
+weight(t46, x41, 1).
+weight(t46, x44, 1).
+weight(x44, t47, 1).
+weight(x49, t47, 1).
+weight(t47, x45, 1).
+weight(x45, t48, 1).
+weight(t48, x46, 1).
+weight(t48, x49, 1).
+weight(x46, t49, 1).
+weight(t49, x48, 1).
+weight(x46, t50, 1).
+weight(t50, x47, 1).
+weight(x26, t51, 1).
+weight(x49, t51, 1).
+weight(t51, x50, 1).
+weight(x40, t52, 1).
+weight(x49, t52, 1).
+weight(t52, x51, 1).
+weight(x50, t53, 1).
+weight(t53, x23, 1).
+weight(t53, x49, 1).
+weight(x51, t54, 1).
+weight(t54, x36, 1).
+weight(t54, x49, 1).
+weight(init1, x0, 1).
+weight(init2, x8, 1).
+weight(init3, x23, 1).
+weight(init4, x32, 1).
+weight(init5, x36, 1).
+weight(init6, x44, 1).
+
+init(x0, 1).
+init(x3, 1).
+init(x8, 1).
+init(x14, 1).
+init(x21, 1).
+init(x23, 1).
+init(x32, 1).
+init(x33, 1).
+init(x36, 1).
+init(x41, 1).
+init(x44, 1).
+init(x49, 1).
+
+cond('(>= x1 1)').
+cond('(>= x4 1)').
+
+target(x1, 1).
+target(x4, 1).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun x1 () Real)
+(declare-fun x4 () Real)
+(declare-fun x5 () Real)
+(declare-fun x3 () Real)
+(declare-fun x2 () Real)
+(declare-fun x9 () Real)
+(declare-fun x10 () Real)
+(declare-fun x13 () Real)
+(declare-fun x7 () Real)
+(declare-fun x15 () Real)
+(declare-fun x16 () Real)
+(declare-fun x17 () Real)
+(declare-fun x14 () Real)
+(declare-fun x11 () Real)
+(declare-fun x18 () Real)
+(declare-fun x19 () Real)
+(declare-fun x20 () Real)
+(declare-fun x22 () Real)
+(declare-fun x21 () Real)
+(declare-fun x25 () Real)
+(declare-fun x24 () Real)
+(declare-fun x30 () Real)
+(declare-fun x28 () Real)
+(declare-fun x29 () Real)
+(declare-fun x31 () Real)
+(declare-fun x27 () Real)
+(declare-fun x6 () Real)
+(declare-fun x34 () Real)
+(declare-fun x35 () Real)
+(declare-fun x33 () Real)
+(declare-fun x37 () Real)
+(declare-fun x39 () Real)
+(declare-fun x38 () Real)
+(declare-fun x12 () Real)
+(declare-fun x42 () Real)
+(declare-fun x43 () Real)
+(declare-fun x41 () Real)
+(declare-fun x45 () Real)
+(declare-fun x48 () Real)
+(declare-fun x46 () Real)
+(declare-fun x47 () Real)
+(declare-fun x26 () Real)
+(declare-fun x40 () Real)
+(declare-fun x50 () Real)
+(declare-fun x51 () Real)
+(declare-fun x49 () Real)
+(declare-fun x0 () Real)
+(declare-fun x8 () Real)
+(declare-fun x23 () Real)
+(declare-fun x32 () Real)
+(declare-fun x36 () Real)
+(declare-fun x44 () Real)
+(assert (>= 0 (+ (- x0) x1 (- x3))))
+(assert (>= 0 (+ (- x1) x2 x3)))
+(assert (>= 0 (+ (- x13) (- x3) x4)))
+(assert (>= 0 (+ (- x3) (- x30) x5)))
+(assert (>= 0 (+ x3 (- x4) x8)))
+(assert (>= 0 (+ x3 x32 (- x5))))
+(assert (>= 0 (+ (- x2) x6)))
+(assert (>= 0 (+ (- x2) x7)))
+(assert (>= 0 (+ (- x14) (- x8) x9)))
+(assert (>= 0 (+ x10 x14 (- x9))))
+(assert (>= 0 (+ (- x10) x11)))
+(assert (>= 0 (+ (- x10) x12)))
+(assert (>= 0 (+ (- x10) x13)))
+(assert (>= 0 (+ (- x14) x15 (- x39))))
+(assert (>= 0 (+ (- x14) x16 (- x7))))
+(assert (>= 0 (+ (- x14) x17 (- x25))))
+(assert (>= 0 (+ x0 x14 (- x15))))
+(assert (>= 0 (+ x14 (- x16) x36)))
+(assert (>= 0 (+ x14 (- x17) x23)))
+(assert (>= 0 (+ (- x11) x18 (- x21))))
+(assert (>= 0 (+ (- x18) x21 x8)))
+(assert (>= 0 (+ (- x19) x21 x44)))
+(assert (>= 0 (+ (- x20) x21 x32)))
+(assert (>= 0 (+ x19 (- x21) (- x47))))
+(assert (>= 0 (+ x20 (- x21) (- x29))))
+(assert (>= 0 (+ (- x21) x22 (- x23))))
+(assert (>= 0 (+ x21 (- x22) x24)))
+(assert (>= 0 (+ (- x24) x26)))
+(assert (>= 0 (+ (- x24) x25)))
+(assert (>= 0 (+ (- x24) x27)))
+(assert (>= 0 (+ x28 (- x31) x33)))
+(assert (>= 0 (+ (- x28) x30)))
+(assert (>= 0 (+ (- x28) x29)))
+(assert (>= 0 (+ x31 (- x32) (- x33))))
+(assert (>= 0 (+ (- x27) (- x33) x34)))
+(assert (>= 0 (+ (- x33) x35 (- x6))))
+(assert (>= 0 (+ x23 x33 (- x34))))
+(assert (>= 0 (+ x0 x33 (- x35))))
+(assert (>= 0 (+ (- x36) x37 (- x41))))
+(assert (>= 0 (+ (- x37) x38 x41)))
+(assert (>= 0 (+ (- x38) x39)))
+(assert (>= 0 (+ (- x38) x40)))
+(assert (>= 0 (+ (- x12) (- x41) x42)))
+(assert (>= 0 (+ (- x41) x43 (- x48))))
+(assert (>= 0 (+ x41 (- x42) x8)))
+(assert (>= 0 (+ x41 (- x43) x44)))
+(assert (>= 0 (+ (- x44) x45 (- x49))))
+(assert (>= 0 (+ (- x45) x46 x49)))
+(assert (>= 0 (+ (- x46) x48)))
+(assert (>= 0 (+ (- x46) x47)))
+(assert (>= 0 (+ (- x26) (- x49) x50)))
+(assert (>= 0 (+ (- x40) (- x49) x51)))
+(assert (>= 0 (+ x23 x49 (- x50))))
+(assert (>= 0 (+ x36 x49 (- x51))))
+(assert (>= 0 (+ x0)))
+(assert (>= 0 (+ x8)))
+(assert (>= 0 (+ x23)))
+(assert (>= 0 (+ x32)))
+(assert (>= 0 (+ x36)))
+(assert (>= 0 (+ x44)))
+(assert (= 1 (+ 0 x1 x4 (- x3) (- x14) (- x21) (- x33) (- x41) (- x49) (- x0) (- x8) (- x23) (- x32) (- x36) (- x44))))
+(assert (>= x1 0))
+(assert (>= x4 0))
+(assert (>= x5 0))
+(assert (>= x3 0))
+(assert (>= x2 0))
+(assert (>= x9 0))
+(assert (>= x10 0))
+(assert (>= x13 0))
+(assert (>= x7 0))
+(assert (>= x15 0))
+(assert (>= x16 0))
+(assert (>= x17 0))
+(assert (>= x14 0))
+(assert (>= x11 0))
+(assert (>= x18 0))
+(assert (>= x19 0))
+(assert (>= x20 0))
+(assert (>= x22 0))
+(assert (>= x21 0))
+(assert (>= x25 0))
+(assert (>= x24 0))
+(assert (>= x30 0))
+(assert (>= x28 0))
+(assert (>= x29 0))
+(assert (>= x31 0))
+(assert (>= x27 0))
+(assert (>= x6 0))
+(assert (>= x34 0))
+(assert (>= x35 0))
+(assert (>= x33 0))
+(assert (>= x37 0))
+(assert (>= x39 0))
+(assert (>= x38 0))
+(assert (>= x12 0))
+(assert (>= x42 0))
+(assert (>= x43 0))
+(assert (>= x41 0))
+(assert (>= x45 0))
+(assert (>= x48 0))
+(assert (>= x46 0))
+(assert (>= x47 0))
+(assert (>= x26 0))
+(assert (>= x40 0))
+(assert (>= x50 0))
+(assert (>= x51 0))
+(assert (>= x49 0))
+(assert (>= x0 0))
+(assert (>= x8 0))
+(assert (>= x23 0))
+(assert (>= x32 0))
+(assert (>= x36 0))
+(assert (>= x44 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+sat
+(model 
+  (define-fun x20 () Real
+    0.0)
+  (define-fun x7 () Real
+    0.0)
+  (define-fun x17 () Real
+    0.0)
+  (define-fun x38 () Real
+    0.0)
+  (define-fun x24 () Real
+    0.0)
+  (define-fun x50 () Real
+    0.0)
+  (define-fun x21 () Real
+    0.0)
+  (define-fun x44 () Real
+    0.0)
+  (define-fun x42 () Real
+    0.0)
+  (define-fun x49 () Real
+    0.0)
+  (define-fun x19 () Real
+    0.0)
+  (define-fun x46 () Real
+    0.0)
+  (define-fun x15 () Real
+    0.0)
+  (define-fun x39 () Real
+    0.0)
+  (define-fun x32 () Real
+    0.0)
+  (define-fun x37 () Real
+    0.0)
+  (define-fun x47 () Real
+    0.0)
+  (define-fun x23 () Real
+    0.0)
+  (define-fun x13 () Real
+    0.0)
+  (define-fun x16 () Real
+    0.0)
+  (define-fun x26 () Real
+    0.0)
+  (define-fun x8 () Real
+    0.0)
+  (define-fun x14 () Real
+    0.0)
+  (define-fun x1 () Real
+    1.0)
+  (define-fun x6 () Real
+    0.0)
+  (define-fun x36 () Real
+    0.0)
+  (define-fun x33 () Real
+    0.0)
+  (define-fun x31 () Real
+    0.0)
+  (define-fun x29 () Real
+    0.0)
+  (define-fun x3 () Real
+    1.0)
+  (define-fun x43 () Real
+    0.0)
+  (define-fun x48 () Real
+    0.0)
+  (define-fun x4 () Real
+    1.0)
+  (define-fun x11 () Real
+    0.0)
+  (define-fun x0 () Real
+    0.0)
+  (define-fun x9 () Real
+    0.0)
+  (define-fun x45 () Real
+    0.0)
+  (define-fun x2 () Real
+    0.0)
+  (define-fun x41 () Real
+    0.0)
+  (define-fun x18 () Real
+    0.0)
+  (define-fun x30 () Real
+    0.0)
+  (define-fun x12 () Real
+    0.0)
+  (define-fun x27 () Real
+    0.0)
+  (define-fun x51 () Real
+    0.0)
+  (define-fun x34 () Real
+    0.0)
+  (define-fun x25 () Real
+    0.0)
+  (define-fun x28 () Real
+    0.0)
+  (define-fun x40 () Real
+    0.0)
+  (define-fun x10 () Real
+    0.0)
+  (define-fun x35 () Real
+    0.0)
+  (define-fun x5 () Real
+    1.0)
+  (define-fun x22 () Real
+    0.0)
+)
+- sat, getting model A' for C'
+assignment('x20', 0.0).
+assignment('x7', 0.0).
+assignment('x17', 0.0).
+assignment('x38', 0.0).
+assignment('x24', 0.0).
+assignment('x50', 0.0).
+assignment('x21', 0.0).
+assignment('x44', 0.0).
+assignment('x42', 0.0).
+assignment('x49', 0.0).
+assignment('x19', 0.0).
+assignment('x46', 0.0).
+assignment('x15', 0.0).
+assignment('x39', 0.0).
+assignment('x32', 0.0).
+assignment('x37', 0.0).
+assignment('x47', 0.0).
+assignment('x23', 0.0).
+assignment('x13', 0.0).
+assignment('x16', 0.0).
+assignment('x26', 0.0).
+assignment('x8', 0.0).
+assignment('x14', 0.0).
+assignment('x1', 1.0).
+assignment('x6', 0.0).
+assignment('x36', 0.0).
+assignment('x33', 0.0).
+assignment('x31', 0.0).
+assignment('x29', 0.0).
+assignment('x3', 1.0).
+assignment('x43', 0.0).
+assignment('x48', 0.0).
+assignment('x4', 1.0).
+assignment('x11', 0.0).
+assignment('x0', 0.0).
+assignment('x9', 0.0).
+assignment('x45', 0.0).
+assignment('x2', 0.0).
+assignment('x41', 0.0).
+assignment('x18', 0.0).
+assignment('x30', 0.0).
+assignment('x12', 0.0).
+assignment('x27', 0.0).
+assignment('x51', 0.0).
+assignment('x34', 0.0).
+assignment('x25', 0.0).
+assignment('x28', 0.0).
+assignment('x40', 0.0).
+assignment('x10', 0.0).
+assignment('x35', 0.0).
+assignment('x5', 1.0).
+assignment('x22', 0.0).
+- constructing invariant I for petri net N and model A'
+(assert (>= 1.0 (+ x1 x4 x5 x3)))
 
 * Invariant I for the petri net:
 (assert (>= 1.0 (+ x1 x4 x5 x3)))

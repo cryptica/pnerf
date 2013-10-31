@@ -3,9 +3,11 @@ benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
 benchmarks/found-in-mist-repo/PN/mesh2x2.spec.pl
 benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl
+benchmarks/found-in-mist-repo/PN/MultiME.spec.pl
 benchmarks/found-in-mist-repo/PN/bingham_h25.spec.pl
 benchmarks/found-in-mist-repo/PN/multipool.spec.pl
 benchmarks/found-in-mist-repo/PN/bingham_h150.spec.pl
+benchmarks/found-in-mist-repo/PN/basicME.spec.pl
 benchmarks/found-in-mist-repo/PN/bingham_h250_attic.spec.pl
 benchmarks/found-in-mist-repo/PN/fms.spec.pl
 benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl

@@ -1,5 +1,179 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
+[-v benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t1]).
+place(s1, [t1], [t2]).
+place(l3, [t4], []).
+place(l8, [t7], [t8]).
+place(l1, [t8], [t3]).
+place(l9, [t3], [t9]).
+place(l2, [t9], [t4]).
+place(l11, [t10], [t11]).
+place(l5, [t11], [t7,t6]).
+place(s3, [t8], [t12]).
+place(l4, [t12,t1], [t5]).
+place(l6, [t5], [t13]).
+place(s4, [t6], [t13]).
+place(s5, [t10], [t14]).
+place(l10, [t14,t2], [t10]).
+place(l7, [t6], [t15]).
+place(s6, [t7], [t15]).
+place(s2, [t15,t14,t13,t12,t11,t9,t5,t4,t3,t2], [t11,t10,t9,t8,t7,t6,t5,t4,t3]).
+place(l0, [init1,t15,t13], [t14,t12,t2,t1]).
+
+transition(t1, [l0,s0], [s1,l4]).
+transition(t2, [l0,s1], [s2,l10]).
+transition(t3, [l1,s2], [s2,l9]).
+transition(t4, [l2,s2], [s2,l3]).
+transition(t5, [l4,s2], [s2,l6]).
+transition(t6, [l5,s2], [s4,l7]).
+transition(t7, [l5,s2], [s6,l8]).
+transition(t8, [l8,s2], [s3,l1]).
+transition(t9, [l9,s2], [s2,l2]).
+transition(t10, [l10,s2], [s5,l11]).
+transition(t11, [l11,s2], [s2,l5]).
+transition(t12, [l0,s3], [s2,l4]).
+transition(t13, [l6,s4], [s2,l0]).
+transition(t14, [l0,s5], [s2,l10]).
+transition(t15, [l7,s6], [s2,l0]).
+transition(init1, [], [l0]).
+
+weight(l0, t1, 1).
+weight(s0, t1, 1).
+weight(t1, s1, 1).
+weight(t1, l4, 1).
+weight(l0, t2, 1).
+weight(s1, t2, 1).
+weight(t2, s2, 1).
+weight(t2, l10, 1).
+weight(l1, t3, 1).
+weight(s2, t3, 1).
+weight(t3, s2, 1).
+weight(t3, l9, 1).
+weight(l2, t4, 1).
+weight(s2, t4, 1).
+weight(t4, s2, 1).
+weight(t4, l3, 1).
+weight(l4, t5, 1).
+weight(s2, t5, 1).
+weight(t5, s2, 1).
+weight(t5, l6, 1).
+weight(l5, t6, 1).
+weight(s2, t6, 1).
+weight(t6, s4, 1).
+weight(t6, l7, 1).
+weight(l5, t7, 1).
+weight(s2, t7, 1).
+weight(t7, s6, 1).
+weight(t7, l8, 1).
+weight(l8, t8, 1).
+weight(s2, t8, 1).
+weight(t8, s3, 1).
+weight(t8, l1, 1).
+weight(l9, t9, 1).
+weight(s2, t9, 1).
+weight(t9, s2, 1).
+weight(t9, l2, 1).
+weight(l10, t10, 1).
+weight(s2, t10, 1).
+weight(t10, s5, 1).
+weight(t10, l11, 1).
+weight(l11, t11, 1).
+weight(s2, t11, 1).
+weight(t11, s2, 1).
+weight(t11, l5, 1).
+weight(l0, t12, 1).
+weight(s3, t12, 1).
+weight(t12, s2, 1).
+weight(t12, l4, 1).
+weight(l6, t13, 1).
+weight(s4, t13, 1).
+weight(t13, s2, 1).
+weight(t13, l0, 1).
+weight(l0, t14, 1).
+weight(s5, t14, 1).
+weight(t14, s2, 1).
+weight(t14, l10, 1).
+weight(l7, t15, 1).
+weight(s6, t15, 1).
+weight(t15, s2, 1).
+weight(t15, l0, 1).
+weight(init1, l0, 1).
+
+init(l0, 1).
+init(s0, 1).
+
+cond('(>= s2 1)').
+cond('(>= l11 2)').
+
+target(s2, 1).
+target(l11, 2).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun s0 () Real)
+(declare-fun s1 () Real)
+(declare-fun l3 () Real)
+(declare-fun l8 () Real)
+(declare-fun l1 () Real)
+(declare-fun l9 () Real)
+(declare-fun l2 () Real)
+(declare-fun l11 () Real)
+(declare-fun l5 () Real)
+(declare-fun s3 () Real)
+(declare-fun l4 () Real)
+(declare-fun l6 () Real)
+(declare-fun s4 () Real)
+(declare-fun s5 () Real)
+(declare-fun l10 () Real)
+(declare-fun l7 () Real)
+(declare-fun s6 () Real)
+(declare-fun s2 () Real)
+(declare-fun l0 () Real)
+(assert (>= 0 (+ (- l0) l4 (- s0) s1)))
+(assert (>= 0 (+ (- l0) l10 (- s1) s2)))
+(assert (>= 0 (+ (- l1) l9)))
+(assert (>= 0 (+ (- l2) l3)))
+(assert (>= 0 (+ (- l4) l6)))
+(assert (>= 0 (+ (- l5) l7 (- s2) s4)))
+(assert (>= 0 (+ (- l5) l8 (- s2) s6)))
+(assert (>= 0 (+ l1 (- l8) (- s2) s3)))
+(assert (>= 0 (+ l2 (- l9))))
+(assert (>= 0 (+ (- l10) l11 (- s2) s5)))
+(assert (>= 0 (+ (- l11) l5)))
+(assert (>= 0 (+ (- l0) l4 s2 (- s3))))
+(assert (>= 0 (+ l0 (- l6) s2 (- s4))))
+(assert (>= 0 (+ (- l0) l10 s2 (- s5))))
+(assert (>= 0 (+ l0 (- l7) s2 (- s6))))
+(assert (>= 0 (+ l0)))
+(assert (= 1 (+ 0 (- s0) (* 2 l11) s2 (- l0))))
+(assert (>= s0 0))
+(assert (>= s1 0))
+(assert (>= l3 0))
+(assert (>= l8 0))
+(assert (>= l1 0))
+(assert (>= l9 0))
+(assert (>= l2 0))
+(assert (>= l11 0))
+(assert (>= l5 0))
+(assert (>= s3 0))
+(assert (>= l4 0))
+(assert (>= l6 0))
+(assert (>= s4 0))
+(assert (>= s5 0))
+(assert (>= l10 0))
+(assert (>= l7 0))
+(assert (>= s6 0))
+(assert (>= s2 0))
+(assert (>= l0 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+unsat
+(error "line 57 column 10: model is not available")
+ - unsat
 
 -------------------------------------------
 The petri net may not satisfy the property

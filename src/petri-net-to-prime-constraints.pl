@@ -6,6 +6,7 @@
 
 :- use_module(library(ordsets)).
 :- use_module(library(lists)).
+:- use_module(library(aggregate)).
 
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
@@ -41,9 +42,12 @@ z3_token_eqs :-
         print('(assert (= 1 (+ 0'),
         findall( _ , (
                        place(P, _, _),
-                       (target(P, B) -> true; B = 0 ),
+                       ( aggregate(max(B), target(P, B), Bmax) ->
+                         true
+                       ; Bmax = 0
+                       ),
                        (init(P, M0) -> true; M0 = 0 ),
-                       W is B - M0,
+                       W is Bmax - M0,
                        ( W = 0 -> true
                        ; W = 1 -> format(' ~p', [P])
                        ; W = -1 -> format(' (- ~p)', [P])

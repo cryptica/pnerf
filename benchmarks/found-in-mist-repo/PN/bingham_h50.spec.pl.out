@@ -1,5 +1,859 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl]
+[-v benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl]
+
+* Constructing petri net N from input file
+place(x1, [t1], [t4,t3,t2]).
+place(x2, [t4], [t6,t5]).
+place(x3, [t6], [t8,t7]).
+place(x4, [t8], [t10,t9]).
+place(x5, [t10], [t12,t11]).
+place(x6, [t12], [t14,t13]).
+place(x7, [t14], [t16,t15]).
+place(x8, [t16], [t18,t17]).
+place(x9, [t18], [t20,t19]).
+place(x10, [t20], [t22,t21]).
+place(x11, [t22], [t24,t23]).
+place(x12, [t24], [t26,t25]).
+place(x13, [t26], [t28,t27]).
+place(x14, [t28], [t30,t29]).
+place(x15, [t30], [t32,t31]).
+place(x16, [t32], [t34,t33]).
+place(x17, [t34], [t36,t35]).
+place(x18, [t36], [t38,t37]).
+place(x19, [t38], [t40,t39]).
+place(x20, [t40], [t42,t41]).
+place(x21, [t42], [t44,t43]).
+place(x22, [t44], [t46,t45]).
+place(x23, [t46], [t48,t47]).
+place(x24, [t48], [t50,t49]).
+place(x25, [t50], [t52,t51]).
+place(x26, [t52], [t54,t53]).
+place(x27, [t54], [t56,t55]).
+place(x28, [t56], [t58,t57]).
+place(x29, [t58], [t60,t59]).
+place(x30, [t60], [t62,t61]).
+place(x31, [t62], [t64,t63]).
+place(x32, [t64], [t66,t65]).
+place(x33, [t66], [t68,t67]).
+place(x34, [t68], [t70,t69]).
+place(x35, [t70], [t72,t71]).
+place(x36, [t72], [t74,t73]).
+place(x37, [t74], [t76,t75]).
+place(x38, [t76], [t78,t77]).
+place(x39, [t78], [t80,t79]).
+place(x40, [t80], [t82,t81]).
+place(x41, [t82], [t84,t83]).
+place(x42, [t84], [t86,t85]).
+place(x43, [t86], [t88,t87]).
+place(x44, [t88], [t90,t89]).
+place(x45, [t90], [t92,t91]).
+place(x46, [t92], [t94,t93]).
+place(x47, [t94], [t96,t95]).
+place(x48, [t96], [t98,t97]).
+place(x49, [t98], [t100,t99]).
+place(x50, [t100], [t101]).
+place(x51, [t2,t1], [t101,t99,t97,t95,t93,t91,t89,t87,t85,t83,t81,t79,t77,t75,t73,t71,t69,t67,t65,t63,t61,t59,t57,t55,t53,t51,t49,t47,t45,t43,t41,t39,t37,t35,t33,t31,t29,t27,t25,t23,t21,t19,t17,t15,t13,t11,t9,t7,t5,t3]).
+place(x52, [t101,t99,t97,t95,t93,t91,t89,t87,t85,t83,t81,t79,t77,t75,t73,t71,t69,t67,t65,t63,t61,t59,t57,t55,t53,t51,t49,t47,t45,t43,t41,t39,t37,t35,t33,t31,t29,t27,t25,t23,t21,t19,t17,t15,t13,t11,t9,t7,t5,t3], [t2,t1]).
+place(x0, [init1,t101,t99,t97,t95,t93,t91,t89,t87,t85,t83,t81,t79,t77,t75,t73,t71,t69,t67,t65,t63,t61,t59,t57,t55,t53,t51,t49,t47,t45,t43,t41,t39,t37,t35,t33,t31,t29,t27,t25,t23,t21,t19,t17,t15,t13,t11,t9,t7,t5,t3,t2], [t1]).
+
+transition(t1, [x0,x52], [x51,x1]).
+transition(t2, [x1,x52], [x51,x0]).
+transition(t3, [x1,x51], [x0,x52]).
+transition(t4, [x1], [x2]).
+transition(t5, [x2,x51], [x0,x52]).
+transition(t6, [x2], [x3]).
+transition(t7, [x3,x51], [x0,x52]).
+transition(t8, [x3], [x4]).
+transition(t9, [x4,x51], [x0,x52]).
+transition(t10, [x4], [x5]).
+transition(t11, [x5,x51], [x0,x52]).
+transition(t12, [x5], [x6]).
+transition(t13, [x6,x51], [x0,x52]).
+transition(t14, [x6], [x7]).
+transition(t15, [x7,x51], [x0,x52]).
+transition(t16, [x7], [x8]).
+transition(t17, [x8,x51], [x0,x52]).
+transition(t18, [x8], [x9]).
+transition(t19, [x9,x51], [x0,x52]).
+transition(t20, [x9], [x10]).
+transition(t21, [x10,x51], [x0,x52]).
+transition(t22, [x10], [x11]).
+transition(t23, [x11,x51], [x0,x52]).
+transition(t24, [x11], [x12]).
+transition(t25, [x12,x51], [x0,x52]).
+transition(t26, [x12], [x13]).
+transition(t27, [x13,x51], [x0,x52]).
+transition(t28, [x13], [x14]).
+transition(t29, [x14,x51], [x0,x52]).
+transition(t30, [x14], [x15]).
+transition(t31, [x15,x51], [x0,x52]).
+transition(t32, [x15], [x16]).
+transition(t33, [x16,x51], [x0,x52]).
+transition(t34, [x16], [x17]).
+transition(t35, [x17,x51], [x0,x52]).
+transition(t36, [x17], [x18]).
+transition(t37, [x18,x51], [x0,x52]).
+transition(t38, [x18], [x19]).
+transition(t39, [x19,x51], [x0,x52]).
+transition(t40, [x19], [x20]).
+transition(t41, [x20,x51], [x0,x52]).
+transition(t42, [x20], [x21]).
+transition(t43, [x21,x51], [x0,x52]).
+transition(t44, [x21], [x22]).
+transition(t45, [x22,x51], [x0,x52]).
+transition(t46, [x22], [x23]).
+transition(t47, [x23,x51], [x0,x52]).
+transition(t48, [x23], [x24]).
+transition(t49, [x24,x51], [x0,x52]).
+transition(t50, [x24], [x25]).
+transition(t51, [x25,x51], [x0,x52]).
+transition(t52, [x25], [x26]).
+transition(t53, [x26,x51], [x0,x52]).
+transition(t54, [x26], [x27]).
+transition(t55, [x27,x51], [x0,x52]).
+transition(t56, [x27], [x28]).
+transition(t57, [x28,x51], [x0,x52]).
+transition(t58, [x28], [x29]).
+transition(t59, [x29,x51], [x0,x52]).
+transition(t60, [x29], [x30]).
+transition(t61, [x30,x51], [x0,x52]).
+transition(t62, [x30], [x31]).
+transition(t63, [x31,x51], [x0,x52]).
+transition(t64, [x31], [x32]).
+transition(t65, [x32,x51], [x0,x52]).
+transition(t66, [x32], [x33]).
+transition(t67, [x33,x51], [x0,x52]).
+transition(t68, [x33], [x34]).
+transition(t69, [x34,x51], [x0,x52]).
+transition(t70, [x34], [x35]).
+transition(t71, [x35,x51], [x0,x52]).
+transition(t72, [x35], [x36]).
+transition(t73, [x36,x51], [x0,x52]).
+transition(t74, [x36], [x37]).
+transition(t75, [x37,x51], [x0,x52]).
+transition(t76, [x37], [x38]).
+transition(t77, [x38,x51], [x0,x52]).
+transition(t78, [x38], [x39]).
+transition(t79, [x39,x51], [x0,x52]).
+transition(t80, [x39], [x40]).
+transition(t81, [x40,x51], [x0,x52]).
+transition(t82, [x40], [x41]).
+transition(t83, [x41,x51], [x0,x52]).
+transition(t84, [x41], [x42]).
+transition(t85, [x42,x51], [x0,x52]).
+transition(t86, [x42], [x43]).
+transition(t87, [x43,x51], [x0,x52]).
+transition(t88, [x43], [x44]).
+transition(t89, [x44,x51], [x0,x52]).
+transition(t90, [x44], [x45]).
+transition(t91, [x45,x51], [x0,x52]).
+transition(t92, [x45], [x46]).
+transition(t93, [x46,x51], [x0,x52]).
+transition(t94, [x46], [x47]).
+transition(t95, [x47,x51], [x0,x52]).
+transition(t96, [x47], [x48]).
+transition(t97, [x48,x51], [x0,x52]).
+transition(t98, [x48], [x49]).
+transition(t99, [x49,x51], [x0,x52]).
+transition(t100, [x49], [x50]).
+transition(t101, [x50,x51], [x0,x52]).
+transition(init1, [], [x0]).
+
+weight(x0, t1, 1).
+weight(x52, t1, 1).
+weight(t1, x51, 1).
+weight(t1, x1, 1).
+weight(x1, t2, 1).
+weight(x52, t2, 1).
+weight(t2, x51, 1).
+weight(t2, x0, 1).
+weight(x1, t3, 1).
+weight(x51, t3, 1).
+weight(t3, x0, 1).
+weight(t3, x52, 1).
+weight(x1, t4, 1).
+weight(t4, x2, 1).
+weight(x2, t5, 1).
+weight(x51, t5, 1).
+weight(t5, x0, 1).
+weight(t5, x52, 1).
+weight(x2, t6, 1).
+weight(t6, x3, 1).
+weight(x3, t7, 1).
+weight(x51, t7, 1).
+weight(t7, x0, 1).
+weight(t7, x52, 1).
+weight(x3, t8, 1).
+weight(t8, x4, 1).
+weight(x4, t9, 1).
+weight(x51, t9, 1).
+weight(t9, x0, 1).
+weight(t9, x52, 1).
+weight(x4, t10, 1).
+weight(t10, x5, 1).
+weight(x5, t11, 1).
+weight(x51, t11, 1).
+weight(t11, x0, 1).
+weight(t11, x52, 1).
+weight(x5, t12, 1).
+weight(t12, x6, 1).
+weight(x6, t13, 1).
+weight(x51, t13, 1).
+weight(t13, x0, 1).
+weight(t13, x52, 1).
+weight(x6, t14, 1).
+weight(t14, x7, 1).
+weight(x7, t15, 1).
+weight(x51, t15, 1).
+weight(t15, x0, 1).
+weight(t15, x52, 1).
+weight(x7, t16, 1).
+weight(t16, x8, 1).
+weight(x8, t17, 1).
+weight(x51, t17, 1).
+weight(t17, x0, 1).
+weight(t17, x52, 1).
+weight(x8, t18, 1).
+weight(t18, x9, 1).
+weight(x9, t19, 1).
+weight(x51, t19, 1).
+weight(t19, x0, 1).
+weight(t19, x52, 1).
+weight(x9, t20, 1).
+weight(t20, x10, 1).
+weight(x10, t21, 1).
+weight(x51, t21, 1).
+weight(t21, x0, 1).
+weight(t21, x52, 1).
+weight(x10, t22, 1).
+weight(t22, x11, 1).
+weight(x11, t23, 1).
+weight(x51, t23, 1).
+weight(t23, x0, 1).
+weight(t23, x52, 1).
+weight(x11, t24, 1).
+weight(t24, x12, 1).
+weight(x12, t25, 1).
+weight(x51, t25, 1).
+weight(t25, x0, 1).
+weight(t25, x52, 1).
+weight(x12, t26, 1).
+weight(t26, x13, 1).
+weight(x13, t27, 1).
+weight(x51, t27, 1).
+weight(t27, x0, 1).
+weight(t27, x52, 1).
+weight(x13, t28, 1).
+weight(t28, x14, 1).
+weight(x14, t29, 1).
+weight(x51, t29, 1).
+weight(t29, x0, 1).
+weight(t29, x52, 1).
+weight(x14, t30, 1).
+weight(t30, x15, 1).
+weight(x15, t31, 1).
+weight(x51, t31, 1).
+weight(t31, x0, 1).
+weight(t31, x52, 1).
+weight(x15, t32, 1).
+weight(t32, x16, 1).
+weight(x16, t33, 1).
+weight(x51, t33, 1).
+weight(t33, x0, 1).
+weight(t33, x52, 1).
+weight(x16, t34, 1).
+weight(t34, x17, 1).
+weight(x17, t35, 1).
+weight(x51, t35, 1).
+weight(t35, x0, 1).
+weight(t35, x52, 1).
+weight(x17, t36, 1).
+weight(t36, x18, 1).
+weight(x18, t37, 1).
+weight(x51, t37, 1).
+weight(t37, x0, 1).
+weight(t37, x52, 1).
+weight(x18, t38, 1).
+weight(t38, x19, 1).
+weight(x19, t39, 1).
+weight(x51, t39, 1).
+weight(t39, x0, 1).
+weight(t39, x52, 1).
+weight(x19, t40, 1).
+weight(t40, x20, 1).
+weight(x20, t41, 1).
+weight(x51, t41, 1).
+weight(t41, x0, 1).
+weight(t41, x52, 1).
+weight(x20, t42, 1).
+weight(t42, x21, 1).
+weight(x21, t43, 1).
+weight(x51, t43, 1).
+weight(t43, x0, 1).
+weight(t43, x52, 1).
+weight(x21, t44, 1).
+weight(t44, x22, 1).
+weight(x22, t45, 1).
+weight(x51, t45, 1).
+weight(t45, x0, 1).
+weight(t45, x52, 1).
+weight(x22, t46, 1).
+weight(t46, x23, 1).
+weight(x23, t47, 1).
+weight(x51, t47, 1).
+weight(t47, x0, 1).
+weight(t47, x52, 1).
+weight(x23, t48, 1).
+weight(t48, x24, 1).
+weight(x24, t49, 1).
+weight(x51, t49, 1).
+weight(t49, x0, 1).
+weight(t49, x52, 1).
+weight(x24, t50, 1).
+weight(t50, x25, 1).
+weight(x25, t51, 1).
+weight(x51, t51, 1).
+weight(t51, x0, 1).
+weight(t51, x52, 1).
+weight(x25, t52, 1).
+weight(t52, x26, 1).
+weight(x26, t53, 1).
+weight(x51, t53, 1).
+weight(t53, x0, 1).
+weight(t53, x52, 1).
+weight(x26, t54, 1).
+weight(t54, x27, 1).
+weight(x27, t55, 1).
+weight(x51, t55, 1).
+weight(t55, x0, 1).
+weight(t55, x52, 1).
+weight(x27, t56, 1).
+weight(t56, x28, 1).
+weight(x28, t57, 1).
+weight(x51, t57, 1).
+weight(t57, x0, 1).
+weight(t57, x52, 1).
+weight(x28, t58, 1).
+weight(t58, x29, 1).
+weight(x29, t59, 1).
+weight(x51, t59, 1).
+weight(t59, x0, 1).
+weight(t59, x52, 1).
+weight(x29, t60, 1).
+weight(t60, x30, 1).
+weight(x30, t61, 1).
+weight(x51, t61, 1).
+weight(t61, x0, 1).
+weight(t61, x52, 1).
+weight(x30, t62, 1).
+weight(t62, x31, 1).
+weight(x31, t63, 1).
+weight(x51, t63, 1).
+weight(t63, x0, 1).
+weight(t63, x52, 1).
+weight(x31, t64, 1).
+weight(t64, x32, 1).
+weight(x32, t65, 1).
+weight(x51, t65, 1).
+weight(t65, x0, 1).
+weight(t65, x52, 1).
+weight(x32, t66, 1).
+weight(t66, x33, 1).
+weight(x33, t67, 1).
+weight(x51, t67, 1).
+weight(t67, x0, 1).
+weight(t67, x52, 1).
+weight(x33, t68, 1).
+weight(t68, x34, 1).
+weight(x34, t69, 1).
+weight(x51, t69, 1).
+weight(t69, x0, 1).
+weight(t69, x52, 1).
+weight(x34, t70, 1).
+weight(t70, x35, 1).
+weight(x35, t71, 1).
+weight(x51, t71, 1).
+weight(t71, x0, 1).
+weight(t71, x52, 1).
+weight(x35, t72, 1).
+weight(t72, x36, 1).
+weight(x36, t73, 1).
+weight(x51, t73, 1).
+weight(t73, x0, 1).
+weight(t73, x52, 1).
+weight(x36, t74, 1).
+weight(t74, x37, 1).
+weight(x37, t75, 1).
+weight(x51, t75, 1).
+weight(t75, x0, 1).
+weight(t75, x52, 1).
+weight(x37, t76, 1).
+weight(t76, x38, 1).
+weight(x38, t77, 1).
+weight(x51, t77, 1).
+weight(t77, x0, 1).
+weight(t77, x52, 1).
+weight(x38, t78, 1).
+weight(t78, x39, 1).
+weight(x39, t79, 1).
+weight(x51, t79, 1).
+weight(t79, x0, 1).
+weight(t79, x52, 1).
+weight(x39, t80, 1).
+weight(t80, x40, 1).
+weight(x40, t81, 1).
+weight(x51, t81, 1).
+weight(t81, x0, 1).
+weight(t81, x52, 1).
+weight(x40, t82, 1).
+weight(t82, x41, 1).
+weight(x41, t83, 1).
+weight(x51, t83, 1).
+weight(t83, x0, 1).
+weight(t83, x52, 1).
+weight(x41, t84, 1).
+weight(t84, x42, 1).
+weight(x42, t85, 1).
+weight(x51, t85, 1).
+weight(t85, x0, 1).
+weight(t85, x52, 1).
+weight(x42, t86, 1).
+weight(t86, x43, 1).
+weight(x43, t87, 1).
+weight(x51, t87, 1).
+weight(t87, x0, 1).
+weight(t87, x52, 1).
+weight(x43, t88, 1).
+weight(t88, x44, 1).
+weight(x44, t89, 1).
+weight(x51, t89, 1).
+weight(t89, x0, 1).
+weight(t89, x52, 1).
+weight(x44, t90, 1).
+weight(t90, x45, 1).
+weight(x45, t91, 1).
+weight(x51, t91, 1).
+weight(t91, x0, 1).
+weight(t91, x52, 1).
+weight(x45, t92, 1).
+weight(t92, x46, 1).
+weight(x46, t93, 1).
+weight(x51, t93, 1).
+weight(t93, x0, 1).
+weight(t93, x52, 1).
+weight(x46, t94, 1).
+weight(t94, x47, 1).
+weight(x47, t95, 1).
+weight(x51, t95, 1).
+weight(t95, x0, 1).
+weight(t95, x52, 1).
+weight(x47, t96, 1).
+weight(t96, x48, 1).
+weight(x48, t97, 1).
+weight(x51, t97, 1).
+weight(t97, x0, 1).
+weight(t97, x52, 1).
+weight(x48, t98, 1).
+weight(t98, x49, 1).
+weight(x49, t99, 1).
+weight(x51, t99, 1).
+weight(t99, x0, 1).
+weight(t99, x52, 1).
+weight(x49, t100, 1).
+weight(t100, x50, 1).
+weight(x50, t101, 1).
+weight(x51, t101, 1).
+weight(t101, x0, 1).
+weight(t101, x52, 1).
+weight(init1, x0, 1).
+
+init(x0, 1).
+init(x52, 1).
+
+cond('(>= x50 2)').
+
+target(x50, 2).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun x1 () Real)
+(declare-fun x2 () Real)
+(declare-fun x3 () Real)
+(declare-fun x4 () Real)
+(declare-fun x5 () Real)
+(declare-fun x6 () Real)
+(declare-fun x7 () Real)
+(declare-fun x8 () Real)
+(declare-fun x9 () Real)
+(declare-fun x10 () Real)
+(declare-fun x11 () Real)
+(declare-fun x12 () Real)
+(declare-fun x13 () Real)
+(declare-fun x14 () Real)
+(declare-fun x15 () Real)
+(declare-fun x16 () Real)
+(declare-fun x17 () Real)
+(declare-fun x18 () Real)
+(declare-fun x19 () Real)
+(declare-fun x20 () Real)
+(declare-fun x21 () Real)
+(declare-fun x22 () Real)
+(declare-fun x23 () Real)
+(declare-fun x24 () Real)
+(declare-fun x25 () Real)
+(declare-fun x26 () Real)
+(declare-fun x27 () Real)
+(declare-fun x28 () Real)
+(declare-fun x29 () Real)
+(declare-fun x30 () Real)
+(declare-fun x31 () Real)
+(declare-fun x32 () Real)
+(declare-fun x33 () Real)
+(declare-fun x34 () Real)
+(declare-fun x35 () Real)
+(declare-fun x36 () Real)
+(declare-fun x37 () Real)
+(declare-fun x38 () Real)
+(declare-fun x39 () Real)
+(declare-fun x40 () Real)
+(declare-fun x41 () Real)
+(declare-fun x42 () Real)
+(declare-fun x43 () Real)
+(declare-fun x44 () Real)
+(declare-fun x45 () Real)
+(declare-fun x46 () Real)
+(declare-fun x47 () Real)
+(declare-fun x48 () Real)
+(declare-fun x49 () Real)
+(declare-fun x50 () Real)
+(declare-fun x51 () Real)
+(declare-fun x52 () Real)
+(declare-fun x0 () Real)
+(assert (>= 0 (+ (- x0) x1 x51 (- x52))))
+(assert (>= 0 (+ x0 (- x1) x51 (- x52))))
+(assert (>= 0 (+ x0 (- x1) (- x51) x52)))
+(assert (>= 0 (+ (- x1) x2)))
+(assert (>= 0 (+ x0 (- x2) (- x51) x52)))
+(assert (>= 0 (+ (- x2) x3)))
+(assert (>= 0 (+ x0 (- x3) (- x51) x52)))
+(assert (>= 0 (+ (- x3) x4)))
+(assert (>= 0 (+ x0 (- x4) (- x51) x52)))
+(assert (>= 0 (+ (- x4) x5)))
+(assert (>= 0 (+ x0 (- x5) (- x51) x52)))
+(assert (>= 0 (+ (- x5) x6)))
+(assert (>= 0 (+ x0 (- x51) x52 (- x6))))
+(assert (>= 0 (+ (- x6) x7)))
+(assert (>= 0 (+ x0 (- x51) x52 (- x7))))
+(assert (>= 0 (+ (- x7) x8)))
+(assert (>= 0 (+ x0 (- x51) x52 (- x8))))
+(assert (>= 0 (+ (- x8) x9)))
+(assert (>= 0 (+ x0 (- x51) x52 (- x9))))
+(assert (>= 0 (+ x10 (- x9))))
+(assert (>= 0 (+ x0 (- x10) (- x51) x52)))
+(assert (>= 0 (+ (- x10) x11)))
+(assert (>= 0 (+ x0 (- x11) (- x51) x52)))
+(assert (>= 0 (+ (- x11) x12)))
+(assert (>= 0 (+ x0 (- x12) (- x51) x52)))
+(assert (>= 0 (+ (- x12) x13)))
+(assert (>= 0 (+ x0 (- x13) (- x51) x52)))
+(assert (>= 0 (+ (- x13) x14)))
+(assert (>= 0 (+ x0 (- x14) (- x51) x52)))
+(assert (>= 0 (+ (- x14) x15)))
+(assert (>= 0 (+ x0 (- x15) (- x51) x52)))
+(assert (>= 0 (+ (- x15) x16)))
+(assert (>= 0 (+ x0 (- x16) (- x51) x52)))
+(assert (>= 0 (+ (- x16) x17)))
+(assert (>= 0 (+ x0 (- x17) (- x51) x52)))
+(assert (>= 0 (+ (- x17) x18)))
+(assert (>= 0 (+ x0 (- x18) (- x51) x52)))
+(assert (>= 0 (+ (- x18) x19)))
+(assert (>= 0 (+ x0 (- x19) (- x51) x52)))
+(assert (>= 0 (+ (- x19) x20)))
+(assert (>= 0 (+ x0 (- x20) (- x51) x52)))
+(assert (>= 0 (+ (- x20) x21)))
+(assert (>= 0 (+ x0 (- x21) (- x51) x52)))
+(assert (>= 0 (+ (- x21) x22)))
+(assert (>= 0 (+ x0 (- x22) (- x51) x52)))
+(assert (>= 0 (+ (- x22) x23)))
+(assert (>= 0 (+ x0 (- x23) (- x51) x52)))
+(assert (>= 0 (+ (- x23) x24)))
+(assert (>= 0 (+ x0 (- x24) (- x51) x52)))
+(assert (>= 0 (+ (- x24) x25)))
+(assert (>= 0 (+ x0 (- x25) (- x51) x52)))
+(assert (>= 0 (+ (- x25) x26)))
+(assert (>= 0 (+ x0 (- x26) (- x51) x52)))
+(assert (>= 0 (+ (- x26) x27)))
+(assert (>= 0 (+ x0 (- x27) (- x51) x52)))
+(assert (>= 0 (+ (- x27) x28)))
+(assert (>= 0 (+ x0 (- x28) (- x51) x52)))
+(assert (>= 0 (+ (- x28) x29)))
+(assert (>= 0 (+ x0 (- x29) (- x51) x52)))
+(assert (>= 0 (+ (- x29) x30)))
+(assert (>= 0 (+ x0 (- x30) (- x51) x52)))
+(assert (>= 0 (+ (- x30) x31)))
+(assert (>= 0 (+ x0 (- x31) (- x51) x52)))
+(assert (>= 0 (+ (- x31) x32)))
+(assert (>= 0 (+ x0 (- x32) (- x51) x52)))
+(assert (>= 0 (+ (- x32) x33)))
+(assert (>= 0 (+ x0 (- x33) (- x51) x52)))
+(assert (>= 0 (+ (- x33) x34)))
+(assert (>= 0 (+ x0 (- x34) (- x51) x52)))
+(assert (>= 0 (+ (- x34) x35)))
+(assert (>= 0 (+ x0 (- x35) (- x51) x52)))
+(assert (>= 0 (+ (- x35) x36)))
+(assert (>= 0 (+ x0 (- x36) (- x51) x52)))
+(assert (>= 0 (+ (- x36) x37)))
+(assert (>= 0 (+ x0 (- x37) (- x51) x52)))
+(assert (>= 0 (+ (- x37) x38)))
+(assert (>= 0 (+ x0 (- x38) (- x51) x52)))
+(assert (>= 0 (+ (- x38) x39)))
+(assert (>= 0 (+ x0 (- x39) (- x51) x52)))
+(assert (>= 0 (+ (- x39) x40)))
+(assert (>= 0 (+ x0 (- x40) (- x51) x52)))
+(assert (>= 0 (+ (- x40) x41)))
+(assert (>= 0 (+ x0 (- x41) (- x51) x52)))
+(assert (>= 0 (+ (- x41) x42)))
+(assert (>= 0 (+ x0 (- x42) (- x51) x52)))
+(assert (>= 0 (+ (- x42) x43)))
+(assert (>= 0 (+ x0 (- x43) (- x51) x52)))
+(assert (>= 0 (+ (- x43) x44)))
+(assert (>= 0 (+ x0 (- x44) (- x51) x52)))
+(assert (>= 0 (+ (- x44) x45)))
+(assert (>= 0 (+ x0 (- x45) (- x51) x52)))
+(assert (>= 0 (+ (- x45) x46)))
+(assert (>= 0 (+ x0 (- x46) (- x51) x52)))
+(assert (>= 0 (+ (- x46) x47)))
+(assert (>= 0 (+ x0 (- x47) (- x51) x52)))
+(assert (>= 0 (+ (- x47) x48)))
+(assert (>= 0 (+ x0 (- x48) (- x51) x52)))
+(assert (>= 0 (+ (- x48) x49)))
+(assert (>= 0 (+ x0 (- x49) (- x51) x52)))
+(assert (>= 0 (+ (- x49) x50)))
+(assert (>= 0 (+ x0 (- x50) (- x51) x52)))
+(assert (>= 0 (+ x0)))
+(assert (= 1 (+ 0 (* 2 x50) (- x52) (- x0))))
+(assert (>= x1 0))
+(assert (>= x2 0))
+(assert (>= x3 0))
+(assert (>= x4 0))
+(assert (>= x5 0))
+(assert (>= x6 0))
+(assert (>= x7 0))
+(assert (>= x8 0))
+(assert (>= x9 0))
+(assert (>= x10 0))
+(assert (>= x11 0))
+(assert (>= x12 0))
+(assert (>= x13 0))
+(assert (>= x14 0))
+(assert (>= x15 0))
+(assert (>= x16 0))
+(assert (>= x17 0))
+(assert (>= x18 0))
+(assert (>= x19 0))
+(assert (>= x20 0))
+(assert (>= x21 0))
+(assert (>= x22 0))
+(assert (>= x23 0))
+(assert (>= x24 0))
+(assert (>= x25 0))
+(assert (>= x26 0))
+(assert (>= x27 0))
+(assert (>= x28 0))
+(assert (>= x29 0))
+(assert (>= x30 0))
+(assert (>= x31 0))
+(assert (>= x32 0))
+(assert (>= x33 0))
+(assert (>= x34 0))
+(assert (>= x35 0))
+(assert (>= x36 0))
+(assert (>= x37 0))
+(assert (>= x38 0))
+(assert (>= x39 0))
+(assert (>= x40 0))
+(assert (>= x41 0))
+(assert (>= x42 0))
+(assert (>= x43 0))
+(assert (>= x44 0))
+(assert (>= x45 0))
+(assert (>= x46 0))
+(assert (>= x47 0))
+(assert (>= x48 0))
+(assert (>= x49 0))
+(assert (>= x50 0))
+(assert (>= x51 0))
+(assert (>= x52 0))
+(assert (>= x0 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+sat
+(model 
+  (define-fun x20 () Real
+    1.0)
+  (define-fun x22 () Real
+    1.0)
+  (define-fun x17 () Real
+    1.0)
+  (define-fun x38 () Real
+    1.0)
+  (define-fun x50 () Real
+    1.0)
+  (define-fun x24 () Real
+    1.0)
+  (define-fun x21 () Real
+    1.0)
+  (define-fun x42 () Real
+    1.0)
+  (define-fun x44 () Real
+    1.0)
+  (define-fun x49 () Real
+    1.0)
+  (define-fun x19 () Real
+    1.0)
+  (define-fun x46 () Real
+    1.0)
+  (define-fun x15 () Real
+    1.0)
+  (define-fun x39 () Real
+    1.0)
+  (define-fun x32 () Real
+    1.0)
+  (define-fun x37 () Real
+    1.0)
+  (define-fun x47 () Real
+    1.0)
+  (define-fun x13 () Real
+    1.0)
+  (define-fun x16 () Real
+    1.0)
+  (define-fun x23 () Real
+    1.0)
+  (define-fun x26 () Real
+    1.0)
+  (define-fun x8 () Real
+    1.0)
+  (define-fun x14 () Real
+    1.0)
+  (define-fun x1 () Real
+    1.0)
+  (define-fun x6 () Real
+    1.0)
+  (define-fun x36 () Real
+    1.0)
+  (define-fun x33 () Real
+    1.0)
+  (define-fun x31 () Real
+    1.0)
+  (define-fun x29 () Real
+    1.0)
+  (define-fun x3 () Real
+    1.0)
+  (define-fun x43 () Real
+    1.0)
+  (define-fun x48 () Real
+    1.0)
+  (define-fun x4 () Real
+    1.0)
+  (define-fun x11 () Real
+    1.0)
+  (define-fun x0 () Real
+    0.0)
+  (define-fun x9 () Real
+    1.0)
+  (define-fun x45 () Real
+    1.0)
+  (define-fun x2 () Real
+    1.0)
+  (define-fun x41 () Real
+    1.0)
+  (define-fun x18 () Real
+    1.0)
+  (define-fun x52 () Real
+    1.0)
+  (define-fun x30 () Real
+    1.0)
+  (define-fun x12 () Real
+    1.0)
+  (define-fun x27 () Real
+    1.0)
+  (define-fun x51 () Real
+    0.0)
+  (define-fun x34 () Real
+    1.0)
+  (define-fun x25 () Real
+    1.0)
+  (define-fun x28 () Real
+    1.0)
+  (define-fun x40 () Real
+    1.0)
+  (define-fun x10 () Real
+    1.0)
+  (define-fun x35 () Real
+    1.0)
+  (define-fun x5 () Real
+    1.0)
+  (define-fun x7 () Real
+    1.0)
+)
+- sat, getting model A' for C'
+assignment('x20', 1.0).
+assignment('x22', 1.0).
+assignment('x17', 1.0).
+assignment('x38', 1.0).
+assignment('x50', 1.0).
+assignment('x24', 1.0).
+assignment('x21', 1.0).
+assignment('x42', 1.0).
+assignment('x44', 1.0).
+assignment('x49', 1.0).
+assignment('x19', 1.0).
+assignment('x46', 1.0).
+assignment('x15', 1.0).
+assignment('x39', 1.0).
+assignment('x32', 1.0).
+assignment('x37', 1.0).
+assignment('x47', 1.0).
+assignment('x13', 1.0).
+assignment('x16', 1.0).
+assignment('x23', 1.0).
+assignment('x26', 1.0).
+assignment('x8', 1.0).
+assignment('x14', 1.0).
+assignment('x1', 1.0).
+assignment('x6', 1.0).
+assignment('x36', 1.0).
+assignment('x33', 1.0).
+assignment('x31', 1.0).
+assignment('x29', 1.0).
+assignment('x3', 1.0).
+assignment('x43', 1.0).
+assignment('x48', 1.0).
+assignment('x4', 1.0).
+assignment('x11', 1.0).
+assignment('x0', 0.0).
+assignment('x9', 1.0).
+assignment('x45', 1.0).
+assignment('x2', 1.0).
+assignment('x41', 1.0).
+assignment('x18', 1.0).
+assignment('x52', 1.0).
+assignment('x30', 1.0).
+assignment('x12', 1.0).
+assignment('x27', 1.0).
+assignment('x51', 0.0).
+assignment('x34', 1.0).
+assignment('x25', 1.0).
+assignment('x28', 1.0).
+assignment('x40', 1.0).
+assignment('x10', 1.0).
+assignment('x35', 1.0).
+assignment('x5', 1.0).
+assignment('x7', 1.0).
+- constructing invariant I for petri net N and model A'
+(assert (>= 1.0 (+ x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 x32 x33 x34 x35 x36 x37 x38 x39 x40 x41 x42 x43 x44 x45 x46 x47 x48 x49 x50 x52)))
 
 * Invariant I for the petri net:
 (assert (>= 1.0 (+ x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 x32 x33 x34 x35 x36 x37 x38 x39 x40 x41 x42 x43 x44 x45 x46 x47 x48 x49 x50 x52)))

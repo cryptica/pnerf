@@ -1,5 +1,187 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/given-by-daniel-kroening/cprover-PN/newrtp.tts.spec.pl]
+[-v benchmarks/given-by-daniel-kroening/cprover-PN/newrtp.tts.spec.pl]
+
+* Constructing petri net N from input file
+place(s0, [], [t1]).
+place(l1, [t1], [t2]).
+place(l3, [t3], [t4]).
+place(l4, [t4], [t6,t5]).
+place(l5, [t5], [t7]).
+place(l6, [t7], [t10,t9,t8]).
+place(l7, [t8], [t11]).
+place(l8, [t9], [t12]).
+place(l9, [t12,t11,t10,t6], [t13]).
+place(s1, [t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2,t1], [t13,t12,t11,t10,t9,t8,t7,t6,t5,t4,t3,t2]).
+place(l2, [t13,t2], [t3]).
+place(l0, [init1], [t1]).
+
+transition(t1, [l0,s0], [s1,l1]).
+transition(t2, [l1,s1], [s1,l2]).
+transition(t3, [l2,s1], [s1,l3]).
+transition(t4, [l3,s1], [s1,l4]).
+transition(t5, [l4,s1], [s1,l5]).
+transition(t6, [l4,s1], [s1,l9]).
+transition(t7, [l5,s1], [s1,l6]).
+transition(t8, [l6,s1], [s1,l7]).
+transition(t9, [l6,s1], [s1,l8]).
+transition(t10, [l6,s1], [s1,l9]).
+transition(t11, [l7,s1], [s1,l9]).
+transition(t12, [l8,s1], [s1,l9]).
+transition(t13, [l9,s1], [s1,l2]).
+transition(init1, [], [l0]).
+
+weight(l0, t1, 1).
+weight(s0, t1, 1).
+weight(t1, s1, 1).
+weight(t1, l1, 1).
+weight(l1, t2, 1).
+weight(s1, t2, 1).
+weight(t2, s1, 1).
+weight(t2, l2, 1).
+weight(l2, t3, 1).
+weight(s1, t3, 1).
+weight(t3, s1, 1).
+weight(t3, l3, 1).
+weight(l3, t4, 1).
+weight(s1, t4, 1).
+weight(t4, s1, 1).
+weight(t4, l4, 1).
+weight(l4, t5, 1).
+weight(s1, t5, 1).
+weight(t5, s1, 1).
+weight(t5, l5, 1).
+weight(l4, t6, 1).
+weight(s1, t6, 1).
+weight(t6, s1, 1).
+weight(t6, l9, 1).
+weight(l5, t7, 1).
+weight(s1, t7, 1).
+weight(t7, s1, 1).
+weight(t7, l6, 1).
+weight(l6, t8, 1).
+weight(s1, t8, 1).
+weight(t8, s1, 1).
+weight(t8, l7, 1).
+weight(l6, t9, 1).
+weight(s1, t9, 1).
+weight(t9, s1, 1).
+weight(t9, l8, 1).
+weight(l6, t10, 1).
+weight(s1, t10, 1).
+weight(t10, s1, 1).
+weight(t10, l9, 1).
+weight(l7, t11, 1).
+weight(s1, t11, 1).
+weight(t11, s1, 1).
+weight(t11, l9, 1).
+weight(l8, t12, 1).
+weight(s1, t12, 1).
+weight(t12, s1, 1).
+weight(t12, l9, 1).
+weight(l9, t13, 1).
+weight(s1, t13, 1).
+weight(t13, s1, 1).
+weight(t13, l2, 1).
+weight(init1, l0, 1).
+
+init(l0, 1).
+init(s0, 1).
+
+cond('(>= s1 1)').
+cond('(>= l5 1)').
+cond('(>= l9 1)').
+
+target(s1, 1).
+target(l5, 1).
+target(l9, 1).
+
+
+* Constructing constraints C' for petri net N
+(declare-fun s0 () Real)
+(declare-fun l1 () Real)
+(declare-fun l3 () Real)
+(declare-fun l4 () Real)
+(declare-fun l5 () Real)
+(declare-fun l6 () Real)
+(declare-fun l7 () Real)
+(declare-fun l8 () Real)
+(declare-fun l9 () Real)
+(declare-fun s1 () Real)
+(declare-fun l2 () Real)
+(declare-fun l0 () Real)
+(assert (>= 0 (+ (- l0) l1 (- s0) s1)))
+(assert (>= 0 (+ (- l1) l2)))
+(assert (>= 0 (+ (- l2) l3)))
+(assert (>= 0 (+ (- l3) l4)))
+(assert (>= 0 (+ (- l4) l5)))
+(assert (>= 0 (+ (- l4) l9)))
+(assert (>= 0 (+ (- l5) l6)))
+(assert (>= 0 (+ (- l6) l7)))
+(assert (>= 0 (+ (- l6) l8)))
+(assert (>= 0 (+ (- l6) l9)))
+(assert (>= 0 (+ (- l7) l9)))
+(assert (>= 0 (+ (- l8) l9)))
+(assert (>= 0 (+ l2 (- l9))))
+(assert (>= 0 (+ l0)))
+(assert (= 1 (+ 0 (- s0) l5 l9 s1 (- l0))))
+(assert (>= s0 0))
+(assert (>= l1 0))
+(assert (>= l3 0))
+(assert (>= l4 0))
+(assert (>= l5 0))
+(assert (>= l6 0))
+(assert (>= l7 0))
+(assert (>= l8 0))
+(assert (>= l9 0))
+(assert (>= s1 0))
+(assert (>= l2 0))
+(assert (>= l0 0))
+(check-sat)
+(get-model)
+
+* Checking SAT(C')
+sat
+(model 
+  (define-fun s0 () Real
+    1.0)
+  (define-fun l3 () Real
+    1.0)
+  (define-fun l7 () Real
+    1.0)
+  (define-fun l5 () Real
+    1.0)
+  (define-fun l2 () Real
+    1.0)
+  (define-fun s1 () Real
+    0.0)
+  (define-fun l4 () Real
+    1.0)
+  (define-fun l6 () Real
+    1.0)
+  (define-fun l0 () Real
+    0.0)
+  (define-fun l8 () Real
+    1.0)
+  (define-fun l9 () Real
+    1.0)
+  (define-fun l1 () Real
+    1.0)
+)
+- sat, getting model A' for C'
+assignment('s0', 1.0).
+assignment('l3', 1.0).
+assignment('l7', 1.0).
+assignment('l5', 1.0).
+assignment('l2', 1.0).
+assignment('s1', 0.0).
+assignment('l4', 1.0).
+assignment('l6', 1.0).
+assignment('l0', 0.0).
+assignment('l8', 1.0).
+assignment('l9', 1.0).
+assignment('l1', 1.0).
+- constructing invariant I for petri net N and model A'
+(assert (>= 1.0 (+ s0 l1 l3 l4 l5 l6 l7 l8 l9 l2)))
 
 * Invariant I for the petri net:
 (assert (>= 1.0 (+ s0 l1 l3 l4 l5 l6 l7 l8 l9 l2)))
