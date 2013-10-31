@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl]
 
 * Invariant I for the petri net:
-(assert (>= 5.0 (+ x3 x4 (* 5.0 x10) (* 5.0 x12))))
+(assert (>= 5 (+ x3 (* 5 x10))))
 
 -------------------------------------------
 The petri net satisfies the property!

@@ -1,8 +1,10 @@
 :- dynamic assignment/2.   % assignment(Preimage, Image).
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic init/2.         % init(PlaceId, InitVal).
+:- dynamic target/2.       % target(PlaceId, TargetVal).
 
 :- use_module(library(lists)).
+:- use_module(library(aggregate)).
 
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
@@ -19,11 +21,12 @@ y_invariant :-
         findall( _ , (
                 place(P, _, _),
                 assignment(P, Y),
-                S is Y,
-                ( S = 0.0 -> true
-                ; S = 1.0 -> format(' ~p', [P])
-                ; S = -1.0 -> format(' (- ~p)', [P])
-                ; format(' (* ~p ~p)', [S, P])
+                target(P, B),
+                B > 0,
+                ( Y = 0 -> true
+                ; Y = 1 -> format(' ~p', [P])
+                ; Y = -1 -> format(' (- ~p)', [P])
+                ; format(' (* ~p ~p)', [Y, P])
                 )
         ), _ ),
         print(')))\n').

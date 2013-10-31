@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/clientserver.tts.spec.pl]
 
 * Invariant I for the petri net:
-(assert (>= 1.0 (+ s0 l2 l1 l6 l4)))
+(assert (>= 1 (+ l6)))
 
 -------------------------------------------
 The petri net satisfies the property!

@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl]
 
 * Invariant I for the petri net:
-(assert (>= 0.1111111111111111 (+ (* 0.1111111111111111 x13) (* 0.1111111111111111 x12) (* 0.1111111111111111 x15) (* 0.1111111111111111 x14))))
+(assert (>= 1 (+ x13 x14)))
 
 -------------------------------------------
 The petri net satisfies the property!

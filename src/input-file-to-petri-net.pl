@@ -9,6 +9,8 @@
 :- dynamic target/2.       % target(PlaceId, TargetVal).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
+:- use_module(library(aggregate)).
+
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].
 
@@ -40,6 +42,17 @@ remove_weight_from_transitions :-
                        maplist(remove_weight, Ow, O),
                        assert( transition(Id, I, O) )
                      ), _ ).
+
+make_targets_unique :-
+        findall( _ , (
+                       place(P, _, _),
+                       aggregate(max(B), (
+                         target(P, B),
+                         retract( target(P, B) )
+                       ), Bmax),
+                       assert( target(P, Bmax) )
+                     ), _ ).
+
 
 connect_places_w_transitions :-
         findall( _ , (
@@ -78,6 +91,7 @@ connect_places_w_transitions :-
         label_transitions,
         connect_places_w_transitions,
         remove_weight_from_transitions,
+        make_targets_unique,
         listing(place/3),
         listing(transition/3),
         listing(weight/3),

@@ -14,7 +14,7 @@
 z3_vars :-
         findall( _ , (
                        place(P, _, _),
-                       format('(declare-fun ~p () Real)\n', [P])
+                       format('(declare-fun ~p () Int)\n', [P])
                      ), _ ).
 
 z3_incidence_ineqs :-
@@ -39,15 +39,12 @@ z3_incidence_ineqs :-
                      ), _ ).
 
 z3_token_eqs :-
-        print('(assert (= 1 (+ 0'),
+        print('(assert (< 0 (+ 0'),
         findall( _ , (
                        place(P, _, _),
-                       ( aggregate(max(B), target(P, B), Bmax) ->
-                         true
-                       ; Bmax = 0
-                       ),
-                       (init(P, M0) -> true; M0 = 0 ),
-                       W is Bmax - M0,
+                       ( target(P, B) -> true ; B = 0 ),
+                       ( init(P, M0) -> true; M0 = 0 ),
+                       W is B - M0,
                        ( W = 0 -> true
                        ; W = 1 -> format(' ~p', [P])
                        ; W = -1 -> format(' (- ~p)', [P])

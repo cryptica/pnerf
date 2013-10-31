@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl]
 
 * Invariant I for the petri net:
-(assert (>= 0.0 (+ l104 l105 l106 l107 l114 l115 l116 l117 l124 l125 l126 l127 l130 l131 l132 l133 l136 l137 l138 l139 l156 l157 l158 l159 s4)))
+(assert (>= 0 (+ s4)))
 
 -------------------------------------------
 The petri net satisfies the property!
