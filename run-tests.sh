@@ -140,6 +140,7 @@ test-smt2-model-to-prolog-model empty-trap-net/model-a2.smt2 empty-trap-net/mode
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime1.smt2 empty-trap-net/model-atheta-prime1.pl
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime2.smt2 empty-trap-net/model-atheta-prime2.pl
 test-smt2-model-to-prolog-model simple-net/model-a1.smt2 simple-net/model-a1.pl
+test-smt2-model-to-prolog-model rational-test/model-a1-real.smt2 rational-test/model-a1-real.pl
 
 #
 # Testing construction of trap constraints C_theta for model A

@@ -19,10 +19,11 @@ y_invariant :-
         findall( _ , (
                 place(P, _, _),
                 assignment(P, Y),
-                ( Y = 0.0 -> true
-                ; Y = 1.0 -> format(' ~p', [P])
-                ; Y = -1.0 -> format(' (- ~p)', [P])
-                ; format(' (* ~p ~p)', [Y, P])
+                S is Y,
+                ( S = 0.0 -> true
+                ; S = 1.0 -> format(' ~p', [P])
+                ; S = -1.0 -> format(' (- ~p)', [P])
+                ; format(' (* ~p ~p)', [S, P])
                 )
         ), _ ),
         print(')))\n').

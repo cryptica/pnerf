@@ -1,0 +1,9 @@
+assignment('s1', 0.0).
+assignment('s2', 0.0).
+assignment('s3', 0.0).
+assignment('s4', 0.0).
+assignment('s5', 1.0).
+assignment('t1', 1.0/2.0).
+assignment('t2', 1.0/2.0).
+assignment('t3', 1.0/2.0).
+assignment('t4', 1.0/2.0).
