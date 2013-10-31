@@ -1,10 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.1/main.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.1/main.spec.pl]
 
-* Constructing petri net N from input file
-
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded don't know, starting search
-search concluded dontknow
+-------------------------------------------
 The petri net may not satisfy the property
+-------------------------------------------
+
+

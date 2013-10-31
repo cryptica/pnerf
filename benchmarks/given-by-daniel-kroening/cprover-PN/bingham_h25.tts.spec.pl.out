@@ -1,9 +1,11 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25.tts.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25.tts.spec.pl]
 
-* Constructing petri net N from input file
+* Invariant I for the petri net:
+(assert (>= 2.0 (+ (* 2.0 s0) (* 2.0 s1) l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13 l14 l15 l16 l17 l18 l19 l20 l21 l22 l23 l24 l25 l26 (* 2.0 s5) (* 2.0 s6) (* 2.0 s7) (* 2.0 s8) (* 2.0 s9) (* 2.0 s10) (* 2.0 s11) (* 2.0 s12) (* 2.0 s13) (* 2.0 s14) (* 2.0 s15) (* 2.0 s16) (* 2.0 s17) (* 2.0 s18) (* 2.0 s19) (* 2.0 s20) (* 2.0 s21) (* 2.0 s22) (* 2.0 s23) (* 2.0 s24) (* 2.0 s25) (* 2.0 s26) (* 2.0 s27) (* 2.0 s28) (* 2.0 s29) s2 l28)))
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded safe
+-------------------------------------------
 The petri net satisfies the property!
+-------------------------------------------
+
+

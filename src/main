@@ -134,14 +134,15 @@ function run_bash {
   return $res
 }
 
-construct_invariant=false
+#construct_invariant=false
+construct_invariant=true
 
-refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+#refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
 #refinement_methods=( 'trap' 'empty-trap' )
 #refinement_methods=( 'trap' )
-#refinement_methods=( )
-equation_type='Int'
-#equation_type='Real'
+refinement_methods=( )
+#equation_type='Int'
+equation_type='Real'
 
 vecho
 vecho '* Constructing petri net N from input file'

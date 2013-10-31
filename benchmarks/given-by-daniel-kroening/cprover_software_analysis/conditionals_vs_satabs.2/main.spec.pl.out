@@ -1,9 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl]
 
-* Constructing petri net N from input file
+-------------------------------------------
+The petri net may not satisfy the property
+-------------------------------------------
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded safe
-The petri net satisfies the property!
+

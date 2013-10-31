@@ -19,5 +19,4 @@ benchmarks/given-by-daniel-kroening/cprover-PN/reaction3
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction4
 benchmarks/given-by-daniel-kroening/cprover-PN/read-write
 benchmarks/given-by-daniel-kroening/cprover-PN/restriction
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.2/main

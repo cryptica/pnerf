@@ -1,6 +1,12 @@
+benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl
+benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl
+benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl
 benchmarks/found-in-mist-repo/PN/kanban.spec.pl
+benchmarks/found-in-mist-repo/PN/MultiME.spec.pl
 benchmarks/found-in-mist-repo/PN/extendedread-write.spec.pl
 benchmarks/found-in-mist-repo/PN/leabasicapproach.spec.pl
+benchmarks/found-in-mist-repo/PN/pingpong.spec.pl
+benchmarks/found-in-mist-repo/PN/basicME.spec.pl
 benchmarks/found-in-mist-repo/PN/pncsasemiliv.spec.pl
 benchmarks/found-in-mist-repo/PN/manufacturing.spec.pl
 benchmarks/found-in-mist-repo/PN/extendedread-write-smallconsts.spec.pl

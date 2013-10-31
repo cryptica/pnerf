@@ -1,9 +1,11 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl]
+[benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl]
 
-* Constructing petri net N from input file
+* Invariant I for the petri net:
+(assert (>= 1.0 (+ begin sc1 oh_ns point1 oh_a_dt sc2 sc3 point2 do)))
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded safe
+-------------------------------------------
 The petri net satisfies the property!
+-------------------------------------------
+
+

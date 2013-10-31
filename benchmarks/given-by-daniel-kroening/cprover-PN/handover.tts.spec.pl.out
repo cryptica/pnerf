@@ -1,9 +1,11 @@
 PETRINIZER: The checker for Petri Nets
-[-d 0 benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl]
+[benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl]
 
-* Constructing petri net N from input file
+* Invariant I for the petri net:
+(assert (>= 1.0 (+ s0 l15 l41 l49 l52 l65 l73 l77 l21 l61 l89 l90 l39 l17 l94 l71 l100 l85 l105 l63 l109 l40 l118 l123)))
 
-* Starting state space exploration for petri net N
-testing inital marking for safety
-check concluded safe
+-------------------------------------------
 The petri net satisfies the property!
+-------------------------------------------
+
+

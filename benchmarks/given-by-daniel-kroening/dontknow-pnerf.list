@@ -1,5 +1,6 @@
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec.pl
+benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.1/main.spec.pl
 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.2/main.spec.pl

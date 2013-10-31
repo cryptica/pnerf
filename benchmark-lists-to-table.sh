@@ -15,8 +15,12 @@ results_other_tool=( positive negative error timeout )
 our_tool=pnerf
 other_tool=bfc
 
-for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
-  echo "$benchmark_dir"
+benchmark_dirs=( 'found-in-mist-repo' 'given-by-daniel-kroening' )
+benchmark_tools=( 'mist' 'bfc' )
+for (( benchmark=0;benchmark<${#benchmark_dirs[@]};benchmark++)); do
+  benchmark_dir='benchmarks/'${benchmark_dirs[$benchmark]}
+  other_tool=${benchmark_tools[$benchmark]}
+  echo "$our_tool on $benchmark_dir compared with $other_tool"
   for result in "${results_our_tool[@]}"; do
     sort_file $benchmark_dir/$result-$our_tool.list
   done
