@@ -20,7 +20,7 @@ z3_vars :-
 z3_incidence_ineqs :-
         findall( _ , (
                        transition(T, I, O),
-                       print('(assert (>= 0 (+'),
+                       print('(assert (>= 0 (+ 0'),
                        list_to_ord_set(I, ISet),
                        list_to_ord_set(O, OSet),
                        ord_union(ISet, OSet, PSet),
