@@ -6,7 +6,6 @@
 
 :- use_module(library(ordsets)).
 :- use_module(library(lists)).
-:- use_module(library(aggregate)).
 
 :- ['load-pl-file.pl'].
 :- ['misc.pl'].

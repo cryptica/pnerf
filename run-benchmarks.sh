@@ -17,16 +17,16 @@ for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
     result=$?
     T=$(($(date +%s%N)-T))
     if [[ result -eq 0 ]]; then
-        echo $pl_file >>$benchmark_dir/positive-pnerf.list
+        list='positive'
     elif [[ result -eq 1 ]]; then
-        echo $pl_file >>$benchmark_dir/negative-pnerf.list
+        list='negative'
     elif [[ result -eq 2 ]]; then
-        echo $pl_file >>$benchmark_dir/dontknow-pnerf.list
+        list='dontknow'
     elif [[ result -eq 124 || result -eq 137 ]]; then
-        echo $pl_file >>$benchmark_dir/timeout-pnerf.list
+        list='timeout'
     else
-        echo $pl_file >>$benchmark_dir/error-pnerf.list
+        list='error'
     fi
-    echo $T $pl_file >>$benchmark_dir/timing-pnerf.log
+    echo $T $pl_file >>$benchmark_dir/$list-pnerf.list
   done
 done

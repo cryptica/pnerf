@@ -2,7 +2,8 @@
 
 function sort_file {
   cat $1 | \
-  sed -e 's/\.pl$//' \
+  sed -e 's/^[[:digit:]]* //' \
+      -e 's/\.pl$//' \
       -e 's/\.spec$//' \
       -e 's/\.tts$//' | \
   sort \
@@ -55,37 +56,28 @@ for (( benchmark=0;benchmark<${#benchmark_dirs[@]};benchmark++)); do
   done
   echo "---------"
   total_sum=0
-  echo -n "         | "
+  echo -n " our sum | "
   for ((rour=0;rour<${#results_our_tool[@]};rour++)); do
     printf "%8d | " ${sums_our_tool[$rour]}
     total_sum=$((total_sum + ${sums_our_tool[$rour]}))
   done
   printf "%8d\n" $total_sum
-  echo
-  N=0
-  T_min=-1
-  T_max=0
-  T_sum=0
-  while read T file; do
-    N=$((N + 1))
-    if [[ $T -gt $T_max ]]; then
-      T_max=$T
-    fi
-    if [[ $T_min -lt 0 || $T -lt $T_min ]]; then
-      T_min=$T
-    fi
-    T_sum=$((T_sum + T))
-  done < $benchmark_dir/timing-$our_tool.log
-  if [[ $N -gt 0 ]]; then
-    T_avg=$((T_sum / N))
-    echo -n "Total   time: "
-    printf "%.3e\n" $T_sum
-    echo -n "Minimal time: "
-    printf "%.3e\n" $T_min
-    echo -n "Maximal time: "
-    printf "%.3e\n" $T_max
-    echo -n "Average time: "
-    printf "%.3e\n" $T_avg
-  fi
+  echo -n "---------+-"
+  for rour in "${results_our_tool[@]}"; do
+    echo -n "---------+-"
+  done
+  echo "---------"
+  total_time=0
+  echo -n "our time | "
+  for ((rour=0;rour<${#results_our_tool[@]};rour++)); do
+    result=${results_our_tool[$rour]}
+    result_time=0
+    while read T file; do
+      result_time=$((result_time + T))
+    done <$benchmark_dir/$result-$our_tool.list
+    printf "%1.2e | " $result_time
+    total_time=$((total_time + $result_time))
+  done
+  printf "%1.2e\n" $total_time
   echo
 done

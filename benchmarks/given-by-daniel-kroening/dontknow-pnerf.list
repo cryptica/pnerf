@@ -1,54 +1,54 @@
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.4/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/dekker_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/szymanski_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/dekker_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/szymanski_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.1/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.3/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/pncsacover.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/newdekker.tts.spec.pl
+135756388 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.1/main.spec.pl
+139544574 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.1/main.spec.pl
+439506351 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.2/main.spec.pl
+139214013 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.1/main.spec.pl
+3411672847 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.2/main.spec.pl
+131221685 benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.1/main.spec.pl
+192220512 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.1/main.spec.pl
+787931533 benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.4/main.spec.pl
+573489371 benchmarks/given-by-daniel-kroening/cprover_software_analysis/dekker_vs_satabs.2/main.spec.pl
+144141632 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.1/main.spec.pl
+130003266 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.1/main.spec.pl
+249759626 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.3/main.spec.pl
+135000166 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.1/main.spec.pl
+125555010 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.1/main.spec.pl
+6484919093 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Function_Pointer3_vs_satabs.3/main.spec.pl
+3214670590 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec.pl
+1300839375 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.3/main.spec.pl
+122970892 benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.1/main.spec.pl
+861080188 benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.3/main.spec.pl
+3169997323 benchmarks/given-by-daniel-kroening/cprover_software_analysis/szymanski_vs_satabs.2/main.spec.pl
+409389274 benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.2/main.spec.pl
+126821209 benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.1/main.spec.pl
+685632757 benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.3/main.spec.pl
+136755890 benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.1/main.spec.pl
+128626287 benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.1/main.spec.pl
+803799398 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p2_vs_satabs.2/main.spec.pl
+375283323 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p3_vs_satabs.2/main.spec.pl
+259712082 benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.2/main.spec.pl
+319983900 benchmarks/given-by-daniel-kroening/cprover_software_analysis/simple_loop5_vs_satabs.2/main.spec.pl
+225779409 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.2/main.spec.pl
+261713852 benchmarks/given-by-daniel-kroening/cprover_software_analysis/pthread5_vs_satabs.1/main.spec.pl
+340134726 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_lock_p0_vs_satabs.2/main.spec.pl
+196759877 benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.1/main.spec.pl
+181580975 benchmarks/given-by-daniel-kroening/cprover_software_analysis/lu-fig2_fixed_vs_satabs.2/main.spec.pl
+162977661 benchmarks/given-by-daniel-kroening/cprover_software_analysis/dekker_vs_satabs.1/main.spec.pl
+178114065 benchmarks/given-by-daniel-kroening/cprover_software_analysis/spin2003_vs_satabs.2/main.spec.pl
+2762934215 benchmarks/given-by-daniel-kroening/cprover_software_analysis/Boop_simple_vf_satabs.2/main.spec.pl
+191951869 benchmarks/given-by-daniel-kroening/cprover_software_analysis/szymanski_vs_satabs.1/main.spec.pl
+158648358 benchmarks/given-by-daniel-kroening/cprover_software_analysis/buggy_spaghetti_vf_satabs.1/main.spec.pl
+820068511 benchmarks/given-by-daniel-kroening/cprover_software_analysis/peterson_vs_satabs.2/main.spec.pl
+173671948 benchmarks/given-by-daniel-kroening/cprover_software_analysis/stack_cas_p0_vs_satabs.2/main.spec.pl
+138605670 benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.1/main.spec.pl
+278064363 benchmarks/given-by-daniel-kroening/cprover_software_analysis/constants_vf_satabs.2/main.spec.pl
+405524724 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_lock_p0_vs_satabs.3/main.spec.pl
+124557352 benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach.tts.spec.pl
+118789118 benchmarks/given-by-daniel-kroening/cprover-PN/platoon.tts.spec.pl
+129070342 benchmarks/given-by-daniel-kroening/cprover-PN/peterson.tts.spec.pl
+115141764 benchmarks/given-by-daniel-kroening/cprover-PN/reaction5.tts.spec.pl
+116321055 benchmarks/given-by-daniel-kroening/cprover-PN/reaction2.tts.spec.pl
+118433884 benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly.tts.spec.pl
+149069902 benchmarks/given-by-daniel-kroening/cprover-PN/pncsacover.tts.spec.pl
+124689768 benchmarks/given-by-daniel-kroening/cprover-PN/kanban.tts.spec.pl
+126311728 benchmarks/given-by-daniel-kroening/cprover-PN/lamport.tts.spec.pl
+140244747 benchmarks/given-by-daniel-kroening/cprover-PN/newdekker.tts.spec.pl

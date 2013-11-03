@@ -1,9 +1,6 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25.tts.spec.pl]
 
-* Invariant I for the petri net:
-(assert (>= 2 (+ l26 s2)))
-
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

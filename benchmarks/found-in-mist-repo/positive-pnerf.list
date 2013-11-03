@@ -1,16 +1,16 @@
-benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
-benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
-benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
-benchmarks/found-in-mist-repo/PN/mesh2x2.spec.pl
-benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl
-benchmarks/found-in-mist-repo/PN/MultiME.spec.pl
-benchmarks/found-in-mist-repo/PN/bingham_h25.spec.pl
-benchmarks/found-in-mist-repo/PN/multipool.spec.pl
-benchmarks/found-in-mist-repo/PN/bingham_h150.spec.pl
-benchmarks/found-in-mist-repo/PN/basicME.spec.pl
-benchmarks/found-in-mist-repo/PN/bingham_h250_attic.spec.pl
-benchmarks/found-in-mist-repo/PN/fms.spec.pl
-benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl
-benchmarks/found-in-mist-repo/PN/csm.spec.pl
-benchmarks/found-in-mist-repo/PN/bingham_h250.spec.pl
-benchmarks/found-in-mist-repo/PN/mesh3x2.spec.pl
+141490341 benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl
+112576747 benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl
+111438277 benchmarks/found-in-mist-repo/boundedPN/newrtp.spec.pl
+119633795 benchmarks/found-in-mist-repo/PN/mesh2x2.spec.pl
+151287904 benchmarks/found-in-mist-repo/PN/bingham_h50.spec.pl
+108954017 benchmarks/found-in-mist-repo/PN/MultiME.spec.pl
+133161452 benchmarks/found-in-mist-repo/PN/bingham_h25.spec.pl
+112686380 benchmarks/found-in-mist-repo/PN/multipool.spec.pl
+206491179 benchmarks/found-in-mist-repo/PN/bingham_h150.spec.pl
+104958848 benchmarks/found-in-mist-repo/PN/basicME.spec.pl
+2775122596 benchmarks/found-in-mist-repo/PN/bingham_h250_attic.spec.pl
+110483135 benchmarks/found-in-mist-repo/PN/fms.spec.pl
+111192837 benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl
+107767544 benchmarks/found-in-mist-repo/PN/csm.spec.pl
+279977081 benchmarks/found-in-mist-repo/PN/bingham_h250.spec.pl
+124704004 benchmarks/found-in-mist-repo/PN/mesh3x2.spec.pl

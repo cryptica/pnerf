@@ -1,9 +1,6 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl]
 
-* Invariant I for the petri net:
-(assert (>= 1 (+ l123)))
-
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

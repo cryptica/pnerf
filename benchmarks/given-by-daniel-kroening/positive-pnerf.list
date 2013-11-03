@@ -1,23 +1,23 @@
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.2/main.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/gsm.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/newrtp.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/keycard.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/basicME.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/abp.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction3.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/csm.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h250.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h150.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/multipoll.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/restriction.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction4.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/phones.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/clientserver.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h500.tts.spec.pl
-benchmarks/given-by-daniel-kroening/cprover-PN/reaction.tts.spec.pl
+219045251 benchmarks/given-by-daniel-kroening/cprover_software_analysis/conditionals_vs_satabs.2/main.spec.pl
+165151779 benchmarks/given-by-daniel-kroening/cprover_software_analysis/rand_cas_vs_satabs.2/main.spec.pl
+160973638 benchmarks/given-by-daniel-kroening/cprover-PN/gsm.tts.spec.pl
+108836208 benchmarks/given-by-daniel-kroening/cprover-PN/newrtp.tts.spec.pl
+157809626 benchmarks/given-by-daniel-kroening/cprover-PN/keycard.tts.spec.pl
+135010840 benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl
+111164388 benchmarks/given-by-daniel-kroening/cprover-PN/basicME.tts.spec.pl
+123528297 benchmarks/given-by-daniel-kroening/cprover-PN/abp.tts.spec.pl
+111142227 benchmarks/given-by-daniel-kroening/cprover-PN/reaction3.tts.spec.pl
+171299218 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50.tts.spec.pl
+114997886 benchmarks/given-by-daniel-kroening/cprover-PN/csm.tts.spec.pl
+488995072 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h250.tts.spec.pl
+313119464 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h150.tts.spec.pl
+121735130 benchmarks/given-by-daniel-kroening/cprover-PN/multipoll.tts.spec.pl
+115787950 benchmarks/given-by-daniel-kroening/cprover-PN/restriction.tts.spec.pl
+137435257 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25.tts.spec.pl
+108476702 benchmarks/given-by-daniel-kroening/cprover-PN/reaction4.tts.spec.pl
+135680679 benchmarks/given-by-daniel-kroening/cprover-PN/phones.tts.spec.pl
+117603587 benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec.pl
+199524190 benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl
+141523059 benchmarks/given-by-daniel-kroening/cprover-PN/clientserver.tts.spec.pl
+1040511333 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h500.tts.spec.pl
+110623980 benchmarks/given-by-daniel-kroening/cprover-PN/reaction.tts.spec.pl

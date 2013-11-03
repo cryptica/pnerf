@@ -1,9 +1,6 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/kanban.spec.pl]
 
-* Invariant I for the petri net:
-(assert (>= 1 (+ x13 x14)))
-
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------
