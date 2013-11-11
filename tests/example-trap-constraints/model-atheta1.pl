@@ -1,0 +1,9 @@
+assignment('nc', false).
+assignment('cs1', false).
+assignment('cs2', false).
+assignment('s1', true).
+assignment('s2', true).
+assignment('o_t1', true).
+assignment('o_t2', true).
+assignment('o_t3', true).
+assignment('o_t4', true).

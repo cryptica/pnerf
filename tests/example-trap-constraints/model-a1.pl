@@ -1,0 +1,9 @@
+assignment('nc', 0).
+assignment('s1', 0).
+assignment('s2', 0).
+assignment('cs1', 1).
+assignment('cs2', 1).
+assignment('t1', 1).
+assignment('t2', 1).
+assignment('t3', 0).
+assignment('t4', 0).

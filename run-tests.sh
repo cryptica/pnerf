@@ -32,6 +32,8 @@ test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp
 test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
 test-input-file-to-petri-net simple-net/input-petri-net.pl simple-net/pp-petri-net.pl
 test-input-file-to-petri-net rational-test/input-petri-net.pl rational-test/pp-petri-net.pl
+test-input-file-to-petri-net example-state-constraints/input-petri-net.pl example-state-constraints/pp-petri-net.pl
+test-input-file-to-petri-net example-trap-constraints/input-petri-net.pl example-trap-constraints/pp-petri-net.pl
 
 #
 # Testing construction of constraints C0 for petri net N
@@ -55,6 +57,8 @@ test-petri-net-to-constraints 'Int' cyclic-net/pp-petri-net.pl cyclic-net/constr
 test-petri-net-to-constraints 'Int' empty-trap-net/pp-petri-net.pl empty-trap-net/constraints-c0.smt2
 test-petri-net-to-constraints 'Int' rational-test/pp-petri-net.pl rational-test/constraints-c0-int.smt2
 test-petri-net-to-constraints 'Real' rational-test/pp-petri-net.pl rational-test/constraints-c0-real.smt2
+test-petri-net-to-constraints 'Int' example-state-constraints/pp-petri-net.pl example-state-constraints/constraints-c0.smt2
+test-petri-net-to-constraints 'Int' example-trap-constraints/pp-petri-net.pl example-trap-constraints/constraints-c0.smt2
 
 #
 # Testing construction of constraints C0' for petri net N
@@ -75,6 +79,7 @@ function test-petri-net-to-prime-constraints {
 }
 test-petri-net-to-prime-constraints simple-net/pp-petri-net.pl simple-net/constraints-c0.smt2
 test-petri-net-to-prime-constraints rational-test/pp-petri-net.pl rational-test/constraints-c0-prime.smt2
+test-petri-net-to-prime-constraints example-state-constraints/pp-petri-net.pl example-state-constraints/constraints-c0-prime.smt2
 
 #
 # Testing checking of SAT(C)
@@ -111,6 +116,11 @@ test-checking-sat simple-net/constraints-c0.smt2 simple-net/model-a1.smt2
 test-checking-sat rational-test/constraints-c0-int.smt2 rational-test/model-a1-int.smt2
 test-checking-sat rational-test/constraints-c0-real.smt2 rational-test/model-a1-real.smt2
 test-checking-sat rational-test/constraints-c0-prime.smt2 rational-test/model-a1-prime.smt2
+test-checking-sat example-state-constraints/constraints-c0.smt2 example-state-constraints/model-a1.smt2
+test-checking-sat example-state-constraints/constraints-c0-prime.smt2 example-state-constraints/model-a1-prime.smt2
+test-checking-sat example-trap-constraints/constraints-c0.smt2 example-trap-constraints/model-a1.smt2
+test-checking-sat example-trap-constraints/constraints-ctheta1.smt2 example-trap-constraints/model-atheta1.smt2
+test-checking-sat example-trap-constraints/constraints-c1.smt2 example-trap-constraints/model-a2.smt2
 
 #
 # Testing smt2 model to prolog model
@@ -141,6 +151,9 @@ test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime1.smt2 empty-tr
 test-smt2-model-to-prolog-model empty-trap-net/model-atheta-prime2.smt2 empty-trap-net/model-atheta-prime2.pl
 test-smt2-model-to-prolog-model simple-net/model-a1.smt2 simple-net/model-a1.pl
 test-smt2-model-to-prolog-model rational-test/model-a1-real.smt2 rational-test/model-a1-real.pl
+test-smt2-model-to-prolog-model example-state-constraints/model-a1-prime.smt2 example-state-constraints/model-a1-prime.pl
+test-smt2-model-to-prolog-model example-trap-constraints/model-a1.smt2 example-trap-constraints/model-a1.pl
+test-smt2-model-to-prolog-model example-trap-constraints/model-atheta1.smt2 example-trap-constraints/model-atheta1.pl
 
 #
 # Testing construction of trap constraints C_theta for model A
@@ -164,6 +177,7 @@ test-trap-constraints petersons-alg/pp-petri-net.pl petersons-alg/model-a1.pl pe
 test-trap-constraints cyclic-net/pp-petri-net.pl cyclic-net/model-a1.pl cyclic-net/constraints-ctheta1.smt2
 test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a1.pl empty-trap-net/constraints-ctheta1.smt2
 test-trap-constraints empty-trap-net/pp-petri-net.pl empty-trap-net/model-a2.pl empty-trap-net/constraints-ctheta2.smt2
+test-trap-constraints example-trap-constraints/pp-petri-net.pl example-trap-constraints/model-a1.pl example-trap-constraints/constraints-ctheta1.smt2
 
 #
 # Testing construction of constraint delta for A_theta
@@ -182,6 +196,7 @@ function test-delta-constraint {
 }
 test-delta-constraint petersons-alg/model-atheta1.pl petersons-alg/pp-petri-net.pl petersons-alg/constraint-delta1.smt2
 test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/pp-petri-net.pl petersons-alg/constraint-delta2.smt2
+test-delta-constraint example-trap-constraints/model-atheta1.pl example-trap-constraints/pp-petri-net.pl example-trap-constraints/constraint-delta1.smt2
 
 #
 # Testing construction of constraints C_n+1 for C_n and A_theta_n
@@ -203,6 +218,7 @@ test-succ-constraints petersons-alg/constraints-c1.smt2 petersons-alg/constraint
 test-succ-constraints cyclic-net/constraints-c0.smt2 cyclic-net/constraint-delta-prime1.smt2 cyclic-net/constraints-c1.smt2
 test-succ-constraints empty-trap-net/constraints-c0.smt2 empty-trap-net/constraint-delta1.smt2 empty-trap-net/constraints-c1.smt2
 test-succ-constraints empty-trap-net/constraints-c1.smt2 empty-trap-net/constraint-delta2.smt2 empty-trap-net/constraints-c2.smt2
+test-succ-constraints example-trap-constraints/constraints-c0.smt2 example-trap-constraints/constraint-delta1.smt2 example-trap-constraints/constraints-c1.smt2
 
 #
 # Testing construction of subnet trap constraints C_theta for model A
@@ -294,4 +310,5 @@ function test-y-invariant {
     fi
 }
 test-y-invariant simple-net/pp-petri-net.pl simple-net/model-a1.pl simple-net/y-invariant.smt2
+test-y-invariant example-state-constraints/pp-petri-net.pl example-state-constraints/model-a1-prime.pl example-state-constraints/y-invariant.smt2
 
