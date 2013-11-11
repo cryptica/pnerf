@@ -32,4 +32,4 @@ init(m1f).
 init(hold1).
 init(m2f).
 
-target([([p4,q4],2)]).
+target(1, [([p4,q4],2)]).

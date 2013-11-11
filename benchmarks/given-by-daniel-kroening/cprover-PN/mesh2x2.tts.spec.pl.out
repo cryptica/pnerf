@@ -1,7 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2.tts.spec.pl]
 
-* Invariant I for the petri net:
+* Invariant I_1 for the petri net:
 l3 + l4 + l7 + l8 + 2s0 + 2s1 + s10 + s11 + s12 + s13 + s14 + s15 + s16 + s17 + 2s18 + s19 + 2s2 + s20 + s21 + s22 + s23 + s24 + s25 + s26 + s27 + s28 + s29 + s3 + s30 + s31 + s32 + s4 + s5 + s6 + s7 + s8 <= 2
 
 -------------------------------------------

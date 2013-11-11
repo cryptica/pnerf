@@ -1,7 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/gsm.tts.spec.pl]
 
-* Invariant I for the petri net:
+* Invariant I_1 for the petri net:
 l15 + l18 + l25 + l27 + l32 + l33 + l39 + l46 + l5 + l53 + l55 + l67 + s0 <= 1
 
 -------------------------------------------

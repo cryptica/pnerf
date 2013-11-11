@@ -15,7 +15,7 @@ mkdir $tmpdir
 function test-input-file-to-petri-net {
     if (
       set -e
-      sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- "$sysdir"/tests/$1 2>/dev/null >$tmpdir/pp-petri-net.pl
+      sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- 0 "$sysdir"/tests/$1 2>/dev/null >$tmpdir/pp-petri-net.pl
       sort "$sysdir"/tests/$2 >$tmpdir/pp-petri-net-exp.pl
       sort $tmpdir/pp-petri-net.pl >$tmpdir/pp-petri-net-out.pl
       diff $tmpdir/pp-petri-net-exp.pl $tmpdir/pp-petri-net-out.pl

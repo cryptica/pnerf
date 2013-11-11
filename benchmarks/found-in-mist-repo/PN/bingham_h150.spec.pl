@@ -455,4 +455,4 @@ transition(t301, ['x150', 'x151'], ['x0', 'x152']).
 init('x0', 1).
 transition(init1, [], ['x0']).
 init('x152', 1).
-target([(['x150'],2)]).
+target(1, [(['x150'],2)]).

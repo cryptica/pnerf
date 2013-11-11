@@ -30,4 +30,4 @@ init('x7', 1).
 init('x8', 1).
 transition(init1, [], ['x8']).
 init('x14', 1).
-target([(['x10'],2)]).
+target(1, [(['x10'],2)]).

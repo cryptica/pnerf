@@ -755,4 +755,4 @@ transition(t501, ['x250', 'x251'], ['x0', 'x252']).
 init('x0', 1).
 transition(init1, [], ['x0']).
 init('x252', 1).
-target([(['x250'],2)]).
+target(1, [(['x250'],2)]).

@@ -11,6 +11,6 @@ init('x0', 1).
 transition(init1, [], ['x0']).
 init('x1', 1).
 init('x2', 1).
-target([(['x3'],1),(['x4'],1)]).
-target([(['x3'],2)]).
-target([(['x4'],2)]).
+target(1, [(['x3'],1),(['x4'],1)]).
+target(2, [(['x3'],2)]).
+target(3, [(['x4'],2)]).

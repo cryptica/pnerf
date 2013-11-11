@@ -49,4 +49,4 @@ transition(init3, [], ['x4']).
 init('x9', 3).
 init('x14', 1).
 init('x17', 2).
-target([(['x13'],2)]).
+target(1, [(['x13'],2)]).

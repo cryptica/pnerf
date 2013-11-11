@@ -110,7 +110,12 @@ sed -e '/target/,/invariants/!D' \
     -e '/EOF/D' \
     -e '/^[[:blank:]]*$/D' \
     -e 's/[[:blank:]]*,[[:blank:]]*/,/g' \
-    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)/(['\1'],\2)/g" \
-    -e 's/^[[:blank:]]*/target([/' \
-    -e 's/[[:blank:]]*$/])./'
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)/(['\1'],\2)/g" | \
+(
+    n=0
+    while read line; do
+        n=$((n+1))
+        echo "target($n, [$line])."
+    done
+)
 

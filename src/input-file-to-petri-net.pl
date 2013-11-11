@@ -6,6 +6,7 @@
 :- dynamic init/1.         % init(PlaceId).
 :- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic cond/1.         % cond(Z3Atom).
+:- dynamic target/2.       % target(TargetNum, ListOfTargets).
 :- dynamic target/1.       % target(ListOfTargets).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
@@ -71,11 +72,26 @@ connect_places_w_transitions :-
                            )
                        )
                      ), _ ).
+        
+convert_targets(N) :-
+  findall( _ , (
+                 retract( target(N1, T) ),
+                 ( ( N = 0; N = N1 ) ->
+                   assert( target(T) )
+                 )
+               ), _ ).
 
 % Entry point
-:-      prolog_flag(argv, Argv),
+:-      prolog_flag(argv, [TargetNumber|Argv]),
         (   foreach(F, Argv)
         do  load_pl_file(F)
+        ),
+        atom_codes(TargetNumber, Nc),
+        number_codes(N,  Nc),
+        ( ( N > 0, \+ target(N, _) ) ->
+          format('Target ~p not available\n', [N]),
+          halt(1)
+        ; convert_targets(N)
         ),
         label_transitions,
         connect_places_w_transitions,

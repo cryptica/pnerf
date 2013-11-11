@@ -145,37 +145,46 @@ refinement_methods=( )
 #equation_type='Int'
 equation_type='Real'
 
-vecho
-vecho '* Constructing petri net N from input file'
-run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $(absolute_path $input)/$(basename $input)
-
 if $construct_invariant; then
   
-  vecho
-  vecho "* Constructing constraints C' for petri net N"
-  run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
+  target=1
+  while (
+    vecho
+    vecho "* Constructing petri net N with target $target from input file"
+    run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $target $(absolute_path $input)/$(basename $input)
+  ); do 
 
-  vecho
-  vecho "* Checking SAT(C')"
-  if ( run_z3 $tmpdir/constraints-c-prime.smt2 $tmpdir/model-a-prime.smt2 ); then
-    vecho "- sat, getting model A' for C'"
-    if [ -z "$verbose" ]; then
-        cat $tmpdir/model-a-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >$tmpdir/model-a-prime.pl
+    vecho
+    vecho "* Constructing constraints C' for petri net N"
+    run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
+
+    vecho
+    vecho "* Checking SAT(C')"
+    if ( run_z3 $tmpdir/constraints-c-prime.smt2 $tmpdir/model-a-prime.smt2 ); then
+      vecho "- sat, getting model A' for C'"
+      if [ -z "$verbose" ]; then
+          cat $tmpdir/model-a-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh >$tmpdir/model-a-prime.pl
+      else
+          cat $tmpdir/model-a-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee $tmpdir/model-a-prime.pl
+      fi
+      vecho "- constructing invariant I for petri net N and model A'"
+      run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+      echo
+      echo "* Invariant I_$target for the petri net:"
+      cat $tmpdir/y-invariant.smt2
     else
-        cat $tmpdir/model-a-prime.smt2 | "$sysdir"/smt2-model-to-prolog-model.sh | tee $tmpdir/model-a-prime.pl
+      vecho " - unsat"
+      exit_with 2
     fi
-    vecho "- constructing invariant I for petri net N and model A'"
-    run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-    echo
-    echo "* Invariant I for the petri net:"
-    cat $tmpdir/y-invariant.smt2
-    exit_with 0
-  else
-    vecho " - unsat"
-    exit_with 2
-  fi
+    target=$((target + 1))
+  done
+  exit_with 0
 
 else
+
+  vecho
+  vecho '* Constructing petri net N from input file'
+  run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl 0 $(absolute_path $input)/$(basename $input)
 
   vecho
   vecho '* Constructing constraints C_0 for petri net N'

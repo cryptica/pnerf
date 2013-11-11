@@ -229,4 +229,4 @@ transition(t155, ['l70', 's1'], ['s1', 'l38']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-target([(['s1'],1),(['l33'],3)]).
+target(1, [(['s1'],1),(['l33'],3)]).

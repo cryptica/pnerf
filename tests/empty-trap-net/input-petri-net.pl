@@ -10,4 +10,4 @@ transition(t3, [s3], [s4,s5]).
 
 init(s1).
 
-target([([s5],1)]).
+target(1, [([s5],1)]).

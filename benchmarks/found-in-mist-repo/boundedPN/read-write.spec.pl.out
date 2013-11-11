@@ -1,7 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl]
 
-* Invariant I for the petri net:
+* Invariant I_1 for the petri net:
 5x10 + 5x12 + x3 + x4 <= 5
 
 -------------------------------------------

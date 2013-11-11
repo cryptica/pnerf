@@ -1,7 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/handover.tts.spec.pl]
 
-* Invariant I for the petri net:
+* Invariant I_1 for the petri net:
 l100 + l105 + l109 + l118 + l123 + l15 + l17 + l21 + l39 + l40 + l41 + l49 + l52 + l61 + l63 + l65 + l71 + l73 + l77 + l85 + l89 + l90 + l94 + s0 <= 1
 
 -------------------------------------------

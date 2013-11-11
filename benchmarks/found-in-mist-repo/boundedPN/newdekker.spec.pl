@@ -33,4 +33,4 @@ init('beg1', 1).
 init('turneq0', 1).
 init('c0eq1', 1).
 init('c1eq1', 1).
-target([(['cs0'],1),(['cs1'],1)]).
+target(1, [(['cs0'],1),(['cs1'],1)]).

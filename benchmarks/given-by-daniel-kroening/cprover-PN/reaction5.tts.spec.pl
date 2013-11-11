@@ -19,4 +19,4 @@ transition(t7, ['l4', 's5'], ['s4', 'l0']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-target([(['s4'],1),(['l1'],2)]).
+target(1, [(['s4'],1),(['l1'],2)]).

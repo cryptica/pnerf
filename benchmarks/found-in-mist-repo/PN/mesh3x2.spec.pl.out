@@ -1,7 +1,7 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/mesh3x2.spec.pl]
 
-* Invariant I for the petri net:
+* Invariant I_1 for the petri net:
 x1 + x3 + x4 + x5 <= 1
 
 -------------------------------------------
