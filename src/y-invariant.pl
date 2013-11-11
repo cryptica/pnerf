@@ -1,7 +1,7 @@
 :- dynamic assignment/2.   % assignment(Preimage, Image).
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic init/2.         % init(PlaceId, InitVal).
-:- dynamic target/2.       % target(PlaceId, TargetVal).
+:- dynamic target/1.       % target(ListOfTargets).
 
 :- use_module(library(lists)).
 :- use_module(library(ordsets)).
@@ -19,10 +19,10 @@ format_y_component(P, Y) :-
 y_invariant :-
         findall( (P, Y) , (
                 place(P, _, _),
-                assignment(P, Y),
-                Y > 0,
-                target(P, B),
-                B > 0
+                targets_for_place(P, Tn),
+                maplist(assignment, [P|Tn], Ys),
+                sumlist(Ys, Y),
+                Y > 0
         ), Xs ),
         list_to_ord_set(Xs, Xord),
         (   Xord = [(P0, Y0)|Xord1] ->
@@ -34,8 +34,7 @@ y_invariant :-
         ;   print('0')
         ),
         findall( S , (
-                place(P, _, _),
-                assignment(P, Y),
+                member((P, Y), Xs),
                 ( init(P, M0) -> true; M0 = 0 ),
                 S is Y * M0
         ), Ss ),

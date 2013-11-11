@@ -7,8 +7,4 @@ transition(t2, [s2,s3], [s1]).
 
 init(s1).
 
-cond('(>= s1 1)').
-cond('(>= s2 1)').
-
-target(s1, 1).
-target(s2, 1).
+target([([s1],1),([s2],1)]).

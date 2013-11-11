@@ -80,5 +80,4 @@ transition(t51, ['x25', 'x26'], ['x0', 'x27']).
 init('x0', 1).
 transition(init1, [], ['x0']).
 init('x27', 1).
-cond('(>= x25 2)').
-target('x25', 2).
+target([(['x25'],2)]).

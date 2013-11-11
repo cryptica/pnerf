@@ -2017,7 +2017,4 @@ transition(t1832, ['l41', 's31'], ['l41', 's63', 'l42']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s128 1)').
-target('s128', 1).
-cond('(>= l54 1)').
-target('l54', 1).
+target([(['s128'],1),(['l54'],1)]).

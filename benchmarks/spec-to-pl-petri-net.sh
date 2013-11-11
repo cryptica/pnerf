@@ -108,8 +108,9 @@ sed -e '/target/,/invariants/!D' \
     -e '/target/D' \
     -e '/invariants/D' \
     -e '/EOF/D' \
-    -e 's/,/\
-/g' | \
-sed -e '/^[[:blank:]]*$/D' \
-    -e "s/[[:blank:]]*\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)[[:blank:]]*/cond('(>= \1 \2)').\ntarget('\1', \2)./g"
+    -e '/^[[:blank:]]*$/D' \
+    -e 's/[[:blank:]]*,[[:blank:]]*/,/g' \
+    -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\([[:alnum:]_][[:alnum:]_]*\)/(['\1'],\2)/g" \
+    -e 's/^[[:blank:]]*/target([/' \
+    -e 's/[[:blank:]]*$/])./'
 

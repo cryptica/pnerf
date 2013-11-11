@@ -11,7 +11,4 @@ transition(t4, ['main', 'x'], ['_x', 'ping']).
 transition(t5, ['ping', '_x'], ['x', 'pong']).
 transition(t6, ['pong', 'x'], ['_x', 'ping']).
 init('start', 1).
-cond('(>= pong 1)').
-target('pong', 1).
-cond('(>= _x 1)').
-target('_x', 1).
+target([(['pong'],1),(['_x'],1)]).

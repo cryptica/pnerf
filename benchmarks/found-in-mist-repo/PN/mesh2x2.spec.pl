@@ -74,7 +74,4 @@ init('x17', 1).
 transition(init4, [], ['x17']).
 init('x19', 1).
 init('x20', 1).
-cond('(>= x2 1)').
-target('x2', 1).
-cond('(>= x7 1)').
-target('x7', 1).
+target([(['x2'],1),(['x7'],1)]).

@@ -2076,7 +2076,4 @@ transition(t1888, ['l22', 's31'], ['l22', 's63', 'l23']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s128 1)').
-target('s128', 1).
-cond('(>= l57 1)').
-target('l57', 1).
+target([(['s128'],1),(['l57'],1)]).

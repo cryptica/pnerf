@@ -1,6 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/keycard.tts.spec.pl]
 
+* Invariant I for the petri net:
+l19 + l24 + l36 + l46 + l48 + l56 + l6 + s0 <= 1
+
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

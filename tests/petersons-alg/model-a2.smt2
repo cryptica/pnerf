@@ -1,27 +1,27 @@
 sat
 (model 
   (define-fun v6 () Int
-    1)
+    0)
   (define-fun u4 () Int
-    0)
+    1)
   (define-fun u5 () Int
-    1)
-  (define-fun v5 () Int
-    2)
-  (define-fun u2 () Int
-    1)
-  (define-fun u3 () Int
     0)
+  (define-fun v5 () Int
+    0)
+  (define-fun u2 () Int
+    0)
+  (define-fun u3 () Int
+    1)
   (define-fun v2 () Int
     0)
   (define-fun u1 () Int
     1)
   (define-fun v4 () Int
-    0)
+    1)
   (define-fun v3 () Int
-    2)
+    1)
   (define-fun v1 () Int
-    2)
+    1)
   (define-fun u6 () Int
     0)
   (define-fun hold2 () Int

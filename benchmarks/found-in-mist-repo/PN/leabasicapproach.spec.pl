@@ -32,7 +32,4 @@ init('Swhile', 1).
 transition(init1, [], ['Swhile']).
 init('Cwhile', 1).
 transition(init2, [], ['Cwhile']).
-cond('(>= Sbad 1)').
-target('Sbad', 1).
-cond('(>= Cbad 1)').
-target('Cbad', 1).
+target([(['Sbad'],1),(['Cbad'],1)]).

@@ -29,7 +29,4 @@ init('x4', 1).
 init('x7', 1).
 init('x9', 1).
 init('x10', 1).
-cond('(>= x3 1)').
-target('x3', 1).
-cond('(>= x13 1)').
-target('x13', 1).
+target([(['x3'],1),(['x13'],1)]).

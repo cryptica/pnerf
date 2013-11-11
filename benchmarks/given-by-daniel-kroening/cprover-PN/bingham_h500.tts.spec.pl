@@ -2516,7 +2516,4 @@ transition(t1506, ['l502', 's504'], ['s2', 'l503']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s2 1)').
-target('s2', 1).
-cond('(>= l501 2)').
-target('l501', 2).
+target([(['s2'],1),(['l501'],2)]).

@@ -1,6 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/multipool.spec.pl]
 
+* Invariant I for the petri net:
+x10 + x11 + x13 + x14 + x3 + x4 + x6 + x7 + x8 + x9 <= 3
+
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

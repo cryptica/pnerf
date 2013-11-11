@@ -52,7 +52,4 @@ init('x10', 45).
 init('x12', 90).
 init('x23', 1).
 transition(init1, [], ['x23']).
-cond('(>= x2 1)').
-target('x2', 1).
-cond('(>= x11 1)').
-target('x11', 1).
+target([(['x2'],1),(['x11'],1)]).

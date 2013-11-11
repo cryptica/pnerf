@@ -155,5 +155,4 @@ transition(t101, ['x50', 'x51'], ['x0', 'x52']).
 init('x0', 1).
 transition(init1, [], ['x0']).
 init('x52', 1).
-cond('(>= x50 2)').
-target('x50', 2).
+target([(['x50'],2)]).

@@ -246,7 +246,4 @@ transition(t184, ['l4', 's3'], ['l4', 's7', 'l5']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s16 1)').
-target('s16', 1).
-cond('(>= l43 1)').
-target('l43', 1).
+target([(['s16'],1),(['l43'],1)]).

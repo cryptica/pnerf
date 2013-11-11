@@ -22,7 +22,4 @@ init('p2', 1).
 init('x_eq_1', 1).
 init('y_eq_1', 1).
 init('q5', 1).
-cond('(>= p1 1)').
-target('p1', 1).
-cond('(>= q4 1)').
-target('q4', 1).
+target([(['p1'],1),(['q4'],1)]).

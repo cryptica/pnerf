@@ -17,15 +17,4 @@ transition(t3, ['x2'], ['x5', 'x9']).
 transition(t4, [('x4', 4), 'x5'], ['x6', 'x10']).
 transition(t5, ['x3'], ['x6', 'x11']).
 transition(t6, [('x6', 2)], [('x0', 3), 'x1', 'x2', 'x3', 'x12']).
-cond('(>= x7 3)').
-target('x7', 3).
-cond('(>= x8 2)').
-target('x8', 2).
-cond('(>= x9 2)').
-target('x9', 2).
-cond('(>= x10 2)').
-target('x10', 2).
-cond('(>= x11 2)').
-target('x11', 2).
-cond('(>= x12 2)').
-target('x12', 2).
+target([(['x7'],3),(['x8'],2),(['x9'],2),(['x10'],2),(['x11'],2),(['x12'],2)]).

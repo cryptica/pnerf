@@ -1,6 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/csm.spec.pl]
 
+* Invariant I for the petri net:
+x10 + x3 + x4 + x7 <= 1
+
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

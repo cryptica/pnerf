@@ -30,5 +30,4 @@ init('x7', 1).
 init('x8', 1).
 transition(init1, [], ['x8']).
 init('x14', 1).
-cond('(>= x10 2)').
-target('x10', 2).
+target([(['x10'],2)]).

@@ -4,6 +4,8 @@ benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h150
 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h25
 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h250
 benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50
+benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h500
+benchmarks/given-by-daniel-kroening/cprover-PN/clientserver
 benchmarks/given-by-daniel-kroening/cprover-PN/csm
 benchmarks/given-by-daniel-kroening/cprover-PN/gsm
 benchmarks/given-by-daniel-kroening/cprover-PN/handover
@@ -12,6 +14,7 @@ benchmarks/given-by-daniel-kroening/cprover-PN/mesh2x2
 benchmarks/given-by-daniel-kroening/cprover-PN/multipoll
 benchmarks/given-by-daniel-kroening/cprover-PN/newrtp
 benchmarks/given-by-daniel-kroening/cprover-PN/phones
+benchmarks/given-by-daniel-kroening/cprover-PN/reaction
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction3
 benchmarks/given-by-daniel-kroening/cprover-PN/reaction4
 benchmarks/given-by-daniel-kroening/cprover-PN/read-write

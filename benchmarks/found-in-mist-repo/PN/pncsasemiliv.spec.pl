@@ -67,7 +67,4 @@ transition(t35, ['x20'], ['x13']).
 transition(t36, ['x20'], ['x20', 'x11']).
 init('x2', 1).
 init('x13', 1).
-cond('(>= x7 1)').
-target('x7', 1).
-cond('(>= x30 1)').
-target('x30', 1).
+target([(['x7'],1),(['x30'],1)]).

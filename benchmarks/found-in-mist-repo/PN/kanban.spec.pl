@@ -38,13 +38,4 @@ init('x10', 1).
 transition(init3, [], ['x10']).
 init('x14', 1).
 transition(init4, [], ['x14']).
-cond('(>= x4 2)').
-target('x4', 2).
-cond('(>= x6 4)').
-target('x6', 4).
-cond('(>= x10 4)').
-target('x10', 4).
-cond('(>= x13 6)').
-target('x13', 6).
-cond('(>= x14 4)').
-target('x14', 4).
+target([(['x4'],2),(['x6'],4),(['x10'],4),(['x13'],6),(['x14'],4)]).

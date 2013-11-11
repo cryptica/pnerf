@@ -3,9 +3,9 @@ sat
   (define-fun v6 () Int
     0)
   (define-fun u4 () Int
-    0)
-  (define-fun u5 () Int
     1)
+  (define-fun u5 () Int
+    0)
   (define-fun v5 () Int
     0)
   (define-fun u2 () Int

@@ -1007,7 +1007,4 @@ transition(t772, ['l63', 's1'], ['l63', 's3', 'l71']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s8 1)').
-target('s8', 1).
-cond('(>= l224 1)').
-target('l224', 1).
+target([(['s8'],1),(['l224'],1)]).

@@ -17,7 +17,4 @@ cond('(>= s2 1)').
 cond('(>= s4 1)').
 cond('(>= s5 1)').
 
-target(s1, 1).
-target(s2, 1).
-target(s4, 1).
-target(s5, 1).
+target([([s1],1),([s2],1),([s4],1),([s5],1)]).

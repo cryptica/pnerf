@@ -2269,7 +2269,4 @@ transition(t1984, ['l10', 's63'], ['l10', 's127', 'l11']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s256 1)').
-target('s256', 1).
-cond('(>= l26 1)').
-target('l26', 1).
+target([(['s256'],1),(['l26'],1)]).

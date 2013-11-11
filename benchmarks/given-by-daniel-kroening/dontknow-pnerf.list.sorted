@@ -1,6 +1,7 @@
 benchmarks/given-by-daniel-kroening/cprover-PN/kanban
 benchmarks/given-by-daniel-kroening/cprover-PN/lamport
 benchmarks/given-by-daniel-kroening/cprover-PN/leabasicapproach
+benchmarks/given-by-daniel-kroening/cprover-PN/newdekker
 benchmarks/given-by-daniel-kroening/cprover-PN/peterson
 benchmarks/given-by-daniel-kroening/cprover-PN/platoon
 benchmarks/given-by-daniel-kroening/cprover-PN/platoonFiniteHandlerPoly

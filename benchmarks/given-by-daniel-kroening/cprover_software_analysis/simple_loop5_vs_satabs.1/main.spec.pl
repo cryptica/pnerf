@@ -80,7 +80,4 @@ transition(t48, ['l16', 's1'], ['l16', 's3', 'l17']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s8 1)').
-target('s8', 1).
-cond('(>= l21 1)').
-target('l21', 1).
+target([(['s8'],1),(['l21'],1)]).

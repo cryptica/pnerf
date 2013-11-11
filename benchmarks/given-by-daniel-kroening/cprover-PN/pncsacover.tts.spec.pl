@@ -132,15 +132,4 @@ transition(t67, ['l0', 's31'], ['s2', 'l21']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s2 1)').
-target('s2', 1).
-cond('(>= l13 1)').
-target('l13', 1).
-cond('(>= l22 1)').
-target('l22', 1).
-cond('(>= l24 1)').
-target('l24', 1).
-cond('(>= l29 1)').
-target('l29', 1).
-cond('(>= l31 1)').
-target('l31', 1).
+target([(['s2'],1),(['l13'],1),(['l22'],1),(['l24'],1),(['l29'],1),(['l31'],1)]).

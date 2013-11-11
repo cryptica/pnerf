@@ -655,7 +655,4 @@ transition(t392, ['l239', 's0'], ['l239', 's0']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s4 1)').
-target('s4', 1).
-cond('(>= l256 1)').
-target('l256', 1).
+target([(['s4'],1),(['l256'],1)]).

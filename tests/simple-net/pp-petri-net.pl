@@ -14,8 +14,4 @@ weight(t2, s1, 1).
 
 init(s1, 1).
 
-cond('(>= s1 1)').
-cond('(>= s2 1)').
-
-target(s1, 1).
-target(s2, 1).
+target([([s1],1),([s2],1)]).

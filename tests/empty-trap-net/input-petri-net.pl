@@ -10,6 +10,4 @@ transition(t3, [s3], [s4,s5]).
 
 init(s1).
 
-cond('(>= s5 1)').
-
-target(s5, 1).
+target([([s5],1)]).

@@ -81,8 +81,4 @@ init(m1f, 1).
 init(hold1, 1).
 init(m2f, 1).
 
-cond('(>= p4 1)').
-cond('(>= q4 1)').
-
-target(p4, 1).
-target(q4, 1).
+target([([p4,q4],2)]).

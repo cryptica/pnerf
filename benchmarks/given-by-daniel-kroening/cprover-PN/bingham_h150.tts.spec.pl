@@ -766,7 +766,4 @@ transition(t456, ['l152', 's154'], ['s2', 'l153']).
 init('l0', 1).
 transition(init1, [], ['l0']).
 init('s0', 1).
-cond('(>= s2 1)').
-target('s2', 1).
-cond('(>= l151 2)').
-target('l151', 2).
+target([(['s2'],1),(['l151'],2)]).

@@ -20,7 +20,4 @@ transition(t10, ['sc2'], ['point2']).
 transition(t11, ['sc3'], ['point2']).
 transition(t12, ['point2'], ['do']).
 init('begin', 1).
-cond('(>= point1 1)').
-target('point1', 1).
-cond('(>= point2 1)').
-target('point2', 1).
+target([(['point1'],1),(['point2'],1)]).

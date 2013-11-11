@@ -1,6 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/reaction4.tts.spec.pl]
 
+* Invariant I for the petri net:
+l7 + s0 + s1 <= 1
+
 -------------------------------------------
 The petri net satisfies the property!
 -------------------------------------------

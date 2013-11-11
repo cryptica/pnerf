@@ -2,7 +2,7 @@
 :- dynamic transition/3.   % transition(Id, InPlaces, OutPlaces).
 :- dynamic weight/3.       % weight(In, Out, Weight).
 :- dynamic init/2.         % init(PlaceId, InitVal).
-:- dynamic cond/1.         % cond(Z3Atom).
+:- dynamic target/1.       % target(ListOfTargets).
 
 :- use_module(library(ordsets)).
 :- use_module(library(lists)).
@@ -56,11 +56,31 @@ z3_nat_ineqs :-
                        transition(T, _, _),
                        format('(assert (>= ~p 0))\n', T)
                      ), _ ).
+
+target_to_z3((Ps, V)) :-
+        print('(>= '),
+        format_sum('~p', Ps),
+        format(' ~p)', [V]).
+                  
 z3_conditions :-
+        print('(assert (or'),
         findall( _ , (
-                       cond(C),
-                       format('(assert ~p)\n', [C])
-                     ), _ ).
+                       target(Ts),
+                       print(' '),
+                       (  Ts = [T] ->
+                          target_to_z3(T)
+                       ;  Ts = [T1|Ts1] ->
+                          print('(and '),
+                          target_to_z3(T1),
+                          (   foreach(T2, Ts1 )
+                          do  print(' '),
+                              target_to_z3(T2)
+                          ),
+                          print(')')
+                       ;  print('true')
+                       )
+                     ), _ ),
+        print('))\n').
 
 z3_constraints(EquationType) :-
         z3_vars(EquationType),

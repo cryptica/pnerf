@@ -11,11 +11,6 @@ init('x0', 1).
 transition(init1, [], ['x0']).
 init('x1', 1).
 init('x2', 1).
-cond('(>= x3 1)').
-target('x3', 1).
-cond('(>= x4 1)').
-target('x4', 1).
-cond('(>= x3 2)').
-target('x3', 2).
-cond('(>= x4 2)').
-target('x4', 2).
+target([(['x3'],1),(['x4'],1)]).
+target([(['x3'],2)]).
+target([(['x4'],2)]).
