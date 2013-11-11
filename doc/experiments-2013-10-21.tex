@@ -108,8 +108,8 @@ Table~\ref{mist-experiments} shows the corresponding experimental results.
     \hline
     \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
     \hline
-    C1 & State constraint with real numbers & 16 &  0 & 11 &  0 \\
-    C2 & State constraint with integers     & 16 &  0 & 11 &  0 \\
+    C1 & State constraint with real numbers & 14 &  0 & 13 &  0 \\
+    C2 & State constraint with integers     & 14 &  0 & 13 &  0 \\
     \hline
     C3 & C2 + TrapConditions               & 20 &  0 &  7 &  0 \\
     C4 & C3 + SubnetTrapConditions         & 21 &  0 &  6 &  0 \\
@@ -125,10 +125,12 @@ Table~\ref{mist-experiments} shows the corresponding experimental results.
 
 Observations:
 \begin{itemize}
-\item State constraints over integers or reals correctly determine that the 16 benchmarks in Appendix~\ref{mist-experiments-c1} are positive.
-\item Composing state constraints with TrapConditions gives the following 4 additional positives.
+\item State constraints over integers or reals correctly determine that the 14 benchmarks in Appendix~\ref{mist-experiments-c1} are positive.
+\item Composing state constraints with TrapConditions gives the following 6 additional positives.
 \begin{verbatim}
 PN/pingpong
+PN/basicME
+PN/multiME
 boundedPN/lamport
 boundedPN/newdekker
 boundedPN/peterson
