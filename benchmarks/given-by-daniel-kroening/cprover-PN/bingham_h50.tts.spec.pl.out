@@ -1,11 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/bingham_h50.tts.spec.pl]
 
-* Invariant I_1 for the petri net:
-l10 + l11 + l12 + l13 + l14 + l15 + l16 + l17 + l18 + l19 + l2 + l20 + l21 + l22 + l23 + l24 + l25 + l26 + l27 + l28 + l29 + l3 + l30 + l31 + l32 + l33 + l34 + l35 + l36 + l37 + l38 + l39 + l4 + l40 + l41 + l42 + l43 + l44 + l45 + l46 + l47 + l48 + l49 + l5 + l50 + l51 + l53 + l6 + l7 + l8 + l9 + 2s0 + 2s1 + 2s10 + 2s11 + 2s12 + 2s13 + 2s14 + 2s15 + 2s16 + 2s17 + 2s18 + 2s19 + s2 + 2s20 + 2s21 + 2s22 + 2s23 + 2s24 + 2s25 + 2s26 + 2s27 + 2s28 + 2s29 + 2s30 + 2s31 + 2s32 + 2s33 + 2s34 + 2s35 + 2s36 + 2s37 + 2s38 + 2s39 + 2s40 + 2s41 + 2s42 + 2s43 + 2s44 + 2s45 + 2s46 + 2s47 + 2s48 + 2s49 + 2s5 + 2s50 + 2s51 + 2s52 + 2s53 + 2s54 + 2s6 + 2s7 + 2s8 + 2s9 <= 2
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ l10 l11 l12 l13 l14 l15 l16 l17 l18 l19 l2 l20 l21 l22 l23 l24 l25 l26 l27 l28 l29 l3 l30 l31 l32 l33 l34 l35 l36 l37 l38 l39 l4 l40 l41 l42 l43 l44 l45 l46 l47 l48 l49 l5 l50 l51 l53 l6 l7 l8 l9 (* 2 s0) (* 2 s1) (* 2 s10) (* 2 s11) (* 2 s12) (* 2 s13) (* 2 s14) (* 2 s15) (* 2 s16) (* 2 s17) (* 2 s18) (* 2 s19) s2 (* 2 s20) (* 2 s21) (* 2 s22) (* 2 s23) (* 2 s24) (* 2 s25) (* 2 s26) (* 2 s27) (* 2 s28) (* 2 s29) (* 2 s30) (* 2 s31) (* 2 s32) (* 2 s33) (* 2 s34) (* 2 s35) (* 2 s36) (* 2 s37) (* 2 s38) (* 2 s39) (* 2 s40) (* 2 s41) (* 2 s42) (* 2 s43) (* 2 s44) (* 2 s45) (* 2 s46) (* 2 s47) (* 2 s48) (* 2 s49) (* 2 s5) (* 2 s50) (* 2 s51) (* 2 s52) (* 2 s53) (* 2 s54) (* 2 s6) (* 2 s7) (* 2 s8) (* 2 s9)) 2))
 -------------------------------------------
 
 

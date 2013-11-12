@@ -2,7 +2,9 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/newdekker.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+Invariant I for the petri net:
+(assert (>= (+ testturn0 testturn1 at20 at21 c0eq1 c1eq1) 1))
+(assert (<= (+ at20 at21 c0eq1 c1eq1 cs0 cs1 testturn0 testturn1) 2))
 -------------------------------------------
 
 

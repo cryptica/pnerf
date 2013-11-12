@@ -67,4 +67,15 @@ targets_for_place(P, Tn) :-
   target(Ts),
   place_targets(P, Ts, 1, [], Tn).
 
+traps_for_place(P, Tns) :-
+  findall(Tn, (
+    trap(N, Tr),
+    member(P, Tr),
+    format_atom('tr_~p', [N], Tn)
+  ), Tns).
+find_traps(Tns) :-
+  findall(Tn, (
+    trap(N, _),
+    format_atom('tr_~p', [N], Tn)
+  ), Tns).
 

@@ -2,7 +2,9 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/lamport.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+Invariant I for the petri net:
+(assert (>= (+ p3 q1 x_eq_1 y_eq_1 q3) 1))
+(assert (<= (+ p1 p3 q1 q3 q4 x_eq_1 y_eq_1) 2))
 -------------------------------------------
 
 

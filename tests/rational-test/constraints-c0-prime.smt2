@@ -8,7 +8,7 @@
 (assert (>= 0 (+ 0 (- s1) s3)))
 (assert (>= 0 (+ 0 (- s2) (- s3) s4 (+ s5 t_1))))
 (assert (>= 0 (+ 0 (- s4) (+ s5 t_1))))
-(assert (< (+ 0 s1) t_1))
+(assert (< (+ 0 s1) (+ t_1 0)))
 (assert (>= t_1 0))
 (assert (>= s1 0))
 (assert (>= s2 0))

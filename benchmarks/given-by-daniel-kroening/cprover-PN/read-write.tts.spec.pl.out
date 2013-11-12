@@ -1,11 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/read-write.tts.spec.pl]
 
-* Invariant I_1 for the petri net:
-5l11 + 5l13 + l4 + l5 + 8s0 + 8s1 + 2s10 + 6s11 + 5s12 + 4s13 + 3s14 + 4s15 + s17 + 2s18 + 3s19 + 8s2 + 3s20 + 3s21 + 8s3 + 3s4 + 3s5 + 3s6 + 3s7 + 3s8 + 3s9 <= 8
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ (* 5 l11) (* 5 l13) l4 l5 (* 8 s0) (* 8 s1) (* 2 s10) (* 6 s11) (* 5 s12) (* 4 s13) (* 3 s14) (* 4 s15) s17 (* 2 s18) (* 3 s19) (* 8 s2) (* 3 s20) (* 3 s21) (* 8 s3) (* 3 s4) (* 3 s5) (* 3 s6) (* 3 s7) (* 3 s8) (* 3 s9)) 8))
 -------------------------------------------
 
 

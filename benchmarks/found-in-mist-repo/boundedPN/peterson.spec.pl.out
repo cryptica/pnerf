@@ -2,7 +2,10 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/peterson.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+Invariant I for the petri net:
+(assert (>= (+ x2 x11 x6 x9) 1))
+(assert (>= (+ x1 x4 x12 x7) 1))
+(assert (<= (+ x1 x11 x12 x13 x2 x3 x4 x6 x7 x9) 3))
 -------------------------------------------
 
 

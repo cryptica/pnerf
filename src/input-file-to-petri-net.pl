@@ -8,6 +8,7 @@
 :- dynamic cond/1.         % cond(Z3Atom).
 :- dynamic target/2.       % target(TargetNum, ListOfTargets).
 :- dynamic target/1.       % target(ListOfTargets).
+:- dynamic trap/2.         % trap(TrapNumber, ListOfPlaces).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
 :- use_module(library(aggregate)).
@@ -106,4 +107,5 @@ convert_targets(N) :-
         listing(init/2),
         listing(cond/1),
         listing(target/1),
+        listing(trap/2),
         halt.

@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/pncsacover.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+No invariant found for the net
 -------------------------------------------
 
 

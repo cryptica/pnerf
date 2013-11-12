@@ -2,7 +2,9 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/pingpong.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+Invariant I for the petri net:
+(assert (>= (+ start main x ping) 1))
+(assert (<= (+ _x main ping pong (* 2 start) x) 2))
 -------------------------------------------
 
 

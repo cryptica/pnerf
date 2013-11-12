@@ -1,11 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/fms.spec.pl]
 
-* Invariant I_1 for the petri net:
-x13 + x14 <= 1
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ x13 x14) 1))
 -------------------------------------------
 
 

@@ -79,10 +79,19 @@ function exit_with {
   result=$1
   echo
   echo '-------------------------------------------'
-  if [[ $result -eq 0 ]]; then
-    echo 'The petri net satisfies the property!'
+  if $invariant; then
+    if [[ $result -eq 0 ]]; then
+      echo "Invariant I for the petri net:"
+      cat $tmpdir/invariant.smt2
+    else
+      echo 'No invariant found for the net'
+    fi
   else
-    echo 'The petri net may not satisfy the property'
+    if [[ $result -eq 0 ]]; then
+      echo 'The petri net satisfies the property!'
+    else
+      echo 'The petri net may not satisfy the property'
+    fi
   fi
   echo '-------------------------------------------'
   echo
@@ -134,24 +143,25 @@ function run_bash {
   return $res
 }
 
-#construct_invariant=false
-construct_invariant=true
+#invariant=false
+invariant=true
 
 #refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
 #refinement_methods=( 'trap' 'empty-trap' )
-#refinement_methods=( 'trap' )
 #refinement_methods=( 'subnet-trap' )
-refinement_methods=( )
+#refinement_methods=( )
+refinement_methods=( 'trap' )
 #equation_type='Int'
 equation_type='Real'
 
-if $construct_invariant; then
-  
+cp $(absolute_path $input)/$(basename $input) $tmpdir/input-petri-net.pl
+
+function construct_invariant {
   target=1
   while (
     vecho
     vecho "* Constructing petri net N with target $target from input file"
-    run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $target $(absolute_path $input)/$(basename $input)
+    run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $target $tmpdir/input-petri-net.pl
   ); do 
 
     vecho
@@ -169,22 +179,23 @@ if $construct_invariant; then
       fi
       vecho "- constructing invariant I for petri net N and model A'"
       run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-      echo
-      echo "* Invariant I_$target for the petri net:"
-      cat $tmpdir/y-invariant.smt2
+      cat $tmpdir/y-invariant.smt2 >> $tmpdir/invariant.smt2
     else
       vecho " - unsat"
-      exit_with 2
+      exit_with 2 $invariant
     fi
     target=$((target + 1))
   done
-  exit_with 0
+  exit_with 0 $invariant
+}
 
+if [[ ${#refinement_methods[@]} -eq 0 && $invariant ]]; then
+  construct_invariant
 else
 
   vecho
   vecho '* Constructing petri net N from input file'
-  run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl 0 $(absolute_path $input)/$(basename $input)
+  run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl 0 $tmpdir/input-petri-net.pl
 
   vecho
   vecho '* Constructing constraints C_0 for petri net N'
@@ -219,6 +230,11 @@ else
 
               vecho "- constructing $method constraint delta for petri net N and model A_theta"
               run_sicstus refinement-methods/$method-delta-constraint.pl $tmpdir/constraint-delta.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
+              if $invarant; then
+                run_sicstus refinement-methods/$method-prolog-delta-constraint.pl $tmpdir/constraint-delta.pl $iter $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
+                cat $tmpdir/constraint-delta.smt2 >> $tmpdir/invariant.smt2
+                cat $tmpdir/constraint-delta.pl >> $tmpdir/input-petri-net.pl
+              fi
 
               vecho "- constructing constraints C_$((iter+1)) for C_$iter and delta"
               run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-cn.smt2 $tmpdir/constraints-c.smt2 $tmpdir/constraint-delta.smt2
@@ -231,12 +247,16 @@ else
           vecho
       done
       if [[ $method_index -ge $method_count ]]; then
-          exit_with 2
+          exit_with 2 $invariant
       fi
       iter=$((iter+1))
   done
   vecho " - unsat"
 
-  exit_with 0
+  if $invarant; then
+    construct_invariant
+  else
+    exit_with 0 $invariant
+  fi
 
 fi

@@ -12,6 +12,6 @@
 (assert (>= 0 (+ 0 (+ cs2 t_1) (- nc) (- s))))
 (assert (>= 0 (+ 0 (- (+ cs1 t_1)) nc s)))
 (assert (>= 0 (+ 0 (- (+ cs2 t_1)) nc s)))
-(assert (< (+ 0 (* 2 nc) s) (* 2 t_1)))
+(assert (< (+ 0 (* 2 nc) s) (+ (* 2 t_1) 0)))
 (check-sat)
 (get-model)

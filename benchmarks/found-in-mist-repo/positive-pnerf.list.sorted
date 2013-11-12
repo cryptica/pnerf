@@ -1,7 +1,8 @@
+benchmarks/found-in-mist-repo/PN/MultiME
+benchmarks/found-in-mist-repo/PN/basicME
 benchmarks/found-in-mist-repo/PN/bingham_h150
 benchmarks/found-in-mist-repo/PN/bingham_h25
 benchmarks/found-in-mist-repo/PN/bingham_h250
-benchmarks/found-in-mist-repo/PN/bingham_h250_attic
 benchmarks/found-in-mist-repo/PN/bingham_h50
 benchmarks/found-in-mist-repo/PN/csm
 benchmarks/found-in-mist-repo/PN/fms
@@ -9,6 +10,10 @@ benchmarks/found-in-mist-repo/PN/fms_attic
 benchmarks/found-in-mist-repo/PN/mesh2x2
 benchmarks/found-in-mist-repo/PN/mesh3x2
 benchmarks/found-in-mist-repo/PN/multipool
+benchmarks/found-in-mist-repo/PN/pingpong
 benchmarks/found-in-mist-repo/boundedPN/kanban
+benchmarks/found-in-mist-repo/boundedPN/lamport
+benchmarks/found-in-mist-repo/boundedPN/newdekker
 benchmarks/found-in-mist-repo/boundedPN/newrtp
+benchmarks/found-in-mist-repo/boundedPN/peterson
 benchmarks/found-in-mist-repo/boundedPN/read-write

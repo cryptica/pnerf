@@ -3,6 +3,7 @@
 :- dynamic weight/3.       % weight(In, Out, Weight).
 :- dynamic init/2.         % init(PlaceId, InitVal).
 :- dynamic target/1.       % target(ListOfTargets).
+:- dynamic trap/2.         % trap(TrapNumber, ListOfPlaces).
 
 :- use_module(library(ordsets)).
 :- use_module(library(lists)).
@@ -24,7 +25,12 @@ z3_vars :-
                        format('(assert (>= ~p 0))\n', P)
                      ), _ ),
         target(Ts),
-        target_vars(Ts, 1).
+        target_vars(Ts, 1),
+        findall( _ , (
+                       trap(N, _),
+                       format('(declare-fun tr_~p () Int)\n', [N]),
+                       format('(assert (>= tr_~p 0))\n', [N])
+                     ), _ ).
 
 z3_incidence_ineqs :-
         findall( _ , (
@@ -38,18 +44,20 @@ z3_incidence_ineqs :-
                        do ( weight(P, T, Wo) -> true; Wo = 0 ),
                           ( weight(T, P, Wi) -> true; Wi = 0 ),
                           W is Wi - Wo,
-                          targets_for_place(P, Tn),
+                          targets_for_place(P, TargetNames),
+                          traps_for_place(P, TrapNames),
+                          append([P|TargetNames], TrapNames, Vars),
                           ( W = 0 -> true
                           ; W = 1 ->
                               print(' '),
-                              format_sum('~p', [P|Tn])
+                              format_sum('~p', Vars)
                           ; W = -1 ->
                               print(' (- '),
-                              format_sum('~p', [P|Tn]),
+                              format_sum('~p', Vars),
                               print(')')
                           ;
                               format(' (* ~p ', [W]),
-                              format_sum('~p', [P|Tn]),
+                              format_sum('~p', Vars),
                               print(')')
                           )
                        ),
@@ -73,21 +81,26 @@ z3_token_eqs :-
         print('(assert (< (+ 0'),
         (  foreach(P, PSet)
         do ( init(P, V) -> true; V = 0 ),
-           targets_for_place(P, Tn),
+           targets_for_place(P, TargetNames),
+           traps_for_place(P, TrapNames),
+           append([P|TargetNames], TrapNames, Vars),
            ( V = 0 -> true
            ; V = 1 ->
                print(' '),
-               format_sum('~p', [P|Tn])
+               format_sum('~p', Vars)
            ;   format(' (* ~p ', [V]),
-               format_sum('~p', [P|Tn]),
+               format_sum('~p', Vars),
                print(')')
            )
         ),
-        print(') '),
+        print(') (+ '),
         target(Ts),
         target_products(Ts, 1, [], Tn1),
+        find_traps(TrapNames),
         format_sum('~p', Tn1),
-        print('))\n').
+        print(' '),
+        format_sum('~p', TrapNames),
+        print(')))\n').
 
 z3_constraints :-
         z3_vars,

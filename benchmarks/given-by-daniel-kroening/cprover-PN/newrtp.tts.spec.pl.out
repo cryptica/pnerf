@@ -1,11 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover-PN/newrtp.tts.spec.pl]
 
-* Invariant I_1 for the petri net:
-l1 + l2 + l3 + l4 + l5 + l6 + l7 + l8 + l9 + s0 <= 1
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ l1 l2 l3 l4 l5 l6 l7 l8 l9 s0) 1))
 -------------------------------------------
 
 

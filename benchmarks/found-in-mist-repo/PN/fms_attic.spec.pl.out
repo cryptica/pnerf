@@ -1,14 +1,10 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/PN/fms_attic.spec.pl]
 
-* Invariant I_1 for the petri net:
-x8 + x9 <= 3
-
-* Invariant I_2 for the petri net:
-x12 + x13 <= 1
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ x8 x9) 3))
+(assert (<= (+ x12 x13) 1))
 -------------------------------------------
 
 

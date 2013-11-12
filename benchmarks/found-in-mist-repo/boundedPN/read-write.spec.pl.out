@@ -1,11 +1,9 @@
 PETRINIZER: The checker for Petri Nets
 [benchmarks/found-in-mist-repo/boundedPN/read-write.spec.pl]
 
-* Invariant I_1 for the petri net:
-5x10 + 5x12 + x3 + x4 <= 5
-
 -------------------------------------------
-The petri net satisfies the property!
+Invariant I for the petri net:
+(assert (<= (+ (* 5 x10) (* 5 x12) x3 x4) 5))
 -------------------------------------------
 
 

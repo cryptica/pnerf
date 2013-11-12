@@ -2,7 +2,7 @@ PETRINIZER: The checker for Petri Nets
 [benchmarks/given-by-daniel-kroening/cprover_software_analysis/double_lock_p1_vs_satabs.3/main.spec.pl]
 
 -------------------------------------------
-The petri net may not satisfy the property
+No invariant found for the net
 -------------------------------------------
 
 

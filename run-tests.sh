@@ -34,6 +34,7 @@ test-input-file-to-petri-net simple-net/input-petri-net.pl simple-net/pp-petri-n
 test-input-file-to-petri-net rational-test/input-petri-net.pl rational-test/pp-petri-net.pl
 test-input-file-to-petri-net example-state-constraints/input-petri-net.pl example-state-constraints/pp-petri-net.pl
 test-input-file-to-petri-net example-trap-constraints/input-petri-net.pl example-trap-constraints/pp-petri-net.pl
+test-input-file-to-petri-net example-trap-constraints/input-petri-net-with-traps.pl example-trap-constraints/pp-petri-net-with-traps.pl
 
 #
 # Testing construction of constraints C0 for petri net N
@@ -80,6 +81,7 @@ function test-petri-net-to-prime-constraints {
 test-petri-net-to-prime-constraints simple-net/pp-petri-net.pl simple-net/constraints-c0.smt2
 test-petri-net-to-prime-constraints rational-test/pp-petri-net.pl rational-test/constraints-c0-prime.smt2
 test-petri-net-to-prime-constraints example-state-constraints/pp-petri-net.pl example-state-constraints/constraints-c0-prime.smt2
+test-petri-net-to-prime-constraints example-trap-constraints/pp-petri-net-with-traps.pl example-trap-constraints/constraints-c0-prime.smt2
 
 #
 # Testing checking of SAT(C)
@@ -121,6 +123,7 @@ test-checking-sat example-state-constraints/constraints-c0-prime.smt2 example-st
 test-checking-sat example-trap-constraints/constraints-c0.smt2 example-trap-constraints/model-a1.smt2
 test-checking-sat example-trap-constraints/constraints-ctheta1.smt2 example-trap-constraints/model-atheta1.smt2
 test-checking-sat example-trap-constraints/constraints-c1.smt2 example-trap-constraints/model-a2.smt2
+test-checking-sat example-trap-constraints/constraints-c0-prime.smt2 example-trap-constraints/model-a1-prime.smt2
 
 #
 # Testing smt2 model to prolog model
@@ -154,6 +157,7 @@ test-smt2-model-to-prolog-model rational-test/model-a1-real.smt2 rational-test/m
 test-smt2-model-to-prolog-model example-state-constraints/model-a1-prime.smt2 example-state-constraints/model-a1-prime.pl
 test-smt2-model-to-prolog-model example-trap-constraints/model-a1.smt2 example-trap-constraints/model-a1.pl
 test-smt2-model-to-prolog-model example-trap-constraints/model-atheta1.smt2 example-trap-constraints/model-atheta1.pl
+test-smt2-model-to-prolog-model example-trap-constraints/model-a1-prime.smt2 example-trap-constraints/model-a1-prime.pl
 
 #
 # Testing construction of trap constraints C_theta for model A
@@ -199,6 +203,23 @@ test-delta-constraint petersons-alg/model-atheta2.pl petersons-alg/pp-petri-net.
 test-delta-constraint example-trap-constraints/model-atheta1.pl example-trap-constraints/pp-petri-net.pl example-trap-constraints/constraint-delta1.smt2
 
 #
+# Testing construction of prolog constraint delta for A_theta
+#
+function test-prolog-delta-constraint {
+    if (
+            set -e
+            sicstus -l "$sysdir"/src/refinement-methods/trap-prolog-delta-constraint.pl -- 0 "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >$tmpdir/constraint-delta-out.pl
+            diff "$sysdir"/tests/$3 $tmpdir/constraint-delta-out.pl
+        ); then
+        echo $3' ... PASS'
+    else
+        echo $3' ... FAILED'
+        exit 6
+    fi
+}
+test-prolog-delta-constraint example-trap-constraints/model-atheta1.pl example-trap-constraints/pp-petri-net.pl example-trap-constraints/constraint-delta1.pl
+
+#
 # Testing construction of constraints C_n+1 for C_n and A_theta_n
 #
 function test-succ-constraints {
@@ -219,6 +240,23 @@ test-succ-constraints cyclic-net/constraints-c0.smt2 cyclic-net/constraint-delta
 test-succ-constraints empty-trap-net/constraints-c0.smt2 empty-trap-net/constraint-delta1.smt2 empty-trap-net/constraints-c1.smt2
 test-succ-constraints empty-trap-net/constraints-c1.smt2 empty-trap-net/constraint-delta2.smt2 empty-trap-net/constraints-c2.smt2
 test-succ-constraints example-trap-constraints/constraints-c0.smt2 example-trap-constraints/constraint-delta1.smt2 example-trap-constraints/constraints-c1.smt2
+
+#
+# Testing construction of input petri net with traps
+#
+function test-trap-input-net {
+    if (
+            set -e
+            cat "$sysdir"/tests/$1 "$sysdir"/tests/$2 >$tmpdir/input-petri-net-with-traps-out.pl
+            diff "$sysdir"/tests/$3 $tmpdir/input-petri-net-with-traps-out.pl
+        ); then
+        echo $3' ... PASS'
+    else
+        echo $3' ... FAILED'
+        exit 7
+    fi
+}
+test-trap-input-net example-trap-constraints/input-petri-net.pl example-trap-constraints/constraint-delta1.pl example-trap-constraints/input-petri-net-with-traps.pl
 
 #
 # Testing construction of subnet trap constraints C_theta for model A
@@ -311,4 +349,5 @@ function test-y-invariant {
 }
 test-y-invariant simple-net/pp-petri-net.pl simple-net/model-a1.pl simple-net/y-invariant.smt2
 test-y-invariant example-state-constraints/pp-petri-net.pl example-state-constraints/model-a1-prime.pl example-state-constraints/y-invariant.smt2
+test-y-invariant example-trap-constraints/pp-petri-net-with-traps.pl example-trap-constraints/model-a1-prime.pl example-trap-constraints/y-invariant.smt2
 
