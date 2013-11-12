@@ -1,8 +1,8 @@
 :- dynamic assignment/2.   % assignment(Preimage, Image).
 :- dynamic place/3.        % place(Id, InTransitions, OutTransitions).
 :- dynamic init/2.         % init(PlaceId, InitVal).
-:- dynamic target/1.       % target(ListOfTargets).
-:- dynamic trap/2.         % trap(TrapNumber, ListOfPlaces).
+:- dynamic target_conj/2.  % target_conj(TargetName, PairOfPlacesAndNumber).
+:- dynamic trap/2.         % trap(TrapName, ListOfPlaces).
 
 :- use_module(library(lists)).
 :- use_module(library(ordsets)).
@@ -20,9 +20,7 @@ format_y_component((P, Y), YTerm) :-
 y_invariant :-
         findall( (P, Y) , (
                 place(P, _, _),
-                targets_for_place(P, TargetNames),
-                traps_for_place(P, TrapNames),
-                append([P|TargetNames], TrapNames, Vars),
+                vars_for_place(P, Vars),
                 maplist(assignment, Vars, Ys),
                 sumlist(Ys, Y),
                 Y > 0

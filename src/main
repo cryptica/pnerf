@@ -231,7 +231,7 @@ else
               vecho "- constructing $method constraint delta for petri net N and model A_theta"
               run_sicstus refinement-methods/$method-delta-constraint.pl $tmpdir/constraint-delta.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
               if $invarant; then
-                run_sicstus refinement-methods/$method-prolog-delta-constraint.pl $tmpdir/constraint-delta.pl $iter $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
+                run_sicstus refinement-methods/$method-prolog-delta-constraint.pl $tmpdir/constraint-delta.pl $((iter + 1)) $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
                 cat $tmpdir/constraint-delta.smt2 >> $tmpdir/invariant.smt2
                 cat $tmpdir/constraint-delta.pl >> $tmpdir/input-petri-net.pl
               fi

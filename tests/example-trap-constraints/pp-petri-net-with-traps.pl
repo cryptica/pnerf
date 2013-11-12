@@ -30,7 +30,7 @@ init(nc, 2).
 init(s1, 1).
 init(s2, 1).
 
-target([([cs1,cs2],2)]).
+target_conj(target_1, [cs1,cs2], 2).
 
-trap(0, [s1,s2]).
+trap(trap_1, [s1,s2]).
 

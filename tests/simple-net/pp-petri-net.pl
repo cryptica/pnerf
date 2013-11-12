@@ -14,4 +14,5 @@ weight(t2, s1, 1).
 
 init(s1, 1).
 
-target([([s1],1),([s2],1)]).
+target_conj(target_1, [s1], 1).
+target_conj(target_2, [s2], 1).

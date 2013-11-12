@@ -1,1 +1,1 @@
-trap(0, [s1,s2]).
+trap(trap_1, [s1,s2]).

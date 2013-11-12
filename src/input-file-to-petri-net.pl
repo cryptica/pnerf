@@ -8,7 +8,8 @@
 :- dynamic cond/1.         % cond(Z3Atom).
 :- dynamic target/2.       % target(TargetNum, ListOfTargets).
 :- dynamic target/1.       % target(ListOfTargets).
-:- dynamic trap/2.         % trap(TrapNumber, ListOfPlaces).
+:- dynamic target_conj/3.  % target_conj(TargetName, ListOfPlaces, Number).
+:- dynamic trap/2.         % trap(TrapName, ListOfPlaces).
 :- dynamic trans_count/1.  % trans_count(NextTransSymbolId).
 
 :- use_module(library(aggregate)).
@@ -74,13 +75,26 @@ connect_places_w_transitions :-
                        )
                      ), _ ).
         
+number_targets([], _).
+number_targets([(P, V)|Ts], N) :-
+  N1 is N + 1,
+  format_atom('target_~p', [N1], Tn),
+  assert( target_conj(Tn, P, V) ),
+  number_targets(Ts, N1).
+
 convert_targets(N) :-
-  findall( _ , (
-                 retract( target(N1, T) ),
-                 ( ( N = 0; N = N1 ) ->
-                   assert( target(T) )
-                 )
-               ), _ ).
+  ( N = 0 ->
+      findall( _ , (
+          retract( target(_, T) ),
+          assert( target(T) )
+      ), _ )
+  ;   findall( _ , (
+          retract( target(N1, T) ),
+          ( N = N1 ->
+              number_targets(T, 0)
+          )
+      ), _ )
+  ).
 
 % Entry point
 :-      prolog_flag(argv, [TargetNumber|Argv]),
@@ -106,6 +120,9 @@ convert_targets(N) :-
                  ), _),
         listing(init/2),
         listing(cond/1),
-        listing(target/1),
+        ( N = 0 ->
+          listing(target/1)
+        ; listing(target_conj/3)
+        ),
         listing(trap/2),
         halt.

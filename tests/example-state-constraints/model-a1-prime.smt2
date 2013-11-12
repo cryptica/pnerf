@@ -1,8 +1,8 @@
 sat
 (model 
-  (define-fun t_1 () Int
-    1)
   (define-fun s () Int
+    1)
+  (define-fun target_1 () Int
     1)
   (define-fun cs1 () Int
     0)

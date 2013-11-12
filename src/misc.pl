@@ -53,29 +53,37 @@ rev_append([], L2, L2).
 rev_append([H|T], L2, [H|T2]) :-
   rev_append(T, L2, T2).
 
-place_targets(_, [], _, Tn, Tn).
-place_targets(P, [(Ps, _)|Ts], N, Tn1, Tn3) :-
-  N1 is N + 1,
-  ( member(P, Ps) -> 
-    format_atom('t_~p', [N], Tn),
-    Tn2 = [Tn|Tn1]
-  ; Tn2 = Tn1
-  ),
-  place_targets(P, Ts, N1, Tn2, Tn3).
+targets_for_place(P, Tns) :-
+  findall(Tn, (
+    target_conj(Tn, Ps, _),
+    member(P, Ps)
+  ), Tns).
 
-targets_for_place(P, Tn) :-
-  target(Ts),
-  place_targets(P, Ts, 1, [], Tn).
+target_products(Tns) :-
+  findall(Tn, (
+    target_conj(Target, _, B),
+    ( B = 0 ->
+      Tn = '0'
+    ; B = 1 ->
+      format_atom('~p', [Target], Tn)
+    ; B = -1 ->
+      format_atom('(- ~p)', [Target], Tn)
+    ; format_atom('(* ~p ~p)', [B, Target], Tn)
+    )
+  ), Tns).
 
 traps_for_place(P, Tns) :-
   findall(Tn, (
-    trap(N, Tr),
-    member(P, Tr),
-    format_atom('tr_~p', [N], Tn)
+    trap(Tn, Ps),
+    member(P, Ps)
   ), Tns).
-find_traps(Tns) :-
+trap_products(Tns) :-
   findall(Tn, (
-    trap(N, _),
-    format_atom('tr_~p', [N], Tn)
+    trap(Trap, _),
+    format_atom('~p', [Trap], Tn)
   ), Tns).
 
+vars_for_place(P, Vars) :-
+  targets_for_place(P, TargetNames),
+  traps_for_place(P, TrapNames),
+  append([P|TargetNames], TrapNames, Vars).

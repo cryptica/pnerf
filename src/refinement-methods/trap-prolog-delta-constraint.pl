@@ -4,11 +4,12 @@
 :- ['../misc.pl'].
 
 delta_condition(N) :-
+        format_atom('trap_~p', [N], Tn),
         findall(P, (
             place(P, _, _),
             assignment(P, true)
           ), Ps),
-        portray_clause(trap(N, Ps)).
+        portray_clause(trap(Tn, Ps)).
 
 % Entry point
 :-      prolog_flag(argv, [TrapNumber|Argv]),

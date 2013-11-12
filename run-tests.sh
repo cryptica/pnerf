@@ -15,26 +15,28 @@ mkdir $tmpdir
 function test-input-file-to-petri-net {
     if (
       set -e
-      sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- 0 "$sysdir"/tests/$1 2>/dev/null >$tmpdir/pp-petri-net.pl
-      sort "$sysdir"/tests/$2 >$tmpdir/pp-petri-net-exp.pl
+      sicstus -l "$sysdir"/src/input-file-to-petri-net.pl -- $1 "$sysdir"/tests/$2 2>/dev/null >$tmpdir/pp-petri-net.pl
+      sort "$sysdir"/tests/$3 >$tmpdir/pp-petri-net-exp.pl
       sort $tmpdir/pp-petri-net.pl >$tmpdir/pp-petri-net-out.pl
       diff $tmpdir/pp-petri-net-exp.pl $tmpdir/pp-petri-net-out.pl
     ); then
-      echo $2' ... PASS'
+      echo $3' ... PASS'
     else
-      echo $2' ... FAILED'
+      echo $3' ... FAILED'
       exit 1
     fi
 }
-test-input-file-to-petri-net petersons-alg/input-petri-net.pl petersons-alg/pp-petri-net.pl
-test-input-file-to-petri-net cyclic-net/input-petri-net.pl cyclic-net/pp-petri-net.pl
-test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
-test-input-file-to-petri-net empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
-test-input-file-to-petri-net simple-net/input-petri-net.pl simple-net/pp-petri-net.pl
-test-input-file-to-petri-net rational-test/input-petri-net.pl rational-test/pp-petri-net.pl
-test-input-file-to-petri-net example-state-constraints/input-petri-net.pl example-state-constraints/pp-petri-net.pl
-test-input-file-to-petri-net example-trap-constraints/input-petri-net.pl example-trap-constraints/pp-petri-net.pl
-test-input-file-to-petri-net example-trap-constraints/input-petri-net-with-traps.pl example-trap-constraints/pp-petri-net-with-traps.pl
+test-input-file-to-petri-net 0 petersons-alg/input-petri-net.pl petersons-alg/pp-petri-net.pl
+test-input-file-to-petri-net 0 cyclic-net/input-petri-net.pl cyclic-net/pp-petri-net.pl
+test-input-file-to-petri-net 0 empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
+test-input-file-to-petri-net 0 empty-trap-net/input-petri-net.pl empty-trap-net/pp-petri-net.pl
+test-input-file-to-petri-net 1 simple-net/input-petri-net.pl simple-net/pp-petri-net.pl
+test-input-file-to-petri-net 0 rational-test/input-petri-net.pl rational-test/pp-petri-net.pl
+test-input-file-to-petri-net 1 rational-test/input-petri-net.pl rational-test/pp-petri-net-prime.pl
+test-input-file-to-petri-net 0 example-state-constraints/input-petri-net.pl example-state-constraints/pp-petri-net.pl
+test-input-file-to-petri-net 1 example-state-constraints/input-petri-net.pl example-state-constraints/pp-petri-net-prime.pl
+test-input-file-to-petri-net 0 example-trap-constraints/input-petri-net.pl example-trap-constraints/pp-petri-net.pl
+test-input-file-to-petri-net 1 example-trap-constraints/input-petri-net-with-traps.pl example-trap-constraints/pp-petri-net-with-traps.pl
 
 #
 # Testing construction of constraints C0 for petri net N
@@ -79,8 +81,8 @@ function test-petri-net-to-prime-constraints {
     fi
 }
 test-petri-net-to-prime-constraints simple-net/pp-petri-net.pl simple-net/constraints-c0.smt2
-test-petri-net-to-prime-constraints rational-test/pp-petri-net.pl rational-test/constraints-c0-prime.smt2
-test-petri-net-to-prime-constraints example-state-constraints/pp-petri-net.pl example-state-constraints/constraints-c0-prime.smt2
+test-petri-net-to-prime-constraints rational-test/pp-petri-net-prime.pl rational-test/constraints-c0-prime.smt2
+test-petri-net-to-prime-constraints example-state-constraints/pp-petri-net-prime.pl example-state-constraints/constraints-c0-prime.smt2
 test-petri-net-to-prime-constraints example-trap-constraints/pp-petri-net-with-traps.pl example-trap-constraints/constraints-c0-prime.smt2
 
 #
@@ -208,7 +210,7 @@ test-delta-constraint example-trap-constraints/model-atheta1.pl example-trap-con
 function test-prolog-delta-constraint {
     if (
             set -e
-            sicstus -l "$sysdir"/src/refinement-methods/trap-prolog-delta-constraint.pl -- 0 "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >$tmpdir/constraint-delta-out.pl
+            sicstus -l "$sysdir"/src/refinement-methods/trap-prolog-delta-constraint.pl -- 1 "$sysdir"/tests/$1 "$sysdir"/tests/$2 2>/dev/null >$tmpdir/constraint-delta-out.pl
             diff "$sysdir"/tests/$3 $tmpdir/constraint-delta-out.pl
         ); then
         echo $3' ... PASS'
@@ -348,6 +350,6 @@ function test-y-invariant {
     fi
 }
 test-y-invariant simple-net/pp-petri-net.pl simple-net/model-a1.pl simple-net/y-invariant.smt2
-test-y-invariant example-state-constraints/pp-petri-net.pl example-state-constraints/model-a1-prime.pl example-state-constraints/y-invariant.smt2
+test-y-invariant example-state-constraints/pp-petri-net-prime.pl example-state-constraints/model-a1-prime.pl example-state-constraints/y-invariant.smt2
 test-y-invariant example-trap-constraints/pp-petri-net-with-traps.pl example-trap-constraints/model-a1-prime.pl example-trap-constraints/y-invariant.smt2
 
