@@ -3,7 +3,7 @@ PETRINIZER: The checker for Petri Nets
 
 -------------------------------------------
 Invariant I for the petri net:
-(assert (<= (+ l104 l105 l106 l107 l114 l115 l116 l117 l124 l125 l126 l127 l130 l131 l132 l133 l136 l137 l138 l139 l156 l157 l158 l159 l208) 0))
+(assert (<= (+ l104 l105 l106 l107 l114 l115 l116 l117 l124 l125 l126 l127 l130 l131 l132 l133 l136 l137 l138 l139 l156 l157 l158 l159 s4) 0))
 -------------------------------------------
 
 

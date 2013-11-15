@@ -14,21 +14,18 @@
 z3_vars :-
         findall( _ , (
                        place(P, _, _),
-                       format('(declare-fun ~p () Int)\n', [P]),
-                       format('(assert (>= ~p 0))\n', P)
+                       format('(declare-fun ~p () Int)\n', [P])
                      ), _ ),
         findall( _ , (
                        target_conj(Target, _, _),
-                       format('(declare-fun ~p () Int)\n', [Target]),
-                       format('(assert (>= ~p 0))\n', Target)
+                       format('(declare-fun ~p () Int)\n', [Target])
                      ), _ ),
         findall( _ , (
                        trap(Trap, _),
-                       format('(declare-fun ~p () Int)\n', [Trap]),
-                       format('(assert (>= ~p 0))\n', [Trap])
+                       format('(declare-fun ~p () Int)\n', [Trap])
                      ), _ ).
 
-z3_incidence_ineqs :-
+z3_inductive_ineqs :-
         findall( _ , (
                        transition(T, I, O),
                        print('(assert (>= 0 (+ 0'),
@@ -40,40 +37,46 @@ z3_incidence_ineqs :-
                        do ( weight(P, T, Wo) -> true; Wo = 0 ),
                           ( weight(T, P, Wi) -> true; Wi = 0 ),
                           W is Wi - Wo,
-                          vars_for_place(P, Vars),
                           ( W = 0 -> true
                           ; W = 1 ->
-                              print(' '),
-                              format_sum('~p', Vars)
+                              format(' ~p', [P])
                           ; W = -1 ->
-                              print(' (- '),
-                              format_sum('~p', Vars),
-                              print(')')
+                              format(' (- ~p)', [P])
                           ;
-                              format(' (* ~p ', [W]),
-                              format_sum('~p', Vars),
-                              print(')')
+                              format(' (* ~p ~p)', [W, P])
                           )
                        ),
                        print(')))\n')
                      ), _ ).
 
-z3_token_eqs :-
-        findall(P1, place(P1, _, _), Ps),
-        list_to_ord_set(Ps, PSet),
+target_products(Tns) :-
+  findall(Tn, (
+    target_conj(Target, _, B),
+    ( B = 0 ->
+      Tn = '0'
+    ; B = 1 ->
+      format_atom('~p', [Target], Tn)
+    ; B = -1 ->
+      format_atom('(- ~p)', [Target], Tn)
+    ; format_atom('(* ~p ~p)', [B, Target], Tn)
+    )
+  ), Tns).
+trap_products(Tns) :-
+  findall(Tn, (
+    trap(Trap, _),
+    format_atom('~p', [Trap], Tn)
+  ), Tns).
+
+z3_safety_ineq :-
         print('(assert (< (+ 0'),
-        (  foreach(P, PSet)
-        do ( init(P, V) -> true; V = 0 ),
-           vars_for_place(P, Vars),
-           ( V = 0 -> true
-           ; V = 1 ->
-               print(' '),
-               format_sum('~p', Vars)
-           ;   format(' (* ~p ', [V]),
-               format_sum('~p', Vars),
-               print(')')
-           )
-        ),
+        findall( _ , (
+            init(P, V),
+            V > 0,
+            ( V = 1 ->
+                format(' ~p', [P])
+            ;   format(' (* ~p ~p)', [V, P])
+            )
+        ), _ ),
         print(') '),
         target_products(TargetProducts),
         trap_products(TrapProducts),
@@ -81,10 +84,48 @@ z3_token_eqs :-
         format_sum('~p', VarProducts),
         print('))\n').
 
+targets_for_place(P, Tns) :-
+  findall(Tn, (
+    target_conj(Tn, Ps, _),
+    member(P, Ps)
+  ), Tns).
+
+traps_for_place(P, Tns) :-
+  findall(Tn, (
+    trap(Tn, Ps),
+    member(P, Ps)
+  ), Tns).
+
+vars_for_place(P, Vars) :-
+  targets_for_place(P, TargetNames),
+  traps_for_place(P, TrapNames),
+  append(TargetNames, TrapNames, Vars).
+
+z3_property_ineqs :-
+        findall( _ , (
+            place(P, _, _),
+            vars_for_place(P, Vars),
+            format('(assert (>= ~p ', [P]),
+            format_sum('~p', Vars),
+            print('))\n')
+        ), _ ).
+
+z3_nat_ineqs :-
+        findall( _ , (
+                       target_conj(Target, _, _),
+                       format('(assert (>= ~p 0))\n', Target)
+                     ), _ ),
+        findall( _ , (
+                       trap(Trap, _),
+                       format('(assert (>= ~p 0))\n', [Trap])
+                     ), _ ).
+
 z3_constraints :-
         z3_vars,
-        z3_incidence_ineqs,
-        z3_token_eqs,
+        z3_inductive_ineqs,
+        z3_safety_ineq,
+        z3_property_ineqs,
+        z3_nat_ineqs,
         print('(check-sat)\n'),
         print('(get-model)\n').
 

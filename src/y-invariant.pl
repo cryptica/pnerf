@@ -20,9 +20,7 @@ format_y_component((P, Y), YTerm) :-
 y_invariant :-
         findall( (P, Y) , (
                 place(P, _, _),
-                vars_for_place(P, Vars),
-                maplist(assignment, Vars, Ys),
-                sumlist(Ys, Y),
+                assignment(P, Y),
                 Y > 0
         ), Xs ),
         list_to_ord_set(Xs, Xord),
