@@ -172,13 +172,15 @@ while (true) {
     nc      = 2 - t1 - t2 + t3 + t4
     ^         ^   ^    ^    ^    ^
     |         |   |    |    |    |
-    place nc  |   ------    ------
-              |      |         |
-              |      |       input transitions of nc
-              |      |    
-              |    output transitions of nc
-              |
-           initial number of tokens in nc
+    |         |   ------    ------
+    |         |      |         |
+    |         |      |       # of tokens given to nc
+    |         |      |    
+    |         |    # of tokens taken from nc
+    |         |
+    |      initial number of tokens in nc
+    |
+    number of tokens in nc
   
     m     = 1 - t1 - t2 + t3 + t4
     cs1   = 0 + t1 - t3
@@ -212,7 +214,7 @@ while (true) {
 * Subprocedure \mathcal{C}:
 
   Input:
-    (S, T, E, I) : Petri net
+    (S, T, E, M0) : Petri net
   Output:
     C : State constraints
 
@@ -375,7 +377,7 @@ Input:
    = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
  P = ( cs1 + cs2 <= 1 )
 
-TODO: Write the code
+TODO: Unroll pseudocode?
 
 
 * Subprocedure Inv:
@@ -387,7 +389,7 @@ TODO: Write the code
   Output:
     I            : Invariant
 
-TODO: Write the code
+TODO: Unroll pseudocode?
 \end{verbatim}
 
 \newpage
@@ -466,7 +468,7 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
 * Method Safety:
 
   Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
-  Subprocedure \Delta constructs constraint \delta corresponding to A_\theta.
+  Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
 \end{verbatim}
 \begin{center}
 \begin{tikzpicture}
@@ -504,7 +506,9 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
   2. S is marked in the initial marking M0
   3. S is unmarked in the assignment A
 
-* Property of constraint \delta: Constraint \delta refines the abstraction, i.e.
+* Property of A_\theta: for each place s, A_\theta(s) iff s \in S
+
+* Property of refinement constraint \delta: Constraint \delta refines the abstraction, i.e.
   1. A ^ \delta is unsat (\delta excludes A)
   2. N |= \delta is sat  (\delta is a property of N)
 \end{verbatim}
@@ -540,14 +544,27 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
     t4  = 0
 
   - Trap conditions C_\theta:
+
+    - Trap implications:
+
+    cs1 => m1 \/ nc
+    ^      ^     ^
+    |      |     |
+    |      |     nc \in S
+    |      |
+    |      m1 \in S
+    |
+    cs1 \in S
+    
+    cs2 => m2 \/ nc
     nc  => (m2 \/ cs1) /\ (m1 \/ cs2)
     m1  => (m2 \/ cs1) /\ (m1 \/ cs2)
     m2  => (m2 \/ cs1) /\ (m1 \/ cs2)
-    cs1 => m1 \/ nc
-    cs2 => m2 \/ nc
 
+    - At least one of the intially marked places belongs to S:
     nc \/ m1 \/ m2
 
+    - None of the marked places in A belongs to S:
     ~cs1 /\ ~cs2
 
   - Assignment A_\theta:
@@ -556,11 +573,58 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
     m2  = true
     cs1 = false
     cs2 = false
-
-  - Constraint \delta:
-    m1 + m2 >= 1
 \end{verbatim}
 
+\newpage
+\begin{verbatim}
+  - Refinement constraint \delta:
+    m1 + m2 >= 1
+    ^    ^
+    |    |
+    ------
+      |
+      S = {m1, m2}, therefore \delta excludes assignment A in the next iteration
+
+* Trap implication:
+
+  place s \in S =>    /\       \    /
+                     /  \       \  /     place p \in S
+                    /    \       \/
+                   t \in s*   p \in t*   
+
+
+  "if s is in trap S then for each output transition t at least one successor p is in trap S"
+
+
+* Refinement constraint \delta:
+
+  \Sigma s >= 1  
+  A(s)
+
+  "At least one place in S is always marked"
+
+
+* Subprocedure TrapConditions:
+
+  Input:
+    (S, T, E, M0) : Petri net
+    A             : Satisfying assignment for C \cup { ~P }
+  Output:
+    C_\theta      : Trap conditions
+
+  TODO: Unroll pseudocode?
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  TODO: Unroll pseudocode?
+\end{verbatim}
+
+\newpage
 \section{Benchmarks of \bfc}
 
 We experimented on the benchmarks \ttt{cprover-PN} and
