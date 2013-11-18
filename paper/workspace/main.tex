@@ -164,35 +164,36 @@ while (true) {
 \begin{verbatim}
 * Property of state constraints C: If C U {\neg P} is unsat then N |= P.
 
-* State constraints C:
+* Example:
+  - State constraints C:
 
-  Place equations:
-
-  nc      = 2 - t1 - t2 + t3 + t4
-  ^         ^   ^    ^    ^    ^
-  |         |   |    |    |    |
-  place nc  |   ------    ------
-            |      |         |
-            |      |       input transitions of nc
-            |      |    
-            |    output transitions of nc
-            |
-         initial number of tokens in nc
-
-  m     = 1 - t1 - t2 + t3 + t4
-  cs1   = 0 + t1 - t3
-  cs2   = 0 + t2 - t4
-
-  Non-negativity conditions:
-
-  nc  >= 0
-  m   >= 0
-  cs1 >= 0
-  cs2 >= 0
-  t1  >= 0
-  t2  >= 0
-  t3  >= 0
-  t4  >= 0
+    Place equations:
+  
+    nc      = 2 - t1 - t2 + t3 + t4
+    ^         ^   ^    ^    ^    ^
+    |         |   |    |    |    |
+    place nc  |   ------    ------
+              |      |         |
+              |      |       input transitions of nc
+              |      |    
+              |    output transitions of nc
+              |
+           initial number of tokens in nc
+  
+    m     = 1 - t1 - t2 + t3 + t4
+    cs1   = 0 + t1 - t3
+    cs2   = 0 + t2 - t4
+  
+    Non-negativity conditions:
+  
+    nc  >= 0
+    m   >= 0
+    cs1 >= 0
+    cs2 >= 0
+    t1  >= 0
+    t2  >= 0
+    t3  >= 0
+    t4  >= 0
 \end{verbatim}
 
 \newpage
@@ -509,15 +510,14 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
   2. N |= \delta is sat  (\delta is a property of N)
 \end{verbatim}
 
+\newpage
 \begin{verbatim}
 * State constraints C:
-
   nc  =  2 - t1 - t2 + t3 + t4
   m1  =  1 - t1 + t3
   m2  =  1 - t2 + t4
   cs1 =  0 + t1 - t3
   cs2 =  0 + t2 - t4
-
   nc  >= 0
   m1  >= 0
   m2  >= 0
@@ -574,6 +574,103 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
 
 
 
+\section{Benchmarks of \bfc}
+
+We experimented on the benchmarks \ttt{cprover-PN} and
+\ttt{cprover\_software\_analysis}
+available at
+\ttt{http://www.mpi-sws.org/\~{}jkloos/iic-experiments/cprover.zip}.
+The set of benchmarks consists 77 benchmarks, 26 positive and 51 negative.
+We applied 8 tool configurations to the set of benchmarks.
+Table~\ref{bfc-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | r | p{7cm} | r | r | r | r | } %
+    \hline
+    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
+    \hline
+    C1 & State constraint over real numbers & 23 &  0 & 54 &  0 \\
+    C2 & State constraint over integers        & 23 &  0 & 54 &  0 \\
+    \hline
+    C3 & C2 + TrapConditions                   & 23 &  0 & 54 &  0 \\
+    C4 & C3 + SubnetTrapConditions         & 23 &  0 & 50 &  4 \\
+    C5 & C4 + EmptyTrapConditions          & 23 &  0 & 46 &  8 \\
+    \hline
+    C6 & C1 + state space exploration \& TO 1\,min & 26 & 34 & 0 & 17 \\
+    C7 & C1 + state space exploration \& TO 10\,min & 26 & 39 & 0 & 12 \\
+    C8 & C1 + state space exploration \& TO 8\,h   & 26 & 45 & 0 &  6 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \bfc}
+\label{bfc-experiments}
+\end{table}
+
+Observations:
+\begin{itemize}
+\item State constraints over integers or reals correctly determine that the 23 benchmarks in Appendix~\ref{bfc-experiments-c1} are positive.
+\item Composing state space constraints with concrete state space
+  exploration gives the following 3 additional positives.
+\begin{verbatim}
+cprover-PN/lamport
+cprover-PN/newdekker
+cprover-PN/peterson
+\end{verbatim}
+\end{itemize}
+
+
+\newpage
+\section{Benchmarks of \mist}
+
+We experimented on the benchmarks available at \\
+\ttt{https://github.com/pierreganty/mist/tree/master/examples/boundedPN}
+and \\
+\ttt{https://github.com/pierreganty/mist/tree/master/examples/PN}.
+The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
+We applied 6 tool configurations to the set of benchmarks.
+Table~\ref{mist-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | r | p{6cm} | r | r | r | r | }
+    \hline
+    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
+    \hline
+    C1 & State constraint with real numbers & 14 &  0 & 13 &  0 \\
+    C2 & State constraint with integers     & 14 &  0 & 13 &  0 \\
+    \hline
+    C3 & C2 + TrapConditions               & 20 &  0 &  7 &  0 \\
+    C4 & C3 + SubnetTrapConditions         & 21 &  0 &  6 &  0 \\
+    C5 & C4 + EmptyTrapConditions          & 21 &  0 &  6 &  0 \\
+    \hline
+    C9 & C4 + state space exploration \& TO 4\,h & 21 &  2 & 0 &  4 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \mist}
+\label{mist-experiments}
+\end{table}
+
+Observations:
+\begin{itemize}
+\item State constraints over integers or reals correctly determine that the 14 benchmarks in Appendix~\ref{mist-experiments-c1} are positive.
+\item Composing state constraints with TrapConditions gives the following 6 additional positives.
+\begin{verbatim}
+PN/pingpong
+PN/basicME
+PN/multiME
+boundedPN/lamport
+boundedPN/newdekker
+boundedPN/peterson
+\end{verbatim}
+\item Composing state constraints with TrapConditions and SubnetTrapConditions gives the additional positive \ttt{PN/manufacturing}.
+  \item The remaining positive benchmarks are the following.
+\begin{verbatim}
+PN/extendedread-write
+PN/extendedread-write-smallconsts
+\end{verbatim}
+\end{itemize}
 
 
 
@@ -916,102 +1013,4 @@ where $M_0$ is the initial marking, $C$ is the incidence matrix of the net, $A\c
 
 \fi
 
-\section{Benchmarks of \bfc}
-
-We experimented on the benchmarks \ttt{cprover-PN} and
-\ttt{cprover\_software\_analysis}
-available at
-\ttt{http://www.mpi-sws.org/\~{}jkloos/iic-experiments/cprover.zip}.
-The set of benchmarks consists 77 benchmarks, 26 positive and 51 negative.
-We applied 8 tool configurations to the set of benchmarks.
-Table~\ref{bfc-experiments} shows the corresponding experimental results.
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | r | p{7cm} | r | r | r | r | } %
-    \hline
-    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
-    \hline
-    C1 & State constraint over real numbers & 23 &  0 & 54 &  0 \\
-    C2 & State constraint over integers        & 23 &  0 & 54 &  0 \\
-    \hline
-    C3 & C2 + TrapConditions                   & 23 &  0 & 54 &  0 \\
-    C4 & C3 + SubnetTrapConditions         & 23 &  0 & 50 &  4 \\
-    C5 & C4 + EmptyTrapConditions          & 23 &  0 & 46 &  8 \\
-    \hline
-    C6 & C1 + state space exploration \& TO 1\,min & 26 & 34 & 0 & 17 \\
-    C7 & C1 + state space exploration \& TO 10\,min & 26 & 39 & 0 & 12 \\
-    C8 & C1 + state space exploration \& TO 8\,h   & 26 & 45 & 0 &  6 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \bfc}
-\label{bfc-experiments}
-\end{table}
-
-Observations:
-\begin{itemize}
-\item State constraints over integers or reals correctly determine that the 23 benchmarks in Appendix~\ref{bfc-experiments-c1} are positive.
-\item Composing state space constraints with concrete state space
-  exploration gives the following 3 additional positives.
-\begin{verbatim}
-cprover-PN/lamport
-cprover-PN/newdekker
-cprover-PN/peterson
-\end{verbatim}
-\end{itemize}
-
-
-\newpage
-
-\section{Benchmarks of \mist}
-
-We experimented on the benchmarks available at \\
-\ttt{https://github.com/pierreganty/mist/tree/master/examples/boundedPN}
-and \\
-\ttt{https://github.com/pierreganty/mist/tree/master/examples/PN}.
-The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
-We applied 6 tool configurations to the set of benchmarks.
-Table~\ref{mist-experiments} shows the corresponding experimental results.
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | r | p{6cm} | r | r | r | r | }
-    \hline
-    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
-    \hline
-    C1 & State constraint with real numbers & 14 &  0 & 13 &  0 \\
-    C2 & State constraint with integers     & 14 &  0 & 13 &  0 \\
-    \hline
-    C3 & C2 + TrapConditions               & 20 &  0 &  7 &  0 \\
-    C4 & C3 + SubnetTrapConditions         & 21 &  0 &  6 &  0 \\
-    C5 & C4 + EmptyTrapConditions          & 21 &  0 &  6 &  0 \\
-    \hline
-    C9 & C4 + state space exploration \& TO 4\,h & 21 &  2 & 0 &  4 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \mist}
-\label{mist-experiments}
-\end{table}
-
-Observations:
-\begin{itemize}
-\item State constraints over integers or reals correctly determine that the 14 benchmarks in Appendix~\ref{mist-experiments-c1} are positive.
-\item Composing state constraints with TrapConditions gives the following 6 additional positives.
-\begin{verbatim}
-PN/pingpong
-PN/basicME
-PN/multiME
-boundedPN/lamport
-boundedPN/newdekker
-boundedPN/peterson
-\end{verbatim}
-\item Composing state constraints with TrapConditions and SubnetTrapConditions gives the additional positive \ttt{PN/manufacturing}.
-  \item The remaining positive benchmarks are the following.
-\begin{verbatim}
-PN/extendedread-write
-PN/extendedread-write-smallconsts
-\end{verbatim}
-\end{itemize}
 \end{document}
