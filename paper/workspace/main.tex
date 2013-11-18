@@ -74,39 +74,38 @@ We present the method Safety by example on a simplified mutual exlusion algorith
 \begin{verbatim}
 * Code
 
-bool m = true;
+bool m = false;
 
 // Thread 1:
 while (true) {
-  if (m) {
-    m = false
+  if (! test_and_set(m)) {
     // critical section 1
-    m = true
-  }
-  if (m) {
     m = false
+  }
+  if (! test_and_set(m)) {
     // critical section 2
-    m = true
+    m = false
   }
 }
 
 // Thread 2:
 while (true) {
-  if (m) {
-    m = false
+  if (! test_and_set(m)) {
     // critical section 1
-    m = true
-  }
-  if (m) {
     m = false
+  }
+  if (! test_and_set(m)) {
     // critical section 2
-    m = true
+    m = false
   }
 }
 
 * Property: Thread 1 and Thread 2 are never in any critical section at the same time.
 
 * Petri net
+
+Place m is marked in the net exactly if m is false in the algorithm.
+
 \end{verbatim}
 
 \begin{center}
@@ -282,19 +281,9 @@ Given Petri net \verb?N? that does not violate property \verb?P?, method Invaria
   target1 >= 0
   nc      >= 0
   m       >= 0
-  cs1     >= 0
-  cs2     >= 0
+  cs1     >= target1
+  cs2     >= target1
 \end{verbatim}
-
-\begin{align*}
-
-2 \cdot nc + m <& 2 \cdot target1 \\
-  target1 \ge& 0 \\
-  nc \ge& 0 \\
-  m \ge& 0 \\
-  cs1 \ge& target1 \\
-  cs2 \ge& target1
-\end{align*}
 
 \begin{verbatim}
 * Model A:
@@ -327,31 +316,23 @@ Intermediate results:
 
 Create variable p for property P.
 
-For t1 construct inequation `target1 - nc - m + cs1 <= 0` in the following way.
-    p - input_places + output_places <= 0
-  We write `p` because the place cs1 appears in the property p and in the output places.
+For t1 construct inequation `- nc - m + cs1 <= 0` in the following way.
+   - input_places + output_places <= 0
 
-For t2 construct inequation `target1 - nc - m + cs2 <= 0` in the following way.
-    p - input_places + output_places <= 0
-  We write `p` because the place cs2 appears in the property p and in the output places.
+For t2 construct inequation `- nc - m + cs2 <= 0` in the following way.
+   - input_places + output_places <= 0
 
-For t3 construct inequation `- target1 + nc + m - cs1 <= 0` in the following way.
-  - p - input_places + output_places <= 0
-  We write `- p` because the place cs1 appears in the property p and in the input places.
+For t3 construct inequation `nc + m - cs1 <= 0` in the following way.
+   - input_places + output_places <= 0
 
-For t4 construct inequation `- target1 + nc + m - cs2 <= 0` in the following way.
-  - p - input_places + output_places <= 0
-  We write `- p` because the place cs2 appears in the property p and in the input places.
-
-The condition for writing `p` or `-p`:
-  Write   `p` when output_places \cap vars(p) \neq \empty
-  Write `- p` when input_places  \cap vars(p) \neq \empty
+For t4 construct inequation `nc + m - cs2 <= 0` in the following way.
+   - input_places + output_places <= 0
 
 Output:
-  target1 - nc - m + cs1   <= 0
-  target1 - nc - m + cs2   <= 0
-  - target1 + nc + m - cs1 <= 0
-  - target1 + nc + m - cs2 <= 0
+  - nc - m + cs1   <= 0
+  - nc - m + cs2   <= 0
+  + nc + m - cs1 <= 0
+  + nc + m - cs2 <= 0
 
   2 \cdot nc + m < 2 \cdot target1
 
@@ -360,8 +341,8 @@ Output:
   target1 >= 0
   nc      >= 0
   m       >= 0
-  cs1     >= 0
-  cs2     >= 0
+  cs1     >= target1
+  cs2     >= target1
 
   
 
@@ -470,38 +451,42 @@ $A\cdot M \ge b$ is equivalent to $\neg P$.
 \paragraph{Example: Mutual exclusion algorithm in Delzanno2001}
 
 \begin{verbatim}
-bool m1 = true;
-bool m2 = true;
+* Code
+
+bool m1 = false;
+bool m2 = false;
 
 // Thread 1:
 while (true) {
-  if (m1 && m2) {
-    m1 = false
+  if (! m2 && ! test_and_set(m1)) {
     // critical section 1
-    m1 = true
+    m1 = false
   }
-  if (m1 && m2) {
-    m2 = false
+  if (! m1 && ! test_and_set(m2)) {
     // critical section 2
-    m2 = true
+    m2 = false
   }
 }
 
 // Thread 2:
 while (true) {
-  if (m1 && m2) {
-    m1 = false
+  if (! m2 && ! test_and_set(m1)) {
     // critical section 1
-    m1 = true
+    m1 = false
   }
-  if (m1 && m2) {
-    m2 = false
+  if (! m1 && ! test_and_set(m2)) {
     // critical section 2
-    m2 = true
+    m2 = false
   }
 }
 
 Property: The number of threads in critical sections should be at most 1
+
+* Petri net
+
+Place m1 is marked in the net exactly if m1 is false in the algorithm.
+Place m2 is marked in the net exactly if m2 is false in the algorithm.
+
 \end{verbatim}
 
 \paragraph{Example: Petri net for mutual exclusion algorithm in Delzanno2001}
