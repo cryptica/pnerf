@@ -529,7 +529,7 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
   t4  >= 0
 
 * Assignment A:
-  nc  = 1
+  nc  = 0
   m1  = 0
   m2  = 0
   cs1 = 1
@@ -540,13 +540,35 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
   t4  = 0
 
 * Trap conditions C_\theta:
- TODO
+  nc  => t1 /\ t2
+  m1  => t1 /\ t2
+  m2  => t1 /\ t2
+  cs1 => t3
+  cs2 => t4
+
+  t1  => m2 \/ cs1
+  t2  => m1 \/ cs2
+  t3  => m1 \/ nc
+  t4  => m2 \/ nc
+
+  nc \/ s1 \/ s2
+
+  ~cs1 /\ ~cs2
 
 * Assignment A_\theta:
- TODO
+  nc  = false
+  m1  = true
+  m2  = true
+  cs1 = false
+  cs2 = false
+
+  t1  = true
+  t2  = true
+  t3  = true
+  t4  = true
 
 * Constraint \delta:
- TODO
+  m1 + m2 >= 1
 \end{verbatim}
 
 
