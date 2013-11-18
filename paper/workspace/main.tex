@@ -69,7 +69,7 @@
 \section{Method Safety}
 
 The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
-We present the method Safety by example on a simplified mutual exlusion algorithm by Delzanno2001.
+We present the method Safety by example on a simplified mutual exclusion algorithm by Delzanno2001.
 
 \begin{verbatim}
 * Code
@@ -102,9 +102,7 @@ while (true) {
 
 * Property: Thread 1 and Thread 2 are never in any critical section at the same time.
 
-* Petri net
-
-Place m is marked in the net exactly if m is false in the algorithm.
+* Petri net:
 
 \end{verbatim}
 
@@ -164,7 +162,7 @@ Place m is marked in the net exactly if m is false in the algorithm.
 \end{center}
 
 \begin{verbatim}
-* Property of state constraints C: if C U {\neg P} is unsat then N |= P
+* Property of state constraints C: If C U {\neg P} is unsat then N |= P.
 
 * State constraints C:
 
@@ -203,12 +201,12 @@ Place m is marked in the net exactly if m is false in the algorithm.
   
   For a given place s the place equation is
 
-  s = initial number of tokens of place s - output transitions of s + input transitions of s
+  # of tokens in s = initial number of tokens of place s - # times each output transition of s fires + # times each input transition of s fires
 
 * Non-negativity conditions:
 
-  place      >= 0
-  transition >= 0
+  # of tokens in place s           >= 0
+  # of times transition t is fired >= 0
 
 * Subprocedure \mathcal{C}:
 
@@ -223,13 +221,8 @@ Place m is marked in the net exactly if m is false in the algorithm.
 \newpage
 \section{Method Invariant}
 
-Given Petri net \verb?N? that does not violate property \verb?P?, method Invariant constructs an invariant \verb?I? with the following properties.
-\begin{itemize}
-\item For each reachable marking \verb=M=, \verb?I(M)? is valid.
-\item For markings that violate the property, \verb?I(M)? is unsat.
-\item \verb?I? is inductive:
-  \verb?\forall M. I(M) valid ^ M -> M1 implies I(M1) valid?
-\end{itemize}
+The method Invariant constructs an invariant \verb=I= for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
+We present the method Invariant by example on a simplified mutual exclusion algorithm by Delzanno2001.
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
@@ -265,6 +258,15 @@ Given Petri net \verb?N? that does not violate property \verb?P?, method Invaria
   \end{tikzpicture}
 \end{center}
 
+\begin{verbatim}
+* Property of dual state constraints C':  If C' is sat then N |= P.
+
+* Property of invariant I:
+  - I is reachable: For each reachable marking M, I(M) is valid
+  - I is safe:      For markings that violate the property, I(M) is unsat
+  - I is inductive: For each marking M, if I(M) is valid and M -> M1 then I(M1) is valid
+\end{verbatim}
+
 \newpage
 \begin{verbatim}
 * Dual state constraints C':
@@ -291,13 +293,75 @@ Given Petri net \verb?N? that does not violate property \verb?P?, method Invaria
   target1 = 1
   nc      = 0
   m       = 1
-  cs1     = 0
-  cs2     = 0
+  cs1     = 1
+  cs2     = 1
   
 * Invariant:
 
   cs1 + cs2 + m <= 1
 
+\end{verbatim}
+
+\newpage
+\begin{verbatim}
+* Derivation of invariant I for Petri net N that satisfies property P:
+
+  M                                    : marking          ~ places
+  C                                    : incidence matrix ~ rows correspond to places, columns correspond to transitions, relates places to transitions
+  X                                    : firing vector    ~ transitions
+
+  The following constraints C1 are unsat.
+  M = M0 + C*X                         : place equations
+  M >= 0                               : non-negativity conditions for places
+  X >= 0                               : non-negativity conditions for transitions
+  AM >= b                              : property P negated
+
+  Substitute M to obtain constraints C2.
+  A(M0 + CX) >= b                      : property P negated
+  M0 + CX >= 0                         : non-negativity conditions for places
+  X >= 0                               : non-negativity conditions for transitions
+
+  Rewrite each system to obtain constraints C3.
+  (-A*C)      (A*M0-b)                 : property P negated
+  (  -C)*X <= (  M0  )                 : non-negativity conditions for places
+  (  -I)      (   0  )                 : non-negativity conditions for transitions
+
+  Apply Farkas' Lemma to obtain constraints C4.
+  yT*(-A*C)                            : 
+     (  -C) = 0                        : 
+     (  -I)                            : 
+
+  yT*(A*M0-b)                          : 
+     (  M0  ) < 0                      : 
+     (   0  )                          : 
+
+  y >= 0                               : 
+
+  The constraints C4 are sat iff the following constraints C5 are sat.
+  y1 * A * C + y2 * C + y3 = 0         : 
+  y1 * (A*M - b) + y2 * M0 < 0         : 
+  y1 >= 0                              : 
+  y2 >= 0                              : 
+  y3 >= 0                              : 
+
+  The constraints C5 are sat iff the following constraints C6 are sat.
+  (y1 * A + y2) * C  <= 0              : 
+  (y1 * A + y2) * M0 < y1 * b          : 
+  y1 >= 0                              : 
+  y2 >= 0                              : 
+
+  The constraints C6 are sat iff the following constraints C' are sat.
+  \lambda * C  <= 0                    : inductivity constraint
+  \lambda * M0 < y1 * b                : safety constraint
+  \lambda >= y1 * A                    : property constraint
+  y1 >= 0                              : non-negativity constraint
+
+  For \lambda satisfying C' the invariant is the following.
+  I(M) = (\lambda * M <= \lambda * M0) : invariant
+\end{verbatim}
+
+\newpage
+\begin{verbatim}
 * Subprocedure \mathcal{C'}:
 
   Input:
@@ -306,81 +370,218 @@ Given Petri net \verb?N? that does not violate property \verb?P?, method Invaria
   Output:
     C'           : Dual state constraints
 
-
 Input:
  N = (S, T, E, I)
    = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
  P = ( cs1 + cs2 <= 1 )
 
-Intermediate results:
+TODO: Write the code
 
-Create variable p for property P.
-
-For t1 construct inequation `- nc - m + cs1 <= 0` in the following way.
-   - input_places + output_places <= 0
-
-For t2 construct inequation `- nc - m + cs2 <= 0` in the following way.
-   - input_places + output_places <= 0
-
-For t3 construct inequation `nc + m - cs1 <= 0` in the following way.
-   - input_places + output_places <= 0
-
-For t4 construct inequation `nc + m - cs2 <= 0` in the following way.
-   - input_places + output_places <= 0
-
-Output:
-  - nc - m + cs1   <= 0
-  - nc - m + cs2   <= 0
-  + nc + m - cs1 <= 0
-  + nc + m - cs2 <= 0
-
-  2 \cdot nc + m < 2 \cdot target1
-
-  Non-negativity conditions:
-
-  target1 >= 0
-  nc      >= 0
-  m       >= 0
-  cs1     >= target1
-  cs2     >= target1
-
-  
 
 * Subprocedure Inv:
 
+  Input:
+    (S, T, E, I) : Petri net
+    A            : Satisfying assignment for C'
 
-* Theorem Dual State Constraints: 
+  Output:
+    I            : Invariant
 
-  TODO: Unroll ?
+TODO: Write the code
 \end{verbatim}
 
 \newpage
+\section{Method Safety by Refinement}
 
-\iffalse
-Constraints $\mathcal C'(N, P)$ with
-$Y_1 = \begin{pmatrix}target1 \end{pmatrix}$,
-$Y_2 =\begin{pmatrix}nc & m & cs1 & cs2\end{pmatrix}$,
-$A =\begin{pmatrix}0 & 0 & 1 & 1 \end{pmatrix}$ and
-$b =\begin{pmatrix}2 \end{pmatrix}$:
+The method Safety by Refinement applies trap conditions to check that a given Petri net \verb=N= never violates a property \verb=P=.
+We present the method Invariant by example on a mutual exclusion algorithm by Delzanno2001.
 
-\begin{align*}
-  target1 - nc - m + cs1 \le& 0 \\ 
-  target1 - nc - m + cs2 \le& 0 \\ 
-  - target1 + nc + m - cs1 \le& 0 \\ 
-  - target1 + nc + m - cs2 \le& 0 \\ 
-2 \cdot nc + m <& 2 \cdot target1 \\
-  target1 \ge& 0 \\
-  nc \ge& 0 \\
-  m \ge& 0 \\
-  cs1 \ge& 0 \\
-  cs2 \ge& 0
-\end{align*}
+\begin{verbatim}
 
-Satisfying assignment is $Y_1 = \begin{pmatrix} 1 \end{pmatrix}$ and
-$Y_2 = \begin{pmatrix}0 & 1 & 0 & 0 \end{pmatrix}$
+* Code
 
-Invariant $\text{Inv}(N, P, A) = (cs1 + cs2 + m \le 1)$
-\fi
+bool m1 = false;
+bool m2 = false;
+
+// Thread 1:
+while (true) {
+  if (! m2 && ! test_and_set(m1)) {
+    // critical section 1
+    m1 = false
+  }
+  if (! m1 && ! test_and_set(m2)) {
+    // critical section 2
+    m2 = false
+  }
+}
+
+// Thread 2:
+while (true) {
+  if (! m2 && ! test_and_set(m1)) {
+    // critical section 1
+    m1 = false
+  }
+  if (! m1 && ! test_and_set(m2)) {
+    // critical section 2
+    m2 = false
+  }
+}
+
+Property: Thread 1 and Thread 2 are never in any critical section at the same time.
+
+* Petri net:
+\end{verbatim}
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+  \node[blue place, tokens=2, label=above:nc] (nc) {};
+  \node[place, tokens=1, label=right:m2, below of=nc, xshift=+0.75cm] (s2) {};
+  \node[place, tokens=1, label=left:m1, below of=nc, xshift=-0.75cm] (s1) {};
+  \node[red place, label=above:cs1, left of=s1] (cs1) {};
+  \node[red place, label=above:cs2, right of=s2] (cs2) {};
+  \node[transition, label=above:t1] (t1) at ($(s1)!0.5!(cs1) + (0,1cm)$) {}
+	edge [pre] (nc)
+	edge [pre] (s1)
+	edge [pre] (s2)
+	edge [post] (cs1)
+	edge [post] (s2);
+  \node[transition, label=above:t2] (t2) at ($(s2)!0.5!(cs2) + (0,1cm)$) {}
+	edge [pre] (nc)
+	edge [pre] (s2)
+	edge [pre] (s1)
+	edge [post] (cs2)
+	edge [post] (s1);
+  \node[transition, label=below:t3] (t3) at ($(s1)!0.5!(cs1) - (0,1cm)$) {}
+	edge [pre] (cs1)
+	edge [post] (s1)
+	edge [post,bend left,min distance=3cm, out=115, in=115] (nc);
+  \node[transition, label=below:t4] (t4) at ($(s2)!0.5!(cs2) - (0,1cm)$) {}
+	edge [pre] (cs2)
+	edge [post] (s2)
+	edge [post,bend right,min distance=3cm, out=-115, in=-115] (nc);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+\begin{verbatim}
+* Method Safety:
+
+  Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
+  Subprocedure \Delta constructs constraint \delta corresponding to A_\theta.
+\end{verbatim}
+\begin{center}
+\begin{tikzpicture}
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+                               	$C_{\theta}:=\text{TrapConditions}(N, A)$};
+  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+                                    	$\delta:=\Delta(A_\theta)$\\
+                                    	$C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {YES};
+  \node[print, right=of satctheta] (dontknow) {Don't know};
+  \node[state, right=of yes] (end1) {END};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge (c);
+  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge node[above]{NO} (yes);
+  \draw (yes) edge (end1);
+  \draw (satc) edge node[right]{YES} (modelc);
+  \draw (modelc) edge (satctheta);
+  \draw (satctheta) edge node[above]{NO} (dontknow);
+  \draw (dontknow) edge (end2);
+  \draw (satctheta) edge node[right]{YES} (modelctheta);
+  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+\end{center}
+
+\begin{verbatim}
+* Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
+  1. S is a trap in the net N
+  2. S is marked in the initial marking M0
+  3. S is unmarked in the assignment A
+
+* Property of constraint \delta: Constraint \delta refines the abstraction, i.e.
+  1. A ^ \delta is unsat (\delta excludes A)
+  2. N |= \delta is sat  (\delta is a property of N)
+\end{verbatim}
+
+\begin{verbatim}
+* State constraints C:
+
+  nc  =  2 - t1 - t2 + t3 + t4
+  m1  =  1 - t1 + t3
+  m2  =  1 - t2 + t4
+  cs1 =  0 + t1 - t3
+  cs2 =  0 + t2 - t4
+
+  nc  >= 0
+  m1  >= 0
+  m2  >= 0
+  cs1 >= 0
+  cs2 >= 0
+  t1  >= 0
+  t2  >= 0
+  t3  >= 0
+  t4  >= 0
+
+* Assignment A:
+  nc  = 1
+  m1  = 0
+  m2  = 0
+  cs1 = 1
+  cs2 = 1
+  t1  = 1
+  t2  = 1
+  t3  = 0
+  t4  = 0
+
+* Trap conditions C_\theta:
+ TODO
+
+* Assignment A_\theta:
+ TODO
+
+* Constraint \delta:
+ TODO
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
