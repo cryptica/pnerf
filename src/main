@@ -162,39 +162,33 @@ function minimize_invariant {
   run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
 
   vecho
-  vecho "* Checking SAT(C'_$iter)"
+  vecho "* Checking SAT(C')"
   if ( run_z3 $tmpdir/constraints-c-prime.smt2 $tmpdir/model-a-prime.smt2 ); then
-    vecho "- sat, getting model A'_$iter for C'_$iter"
+    vecho "- sat, getting model A' for C'"
     >$tmpdir/minimization-constraints.pl
     run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
     iter=0
     while (
       vecho
       vecho " * Minimizing invariant in iteration $iter"
-      vecho " - finding next place to be set to zero"
-      run_sicstus minimization-constraints.pl $tmpdir/minimization-constraints-next.pl $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl $tmpdir/minimization-constraints.pl
+      vecho " - constructing minimization constraints M_$iter"
+      run_sicstus minimization-constraints.pl $tmpdir/constraints-min.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+      vecho " - constructing constraints C''_$iter"
+      run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-c-prime-next.smt2 $tmpdir/constraints-c-prime.smt2 $tmpdir/constraints-min.smt2
+      vecho " - checking SAT(C''_$iter)"
+      run_z3 $tmpdir/constraints-c-prime-next.smt2 $tmpdir/model-a-prime.smt2
       ); do
-      vecho " - constructing additional z3 constraints"
-      run_sicstus minimization-constraints-to-z3 $tmpdir/constraints-c-prime-plus.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl $tmpdir/minimization-constraints-next.pl
-      vecho " - constructing complete z3 constraints"
-      run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-c-prime-next.smt2 $tmpdir/constraints-c-prime.smt2 $tmpdir/constraints-c-prime-plus.smt2
-      vecho " - testing sat"
-      if ( run_z3 $tmpdir/constraints-c-prime-next.smt2 $tmpdir/model-a-prime.smt2 ); then
-        vecho " - sat, using new model"
-        run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
-      else
-        vecho " - unsat, disabling used place"
-        cat $tmpdir/minimization-constraints-next.pl >>$tmpdir/minimization-constraints.pl
-      fi
+      vecho "- sat, getting model A'' for C''"
+      run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
       iter=$((iter + 1))
     done
-    vecho " - no more places to be set to zero"
+    vecho " - unsat, found minimal invariant"
     vecho " - constructing invariant I for petri net N and model A'_$iter"
     run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
     cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
     return 0
   else
-    vecho " - unsat"
+    vecho " - unsat, no invariant"
     return 2
   fi
 }
