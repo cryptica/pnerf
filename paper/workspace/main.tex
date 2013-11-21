@@ -2,14 +2,12 @@
 
 \usepackage{amsmath}
 \usepackage[usenames,dvipsnames]{color}
-\usepackage{multirow}
 \usepackage{listings}
 \usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,shapes.multipart,shapes.geometric,
-	snakes,automata,backgrounds,petri,calc}
-\usetikzlibrary{positioning}
+	snakes,automata,backgrounds,petri,calc,positioning}
 
 \newcommand{\bfc}{{\sc Bfc}}
 \newcommand{\mist}{{\sc Mist}}
@@ -246,7 +244,7 @@ We present the method Invariant by example on a simplified mutual exclusion algo
     \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
     \node[print, right=of satc] (noinv) {No Invariant};
     \node[action, below=of satc] (inv) {$A:=\text{Model}(C')$\\
-      $I := \text{Inv}(N, P, A)$};
+      $I := \text{Inv}(N, A)$};
     \node[print, below=of inv] (printinv) {Invariant: $I$};
     \node[state, right=of noinv] (end1) {END};
     \node[state, below=of printinv] (end2) {END};
@@ -367,13 +365,13 @@ We present the method Invariant by example on a simplified mutual exclusion algo
 * Subprocedure \mathcal{C'}:
 
   Input:
-    (S, T, E, I) : Petri net
-    P            : Property
+    (S, T, E, M0) : Petri net
+    P             : Property
   Output:
-    C'           : Dual state constraints
+    C'            : Dual state constraints
 
 Input:
- N = (S, T, E, I)
+ N = (S, T, E, M0)
    = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
  P = ( cs1 + cs2 <= 1 )
 
@@ -383,16 +381,124 @@ TODO: Unroll pseudocode?
 * Subprocedure Inv:
 
   Input:
-    (S, T, E, I) : Petri net
-    A            : Satisfying assignment for C'
+    (S, T, E, M0) : Petri net
+    A             : Satisfying assignment for C'
 
   Output:
-    I            : Invariant
+    I             : Invariant
 
 TODO: Unroll pseudocode?
 \end{verbatim}
 
 \newpage
+\section{Method Invariant Minimization}
+
+The method Invariant Minimization constructs an invariant \verb=I= that uses a minimal number places for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
+We present the method Invariant Minimization by example on a simplified mutual exclusion algorithm by Delzanno2001.
+
+\begin{verbatim}
+* Code, property, and Petri net: same as in section Method Safety.
+\end{verbatim}
+
+\begin{verbatim}
+* Method Invariant
+
+  Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A
+\end{verbatim}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node[state] (begin) {BEGIN};
+    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
+    \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
+    \node[print, right=of satc] (noinv) {No Invariant};
+    \node[action, below=of satc] (model1) {$A:=\text{Model}(C')$};
+    \node[action, below=of model1] (cm) {$C_M:=\text{MinConstraints}(N, A)$};
+    \node[decision, below=of cm] (satcm) {$\text{SAT}(C' \cup C_M)$};
+    \node[action, right=of satcm] (model2) {$A:=\text{Model}(C' \cup C_M)$};
+    \node[action, below=of satcm] (inv) {$I := \text{Inv}(N, A)$};
+    \node[print, below=of inv] (printinv) {Invariant: $I$};
+    \node[state, right=of noinv] (end1) {END};
+    \node[state, below=of printinv] (end2) {END};
+    
+    \draw (begin) edge (c);
+    \draw (c) edge (satc);
+    \draw (satc) edge node[above]{NO} (noinv);
+    \draw (noinv) edge (end1);
+    \draw (satc) edge node[right]{YES} (model1);
+    \draw (model1) edge coordinate[pos=.5] (edgein) (cm);
+    \draw (cm) edge (satcm);
+    \draw (satcm) edge node[above]{YES} (model2);
+    \draw (model2) |- (edgein);
+    \draw (satcm) edge node[right]{NO} (inv);
+    \draw (inv) edge (printinv);
+    \draw (printinv) edge (end2);
+  \end{tikzpicture}
+\end{center}
+
+\begin{verbatim}
+* Property of minimization constraints C_M generated from A: 
+    If A' satisfies C' u C_M, then Inv(N, A') uses less places than Inv(N, A)
+\end{verbatim}
+
+\newpage
+\begin{verbatim}
+* Example:
+  - Dual state constraints C' and satisfying assignment A for C' as in example for method Invariant
+
+  - Minimization constraints:
+
+    nc  ~= 0 => m_nc = 1
+    |           --------
+    |              |
+    |           place appears in invariant
+    |
+    place coefficient in the invariant
+
+    nc   = 0 => m_nc  = 0
+    |           ---------
+    |              |
+    |           place does not appear in invariant
+    |
+    place coefficient in the invariant
+
+    m   ~= 0 => m_m   = 1
+    m    = 0 => m_m   = 0
+    cs1 ~= 0 => m_cs1 = 1
+    cs1  = 0 => m_cs1 = 0
+    cs2 ~= 0 => m_cs2 = 1
+    cs2  = 0 => m_cs2 = 0
+
+    m_nc + m_m + m_cs1 + m_cs2 < 3
+    --------------------------   |
+                |                |
+                |    number of places appearing in current invariant for A
+                |    = #{s | A(s) ~= 0} = #{m, cs1, cs2}
+                |
+                |
+  number of places appearing in new invariant
+\end{verbatim}
+
+\begin{verbatim}
+* Subprocedure \text{MinConstraints}:
+
+  Input:
+    (S, T, E, M0) : Petri net
+    A             : Assignment
+  Output:
+    C_M           : Minimization Constraints
+
+Input:
+ N   = (S, T, E, M0)
+     = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
+ A   = ( nc=0, m=1, cs1=1, cs2=1, target1=1 )
+
+TODO: Unroll pseudocode?
+
+\end{verbatim}
+
+\newpage
+
 \section{Method Safety by Refinement}
 
 The method Safety by Refinement applies trap conditions to check that a given Petri net \verb=N= never violates a property \verb=P=.
@@ -787,14 +893,14 @@ $b =\begin{pmatrix}2 \end{pmatrix}$:
 Satisfying assignment is $Y_1 = \begin{pmatrix} 1 \end{pmatrix}$ and
 $Y_2 = \begin{pmatrix}0 & 1 & 0 & 0 \end{pmatrix}$
 
-Invariant $\text{Inv}(N, P, A) = (cs1 + cs2 + m \le 1)$
+Invariant $\text{Inv}(N, A) = (cs1 + cs2 + m \le 1)$
 
 \paragraph{Technique}
 \begin{align*}
   \mathcal C'(N, P) =& ( ( ( Y_1 \cdot A + Y_2) \cdot C \le 0) \land \\
 & ((Y_1 \cdot A + Y_2) \cdot M_0 < Y_1 \cdot b) \land \\
 & (Y_1 \ge 0) \land (Y_2 \ge 0)) \\
-  \text{Inv}(N, P, A) =& ( ( Y_1 \cdot A + Y_2) \cdot M \le ( Y_1 \cdot A + Y_2) \cdot M_0)
+  \text{Inv}(N, A) =& ( ( Y_1 \cdot A + Y_2) \cdot M \le ( Y_1 \cdot A + Y_2) \cdot M_0)
 \end{align*}
 where $M_0$ is the initial marking, $C$ is the incidence matrix of the net and
 $A\cdot M \ge b$ is equivalent to $\neg P$.
@@ -807,7 +913,7 @@ $A\cdot M \ge b$ is equivalent to $\neg P$.
   \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
   \node[print, right=of satc] (noinv) {No Invariant};
   \node[action, below=of satc] (inv) {$A_\theta:=\text{Model}(C')$\\
-                                  	$I := \text{Inv}(N, P, A)$};
+                                  	$I := \text{Inv}(N, A)$};
   \node[print, below=of inv] (printinv) {Invariant: $I$};
   \node[state, right=of noinv] (end1) {END};
   \node[state, below=of printinv] (end2) {END};
