@@ -1,6 +1,6 @@
 .*.swp
-doc/*-dot2tex-fig*
-doc/*.aux
-doc/*.log
-doc/*.toc
-doc/*.pdf
+*-dot2tex-fig*
+*.aux
+*.log
+*.toc
+*.pdf
