@@ -93,8 +93,8 @@ sed -e '/^[[:blank:]]*$/D' \
             n=$((n+1))
             echo $line | \
               sed -e "s/\([[:alpha:]_][[:alnum:]_]*\)[[:blank:]]*>=[[:blank:]]*\
-\([[:digit:]][[:digit:]_]*\)/init('\1', \2).\n\
-transition(init$n, [], ['\1'])./"
+\([[:digit:]][[:digit:]_]*\)/init('\1', \2).=\
+transition(init$n, [], ['\1'])./" | tr '=' '\n'
         else
             echo $line
         fi
