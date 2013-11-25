@@ -33,7 +33,7 @@
 \title{Report on a Safety Checker for Petri nets}
 \author{Philipp Meyer \and Rusl\'{a}n Ledesma-Garza}
 % \institute{Technische Universit\"at M\"unchen}
-\date{Wed Nov 13 09:11:15 CEST 2013}
+\date{Mon Nov 25 14:24:10 CET 2013}
 
 
 
@@ -145,7 +145,7 @@ while (true) {
     \node[state] (begin) {BEGIN};
     \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
     \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-    \node[print, right=of satc] (yes) {YES};
+    \node[print, right=of satc] (yes) {N satisfies P};
     \node[print, below=of satc] (dontknow) {Don't know};
     \node[state, right=of yes] (end1) {END};
     \node[state, below=of dontknow] (end2) {END};
@@ -202,7 +202,9 @@ while (true) {
   
   For a given place s the place equation is
 
-  # of tokens in s = initial number of tokens of place s - # times each output transition of s fires + # times each input transition of s fires
+  # of tokens in s = initial number of tokens of place s
+                     - # times each output transition of s fires
+                     + # times each input transition of s fires
 
 * Non-negativity conditions:
 
@@ -587,7 +589,7 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
   \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
                                     	$\delta:=\Delta(A_\theta)$\\
                                     	$C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {YES};
+  \node[print, right=of satc] (yes) {N satisfies P};
   \node[print, right=of satctheta] (dontknow) {Don't know};
   \node[state, right=of yes] (end1) {END};
   \node[state, right=of dontknow] (end2) {END};
@@ -734,31 +736,21 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
 \section{Benchmarks of \bfc}
 
 We experimented on the benchmarks \ttt{cprover-PN} and
-\ttt{cprover\_software\_analysis}
-available at
+\ttt{cprover\_software\_analysis} available at \\
 \ttt{http://www.mpi-sws.org/\~{}jkloos/iic-experiments/cprover.zip}.
 The set of benchmarks consists 77 benchmarks, 26 positive and 51 negative.
-We applied 8 tool configurations to the set of benchmarks.
 Table~\ref{bfc-experiments} shows the corresponding experimental results.
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | r | p{7cm} | r | r | r | r | } %
+  \begin{tabular}{ | p{7cm} | r | r | r | r | } %
     \hline
-    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
+    Method & pos & neg & don't know & TO \\
     \hline
-    C1 & State constraint over real numbers & 23 &  0 & 54 &  0 \\
-    C2 & State constraint over integers        & 23 &  0 & 54 &  0 \\
-    \hline
-    C3 & C2 + TrapConditions                   & 23 &  0 & 54 &  0 \\
-    C4 & C3 + SubnetTrapConditions         & 23 &  0 & 50 &  4 \\
-    C5 & C4 + EmptyTrapConditions          & 23 &  0 & 46 &  8 \\
-    \hline
-    C6 & C1 + state space exploration \& TO 1\,min & 26 & 34 & 0 & 17 \\
-    C7 & C1 + state space exploration \& TO 10\,min & 26 & 39 & 0 & 12 \\
-    C8 & C1 + state space exploration \& TO 8\,h   & 26 & 45 & 0 &  6 \\
-    \hline
-    C10 & Method Invariant                  & 23 &  0 & 54 &  0 \\
+    Safety (over real numbers or naturals) & 23 &  0 & 54 &  0 \\
+    Invariant                              & 23 &  0 & 54 &  0 \\
+    Invariant Minimization                 & 23 &  0 & 54 &  0 \\
+    Safety by Refinement                   & 23 &  0 & 54 &  0 \\
     \hline
   \end{tabular}
 \end{center}
@@ -766,20 +758,6 @@ Table~\ref{bfc-experiments} shows the corresponding experimental results.
 \label{bfc-experiments}
 \end{table}
 
-Observations:
-\begin{itemize}
-\item State constraints over integers or reals correctly determine that the 23 benchmarks in Appendix~\ref{bfc-experiments-c1} are positive.
-\item Composing state space constraints with concrete state space
-  exploration gives the following 3 additional positives.
-\begin{verbatim}
-cprover-PN/lamport
-cprover-PN/newdekker
-cprover-PN/peterson
-\end{verbatim}
-\end{itemize}
-
-
-\newpage
 \section{Benchmarks of \mist}
 
 We experimented on the benchmarks available at \\
@@ -787,391 +765,23 @@ We experimented on the benchmarks available at \\
 and \\
 \ttt{https://github.com/pierreganty/mist/tree/master/examples/PN}.
 The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
-We applied 6 tool configurations to the set of benchmarks.
 Table~\ref{mist-experiments} shows the corresponding experimental results.
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | r | p{6cm} | r | r | r | r | }
+  \begin{tabular}{ | p{6cm} | r | r | r | r | }
     \hline
-    \multicolumn{2}{|l|}{Configuration} & pos & neg & don't know & TO \\
+    Method & pos & neg & don't know & TO \\
     \hline
-    C1 & State constraint with real numbers & 14 &  0 & 13 &  0 \\
-    C2 & State constraint with integers     & 14 &  0 & 13 &  0 \\
-    \hline
-    C3 & C2 + TrapConditions               & 20 &  0 &  7 &  0 \\
-    C4 & C3 + SubnetTrapConditions         & 21 &  0 &  6 &  0 \\
-    C5 & C4 + EmptyTrapConditions          & 21 &  0 &  6 &  0 \\
-    \hline
-    C9 & C4 + state space exploration \& TO 4\,h & 21 &  2 & 0 &  4 \\
-    \hline
-    C10 & Method Invariant                  & 14 &  0 & 13 &  0 \\
+    Safety (over real numbers or naturals) & 14 &  0 & 13 &  0 \\
+    Invariant                              & 14 &  0 & 13 &  0 \\
+    Invariant Minimization                 & 14 &  0 & 13 &  0 \\
+    Safety by Refinement                   & 20 &  0 &  7 &  0 \\
     \hline
   \end{tabular}
 \end{center}
 \caption{Experimental results for the benchmarks of \mist}
 \label{mist-experiments}
 \end{table}
-
-Observations:
-\begin{itemize}
-\item State constraints over integers or reals correctly determine that the 14 benchmarks in Appendix~\ref{mist-experiments-c1} are positive.
-\item Composing state constraints with TrapConditions gives the following 6 additional positives.
-\begin{verbatim}
-PN/pingpong
-PN/basicME
-PN/multiME
-boundedPN/lamport
-boundedPN/newdekker
-boundedPN/peterson
-\end{verbatim}
-\item Composing state constraints with TrapConditions and SubnetTrapConditions gives the additional positive \ttt{PN/manufacturing}.
-  \item The remaining positive benchmarks are the following.
-\begin{verbatim}
-PN/extendedread-write
-PN/extendedread-write-smallconsts
-\end{verbatim}
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\iffalse
-
-\paragraph{Intermediate results}
-Constraints $\mathcal C'(N, P)$ with
-$Y_1 = \begin{pmatrix}target1 \end{pmatrix}$,
-$Y_2 =\begin{pmatrix}nc & m & cs1 & cs2\end{pmatrix}$,
-$A =\begin{pmatrix}0 & 0 & 1 & 1 \end{pmatrix}$ and
-$b =\begin{pmatrix}2 \end{pmatrix}$:
-
-\begin{align*}
-  target1 - nc - m + cs1 \le& 0 \\ 
-  target1 - nc - m + cs2 \le& 0 \\ 
-  - target1 + nc + m - cs1 \le& 0 \\ 
-  - target1 + nc + m - cs2 \le& 0 \\ 
-2 \cdot nc + m <& 2 \cdot target1 \\
-  target1 \ge& 0 \\
-  nc \ge& 0 \\
-  m \ge& 0 \\
-  cs1 \ge& 0 \\
-  cs2 \ge& 0
-\end{align*}
-
-Satisfying assignment is $Y_1 = \begin{pmatrix} 1 \end{pmatrix}$ and
-$Y_2 = \begin{pmatrix}0 & 1 & 0 & 0 \end{pmatrix}$
-
-Invariant $\text{Inv}(N, A) = (cs1 + cs2 + m \le 1)$
-
-\paragraph{Technique}
-\begin{align*}
-  \mathcal C'(N, P) =& ( ( ( Y_1 \cdot A + Y_2) \cdot C \le 0) \land \\
-& ((Y_1 \cdot A + Y_2) \cdot M_0 < Y_1 \cdot b) \land \\
-& (Y_1 \ge 0) \land (Y_2 \ge 0)) \\
-  \text{Inv}(N, A) =& ( ( Y_1 \cdot A + Y_2) \cdot M \le ( Y_1 \cdot A + Y_2) \cdot M_0)
-\end{align*}
-where $M_0$ is the initial marking, $C$ is the incidence matrix of the net and
-$A\cdot M \ge b$ is equivalent to $\neg P$.
-
-\paragraph{Method Invariant}
-\mbox{ } \\
-\begin{tikzpicture}
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
-  \node[print, right=of satc] (noinv) {No Invariant};
-  \node[action, below=of satc] (inv) {$A_\theta:=\text{Model}(C')$\\
-                                  	$I := \text{Inv}(N, A)$};
-  \node[print, below=of inv] (printinv) {Invariant: $I$};
-  \node[state, right=of noinv] (end1) {END};
-  \node[state, below=of printinv] (end2) {END};
- 
-  \draw (begin) edge (c);
-  \draw (c) edge (satc);
-  \draw (satc) edge node[above]{NO} (noinv);
-  \draw (satc) edge node[right]{YES} (inv);
-  \draw (noinv) edge (end1);
-  \draw (inv) edge (printinv);
-  \draw (printinv) edge (end2);
-\end{tikzpicture}
-
-\section{Method Safety by Refinement}
-
-\paragraph{Example: Mutual exclusion algorithm in Delzanno2001}
-
-\begin{verbatim}
-* Code
-
-bool m1 = false;
-bool m2 = false;
-
-// Thread 1:
-while (true) {
-  if (! m2 && ! test_and_set(m1)) {
-    // critical section 1
-    m1 = false
-  }
-  if (! m1 && ! test_and_set(m2)) {
-    // critical section 2
-    m2 = false
-  }
-}
-
-// Thread 2:
-while (true) {
-  if (! m2 && ! test_and_set(m1)) {
-    // critical section 1
-    m1 = false
-  }
-  if (! m1 && ! test_and_set(m2)) {
-    // critical section 2
-    m2 = false
-  }
-}
-
-Property: The number of threads in critical sections should be at most 1
-
-* Petri net
-
-Place m1 is marked in the net exactly if m1 is false in the algorithm.
-Place m2 is marked in the net exactly if m2 is false in the algorithm.
-
-\end{verbatim}
-
-\paragraph{Example: Petri net for mutual exclusion algorithm in Delzanno2001}
-\mbox{ } \\
-\begin{tikzpicture}[node distance=2cm]
-  \node[blue place, tokens=2, label=above:nc] (nc) {};
-  \node[place, tokens=1, label=right:m2, below of=nc, xshift=+0.75cm] (s2) {};
-  \node[place, tokens=1, label=left:m1, below of=nc, xshift=-0.75cm] (s1) {};
-  \node[red place, label=above:cs1, left of=s1] (cs1) {};
-  \node[red place, label=above:cs2, right of=s2] (cs2) {};
-  \node[transition, label=above:t1] (t1) at ($(s1)!0.5!(cs1) + (0,1cm)$) {}
-	edge [pre] (nc)
-	edge [pre] (s1)
-	edge [pre] (s2)
-	edge [post] (cs1)
-	edge [post] (s2);
-  \node[transition, label=above:t2] (t2) at ($(s2)!0.5!(cs2) + (0,1cm)$) {}
-	edge [pre] (nc)
-	edge [pre] (s2)
-	edge [pre] (s1)
-	edge [post] (cs2)
-	edge [post] (s1);
-  \node[transition, label=below:t3] (t3) at ($(s1)!0.5!(cs1) - (0,1cm)$) {}
-	edge [pre] (cs1)
-	edge [post] (s1)
-	edge [post,bend left,min distance=3cm, out=115, in=115] (nc);
-  \node[transition, label=below:t4] (t4) at ($(s2)!0.5!(cs2) - (0,1cm)$) {}
-	edge [pre] (cs2)
-	edge [post] (s2)
-	edge [post,bend right,min distance=3cm, out=-115, in=-115] (nc);
-\end{tikzpicture}
-\begin{align*}
-  P &= ( cs1 + cs2 \le 1 ) \\
-  \neg P &= ( cs1 + cs2 \ge 2 )
-\end{align*}
-
-\paragraph{Intermediate results}
-Constraints $\mathcal C(N)$ with
-$M =\begin{pmatrix}nc & m1 & m2 & cs1 & cs2 \end{pmatrix}^T$,
-$M_0 =\begin{pmatrix}2 & 1 & 1 & 0 & 0 \end{pmatrix}^T$,
-$X =\begin{pmatrix}t1 & t2 & t3 & t4 \end{pmatrix}^T$ and
-$C =\begin{pmatrix}
-  -1 & -1 & 1 & 1 \\
-  -1 &  0 & 1 & 0 \\
-   0 & -1 & 0 & 1 \\
-  1 & 0 & -1 & 0 \\
-  0 & 1 & 0 & -1
-\end{pmatrix}$:
-\begin{align*}
-  nc   =& 2 - t1 - t2 + t3 + t4 \\
-  m1  =& 1 - t1 + t3 \\
-  m2  =& 1 - t2 + t4 \\
-  cs1 =& 0 + t1 - t3 \\
-  cs2 =& 0 + t2 - t4 \\
-  nc \ge& 0 \\
-  m1 \ge& 0 \\
-  m2 \ge& 0 \\
-  cs1 \ge& 0 \\
-  cs2 \ge& 0
-\end{align*}
-
-Satisfying assignment is
-$M =\begin{pmatrix}0 & 0 & 0 & 1 & 1 \end{pmatrix}^T$ and
-$X =\begin{pmatrix}1 & 1 & 0 & 0 \end{pmatrix}^T$.
-
-A set satisfying the trap conditions is $S = \{m1, m2\}$.
-
-The trap constraint is $\delta = (m1 + m2 \ge 1)$.
-
-With the additional constraint, the set of constraints is unsatisfiable.
-
-\paragraph{Technique trap conditions} For a petri net $N$ and an assignment $A$,
-find a set $S$ that satisfies
-\begin{enumerate}
-  \item $S$ is a trap in the net $N$.
-  \item $S$ is marked in the initial marking $M_0$.
-  \item $S$ is unmarked in the assignment $A$.
-\end{enumerate}
-For such a set $S$, generate a constraint
-$\delta = \left( \sum_{s \in S} s \ge 1 \right)$, ensuring the
-trap is marked in any assignment.
-
-\paragraph{Method Safety by Refinement}
-\mbox{ } \\
-\begin{tikzpicture}
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                               	$C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                    	$\delta:=\Delta(A_\theta)$\\
-                                    	$C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {YES};
-  \node[print, right=of satctheta] (dontknow) {Don't know};
-  \node[state, right=of yes] (end1) {END};
-  \node[state, right=of dontknow] (end2) {END};
-
-  \draw (begin) edge (c);
-  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge node[above]{NO} (yes);
-  \draw (yes) edge (end1);
-  \draw (satc) edge node[right]{YES} (modelc);
-  \draw (modelc) edge (satctheta);
-  \draw (satctheta) edge node[above]{NO} (dontknow);
-  \draw (dontknow) edge (end2);
-  \draw (satctheta) edge node[right]{YES} (modelctheta);
-  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-
-\section{Method Invariant by Refinement}
-
-\paragraph{Example}
-See example for method Safety by Refinement.
-
-\paragraph{Intermediate results}
-Constraints $\mathcal C'(N)$ with
-$Y_1 = \begin{pmatrix}target1 \end{pmatrix}$,
-$Y_2 = \begin{pmatrix}trap2 \end{pmatrix}$,
-$Y_3 =\begin{pmatrix}nc & m & cs1 & cs2\end{pmatrix}$,
-the trap from the trap refinement as
-$D =\begin{pmatrix}0 & 1 & 1 & 0 & 0 \end{pmatrix}$,
-$A =\begin{pmatrix}0 & 0 & 0 & 1 & 1 \end{pmatrix}$ and
-$b =\begin{pmatrix}1 \end{pmatrix}$:
-
-\begin{align*}
-  target1 - trap1 - nc - m1 + cs1 \le& 0 \\ 
-  target1 - trap1 - nc - m2 + cs2 \le& 0 \\ 
-  - target1 + trap1 + nc + m1 - cs1 \le& 0 \\ 
-  - target1 + trap1 + nc + m2 - cs2 \le& 0 \\ 
-2 \cdot trap1 + 2 \cdot nc + m1 + m2 <& 2 \cdot target1 + trap1 \\
-  target1 \ge& 0 \\
-  trap1 \ge& 0 \\
-  nc \ge& 0 \\
-  m1 \ge& 0 \\
-  m2 \ge& 0 \\
-  cs1 \ge& 0 \\
-  cs2 \ge& 0
-\end{align*}
-
-Satisfying assignment is
-$Y_1 = \begin{pmatrix} 1 \end{pmatrix}$,
-$Y_2 = \begin{pmatrix} 1 \end{pmatrix}$ and
-$Y_3 = \begin{pmatrix}0 & 0 & 0 & 0 & 0 \end{pmatrix}$.
-
-Invariant $\text{Inv}(N, D, P, A) =
-((cs1 + cs2 + m1 + m2 \le 2) \land (m1 + m2 \ge 1))$.
-
-\paragraph{Technique}
-\begin{align*}
-  \mathcal C'(N, D, P) =& ( ( ( Y_1 \cdot A + Y_2 \cdot D + Y_3) \cdot C \le 0) \land \\
-& ((Y_1 \cdot A + Y_2 \cdot D + Y_3) \cdot M_0 < Y_1 \cdot b + Y_2 \cdot \mathbf{1}) \land \\
-& (Y_1 \ge 0) \land (Y_2 \ge 0) \land (Y_3 \ge 0)) \\
-  \text{Inv}(N, D, P, A) =& ( ( Y_1 \cdot A + Y_2 \cdot D + Y_3) \cdot M \le ( Y_1 \cdot A + Y_2 \cdot D + Y_3) \cdot M_0) \land ( D \cdot M \ge \mathbf{1} )
-\end{align*}
-where $M_0$ is the initial marking, $C$ is the incidence matrix of the net, $A\cdot M \ge b$ is equivalent to $\neg P$ and $D \cdot M \ge \mathbf{1}$ is equivalent to the trap constraints.
-
-\paragraph{Method Invariant by Refinement}
-\mbox{ } \\
-\begin{tikzpicture}
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$\\
-                                 	$D:=\{\}$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                                   	$C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                        	$\delta:=\Delta(A_\theta)$\\
-                                        	$C:=C \cup \{\delta\}$\\
-                                        	$D:=D \cup \{\delta\}$};
-  \node[print, right=of satctheta] (noinv2) {No Invariant};
-  \node[state, below=of noinv2] (end3) {END};
-   
-  \node[action, right=of satc] (cprime) {$C':=\mathcal C'(N, D, P)$};
-  \node[decision, right=of cprime] (satcprime) {$\text{SAT}(C')$};
-  \node[action, below=of satcprime] (inv) {$A_\theta:=\text{Model}(C')$\\
-                                      	$I := \text{Inv}(N, D, P, A)$};
-  \node[print, below=of inv] (printinv) {Invariant: $I$};
-  \node[print, right=of satcprime] (noinv) {No Invariant};
-  \node[state, below=of noinv] (end1) {END};
-  \node[state, below=of printinv] (end2) {END};
- 
-  \draw (cprime) edge (satcprime);
-  \draw (satcprime) edge node[above]{NO} (noinv);
-  \draw (satcprime) edge node[right]{YES} (inv);
-  \draw (inv) edge (printinv);
-  \draw (noinv) edge (end1);
-  \draw (printinv) edge (end2);
- 
-  \draw (begin) edge (c);
-  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge node[above]{NO} (cprime);
-  \draw (satc) edge node[right]{YES} (modelc);
-  \draw (modelc) edge (satctheta);
-  \draw (satctheta) edge node[above]{NO} (noinv2);
-  \draw (noinv2) edge (end3);
-  \draw (satctheta) edge node[right]{YES} (modelctheta);
-  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-
-\fi
 
 \end{document}
