@@ -1,0 +1,11 @@
+benchmarks/ic3-soter/finite_leader__single_leader__depth_0__fixed.spec
+benchmarks/ic3-soter/firewall__no_pred_called_with_zero__depth_0__fixed.spec
+benchmarks/ic3-soter/howait__all_workers_finished_if_wait_over__depth_0__fixed.spec
+benchmarks/ic3-soter/safe_send__sending_to_non-pid__depth_0__fixed.spec
+benchmarks/ic3-soter/stutter__we_abhorr_as__depth_0__fixed.spec
+benchmarks/ic3-soter/stutter__we_abhorr_as__depth_1__fixed.spec
+benchmarks/ic3-soter/stutter__we_abhorr_as__depth_2__fixed.spec
+benchmarks/ic3-soter/unsafe_send__sending_to_non-pid__depth_0__fixed.spec
+benchmarks/ic3-soter/unsafe_send__sending_to_non-pid__depth_1__fixed.spec
+benchmarks/ic3-soter/unsafe_send__sending_to_non-pid__depth_2__fixed.spec
+
