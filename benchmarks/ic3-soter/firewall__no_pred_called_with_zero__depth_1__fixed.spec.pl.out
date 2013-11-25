@@ -1,9 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/ic3-soter/firewall__no_pred_called_with_zero__depth_1__fixed.spec.pl]
+[-refinement benchmarks/ic3-soter/firewall__no_pred_called_with_zero__depth_1__fixed.spec.pl]
 
 -------------------------------------------
-Invariant I for the petri net:
-(assert (<= l739 0))
+The petri net satisfies the property!
 -------------------------------------------
 
 

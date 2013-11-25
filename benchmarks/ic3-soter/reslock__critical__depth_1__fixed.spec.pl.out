@@ -1,8 +1,8 @@
 PETRINIZER: The checker for Petri Nets
-[benchmarks/ic3-soter/reslock__critical__depth_1__fixed.spec.pl]
+[-refinement benchmarks/ic3-soter/reslock__critical__depth_1__fixed.spec.pl]
 
 -------------------------------------------
-No invariant found for the net
+The petri net may not satisfy the property
 -------------------------------------------
 
 

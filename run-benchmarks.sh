@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
-for benchmark_dir in "benchmarks/ic3-soter"; do
+for benchmark_dir in benchmarks/ic3-soter; do
   >$benchmark_dir/positive-pnerf.list
   >$benchmark_dir/dontknow-pnerf.list
   >$benchmark_dir/negative-pnerf.list
@@ -10,13 +10,13 @@ for benchmark_dir in "benchmarks/ic3-soter"; do
   >$benchmark_dir/timing-pnerf.log
       #timeout 600 ./src/explore-states.sh -d 0 $pl_file | tee $pl_file.out
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
-    T="$(date +%s%N)"
+    T="$(gdate +%s%N)"
     (
       set -o pipefail;
-      timeout 600 ./src/main $pl_file | tee $pl_file.out
+      timeout 600 ./src/main -refinement $pl_file | tee $pl_file.out
     )
     result=$?
-    T=$(($(date +%s%N)-T))
+    T=$(($(gdate +%s%N)-T))
     if [[ result -eq 0 ]]; then
         list='positive'
     elif [[ result -eq 1 ]]; then

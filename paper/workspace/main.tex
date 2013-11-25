@@ -11,6 +11,7 @@
 
 \newcommand{\bfc}{{\sc Bfc}}
 \newcommand{\mist}{{\sc Mist}}
+\newcommand{\iic}{{\sc IIC}}
 \newcommand{\pnerf}{{\sc Pnerf}}
 \newcommand{\zthree}{{\sc Z3}}
 \newcommand{\ttt}[1]{\texttt{#1}}
@@ -748,8 +749,7 @@ Table~\ref{bfc-experiments} shows the corresponding experimental results.
     Method & pos & neg & don't know & TO \\
     \hline
     Safety (over real numbers or naturals) & 23 &  0 & 54 &  0 \\
-    Invariant                              & 23 &  0 & 54 &  0 \\
-    Invariant Minimization                 & 23 &  0 & 54 &  0 \\
+    Invariant \& Invariant Minimization    & 23 &  0 & 54 &  0 \\
     Safety by Refinement                   & 23 &  0 & 54 &  0 \\
     \hline
   \end{tabular}
@@ -774,14 +774,36 @@ Table~\ref{mist-experiments} shows the corresponding experimental results.
     Method & pos & neg & don't know & TO \\
     \hline
     Safety (over real numbers or naturals) & 14 &  0 & 13 &  0 \\
-    Invariant                              & 14 &  0 & 13 &  0 \\
-    Invariant Minimization                 & 14 &  0 & 13 &  0 \\
+    Invariant \& Invariant Minimization    & 14 &  0 & 13 &  0 \\
     Safety by Refinement                   & 20 &  0 &  7 &  0 \\
     \hline
   \end{tabular}
 \end{center}
 \caption{Experimental results for the benchmarks of \mist}
 \label{mist-experiments}
+\end{table}
+
+\section{Benchmarks of \iic}
+
+We experimented on the benchmarks available at \\
+\ttt{https://svn.rse.mpi-sws.org/RSE/IC3forWSTS/code/trunk/examples/soter}.
+The set of benchmarks consists 38 benchmarks, 28 positive and 10 negative.
+Table~\ref{iic-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | p{6cm} | r | r | r | r | }
+    \hline
+    Method & pos & neg & don't know & TO \\
+    \hline
+    Safety (over real numbers or naturals) & 2 & 0 & 36 & 0 \\
+    Invariant \& Invariant Minimization    & 2 & 0 & 26 & 0 \\
+    Safety by Refinement                   & 2 & 0 & 36 & 0 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \iic}
+\label{iic-experiments}
 \end{table}
 
 \end{document}

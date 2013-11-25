@@ -16,8 +16,8 @@ results_other_tool=( positive negative error timeout )
 our_tool=pnerf
 other_tool=bfc
 
-benchmark_dirs=( 'found-in-mist-repo' 'given-by-daniel-kroening' )
-benchmark_tools=( 'mist' 'bfc' )
+benchmark_dirs=( 'found-in-mist-repo' 'given-by-daniel-kroening' 'ic3-soter' )
+benchmark_tools=( 'mist' 'bfc' 'iic' )
 for (( benchmark=0;benchmark<${#benchmark_dirs[@]};benchmark++)); do
   benchmark_dir='benchmarks/'${benchmark_dirs[$benchmark]}
   other_tool=${benchmark_tools[$benchmark]}

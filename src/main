@@ -19,8 +19,11 @@ function print_usage {
 
 Usage: $0 [options] input_file
 Option list:
+ -safety | --safety           : Method Safety, default
+ -invariant | --invariant     : Method Invariant
+ -refinement | --refinement   : Method Safety by Refinement
  -h | --h | -help | --help    : Prints this help
- -v                           : Verbose output
+ -v | --v                     : Verbose output
 
 EOF
 }
@@ -37,6 +40,10 @@ function vecho {
 
 print_title "$*"
 
+# Method Safety
+invariant=false
+refinement_methods=( )
+equation_type='Real'
 
 # parse parameters
 for a in $@; do
@@ -47,6 +54,21 @@ for a in $@; do
             ;;
         -v | --v)
             verbose=true
+            ;;
+        -safety | --safety)
+            # Method Safety, see above
+            ;;
+        -invariant | --invariant)
+            # Method Invariant & Invariant Minimization
+            invariant=true
+            refinement_methods=( )
+            equation_type='Real'
+            ;;
+        -refinement | --refinement)
+            # Method Safety by Refinement
+            invariant=false
+            refinement_methods=( 'trap' )
+            equation_type='Real'
             ;;
         -*)
             echo 'ERROR: Unknown option '$a
@@ -143,16 +165,16 @@ function run_bash {
   return $res
 }
 
-#invariant=false
-invariant=true
+# #invariant=false
+# invariant=true
 
-#refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
-#refinement_methods=( 'trap' 'empty-trap' )
-#refinement_methods=( 'subnet-trap' )
-#refinement_methods=( )
-refinement_methods=( 'trap' )
-#equation_type='Int'
-equation_type='Real'
+# #refinement_methods=( 'trap' 'empty-trap' 'subnet-trap' )
+# #refinement_methods=( 'trap' 'empty-trap' )
+# #refinement_methods=( 'subnet-trap' )
+# #refinement_methods=( )
+# refinement_methods=( 'trap' )
+# #equation_type='Int'
+# equation_type='Real'
 
 cp $(absolute_path $input)/$(basename $input) $tmpdir/input-petri-net.pl
 
