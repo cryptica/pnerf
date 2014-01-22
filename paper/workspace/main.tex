@@ -237,7 +237,7 @@ We present the method Invariant by example on a simplified mutual exclusion algo
 
   Subprocedure \mathcal{C'} constructs dual state constraints C' corresponding to N and P.
   Subprocedure Model returns assignment A such that A satisfies C'.
-  Subprocedure Inv constructs invariant I corresponding to N, P, and A.
+  Subprocedure Inv constructs invariant I corresponding to N and A.
 \end{verbatim}
 
 \begin{center}
@@ -394,17 +394,20 @@ TODO: Unroll pseudocode?
 \end{verbatim}
 
 \newpage
-\section{Method Invariant Minimization}
+\section{Method Invariant with Minimization}
 
-The method Invariant Minimization constructs an invariant \verb=I= that uses a minimal number places for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
-We present the method Invariant Minimization by example on a simplified mutual exclusion algorithm by Delzanno2001.
+The method Invariant with Minimization constructs an invariant \verb=I=
+that uses a minimal number of places for given Petri net \verb=N= and
+\verb=P= when \verb=N= never violates \verb=P=. 
+We present the method Invariant with Minimization by example on a
+simplified mutual exclusion algorithm by Delzanno2001.
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
 \end{verbatim}
 
 \begin{verbatim}
-* Method Invariant
+* Method Invariant with Minimization
 
   Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A
 \end{verbatim}
@@ -574,7 +577,7 @@ Property: Thread 1 and Thread 2 are never in any critical section at the same ti
 
 \newpage
 \begin{verbatim}
-* Method Safety:
+* Method Safety by Refinement:
 
   Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
   Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
@@ -748,9 +751,9 @@ Table~\ref{bfc-experiments} shows the corresponding experimental results.
     \hline
     Method & pos & neg & don't know & TO \\
     \hline
-    Safety (over real numbers or naturals) & 23 &  0 & 54 &  0 \\
-    Invariant \& Invariant Minimization    & 23 &  0 & 54 &  0 \\
-    Safety by Refinement                   & 23 &  0 & 54 &  0 \\
+    Safety (over real numbers or naturals)      & 23 &  0 & 54 &  0 \\
+    Invariant \& Invariant with Minimization    & 23 &  0 & 54 &  0 \\
+    Safety by Refinement                        & 23 &  0 & 54 &  0 \\
     \hline
   \end{tabular}
 \end{center}
@@ -773,9 +776,9 @@ Table~\ref{mist-experiments} shows the corresponding experimental results.
     \hline
     Method & pos & neg & don't know & TO \\
     \hline
-    Safety (over real numbers or naturals) & 14 &  0 & 13 &  0 \\
-    Invariant \& Invariant Minimization    & 14 &  0 & 13 &  0 \\
-    Safety by Refinement                   & 20 &  0 &  7 &  0 \\
+    Safety (over real numbers or naturals)      & 14 &  0 & 13 &  0 \\
+    Invariant \& Invariant with Minimization    & 14 &  0 & 13 &  0 \\
+    Safety by Refinement                        & 20 &  0 &  7 &  0 \\
     \hline
   \end{tabular}
 \end{center}
@@ -796,9 +799,9 @@ Table~\ref{iic-experiments} shows the corresponding experimental results.
     \hline
     Method & pos & neg & don't know & TO \\
     \hline
-    Safety (over real numbers or naturals) & 2 & 0 & 36 & 0 \\
-    Invariant \& Invariant Minimization    & 2 & 0 & 26 & 0 \\
-    Safety by Refinement                   & 2 & 0 & 36 & 0 \\
+    Safety (over real numbers or naturals)      & 2 & 0 & 36 & 0 \\
+    Invariant \& Invariant with Minimization    & 2 & 0 & 26 & 0 \\
+    Safety by Refinement                        & 2 & 0 & 36 & 0 \\
     \hline
   \end{tabular}
 \end{center}
@@ -806,7 +809,8 @@ Table~\ref{iic-experiments} shows the corresponding experimental results.
 \label{iic-experiments}
 \end{table}
 
-We constructed the following two invariants by applying the method Invariant Minimization.
+We constructed the following two invariants by applying the method
+Invariant with Minimization.
 
 \begin{itemize}
 \item \verb?firewall__no_pred_called_with_zero__depth_1__fixed?: \verb?(assert (<= l739 0))?
