@@ -48,7 +48,7 @@ equation_type='Real'
 # parse parameters
 for a in $@; do
     case $a in
-        h | --h | -help | --help)
+        -h | --h | -help | --help)
             print_usage
             exit 0
             ;;
