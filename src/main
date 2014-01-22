@@ -22,6 +22,7 @@ Option list:
  -safety | --safety           : Method Safety, default
  -invariant | --invariant     : Method Invariant
  -refinement | --refinement   : Method Safety by Refinement
+ -inv-ref | --inv-ref         : Method Invariant by Refinement
  -h | --h | -help | --help    : Prints this help
  -v | --v                     : Verbose output
 
@@ -67,6 +68,12 @@ for a in $@; do
         -refinement | --refinement)
             # Method Safety by Refinement
             invariant=false
+            refinement_methods=( 'trap' )
+            equation_type='Real'
+            ;;
+        -inv-ref | --inv-ref)
+            # Method Invariant by Refinement
+            invariant=true
             refinement_methods=( 'trap' )
             equation_type='Real'
             ;;
