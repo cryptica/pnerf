@@ -20,7 +20,7 @@ function print_usage {
 Usage: $0 [options] input_file
 Option list:
  -safety | --safety                   : Method Safety, default
- -safety-int | --safety-int           : Method Safety, default
+ -safety-int | --safety-int           : Method Safety over integers
  -invariant | --invariant             : Method Invariant
  -refinement | --refinement           : Method Safety by Refinement
  -refinement-int | --refinement-int   : Method Safety by Refinement over integers
