@@ -301,7 +301,7 @@ else
   done
   vecho " - unsat"
 
-  if $invarant; then
+  if $invariant; then
     construct_invariant
   else
     exit_with 0 $invariant
