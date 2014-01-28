@@ -25,6 +25,7 @@ Option list:
  -refinement | --refinement           : Method Safety by Refinement
  -refinement-int | --refinement-int   : Method Safety by Refinement over integers
  -inv-ref | --inv-ref                 : Method Invariant by Refinement
+ -benchmark | --benchmark             : Print information for benchmark
  -h | --h | -help | --help            : Prints this help
  -v | --v                             : Verbose output
 
@@ -41,12 +42,13 @@ function vecho {
 # **********************************************************************
 # Entry point
 
-print_title "$*"
-
 # Method Safety
 invariant=false
+minimize_invariant=false
 refinement_methods=( )
 equation_type='Real'
+
+benchmark=false
 
 # parse parameters
 for a in $@; do
@@ -66,8 +68,16 @@ for a in $@; do
             equation_type='Int'
             ;;
         -invariant | --invariant)
-            # Method Invariant & Invariant Minimization
+            # Method Invariant
             invariant=true
+            minimize_invariant=false
+            refinement_methods=( )
+            equation_type='Real'
+            ;;
+        -inv-min | --inv-min)
+            # Method Invariant Minimization
+            invariant=true
+            minimize_invariant=true
             refinement_methods=( )
             equation_type='Real'
             ;;
@@ -80,6 +90,7 @@ for a in $@; do
         -refinement-int | --refinement-int)
             # Method Safety by Refinement over integers
             invariant=false
+            minimize_invariant=false
             refinement_methods=( 'trap' )
             equation_type='Int'
             ;;
@@ -89,6 +100,10 @@ for a in $@; do
             refinement_methods=( 'trap' )
             equation_type='Real'
             ;;
+        -benchmark | --benchmark)
+            # Output information for benchmarks
+            benchmark=true
+            ;;
         -*)
             echo 'ERROR: Unknown option '$a
             exit 3
@@ -97,6 +112,10 @@ for a in $@; do
             input=$a
     esac
 done
+
+if ! $benchmark; then
+  print_title "$*"
+fi
 
 if [ -z $input ]; then
     echo 'ERROR: No input file was given'
@@ -118,25 +137,35 @@ set -o pipefail
 
 function exit_with {
   result=$1
-  echo
-  echo '-------------------------------------------'
-  if $invariant; then
+  iter=$2
+  if $benchmark; then
     if [[ $result -eq 0 ]]; then
-      echo "Invariant I for the petri net:"
-      cat $tmpdir/invariant.smt2
+      echo -n "+;"
     else
-      echo 'No invariant found for the net'
+      echo -n "-;"
     fi
+    echo -n "$iter;"
   else
-    if [[ $result -eq 0 ]]; then
-      echo 'The petri net satisfies the property!'
+    echo
+    echo '-------------------------------------------'
+    if $invariant; then
+      if [[ $result -eq 0 ]]; then
+        echo "Invariant I for the petri net:"
+        cat $tmpdir/invariant.smt2
+      else
+        echo 'No invariant found for the net'
+      fi
     else
-      echo 'The petri net may not satisfy the property'
+      if [[ $result -eq 0 ]]; then
+        echo 'The petri net satisfies the property!'
+      else
+        echo 'The petri net may not satisfy the property'
+      fi
     fi
+    echo '-------------------------------------------'
+    echo
+    echo
   fi
-  echo '-------------------------------------------'
-  echo
-  echo
   set +o pipefail
   set +e
   rm -r $tmpdir
@@ -197,66 +226,59 @@ function run_bash {
 
 cp $(absolute_path $input)/$(basename $input) $tmpdir/input-petri-net.pl
 
-function minimize_invariant {
-  vecho
-  vecho "* Constructing constraints C'_0 for petri net N"
-  run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
-
-  vecho
-  vecho "* Checking SAT(C')"
-  if ( run_z3 $tmpdir/constraints-c-prime.smt2 $tmpdir/model-a-prime.smt2 ); then
-    vecho "- sat, getting model A' for C'"
-    >$tmpdir/minimization-constraints.pl
-    run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
-    iter=0
-    while (
-      vecho
-      vecho " * Minimizing invariant in iteration $iter"
-      vecho " - constructing minimization constraints M_$iter"
-      run_sicstus minimization-constraints.pl $tmpdir/constraints-min.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-      vecho " - constructing constraints C''_$iter"
-      run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-c-prime-next.smt2 $tmpdir/constraints-c-prime.smt2 $tmpdir/constraints-min.smt2
-      vecho " - checking SAT(C''_$iter)"
-      run_z3 $tmpdir/constraints-c-prime-next.smt2 $tmpdir/model-a-prime.smt2
-      ); do
-      vecho "- sat, getting model A'' for C''"
-      run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
-      iter=$((iter + 1))
-    done
-    vecho " - unsat, found minimal invariant"
-    vecho " - constructing invariant I for petri net N and model A'_$iter"
-    run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-    cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
-    return 0
-  else
-    vecho " - unsat, no invariant"
-    return 2
-  fi
-}
-
 function construct_invariant {
   target=1
+  total_iter=0
   while (
     vecho
     vecho "* Constructing petri net N with target $target from input file"
     run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $target $tmpdir/input-petri-net.pl
   ); do 
-    if ( ! minimize_invariant ); then
-      exit_with 2 $invariant
+    vecho
+    vecho "* Constructing constraints C'_0 for petri net N"
+    run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
+    vecho
+    vecho "* Checking SAT(C')"
+    if ( run_z3 $tmpdir/constraints-c-prime.smt2 $tmpdir/model-a-prime.smt2 ); then
+      vecho "- sat, getting model A' for C'"
+      >$tmpdir/minimization-constraints.pl
+      run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
+      if $minimize_invariant; then
+        iter=0
+        while (
+          vecho
+          vecho " * Minimizing invariant in iteration $iter"
+          vecho " - constructing minimization constraints M_$iter"
+          run_sicstus minimization-constraints.pl $tmpdir/constraints-min.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+          vecho " - constructing constraints C''_$iter"
+          run_bash "$sysdir"/succ-constraints.sh $tmpdir/constraints-c-prime-next.smt2 $tmpdir/constraints-c-prime.smt2 $tmpdir/constraints-min.smt2
+          vecho " - checking SAT(C''_$iter)"
+          run_z3 $tmpdir/constraints-c-prime-next.smt2 $tmpdir/model-a-prime.smt2
+          ); do
+          vecho "- sat, getting model A'' for C''"
+          run_bash "$sysdir"/smt2-model-to-prolog-model.sh $tmpdir/model-a-prime.pl $tmpdir/model-a-prime.smt2 
+          iter=$((iter + 1))
+        done
+        total_iter=$((total_iter + iter))
+        vecho " - unsat, found minimal invariant"
+      fi
+      vecho " - constructing invariant I for petri net N and model A'_$iter"
+      run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+      cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
+    else
+      exit_with 2 $total_iter
     fi
     target=$((target + 1))
   done
-  exit_with 0 $invariant
+  exit_with 0 $total_iter
 }
 
-if [[ ${#refinement_methods[@]} -eq 0 && $invariant ]]; then
+if [[ $invariant = true && ${#refinement_methods[@]} -eq 0 ]]; then
   construct_invariant
 else
-
   vecho
   vecho '* Constructing petri net N from input file'
   run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl 0 $tmpdir/input-petri-net.pl
-
   vecho
   vecho '* Constructing constraints C_0 for petri net N'
   run_sicstus petri-net-to-constraints.pl $tmpdir/constraints-c.smt2 $equation_type $tmpdir/pp-petri-net.pl
@@ -307,7 +329,7 @@ else
           vecho
       done
       if [[ $method_index -ge $method_count ]]; then
-          exit_with 2 $invariant
+          exit_with 2 $iter
       fi
       iter=$((iter+1))
   done
@@ -316,7 +338,7 @@ else
   if $invariant; then
     construct_invariant
   else
-    exit_with 0 $invariant
+    exit_with 0 $iter
   fi
 
 fi

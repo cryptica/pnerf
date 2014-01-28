@@ -1,22 +1,24 @@
 #!/bin/bash
 
+benchmarks=( 'found-in-mist-repo' 'given-by-daniel-kroening' 'ic3-soter' )
+
 #for benchmark_dir in `find benchmarks -mindepth 1 -maxdepth 1 -type d`; do
-for benchmark_dir in benchmarks/ic3-soter; do
+for benchmark in $benchmarks; do
+  benchmark_dir="benchmarks/$benchmark"
   >$benchmark_dir/positive-pnerf.list
   >$benchmark_dir/dontknow-pnerf.list
   >$benchmark_dir/negative-pnerf.list
   >$benchmark_dir/timeout-pnerf.list
   >$benchmark_dir/error-pnerf.list
   >$benchmark_dir/timing-pnerf.log
-      #timeout 600 ./src/explore-states.sh -d 0 $pl_file | tee $pl_file.out
   for pl_file in `find $benchmark_dir -name "*.pl"`; do
-    T="$(gdate +%s%N)"
+    T="$(date +%s%N)"
     (
       set -o pipefail;
-      timeout 600 ./src/main -refinement $pl_file | tee $pl_file.out
+      timeout 60 ./src/main -refinement-int $pl_file | tee $pl_file.out
     )
     result=$?
-    T=$(($(gdate +%s%N)-T))
+    T=$(($(date +%s%N)-T))
     if [[ result -eq 0 ]]; then
         list='positive'
     elif [[ result -eq 1 ]]; then
