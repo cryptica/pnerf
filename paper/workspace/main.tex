@@ -143,8 +143,8 @@ TODO
     nid1       = 0 - u1 + u2
     id2        = 1                     + v2           + v5 - v6
     cs2        = 0                               + v4 - v5
-    idle2      = 1                          + v3 + v5 - v6
-    req2       = 0                - v1           - v4 + v6
+    idle2      = 1                          + v3 + v5      - v6
+    req2       = 0                - v1           - v4      + v6
     after_you2 = 0                + v1 - v2
     await2     = 0                     + v2 - v3
 \end{verbatim}
@@ -175,6 +175,9 @@ TODO
     v5         >= 0
     v6         >= 0
 
+  - Negated Property \neg P:
+
+    cs1 + cs2  >= 2
 
 * Place equation:
   
@@ -195,8 +198,26 @@ TODO
     (S, T, E, M0) : Petri net
   Output:
     C : State constraints
-
-  TODO: Unroll pseudocode?
+  Pseudocode:
+  
+  # Place equations
+  for s in S:
+    # initial number of tokens
+    print(s + " = " + M0(s)"
+    for t in T:
+      if (t, s) in E and not (s, t) in E:
+        # input transition
+        print(" + " t)
+      if (s, t) in E and not (t, s) in E:
+        # output transition
+        print(" - " t)
+    print("\n")
+  
+  # Non-negativity conditions
+  for s in S:
+    print(s + " >= 0\n")
+  for t in T:
+    print(t + " >= 0\n")
 \end{verbatim}
 
 \iffalse
