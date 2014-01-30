@@ -69,7 +69,7 @@
 \section{Method Safety}
 
 The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
-We present the method Safety by example on Lamport's 1-bit algorithm by Esparza1997.
+We present the method Safety by example on Lamport's 1-bit algorithm [Esparza1997].
 
 \begin{verbatim}
 * Code
@@ -87,7 +87,7 @@ TODO
 \end{center}
 
 \begin{verbatim}
-* Property: P = ( cs1 + cs2 >= 1 )
+* Property P: cs1 + cs2 <= 1
 \end{verbatim}
 
 \newpage
@@ -124,56 +124,58 @@ TODO
 
     Place equations:
   
-    id1     = 1    + u1    - u2
-    ^         ^      |       |
-    |         |      |       |
-    |         |      |       |
-    |         |      |       |
-    |         |      |     # of tokens taken from nc
-    |         |      |    
-    |         |    # of tokens given to nc
-    |         |
-    |      initial number of tokens in nc
+    id1        = 1 + u1 - u2
+    ^            ^   ^    ^
+    |            |   |    |
+    |            |   |    |
+    |            |   |    |
+    |            |   |   # of tokens taken from nc
+    |            |   |    
+    |            |  # of tokens given to nc
+    |            |
+    |          initial number of tokens in nc
     |
     number of tokens in nc
 
-    cs1 = 0 - u1 + u3
-    idle1 = 1 + u1 - u2
-    req1 = 0 + u2 - u3
-    nid1 = 0 - u1 u2
-    id2 = 1 + v2 + v5 - v6
-    cs2 = 0 + v4 - v5
-    idle2 = 1 + v3 + v5 - v6
-    req2 = 0 - v1 - v4 + v6
-    after_you2 = 0 + v1 - v2
-    await2 = 0 + v2 - v3
-  
-    Non-negativity conditions:
-  
-    id1 >= 0
-    cs1 >= 0
-    idle1 >= 0
-    req1 >= 0
-    nid1 >= 0
-    id2 >= 0
-    cs2 >= 0
-    idle2 >= 0
-    req2 >= 0
-    after_you2 >= 0
-    await2 >= 0
-    u1 >= 0
-    u2 >= 0
-    u3 >= 0
-    v1 >= 0
-    v2 >= 0
-    v3 >= 0
-    v4 >= 0
-    v5 >= 0
-    v6 >= 0
+    cs1        = 0 - u1      + u3
+    idle1      = 1 + u1 - u2
+    req1       = 0      + u2 - u3
+    nid1       = 0 - u1 + u2
+    id2        = 1                     + v2           + v5 - v6
+    cs2        = 0                               + v4 - v5
+    idle2      = 1                          + v3 + v5 - v6
+    req2       = 0                - v1           - v4 + v6
+    after_you2 = 0                + v1 - v2
+    await2     = 0                     + v2 - v3
 \end{verbatim}
 
 \newpage
+
 \begin{verbatim}
+    Non-negativity conditions:
+  
+    id1        >= 0
+    cs1        >= 0
+    idle1      >= 0
+    req1       >= 0
+    nid1       >= 0
+    id2        >= 0
+    cs2        >= 0
+    idle2      >= 0
+    req2       >= 0
+    after_you2 >= 0
+    await2     >= 0
+    u1         >= 0
+    u2         >= 0
+    u3         >= 0
+    v1         >= 0
+    v2         >= 0
+    v3         >= 0
+    v4         >= 0
+    v5         >= 0
+    v6         >= 0
+
+
 * Place equation:
   
   For a given place s the place equation is
