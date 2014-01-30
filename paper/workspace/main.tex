@@ -4,6 +4,7 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{listings}
 \usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,shapes.multipart,shapes.geometric,
@@ -68,70 +69,25 @@
 \section{Method Safety}
 
 The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
-We present the method Safety by example on a simplified mutual exclusion algorithm by Delzanno2001.
+We present the method Safety by example on Lamport's 1-bit algorithm by Esparza1997.
 
 \begin{verbatim}
 * Code
 
-bool m = false;
+TODO
 
-// Thread 1:
-while (true) {
-  if (! test_and_set(m)) {
-    // critical section 1
-    m = false
-  }
-  if (! test_and_set(m)) {
-    // critical section 2
-    m = false
-  }
-}
-
-// Thread 2:
-while (true) {
-  if (! test_and_set(m)) {
-    // critical section 1
-    m = false
-  }
-  if (! test_and_set(m)) {
-    // critical section 2
-    m = false
-  }
-}
-
-* Property: Thread 1 and Thread 2 are never in any critical section at the same time.
+* Property: Thread 1 and Thread 2 are never in the critical section at the same time.
 
 * Petri net:
 
 \end{verbatim}
 
 \begin{center}
-  \begin{tikzpicture}[node distance=2cm]
-    \node[blue place, tokens=2, label=above:nc] (nc) {};
-    \node[place, tokens=1, label=above:m, below of=nc] (s) {};
-    \node[red place, label=above:cs1, left of=s] (cs1) {};
-    \node[red place, label=above:cs2, right of=s] (cs2) {};
-    \node[transition, label=above:t1] (t1) at ($(s)!0.5!(cs1) + (0,1cm)$) {}
-    edge [pre] (nc)
-    edge [pre] (s)
-    edge [post] (cs1);
-    \node[transition, label=above:t2] (t2) at ($(s)!0.5!(cs2) + (0,1cm)$) {}
-    edge [pre] (nc)
-    edge [pre] (s)
-    edge [post] (cs2);
-    \node[transition, label=below:t3] (t3) at ($(s)!0.5!(cs1) - (0,1cm)$) {}
-    edge [pre] (cs1)
-    edge [post] (s)
-    edge [post,bend left,min distance=3cm, out=105, in=105] (nc);
-    \node[transition, label=below:t4] (t4) at ($(s)!0.5!(cs2) - (0,1cm)$) {}
-    edge [pre] (cs2)
-    edge [post] (s)
-    edge [post,bend right,min distance=3cm, out=-105, in=-105] (nc);
-  \end{tikzpicture}
+  \includegraphics[width=12cm]{lamport}
 \end{center}
 
 \begin{verbatim}
-* Property: P = ( cs1 + cs2 <= 1 )
+* Property: P = ( cs1 + cs2 >= 1 )
 \end{verbatim}
 
 \newpage
@@ -168,33 +124,52 @@ while (true) {
 
     Place equations:
   
-    nc      = 2 - t1 - t2 + t3 + t4
-    ^         ^   ^    ^    ^    ^
-    |         |   |    |    |    |
-    |         |   ------    ------
-    |         |      |         |
-    |         |      |       # of tokens given to nc
+    id1     = 1    + u1    - u2
+    ^         ^      |       |
+    |         |      |       |
+    |         |      |       |
+    |         |      |       |
+    |         |      |     # of tokens taken from nc
     |         |      |    
-    |         |    # of tokens taken from nc
+    |         |    # of tokens given to nc
     |         |
     |      initial number of tokens in nc
     |
     number of tokens in nc
-  
-    m     = 1 - t1 - t2 + t3 + t4
-    cs1   = 0 + t1 - t3
-    cs2   = 0 + t2 - t4
+
+    cs1 = 0 - u1 + u3
+    idle1 = 1 + u1 - u2
+    req1 = 0 + u2 - u3
+    nid1 = 0 - u1 u2
+    id2 = 1 + v2 + v5 - v6
+    cs2 = 0 + v4 - v5
+    idle2 = 1 + v3 + v5 - v6
+    req2 = 0 - v1 - v4 + v6
+    after_you2 = 0 + v1 - v2
+    await2 = 0 + v2 - v3
   
     Non-negativity conditions:
   
-    nc  >= 0
-    m   >= 0
+    id1 >= 0
     cs1 >= 0
+    idle1 >= 0
+    req1 >= 0
+    nid1 >= 0
+    id2 >= 0
     cs2 >= 0
-    t1  >= 0
-    t2  >= 0
-    t3  >= 0
-    t4  >= 0
+    idle2 >= 0
+    req2 >= 0
+    after_you2 >= 0
+    await2 >= 0
+    u1 >= 0
+    u2 >= 0
+    u3 >= 0
+    v1 >= 0
+    v2 >= 0
+    v3 >= 0
+    v4 >= 0
+    v5 >= 0
+    v6 >= 0
 \end{verbatim}
 
 \newpage
@@ -204,8 +179,8 @@ while (true) {
   For a given place s the place equation is
 
   # of tokens in s = initial number of tokens of place s
-                     - # times each output transition of s fires
                      + # times each input transition of s fires
+                     - # times each output transition of s fires
 
 * Non-negativity conditions:
 
@@ -221,6 +196,8 @@ while (true) {
 
   TODO: Unroll pseudocode?
 \end{verbatim}
+
+\iffalse
 
 \newpage
 \section{Method Invariant}
@@ -823,5 +800,7 @@ Invariant with Minimization.
 \item \verb=firewall__no_pred_called_with_zero__depth_1__fixed.spec=: \verb=(l739 < 1)=
 \item \verb=firewall__no_pred_called_with_zero__depth_2__fixed.spec=: \verb=(l3849 < 1)=
 \end{itemize}
+
+\fi
 
 \end{document}
