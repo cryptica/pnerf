@@ -4,7 +4,7 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{multirow}
 \usepackage{listings}
-\usepackage[a4paper, landscape, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage[a4paper, landscape, top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm, includefoot]{geometry}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes, shapes.multipart, shapes.geometric}
@@ -32,7 +32,8 @@ The symbols used in the headers of the tables are:
   \item[P] Number of places in the petri net.
   \item[T] Number of transitions in the petri net.
   \item[R] Result of our tool. It is + if our tool can prove safety or find an invariant and - otherwise.
-  \item[I] Number of iterations. This is the number of traps used for refinement or the number of times an invariant is minimized.
+  \item[I] Number of iterations. This is the number of traps used for refinement.
+  \item[M] Number of minimization steps for the invariant.
   \item[T] Running time of our tool in seconds.
 \end{description}
 
@@ -40,79 +41,87 @@ The methods used by our tool are:
 
 \begin{description}
   \item[Safety] Method Safety over reals.
-  \item[Safety-Int] Method Safety over integers.
+  \item[Safe-Int] Method Safety over integers.
   \item[Refinement] Method Safety by Refinement over reals.
-  \item[Refinement-Int] Method Safety by Refinement over integers.
+  \item[Ref-Int] Method Safety by Refinement over integers.
   \item[Invariant] Method Invariant.
   \item[Inv-Min] Method Invariant Minimization.
   \item[Inv-Ref] Method Invariant by Refinement.
+  \item[Inv-Ref-Min] Method Invariant by Refinement with Minimization.
 \end{description}
 
 \section{Benchmarks of \bfc}
 
 The set of benchmarks consists of 77 benchmarks, 26 positive and 51 negative.
-Table~\ref{bfc-experiments}, \ref{bfc-experiments-2} and \ref{bfc-experiments-3}
+Table~\ref{bfc-experiments} and \ref{bfc-experiments-2}
 show the experimental results.
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | l | r | r | *{17}{ r | } } %
+  \begin{tabular}{ | l | r | r | *{25}{ r | } } %
     \hline
            \multicolumn{3}{|c|}{Network}
          & \multicolumn{2}{|c|}{Safety}
-         & \multicolumn{2}{|c|}{Safety-Int}
+         & \multicolumn{2}{|c|}{Safe-Int}
          & \multicolumn{3}{|c|}{Refinement}
-         & \multicolumn{3}{|c|}{Refinement-Int}
+         & \multicolumn{3}{|c|}{Ref-Int}
          & \multicolumn{2}{|c|}{Invariant}
          & \multicolumn{3}{|c|}{Inv-Min}
-         & \multicolumn{2}{|c|}{Inv-Ref} \\
+         & \multicolumn{3}{|c|}{Inv-Ref}
+         & \multicolumn{4}{|c|}{Inv-Ref-Min} \\
     Name & P & T
         & R & T
         & R & T
         & R & I & T
         & R & I & T
         & R & T
+        & R & M & T
         & R & I & T
-        & R & T \\
+        & R & I & M & T \\
     \hline
-        \multicolumn{20}{|c|}{Positive Benchmarks} \\
+        \multicolumn{25}{|c|}{Positive Benchmarks} \\
     \hline
-cprover-PN/abp & 42 & 43 & + & 0.19 & + & 0.18 & + & 0 & 0.13 & + & 0 & 0.17 & + & 0.26 & + & 2 & 0.56 & + & 0.42 \\
-cprover-PN/basicME & 18 & 17 & + & 0.13 & + & 0.15 & + & 0 & 0.13 & + & 0 & 0.17 & + & 0.25 & + & 0 & 0.30 & + & 0.39 \\
-cprover-PN/bingham\_h150 & 309 & 457 & + & 0.35 & + & 0.35 & + & 0 & 0.40 & + & 0 & 0.35 & + & 0.57 & + & 0 & 0.81 & + & 0.93 \\
-cprover-PN/bingham\_h25 & 59 & 82 & + & 0.17 & + & 0.19 & + & 0 & 0.17 & + & 0 & 0.18 & + & 0.30 & + & 0 & 0.36 & + & 0.45 \\
-cprover-PN/bingham\_h250 & 509 & 757 & + & 0.61 & + & 0.55 & + & 0 & 0.55 & + & 0 & 0.57 & + & 0.85 & + & 0 & 1.22 & + & 1.43 \\
-cprover-PN/bingham\_h50 & 109 & 157 & + & 0.22 & + & 0.22 & + & 0 & 0.19 & + & 0 & 0.19 & + & 0.34 & + & 0 & 0.46 & + & 0.55 \\
-cprover-PN/bingham\_h500 & 1009 & 1507 & + & 1.20 & + & 1.09 & + & 0 & 1.20 & + & 0 & 1.11 & + & 1.74 & + & 0 & 2.89 & + & 3.00 \\
-cprover-PN/clientserver & 13 & 11 & + & 0.13 & + & 0.12 & + & 0 & 0.15 & + & 0 & 0.14 & + & 0.27 & + & 0 & 0.32 & + & 0.38 \\
-cprover-PN/csm & 28 & 27 & + & 0.14 & + & 0.15 & + & 0 & 0.13 & + & 0 & 0.13 & + & 0.26 & + & 0 & 0.32 & + & 0.35 \\
-cprover-PN/gsm & 73 & 156 & + & 0.26 & + & 0.29 & + & 0 & 0.21 & + & 0 & 0.20 & + & 0.64 & + & 0 & 0.68 & + & 0.78 \\
-cprover-PN/handover & 126 & 255 & + & 0.23 & + & 0.23 & + & 0 & 0.25 & + & 0 & 0.26 & + & 0.37 & + & 0 & 0.50 & + & 0.60 \\
-cprover-PN/keycard & 59 & 78 & + & 0.16 & + & 0.15 & + & 0 & 0.21 & + & 0 & 0.15 & + & 0.33 & + & 0 & 0.36 & + & 0.49 \\
-cprover-PN/lamport & 30 & 27 & - & 0.19 & - & 0.18 & - & 0 & 0.20 & - & 0 & 0.21 & - & 0.14 & - & 0 & 0.17 & - & 0.23 \\
-cprover-PN/mesh2x2 & 66 & 69 & + & 0.20 & + & 0.20 & + & 0 & 0.15 & + & 0 & 0.20 & + & 0.27 & + & 0 & 0.37 & + & 0.43 \\
-cprover-PN/multipoll & 35 & 41 & + & 0.15 & + & 0.15 & + & 0 & 0.16 & + & 0 & 0.14 & + & 0.26 & + & 0 & 0.32 & + & 0.43 \\
-cprover-PN/newdekker & 51 & 48 & - & 0.18 & - & 0.18 & - & 0 & 0.22 & - & 0 & 0.25 & - & 0.15 & - & 0 & 0.15 & - & 0.24 \\
-cprover-PN/newrtp & 12 & 14 & + & 0.15 & + & 0.12 & + & 0 & 0.15 & + & 0 & 0.14 & + & 0.27 & + & 0 & 0.30 & + & 0.40 \\
-cprover-PN/peterson & 39 & 36 & - & 0.15 & - & 0.16 & - & 0 & 0.27 & - & 0 & 0.21 & - & 0.15 & - & 0 & 0.14 & - & 0.22 \\
-cprover-PN/phones & 51 & 87 & + & 0.16 & + & 0.18 & + & 0 & 0.16 & + & 0 & 0.16 & + & 0.30 & + & 0 & 0.37 & + & 0.43 \\
-cprover-PN/reaction & 19 & 15 & + & 0.14 & + & 0.14 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.34 & + & 0.37 \\
-cprover-PN/reaction3 & 22 & 18 & + & 0.16 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.15 & + & 0.25 & + & 0 & 0.32 & + & 0.37 \\
-cprover-PN/reaction4 & 16 & 13 & + & 0.14 & + & 0.15 & + & 0 & 0.14 & + & 0 & 0.13 & + & 0.28 & + & 0 & 0.33 & + & 0.36 \\
-cprover-PN/read-write & 36 & 31 & + & 0.16 & + & 0.20 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.28 & + & 0 & 0.34 & + & 0.43 \\
-cprover-PN/restriction & 15 & 10 & + & 0.14 & + & 0.14 & + & 0 & 0.13 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.32 & + & 0.40 \\
-cprover\_software\_analysis/conditionals\_vs\_satabs.2 & 214 & 281 & + & 0.27 & + & 0.25 & + & 0 & 0.27 & + & 0 & 0.25 & + & 0.44 & + & 0 & 0.55 & + & 0.65 \\
-cprover\_software\_analysis/rand\_cas\_vs\_satabs.2 & 110 & 139 & + & 0.19 & + & 0.21 & + & 0 & 0.20 & + & 0 & 0.23 & + & 0.36 & + & 0 & 0.47 & + & 0.50 \\
+cprover-PN/abp & 42 & 43 & + & 0.12 & + & 0.12 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.22 & + & 2 & 0.44 & + & 0 & 0.32 & + & 0 & 2 & 0.55 \\
+cprover-PN/basicME & 18 & 17 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.21 & + & 0 & 0.27 & + & 0 & 0.31 & + & 0 & 0 & 0.36 \\
+cprover-PN/bingham\_h150 & 309 & 457 & + & 0.31 & + & 0.30 & + & 0 & 0.31 & + & 0 & 0.30 & + & 0.48 & + & 0 & 0.69 & + & 0 & 0.79 & + & 0 & 0 & 0.98 \\
+cprover-PN/bingham\_h25 & 59 & 82 & + & 0.13 & + & 0.14 & + & 0 & 0.15 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.31 & + & 0 & 0.36 & + & 0 & 0 & 0.43 \\
+cprover-PN/bingham\_h250 & 509 & 757 & + & 0.47 & + & 0.45 & + & 0 & 0.47 & + & 0 & 0.46 & + & 0.71 & + & 0 & 1.05 & + & 0 & 1.18 & + & 0 & 0 & 1.50 \\
+cprover-PN/bingham\_h50 & 109 & 157 & + & 0.17 & + & 0.17 & + & 0 & 0.17 & + & 0 & 0.17 & + & 0.29 & + & 0 & 0.38 & + & 0 & 0.44 & + & 0 & 0 & 0.53 \\
+cprover-PN/bingham\_h500 & 1009 & 1507 & + & 0.99 & + & 0.94 & + & 0 & 0.99 & + & 0 & 0.92 & + & 1.45 & + & 0 & 2.35 & + & 0 & 2.44 & + & 0 & 0 & 3.35 \\
+cprover-PN/clientserver & 13 & 11 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.22 & + & 0 & 0.25 & + & 0 & 0.29 & + & 0 & 0 & 0.35 \\
+cprover-PN/csm & 28 & 27 & + & 0.11 & + & 0.11 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.21 & + & 0 & 0.27 & + & 0 & 0.31 & + & 0 & 0 & 0.37 \\
+cprover-PN/gsm & 73 & 156 & + & 0.16 & + & 0.16 & + & 0 & 0.16 & + & 0 & 0.16 & + & 0.27 & + & 0 & 0.35 & + & 0 & 0.41 & + & 0 & 0 & 0.50 \\
+cprover-PN/handover & 126 & 255 & + & 0.20 & + & 0.20 & + & 0 & 0.20 & + & 0 & 0.20 & + & 0.31 & + & 0 & 0.43 & + & 0 & 0.50 & + & 0 & 0 & 0.61 \\
+cprover-PN/keycard & 59 & 78 & + & 0.13 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.13 & + & 0.23 & + & 0 & 0.31 & + & 0 & 0.35 & + & 0 & 0 & 0.42 \\
+cprover-PN/lamport & 30 & 27 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+cprover-PN/mesh2x2 & 66 & 69 & + & 0.13 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.13 & + & 0.23 & + & 0 & 0.31 & + & 0 & 0.35 & + & 0 & 0 & 0.43 \\
+cprover-PN/multipoll & 35 & 41 & + & 0.12 & + & 0.12 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.23 & + & 0 & 0.28 & + & 0 & 0.33 & + & 0 & 0 & 0.39 \\
+cprover-PN/newdekker & 51 & 48 & - & 0.13 & - & 0.13 & - & 0 & 0.19 & - & 0 & 0.19 & - & 0.13 & - & 0 & 0.14 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover-PN/newrtp & 12 & 14 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.25 & + & 0 & 0.30 & + & 0 & 0 & 0.35 \\
+cprover-PN/peterson & 39 & 36 & - & 0.13 & - & 0.13 & - & 0 & 0.19 & - & 0 & 0.19 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.18 \\
+cprover-PN/phones & 51 & 87 & + & 0.14 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.31 & + & 0 & 0.36 & + & 0 & 0 & 0.43 \\
+cprover-PN/reaction & 19 & 15 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.30 & + & 0 & 0 & 0.35 \\
+cprover-PN/reaction3 & 22 & 18 & + & 0.12 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.30 & + & 0 & 0 & 0.36 \\
+cprover-PN/reaction4 & 16 & 13 & + & 0.11 & + & 0.11 & + & 0 & 0.12 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.29 & + & 0 & 0 & 0.35 \\
+cprover-PN/read-write & 36 & 31 & + & 0.12 & + & 0.12 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.21 & + & 0 & 0.29 & + & 0 & 0.32 & + & 0 & 0 & 0.38 \\
+cprover-PN/restriction & 15 & 10 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.29 & + & 0 & 0 & 0.35 \\
+cprover\_sa/conditionals\_vs\_satabs.2 & 214 & 281 & + & 0.21 & + & 0.22 & + & 0 & 0.21 & + & 0 & 0.21 & + & 0.34 & + & 0 & 0.47 & + & 0 & 0.54 & + & 0 & 0 & 0.68 \\
+cprover\_sa/rand\_cas\_vs\_satabs.2 & 110 & 139 & + & 0.16 & + & 0.15 & + & 0 & 0.16 & + & 0 & 0.16 & + & 0.26 & + & 0 & 0.36 & + & 0 & 0.42 & + & 0 & 0 & 0.50 \\
     \hline
-        \multicolumn{20}{|c|}{Negative Benchmarks} \\
+        \multicolumn{25}{|c|}{Negative Benchmarks} \\
     \hline
-cprover-PN/kanban & 26 & 29 & - & 0.18 & - & 0.17 & - & 0 & 0.23 & - & 0 & 0.20 & - & 0.14 & - & 0 & 0.14 & - & 0.21 \\
-cprover-PN/leabasicapproach & 30 & 27 & - & 0.16 & - & 0.16 & - & 0 & 0.24 & - & 0 & 0.23 & - & 0.16 & - & 0 & 0.15 & - & 0.22 \\
-cprover-PN/platoon & 20 & 17 & - & 0.17 & - & 0.14 & - & 0 & 0.21 & - & 0 & 0.23 & - & 0.14 & - & 0 & 0.16 & - & 0.24 \\
-cprover-PN/platoonFiniteHandlerPoly & 19 & 16 & - & 0.15 & - & 0.16 & - & 0 & 0.24 & - & 0 & 0.22 & - & 0.13 & - & 0 & 0.13 & - & 0.20 \\
-cprover-PN/pncsacover & 64 & 68 & - & 0.19 & - & 0.18 & - & 0 & 0.28 & - & 0 & 0.25 & - & 0.16 & - & 0 & 0.17 & - & 0.28 \\
-cprover-PN/reaction2 & 13 & 11 & - & 0.15 & - & 0.14 & - & 0 & 0.21 & - & 0 & 0.19 & - & 0.14 & - & 0 & 0.12 & - & 0.25 \\
-cprover-PN/reaction5 & 11 & 8 & - & 0.14 & - & 0.14 & - & 1 & 0.39 & - & 1 & 0.44 & - & 0.12 & - & 0 & 0.14 & - & 0.42 \\
+cprover-PN/kanban & 26 & 29 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+cprover-PN/leabasicapproach & 30 & 27 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+cprover-PN/platoon & 20 & 17 & - & 0.12 & - & 0.12 & - & 0 & 0.17 & - & 0 & 0.17 & - & 0.11 & - & 0 & 0.11 & - & 0 & 0.17 & - & 0 & 0 & 0.17 \\
+cprover-PN/platoonFiniteHandlerPoly & 19 & 16 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.17 & - & 0.11 & - & 0 & 0.11 & - & 0 & 0.17 & - & 0 & 0 & 0.17 \\
+cprover-PN/pncsacover & 64 & 68 & - & 0.14 & - & 0.14 & - & 0 & 0.21 & - & 0 & 0.21 & - & 0.14 & - & 0 & 0.14 & - & 0 & 0.21 & - & 0 & 0 & 0.22 \\
+cprover-PN/reaction2 & 13 & 11 & - & 0.12 & - & 0.12 & - & 0 & 0.17 & - & 0 & 0.17 & - & 0.11 & - & 0 & 0.11 & - & 0 & 0.16 & - & 0 & 0 & 0.17 \\
+cprover-PN/reaction5 & 11 & 8 & - & 0.11 & - & 0.12 & - & 1 & 0.32 & - & 1 & 0.32 & - & 0.11 & - & 0 & 0.11 & - & 1 & 0.32 & - & 1 & 0 & 0.32 \\
+cprover\_sa/Boop\_simple\_vf\_satabs.1 & 31 & 31 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+cprover\_sa/Boop\_simple\_vf\_satabs.2 & 330 & 7489 & - & 2.67 & - & 2.68 & - & 0 & 4.28 & - & 0 & 4.29 & - & 2.44 & - & 0 & 2.43 & - & 0 & 4.30 & - & 0 & 0 & 4.29 \\
+cprover\_sa/Function\_Pointer3\_vs\_satabs.1 & 40 & 71 & - & 0.14 & - & 0.14 & - & 1 & 0.40 & - & 1 & 0.40 & - & 0.13 & - & 0 & 0.13 & - & 1 & 0.40 & - & 1 & 0 & 0.40 \\
+cprover\_sa/Function\_Pointer3\_vs\_satabs.2 & 306 & 841 & - & 0.43 & - & 0.44 & - & 0 & 0.65 & - & 1 & 1.26 & - & 0.39 & - & 0 & 0.39 & - & 0 & 0.67 & - & 0 & 0 & 0.67 \\
+cprover\_sa/Function\_Pointer3\_vs\_satabs.3 & 2826 & 8961 & - & 6.26 & - & 7.02 & - & 0 & 8.30 & - & 0 & 8.89 & - & 5.90 & - & 0 & 5.82 & - & 0 & 8.14 & - & 0 & 0 & 8.19 \\
     \hline
   \end{tabular}
 \end{center}
@@ -122,106 +131,73 @@ cprover-PN/reaction5 & 11 & 8 & - & 0.14 & - & 0.14 & - & 1 & 0.39 & - & 1 & 0.4
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | l | r | r | *{17}{ r | } } %
+  \begin{tabular}{ | l | r | r | *{25}{ r | } } %
     \hline
            \multicolumn{3}{|c|}{Network}
          & \multicolumn{2}{|c|}{Safety}
-         & \multicolumn{2}{|c|}{Safety-Int}
+         & \multicolumn{2}{|c|}{Safe-Int}
          & \multicolumn{3}{|c|}{Refinement}
-         & \multicolumn{3}{|c|}{Refinement-Int}
+         & \multicolumn{3}{|c|}{Ref-Int}
          & \multicolumn{2}{|c|}{Invariant}
          & \multicolumn{3}{|c|}{Inv-Min}
-         & \multicolumn{2}{|c|}{Inv-Ref} \\
+         & \multicolumn{3}{|c|}{Inv-Ref}
+         & \multicolumn{4}{|c|}{Inv-Ref-Min} \\
     Name & P & T
         & R & T
         & R & T
         & R & I & T
         & R & I & T
         & R & T
+        & R & M & T
         & R & I & T
-        & R & T \\
+        & R & I & M & T \\
     \hline
-        \multicolumn{20}{|c|}{Negative Benchmarks (continued)} \\
+        \multicolumn{25}{|c|}{Negative Benchmarks (continued)} \\
     \hline
-cprover\_software\_analysis/Boop\_simple\_vf\_satabs.1 & 31 & 31 & - & 0.16 & - & 0.15 & - & 0 & 0.23 & - & 0 & 0.22 & - & 0.14 & - & 0 & 0.14 & - & 0.21 \\
-cprover\_software\_analysis/Boop\_simple\_vf\_satabs.2 & 330 & 7489 & - & 3.39 & - & 3.27 & - & 0 & 5.59 & - & 0 & 5.62 & - & 2.93 & - & 0 & 3.05 & - & 5.36 \\
-cprover\_software\_analysis/Function\_Pointer3\_vs\_satabs.1 & 40 & 71 & - & 0.17 & - & 0.16 & - & 1 & 0.52 & - & 1 & 0.49 & - & 0.15 & - & 0 & 0.17 & - & 0.49 \\
-cprover\_software\_analysis/Function\_Pointer3\_vs\_satabs.2 & 306 & 841 & - & 0.53 & - & 0.56 & - & 0 & 0.82 & - & 1 & 1.55 & - & 0.45 & - & 0 & 0.49 & - & 0.85 \\
-cprover\_software\_analysis/Function\_Pointer3\_vs\_satabs.3 & 2826 & 8961 & - & 8.12 & - & 8.86 & - & 0 & 10.21 & - & 0 & 11.29 & - & 7.49 & - & 0 & 7.56 & - & 10.19 \\
-cprover\_software\_analysis/buggy\_spaghetti\_vf\_satabs.1 & 78 & 115 & - & 0.18 & - & 0.18 & - & 0 & 0.31 & - & 0 & 0.27 & - & 0.20 & - & 0 & 0.17 & - & 0.29 \\
-cprover\_software\_analysis/buggy\_spaghetti\_vf\_satabs.2 & 326 & 697 & - & 0.50 & - & 0.47 & - & 0 & 0.77 & - & 0 & 0.77 & - & 0.43 & - & 0 & 0.47 & - & 0.72 \\
-cprover\_software\_analysis/conditionals\_vs\_satabs.1 & 50 & 55 & - & 0.18 & - & 0.17 & - & 0 & 0.24 & - & 0 & 0.25 & - & 0.15 & - & 0 & 0.15 & - & 0.25 \\
-cprover\_software\_analysis/constants\_vf\_satabs.1 & 26 & 25 & - & 0.15 & - & 0.15 & - & 0 & 0.25 & - & 0 & 0.22 & - & 0.15 & - & 0 & 0.13 & - & 0.22 \\
-cprover\_software\_analysis/constants\_vf\_satabs.2 & 262 & 393 & - & 0.33 & - & 0.35 & - & 0 & 0.54 & - & 0 & 0.51 & - & 0.30 & - & 0 & 0.29 & - & 0.54 \\
-cprover\_software\_analysis/dekker\_vs\_satabs.1 & 41 & 121 & - & 0.21 & - & 0.20 & - & 0 & 0.33 & - & 0 & 0.28 & - & 0.17 & - & 0 & 0.22 & - & 0.28 \\
-cprover\_software\_analysis/dekker\_vs\_satabs.2 & 164 & 1345 & - & 0.67 & - & 0.72 & - & 0 & 1.08 & - & 0 & 1.08 & - & 0.62 & - & 0 & 0.61 & - & 1.08 \\
-cprover\_software\_analysis/double\_lock\_p1\_vs\_satabs.1 & 64 & 205 & - & 0.22 & - & 0.24 & - & 1 & 0.79 & - & 2 & 1.59 & - & 0.36 & - & 0 & 0.36 & - & 0.79 \\
-cprover\_software\_analysis/double\_lock\_p1\_vs\_satabs.2 & 570 & 7601 & - & 4.28 & - & 12.37 & - & 0 & 6.52 & - & 0 & 13.19 & - & 3.29 & - & 0 & 3.19 & - & 6.02 \\
-cprover\_software\_analysis/double\_lock\_p1\_vs\_satabs.3 & 570 & 7569 & - & 3.90 & - & 11.20 & - & 0 & 5.76 & - & 0 & 13.13 & - & 3.12 & - & 0 & 3.23 & - & 5.85 \\
-cprover\_software\_analysis/double\_lock\_p2\_vs\_satabs.1 & 64 & 213 & - & 0.25 & - & 0.23 & - & 0 & 0.38 & - & 1 & 0.73 & - & 0.20 & - & 0 & 0.22 & - & 0.33 \\
-cprover\_software\_analysis/double\_lock\_p2\_vs\_satabs.2 & 184 & 1833 & - & 0.93 & - & 0.93 & - & 0 & 1.44 & - & 0 & 1.44 & - & 0.81 & - & 0 & 0.81 & - & 1.49 \\
-cprover\_software\_analysis/double\_lock\_p3\_vs\_satabs.1 & 46 & 81 & - & 0.18 & - & 0.18 & - & 0 & 0.25 & - & 0 & 0.27 & - & 0.15 & - & 0 & 0.16 & - & 0.28 \\
-cprover\_software\_analysis/double\_lock\_p3\_vs\_satabs.2 & 112 & 745 & - & 0.49 & - & 0.47 & - & 1 & 1.34 & - & 0 & 0.71 & - & 0.41 & - & 0 & 0.44 & - & 1.33 \\
-cprover\_software\_analysis/double\_lock\_p3\_vs\_satabs.3 & 306 & 3137 & - & 1.56 & - & 1.54 & - & 0 & 2.35 & - & 0 & 2.34 & - & 1.32 & - & 0 & 1.32 & - & 2.34 \\
-cprover\_software\_analysis/lu-fig2\_fixed\_vs\_satabs.1 & 39 & 37 & - & 0.19 & - & 0.20 & - & 0 & 0.25 & - & 0 & 0.23 & - & 0.17 & - & 0 & 0.13 & - & 0.23 \\
-cprover\_software\_analysis/lu-fig2\_fixed\_vs\_satabs.2 & 61 & 185 & - & 0.23 & - & 0.21 & - & 0 & 0.33 & - & 0 & 0.35 & - & 0.20 & - & 0 & 0.23 & - & 0.32 \\
-cprover\_software\_analysis/lu-fig2\_fixed\_vs\_satabs.3 & 178 & 1617 & - & 0.82 & - & 0.80 & - & 0 & 1.31 & - & 0 & 1.25 & - & 0.72 & - & 0 & 0.72 & - & 1.25 \\
-cprover\_software\_analysis/peterson\_vs\_satabs.1 & 31 & 65 & - & 0.16 & - & 0.17 & - & 0 & 0.25 & - & 0 & 0.25 & - & 0.15 & - & 0 & 0.17 & - & 0.29 \\
-cprover\_software\_analysis/peterson\_vs\_satabs.2 & 284 & 1985 & - & 0.95 & - & 0.98 & - & 0 & 1.52 & - & 0 & 1.54 & - & 0.91 & - & 0 & 0.93 & - & 1.54 \\
-cprover\_software\_analysis/pthread5\_vs\_satabs.1 & 80 & 413 & - & 0.35 & - & 0.30 & - & 0 & 0.45 & - & 0 & 0.49 & - & 0.27 & - & 0 & 0.28 & - & 0.47 \\
-cprover\_software\_analysis/pthread5\_vs\_satabs.2 & 80 & 412 & - & 0.34 & - & 0.35 & - & 0 & 0.47 & - & 0 & 0.47 & - & 0.27 & - & 0 & 0.33 & - & 0.46 \\
-cprover\_software\_analysis/pthread5\_vs\_satabs.3 & 187 & 1893 & - & 1.00 & - & 0.96 & - & 0 & 1.48 & - & 0 & 1.49 & - & 0.84 & - & 0 & 0.81 & - & 1.45 \\
-cprover\_software\_analysis/pthread5\_vs\_satabs.4 & 187 & 1889 & - & 1.00 & - & 1.01 & - & 0 & 1.49 & - & 0 & 1.65 & - & 0.82 & - & 0 & 0.82 & - & 1.69 \\
+cprover\_sa/buggy\_spaghetti\_vf\_satabs.1 & 78 & 115 & - & 0.16 & - & 0.16 & - & 0 & 0.23 & - & 0 & 0.23 & - & 0.14 & - & 0 & 0.14 & - & 0 & 0.23 & - & 0 & 0 & 0.23 \\
+cprover\_sa/buggy\_spaghetti\_vf\_satabs.2 & 326 & 697 & - & 0.41 & - & 0.40 & - & 0 & 0.61 & - & 0 & 0.61 & - & 0.36 & - & 0 & 0.36 & - & 0 & 0.60 & - & 0 & 0 & 0.60 \\
+cprover\_sa/conditionals\_vs\_satabs.1 & 50 & 55 & - & 0.14 & - & 0.14 & - & 0 & 0.20 & - & 0 & 0.20 & - & 0.13 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover\_sa/constants\_vf\_satabs.1 & 26 & 25 & - & 0.12 & - & 0.12 & - & 0 & 0.17 & - & 0 & 0.17 & - & 0.11 & - & 0 & 0.12 & - & 0 & 0.17 & - & 0 & 0 & 0.17 \\
+cprover\_sa/constants\_vf\_satabs.2 & 262 & 393 & - & 0.27 & - & 0.27 & - & 0 & 0.41 & - & 0 & 0.42 & - & 0.25 & - & 0 & 0.24 & - & 0 & 0.41 & - & 0 & 0 & 0.42 \\
+cprover\_sa/dekker\_vs\_satabs.1 & 41 & 121 & - & 0.15 & - & 0.16 & - & 0 & 0.23 & - & 0 & 0.24 & - & 0.14 & - & 0 & 0.14 & - & 0 & 0.23 & - & 0 & 0 & 0.23 \\
+cprover\_sa/dekker\_vs\_satabs.2 & 164 & 1345 & - & 0.56 & - & 0.57 & - & 0 & 0.88 & - & 0 & 0.88 & - & 0.50 & - & 0 & 0.50 & - & 0 & 0.88 & - & 0 & 0 & 0.89 \\
+cprover\_sa/double\_lock\_p1\_vs\_satabs.1 & 64 & 205 & - & 0.19 & - & 0.19 & - & 1 & 0.54 & - & 2 & 0.81 & - & 0.17 & - & 0 & 0.17 & - & 1 & 0.54 & - & 1 & 0 & 0.54 \\
+cprover\_sa/double\_lock\_p1\_vs\_satabs.2 & 570 & 7601 & - & 3.29 & - & 10.49 & - & 0 & 4.91 & - & 0 & 12.05 & - & 2.59 & - & 0 & 2.65 & - & 0 & 4.89 & - & 0 & 0 & 4.87 \\
+cprover\_sa/double\_lock\_p1\_vs\_satabs.3 & 570 & 7569 & - & 3.15 & - & 10.34 & - & 0 & 4.70 & - & 0 & 11.86 & - & 2.59 & - & 0 & 2.60 & - & 0 & 4.69 & - & 0 & 0 & 4.68 \\
+cprover\_sa/double\_lock\_p2\_vs\_satabs.1 & 64 & 213 & - & 0.19 & - & 0.20 & - & 0 & 0.28 & - & 1 & 0.57 & - & 0.18 & - & 0 & 0.17 & - & 0 & 0.28 & - & 0 & 0 & 0.28 \\
+cprover\_sa/double\_lock\_p2\_vs\_satabs.2 & 184 & 1833 & - & 0.78 & - & 0.77 & - & 0 & 1.18 & - & 0 & 1.17 & - & 0.67 & - & 0 & 0.66 & - & 0 & 1.18 & - & 0 & 0 & 1.18 \\
+cprover\_sa/double\_lock\_p3\_vs\_satabs.1 & 46 & 81 & - & 0.14 & - & 0.14 & - & 0 & 0.21 & - & 0 & 0.21 & - & 0.13 & - & 0 & 0.13 & - & 0 & 0.21 & - & 0 & 0 & 0.21 \\
+cprover\_sa/double\_lock\_p3\_vs\_satabs.2 & 112 & 745 & - & 0.37 & - & 0.38 & - & 1 & 1.06 & - & 0 & 0.58 & - & 0.33 & - & 0 & 0.34 & - & 1 & 1.07 & - & 1 & 0 & 1.07 \\
+cprover\_sa/double\_lock\_p3\_vs\_satabs.3 & 306 & 3137 & - & 1.28 & - & 1.28 & - & 0 & 1.93 & - & 0 & 1.92 & - & 1.08 & - & 0 & 1.09 & - & 0 & 1.92 & - & 0 & 0 & 1.94 \\
+cprover\_sa/lu-fig2\_vs\_satabs.1 & 39 & 37 & - & 0.14 & - & 0.13 & - & 0 & 0.19 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover\_sa/lu-fig2\_vs\_satabs.2 & 61 & 185 & - & 0.18 & - & 0.18 & - & 0 & 0.27 & - & 0 & 0.27 & - & 0.17 & - & 0 & 0.17 & - & 0 & 0.27 & - & 0 & 0 & 0.27 \\
+cprover\_sa/lu-fig2\_vs\_satabs.3 & 178 & 1617 & - & 0.69 & - & 0.71 & - & 0 & 1.03 & - & 0 & 1.04 & - & 0.59 & - & 0 & 0.60 & - & 0 & 1.03 & - & 0 & 0 & 1.03 \\
+cprover\_sa/peterson\_vs\_satabs.1 & 31 & 65 & - & 0.14 & - & 0.14 & - & 0 & 0.20 & - & 0 & 0.20 & - & 0.13 & - & 0 & 0.13 & - & 0 & 0.21 & - & 0 & 0 & 0.20 \\
+cprover\_sa/peterson\_vs\_satabs.2 & 284 & 1985 & - & 0.81 & - & 0.83 & - & 0 & 1.24 & - & 0 & 1.27 & - & 0.73 & - & 0 & 0.81 & - & 0 & 1.26 & - & 0 & 0 & 1.24 \\
+cprover\_sa/pthread5\_vs\_satabs.1 & 80 & 413 & - & 0.26 & - & 0.26 & - & 0 & 0.38 & - & 0 & 0.41 & - & 0.24 & - & 0 & 0.23 & - & 0 & 0.39 & - & 0 & 0 & 0.39 \\
+cprover\_sa/pthread5\_vs\_satabs.2 & 80 & 412 & - & 0.25 & - & 0.26 & - & 0 & 0.39 & - & 0 & 0.39 & - & 0.24 & - & 0 & 0.23 & - & 0 & 0.38 & - & 0 & 0 & 0.39 \\
+cprover\_sa/pthread5\_vs\_satabs.3 & 187 & 1893 & - & 0.79 & - & 0.79 & - & 0 & 1.21 & - & 0 & 1.20 & - & 0.68 & - & 0 & 0.67 & - & 0 & 1.21 & - & 0 & 0 & 1.22 \\
+cprover\_sa/pthread5\_vs\_satabs.4 & 187 & 1889 & - & 0.78 & - & 0.78 & - & 0 & 1.20 & - & 0 & 1.21 & - & 0.67 & - & 0 & 0.67 & - & 0 & 1.19 & - & 0 & 0 & 1.22 \\
+cprover\_sa/rand\_cas\_vs\_satabs.1 & 48 & 53 & - & 0.13 & - & 0.13 & - & 0 & 0.20 & - & 0 & 0.19 & - & 0.13 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover\_sa/rand\_lock\_p0\_vs\_satabs.1 & 29 & 43 & - & 0.13 & - & 0.14 & - & 0 & 0.19 & - & 0 & 0.19 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover\_sa/rand\_lock\_p0\_vs\_satabs.2 & 110 & 289 & - & 0.22 & - & 0.22 & - & 0 & 0.33 & - & 0 & 0.34 & - & 0.20 & - & 0 & 0.20 & - & 0 & 0.33 & - & 0 & 0 & 0.33 \\
+cprover\_sa/rand\_lock\_p0\_vs\_satabs.3 & 234 & 773 & - & 0.40 & - & 0.44 & - & 0 & 0.62 & - & 0 & 0.62 & - & 0.36 & - & 0 & 0.36 & - & 0 & 0.61 & - & 0 & 0 & 0.62 \\
+cprover\_sa/simple\_loop5\_vs\_satabs.1 & 31 & 49 & - & 0.13 & - & 0.13 & - & 0 & 0.19 & - & 0 & 0.19 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.19 \\
+cprover\_sa/simple\_loop5\_vs\_satabs.2 & 93 & 485 & - & 0.28 & - & 0.28 & - & 0 & 0.42 & - & 0 & 0.42 & - & 0.25 & - & 0 & 0.25 & - & 0 & 0.44 & - & 0 & 0 & 0.43 \\
+cprover\_sa/spin2003\_vs\_satabs.1 & 27 & 35 & - & 0.13 & - & 0.13 & - & 0 & 0.19 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+cprover\_sa/spin2003\_vs\_satabs.2 & 56 & 181 & - & 0.18 & - & 0.18 & - & 0 & 0.26 & - & 1 & 0.51 & - & 0.16 & - & 0 & 0.17 & - & 0 & 0.27 & - & 0 & 0 & 0.26 \\
+cprover\_sa/stack\_cas\_p0\_vs\_satabs.1 & 41 & 71 & - & 0.14 & - & 0.14 & - & 0 & 0.20 & - & 0 & 0.20 & - & 0.13 & - & 0 & 0.14 & - & 0 & 0.20 & - & 0 & 0 & 0.20 \\
+cprover\_sa/stack\_cas\_p0\_vs\_satabs.2 & 78 & 157 & - & 0.17 & - & 0.18 & - & 0 & 0.25 & - & 0 & 0.25 & - & 0.16 & - & 0 & 0.16 & - & 0 & 0.25 & - & 0 & 0 & 0.25 \\
+cprover\_sa/stack\_cas\_p0\_vs\_satabs.3 & 158 & 345 & - & 0.24 & - & 0.24 & - & 0 & 0.37 & - & 0 & 0.37 & - & 0.22 & - & 0 & 0.22 & - & 0 & 0.37 & - & 0 & 0 & 0.37 \\
+cprover\_sa/stack\_lock\_p0\_vs\_satabs.1 & 37 & 59 & - & 0.15 & - & 0.14 & - & 0 & 0.20 & - & 0 & 0.20 & - & 0.12 & - & 0 & 0.13 & - & 0 & 0.21 & - & 0 & 0 & 0.20 \\
+cprover\_sa/stack\_lock\_p0\_vs\_satabs.2 & 106 & 633 & - & 0.33 & - & 0.34 & - & 0 & 0.50 & - & 0 & 0.50 & - & 0.30 & - & 0 & 0.30 & - & 0 & 0.50 & - & 0 & 0 & 0.50 \\
+cprover\_sa/szymanski\_vs\_satabs.1 & 61 & 225 & - & 0.19 & - & 0.19 & - & 0 & 0.28 & - & 0 & 0.29 & - & 0.17 & - & 0 & 0.17 & - & 0 & 0.28 & - & 0 & 0 & 0.29 \\
+cprover\_sa/szymanski\_vs\_satabs.2 & 568 & 8321 & - & 3.09 & - & 10.58 & - & 0 & 4.73 & - & 0 & 12.24 & - & 2.74 & - & 0 & 2.77 & - & 0 & 4.76 & - & 0 & 0 & 4.73 \\
     \hline
   \end{tabular}
 \end{center}
-\caption{Experimental results for the benchmarks of \bfc}
+\caption{Experimental results for the benchmarks of \bfc (continued)}
 \label{bfc-experiments-2}
-\end{table}
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | l | r | r | *{17}{ r | } } %
-    \hline
-           \multicolumn{3}{|c|}{Network}
-         & \multicolumn{2}{|c|}{Safety}
-         & \multicolumn{2}{|c|}{Safety-Int}
-         & \multicolumn{3}{|c|}{Refinement}
-         & \multicolumn{3}{|c|}{Refinement-Int}
-         & \multicolumn{2}{|c|}{Invariant}
-         & \multicolumn{3}{|c|}{Inv-Min}
-         & \multicolumn{2}{|c|}{Inv-Ref} \\
-    Name & P & T
-        & R & T
-        & R & T
-        & R & I & T
-        & R & I & T
-        & R & T
-        & R & I & T
-        & R & T \\
-    \hline
-        \multicolumn{20}{|c|}{Negative Benchmarks (continued)} \\
-    \hline
-cprover\_software\_analysis/rand\_cas\_vs\_satabs.1 & 48 & 53 & - & 0.16 & - & 0.20 & - & 0 & 0.25 & - & 0 & 0.24 & - & 0.15 & - & 0 & 0.16 & - & 0.25 \\
-cprover\_software\_analysis/rand\_lock\_p0\_vs\_satabs.1 & 29 & 43 & - & 0.16 & - & 0.16 & - & 0 & 0.25 & - & 0 & 0.23 & - & 0.15 & - & 0 & 0.17 & - & 0.24 \\
-cprover\_software\_analysis/rand\_lock\_p0\_vs\_satabs.2 & 110 & 289 & - & 0.26 & - & 0.31 & - & 0 & 0.43 & - & 0 & 0.39 & - & 0.23 & - & 0 & 0.25 & - & 0.47 \\
-cprover\_software\_analysis/rand\_lock\_p0\_vs\_satabs.3 & 234 & 773 & - & 0.50 & - & 0.52 & - & 0 & 0.81 & - & 0 & 0.78 & - & 0.43 & - & 0 & 0.43 & - & 0.74 \\
-cprover\_software\_analysis/simple\_loop5\_vs\_satabs.1 & 31 & 49 & - & 0.16 & - & 0.20 & - & 0 & 0.22 & - & 0 & 0.24 & - & 0.19 & - & 0 & 0.16 & - & 0.24 \\
-cprover\_software\_analysis/simple\_loop5\_vs\_satabs.2 & 93 & 485 & - & 0.37 & - & 0.39 & - & 0 & 0.52 & - & 0 & 0.55 & - & 0.31 & - & 0 & 0.30 & - & 0.54 \\
-cprover\_software\_analysis/spin2003\_vs\_satabs.1 & 27 & 35 & - & 0.19 & - & 0.17 & - & 0 & 0.26 & - & 0 & 0.24 & - & 0.15 & - & 0 & 0.18 & - & 0.24 \\
-cprover\_software\_analysis/spin2003\_vs\_satabs.2 & 56 & 181 & - & 0.21 & - & 0.22 & - & 0 & 0.33 & - & 1 & 0.67 & - & 0.19 & - & 0 & 0.24 & - & 0.33 \\
-cprover\_software\_analysis/stack\_cas\_p0\_vs\_satabs.1 & 41 & 71 & - & 0.17 & - & 0.20 & - & 0 & 0.26 & - & 0 & 0.30 & - & 0.15 & - & 0 & 0.16 & - & 0.26 \\
-cprover\_software\_analysis/stack\_cas\_p0\_vs\_satabs.2 & 78 & 157 & - & 0.21 & - & 0.23 & - & 0 & 0.32 & - & 0 & 0.30 & - & 0.20 & - & 0 & 0.18 & - & 0.32 \\
-cprover\_software\_analysis/stack\_cas\_p0\_vs\_satabs.3 & 158 & 345 & - & 0.31 & - & 0.33 & - & 0 & 0.47 & - & 0 & 0.51 & - & 0.31 & - & 0 & 0.25 & - & 0.44 \\
-cprover\_software\_analysis/stack\_lock\_p0\_vs\_satabs.1 & 37 & 59 & - & 0.16 & - & 0.16 & - & 0 & 0.26 & - & 0 & 0.23 & - & 0.16 & - & 0 & 0.16 & - & 0.27 \\
-cprover\_software\_analysis/stack\_lock\_p0\_vs\_satabs.2 & 106 & 633 & - & 0.42 & - & 0.39 & - & 0 & 0.62 & - & 0 & 0.64 & - & 0.35 & - & 0 & 0.35 & - & 0.65 \\
-cprover\_software\_analysis/szymanski\_vs\_satabs.1 & 61 & 225 & - & 0.25 & - & 0.24 & - & 0 & 0.35 & - & 0 & 0.35 & - & 0.21 & - & 0 & 0.23 & - & 0.37 \\
-cprover\_software\_analysis/szymanski\_vs\_satabs.2 & 568 & 8321 & - & 3.94 & - & 11.44 & - & 0 & 5.80 & - & 0 & 13.53 & - & 3.35 & - & 0 & 3.38 & - & 5.85 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \bfc}
-\label{bfc-experiments-3}
 \end{table}
 
 \section{Benchmarks of \mist}
@@ -229,62 +205,64 @@ cprover\_software\_analysis/szymanski\_vs\_satabs.2 & 568 & 8321 & - & 3.94 & - 
 The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
 Table~\ref{mist-experiments} shows the experimental results.
 In the case of \footnotemark[1], the high runtime and timeouts
-for the invariant come from the special form of the property,
-as the negation contains a lot of disjunctions.
+for the invariant come from the special form of the property.
+The negation contains 8989 disjunctions, which have to be solved separately.
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | l | r | r | *{17}{ r | } } %
+  \begin{tabular}{ | l | r | r | *{22}{ r | } } %
     \hline
            \multicolumn{3}{|c|}{Network}
          & \multicolumn{2}{|c|}{Safety}
-         & \multicolumn{2}{|c|}{Safety-Int}
+         & \multicolumn{2}{|c|}{Safe-Int}
          & \multicolumn{3}{|c|}{Refinement}
-         & \multicolumn{3}{|c|}{Refinement-Int}
+         & \multicolumn{3}{|c|}{Ref-Int}
          & \multicolumn{2}{|c|}{Invariant}
          & \multicolumn{3}{|c|}{Inv-Min}
-         & \multicolumn{2}{|c|}{Inv-Ref} \\
+         & \multicolumn{3}{|c|}{Inv-Ref}
+         & \multicolumn{4}{|c|}{Inv-Ref-Min} \\
     Name & P & T
         & R & T
         & R & T
         & R & I & T
         & R & I & T
         & R & T
+        & R & M & T
         & R & I & T
-        & R & T \\
+        & R & I & M & T \\
     \hline
-        \multicolumn{20}{|c|}{Positive Benchmarks} \\
+        \multicolumn{25}{|c|}{Positive Benchmarks} \\
     \hline
-PN/MultiME & 12 & 11 & - & 0.16 & - & 0.14 & + & 1 & 0.34 & + & 1 & 0.32 & - & 0.13 & - & 0 & 0.12 & + & 0.93 \\
-PN/basicME & 5 & 5 & - & 0.12 & - & 0.14 & + & 1 & 0.32 & + & 1 & 0.29 & - & 0.12 & - & 0 & 0.12 & + & 0.86 \\
-PN/bingham\_h150 & 153 & 302 & + & 0.22 & + & 0.22 & + & 0 & 0.24 & + & 0 & 0.22 & + & 0.41 & + & 0 & 0.50 & + & 0.61 \\
-PN/bingham\_h25 & 28 & 52 & + & 0.13 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.35 & + & 0.37 \\
-PN/bingham\_h250 & 253 & 502 & + & 0.32 & + & 0.31 & + & 0 & 0.30 & + & 0 & 0.32 & + & 0.50 & + & 0 & 0.70 & + & 0.83 \\
-PN/bingham\_h250\_attic \footnotemark[1] & 253 & 502 & + & 11.52 & + & 18.09 & + & 0 & 11.74 & + & 0 & 18.74 & + & 6535.28 & TO & TO & TO & TO & TO \\
-PN/bingham\_h50 & 53 & 102 & + & 0.17 & + & 0.15 & + & 0 & 0.17 & + & 0 & 0.17 & + & 0.30 & + & 0 & 0.38 & + & 0.40 \\
-PN/csm & 14 & 14 & + & 0.14 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.14 & + & 0.22 & + & 0 & 0.29 & + & 0.36 \\
-PN/extendedread-write-smallconsts & 24 & 23 & - & 0.14 & - & 0.15 & - & 0 & 0.23 & - & 0 & 0.20 & - & 0.14 & - & 0 & 0.14 & - & 0.22 \\
-PN/extendedread-write & 24 & 23 & - & 0.15 & - & 0.14 & - & 0 & 0.21 & - & 0 & 0.20 & - & 0.13 & - & 0 & 0.13 & - & 0.22 \\
-PN/fms & 22 & 23 & + & 0.12 & + & 0.15 & + & 0 & 0.14 & + & 0 & 0.13 & + & 0.23 & + & 0 & 0.30 & + & 0.38 \\
-PN/fms\_attic & 22 & 23 & + & 0.13 & + & 0.14 & + & 0 & 0.12 & + & 0 & 0.13 & + & 0.42 & + & 0 & 0.55 & + & 0.54 \\
-PN/manufacturing & 13 & 6 & - & 0.15 & - & 0.15 & - & 0 & 0.21 & - & 0 & 0.19 & - & 0.12 & - & 0 & 0.13 & - & 0.19 \\
-PN/mesh2x2 & 32 & 36 & + & 0.14 & + & 0.13 & + & 0 & 0.17 & + & 0 & 0.14 & + & 0.25 & + & 0 & 0.30 & + & 0.36 \\
-PN/mesh3x2 & 52 & 60 & + & 0.18 & + & 0.17 & + & 0 & 0.14 & + & 0 & 0.15 & + & 0.26 & + & 0 & 0.35 & + & 0.39 \\
-PN/multipool & 18 & 25 & + & 0.15 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.13 & + & 0.25 & + & 0 & 0.31 & + & 0.38 \\
-PN/pingpong & 6 & 6 & - & 0.15 & - & 0.16 & + & 1 & 0.32 & + & 1 & 0.31 & - & 0.13 & - & 0 & 0.13 & + & 0.56 \\
-boundedPN/kanban & 16 & 16 & + & 0.15 & + & 0.15 & + & 0 & 0.15 & + & 0 & 0.14 & + & 0.25 & + & 0 & 0.30 & + & 0.38 \\
-boundedPN/lamport & 11 & 9 & - & 0.17 & - & 0.13 & + & 1 & 0.34 & + & 1 & 0.31 & - & 0.13 & - & 0 & 0.14 & + & 0.58 \\
-boundedPN/newdekker & 16 & 14 & - & 0.15 & - & 0.18 & + & 1 & 0.34 & + & 1 & 0.37 & - & 0.12 & - & 0 & 0.15 & + & 0.55 \\
-boundedPN/newrtp & 9 & 12 & + & 0.14 & + & 0.12 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.23 & + & 0 & 0.30 & + & 0.38 \\
-boundedPN/peterson & 14 & 12 & - & 0.13 & - & 0.17 & + & 2 & 0.57 & + & 2 & 0.55 & - & 0.13 & - & 0 & 0.15 & + & 0.75 \\
-boundedPN/read-write & 13 & 9 & + & 0.14 & + & 0.13 & + & 0 & 0.16 & + & 0 & 0.13 & + & 0.22 & + & 0 & 0.33 & + & 0.38 \\
+PN/MultiME & 12 & 11 & - & 0.12 & - & 0.12 & + & 1 & 0.27 & + & 1 & 0.27 & - & 0.11 & - & 0 & 0.11 & + & 1 & 0.76 & + & 1 & 0 & 0.92 \\
+PN/basicME & 5 & 5 & - & 0.12 & - & 0.11 & + & 1 & 0.26 & + & 1 & 0.26 & - & 0.11 & - & 0 & 0.12 & + & 1 & 0.73 & + & 1 & 0 & 0.90 \\
+PN/bingham\_h150 & 153 & 302 & + & 0.21 & + & 0.21 & + & 0 & 0.21 & + & 0 & 0.21 & + & 0.34 & + & 0 & 0.46 & + & 0 & 0.53 & + & 0 & 0 & 0.65 \\
+PN/bingham\_h25 & 28 & 52 & + & 0.12 & + & 0.12 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.22 & + & 0 & 0.28 & + & 0 & 0.32 & + & 0 & 0 & 0.39 \\
+PN/bingham\_h250 & 253 & 502 & + & 0.28 & + & 0.29 & + & 0 & 0.28 & + & 0 & 0.28 & + & 0.46 & + & 0 & 0.61 & + & 0 & 0.71 & + & 0 & 0 & 0.87 \\
+PN/bingham\_h250\_attic \footnotemark[1] & 253 & 502 & + & 11.52 & + & 18.09 & + & 0 & 11.74 & + & 0 & 18.74 & + & 6535.28 & TO & TO & TO & TO & TO & TO & TO & TO & TO & TO \\
+PN/bingham\_h50 & 53 & 102 & + & 0.14 & + & 0.14 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.31 & + & 0 & 0.36 & + & 0 & 0 & 0.44 \\
+PN/csm & 14 & 14 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.30 & + & 0 & 0 & 0.35 \\
+PN/extendedread-write-smallconsts & 24 & 23 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.19 & - & 0 & 0 & 0.18 \\
+PN/extendedread-write & 24 & 23 & - & 0.13 & - & 0.14 & - & 0 & 0.18 & - & 0 & 0.20 & - & 0.12 & - & 0 & 0.13 & - & 0 & 0.20 & - & 0 & 0 & 0.18 \\
+PN/fms & 22 & 23 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.13 & + & 0.22 & + & 0 & 0.26 & + & 0 & 0.30 & + & 0 & 0 & 0.36 \\
+PN/fms\_attic & 22 & 23 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.35 & + & 0 & 0.47 & + & 0 & 0.45 & + & 0 & 0 & 0.58 \\
+PN/manufacturing & 13 & 6 & - & 0.12 & - & 0.12 & - & 0 & 0.16 & - & 0 & 0.16 & - & 0.11 & - & 0 & 0.11 & - & 0 & 0.16 & - & 0 & 0 & 0.17 \\
+PN/mesh2x2 & 32 & 36 & + & 0.12 & + & 0.12 & + & 0 & 0.12 & + & 0 & 0.12 & + & 0.21 & + & 0 & 0.27 & + & 0 & 0.31 & + & 0 & 0 & 0.38 \\
+PN/mesh3x2 & 52 & 60 & + & 0.13 & + & 0.13 & + & 0 & 0.12 & + & 0 & 0.13 & + & 0.22 & + & 0 & 0.30 & + & 0 & 0.41 & + & 0 & 0 & 0.47 \\
+PN/multipool & 18 & 25 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.30 & + & 0 & 0 & 0.36 \\
+PN/pingpong & 6 & 6 & - & 0.11 & - & 0.11 & + & 1 & 0.26 & + & 1 & 0.26 & - & 0.11 & - & 0 & 0.11 & + & 1 & 0.44 & + & 1 & 0 & 0.50 \\
+boundedPN/kanban & 16 & 16 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.26 & + & 0 & 0.29 & + & 0 & 0 & 0.35 \\
+boundedPN/lamport & 11 & 9 & - & 0.11 & - & 0.12 & + & 1 & 0.28 & + & 1 & 0.28 & - & 0.11 & - & 0 & 0.11 & + & 1 & 0.46 & + & 1 & 0 & 0.51 \\
+boundedPN/newdekker & 16 & 14 & - & 0.12 & - & 0.12 & + & 1 & 0.27 & + & 1 & 0.28 & - & 0.11 & - & 0 & 0.11 & + & 1 & 0.48 & + & 1 & 0 & 0.51 \\
+boundedPN/newrtp & 9 & 12 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.25 & + & 0 & 0.29 & + & 0 & 0 & 0.34 \\
+boundedPN/peterson & 14 & 12 & - & 0.12 & - & 0.12 & + & 2 & 0.45 & + & 2 & 0.45 & - & 0.11 & - & 0 & 0.11 & + & 2 & 0.62 & + & 2 & 0 & 0.67 \\
+boundedPN/read-write & 13 & 9 & + & 0.11 & + & 0.11 & + & 0 & 0.11 & + & 0 & 0.11 & + & 0.20 & + & 0 & 0.25 & + & 0 & 0.29 & + & 0 & 0 & 0.35 \\
     \hline
-        \multicolumn{20}{|c|}{Negative Benchmarks} \\
+        \multicolumn{25}{|c|}{Negative Benchmarks} \\
     \hline
-PN/kanban & 16 & 20 & - & 0.14 & - & 0.15 & - & 0 & 0.21 & - & 0 & 0.22 & - & 0.13 & - & 0 & 0.13 & - & 0.19 \\
-PN/leabasicapproach & 16 & 14 & - & 0.13 & - & 0.17 & - & 0 & 0.21 & - & 0 & 0.28 & - & 0.19 & - & 0 & 0.16 & - & 0.20 \\
-PN/pncsacover & 31 & 36 & - & 0.17 & - & 0.18 & - & 0 & 0.23 & - & 0 & 0.22 & - & 0.15 & - & 0 & 0.13 & - & 0.25 \\
-PN/pncsasemiliv & 31 & 36 & - & 0.17 & - & 0.14 & - & 0 & 0.23 & - & 0 & 0.23 & - & 0.15 & - & 0 & 0.14 & - & 0.21 \\
+PN/kanban & 16 & 20 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.17 & - & 0.11 & - & 0 & 0.11 & - & 0 & 0.17 & - & 0 & 0 & 0.17 \\
+PN/leabasicapproach & 16 & 14 & - & 0.12 & - & 0.12 & - & 0 & 0.17 & - & 0 & 0.17 & - & 0.12 & - & 0 & 0.11 & - & 0 & 0.17 & - & 0 & 0 & 0.18 \\
+PN/pncsacover & 31 & 36 & - & 0.13 & - & 0.13 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
+PN/pncsasemiliv & 31 & 36 & - & 0.12 & - & 0.12 & - & 0 & 0.18 & - & 0 & 0.18 & - & 0.12 & - & 0 & 0.12 & - & 0 & 0.18 & - & 0 & 0 & 0.18 \\
     \hline
   \end{tabular}
 \end{center}
@@ -297,74 +275,76 @@ PN/pncsasemiliv & 31 & 36 & - & 0.17 & - & 0.14 & - & 0 & 0.23 & - & 0 & 0.23 & 
 The set of benchmarks consists 38 benchmarks, 28 positive and 10 negative.
 Table~\ref{iic-experiments} shows the experimental results.
 
-\begin{verbatim}
+\iffalse
 TODO: Use fixed or non-fixed benchmark?  Source for list of positives and negatives?
-\end{verbatim}
+\fi
 
 \begin{table}[h]
 \begin{center}
-  \begin{tabular}{ | l | r | r | *{17}{ r | } } %
+  \begin{tabular}{ | l | r | r | *{22}{ r | } } %
     \hline
            \multicolumn{3}{|c|}{Network}
          & \multicolumn{2}{|c|}{Safety}
-         & \multicolumn{2}{|c|}{Safety-Int}
+         & \multicolumn{2}{|c|}{Safe-Int}
          & \multicolumn{3}{|c|}{Refinement}
-         & \multicolumn{3}{|c|}{Refinement-Int}
+         & \multicolumn{3}{|c|}{Ref-Int}
          & \multicolumn{2}{|c|}{Invariant}
          & \multicolumn{3}{|c|}{Inv-Min}
-         & \multicolumn{2}{|c|}{Inv-Ref} \\
+         & \multicolumn{3}{|c|}{Inv-Ref}
+         & \multicolumn{4}{|c|}{Inv-Ref-Min} \\
     Name & P & T
         & R & T
         & R & T
         & R & I & T
         & R & I & T
         & R & T
+        & R & M & T
         & R & I & T
-        & R & T \\
+        & R & I & M & T \\
     \hline
-        \multicolumn{20}{|c|}{Positive Benchmarks} \\
+        \multicolumn{25}{|c|}{Positive Benchmarks} \\
     \hline
-concdb\_\_single\_client\_writes\_\_depth\_0\_\_fixed & 570 & 717 & + & 0.52 & + & 0.50 & + & 0 & 0.54 & + & 0 & 0.53 & + & 0.79 & + & 0 & 1.35 & + & 1.26 \\
-finite\_leader\_\_single\_leader\_\_depth\_1\_\_fixed & 454 & 447 & + & 0.43 & + & 0.40 & + & 0 & 0.45 & + & 0 & 0.37 & + & 0.60 & + & 0 & 1.52 & + & 1.00 \\
-finite\_leader\_\_single\_leader\_\_depth\_2\_\_fixed & 454 & 447 & + & 0.38 & + & 0.38 & + & 0 & 0.43 & + & 0 & 0.42 & + & 0.65 & + & 0 & 1.54 & + & 1.00 \\
-firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_1\_\_fixed & 780 & 1024 & + & 0.64 & + & 0.66 & + & 0 & 0.67 & + & 0 & 0.68 & + & 0.92 & + & 0 & 2.46 & + & 1.61 \\
-firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_2\_\_fixed & 4014 & 6938 & + & 8.05 & + & 8.75 & + & 0 & 8.71 & + & 0 & 8.07 & + & 9.38 & + & 0 & 40.62 & + & 17.59 \\
-parikh\_\_should\_already\_be\_initialized\_\_depth\_0\_\_fixed & 77 & 70 & + & 0.17 & + & 0.18 & + & 0 & 0.21 & + & 0 & 0.18 & + & 0.28 & + & 0 & 0.40 & + & 0.45 \\
-parikh\_\_should\_already\_be\_initialized\_\_depth\_1\_\_fixed & 88 & 82 & + & 0.17 & + & 0.17 & + & 0 & 0.16 & + & 0 & 0.17 & + & 0.31 & + & 0 & 0.40 & + & 0.44 \\
-parikh\_\_should\_already\_be\_initialized\_\_depth\_2\_\_fixed & 88 & 82 & + & 0.20 & + & 0.17 & + & 0 & 0.16 & + & 0 & 0.18 & + & 0.29 & + & 0 & 0.42 & + & 0.44 \\
-pipe\_\_single\_message\_in\_mailbox\_\_depth\_0\_\_fixed & 212 & 236 & + & 0.25 & + & 0.29 & + & 0 & 0.25 & + & 0 & 0.26 & + & 0.40 & + & 0 & 0.55 & + & 0.65 \\
-reslock\_\_critical\_\_depth\_0\_\_fixed & 364 & 395 & + & 0.35 & + & 0.34 & + & 0 & 0.36 & + & 0 & 0.32 & + & 0.53 & + & 0 & 1.00 & + & 0.87 \\
-reslock\_\_critical\_\_depth\_1\_\_fixed & 600 & 702 & + & 0.53 & + & 0.52 & + & 0 & 0.51 & + & 0 & 0.51 & + & 0.79 & + & 0 & 2.15 & + & 1.28 \\
-reslock\_\_critical\_\_depth\_2\_\_fixed & 841 & 1030 & + & 0.77 & + & 0.72 & + & 0 & 0.84 & + & 0 & 0.77 & + & 1.04 & + & 0 & 3.40 & + & 1.81 \\
-reslockbeh\_\_critical\_\_depth\_0\_\_fixed & 734 & 977 & + & 0.87 & + & 0.70 & + & 0 & 0.75 & + & 0 & 0.82 & + & 1.10 & + & 0 & 2.82 & + & 2.03 \\
-reslockbeh\_\_critical\_\_depth\_1\_\_fixed & 4461 & 187 & + & 0.97 & + & 0.82 & + & 0 & 0.81 & + & 0 & 0.76 & + & 1.21 & + & 0 & 46.97 & + & 1.92 \\
-ring\_\_single\_message\_in\_mailbox\_\_depth\_0\_\_fixed & 387 & 453 & + & 0.38 & + & 0.36 & + & 0 & 0.37 & + & 0 & 0.40 & + & 0.57 & + & 0 & 1.06 & + & 0.94 \\
-safe\_send\_\_sending\_to\_non-pid\_1\_\_depth\_1\_\_fixed & 279 & 285 & - & 0.33 & - & 0.32 & + & 1 & 0.75 & + & 1 & 0.74 & - & 0.27 & - & 0 & 0.30 & + & 1.22 \\
-safe\_send\_\_sending\_to\_non-pid\_1\_\_depth\_2\_\_fixed & 279 & 285 & - & 0.34 & - & 0.29 & + & 1 & 0.82 & + & 1 & 0.72 & - & 0.27 & - & 0 & 0.28 & + & 1.21 \\
-safe\_send\_\_sending\_to\_non-pid\_2\_\_depth\_1\_\_fixed & 279 & 285 & - & 0.33 & - & 0.30 & + & 1 & 0.74 & + & 1 & 0.76 & - & 0.27 & - & 0 & 0.26 & + & 1.20 \\
-safe\_send\_\_sending\_to\_non-pid\_2\_\_depth\_2\_\_fixed & 279 & 285 & - & 0.30 & - & 0.32 & + & 1 & 0.74 & + & 1 & 0.72 & - & 0.27 & - & 0 & 0.27 & + & 1.17 \\
-safe\_send\_\_sending\_to\_non-pid\_3\_\_depth\_1\_\_fixed & 279 & 285 & + & 0.27 & + & 0.29 & + & 0 & 0.28 & + & 0 & 0.28 & + & 0.45 & + & 0 & 0.69 & + & 0.73 \\
-safe\_send\_\_sending\_to\_non-pid\_3\_\_depth\_2\_\_fixed & 279 & 285 & + & 0.27 & + & 0.27 & + & 0 & 0.32 & + & 0 & 0.25 & + & 0.42 & + & 0 & 0.72 & + & 0.69 \\
-safe\_send\_\_sending\_to\_non-pid\_4\_\_depth\_1\_\_fixed & 279 & 285 & - & 0.30 & - & 0.34 & - & 5 & 2.56 & + & 3 & 1.64 & - & 0.28 & - & 0 & 0.27 & - & 2.58 \\
-safe\_send\_\_sending\_to\_non-pid\_4\_\_depth\_2\_\_fixed & 279 & 285 & - & 0.31 & - & 0.30 & - & 5 & 2.65 & + & 3 & 1.61 & - & 0.27 & - & 0 & 0.27 & - & 2.58 \\
-sieve\_\_single\_message\_in\_counter\_mailbox\_\_depth\_0\_\_fixed & 263 & 275 & + & 0.31 & + & 0.26 & + & 0 & 0.30 & + & 0 & 0.29 & + & 0.43 & + & 0 & 0.70 & + & 0.75 \\
-sieve\_\_single\_message\_in\_filter\_mailbox\_\_depth\_0\_\_fixed & 263 & 276 & + & 0.29 & + & 0.27 & + & 0 & 0.29 & + & 0 & 0.29 & + & 0.43 & + & 0 & 0.69 & + & 0.71 \\
-sieve\_\_single\_message\_in\_sieve\_mailbox\_\_depth\_0\_\_fixed & 263 & 274 & + & 0.32 & + & 0.31 & + & 0 & 0.29 & + & 0 & 0.28 & + & 0.43 & + & 0 & 0.71 & + & 0.69 \\
-state\_factory\_\_after\_receive\_if\_no\_mail\_\_depth\_0\_\_fixed & 542 & 648 & + & 0.52 & + & 0.49 & + & 0 & 0.54 & + & 0 & 0.49 & + & 0.74 & + & 0 & 1.41 & + & 1.19 \\
-state\_factory\_\_single\_message\_in\_mailbox\_\_depth\_0\_\_fixed & 541 & 647 & + & 0.51 & + & 0.47 & + & 0 & 0.50 & + & 0 & 0.49 & + & 0.76 & + & 0 & 1.31 & + & 1.37 \\
+concdb\_\_single\_client\_writes\_\_depth\_0\ & 570 & 717 & + & 0.44 & + & 0.42 & + & 0 & 0.44 & + & 0 & 0.42 & + & 0.64 & + & 0 & 1.11 & + & 0 & 1.05 & + & 0 & 0 & 1.52 \\
+finite\_leader\_\_single\_leader\_\_depth\_1\ & 454 & 447 & + & 0.33 & + & 0.31 & + & 0 & 0.33 & + & 0 & 0.31 & + & 0.50 & + & 0 & 1.22 & + & 0 & 0.81 & + & 0 & 0 & 1.53 \\
+finite\_leader\_\_single\_leader\_\_depth\_2\ & 454 & 447 & + & 0.34 & + & 0.31 & + & 0 & 0.33 & + & 0 & 0.31 & + & 0.52 & + & 0 & 1.22 & + & 0 & 0.81 & + & 0 & 0 & 1.54 \\
+firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_1\ & 780 & 1024 & + & 0.54 & + & 0.54 & + & 0 & 0.54 & + & 0 & 0.52 & + & 0.78 & + & 0 & 2.02 & + & 0 & 1.29 & + & 0 & 0 & 2.54 \\
+firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_2\ & 4014 & 6938 & + & 6.56 & + & 6.53 & + & 0 & 6.59 & + & 0 & 6.60 & + & 7.66 & + & 0 & 34.03 & + & 0 & 14.22 & + & 0 & 0 & 40.53 \\
+parikh\_\_should\_already\_be\_initialized\_\_depth\_0\ & 77 & 70 & + & 0.13 & + & 0.13 & + & 0 & 0.13 & + & 0 & 0.13 & + & 0.23 & + & 0 & 0.32 & + & 0 & 0.36 & + & 0 & 0 & 0.44 \\
+parikh\_\_should\_already\_be\_initialized\_\_depth\_1\ & 88 & 82 & + & 0.14 & + & 0.14 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.32 & + & 0 & 0.38 & + & 0 & 0 & 0.45 \\
+parikh\_\_should\_already\_be\_initialized\_\_depth\_2\ & 88 & 82 & + & 0.14 & + & 0.14 & + & 0 & 0.14 & + & 0 & 0.14 & + & 0.24 & + & 0 & 0.32 & + & 0 & 0.38 & + & 0 & 0 & 0.45 \\
+pipe\_\_single\_message\_in\_mailbox\_\_depth\_0\ & 212 & 236 & + & 0.21 & + & 0.20 & + & 0 & 0.20 & + & 0 & 0.20 & + & 0.33 & + & 0 & 0.46 & + & 0 & 0.51 & + & 0 & 0 & 0.65 \\
+reslock\_\_critical\_\_depth\_0\ & 364 & 395 & + & 0.28 & + & 0.27 & + & 0 & 0.28 & + & 0 & 0.27 & + & 0.43 & + & 0 & 0.75 & + & 0 & 0.69 & + & 0 & 0 & 1.03 \\
+reslock\_\_critical\_\_depth\_1\ & 600 & 702 & + & 0.43 & + & 0.41 & + & 0 & 0.43 & + & 0 & 0.42 & + & 0.61 & + & 0 & 1.67 & + & 0 & 1.02 & + & 0 & 0 & 2.10 \\
+reslock\_\_critical\_\_depth\_2\ & 841 & 1030 & + & 0.63 & + & 0.58 & + & 0 & 0.63 & + & 0 & 0.59 & + & 0.81 & + & 0 & 2.58 & + & 0 & 1.44 & + & 0 & 0 & 3.21 \\
+reslockbeh\_\_critical\_\_depth\_0\ & 734 & 977 & + & 0.60 & + & 0.56 & + & 0 & 0.60 & + & 0 & 0.57 & + & 0.77 & + & 0 & 1.97 & + & 0 & 1.35 & + & 0 & 0 & 2.59 \\
+reslockbeh\_\_critical\_\_depth\_1\ & 4461 & 187 & + & 0.63 & + & 0.60 & + & 0 & 0.63 & + & 0 & 0.60 & + & 0.90 & + & 0 & 37.72 & + & 0 & 1.54 & + & 0 & 0 & 38.54 \\
+ring\_\_single\_message\_in\_mailbox\_\_depth\_0\ & 387 & 453 & + & 0.30 & + & 0.30 & + & 0 & 0.30 & + & 0 & 0.31 & + & 0.45 & + & 0 & 0.81 & + & 0 & 0.74 & + & 0 & 0 & 1.10 \\
+safe\_send\_\_sending\_to\_non-pid\_1\_\_depth\_1\ & 279 & 285 & - & 0.26 & - & 0.25 & + & 1 & 0.60 & + & 1 & 0.57 & - & 0.23 & - & 0 & 0.23 & + & 1 & 0.96 & + & 1 & 2 & 2.45 \\
+safe\_send\_\_sending\_to\_non-pid\_1\_\_depth\_2\ & 279 & 285 & - & 0.26 & - & 0.25 & + & 1 & 0.60 & + & 1 & 0.57 & - & 0.23 & - & 0 & 0.23 & + & 1 & 0.97 & + & 1 & 2 & 2.45 \\
+safe\_send\_\_sending\_to\_non-pid\_2\_\_depth\_1\ & 279 & 285 & - & 0.25 & - & 0.25 & + & 1 & 0.59 & + & 1 & 0.57 & - & 0.22 & - & 0 & 0.22 & + & 1 & 0.97 & + & 1 & 1 & 1.67 \\
+safe\_send\_\_sending\_to\_non-pid\_2\_\_depth\_2\ & 279 & 285 & - & 0.25 & - & 0.24 & + & 1 & 0.60 & + & 1 & 0.57 & - & 0.22 & - & 0 & 0.23 & + & 1 & 0.96 & + & 1 & 1 & 1.66 \\
+safe\_send\_\_sending\_to\_non-pid\_3\_\_depth\_1\ & 279 & 285 & + & 0.23 & + & 0.22 & + & 0 & 0.22 & + & 0 & 0.22 & + & 0.35 & + & 0 & 0.57 & + & 0 & 0.58 & + & 0 & 0 & 0.79 \\
+safe\_send\_\_sending\_to\_non-pid\_3\_\_depth\_2\ & 279 & 285 & + & 0.22 & + & 0.22 & + & 0 & 0.23 & + & 0 & 0.22 & + & 0.36 & + & 0 & 0.56 & + & 0 & 0.56 & + & 0 & 0 & 0.77 \\
+safe\_send\_\_sending\_to\_non-pid\_4\_\_depth\_1\ & 279 & 285 & - & 0.24 & - & 0.25 & - & 5 & 2.14 & + & 3 & 1.26 & - & 0.22 & - & 0 & 0.22 & - & 5 & 2.14 & - & 5 & 0 & 2.13 \\
+safe\_send\_\_sending\_to\_non-pid\_4\_\_depth\_2\ & 279 & 285 & - & 0.25 & - & 0.25 & - & 5 & 2.13 & + & 3 & 1.25 & - & 0.22 & - & 0 & 0.22 & - & 5 & 2.12 & - & 5 & 0 & 2.15 \\
+sieve\_\_single\_message\_in\_counter\_mailbox\_\_depth\_0\ & 263 & 275 & + & 0.23 & + & 0.22 & + & 0 & 0.22 & + & 0 & 0.22 & + & 0.36 & + & 0 & 0.57 & + & 0 & 0.57 & + & 0 & 0 & 0.78 \\
+sieve\_\_single\_message\_in\_filter\_mailbox\_\_depth\_0\ & 263 & 276 & + & 0.23 & + & 0.22 & + & 0 & 0.23 & + & 0 & 0.22 & + & 0.35 & + & 0 & 0.56 & + & 0 & 0.57 & + & 0 & 0 & 0.77 \\
+sieve\_\_single\_message\_in\_sieve\_mailbox\_\_depth\_0\ & 263 & 274 & + & 0.22 & + & 0.22 & + & 0 & 0.23 & + & 0 & 0.22 & + & 0.36 & + & 0 & 0.57 & + & 0 & 0.58 & + & 0 & 0 & 0.78 \\
+state\_factory\_\_after\_receive\_if\_no\_mail\_\_depth\_0\ & 542 & 648 & + & 0.42 & + & 0.40 & + & 0 & 0.42 & + & 0 & 0.40 & + & 0.58 & + & 0 & 1.14 & + & 0 & 0.99 & + & 0 & 0 & 1.57 \\
+state\_factory\_\_single\_message\_in\_mailbox\_\_depth\_0\ & 541 & 647 & + & 0.42 & + & 0.40 & + & 0 & 0.42 & + & 0 & 0.39 & + & 0.58 & + & 0 & 0.96 & + & 0 & 0.99 & + & 0 & 0 & 1.37 \\
     \hline
-        \multicolumn{20}{|c|}{Negative Benchmarks} \\
+        \multicolumn{25}{|c|}{Negative Benchmarks} \\
     \hline
-finite\_leader\_\_single\_leader\_\_depth\_0\_\_fixed & 297 & 308 & - & 0.36 & - & 0.32 & - & 1 & 0.90 & - & 1 & 0.98 & - & 0.29 & - & 0 & 0.30 & - & 0.98 \\
-firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_0\_\_fixed & 352 & 400 & - & 0.37 & - & 0.40 & - & 1 & 1.07 & - & 1 & 1.19 & - & 0.41 & - & 0 & 0.33 & - & 1.26 \\
-howait\_\_all\_workers\_finished\_if\_wait\_over\_\_depth\_0\_\_fixed & 217 & 232 & - & 0.27 & - & 0.26 & - & 1 & 0.82 & - & 1 & 0.87 & - & 0.26 & - & 0 & 0.26 & - & 0.80 \\
-safe\_send\_\_sending\_to\_non-pid\_\_depth\_0\_\_fixed & 121 & 120 & - & 0.20 & - & 0.22 & - & 1 & 0.63 & - & 1 & 0.59 & - & 0.18 & - & 0 & 0.19 & - & 0.62 \\
-stutter\_\_we\_abhorr\_as\_\_depth\_0\_\_fixed & 87 & 86 & - & 0.17 & - & 0.18 & - & 1 & 0.58 & - & 1 & 0.60 & - & 0.17 & - & 0 & 0.19 & - & 0.55 \\
-stutter\_\_we\_abhorr\_as\_\_depth\_1\_\_fixed & 107 & 104 & - & 0.20 & - & 0.20 & - & 1 & 0.54 & - & 1 & 0.58 & - & 0.19 & - & 0 & 0.17 & - & 0.56 \\
-stutter\_\_we\_abhorr\_as\_\_depth\_2\_\_fixed & 107 & 104 & - & 0.19 & - & 0.22 & - & 1 & 0.62 & - & 1 & 0.59 & - & 0.18 & - & 0 & 0.17 & - & 0.62 \\
-unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_0\_\_fixed & 35 & 30 & - & 0.17 & - & 0.15 & - & 1 & 0.48 & - & 1 & 0.50 & - & 0.16 & - & 0 & 0.16 & - & 0.48 \\
-unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_1\_\_fixed & 35 & 30 & - & 0.16 & - & 0.16 & - & 1 & 0.45 & - & 1 & 0.45 & - & 0.14 & - & 0 & 0.17 & - & 0.47 \\
-unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_2\_\_fixed & 35 & 30 & - & 0.15 & - & 0.15 & - & 1 & 0.50 & - & 1 & 0.47 & - & 0.15 & - & 0 & 0.14 & - & 0.44 \\
+finite\_leader\_\_single\_leader\_\_depth\_0\ & 297 & 308 & - & 0.26 & - & 0.25 & - & 1 & 0.74 & - & 1 & 0.74 & - & 0.25 & - & 0 & 0.24 & - & 1 & 0.74 & - & 1 & 0 & 0.74 \\
+firewall\_\_no\_pred\_called\_with\_zero\_\_depth\_0\ & 352 & 400 & - & 0.30 & - & 0.29 & - & 1 & 0.87 & - & 1 & 0.86 & - & 0.27 & - & 0 & 0.27 & - & 1 & 0.87 & - & 1 & 0 & 0.86 \\
+howait\_\_all\_workers\_finished\_if\_wait\_over\_\_depth\_0\ & 217 & 232 & - & 0.21 & - & 0.23 & - & 1 & 0.63 & - & 1 & 0.63 & - & 0.20 & - & 0 & 0.20 & - & 1 & 0.63 & - & 1 & 0 & 0.63 \\
+safe\_send\_\_sending\_to\_non-pid\_\_depth\_0\ & 121 & 120 & - & 0.17 & - & 0.17 & - & 1 & 0.48 & - & 1 & 0.48 & - & 0.16 & - & 0 & 0.16 & - & 1 & 0.48 & - & 1 & 0 & 0.48 \\
+stutter\_\_we\_abhorr\_as\_\_depth\_0\ & 87 & 86 & - & 0.15 & - & 0.15 & - & 1 & 0.43 & - & 1 & 0.43 & - & 0.14 & - & 0 & 0.14 & - & 1 & 0.44 & - & 1 & 0 & 0.43 \\
+stutter\_\_we\_abhorr\_as\_\_depth\_1\ & 107 & 104 & - & 0.16 & - & 0.16 & - & 1 & 0.46 & - & 1 & 0.45 & - & 0.15 & - & 0 & 0.15 & - & 1 & 0.47 & - & 1 & 0 & 0.45 \\
+stutter\_\_we\_abhorr\_as\_\_depth\_2\ & 107 & 104 & - & 0.16 & - & 0.17 & - & 1 & 0.46 & - & 1 & 0.45 & - & 0.15 & - & 0 & 0.15 & - & 1 & 0.46 & - & 1 & 0 & 0.46 \\
+unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_0\ & 35 & 30 & - & 0.12 & - & 0.12 & - & 1 & 0.35 & - & 1 & 0.35 & - & 0.12 & - & 0 & 0.12 & - & 1 & 0.36 & - & 1 & 0 & 0.35 \\
+unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_1\ & 35 & 30 & - & 0.12 & - & 0.13 & - & 1 & 0.35 & - & 1 & 0.36 & - & 0.12 & - & 0 & 0.12 & - & 1 & 0.35 & - & 1 & 0 & 0.35 \\
+unsafe\_send\_\_sending\_to\_non-pid\_\_depth\_2\ & 35 & 30 & - & 0.12 & - & 0.13 & - & 1 & 0.35 & - & 1 & 0.37 & - & 0.12 & - & 0 & 0.12 & - & 1 & 0.35 & - & 1 & 0 & 0.35 \\
     \hline
   \end{tabular}
 \end{center}

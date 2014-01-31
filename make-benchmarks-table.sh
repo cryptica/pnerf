@@ -2,7 +2,7 @@
 
 benchmarks=( 'found-in-mist-repo' 'given-by-daniel-kroening' 'ic3-soter' )
 
-methods=( 'safety' 'safety-int' 'refinement' 'refinement-int' 'invariant' 'inv-min' 'inv-ref' )
+methods=( 'safety' 'safety-int' 'refinement' 'refinement-int' 'invariant' 'inv-min' 'inv-ref' 'inv-ref-min' )
 
 timeout=7200
 
