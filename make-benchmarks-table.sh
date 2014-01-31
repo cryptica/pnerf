@@ -12,11 +12,6 @@ function benchmark_files {
   in_file=$benchmark_dir'/'$2
   out_file=$benchmark_dir'/'$3
   >$out_file
-  echo -n "Name;Places;Transitions;" | tee -a $out_file
-  for method in ${methods[@]}; do
-    echo -n "$method-Result;$method-Iterations;$method-Time;" | tee -a $out_file
-  done
-  echo | tee -a $out_file
   while read pl_file; do
     if [[ "$pl_file" =~ ^'#' ]]; then
       echo "Skipping $pl_file"

@@ -21,10 +21,12 @@ Usage: $0 [options] input_file
 Option list:
  -safety | --safety                   : Method Safety, default
  -safety-int | --safety-int           : Method Safety over integers
- -invariant | --invariant             : Method Invariant
  -refinement | --refinement           : Method Safety by Refinement
  -refinement-int | --refinement-int   : Method Safety by Refinement over integers
+ -invariant | --invariant             : Method Invariant
+ -inv-min | --inv-min                 : Method Invariant Minimization
  -inv-ref | --inv-ref                 : Method Invariant by Refinement
+ -inv-ref-min | --inv-reftmin         : Method Invariant by Refinement with Minimization
  -benchmark | --benchmark             : Print information for benchmark
  -h | --h | -help | --help            : Prints this help
  -v | --v                             : Verbose output
@@ -97,6 +99,14 @@ for a in $@; do
         -inv-ref | --inv-ref)
             # Method Invariant by Refinement
             invariant=true
+            minimize_invariant=false
+            refinement_methods=( 'trap' )
+            equation_type='Real'
+            ;;
+        -inv-ref-min | --inv-ref-min)
+            # Method Invariant by Refinement with Minimization
+            invariant=true
+            minimize_invariant=true
             refinement_methods=( 'trap' )
             equation_type='Real'
             ;;
@@ -137,14 +147,20 @@ set -o pipefail
 
 function exit_with {
   result=$1
-  iter=$2
+  ref_iter=$2
+  min_iter=$3
   if $benchmark; then
     if [[ $result -eq 0 ]]; then
       echo -n "+;"
     else
       echo -n "-;"
     fi
-    echo -n "$iter;"
+    if [[ ${#refinement_methods[@]} -gt 0 ]]; then
+      echo -n "$ref_iter;"
+    fi
+    if $minimize_invariant; then
+      echo -n "$min_iter;"
+    fi
   else
     echo
     echo '-------------------------------------------'
@@ -153,7 +169,7 @@ function exit_with {
         echo "Invariant I for the petri net:"
         cat $tmpdir/invariant.smt2
       else
-        echo 'No invariant found for the net'
+        echo 'Failed at finding an invariant'
       fi
     else
       if [[ $result -eq 0 ]]; then
@@ -227,6 +243,7 @@ function run_bash {
 cp $(absolute_path $input)/$(basename $input) $tmpdir/input-petri-net.pl
 
 function construct_invariant {
+  refinement_iter=$1
   target=1
   total_iter=0
   while (
@@ -266,15 +283,15 @@ function construct_invariant {
       run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
       cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
     else
-      exit_with 2 $total_iter
+      exit_with 2 $refinement_iter $total_iter
     fi
     target=$((target + 1))
   done
-  exit_with 0 $total_iter
+  exit_with 0 $refinement_iter $total_iter
 }
 
 if [[ $invariant = true && ${#refinement_methods[@]} -eq 0 ]]; then
-  construct_invariant
+  construct_invariant 0
 else
   vecho
   vecho '* Constructing petri net N from input file'
@@ -329,16 +346,16 @@ else
           vecho
       done
       if [[ $method_index -ge $method_count ]]; then
-          exit_with 2 $iter
+          exit_with 2 $iter 0
       fi
       iter=$((iter+1))
   done
   vecho " - unsat"
 
   if $invariant; then
-    construct_invariant
+    construct_invariant $iter
   else
-    exit_with 0 $iter
+    exit_with 0 $iter 0
   fi
 
 fi
