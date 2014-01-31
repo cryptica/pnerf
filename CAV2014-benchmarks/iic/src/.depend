@@ -1,0 +1,29 @@
+exceptions.o: exceptions.cpp exceptions.h
+parallelization.o: parallelization.cpp wsts.h vass_state_sets.h helpers.h \
+ parallelization.h
+parser_interface.o: parser_interface.cpp error.h xmalloc.h tbsymbol.h \
+ laparser.h tbsymbolinfo.h tree.h wsts.h vass_state_sets.h helpers.h \
+ exceptions.h
+vass_global_state.o: vass_global_state.cpp vass_global_state.h wsts.h \
+ vass_state_sets.h helpers.h
+iic_algorithm.o: iic_algorithm.cpp vass_global_state.h wsts.h \
+ vass_state_sets.h helpers.h solver_petri_net.h parallelization.h
+io_helper.o: io_helper.cpp vass_state_sets.h helpers.h
+solver_petri_net.o: solver_petri_net.cpp solver_petri_net.h \
+ vass_state_sets.h helpers.h vass_global_state.h wsts.h laparser.h \
+ error.h xmalloc.h tbsymbol.h tbsymbolinfo.h tree.h
+vass_state_sets.o: vass_state_sets.cpp vass_state_sets.h helpers.h
+error.o: error.c error.h
+laparser.o: laparser.c laparser.h error.h xmalloc.h tbsymbol.h \
+ tbsymbolinfo.h tree.h
+tbsymbol.o: tbsymbol.c tbsymbol.h error.h xmalloc.h
+tbsymbolinfo.o: tbsymbolinfo.c error.h xmalloc.h tbsymbolinfo.h \
+ tbsymbol.h
+tree.o: tree.c error.h xmalloc.h tree.h
+xmalloc.o: xmalloc.c xmalloc.h error.h
+lexer.o: lexer.c laparser.h error.h xmalloc.h tbsymbol.h tbsymbolinfo.h \
+ tree.h parser.h
+parser.o: parser.c laparser.h error.h xmalloc.h tbsymbol.h tbsymbolinfo.h \
+ tree.h
+iic.o: iic.cpp laparser.h error.h xmalloc.h tbsymbol.h tbsymbolinfo.h \
+ tree.h iic.h wsts.h vass_state_sets.h helpers.h exceptions.h

@@ -1,0 +1,4 @@
+IIC (1.0)
+  * Tagged the version as used in the CAV paper.
+  * Merged all the work done for forward analysis so far.
+-- Johannes Kloos <jkloos@mpi-sws.org>  22 Jan 2013

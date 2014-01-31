@@ -1,0 +1,29 @@
+Authors of mist2
+
+Anthony PIRON:
+entire files -> ./src/codegengoals.[ch] ./src/codegeninit.[ch]
+./src/codegeninvar.[ch] ./src/codegenrules.[ch] ./src/error.[ch]
+./src/tree.[ch] ./src/xmalloc.[ch] ./src/parser.y ./src/lexer.l
+
+Laurent VAN BEGIN:
+entire files -> ./src/findpathtransfer.[ch]
+
+Pierre GANTY:
+entire files -> ./src/basis.[hc] ./src/checkup.[hc] ./src/complement.[hc]
+./src/computesim.[hc] ./src/config.[hc] ./src/def.[hc] ./src/determinize.[hc]
+./src/father_mangmt.[hc] ./src/initialmarking.[hc] ./src/interval.[hc]
+./src/ist.[hc] ./src/ist_to_ps.[hc] ./src/laparser.[hc] ./src/list.[hc]
+./src/list_ist.[hc] ./src/listnode.[hc] ./src/minimize.[hc]
+./src/minimizeinvarexact.[hc] ./src/minimizeinvarheuristic.[hc]
+./src/normalize.[hc] ./src/parser.[hc] ./src/precone.[hc] ./src/proc.[hc]
+./src/remove.[hc] ./src/stat.[hc] ./src/transsystem.[hc] ./src/transtree.[hc]
+
+modifications -> ./src/codegengoals.[ch] ./src/codegeninit.[ch]
+./src/codegeninvar.[ch] ./src/codegenrules.[ch] ./src/error.[ch]
+./src/xmalloc.[ch] ./src/parser.y ./src/lexer.l
+
+Authors of IIC, based on mist2:
+
+Johannes Kloos
+Filip Niskic
+
