@@ -1,24 +1,27 @@
-=======
-pnerf
+=====
+Petrinizer: A Constraint-Based Model Checker for Petri Nets
 =====
 
+Description of directories:
+
+* ./CAV2014-benchmarks/
+  * Benchmarks corresponding to the experiments of CAV2014
+
 * ./benchmarks/
-  * You obtain *.pl files by spec-to-pl-petrinet.sh.
+  * Benchmarks corresponding to the development of Petrinizer
 
-* ./benchmarks/cprover_PN:
-  * Files *.pl are input to the tool.
-  * Conversion scripts are dk-to-pp-dk.sh and pp-dk-to-pl-petri-net.sh
-  * Positive/negative results of the tool are in positive.list/negative.list.
+* ./ocaml/
+  * OCaml version of Petrinizer
 
-* ./run-tests.sh:
-  * Performs unit testing.
-        
-* ./tests/petersons-alg:
-  * Unit tests corresponding to petri net for Peterson's
-    Algorithm. Taken from Javier's notes on petri nets
-    (http://www7.in.tum.de/um/courses/petri/SS2013/PNSkript.pdf,
-    p. 16).
+* ./paper/
+  
+* ./src/
+  * Bash+Prolog version of Petrinizer
 
-* TODO
-  * Analyze runtime and number of iterations of the tool on the benchmarks.
-  * Compare results with results of Daniel Kroening's tool
+* ./summary/
+  * Summary of experiments on ./benchmarks/*/*
+
+* ./tests/
+  * Unit tests corresponding to end-to-end examples.
+
+  
