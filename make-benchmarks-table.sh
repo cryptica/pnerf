@@ -28,7 +28,8 @@ function benchmark_files {
       T="$(date +%s%N)"
       (
         set -o pipefail;
-        timeout $timeout ./src/main "-benchmark" "-$method" $pl_file | tee -a $out_file
+        timeout $timeout ./src/main "-benchmark" "-$method" $pl_file | \
+          sed -n '2{p;q;}' | tr -d '\n' | tee -a $out_file
       )
       result=$?
       T=$(($(date +%s%N)-T))

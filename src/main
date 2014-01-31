@@ -149,7 +149,19 @@ function exit_with {
   result=$1
   ref_iter=$2
   min_iter=$3
+  inv_size=$4
   if $benchmark; then
+    echo -n "Result;"
+    if [[ ${#refinement_methods[@]} -gt 0 ]]; then
+      echo -n "TrapIterations;"
+    fi
+    if $minimize_invariant; then
+      echo -n "MinimizeIterations;"
+    fi
+    if $invariant; then
+      echo -n "InvariantSize;"
+    fi
+    echo
     if [[ $result -eq 0 ]]; then
       echo -n "+;"
     else
@@ -161,6 +173,10 @@ function exit_with {
     if $minimize_invariant; then
       echo -n "$min_iter;"
     fi
+    if $invariant; then
+      echo -n "$inv_size;"
+    fi
+    echo
   else
     echo
     echo '-------------------------------------------'
@@ -244,8 +260,10 @@ cp $(absolute_path $input)/$(basename $input) $tmpdir/input-petri-net.pl
 
 function construct_invariant {
   refinement_iter=$1
+  trap_places=$2
   target=1
   total_iter=0
+  inv_size=0
   while (
     vecho
     vecho "* Constructing petri net N with target $target from input file"
@@ -282,16 +300,22 @@ function construct_invariant {
       vecho " - constructing invariant I for petri net N and model A'_$iter"
       run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
       cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
+      if $benchmark; then
+        run_sicstus count-places.pl $tmpdir/num-places 'invariant' $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+        num_places=$(cat $tmpdir/num-places)
+        inv_size=$((inv_size + num_places))
+      fi
     else
-      exit_with 2 $refinement_iter $total_iter
+      exit_with 2 $refinement_iter $total_iter 0
     fi
     target=$((target + 1))
   done
-  exit_with 0 $refinement_iter $total_iter
+  total_num_places=$((trap_places + inv_size))
+  exit_with 0 $refinement_iter $total_iter $total_num_places
 }
 
 if [[ $invariant = true && ${#refinement_methods[@]} -eq 0 ]]; then
-  construct_invariant 0
+  construct_invariant 0 0
 else
   vecho
   vecho '* Constructing petri net N from input file'
@@ -302,6 +326,7 @@ else
 
   method_count=${#refinement_methods[@]}
   iter=0
+  trap_places=0
   while
     (
       vecho
@@ -331,6 +356,11 @@ else
               run_sicstus refinement-methods/$method-delta-constraint.pl $tmpdir/constraint-delta.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
               if $invarant; then
                 run_sicstus refinement-methods/$method-prolog-delta-constraint.pl $tmpdir/constraint-delta.pl $((iter + 1)) $tmpdir/pp-petri-net.pl $tmpdir/model-atheta.pl
+                if $benchmark; then
+                  run_sicstus count-places.pl $tmpdir/num-places 'trap' $tmpdir/constraint-delta.pl
+                  num_places=$(cat $tmpdir/num-places)
+                  trap_places=$((trap_places + num_places))
+                fi
                 cat $tmpdir/constraint-delta.smt2 >> $tmpdir/invariant.smt2
                 cat $tmpdir/constraint-delta.pl >> $tmpdir/input-petri-net.pl
               fi
@@ -346,16 +376,16 @@ else
           vecho
       done
       if [[ $method_index -ge $method_count ]]; then
-          exit_with 2 $iter 0
+          exit_with 2 $iter 0 0
       fi
       iter=$((iter+1))
   done
   vecho " - unsat"
 
   if $invariant; then
-    construct_invariant $iter
+    construct_invariant $iter $trap_places
   else
-    exit_with 0 $iter 0
+    exit_with 0 $iter 0 0
   fi
 
 fi
