@@ -207,10 +207,10 @@ TODO
     for t in T:
       if (t, s) in E and not (s, t) in E:
         # input transition
-        print(" + " t)
+        print(" + " + t)
       if (s, t) in E and not (t, s) in E:
         # output transition
-        print(" - " t)
+        print(" - " + t)
     print("\n")
   
   # Non-negativity conditions
