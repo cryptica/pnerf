@@ -74,26 +74,66 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
 \begin{verbatim}
 * Code
 
-\end{verbatim}
+Process 1:
 
-\includegraphics[scale=0.75]{lamport-code}
+bit1 := false
+while true do
+  bit1 := true
+  a: while bit2 do skip od
+  b: <critical section>
+  bit1 := false
+od
 
-\begin{verbatim}
-* Property: Thread 1 and Thread 2 are never in the critical section at the same time.
+Process 2:
+
+bit2 := false
+while true do
+  l: bit2 := true
+  if bit1 then
+    bit2 := false
+    while bit1 do skip od
+    goto l
+  fi
+  <critical section>
+  bit2 := false
+od
+
+* Property: Process 1 and Process 2 are never in their respective critical section at the same time.
 
 * Petri net:
 
 \end{verbatim}
 
 \begin{center}
-  \includegraphics[width=12cm]{lamport}
+  \includegraphics[width=10cm]{lamport}
 \end{center}
 
 \begin{verbatim}
-* Property P: cs1 + cs2 <= 1
+
+* Subnet of Petri net:
+
 \end{verbatim}
 
-\newpage
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+  \node[place, tokens=1, label=left:a] (a) {};
+  \node[place, tokens=0, label=left:b, below of=a] (b) {};
+  \node[place, tokens=0, label=right:nbit2, right of=b, xshift=-1cm, yshift=+1cm] (nbit2) {};
+  \node[transition, label=left:t1, above of=a, yshift=-1cm] (t1) {}
+    edge [pre, bend left, min distance=2cm, out=225, in=-45] (b)
+    edge [post] (a);
+  \node[transition, label=left:t2] (t2) at ($(a)!0.5!(b)$) {}
+    edge [pre] (a)
+    edge [pre] (nbit2)
+    edge [post] (b)
+    edge [post] (nbit2);
+\end{tikzpicture}
+\end{center}
+
+\begin{verbatim}
+* Property P: a + b <= 1
+\end{verbatim}
+
 \begin{verbatim}
 * Method Safety:
 
@@ -121,66 +161,41 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
 
 \begin{verbatim}
 * Property of state constraints C: If C U {\neg P} is unsat then N |= P.
-
-* Example:
-  - State constraints C:
-
-    Place equations:
-  
-    id1        = 1 + u1 - u2
-    ^            ^   ^    ^
-    |            |   |    |
-    |            |   |    |
-    |            |   |    |
-    |            |   |   # of tokens taken from nc
-    |            |   |    
-    |            |  # of tokens given to nc
-    |            |
-    |          initial number of tokens in nc
-    |
-    number of tokens in nc
-
-    cs1        = 0 - u1      + u3
-    idle1      = 1 + u1 - u2
-    req1       = 0      + u2 - u3
-    nid1       = 0 - u1 + u2
-    id2        = 1                     + v2           + v5 - v6
-    cs2        = 0                               + v4 - v5
-    idle2      = 1                          + v3 + v5      - v6
-    req2       = 0                - v1           - v4      + v6
-    after_you2 = 0                + v1 - v2
-    await2     = 0                     + v2 - v3
 \end{verbatim}
 
 \newpage
 
 \begin{verbatim}
-    Non-negativity conditions:
+* Example:
+  - State constraints C:
+
+    Place equations:
   
-    id1        >= 0
-    cs1        >= 0
-    idle1      >= 0
-    req1       >= 0
-    nid1       >= 0
-    id2        >= 0
-    cs2        >= 0
-    idle2      >= 0
-    req2       >= 0
-    after_you2 >= 0
-    await2     >= 0
-    u1         >= 0
-    u2         >= 0
-    u3         >= 0
-    v1         >= 0
-    v2         >= 0
-    v3         >= 0
-    v4         >= 0
-    v5         >= 0
-    v6         >= 0
+    a     = 1 + t1 - t2
+    ^       ^   ^    ^
+    |       |   |    |
+    |       |   |    |
+    |       |   |    |
+    |       |   |   # of tokens taken from a
+    |       |   |    
+    |       |  # of tokens given to a
+    |       |
+    |      initial number of tokens in a
+    |
+    number of tokens in a
+
+    b     = 0 - t1 + t2
+    nbit2 = 0
+    
+Non-negativity conditions:
+  
+    a     >= 0
+    b     >= 0
+    nbit2 >= 0
 
   - Negated Property \neg P:
 
-    cs1 + cs2  >= 2
+    a + b >= 2
 
 * Place equation:
   
@@ -271,86 +286,63 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 \newpage
 \begin{verbatim}
 * Example
-  - State constraints C and \neg P are the same as in the example for method Safety.
+  - State constraints C same as in the example for method Safety.
+ 
+  - Property P:
+
+    b = 0 
+  
+  - Negated Property \neg P:
+    
+    b >= 1
 
   - Assignment A:
-    id1        = 0
-    cs1        = 1
-    idle1      = 0
-    req1       = 0
-    nid1       = 1
-    id2        = 0
-    cs2        = 1
-    idle2      = 0
-    req2       = 0
-    after_you2 = 0
-    await2     = 0
-    u1         = 0
-    u2         = 1
-    u3         = 1
-    v1         = 0
-    v2         = 0
-    v3         = 0
-    v4         = 1
-    v5         = 0
-    v6         = 1
+    a     = 0
+    b     = 1
+    nbit2 = 0
+    t1    = 0
+    t2    = 1
 
   - Trap conditions C_\theta:
 
     - Trap implications:
-                       v4              v3                 u2
-                  ------------    --------------    --------------     
-    id1        => (cs2 \/ id1) /\ (id1 \/ idle2) /\ (req1 \/ nid1)
-    ^              ^      ^        ^      ^          ^       ^
-    |              |      |        |      |          |       |
-    |              |     id1 \in S |     idle2 \in S |      nid1 \in S
-    |              |               |                 |
-    |             cs2 \in S       id1 \in S         req1 \in S
+               t2
+             ----------
+    a     => b \/ nbit2
+    ^           ^      ^
+    |           |      |
+    |           |     nbit2 \in S
+    |           |
+    |          b \in S
     |
-    id1 \in S
+    a \in S
     
-    cs1        => idle1 \/ id1
-    idle1      => req1 \/ nid1
-    req1       => cs1 \/ id2
-    nid1       => (after_you2 \/ nid1) /\ (idle1 \/ id1)
-    id2        => req2 /\ (cs1 \/ id2)
-    cs2        => (idle2 \/ id2)
-    idle2      => req2
-    req2       => (cs2 \/ id1) /\ (cs2 \/ id1)
-    after_you2 => id2 \/ await2
-    await2     => id1 \/ idle2
+    nbit2 => b \/ nbit2
+    b     => a
 
     - At least one of the initially marked places belongs to S:
-    id1 \/ id2 \/ idle1 \/ idle2
+    a
 
     - None of the marked places in A belongs to S:
-    ~cs1 /\ ~cs2 /\ ~nid1
+    ~b
+  
+  - Assignment A_\theta:
+    a     = true
+    b     = false
+    nbit2 = true
+
+  - Refinement constraint \delta:
+    a + b >= 1
+    ^   ^
+    |   |
+    -----
+      |
+      S = {a, b}, therefore \delta excludes assignment A in the next iteration
 \end{verbatim}
 
 \newpage
 
 \begin{verbatim}
-  - Assignment A_\theta:
-    id1        = true
-    cs1        = false
-    idle1      = false
-    req1       = true
-    nid1       = false
-    id2        = true
-    cs2        = false
-    idle2      = false
-    req2       = true
-    after_you2 = true
-    await2     = false
-
-  - Refinement constraint \delta:
-    id1 + id2 + req1 + req2 + after_you2 >= 1
-    ^     ^     ^      ^      ^
-    |     |     |      |      |
-    ---------------------------
-      |
-      S = {iq1, iq2, req1, req2, after_you2}, therefore \delta excludes
-      assignment A in the next iteration
 
 * Trap implication:
 
@@ -369,12 +361,6 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   A(s)
 
   "At least one place in S is always marked"
-
-\end{verbatim}
-
-\newpage
-
-\begin{verbatim}
 
 * Subprocedure TrapConditions:
 
