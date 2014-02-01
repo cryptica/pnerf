@@ -381,6 +381,11 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
   "At least one place in S is always marked"
 
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
 
 * Subprocedure TrapConditions:
 
@@ -389,19 +394,6 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
     A             : Satisfying assignment for C \cup { ~P }
   Output:
     C_\theta      : Trap conditions
-
-  TODO: Unroll pseudocode?
-\end{verbatim}
-
-\newpage
-
-\begin{verbatim}
-* Subprocedure \Delta:
-
-  Input:
-    A_\theta      : Satisfying assignment for C_\theta
-  Output:
-    \delta        : Refinement constraint \delta
 
   Pseudocode:
   
@@ -426,6 +418,22 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   for s in S:
     if A(s) = 0:
       print("~" + p + "\n")
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  Pseudocode:
+
+  print("0")
+  for s in A_theta:
+    if A_theta(s):
+      print(" + " + s)
+  print(" >= 1")
+  
 \end{verbatim}
 
 \iffalse
