@@ -191,11 +191,7 @@ TODO
 
   # of tokens in place s           >= 0
   # of times transition t is fired >= 0
-\end{verbatim}
 
-\newpage
-
-\begin{verbatim}
 * Subprocedure \mathcal{C}:
 
   Input:
@@ -204,26 +200,15 @@ TODO
     C : State constraints
 
   Pseudocode:
-  
-  # Place equations
-  for s in S:
-    # initial number of tokens
-    print(s + " = " + M0(s))
-    for t in T:
-      if (t, s) in E and not (s, t) in E:
-        # input transition
-        print(" + " + t)
-      if (s, t) in E and not (t, s) in E:
-        # output transition
-        print(" - " + t)
-    print("\n")
-  
-  # Non-negativity conditions
-  for s in S:
-    print(s + " >= 0\n")
-  for t in T:
-    print(t + " >= 0\n")
-\end{verbatim}
+
+  \end{verbatim}
+\begin{align*}
+  C =& \left( \bigwedge_{s \in S}
+    s = M_0(s) + \sum_{t \in ^\bullet s} t - \sum_{t \in s^\bullet} t
+  \right) \land \\
+  & \left( \bigwedge_{s \in S} s \ge 0 \right) \land
+    \left( \bigwedge_{t \in T} t \ge 0 \right)
+\end{align*}
 
 \newpage
 
@@ -397,27 +382,15 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
   Pseudocode:
   
-  # Trap implications
-  for s in S:
-    print(s + " => true")
-    for t in s*:
-      print(" /\ ( false")
-      for p in t*:
-        print(" \/ " + p)
-     print(")")
-    print("\n")
-  
-  # Initially marked
-  print("false")
-  for s in S:
-    if M0(s) > 0:
-      print(" \/ " + s)
-  print("\n")
-  
-  # Unmarked in A
-  for s in S:
-    if A(s) = 0:
-      print("~" + p + "\n")
+\end{verbatim}
+\begin{align*}
+  C_\theta =& \left( \bigwedge_{s \in S} \left( s \Rightarrow
+        \bigwedge_{t \in s^\bullet} \bigvee_{p \in t^\bullet} p
+    \right) \right) \land \\
+  & \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land \\
+  & \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right) \\
+\end{align*}
+\begin{verbatim}
 
 * Subprocedure \Delta:
 
@@ -428,21 +401,15 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
   Pseudocode:
 
-  print("0")
-  for s in A_theta:
-    if A_theta(s):
-      print(" + " + s)
-  print(" >= 1")
-  
 \end{verbatim}
-
-\iffalse
+\begin{align*}
+  & \delta = \left( \sum_{A_\theta(s)} s \ge 0 \right)\\
+\end{align*}
 
 \newpage
 \section{Method Invariant}
 
 The method Invariant constructs an invariant \verb=I= for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
-We present the method Invariant by example on a simplified mutual exclusion algorithm by Delzanno2001.
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
@@ -490,34 +457,62 @@ We present the method Invariant by example on a simplified mutual exclusion algo
 \newpage
 \begin{verbatim}
 * Example:
+
+  - With weakened property P \/ (\neg \delta)
+
+  - Negated property is \neg P /\ \delta
+
   - Dual state constraints C':
+    0 >= (- cs1) + id1 + idle1 + (- nid1)
+    0 >= (- id1) + (- idle1) + nid1 + req1
+    0 >= cs1 + (- req1)
+    0 >= after_you2 + (- req2)
+    0 >= (- after_you2) + await2 + id2
+    0 >= (- await2) + idle2
+    0 >= cs2 + (- req2)
+    0 >= (- cs2) + id2 + idle2
+    0 >= (- id2) + (- idle2) + req2
 
-    - nc - m + cs1 <= 0
-    - nc - m + cs2 <= 0
-      nc + m - cs1 <= 0
-      nc + m - cs2 <= 0
+    id1 + id2 + idle1 + idle2 < 2 * target_1 + trap_1
 
-    2 \cdot nc + m < 2 \cdot target1
+    id1        >= trap_1
+    cs1        >= target_1
+    idle1      >= 0
+    req1       >= trap_1
+    nid1       >= 0
+    id2        >= trap_1
+    cs2        >= target_1
+    idle2      >= 0
+    req2       >= trap_1
+    after_you2 >= trap_1
+    await2     >= 0
+    target_1   >= 0
+    trap_1     >= 0
 
-    Non-negativity conditions:
-
-    target1 >= 0
-    nc      >= 0
-    m       >= 0
-    cs1     >= target1
-    cs2     >= target1
-  
   - Model A:
 
-    target1 = 1
-    nc      = 0
-    m       = 1
-    cs1     = 1
-    cs2     = 1
+    id1        = 1
+    cs1        = 1
+    idle1      = 0
+    req1       = 1
+    nid1       = 0
+    id2        = 1
+    cs2        = 1
+    idle2      = 0
+    req2       = 1
+    await2     = 0
+    after_you2 = 1
+    target_1   = 1
+    trap_1     = 1
     
   - Invariant:
 
-    cs1 + cs2 + m <= 1
+    id1 + id2 + req1 + req2 + after_you2 + cs1 + cs2 <= 2
+  
+  - Invariant with trap constraint \delta added:
+    
+    id1 + id2 + req1 + req2 + after_you2             >= 1
+    id1 + id2 + req1 + req2 + after_you2 + cs1 + cs2 <= 2
 
 \end{verbatim}
 
@@ -608,6 +603,8 @@ TODO: Unroll pseudocode?
 
 TODO: Unroll pseudocode?
 \end{verbatim}
+
+\iffalse
 
 \newpage
 \section{Method Invariant with Minimization}
