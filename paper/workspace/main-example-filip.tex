@@ -69,25 +69,25 @@
 \section{Method Safety}
 
 The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
-We present the method Safety by example on Lamport's 1-bit algorithm [Esparza1997].
+We present the method Safety by example on a modified Petri net from [Esparza1997].
 
 \begin{verbatim}
 * Code
 
 TODO
 
-* Property: Thread 1 and Thread 2 are never in the critical section at the same time.
+* Property: z is never marked
 
 * Petri net:
 
 \end{verbatim}
 
 \begin{center}
-  \includegraphics[width=12cm]{lamport}
+  \includegraphics[width=6cm]{example-filip}
 \end{center}
 
 \begin{verbatim}
-* Property P: cs1 + cs2 <= 1
+* Property P: z = 0
 \end{verbatim}
 
 \newpage
@@ -124,29 +124,22 @@ TODO
 
     Place equations:
   
-    id1        = 1 + u1 - u2
-    ^            ^   ^    ^
-    |            |   |    |
-    |            |   |    |
-    |            |   |    |
-    |            |   |   # of tokens taken from nc
-    |            |   |    
-    |            |  # of tokens given to nc
-    |            |
-    |          initial number of tokens in nc
+    x = 1 - t
+    ^   ^   ^
+    |   |   |
+    |   |   |
+    |   |   |
+    |   |   |
+    |   |   |
+    |   |  # of tokens taken from x
+    |   |
+    |   initial number of tokens in x
     |
-    number of tokens in nc
+    number of tokens in x
 
-    cs1        = 0 - u1      + u3
-    idle1      = 1 + u1 - u2
-    req1       = 0      + u2 - u3
-    nid1       = 0 - u1 + u2
-    id2        = 1                     + v2           + v5 - v6
-    cs2        = 0                               + v4 - v5
-    idle2      = 1                          + v3 + v5      - v6
-    req2       = 0                - v1           - v4      + v6
-    after_you2 = 0                + v1 - v2
-    await2     = 0                     + v2 - v3
+    y = 0
+    z = 0 + t
+    w = 0 + t
 \end{verbatim}
 
 \newpage
@@ -154,30 +147,15 @@ TODO
 \begin{verbatim}
     Non-negativity conditions:
   
-    id1        >= 0
-    cs1        >= 0
-    idle1      >= 0
-    req1       >= 0
-    nid1       >= 0
-    id2        >= 0
-    cs2        >= 0
-    idle2      >= 0
-    req2       >= 0
-    after_you2 >= 0
-    await2     >= 0
-    u1         >= 0
-    u2         >= 0
-    u3         >= 0
-    v1         >= 0
-    v2         >= 0
-    v3         >= 0
-    v4         >= 0
-    v5         >= 0
-    v6         >= 0
+    x >= 0
+    y >= 0
+    z >= 0
+    w >= 0
+    t >= 0
 
   - Negated Property \neg P:
 
-    cs1 + cs2  >= 2
+    z >= 1
 
 * Place equation:
   
@@ -271,83 +249,54 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   - State constraints C and \neg P are the same as in the example for method Safety.
 
   - Assignment A:
-    id1        = 0
-    cs1        = 1
-    idle1      = 0
-    req1       = 0
-    nid1       = 1
-    id2        = 0
-    cs2        = 1
-    idle2      = 0
-    req2       = 0
-    after_you2 = 0
-    await2     = 0
-    u1         = 0
-    u2         = 1
-    u3         = 1
-    v1         = 0
-    v2         = 0
-    v3         = 0
-    v4         = 1
-    v5         = 0
-    v6         = 1
+    x = 0
+    y = 0
+    z = 1
+    w = 1
+    t = 1
 
   - Trap conditions C_\theta:
 
     - Trap implications:
-                       v4              v3                 u2
-                  ------------    --------------    --------------     
-    id1        => (cs2 \/ id1) /\ (id1 \/ idle2) /\ (req1 \/ nid1)
-    ^              ^      ^        ^      ^          ^       ^
-    |              |      |        |      |          |       |
-    |              |     id1 \in S |     idle2 \in S |      nid1 \in S
-    |              |               |                 |
-    |             cs2 \in S       id1 \in S         req1 \in S
+              t
+         -----------
+    x => y \/ z \/ w
+    ^    ^    |    |
+    |    |    |    w \in S
+    |    |    |
+    |    |    z \in S
+    |    |
+    |    y \in S
     |
-    id1 \in S
+    x \in S
     
-    cs1        => idle1 \/ id1
-    idle1      => req1 \/ nid1
-    req1       => cs1 \/ id2
-    nid1       => (after_you2 \/ nid1) /\ (idle1 \/ id1)
-    id2        => req2 /\ (cs1 \/ id2)
-    cs2        => (idle2 \/ id2)
-    idle2      => req2
-    req2       => (cs2 \/ id1) /\ (cs2 \/ id1)
-    after_you2 => id2 \/ await2
-    await2     => id1 \/ idle2
+    y => y \/ z \/ w
+    z => true
+    w => true
 
     - At least one of the initially marked places belongs to S:
-    id1 \/ id2 \/ idle1 \/ idle2
+    x
 
     - None of the marked places in A belongs to S:
-    ~cs1 /\ ~cs2 /\ ~nid1
+    ~z /\ ~w
 \end{verbatim}
 
 \newpage
 
 \begin{verbatim}
   - Assignment A_\theta:
-    id1        = true
-    cs1        = false
-    idle1      = false
-    req1       = true
-    nid1       = false
-    id2        = true
-    cs2        = false
-    idle2      = false
-    req2       = true
-    after_you2 = true
-    await2     = false
+    x = true
+    y = true
+    z = false
+    w = false
 
   - Refinement constraint \delta:
-    id1 + id2 + req1 + req2 + after_you2 >= 1
-    ^     ^     ^      ^      ^
-    |     |     |      |      |
-    ---------------------------
+    x + y >= 1
+    ^   ^
+    |   |
+    -----
       |
-      S = {iq1, iq2, req1, req2, after_you2}, therefore \delta excludes
-      assignment A in the next iteration
+      S = {x, y}, therefore \delta excludes assignment A in the next iteration
 
 * Trap implication:
 
