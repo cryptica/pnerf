@@ -191,19 +191,24 @@ TODO
 
   # of tokens in place s           >= 0
   # of times transition t is fired >= 0
+\end{verbatim}
 
+\newpage
+
+\begin{verbatim}
 * Subprocedure \mathcal{C}:
 
   Input:
     (S, T, E, M0) : Petri net
   Output:
     C : State constraints
+
   Pseudocode:
   
   # Place equations
   for s in S:
     # initial number of tokens
-    print(s + " = " + M0(s)"
+    print(s + " = " + M0(s))
     for t in T:
       if (t, s) in E and not (s, t) in E:
         # input transition
@@ -218,6 +223,205 @@ TODO
     print(s + " >= 0\n")
   for t in T:
     print(t + " >= 0\n")
+\end{verbatim}
+
+\newpage
+
+\section{Method Safety by Refinement}
+
+The method Safety by Refinement applies trap conditions to check that a given Petri net \verb=N= never violates a property \verb=P=.
+
+\begin{verbatim}
+* Method Safety by Refinement:
+
+  Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
+  Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
+\end{verbatim}
+\begin{center}
+\begin{tikzpicture}
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+                               	$C_{\theta}:=\text{TrapConditions}(N, A)$};
+  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+                                    	$\delta:=\Delta(A_\theta)$\\
+                                    	$C:=C \cup \{\delta\}$};
+  \node[print, right=of satc] (yes) {N satisfies P};
+  \node[print, right=of satctheta] (dontknow) {Don't know};
+  \node[state, right=of yes] (end1) {END};
+  \node[state, right=of dontknow] (end2) {END};
+
+  \draw (begin) edge (c);
+  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge node[above]{NO} (yes);
+  \draw (yes) edge (end1);
+  \draw (satc) edge node[right]{YES} (modelc);
+  \draw (modelc) edge (satctheta);
+  \draw (satctheta) edge node[above]{NO} (dontknow);
+  \draw (dontknow) edge (end2);
+  \draw (satctheta) edge node[right]{YES} (modelctheta);
+  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+\end{center}
+
+\begin{verbatim}
+* Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
+  1. S is a trap in the net N
+  2. S is marked in the initial marking M0
+  3. S is unmarked in the assignment A
+
+* Property of A_\theta: for each place s, A_\theta(s) iff s \in S
+
+* Property of refinement constraint \delta: Constraint \delta refines the abstraction, i.e.
+  1. A ^ \delta is unsat (\delta excludes A)
+  2. N |= \delta is sat  (\delta is a property of N)
+\end{verbatim}
+
+\newpage
+\begin{verbatim}
+* Example
+  - State constraints C and \neg P are the same as in the example for method Safety.
+
+  - Assignment A:
+    id1        = 0
+    cs1        = 1
+    idle1      = 0
+    req1       = 0
+    nid1       = 1
+    id2        = 0
+    cs2        = 1
+    idle2      = 0
+    req2       = 0
+    after_you2 = 0
+    await2     = 0
+    u1         = 0
+    u2         = 1
+    u3         = 1
+    v1         = 0
+    v2         = 0
+    v3         = 0
+    v4         = 1
+    v5         = 0
+    v6         = 1
+
+  - Trap conditions C_\theta:
+
+    - Trap implications:
+                       v4              v3                 u2
+                  ------------    --------------    --------------     
+    id1        => (cs2 \/ id1) /\ (id1 \/ idle2) /\ (req1 \/ nid1)
+    ^              ^      ^        ^      ^          ^       ^
+    |              |      |        |      |          |       |
+    |              |     id1 \in S |     idle2 \in S |      nid1 \in S
+    |              |               |                 |
+    |             cs2 \in S       id1 \in S         req1 \in S
+    |
+    id1 \in S
+    
+    cs1        => idle1 \/ id1
+    idle1      => req1 \/ nid1
+    req1       => cs1 \/ id2
+    nid1       => (after_you2 \/ nid1) /\ (idle1 \/ id1)
+    id2        => req2 /\ (cs1 \/ id2)
+    cs2        => (idle2 \/ id2)
+    idle2      => req2
+    req2       => (cs2 \/ id1) /\ (cs2 \/ id1)
+    after_you2 => id2 \/ await2
+    await2     => id1 \/ idle2
+
+    - At least one of the initially marked places belongs to S:
+    id1 \/ id2 \/ idle1 \/ idle2
+
+    - None of the marked places in A belongs to S:
+    ~cs1 /\ ~cs2 /\ ~nid1
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+  - Assignment A_\theta:
+    id1        = true
+    cs1        = false
+    idle1      = false
+    req1       = true
+    nid1       = false
+    id2        = true
+    cs2        = false
+    idle2      = false
+    req2       = true
+    after_you2 = true
+    await2     = false
+  - Refinement constraint \delta:
+    id1 + id2 + req1 + req2 + after_you2 >= 1
+    ^     ^     ^      ^      ^
+    |     |     |      |      |
+    ---------------------------
+      |
+      S = {iq1, iq2, req1, req2, after_you2}, therefore \delta excludes
+      assignment A in the next iteration
+
+* Trap implication:
+
+  place s \in S =>    /\       \    /
+                     /  \       \  /     place p \in S
+                    /    \       \/
+                   t \in s*   p \in t*   
+
+
+  "if s is in trap S then for each output transition t at least one successor p is in trap S"
+
+
+* Refinement constraint \delta:
+
+  \Sigma s >= 1  
+  A(s)
+
+  "At least one place in S is always marked"
+
+
+* Subprocedure TrapConditions:
+
+  Input:
+    (S, T, E, M0) : Petri net
+    A             : Satisfying assignment for C \cup { ~P }
+  Output:
+    C_\theta      : Trap conditions
+
+  TODO: Unroll pseudocode?
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  Pseudocode:
+  
+  # Trap implications
+  for s in S:
+    print(s + " => true")
+    for t in s*:
+      print(" /\ ( false")
+      for p in t*:
+        print(" \/ " + p)
+     print(")")
+    print("\n")
+  
+  # Initially marked
+  print("false")
+  for s in S:
+    if M0(s) > 0:
+      print(" \/ " + s)
+  print("\n")
+  
+  # Unmarked in A
+  for s in S:
+    if A(s) = 0:
+      print("~" + p + "\n")
 \end{verbatim}
 
 \iffalse
@@ -503,238 +707,7 @@ TODO: Unroll pseudocode?
 
 \end{verbatim}
 
-\newpage
 
-\section{Method Safety by Refinement}
-
-The method Safety by Refinement applies trap conditions to check that a given Petri net \verb=N= never violates a property \verb=P=.
-We present the method Invariant by example on a mutual exclusion algorithm by Delzanno2001.
-
-\begin{verbatim}
-
-* Code
-
-bool m1 = false;
-bool m2 = false;
-
-// Thread 1:
-while (true) {
-  if (! m2 && ! test_and_set(m1)) {
-    // critical section 1
-    m1 = false
-  }
-  if (! m1 && ! test_and_set(m2)) {
-    // critical section 2
-    m2 = false
-  }
-}
-
-// Thread 2:
-while (true) {
-  if (! m2 && ! test_and_set(m1)) {
-    // critical section 1
-    m1 = false
-  }
-  if (! m1 && ! test_and_set(m2)) {
-    // critical section 2
-    m2 = false
-  }
-}
-
-Property: Thread 1 and Thread 2 are never in any critical section at the same time.
-
-* Petri net:
-\end{verbatim}
-\begin{center}
-\begin{tikzpicture}[node distance=2cm]
-  \node[blue place, tokens=2, label=above:nc] (nc) {};
-  \node[place, tokens=1, label=right:m2, below of=nc, xshift=+0.75cm] (s2) {};
-  \node[place, tokens=1, label=left:m1, below of=nc, xshift=-0.75cm] (s1) {};
-  \node[red place, label=above:cs1, left of=s1] (cs1) {};
-  \node[red place, label=above:cs2, right of=s2] (cs2) {};
-  \node[transition, label=above:t1] (t1) at ($(s1)!0.5!(cs1) + (0,1cm)$) {}
-	edge [pre] (nc)
-	edge [pre] (s1)
-	edge [pre] (s2)
-	edge [post] (cs1)
-	edge [post] (s2);
-  \node[transition, label=above:t2] (t2) at ($(s2)!0.5!(cs2) + (0,1cm)$) {}
-	edge [pre] (nc)
-	edge [pre] (s2)
-	edge [pre] (s1)
-	edge [post] (cs2)
-	edge [post] (s1);
-  \node[transition, label=below:t3] (t3) at ($(s1)!0.5!(cs1) - (0,1cm)$) {}
-	edge [pre] (cs1)
-	edge [post] (s1)
-	edge [post,bend left,min distance=3cm, out=115, in=115] (nc);
-  \node[transition, label=below:t4] (t4) at ($(s2)!0.5!(cs2) - (0,1cm)$) {}
-	edge [pre] (cs2)
-	edge [post] (s2)
-	edge [post,bend right,min distance=3cm, out=-115, in=-115] (nc);
-\end{tikzpicture}
-\end{center}
-
-\newpage
-\begin{verbatim}
-* Method Safety by Refinement:
-
-  Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
-  Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
-\end{verbatim}
-\begin{center}
-\begin{tikzpicture}
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                               	$C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                    	$\delta:=\Delta(A_\theta)$\\
-                                    	$C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {N satisfies P};
-  \node[print, right=of satctheta] (dontknow) {Don't know};
-  \node[state, right=of yes] (end1) {END};
-  \node[state, right=of dontknow] (end2) {END};
-
-  \draw (begin) edge (c);
-  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge node[above]{NO} (yes);
-  \draw (yes) edge (end1);
-  \draw (satc) edge node[right]{YES} (modelc);
-  \draw (modelc) edge (satctheta);
-  \draw (satctheta) edge node[above]{NO} (dontknow);
-  \draw (dontknow) edge (end2);
-  \draw (satctheta) edge node[right]{YES} (modelctheta);
-  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-\end{center}
-
-\begin{verbatim}
-* Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
-  1. S is a trap in the net N
-  2. S is marked in the initial marking M0
-  3. S is unmarked in the assignment A
-
-* Property of A_\theta: for each place s, A_\theta(s) iff s \in S
-
-* Property of refinement constraint \delta: Constraint \delta refines the abstraction, i.e.
-  1. A ^ \delta is unsat (\delta excludes A)
-  2. N |= \delta is sat  (\delta is a property of N)
-\end{verbatim}
-
-\newpage
-\begin{verbatim}
-* Example
-  - State constraints C:
-    nc  =  2 - t1 - t2 + t3 + t4
-    m1  =  1 - t1 + t3
-    m2  =  1 - t2 + t4
-    cs1 =  0 + t1 - t3
-    cs2 =  0 + t2 - t4
-    nc  >= 0
-    m1  >= 0
-    m2  >= 0
-    cs1 >= 0
-    cs2 >= 0
-    t1  >= 0
-    t2  >= 0
-    t3  >= 0
-    t4  >= 0
-
-  - Assignment A:
-    nc  = 0
-    m1  = 0
-    m2  = 0
-    cs1 = 1
-    cs2 = 1
-    t1  = 1
-    t2  = 1
-    t3  = 0
-    t4  = 0
-
-  - Trap conditions C_\theta:
-
-    - Trap implications:
-
-    cs1 => m1 \/ nc
-    ^      ^     ^
-    |      |     |
-    |      |     nc \in S
-    |      |
-    |      m1 \in S
-    |
-    cs1 \in S
-    
-    cs2 => m2 \/ nc
-    nc  => (m2 \/ cs1) /\ (m1 \/ cs2)
-    m1  => (m2 \/ cs1) /\ (m1 \/ cs2)
-    m2  => (m2 \/ cs1) /\ (m1 \/ cs2)
-
-    - At least one of the intially marked places belongs to S:
-    nc \/ m1 \/ m2
-
-    - None of the marked places in A belongs to S:
-    ~cs1 /\ ~cs2
-
-  - Assignment A_\theta:
-    nc  = false
-    m1  = true
-    m2  = true
-    cs1 = false
-    cs2 = false
-\end{verbatim}
-
-\newpage
-\begin{verbatim}
-  - Refinement constraint \delta:
-    m1 + m2 >= 1
-    ^    ^
-    |    |
-    ------
-      |
-      S = {m1, m2}, therefore \delta excludes assignment A in the next iteration
-
-* Trap implication:
-
-  place s \in S =>    /\       \    /
-                     /  \       \  /     place p \in S
-                    /    \       \/
-                   t \in s*   p \in t*   
-
-
-  "if s is in trap S then for each output transition t at least one successor p is in trap S"
-
-
-* Refinement constraint \delta:
-
-  \Sigma s >= 1  
-  A(s)
-
-  "At least one place in S is always marked"
-
-
-* Subprocedure TrapConditions:
-
-  Input:
-    (S, T, E, M0) : Petri net
-    A             : Satisfying assignment for C \cup { ~P }
-  Output:
-    C_\theta      : Trap conditions
-
-  TODO: Unroll pseudocode?
-
-* Subprocedure \Delta:
-
-  Input:
-    A_\theta      : Satisfying assignment for C_\theta
-  Output:
-    \delta        : Refinement constraint \delta
-
-  TODO: Unroll pseudocode?
-\end{verbatim}
 
 \newpage
 \section{Benchmarks of \bfc}
