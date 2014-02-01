@@ -183,8 +183,8 @@ TODO
 \begin{align*}
   C(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left(
     s = M_0(s) + \sum_{(t, s) \in E} t - \sum_{(s, t) \in E} t
-  \right) \right) \land \\
-  & \left( \bigwedge_{s \in S} s \ge 0 \right) \land
+  \right) \right) \land
+    \left( \bigwedge_{s \in S} s \ge 0 \right) \land
     \left( \bigwedge_{t \in T} t \ge 0 \right)
 \end{align*}
 
@@ -337,8 +337,8 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   C_\theta(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left( s \Rightarrow
       \bigwedge_{(s, t) \in E} \bigvee_{(t, p) \in E} p
     \right) \right) \land \\
-  & \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land \\
-  & \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right) \\
+    \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
+    \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
 \end{align*}
 \begin{verbatim}
 
@@ -353,7 +353,7 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
 \end{verbatim}
 \begin{align*}
-  & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)\\
+  & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)
 \end{align*}
 
 \iffalse
