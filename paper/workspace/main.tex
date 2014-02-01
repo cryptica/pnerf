@@ -76,26 +76,26 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
 
 Process 1:
 
-bit1 := false
-while true do
-  bit1 := true
-  a: while bit2 do skip od
-  b: <critical section>
-  bit1 := false
-od
+    bit1 := false
+    while true do
+p1:   bit1 := true
+p2:   while bit2 do skip od
+p3:   <critical section>
+      bit1 := false
+    od
 
 Process 2:
 
-bit2 := false
-while true do
-  l: bit2 := true
-  if bit1 then
     bit2 := false
-    while bit1 do skip od
-    goto l
-  fi
-  <critical section>
-  bit2 := false
+    while true do
+q1:   bit2 := true
+q2:   if bit1 then
+q3:     bit2 := false
+q4:     while bit1 do skip od
+        goto q1
+      fi
+q5:   <critical section>
+      bit2 := false
 od
 
 * Property: Process 1 and Process 2 are never in their respective critical section at the same time.
@@ -118,7 +118,7 @@ od
 \begin{tikzpicture}[node distance=2cm]
   \node[place, tokens=1, label=left:a] (a) {};
   \node[place, tokens=0, label=left:b, below of=a] (b) {};
-  \node[place, tokens=0, label=right:nbit2, right of=b, xshift=-1cm, yshift=+1cm] (nbit2) {};
+  \node[place, tokens=0, label=right:$\neg bit2$, right of=b, xshift=-1cm, yshift=+1cm] (nbit2) {};
   \node[transition, label=left:t1, above of=a, yshift=-1cm] (t1) {}
     edge [pre, bend left, min distance=2cm, out=225, in=-45] (b)
     edge [post] (a);
