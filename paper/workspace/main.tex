@@ -619,9 +619,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
-\end{verbatim}
 
-\begin{verbatim}
 * Method Invariant with Minimization
 
   Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
@@ -707,6 +705,9 @@ that uses a minimal number of places for given Petri net \verb=N= and
 
     a + b <= 1
     
+* Subprocedures \mathcal{C'} and Inv are the same as
+  in Method Invariant
+
 * Subprocedure \text{MinConstraints}:
 
   Input:
@@ -811,6 +812,12 @@ that uses a minimal number of places for given Petri net \verb=N= and
 
     a     + nbit2 >= 1
     a + b + nbit2 <= 1
+
+* Subprocedures TrapConditions and \Delta are the same as
+  in Method Safety by Refinement
+
+* Subprocedures \mathcal{C'} and Inv are the same as
+  in Method Invariant
 
 \end{verbatim}
 
