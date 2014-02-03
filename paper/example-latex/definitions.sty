@@ -1,0 +1,36 @@
+% definitions.tex
+%
+% Macros for writting mathematical definitions by Ruslan Ledesma-Garza.
+%
+
+\ProvidesPackage{definitions}[2010/08/02 Macros for writting mathematical definitions]
+\RequirePackage{xspace,ntheorem}
+
+% theorem environment stuff
+
+\newtheoremstyle
+    {myplain}
+    {\item[\hskip\labelsep \theorem@headerfont ##1\ ##2\theorem@separator]}%
+    {\item[\begin{minipage}{\columnwidth}
+          \hskip\labelsep \theorem@headerfont ##1\ ##2\ (##3)\theorem@separator
+        \end{minipage}
+    ]}
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\ensuremath{\blacksquare}}
+\theoremseparator{.}
+
+%% \theoremstyle{plain}
+% \newtheorem{thm}{Theorem}[section] % similar env defined in llncs
+% \newtheorem{defn}[thm]{Definition} % similar env defined in llncs
+% \newtheorem{lem}[thm]{Lemma} % similar env defined in llncs
+% \newtheorem{cor}[thm]{Corollary} % similar env defined in llncs
+% \newtheorem{prop}[thm]{Proposition} % similar env defined in llncs
+% \newtheorem{ex}[thm]{Example} % similar env defined in llncs
+% \newtheorem{rem}[thm]{Remark} % similar env defined in llncs
+% \newtheorem{claim}[thm]{Claim} % already defined in llncs
+% \newtheorem{tspec}[thm]{Temporal Specification}
+
+\theoremsymbol{\ensuremath{\square}}
+\theoremstyle{nonumberplain}
+% \newtheorem{proof}{Proof}

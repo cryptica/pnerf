@@ -1,0 +1,122 @@
+% \documentclass[nocopyrightspace]{sigplanconf}
+%\documentclass{llncs}
+\documentclass{llncs}
+
+\sloppy
+
+\input{preamble}
+
+
+\begin{document}
+
+% \conferenceinfo{WXYZ '05}{date, City.} 
+% \copyrightyear{2005} 
+% \copyrightdata{[to be supplied]} 
+
+% \titlebanner{}
+% \preprintfooter{}
+
+% \pagestyle{headings}
+
+\title{Binary Reachability Analysis of Higher Order Functional Programs}
+%\title{Temporal Monitoring and Verification of Higher Order Functional Programs}
+\author{Rusl\'{a}n Ledesma-Garza \and Andrey Rybalchenko}
+\institute{Technische Universit\"at M\"unchen}
+
+\maketitle
+
+\begin{abstract}
+%
+
+\input{abstract}
+\iffalse
+The automata-theoretic approach to program verification is an
+effective and uniform way of dealing with complex temporal properties.
+The crux of the approach is to represent the property by a monitor
+that inspects program computations.
+The monitor keeps record of the (intermediate) inspection results, and
+if the property violation is detected then an appropriate note is
+recorded.
+Then, the monitor is composed with the program, which produces a
+product program that monitors its own computation and can be analyzed
+using tools for proving reachability and (fair) termination (i.e.,
+sophisticated temporal reasoning is no longer necessary).
+While already ubiquitous for dealing with imperative programs, monitor
+based approaches were recently applied for termporal verification of
+higher order functional programs by using higher order recursion
+schemes (HORS), e.g.~\cite{Ong06,Kobayashi09}.
+
+In this paper, we present an alternative approach to monitoring and
+verifying higher order functional programs that applies the monitor
+composition directly on the program source code (instead of composing
+with a HORS derived from the program by applying finite state
+abstraction on data types).
+We formulate our approach for a \miniocaml language as a program
+transformation algorithm and present its implementation.
+Our experimental evaluation in combination with the DSolve verifier
+for OCaml~\cite{DSolveCAV} shows that the scalability and
+effectiveness of existing abstraction-based assertion checking tools
+can be effectively leveraged for dealing with temporal safety and
+liveness properties of higher order functional programs.
+
+
+
+The automata-theoretic approach is a standard method for dealing with
+complex temporal properties of imperative programs and only requires
+program verifiers that deal reachability and (fair) termination
+properties.
+The automata-theoretic semantics of imperative programs directly
+supports monitoring and product construction.
+Until now, the temporal reasoning about functional programs does not
+rely on monitoring and reduction to reachability and (fair)
+termination.
+Instead, the reasoning is executed using type systems and type
+inference algorithms that are developed/customized for the specific
+property at hand.
+\fi
+
+
+
+\iffalse
+
+In this paper, we present an application of the automata-theoretic
+approach to the temporal verification, i.e., safety and liveness, of
+\miniocaml\ programs with higher-order procedures.  
+First, we present the notion of monitoring for \miniocaml\ computations
+given as evaluation trees, and define monitor specifications that can be
+composed with \miniocaml\ programs.
+Second, we present a product construction algorithm that composes an
+\miniocaml\ program with a monitor specification in the presence of
+higher order procedures.
+Third, we present an implementation of the proposed approach that uses
+the \dsolve\ reachability checker, together with its experimental
+evaluation on examples from the literature.
+The examples include resource analysis and termination checking tasks.
+\fi
+\end{abstract}
+ 
+% \mbox{ }
+% \\ \\
+%\nocite{Hofmann00,Hofmann02,Hofmann03,Kobayashi09}
+
+\input{sec_introduction}
+\input{sec_illustration}
+\input{sec_preliminaries}
+\input{sec_semantics}
+%\input{sec_logger}
+\input{sec_transformation}
+%\input{sec_trans_assert}
+\input{sec_experiments}
+\input{sec_relwork.tex}
+\input{sec_conclusions}
+
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

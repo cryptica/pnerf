@@ -1,0 +1,198 @@
+\section{Program transformation}
+\label{sec-transformation}
+
+In this section we present a program transformation that realizes the
+function \monitor presented in Section~\ref{sec-semantics}.
+To implement the state passing between judgemets we apply a so-called
+logger monad.
+
+\input{sec_logger}
+
+\paragraph{\bf Transformation of types}
+
+We transform each program expression into a monadic expression that
+keeps track of the state that results in the judgement augmentation.
+Figure~\ref{fig-types-prods} presents the function \monadic\ that maps
+types of expressions in the original program to types of the
+transformed program.
+Function \monadic\ indicates that a tranformed program is a \miniocaml\
+function that takes an initial state and returns a \mbox{pre-monadic}
+program value together with a final state.
+
+\begin{figure}[t]
+  \linespread{1}
+  \begin{minipage}[t]{\columnwidth}
+    \small
+    \begin{tabular}{l@{\ }l}
+      1 & \algLet \algRec \monadic\ \type\ = (\premonadic\ \type) \moncstr \\[\jot]
+      & \\[\jot]
+      2 & \algAnd \premonadic\ = \algFunction \\[\jot]
+      3 & \tabT $|$ \ttt{\type[1] -> \type[2]}\
+      \algArrow \ttt{$(\premonadic\ \type[1])$ -> $(\premonadic\
+        \type[2])$ m} \\[\jot]
+      % 6 & \tabT $|$ \ttt{\type[1]\ *\ \ldots\ *\ \type[n]}\
+      % \algArrow \ttt{$(\premonadic\ \type[1])$\ *\ \ldots\ *\
+      %   $(\premonadic\ \type[n])$} \\[\jot] 
+      4 & \tabT $|$ \ttt{(\type[1],\ \ldots,\ \type[n])\ \tycstr}\ 
+      \algArrow \ttt{($(\premonadic\ \type[1])$,\ \ldots,\ $(\premonadic\
+      \type[n])$)\ \tycstr} \\[\jot]
+      5 & \tabT $|$ \type\ \algArrow \type
+    \end{tabular}
+  \end{minipage}
+  \caption{Type transformation function \monadic.}
+  \label{fig-types-prods}
+\end{figure}
+
+For example, consider the following applications of \monadic.
+%
+\begin{align*}
+  \monadic\ \texttt{(int -> (int -> int))} = \;
+  \begin{array}[t]{@{}l@{}}
+    \texttt{(int -> ((\premonadic\ int -> int) m)) m}\\[\jot]
+    \texttt{(int -> ((int -> int m) m)) m}
+    % (int -> ((prem int -> int) m)) m
+    % (int -> ((int -> int m) m)) m
+  \end{array}
+\end{align*}
+%
+\input{fig_tsel}
+
+\input{fig_prod_constr}
+
+\paragraph{\bf Transformation of expressions}
+
+
+We present the transformation function \product\ in
+Figure~\ref{fig-prod-alg}. 
+\product uses two auxiliary functions $\tselEnter$ and $\tselExit$
+shown in Figure~\ref{fig-tsel}.
+
+For a expression \expr, \product\ traverses the abstract syntax tree
+of \expr\ and gives a core monadic expression that evaluates the user
+program together with two state transform operations.
+\product generates \miniocaml expressions using the $\quo{\cdot}$
+function.
+For example, $\quo{\ttt{let x = 1 in 1}}$ emits the expression
+\ttt{let x = 1 in 1}.
+Within $\quo{\cdot}$ we can perform an evaluation by
+applying~$\aq{\cdot}$.
+For example, $\quo{\ttt{let x = \aq{\quo{1+2}} in 1}}$ emits $\ttt{let
+x = 1+2 in 1}$.
+
+The important case is the tranformation of
+$\theFunction/\theArity$-applications.
+Such applications are recognized in $\tselEnter$ and $\tselExit$.
+The emitted code either saves the argument values into the state, or
+propagates further the current state.
+Furthermore, $\tselEnter$ performs a check if the snapshot stored in a
+state together with the arguments of a
+$\theFunction/\theArity$-application satisfy the transition invariant
+candidate~$\theTI$.
+This check is guarded by the condition that the snapshot must have
+been stored previously.
+
+We show an example application of \product in Figure~\ref{fig-ex-prod}
+for analysing $\texttt{f}/1$-applications.
+First, we present subexpressions of the program and then show the
+result of the application of \product on them (we have partially
+simplified the transformed expressions to improve readability).
+%
+\begin{figure}[!t]
+  \centering
+{
+\small
+\begin{verbatim}
+e = let rec f x = if x > 0 then f (x - 1) else fun y -> f x y in f 1
+e1 = if x > 0 then f (x - 1) else fun y -> f x y
+e2 = x > 0
+e3 = 0
+e4 = (>) x
+e5 = x
+e6 = (>)
+e7 = f (x - 1)
+...
+
+Transform e = let rec f = fun x -> 'Transform e1' in 'Transform e20'
+Transform e1 = 'Transform e2' >>= fun x2 -> (if x2 then 'Transform e7'
+                                             else 'Transform e14')
+Transform e2 = fun s_full -> ('Transform e3' >>= fun x3 ->
+                              'Transform e4' >>= fun x4 ->
+                              update (fun s -> s) >>= fun () s_partial ->
+                             (x4 x3 >>= fun xapp2 ->
+                              update (fun s -> s) >>= fun () ->
+                              unit xapp2) s_partial) s_full
+Transform e3 = unit 0
+Transform e4 = fun s_full -> ('Transform e5' >>= fun x5 ->
+                              'Transform e6' >>= fun x6 ->
+                              update (fun s -> s) >>= fun () s_partial ->
+                             (x6 x5 >>= fun xapp4 ->
+                              update (fun s -> s) >>= fun () ->
+                              unit xapp4) s_partial) s_full
+Transform e5 = unit x
+Transform e6 = unit (fun z1 -> unit (fun z2 -> unit (z1 > z2)))
+Transform e7 = fun s_full -> ('Transform e8' >>= fun x8 ->
+                              'Transform e13' >>= fun x13 ->
+                              update (fun ( _, m ) ->
+                                let m_c, m_1 = m in
+                                if m_c then assert ( x8 > 0 && m_1 > x8 );
+                                x8, if not m_c && nondet () then true, x8 else m
+                              ) >>= fun () s_partial ->
+                             (x13 x8 >>= fun xapp7 ->
+                              update (fun _ -> s_full) >>= fun () ->
+                              unit xapp7) s_partial) s_full
+...
+\end{verbatim}
+}
+  \caption{Example application of \product\ with $N = 1$ and \mbox{$\theTI = (\
+      a_1 > 0 \wedge m_1 > a_1 \ )$}. Given a stored snapshot, the
+    transformed application \ttt{f (x - 1)} checks that the current
+    actual satisfies $\theTI$.}
+  \label{fig-ex-prod}
+\end{figure}
+%
+
+We establish a relationship between augmented evaluation trees and
+evaluation trees of the transformed program in the following theorem.
+%
+\begin{theorem}[\product implements \monitor]
+\label{thm-product}
+%
+A pair $(v_1, \dots, v_\theArity)$ and~$(u_1, \dots, u_\theArity)$ is
+obtained from the augmented evaluation tree as described in
+Theorem~\ref{thm-monitor}
+if and only if a judgement of the following form appears in the
+evaluation tree of the
+program obtained by applying \product:
+%
+\begin{center}
+  \mevj{\evj{\ectx}{$\theFunction$\ \expr[1]\ \_\!\_\ \dots\
+      \expr[\theArity]\ s}{\val}}{\stupa}{}
+\end{center}
+%
+such that $\tsf{eval}\ \ectx\ s = (true, (v_1, \dots, v_\theArity))$
+and for each $i \in 1..\theArity$ we have \mbox{$\tsf{eval}\ \ectx\ \expr[i]
+= u_i$}.
+%
+\end{theorem}
+%
+
+The following corollary of Theorem~\ref{thm-product} allows one to
+rely on the assertion validity in the transformed program to implement
+the binary reachability analysis of the original program.
+%
+\begin{theorem}[Binary reachability analysis as assertion checking]
+\label{thm-assert}
+%
+Each pair $(v_1, \dots, v_\theArity)$ and~$(u_1, \dots, u_\theArity)$
+in the $\theFunction/\theArity$-recursion relation of the program 
+satisfies $\theTI$ if and only if the assertion inserted by
+$\tselEnter$ is valid in the transformed program.
+%
+\end{theorem}
+%
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

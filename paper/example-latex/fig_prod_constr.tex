@@ -1,0 +1,267 @@
+\begin{figure}[p]
+%  \hline
+  \centering
+  \begin{minipage}[t]{\linewidth}
+    \linespread{1.2}
+    \begin{minipage}[t]{.02\linewidth}
+      \small
+%      \mbox{} \\
+      \gutternumbering{1}{36}
+    \end{minipage}
+    \begin{minipage}[t]{.962\linewidth}
+      \small
+%      \mbox{} \\
+      \algLet \product\ \expr\ = \\
+      \tabT \algMatch \expr\ \algWith
+      \\
+      \tabT \algCase{\cst\ } \\
+      \tabTT \algLet \var[1], \ldots, \var[\arity\ \cst]\ = \freshvar, \ldots, \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{unit (fun \var[1]-> \\ \tabTTTT 
+          \ldots\ \\ \tabTTTTT 
+          unit (fun \var[\arity\ \cst]-> \\  \tabTTTTTT 
+          unit (\cst\ \var[1] \ldots\ \var[\arity\ \cst])) \ldots\ )
+        }}\\
+      \iffalse
+      \tabT \algCase{\cst\ } \\
+      \tabTT \algLet \var[1], \ldots, \var[\arity\ \cst]\ = \freshvar, \ldots, \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{unit (fun \var[1]-> \\ \tabTTTT 
+          \ldots\ \\ \tabTTTTT 
+          unit (fun \var[\arity\ \cst]-> \\  \tabTTTTTT 
+          unit (\cst\ \var[1] \ldots\ \var[\arity\ \cst])) \ldots\ )
+        }
+      }\\
+      \fi
+      \tabT \algCase{\var\ } % \\      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{unit \var}
+      }
+      \\
+%      % \tabT \algCase{\ntupleexpr\ \algWhen $n > 1$} \\
+      % \tabTT \algLet \var[1], \ldots, \var[n]\ = \freshvar, \ldots, \freshvar\ \algIn \\
+      % \tabTTT\hspace{-2.3ex}
+      % \quo{
+      %   \ttt{\aq{\product\ \expr[n]} >>= fun \var[n]-> %\\ \tabTTT 
+      %     \ldots %\\ \tabTTT 
+      %     \aq{\product\ \expr[1]} >>= fun \var[1]-> %\\ \tabTTT 
+      %     unit (\var[1], \ldots, \var[n])}~}
+%      % \\
+      \tabT \algCase{\ttt{\cstr(\ntupleexpr)}} \\
+      \tabTT \algLet \var[1], \ldots, \var[n]\ = \freshvar, \ldots, \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () ->\\
+          % \tabTTT
+          \aq{\product\ \expr[n]} >>= fun \var[n] -> \\
+          \tabTTT \ldots \\
+          \tabTTT \aq{\product\ \expr[1]} >>= fun \var[1] -> \\
+          % \tabTTT update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+          \tabTTT unit (\cstr (\var[1], \ldots, \var[n]))
+        }
+      }
+      \\
+      \tabT \algCase{\expr[f]\ \expr[p]\ } \\
+      \tabTT \algLet \var[app], \var[p], \vst[\mathit{full}]\ \vst[\mathit{partial}] = \freshvar, \freshvar, \freshvar, \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          fun \vst[\mathit{full}]\ -> \\
+          \tabTTTT (\aq{\product\ \expr[p]} >>= fun \var[p] -> \\
+          \tabTTTT \aq{\product\ \expr[f]} >>= fun \var[f] -> \\
+          \tabTTTT update (\aq{\tselEnter\ \expr } \var[p]) >>= fun () \vst[\mathit{partial}]\  -> \\
+          \tabTTTT (\var[f]\ \var[p] >>= fun \varapp\ -> \\
+          \tabTTTT update (\aq{\tselExit\ \expr} \vst[\mathit{full}] \vst[\mathit{partial}]) >>= fun () -> \\
+          \tabTTTT unit \varapp) \vst[\mathit{partial}]) \vst[\mathit{full}]
+        }
+      }
+      \\
+      \tabT
+      \algCase{ \funexpr\ } %\\      \tabTT\hspace{-3ex}
+      \quo{ \ttt{unit (fun \var\ -> \aq{\product\ \expr[b]})} }
+      \\
+      \tabT \algCase{ \ttt{let \patt\ = \expr[1]\ in \expr[2]}\ } 
+%      \\ \tabTTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{( \aq{\product\ \expr[1]} %\hspace{2.5ex}
+          >>= fun \patt\ -> %\\  \tabTTTT 
+          \aq{\product\ \expr[2]} )}
+      }
+      \\
+      \tabT
+      \algCase{ \ttt{let rec \var[f] = \funexpr\ in \expr[2]}\ } 
+      \\ \tabTTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{( let rec \var[f] = fun \var\ -> \aq{\product\ \expr[b]} 
+          in \aq{\product\ \expr[2]})}
+      }
+      \\
+      \tabT
+      \algCase{ 
+        \ttt{match \expr[m]\ with} %\\
+        \ttt{ | \ensuremath{e^p_1}\ -> \expr[1]} % \\
+        \ttt{\tabT \ldots} %\\
+        \ttt{ |  \ensuremath{e^p_i}\ -> \expr[i]}
+      } \\
+      \tabTTT \algLet \var[m]
+      \ = \freshvar
+      \ \algIn \\
+      \tabTTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+          % \tabTTT
+          \aq{\product\ \expr[m]} >>= fun \var[m]\ -> \\
+          \tabTTTT  ( match \var[m] with \\ \tabTTTTT 
+          | \ensuremath{e^p_1}\ -> \aq{\product\ \expr[1]}  \\
+          \tabTTTTT \ldots  \\
+          \tabTTTTT| \ensuremath{e^p_i}\ -> \aq{\product\ \expr[i]} \\ \tabTTTT 
+          )
+        }
+      }
+      \iffalse
+      \\
+      \tabT
+      \algCase{ 
+        \ttt{match \expr[m]\ with} \\
+        \ttt{\tabTT | \ensuremath{e^p_1}\ -> \expr[1]} \\
+        \ttt{\tabTT \ldots} \\
+        \ttt{\tabTT |  \ensuremath{e^p_i}\ -> \expr[i]}
+      } \\
+      \tabTTT \algLet \var[m]
+%      , \var[v]
+      \ = \freshvar
+%      , \freshvar
+      \ \algIn \\
+      \tabTTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+          % \tabTTT
+          \aq{\product\ \expr[m]} >>= fun \var[m]\ -> \\
+          \tabTTTT  ( match \var[m] with \\
+          \tabTTTTT | \ensuremath{e^p_1}\ -> \aq{\product\ \expr[1]} \\
+          \tabTTTTT \ldots \\
+          \tabTTTTT | \ensuremath{e^p_i}\ -> \aq{\product\ \expr[i]} \\
+          \tabTTTT ) %>>= fun \var[v]\ -> \\
+          % \tabTTT  update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+%          \tabTTT unit \var[v]
+        }
+      }
+      \fi
+    \end{minipage}
+  \end{minipage}
+  \caption{The transformation function \product.  
+    The operator \quo{$\;\cdot\;$} emits a \miniocaml\ expression after evaluating
+    expressions that are embedded using~\aq{$\;\cdot\;$}.  }
+  \label{fig-prod-alg}
+\end{figure}
+\iffalse  
+
+\begin{figure}[t]
+  %
+  \begin{minipage}[t]{\linewidth}
+    \linespread{1.2}
+    \begin{minipage}[t]{.04\linewidth}
+      \small
+      \mbox{} \\
+      \gutternumbering{31}{48}
+    \end{minipage}
+    \begin{minipage}[t]{.94\linewidth}
+      \small
+      \mbox{} \\
+      % \algCase{\expr[f]\ \expr[p]\ } \\
+      % \tabT \algLet \var[f], \var[p]\ = \freshvar, \freshvar\ \algIn \\
+      % \tabTTT\hspace{-2.3ex}
+      % \quo{
+      %   \ttt{
+      %     \aq{\product\ \expr[p]} >>= fun \var[p] -> \\
+      %     \tabTTT \aq{\product\ \expr[f]} >>= fun \var[f] -> \\
+      %     \tabTTT \var[f]\ \var[p]
+      %   }
+      % }
+      % \\
+      \algCase{\funexpr\ } %\\      \tabTT\hspace{-3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () ->\\
+          % \tabTT update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+          % \tabTT
+          unit (fun \var\ -> \aq{\product\ \expr[b]})
+        }
+      }
+      \\
+      \algCase{ \ttt{let \patt\ = \expr[1]\ in \expr[2]}\ } \\
+%      \tabTT \algLet \var[v]\ = \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+          % \tabTTT\hspace{-0.5ex} 
+          ( \aq{\product\ \expr[1]} %\hspace{2.5ex}
+          >>= fun \patt\ -> %\\  \tabTTTT 
+          \aq{\product\ \expr[2]} ) % >>= fun \var[v] -> \\
+          % \tabTTT update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+ %         \tabTTT unit \var[v]
+        }
+      }
+      \\
+      \algCase{ \ttt{let rec \var[f] = \funexpr\ in \expr[2]}\ } \\
+%      \tabTT \algLet \var[v]\ = \freshvar\ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () ->\\
+          % \tabTTT\hspace{-0.5ex}
+          ( let rec \var[f] = fun \var\ -> \aq{\product\ \expr[b]} 
+          \\ \tabTTTT 
+          in \aq{\product\ \expr[2]} ) % >>= fun \var[v]\ -> \\
+          % \tabTTT update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+%          \tabTTT unit \var[v]
+        }
+      }
+      \\
+      \algCase{ 
+        \ttt{match \expr[m]\ with} \\
+        \ttt{\tabT | \ncstrpatt{1}\ -> \expr[1]} \\
+        \ttt{\tabT \ldots} \\
+        \ttt{\tabT | \ncstrpatt{i}\ -> \expr[i]}
+      } \\
+      \tabTT \algLet \var[m]
+%      , \var[v]
+      \ = \freshvar
+%      , \freshvar
+      \ \algIn \\
+      \tabTTT\hspace{-2.3ex}
+      \quo{
+        \ttt{
+          % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+          % \tabTTT
+          \aq{\product\ \expr[m]} >>= fun \var[m]\ -> \\
+          \tabTTT  ( match \var[m] with \\
+          \tabTTTT | \ncstrpatt{1}\ -> \aq{\product\ \expr[1]} \\
+          \tabTTTT \ldots \\
+          \tabTTTT | \ncstrpatt{i}\ -> \aq{\product\ \expr[i]} \\
+          \tabTTT ) %>>= fun \var[v]\ -> \\
+          % \tabTTT  update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+%          \tabTTT unit \var[v]
+        }
+      }
+      \\
+    \end{minipage}
+  \end{minipage}
+  \caption{The product construction function \product.  It takes as
+    input an expression \expr.
+    The output is the product of \expr.  The operator
+    \quo{$\;\cdot\;$} emits a \miniocaml\ expression after evaluating
+    the embedded programs~\aq{$\;\cdot\;$}.  }
+  \label{fig-prod-alg}
+\end{figure}
+\fi
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

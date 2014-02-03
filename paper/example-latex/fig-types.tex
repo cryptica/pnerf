@@ -1,0 +1,20 @@
+\begin{minipage}{\columnwidth}
+  \small
+  \centering
+  \begin{tabular}{@{}r@{}l@{}l@{\;}l@{}}
+%    & $\type ::=$ &    & type \\[\jot]
+    & & $\type ::=$\ \tybase  & \myexp{base type} \\[\jot]
+    & & $|$ \ \tyvar  & \myexp{type variable} \\[\jot]
+    & & $|$ \ \ttt{\type\ -> \type}  & \myexp{function type} \\[\jot]
+%    & & $|$ \ \ttt{\type\ *\ \ldots\ *\ \type}  & tuple type \\[\jot]
+    & & $|$ \ \ttt{(\type,\ \ldots,\ \type)\ \tycstr\ }  & \myexp{variant type}
+  \end{tabular}
+
+  \centering
+  (b)
+\end{minipage}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

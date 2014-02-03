@@ -1,0 +1,146 @@
+\section{Illustration}
+
+In this section we illustrate what our transformation adds to the
+program in order to keep track of pairs of argument valuations for
+checking a transition invariant candidate.
+
+We consider the following curried function \texttt{f} that has a type
+\texttt{x:int -> y:int -> ret:int}.
+Here, we annotated the parameter and return value types with
+identifiers to improve readability.
+%
+\begin{center}
+\begin{minipage}[h]{.8\linewidth}
+\begin{small}
+\begin{verbatim}
+let rec f x = if x > 0 then f (x-1) else fun y -> f x y
+\end{verbatim}
+\end{small}
+\end{minipage}
+\end{center}
+%
+This function shows that -- in contrast to proving termination of
+recursive procedures in imperative programs -- it is important to
+differentiate between partial and complete applications when dealing
+with curried functions.
+First, we observe that any partial application of \texttt{f}
+terminates.
+For example, \texttt{f 10} stops after ten recursive calls and returns
+a function \texttt{fun y -> f 10 y} where \texttt{f} is bound to a
+closure.
+That is, there is no infinite sequence of \texttt{f} applications that
+are passed only one argument.
+In contrast, any complete application of \texttt{f} does not terminate.
+For example, \texttt{f 1 1} will lead to an infinite sequence of
+\texttt{f} applications such that each of them is given two arguments.
+
+Our binary reachability analysis takes as input a specification that
+determines which kind of applications we want to keep track of. 
+The specification consists of a function identifier, e.g., \texttt{f},
+a number of parameters, e.g., one, and a transition invariant candidate. 
+Then, such a specification requires that applications of \texttt{f} to
+one argument satisfy the transition invariant candidate.
+Alternatively, we may focus on applications of \texttt{f} to two
+arguments.
+
+Once the specification is given, we transform \texttt{f} into a
+function \texttt{f\_m} that keeps track of arguments on which \texttt{f} was
+applied using additional parameters \texttt{old\_x} and~\texttt{old\_y}.
+As a result, \texttt{f\_m} fulfills two requirements. 
+First, it computes a result value \texttt{res} such that $\mathtt{res}
+= \mathtt{f\ x\ y}$. 
+Second, it computes new values of additional parameters.
+If \texttt{f\_m} was an imperative program, we would obtain the type
+%
+\begin{small}
+\begin{verbatim}
+        x:int * y:int * copied:bool * old_x:int * old_y:int ->
+          ret:int * new_copied:bool * new_x:int * new_y:int
+\end{verbatim}
+\end{small}
+% 
+where \texttt{new\_x} and \texttt{new\_y} are computed as follows. 
+If \texttt{old\_x} already stores a value that was given to \texttt{x} in the past, i.e.,
+if $\mathtt{copied} = \mathtt{true}$, then $\mathtt{new\_x} = \mathtt{old\_x}$. 
+Otherwise, \texttt{f\_m} can nondeterministically either store
+\texttt{x} in \texttt{new\_x} and set $\mathtt{new\_copied} =
+\mathtt{true}$, or leave $\mathtt{new\_x} = \mathtt{old\_x}$
+and~$\mathtt{new\_copied} = \mathtt{false}$.
+The computation of \texttt{new\_y} is similar.
+Given a transformed program, checking binary reachability amounts to
+checking that at each application site the pair of tuples
+$(\mathtt{old\_x}, \mathtt{old\_y})$ and $(\mathtt{x}, \mathtt{y})$
+satisfies the transition invariant whenever \texttt{copied}
+is~\texttt{true}.
+
+Due to partial applications we cannot expect that values of \texttt{x}
+and \texttt{y} are provided simultaneously, which complicates both
+computation of \texttt{new\_x} and \texttt{new\_y} and checking if
+$(\mathtt{old\_x}, \mathtt{old\_y})$ together with $(\mathtt{x},
+\mathtt{y})$ satisfy the transition invariant. 
+Hence, we need to keep track of arguments as they are provided, which
+requires ``waiting'' for missing arguments.
+We implement this waiting process by introducing additional parameters
+\texttt{old\_state\_x} and \texttt{old\_state\_y} for each partial
+application, together with their updated versions
+\texttt{new\_state\_x} and~\texttt{new\_state\_y}.
+Each additional parameter accumulates arguments in its first
+component, and it keeps a tuple of previously provided arguments in
+its second component. 
+We obtain the following type for \texttt{f\_m}.
+%
+\begin{small}
+\begin{verbatim}
+x:int 
+-> old_state_x:((int * int) *                (* accumulate x and y     *)
+                (bool * int * int))          (* store copied, x, and y *)
+-> (y:int 
+    -> old_state_y:((int * int) *            (* accumulate x and y     *)    
+                    (bool * int * int))      (* store copied, x, and y *)
+    -> ret:int * new_state_y:((int * int) * 
+                              (bool * int * int))) *
+   new_state_x:((int * int) * 
+                (bool * int * int))
+\end{verbatim}
+\end{small}
+% 
+We refer to \texttt{(int * int) * (bool * int * int)} as~\texttt{state}. 
+Then \texttt{f\_m} has the type:
+%
+\begin{small}
+\begin{verbatim}
+      x:int -> old_state_x:state -> 
+        (y:int -> old_state_y:state -> ret:int * new_state_y:state) *
+        new_state_x:state
+\end{verbatim}
+\end{small}
+% 
+We formalize the above transformation in
+Section~\ref{sec-transformation}. 
+Figure~\ref{fig-ex-prod} presents a detailed execution protocol of
+applying our transformation on the above program.
+
+\iffalse
+When dealing with unary applications, the binary reachability
+analysis can show that every pair of unary applications is included
+in a transition invariant using the following check.
+\fi
+
+Note that if complete applications of a function terminate, then every
+partial application of the function terminates.
+For example, consider the following function~\texttt{g}.
+%
+\begin{center}
+\begin{verbatim}
+let rec g x = if x > 0 then g (x-1) else fun y -> x+y
+\end{verbatim}
+\end{center}
+%
+This function does not have any infinite application sequences neither
+for complete nor for partial applications.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

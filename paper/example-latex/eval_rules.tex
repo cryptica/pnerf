@@ -1,0 +1,147 @@
+\newcommand{\ercst}{
+  \inference[{\tiny \scst}]{
+  }{
+    \evj{\ectx}{\cst}{\cst}
+  }
+}
+
+\newcommand{\ervar}{
+  \inference[{\tiny \svar}]{
+    \var \in \dom\ \ectx
+  }{
+    \evj{\ectx}{\var}{\ectx\ \var}
+  }
+}
+
+\newcommand{\ertup}{
+  \inference[{\tiny \stup}]{
+    \evj{\ectx}{\expr[n]}{\val[n]}
+    &
+    \ldots
+    &
+    \evj{\ectx}{\expr[1]}{\val[1]}
+  }{
+    \evj{\ectx}{\ntupleexpr}{\ntupleval}
+  }
+}
+
+\newcommand{\ercstr}{
+  \inference[{\tiny \scstr}]{
+    \evj{\ectx}{\expr[n]}{\val[n]}
+    &
+    \ldots
+    &
+    \evj{\ectx}{\expr[1]}{\val[1]}
+  }{
+    \evj{\ectx}{\ttt{\cstr(\ntupleexpr)}}{\cstr(\ntupleval)}
+  }
+}
+
+\newcommand{\erappcst}{
+  \inference[{\tiny \sappcst}]{
+    \evj{\ectx}{\expr[p]}{\val[p]}
+    &
+    \evj{\ectx}{\expr[f]}{\cst}
+  }{
+    \evj{\ectx}{\appexpr}{\cst\ \val[p]}
+  }
+}
+
+\newcommand{\erapp}{
+  \inference[{\tiny \sapp}]{
+    \evj{\ectx}{\expr[p]}{\val[p]}
+    &
+    \evj{\ectx}{\expr[f]}{\closure[b]}
+    \\
+    \evj{\ectx[b] \eext \var \emapsto \val[p]}{\expr[b]}{\val}
+  }{
+    \evj{\ectx}{\appexpr}{\val}
+  }
+}
+
+\newcommand{\erapprec}{
+  \inference[{\tiny \sapprec}]{
+    \evj{\ectx}{\expr[p]}{\val[p]}
+    &
+    \evj{\ectx}{\expr[f]}{\recclosure[b]}
+    \\
+    \evj{\ectx[b] \eext \var[f] \emapsto \recclosure[b] \eext \var
+      \emapsto \val[p]}{\expr[b]}{\val}
+  }{
+    \evj{\ectx}{\appexpr}{\val}
+  }
+}
+
+\newcommand{\erlet}{
+  \inference[{\tiny \slet}]{
+    \evj{\ectx}{\expr[1]}{\val[1]}
+    &
+    \evj
+    { \ectx \eext \patternmatch~\patt~\val[1] }
+    {\expr[2]}
+    {\val}
+  }{
+    \evj
+    {\ectx}
+    {\ttt{let \patt\ = \expr[1]\ in \expr[2]}}
+    {\val}
+  }
+}
+
+\newcommand{\erfun}{
+  \inference[{\tiny \sfun}]{
+  }{
+    \evj
+    {\ectx}
+    {\funexpr}
+    {\closure}
+  }
+}
+
+\newcommand{\erletrec}{
+  \inference[{\tiny \sletrec}]{
+    \evj
+    { \ectx \eext \var[f] \emapsto \recclosure}
+    {\expr[2]}
+    {\val}
+  }{
+    \evj
+    {\ectx}
+    {\ensuremath{
+        \ttt{let rec \var[f] = \funexpr\ in \expr[2]}
+      }}
+    {\val}
+  }
+}
+
+\newcommand{\ermatch}{
+  \inference[{\tiny \smatch}]{
+    \evj{\ectx}{\expr[m]}{\val[m]}
+    \\
+    \trm{\ncstrpatt{k} is the first pattern to match \val[m]}
+    \\
+    \evj
+    { \ectx \eext \patternmatch~(\ncstrpatt{k})~\val[m] }
+    {\expr[k]}
+    {\val}
+  }{
+    \evj
+    {\ectx}
+    {\ensuremath{
+        \left(
+        \begin{array}{l}
+          \ttt{match \expr[m]\ with} \\
+          \ttt{\tabT | \ncstrpatt{1}\ -> \expr[1]} \\
+          \ttt{\tabT \ldots} \\
+          \ttt{\tabT | \ncstrpatt{i}\ -> \expr[i]}
+        \end{array}
+        \right)
+      }}
+    {\val}
+  }
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

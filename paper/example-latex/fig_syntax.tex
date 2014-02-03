@@ -1,0 +1,43 @@
+\begin{minipage}{\columnwidth}
+  \footnotesize
+  \centering
+   \begin{tabular}{@{}r l l@{\;}l@{}}
+     % \patts & $\ni \patt ::=$ & 
+     % & pattern \\[\jot]
+     % & & $|$ \ \var  & variable \\[\jot]
+     % & & $|$ \ \ttt{\patt, \ldots, \patt}
+      % & tuple pattern \\[4\jot]
+      % \exprs & $\ni \expr ::=$ & 
+      % & expression \\[\jot]
+%%      \exprs & $\ni \expr ::=$ &\ \ \cst 
+ &&      \exprs\  $\ni \expr ::=$ \ \ \cst 
+      & \myexp{constant} \\[\jot]
+     & & $|$ \var 
+      & \myexp{variable} \\[\jot]
+     % & & $|$ \ttt{\expr, \ldots, \expr}
+     %  & tuple expression \\[\jot]
+     & & $|$ \ttt{\cstr(\expr, \ldots, \expr)} 
+      & \myexp{construction} \\[\jot]
+     & & $|$ \expr\ \expr 
+      & \myexp{application} \\[\jot]
+     & & $|$ \ttt{fun \var\ -> \expr}
+      & \myexp{abstraction} \\[\jot]
+     & & $|$ \ttt{let \patt\ = \expr\ in \expr}
+      & \myexp{let binding} \\[\jot]
+     & & $|$ \ttt{let \exprRec \var\,=\,fun \var\,->\,\expr\,in \expr\
+     }
+      & \myexp{let-rec binding} \\[\jot]
+     & & $|$
+     \ttt{match \expr\ with}  & \myexp{match-with} \\
+     & & \ttt{\tabT | \ttt{\cstr(\var, \ldots, \var)}\ -> \expr} & \\
+     & & \ttt{\tabT \ldots} & \\
+     & & \ttt{\tabT | \ttt{\cstr(\var, \ldots, \var)}\ -> \expr}
+  \end{tabular}
+
+  \centering
+     (a) 
+\end{minipage}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

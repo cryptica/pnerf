@@ -1,0 +1,87 @@
+\section{A limitation and future work}
+\label{sec:conclusion}
+
+Compared to imperative programs, higher order functions impose
+additional complication on the binary reachability analysis.
+The major current limitation of our approach lies in the treatment of
+partial applications when arguments are provided at different program
+points, as illustrated by the following example. 
+%
+\begin{small}
+\begin{verbatim}
+let rec f x = if x > 0 then f (x - 1) else fun y -> y + 1 in
+let g = f 1 in
+g 2
+\end{verbatim}
+\end{small}
+%
+Proving termination of $\mathtt{f}/2$ applications is not possible,
+since the second argument to \texttt{f} is given indirectly through an
+application of~\texttt{g}. 
+Without a control-flow analysis, we cannot store \texttt{2} in the
+auxiliary state since it is not known syntactically that \texttt{2} is
+the second argument for~\texttt{f}.
+Removing the above limitation is an important step for future work,
+which can be accomplished either by relying on results of a
+control-flow analysis, e.g.~\cite{MightPOPL11}, that is performed
+before the transformation takes place.
+In simple cases, by using the following transformation that is based
+on $\beta$ reduction.
+%
+\begin{small}
+\begin{verbatim}
+let rec f x = if x > 0 then f (x - 1) else fun y -> y + 1 in
+(* let g = f 1 in *)
+(f 1) 2
+\end{verbatim}
+\end{small}
+%
+In the transformed program, both arguments are given to \texttt{f}
+directly.
+
+% In the future we would like to integrate our binary reachability
+% analysis in a counter example guided abstraction refinement loop,
+% following the steps of~\cite{copytrick}.
+
+
+% Our monitorability condition on expressions interferes with modularity
+% in the following two ways. Consider a user program \expr\ with a free
+% variable representing a library value, say \ttt{List.map~:~('a->'b)->'a~list->'b~list}. 
+% \product\ can construct a product \exprprod\ for \expr. 
+% First, \exprprod\ can only be used for runtime verification in the presence
+% of a monadic value \ttt{List.map\_m} of type
+%  \ttt{\monadic~('a->'b)->'a~list->'b~list}. Since \product\ can deal
+%  with arbitrary higher-order function declarations, a solution is to
+%  prepend \expr\ with the definition of \ttt{List.map}. Second, the
+%  static reasoning about \exprprod\ can only be done under given
+%  assumptions about \ttt{List.map}. A solution is to use tool-specific
+%  codifications of assumptions on free variables. As shown in the
+%  illustration section and our experiments, \dsolve\ provides such a mechanism.
+
+
+% % \begin{remark}[TODO: Higher-order functions]
+% %   \product\ can construct products for expressions featuring
+% %   higher-order functions. Given a higher-order abstraction, \product\
+% %   constructs a higher-order abstraction.  Higher-order abstractions
+% %   given by \product\ can only be applied to product parameters. Thus,
+% %   runtime verification of higher-order products can only be done in
+% %   the presence of product parameters. Static verification of
+% %   higher-order products can be done by making assumptions on given
+% %   product parameters. \dsolve\ provides a ``value specifications'' for
+% %   making these assumptions~\cite{Dsolve}.
+% % \end{remark}
+
+% We leave as future work the development of a user-friendly language
+% specification based on temporal logics. 
+
+% \paragraph{Future work}
+% \begin{enumerate}
+% \item User friendliness of monitor specifications.
+% \item Cannot assign blame to original locations of the program neither
+%   on runtime nor statically. \dsolve\ only provides 
+% \end{enumerate}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

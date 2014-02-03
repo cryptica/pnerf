@@ -1,0 +1,85 @@
+\paragraph{\bf Logger monad}
+A \emph{monad} consists of a type constructor \ttt{m} of arity~1 and two
+operations
+%
+\begin{small}
+\begin{align*}
+  \ttt{unit~}&\ttt{:~'a~->~'a~m} \\
+  \ttt{(~>>=~)~}&\ttt{:~'a~m~->~('a~->~'b~m)~->~'b~m}
+\end{align*}
+\end{small} 
+%
+These operations need to satisfy three conditions called \emph{left
+unit}, \emph{right unit}, and \emph{associative}~\cite{Wadler95}.  
+We assume that \ttt{state} is a given type.  
+Figure~\ref{fig-state-monad} presents a variant of the \emph{logger
+monad}~\cite{freetheorems}. The state
+update operator \ttt{update} is of type
+\ttt{(state~->~state)~->~unit~m}. A monadic expression (resp. value)
+is an expression (resp. value) of the logger monad type. 
+
+For example, the monadic expression \ttt{unit 1} evaluates to a
+function that takes a state \st\ and returns a pair (\ttt{1}, \st). As
+another example, the following monadic expression evaluates to a
+function that takes a state \st\ and returns a pair (\ttt{1}, \st\ $+$
+\ttt{1}).
+\begin{center}
+  \ttt{update (fun s -> s + 1) >>= fun () -> unit \ttt{1}}
+\end{center}
+
+\begin{figure}[t]
+  \linespread{1}
+  \begin{minipage}[t]{\columnwidth}
+    \small
+   \begin{tabular}{l@{\ }l}
+     1 & \ttt{(* logger monad type *)} \\[\jot]
+     2 & \ttt{type 'a m = state -> 'a * state } \\[\jot]
+     3 & \ttt{(* unit operator *)} \\[\jot]
+     4 & \ttt{let unit a = fun s -> (a, s) } \\[\jot]
+     5 & \ttt{(* bind operator *)} \\[\jot]
+     6 & \ttt{let ( >>= ) m k = fun s0 -> } \\[\jot]
+     7 & \ttt{\tabTTTTTTTT let v1, s1 = m s0 in } \\[\jot]
+     8 & \ttt{\tabTTTTTTTT k v1 s1 } \\[\jot]
+     9 & \ttt{(* state transform operator *)} \\[\jot]
+     10 & \ttt{let update f = fun s -> ( (), f s ) }
+    \end{tabular}
+  \end{minipage}
+  \caption{Logger monad with state transform operator
+    \ttt{update}. The unit operator takes a value and constructs a
+    monadic value. The bind operator takes a monadic value and a
+    function returning a monadic value, and constructs a new monadic
+    value. The state transform operator creates a new monadic value by
+    applying the state transformer \ttt{f}.}
+  \label{fig-state-monad}
+\end{figure}
+
+\iffalse
+We clarify the product expressions above by expressing them in
+\haskell's \emph{do notation}~\cite{DoNotation}. For
+the product of expression \ttt{1} and \msplus, the corresponding
+\haskell\ program is the following.
+\begin{center}
+  \begin{minipage}{.4\columnwidth}
+   \small
+    \ttt{do \\
+      \tabT update (fun s -> s) \\
+      \tabT update (fun s -> s) \\
+      \tabT unit \ttt{1}}
+ \end{minipage}
+\end{center}
+For the product of expression \ttt{+} and \msplus, the corresponding
+\haskell\ program is the following.
+\begin{center}
+  \begin{minipage}{.9\columnwidth}
+    \small
+    \ttt{do \\
+      \tabT update (fun s -> s) \\
+      \tabT update (fun s -> s + 1) \\
+      \tabT unit (fun x -> unit (fun y -> unit ((+)\ x\ y)))} 
+ \end{minipage}
+\end{center}
+\fi
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

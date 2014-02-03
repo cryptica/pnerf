@@ -1,0 +1,64 @@
+\section{Experimental evaluation}
+\label{sec-experiments}
+
+In this section we describe our implementation and the corresponding
+experimental evaluation.
+
+\paragraph{Implementation.}
+We implemented \product\ as an extension to the \camlp\
+parser~\cite{Camlp4-dist}. Our implementation takes as input a user
+program and a specification consisting of a function name, an arity,
+and candidate transition invariant. Our implementation produces a
+transformed program following the procedure depicted in
+Figure~\ref{fig-ex-prod}.
+
+\paragraph{Experiments.}
+\input{fig_experiments}
+Our experiments consisted of two steps. First we applied our
+transformation to the set of benchmarks summarized in
+Figure~\ref{fig-experiments}. Then we analyzed the transformed
+benchmarks using the reachability checker \dsolve~\cite{Dsolve, DsolveCAV}.
+\ifthenelse{\equal{\isTechReport}{true}}{
+The set of benchmarks is available at~\ttt{http://www7.in.tum.de/\~{}ruslan/binreach/}.
+}{
+The set of benchmarks is available at~\cite{FunVTechReport}.
+}
+Our benchmarks feature higher order functions and algebraic
+data types (lists).  We summarize our verified benchmarks in
+Figure~\ref{fig-experiments}.
+Benchmarks 11-15 correspond to the higher-order programs
+in~\cite{Sereni05terminationanalysis} that are strict and
+\mbox{type-check}.
+The experiments show that our transformation can be used together with a state of
+the art static analyzer to prove termination of higher-order programs found
+in the literature.
+
+% \paragraph{Evaluation.}
+% The experiments show that our transformation can be used together with a state of
+% the art static analyzer to prove termination of higher-order programs found
+% in the literature.
+
+% For example, consider the higher-order benchmark \ttt{sereni29} shown below.
+% \begin{verbatim}
+% let rec length l =
+%   match l with
+%     | [] -> 0
+%     | _ :: t -> 1 + length t
+% let rec map f xs =
+%   match xs with
+%     | [] -> []
+%     | y :: ys -> f y :: map f ys in
+% let compose f g x = f (g x) in
+% let add x y = x + y in
+% map (compose (add 1) (add 2)) [0;1]
+% \end{verbatim}
+% We applied our program transformation on \ttt{sereni29} using the function
+% identifier \ttt{map}, the number of parameters $2$, and the transition
+% invariant candidate $\ttt{length}(a_2) \geq 0 \wedge
+% \ttt{length}(m_2) > \ttt{length}(a_2)$. Then we obtained a
+% transformed program that we verified correct using \dsolve.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

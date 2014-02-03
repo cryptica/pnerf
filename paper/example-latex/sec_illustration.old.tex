@@ -1,0 +1,150 @@
+\section{Examples}
+
+In this section we show several functional programs that illustrate
+complications that arise when proving termination.  We also highlight
+how our implementation applies binary reachability analysis to address
+such complications.
+
+We write our examples in OCaml, and use \texttt{nondet ()} to model
+non-deterministic input, which is useful for abstracting complex
+expressions that are irrelevant for our reasoning process.
+
+\paragraph{\bf Non-well-founded data}
+
+The program \texttt{choice} is shown below.
+%
+\begin{center}
+\begin{minipage}[h]{.5\linewidth}
+\begin{small}
+\begin{verbatim}
+let rec choice (x, y) = 
+  if x > 0 && y > 0 then
+    if nondet () then 
+      choice (x-1, x)
+    else 
+      choice (y-2, x+1)
+  else 
+    ()
+in
+choice (read_int (), read_int ())
+\end{verbatim}
+\end{small}
+\end{minipage}
+\end{center}
+%
+\texttt{choice} requires complex termination reasoning, since the else
+branch may lead to the increase of the value that is passed as the
+second component of the tuple. 
+For this reason, for example, a size-change based method is no longer
+applicable.
+
+Using transition invariants, we can prove termination by showing that
+between every pair of applications of \texttt{choice} either the value
+of the first component of the parameter, the second component, or
+their sum is decreasing.
+
+\paragraph{\bf Partial applications}
+
+We consider the following curried function \texttt{f} that has a type 
+\texttt{int -> int -> int}.
+%
+\begin{center}
+\begin{minipage}[h]{.8\linewidth}
+\begin{small}
+\begin{verbatim}
+let rec f x = if x > 0 then f (x-1) else fun y -> f x y
+\end{verbatim}
+\end{small}
+\end{minipage}
+\end{center}
+%
+This function shows that -- in contrast to proving termination of
+recursive procedures in imperative programs -- it is important to
+differentiate between partial and complete applications when dealing
+with curried functions.
+First, we observe that any partial application of \texttt{f}
+terminates.
+For example, \texttt{f 10} stops after ten recursive calls and returns
+a function \texttt{fun y -> f 10 y} where \texttt{f} is bound to a
+closure.
+That is, there is no infinite sequence of \texttt{f} applications that
+are passed only one argument.
+In contrast, any complete application of \texttt{f} does not terminate.
+For example, \texttt{f 1 1} will lead to an infinite sequence of
+\texttt{f} applications such that each of them is given two arguments.
+
+Our binary reachability analysis takes as input a specification that
+determines which kind of applications we want to keep track of. 
+The specification consists of a function identifier, e.g., \texttt{f},
+a number of parameters, e.g., one, and a transition invariant candidate. 
+Then, such a specification requires that applications of \texttt{f} to
+one argument satisfy the transition invariant candidate.
+Alternatively, we may focus on applications of \texttt{f} to two
+arguments.
+
+When dealing with one-ary applications, the binary reachability
+analysis can show that every pair of one-ary applications is included
+in a transition invariant. 
+
+
+Note that if complete applications of a function terminate, then every
+partial application of the function terminates.
+For example, the following function \texttt{g} does not have any
+infinite application sequences neither for complete nor for partial
+applications.
+%
+\begin{center}
+\begin{minipage}[h]{.8\linewidth}
+\begin{small}
+\begin{verbatim}
+let rec g x = if x > 0 then g (x-1) else fun y -> x+y
+\end{verbatim}
+\end{small}
+\end{minipage}
+\end{center}
+
+
+
+
+\paragraph{\bf Functions as arguments}
+
+The following example contains functions that take functions as
+arguments.
+%
+\begin{center}
+\begin{minipage}[h]{.8\linewidth}
+\begin{small}
+\begin{verbatim}
+let rec map_skip (f, skip) = function
+  | x :: xr -> f x :: map_skip (f, skip) (skip xr)
+  | [] -> []
+in
+let add x y = x+y in
+let tail = function
+  | _ :: tl -> tl
+  | [] -> []
+in
+map_skip (add 1, tail) [0;1]
+\end{verbatim}
+\end{small}
+\end{minipage}
+\end{center}
+%
+While such arguments may not participate in the expressions that
+exhibit decent, it is important to keep track of their effect on the
+arguments of the recursive calls.
+For example, it is important that no application of \texttt{skip}
+increases the length of its input list.
+
+Our binary reachability analysis keep track of the above condition by
+relying on a program transformation that augments functions with
+additional inputs.
+By storing arguments of a function application in such inputs, they
+become available, i.e., they persist through applications of functions
+that are passed as parameter, for the comparison with the transition
+invariant when necessary. 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

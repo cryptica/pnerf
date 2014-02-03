@@ -1,0 +1,38 @@
+program/expression
+types
+values
+evaluation judgement E
+evaluation tree E
+reachable applications E
+recursion relation E
+f/n recursion relation E
+binary reachability analysis E
+monitored judgement E
+monitored tree E
+tree construction
+"reading" a recursion relation from a monitored tree E
+T1: binary reachability iff recursion relation from monitored tree
+logger monad EE
+transformation E
+T2: recursion relation from monitored tree iff (actuals, memory) reachability relation
+transformation + assertion E
+T3: binary reachability analysis iff assertion validity on (actuals, memory) reachability relation
+
+
+mon s t =
+  j = root(t)
+  match j with 
+    | E |- f  e1 ... en => v ->
+      u1, ..., un = valueOf(e1, E), ..., valueOf(en, E)
+      s'  = if not s.copy && nondet () then (true, u1, ..., un) else s
+      t_ep, t_ef, t_b = immediate subtrees of t
+      tm_ep = mon s t_ep
+      tm_ef = mon s t_ef
+      tm_b  = mon s' t_b
+      {(root(tm_ep), root(tm_ef), root(tm_b), (j, s))} U
+        t_ep U t_ef U t_b
+    | _, _ -> 
+      t1,   ..., ti = immediate subtrees of t
+      tm_1, ..., tm_i = mon s t1, ..., mon s ti
+      {(root(tm_1), ..., root(tm_i), (j, s))} U 
+        tm_1 U ... U tm_i

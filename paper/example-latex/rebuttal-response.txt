@@ -1,0 +1,34 @@
+Thank you for the comments and suggestions!
+
+Review 1:
+
+The current set of benchmarks was suggested to us by experts on checking termination of higher order programs and comes from the suggested literature.
+We realize that a larger set of benchmarks provides a better insight into pros and cons of the approach, we are working on it. 
+
+Our previous experience with the Terminator tool for proving termination of C routines shows that while a collection of simple tricks can deal with a large variety of simple examples. Nevertheless, for more complicated programs it is important to have a tool that can deal with general cases as well, which is the goal of our approach.
+Due to its generality, our approach allows to implement the size change termination algorithm by relying on the correspondence between SCT and transition invariants [Jones et al, SAS 2010].
+
+Regarding Fig 3, we will formalize augment as a tree transducer thus making it applicable to evaluation trees for diverging expressions.
+
+Review 2:
+
+Kraus et al focus on finding ranking functions by composing, e.g., via lexicographic composition or SCT approach, predefined well-founded measures manually given to datatypes (which are usually recorded in Isabelle theories). 
+Usually predefined measures work well, but when more complex measures, e.g., some weighted combination thereof needs to be discovered, an automatic method is very desirable [Nipkow, personal communication]. 
+
+Review 3:
+
+Transformed programs contain a significant portion of expressions that pass state around without changing it. To deal with larger examples we are implementing a beta-reduction based program simplification that removes such expressions.
+DSolve relies on logical qualifiers, akin to a set of predicates used in predicate abstraction of imperative programs. When dealing with complex termination arguments the default set of qualifiers used by DSolve is not expressive enough. An abstraction refinement technique for termination, e.g., Cook et al SAS 2005, could be applied here.
+For a language with references, our notion of binary reachability and instrumentation technique would not change much. The biggest limitation is the ability of the reachability checker to handle imperative features when references are passed around in closures, which is a research challenge. For references that act as “globals”, a transformation that passes them in a state monad can be useful.
+Regarding current limitations, here is an example:
+
+let rec f g = if g () < 0 then 0 else f (fun () -> g () - 1);;
+
+While in theory our approach can prove termination of f/1, our implementation cannot show this program terminating for all g's because:
+1) we cannot look inside at the closure corresponding to g using instrumentation code.
+2) we do not want to apply g inside a transition invariant check, because g may modify the state of the program (e.g. may modify a reference).
+
+Review 4:
+
+The current set of benchmarks was suggested to us by experts on checking termination of higher order programs and comes from the suggested literature.
+We realize that a larger set of benchmarks provides a better insight into pros and cons of the approach, we are working on it. 
