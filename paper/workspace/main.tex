@@ -1,6 +1,13 @@
 \documentclass{llncs}
 
+\newcommand{\isDraft}{true}
+
 \input{preamble}
+
+\ifthenelse{\equal{\isDraft}{true}}{
+  \usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
+  \pagestyle{plain}
+}{}
 
 \begin{document}
 
@@ -9,13 +16,13 @@
   \author{
     Javier Esparza\inst{1}
     \and
-    Rusl\'{a}n Ledesma-Garza\inst{1}
-    \and
     Rupak Majumdar\inst{2}
     \and
     Philipp Meyer\inst{1}
     \and
     Filip Niksic\inst{2}
+    \and
+    Rusl\'{a}n Ledesma-Garza\inst{1}
   }
   \institute{
     Technische Universit\"at M\"unchen
@@ -55,7 +62,6 @@
     than those produced by existing solvers.
   \end{abstract}
 }{
-  \usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
 }
 
 
