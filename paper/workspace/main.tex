@@ -5,11 +5,11 @@
 \begin{document}
 
 \ifthenelse{\equal{\isDraft}{false}}{
-  \title{Verification of Petri Nets Using Linear Programming}
+  \title{An SMT-based Approach to Coverability Analysis}
   \author{
     Javier Esparza\inst{1}
     \and
-    Ruslán Ledesma-Garza\inst{1}
+    Rusl\'{a}n Ledesma-Garza\inst{1}
     \and
     Rupak Majumdar\inst{2}
     \and
@@ -18,12 +18,57 @@
     Filip Niksic\inst{2}
   }
   \institute{
-    Technische Universität München
+    Technische Universit\"at M\"unchen
     \and
-    MPI-SWS, Kaiserslautern and Saarbrücken
+    MPI-SWS, Kaiserslautern and Saarbr\"ucken
   }
+  
   \maketitle
-}{}
+
+  \begin{abstract}
+    Model checkers based on Petri net coverability have been used
+    successfully in recent years to verify safety properties of concurrent
+    shared-memory or asynchronous message-passing software. The bottleneck
+    in the verification process is the iterative computation of the
+    (backward) reachable or (forward) coverable set, and most recent
+    research has focused on non-trivial heuristics to speed it up.
+
+    In this paper, we revisit a constraint approach to the problem based on
+    classical Petri net analysis techniques: marking equation, place
+    invariants, and traps. Given a marking M to be covered, the approach
+    constructs constraints corresponding to increasingly precise
+    overapproximations of the reachable markings covering M. If one of
+    these constraints is unsatisfiable, then M is not coverable.
+
+    Previous work on this approach suffered from the absence of efficient
+    decision procedures for linear arithmetic, which nowadays exist as a
+    part of SMT solvers. We show how to utilize an SMT solver to implement
+    the constraint approach, and additionally, to generate a minimized
+    inductive invariant from a safety proof.
+
+    We empirically evaluate our procedure on a large set of existing Petri
+    net benchmarks arising out of software verification. Surprisingly, even
+    though our technique is incomplete, we show that it can quickly
+    discharge all safe instances, usually competitive with, and occasionally
+    much faster than, state-of-the-art techniques. Additionally, the
+    inductive invariants computed are usually orders of magnitude smaller
+    than those produced by existing solvers.
+  \end{abstract}
+}{
+  \usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
+}
+
+
+\section{Introduction}
+
+This paper makes the following contributions.
+\begin{itemize}
+\item An application of \zthree\ to the constraint approach and its
+  corresponding evaluation.
+\item A method that given a network and a property constructs a
+  minimal invariant.
+\end{itemize}
+
 
 \section{Preliminaries}
 

@@ -1,7 +1,7 @@
 all:
-	pdflatex main.tex
-	pdflatex main.tex
-	pdflatex main.tex
+	pdflatex -halt-on-error main && \
+	pdflatex -halt-on-error main && \
+	pdflatex -halt-on-error main
 
 pdf: all
 
