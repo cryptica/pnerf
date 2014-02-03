@@ -264,11 +264,12 @@ function construct_invariant {
   target=1
   total_iter=0
   inv_size=0
+  >$tmpdir/invariant.smt2
   while (
     vecho
     vecho "* Constructing petri net N with target $target from input file"
     run_sicstus input-file-to-petri-net.pl $tmpdir/pp-petri-net.pl $target $tmpdir/input-petri-net.pl
-  ); do 
+  ); do
     vecho
     vecho "* Constructing constraints C'_0 for petri net N"
     run_sicstus petri-net-to-prime-constraints.pl $tmpdir/constraints-c-prime.smt2 $tmpdir/pp-petri-net.pl
@@ -299,11 +300,14 @@ function construct_invariant {
       fi
       vecho " - constructing invariant I for petri net N and model A'_$iter"
       run_sicstus y-invariant.pl $tmpdir/y-invariant.smt2 $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-      cat $tmpdir/y-invariant.smt2 >>$tmpdir/invariant.smt2
-      if $benchmark; then
-        run_sicstus count-places.pl $tmpdir/num-places 'invariant' $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
-        num_places=$(cat $tmpdir/num-places)
-        inv_size=$((inv_size + num_places))
+      y_invariant=$(cat $tmpdir/y-invariant.smt2)
+      if ( ! grep -xq "$y_invariant" $tmpdir/invariant.smt2 >/dev/null ); then
+        echo "$y_invariant" >>$tmpdir/invariant.smt2
+        if $benchmark; then
+          run_sicstus count-places.pl $tmpdir/num-places 'invariant' $tmpdir/pp-petri-net.pl $tmpdir/model-a-prime.pl
+          num_places=$(cat $tmpdir/num-places)
+          inv_size=$((inv_size + num_places))
+        fi
       fi
     else
       exit_with 2 $refinement_iter $total_iter 0
