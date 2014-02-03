@@ -28,7 +28,7 @@
 \tikzstyle{action}=[draw, rectangle, align=center]
 \tikzstyle{decision}=[draw, diamond, aspect=2, align=center]
 \tikzstyle{print}=[draw, trapezium, trapezium left angle=70, trapezium right angle=-70]
-\tikzstyle{every edge}=[draw, ->, >=stealth, shorten >=2pt, shorten <=2pt]
+\tikzstyle{every path}=[draw, ->, >=stealth, shorten >=2pt, shorten <=2pt]
 
 \begin{document}
 
@@ -115,18 +115,18 @@ od
 \end{verbatim}
 
 \begin{center}
-\begin{tikzpicture}[node distance=2cm]
-  \node[place, tokens=1, label=left:a] (a) {};
-  \node[place, tokens=0, label=left:b, below of=a] (b) {};
-  \node[place, tokens=0, label=right:$\neg bit2$, right of=b, xshift=-1cm, yshift=+1cm] (nbit2) {};
-  \node[transition, label=left:t1, above of=a, yshift=-1cm] (t1) {}
-    edge [pre, bend left, min distance=2cm, out=225, in=-45] (b)
-    edge [post] (a);
-  \node[transition, label=left:t2] (t2) at ($(a)!0.5!(b)$) {}
-    edge [pre] (a)
-    edge [pre] (nbit2)
-    edge [post] (b)
-    edge [post] (nbit2);
+\begin{tikzpicture}[node distance=1cm]
+  \node[transition, label=left:t1] (t1) {};
+  \node[place, tokens=1, label=left:a, below of=t1] (a) {};
+  \node[transition, label=left:t2, below of=a] (t2) {};
+  \node[place, tokens=0, label=left:b, below of=t2] (b) {};
+  \node[place, tokens=0, label=right:$\neg bit2$, right of=t2] (nbit2) {};
+  \draw (t1) edge[pre, bend left, min distance=2cm, out=225, in=-45] (b);
+  \draw (t1) edge[post] (a);
+  \draw (t2) edge[pre] (nbit2);
+  \draw (t2) edge[post] (nbit2);
+  \draw (t2) edge[pre] (a);
+  \draw (t2) edge[post] (b);
 \end{tikzpicture}
 \end{center}
 
@@ -396,8 +396,6 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)
 \end{align*}
 
-\iffalse
-
 \newpage
 \section{Method Invariant}
 
@@ -412,7 +410,7 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 
   Subprocedure \mathcal{C'} constructs dual state constraints C' corresponding to N and P.
   Subprocedure Model returns assignment A such that A satisfies C'.
-  Subprocedure Inv constructs invariant I corresponding to N and A.
+  Subprocedure Inv constructs invariant I corresponding to N and A'.
 \end{verbatim}
 
 \begin{center}
@@ -421,8 +419,8 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
     \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
     \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
     \node[print, right=of satc] (noinv) {No Invariant};
-    \node[action, below=of satc] (inv) {$A:=\text{Model}(C')$\\
-      $I := \text{Inv}(N, A)$};
+    \node[action, below=of satc] (inv) {$A':=\text{Model}(C')$\\
+      $I := \text{Inv}(N, A')$};
     \node[print, below=of inv] (printinv) {Invariant: $I$};
     \node[state, right=of noinv] (end1) {END};
     \node[state, below=of printinv] (end2) {END};
@@ -450,61 +448,28 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 \begin{verbatim}
 * Example:
 
-  - With weakened property P \/ (\neg \delta)
-
-  - Negated property is \neg P /\ \delta
-
   - Dual state constraints C':
-    0 >= (- cs1) + id1 + idle1 + (- nid1)
-    0 >= (- id1) + (- idle1) + nid1 + req1
-    0 >= cs1 + (- req1)
-    0 >= after_you2 + (- req2)
-    0 >= (- after_you2) + await2 + id2
-    0 >= (- await2) + idle2
-    0 >= cs2 + (- req2)
-    0 >= (- cs2) + id2 + idle2
-    0 >= (- id2) + (- idle2) + req2
 
-    id1 + id2 + idle1 + idle2 < 2 * target_1 + trap_1
+    0        >= - b
+    0        >= (- a) + b
 
-    id1        >= trap_1
-    cs1        >= target_1
-    idle1      >= 0
-    req1       >= trap_1
-    nid1       >= 0
-    id2        >= trap_1
-    cs2        >= target_1
-    idle2      >= 0
-    req2       >= trap_1
-    after_you2 >= trap_1
-    await2     >= 0
-    target_1   >= 0
-    trap_1     >= 0
+    a        <  2 * target_1
 
-  - Model A:
+    a        >= target_1
+    b        >= target_1
+    nbit2    >= 0
+    target_1 >= 0
 
-    id1        = 1
-    cs1        = 1
-    idle1      = 0
-    req1       = 1
-    nid1       = 0
-    id2        = 1
-    cs2        = 1
-    idle2      = 0
-    req2       = 1
-    await2     = 0
-    after_you2 = 1
-    target_1   = 1
-    trap_1     = 1
+  - Model A':
+
+    a        = 1
+    b        = 1
+    nbit2    = 1
+    target_1 = 1
     
   - Invariant:
 
-    id1 + id2 + req1 + req2 + after_you2 + cs1 + cs2 <= 2
-  
-  - Invariant with trap constraint \delta added:
-    
-    id1 + id2 + req1 + req2 + after_you2             >= 1
-    id1 + id2 + req1 + req2 + after_you2 + cs1 + cs2 <= 2
+    a + b + nbit2 <= 1
 
 \end{verbatim}
 
@@ -603,8 +568,6 @@ TODO: Unroll pseudocode?
 The method Invariant with Minimization constructs an invariant \verb=I=
 that uses a minimal number of places for given Petri net \verb=N= and
 \verb=P= when \verb=N= never violates \verb=P=. 
-We present the method Invariant with Minimization by example on a
-simplified mutual exclusion algorithm by Delzanno2001.
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
@@ -613,7 +576,7 @@ simplified mutual exclusion algorithm by Delzanno2001.
 \begin{verbatim}
 * Method Invariant with Minimization
 
-  Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A
+  Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
 \end{verbatim}
 
 \begin{center}
@@ -622,11 +585,11 @@ simplified mutual exclusion algorithm by Delzanno2001.
     \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
     \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
     \node[print, right=of satc] (noinv) {No Invariant};
-    \node[action, below=of satc] (model1) {$A:=\text{Model}(C')$};
-    \node[action, below=of model1] (cm) {$C_M:=\text{MinConstraints}(N, A)$};
+    \node[action, below=of satc] (model1) {$A':=\text{Model}(C')$};
+    \node[action, below=of model1] (cm) {$C_M:=\text{MinConstraints}(N, A')$};
     \node[decision, below=of cm] (satcm) {$\text{SAT}(C' \cup C_M)$};
-    \node[action, right=of satcm] (model2) {$A:=\text{Model}(C' \cup C_M)$};
-    \node[action, below=of satcm] (inv) {$I := \text{Inv}(N, A)$};
+    \node[action, right=of satcm] (model2) {$A':=\text{Model}(C' \cup C_M)$};
+    \node[action, below=of satcm] (inv) {$I := \text{Inv}(N, A')$};
     \node[print, below=of inv] (printinv) {Invariant: $I$};
     \node[state, right=of noinv] (end1) {END};
     \node[state, below=of printinv] (end2) {END};
@@ -654,39 +617,49 @@ simplified mutual exclusion algorithm by Delzanno2001.
 \newpage
 \begin{verbatim}
 * Example:
-  - Dual state constraints C' and satisfying assignment A for C' as in example for method Invariant
+  - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant
 
-  - Minimization constraints:
+  - Minimization constraints C_M:
 
-    nc  ~= 0 => m_nc = 1
-    |           --------
-    |              |
-    |           place appears in invariant
+    a     > 0 => b_a     = 1
+    |            -----------
+    |               |
+    |            place appears in invariant
     |
     place coefficient in the invariant
 
-    nc   = 0 => m_nc  = 0
-    |           ---------
-    |              |
-    |           place does not appear in invariant
+    a     = 0 => b_a     = 0
+    |           ------------
+    |               |
+    |            place does not appear in invariant
     |
     place coefficient in the invariant
 
-    m   ~= 0 => m_m   = 1
-    m    = 0 => m_m   = 0
-    cs1 ~= 0 => m_cs1 = 1
-    cs1  = 0 => m_cs1 = 0
-    cs2 ~= 0 => m_cs2 = 1
-    cs2  = 0 => m_cs2 = 0
+    b     > 0 => b_b     = 1
+    b     = 0 => b_b     = 0
+    nbit2 > 0 => b_nbit2 = 1
+    nbit2 = 0 => b_nbit2 = 0
 
-    m_nc + m_m + m_cs1 + m_cs2 < 3
-    --------------------------   |
-                |                |
-                |    number of places appearing in current invariant for A
-                |    = #{s | A(s) ~= 0} = #{m, cs1, cs2}
+    b_a + b_b + b_nbit2 < 3
+    -------------------   |
+                |         |
+                |    number of places appearing in current invariant for A'
+                |    = #{s | A'(s) > 0} = #{a, b, nbit2}
                 |
                 |
   number of places appearing in new invariant
+  
+  - Model A' for C' \cup C_M:
+
+    a        = 1
+    b        = 1
+    nbit2    = 0
+    target_1 = 1
+    
+  - Minimized Invariant:
+
+    a + b <= 1
+    
 \end{verbatim}
 
 \begin{verbatim}
@@ -700,14 +673,50 @@ simplified mutual exclusion algorithm by Delzanno2001.
 
 Input:
  N   = (S, T, E, M0)
-     = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
- A   = ( nc=0, m=1, cs1=1, cs2=1, target1=1 )
+ A   : Satisfying assignment for C'
 
 TODO: Unroll pseudocode?
 
 \end{verbatim}
 
+\newpage
 
+\section{Method Invariant by Refinement}
+
+\begin{verbatim}
+* Code, property, and Petri net: same as in section Method Safety by Refinement.
+
+* Example:
+
+  - Trap constraints as in example from section Method Safety by Refinement.
+  
+  - Dual state constraints C':
+
+    0        >= - b
+    0        >= (- a) + b
+
+    a        <  target_1 + trap_1
+
+    a        >= trap_1
+    b        >= target_1
+    nbit2    >= trap_1
+    target_1 >= 0
+    trap_1   >= 0
+
+  - Model A':
+
+    a        = 1
+    b        = 1
+    nbit2    = 1
+    target_1 = 1
+    trap_1   = 1
+    
+  - Invariant:
+
+    a     + nbit2 >= 1
+    a + b + nbit2 <= 1
+
+\end{verbatim}
 
 \newpage
 \section{Benchmarks of \bfc}
@@ -796,7 +805,5 @@ Invariant with Minimization.
 \item \verb=firewall__no_pred_called_with_zero__depth_1__fixed.spec=: \verb=(l739 < 1)=
 \item \verb=firewall__no_pred_called_with_zero__depth_2__fixed.spec=: \verb=(l3849 < 1)=
 \end{itemize}
-
-\fi
 
 \end{document}
