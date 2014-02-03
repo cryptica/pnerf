@@ -1,43 +1,29 @@
-\documentclass{article}
+\documentclass{llncs}
 
-\usepackage{amsmath}
-\usepackage[usenames,dvipsnames]{color}
-\usepackage{listings}
-\usepackage[a4paper, top=2cm, bottom=3cm, left=2cm, right=2cm]{geometry}
-\usepackage{graphicx}
-
-\usepackage{tikz}
-\usetikzlibrary{arrows,shapes,shapes.multipart,shapes.geometric,
-	snakes,automata,backgrounds,petri,calc,positioning}
-
-\newcommand{\bfc}{{\sc Bfc}}
-\newcommand{\mist}{{\sc Mist}}
-\newcommand{\iic}{{\sc IIC}}
-\newcommand{\pnerf}{{\sc Pnerf}}
-\newcommand{\zthree}{{\sc Z3}}
-\newcommand{\ttt}[1]{\texttt{#1}}
- 
-\tikzstyle{place}=[circle,thick,draw=black!75,fill=white!20,
-  	minimum size=6mm]
-\tikzstyle{red place}=[place,draw=red!75,fill=red!20]
-\tikzstyle{blue place}=[place,draw=blue!75,fill=blue!20]
-\tikzstyle{transition}=[rectangle,thick,draw=black!75,
-  	fill=black!20,minimum size=4mm]
-
-\tikzstyle{state}=[draw, ellipse, aspect=2]
-\tikzstyle{action}=[draw, rectangle, align=center]
-\tikzstyle{decision}=[draw, diamond, aspect=2, align=center]
-\tikzstyle{print}=[draw, trapezium, trapezium left angle=70, trapezium right angle=-70]
-\tikzstyle{every path}=[draw, ->, >=stealth, shorten >=2pt, shorten <=2pt]
+\input{preamble}
 
 \begin{document}
 
-\title{Report on a Safety Checker for Petri nets}
-\author{Philipp Meyer \and Rusl\'{a}n Ledesma-Garza}
-% \institute{Technische Universit\"at M\"unchen}
-\date{Mon Nov 25 14:24:10 CET 2013}
-
-
+\ifthenelse{\equal{\isDraft}{false}}{
+  \title{Verification of Petri Nets Using Linear Programming}
+  \author{
+    Javier Esparza\inst{1}
+    \and
+    Ruslán Ledesma-Garza\inst{1}
+    \and
+    Rupak Majumdar\inst{2}
+    \and
+    Philipp Meyer\inst{1}
+    \and
+    Filip Niksic\inst{2}
+  }
+  \institute{
+    Technische Universität München
+    \and
+    MPI-SWS, Kaiserslautern and Saarbrücken
+  }
+  \maketitle
+}{}
 
 \section{Preliminaries}
 
