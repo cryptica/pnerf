@@ -416,7 +416,7 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 \begin{center}
   \begin{tikzpicture}
     \node[state] (begin) {BEGIN};
-    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
+    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, \neg P)$};
     \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
     \node[print, right=of satc] (noinv) {No Invariant};
     \node[action, below=of satc] (inv) {$A':=\text{Model}(C')$\\
@@ -450,7 +450,7 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 
   - Dual state constraints C':
 
-    0        >= - b
+    0        >=    a  - b
     0        >= (- a) + b
 
     a        <  2 * target_1
@@ -536,31 +536,48 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 * Subprocedure \mathcal{C'}:
 
   Input:
-    (S, T, E, M0) : Petri net
-    P             : Property
+    N = (S, T, E, M0)  : Petri net
+    \neg P = (p_1,1 + ... + p_1,m_1 >= b_1 /\ p_2,1 + ... + p_2,m_2 >= b_2 /\
+              ... /\ p_n,1 + ... + p_n,m_n >= b_n ) : Negated property
   Output:
     C'            : Dual state constraints
 
 Input:
- N = (S, T, E, M0)
-   = ( (nc m cs1 cs2) (t1 t2 t3 t4) (e1 ... en) (2 1 0 0) )
- P = ( cs1 + cs2 <= 1 )
+ N      = (S, T, E, M0)
+        = ( (a b nbit2 ) (t1 t2) (e1 ... en) (1 0 0) )
+\neg P  = ( a + b >= 2 )
 
-TODO: Unroll pseudocode?
+Pseudocode:
+\end{verbatim}
 
+\begin{align*}
+  C'(N, \neg P) =& \left( \bigwedge_{t \in T} \left( 0 \ge
+                      \sum_{(t, s) \in E} s
+                    - \sum_{(s, t) \in E} s \right) \right) \land
+     \left( \sum_{s \in S} M_0(s) \cdot s <
+       \sum_{i=1}^n b_i \cdot target_i \right) \land \\
+     & \left( \bigwedge_{s \in S} \left ( s \ge 
+       \sum_{i : s \in \{ p_{i,1}, \ldots, p_{i,m_i} \} } target_i \right) \right) \land
+     \left( \bigwedge_{i=1}^n \left( target_i \ge 0 \right) \right)
+\end{align*}
 
+\begin{verbatim}
 * Subprocedure Inv:
 
   Input:
-    (S, T, E, M0) : Petri net
-    A             : Satisfying assignment for C'
+    N = (S, T, E, M0) : Petri net
+    A'                : Satisfying assignment for C'
 
   Output:
-    I             : Invariant
+    I                 : Invariant
 
-TODO: Unroll pseudocode?
+  Pseudocode:
 \end{verbatim}
 
+\begin{align*}
+  I(N, A') =& \left( \sum_{s \in S} A'(s) \cdot s \le
+                     \sum_{s \in S} A'(s) \cdot M_0(s) \right)
+\end{align*}
 
 \newpage
 \section{Method Invariant with Minimization}
@@ -610,8 +627,8 @@ that uses a minimal number of places for given Petri net \verb=N= and
 \end{center}
 
 \begin{verbatim}
-* Property of minimization constraints C_M generated from A: 
-    If A' satisfies C' u C_M, then Inv(N, A') uses less places than Inv(N, A)
+* Property of minimization constraints C_M generated from A': 
+    If A'' satisfies C' u C_M, then Inv(N, A'') uses less places than Inv(N, A')
 \end{verbatim}
 
 \newpage
@@ -646,7 +663,6 @@ that uses a minimal number of places for given Petri net \verb=N= and
                 |    number of places appearing in current invariant for A'
                 |    = #{s | A'(s) > 0} = #{a, b, nbit2}
                 |
-                |
   number of places appearing in new invariant
   
   - Model A' for C' \cup C_M:
@@ -660,24 +676,24 @@ that uses a minimal number of places for given Petri net \verb=N= and
 
     a + b <= 1
     
-\end{verbatim}
-
-\begin{verbatim}
 * Subprocedure \text{MinConstraints}:
 
   Input:
-    (S, T, E, M0) : Petri net
-    A             : Assignment
+    N = (S, T, E, M0)  : Petri net
+    A'                 : Satisfying assignment for C'
   Output:
-    C_M           : Minimization Constraints
+    C_M                : Minimization Constraints
 
-Input:
- N   = (S, T, E, M0)
- A   : Satisfying assignment for C'
-
-TODO: Unroll pseudocode?
+  Pseudocode:
 
 \end{verbatim}
+
+\begin{align*}
+  C_M(N, A') =& \left( \bigwedge_{s \in S} \left(
+      (s > 0 \Rightarrow b_s = 1) \land (s = 0 \Rightarrow b_s = 0)
+    \right) \right) \land
+    \left( \sum_{s \in S} b_s < \sum_{s \in S : A'(s) > 0} 1 \right)
+\end{align*}
 
 \newpage
 
@@ -686,13 +702,62 @@ TODO: Unroll pseudocode?
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety by Refinement.
 
+* Method Invariant by Refinement
+\end{verbatim}
+
+\begin{tikzpicture}
+  \node[state] (begin) {BEGIN};
+  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$\\
+                                        $D:=\{\}$};
+  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+                                        $C_{\theta}:=\text{TrapConditions}(N, A)$};
+  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+                                                $\delta:=\Delta(A_\theta)$\\
+                                                $C:=C \cup \{\delta\}$\\
+                                                $D:=D \cup \{\delta\}$};
+  \node[print, right=of satctheta] (noinv2) {No Invariant};
+  \node[state, below=of noinv2] (end3) {END};
+   
+  \node[action, right=of satc] (cprime) {$C':=\mathcal C'(N, \neg P \land D)$};
+  \node[decision, right=of cprime] (satcprime) {$\text{SAT}(C')$};
+  \node[action, below=of satcprime] (inv) {$A':=\text{Model}(C')$\\
+                                        $I:=D \land \text{Inv}(N, A')$};
+  \node[print, below=of inv] (printinv) {Invariant: $I$};
+  \node[print, right=of satcprime] (noinv) {No Invariant};
+  \node[state, below=of noinv] (end1) {END};
+  \node[state, below=of printinv] (end2) {END};
+ 
+  \draw (cprime) edge (satcprime);
+  \draw (satcprime) edge node[above]{NO} (noinv);
+  \draw (satcprime) edge node[right]{YES} (inv);
+  \draw (inv) edge (printinv);
+  \draw (noinv) edge (end1);
+  \draw (printinv) edge (end2);
+ 
+  \draw (begin) edge (c);
+  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
+  \draw (satc) edge node[above]{NO} (cprime);
+  \draw (satc) edge node[right]{YES} (modelc);
+  \draw (modelc) edge (satctheta);
+  \draw (satctheta) edge node[above]{NO} (noinv2);
+  \draw (noinv2) edge (end3);
+  \draw (satctheta) edge node[right]{YES} (modelctheta);
+  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+\end{tikzpicture}
+
+\newpage
+
+\begin{verbatim}
 * Example:
 
   - Trap constraints as in example from section Method Safety by Refinement.
   
   - Dual state constraints C':
 
-    0        >= - b
+    0        >=    a  - b
     0        >= (- a) + b
 
     a        <  target_1 + trap_1
@@ -717,6 +782,9 @@ TODO: Unroll pseudocode?
     a + b + nbit2 <= 1
 
 \end{verbatim}
+
+
+\iffalse
 
 \newpage
 \section{Benchmarks of \bfc}
@@ -805,5 +873,7 @@ Invariant with Minimization.
 \item \verb=firewall__no_pred_called_with_zero__depth_1__fixed.spec=: \verb=(l739 < 1)=
 \item \verb=firewall__no_pred_called_with_zero__depth_2__fixed.spec=: \verb=(l3849 < 1)=
 \end{itemize}
+
+\fi
 
 \end{document}
