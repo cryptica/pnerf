@@ -1,0 +1,40 @@
+\begin{figure}[t]
+  \scalebox{.8}{
+    \begin{minipage}{\columnwidth}
+      \small
+      % \begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c |}
+      % \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+      \begin{tabular}{ c | c | l }
+        \# &
+        Name &
+        Description % &
+        % Class %  &
+        % Monitor Specification &
+        % Harness &
+        % % Exit Code &
+        % Wall Time &
+        % % System Time &
+        % % User Time &
+        % LOC &
+        % Source
+        \\ \hline
+
+        \input{table-body}
+
+
+      \end{tabular}
+      \\ \\
+      % \\*
+      % \benchmarkontrees Benchmark on trees. \\*
+      % \benchmarkonfiledescriptors Benchmark on file descriptors.
+    \end{minipage}
+  }
+  \caption{Verified benchmarks (benchmarks with higher order functions are
+    marked with \hobenchmark.)}
+  \label{fig-experiments}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

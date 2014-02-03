@@ -1,0 +1,71 @@
+\begin{figure}[!t]
+%  \hline
+  \centering
+  \begin{minipage}[t]{1.05\linewidth}
+    \linespread{1.2}
+    \begin{minipage}[t]{.03\linewidth}
+      \small
+      1 \\ 2 \\ 3 \\[\jot] \vspace{.3ex} \\ 4 \\ 5 \\ 6 \\7 \\8 \\ 9 \\
+      10 \\ 11 \\ 12 \\ \\ 13 \\ 14 \\ 15 \\ 16
+%      \gutternumbering{1}{29}
+    \end{minipage}
+    \begin{minipage}[t]{1.02\linewidth}
+      \small
+     % \algLet \tiCheck\ a\ = \\
+     %  \tabT \quo{ \hspace{.5ex} \ttt{let m\_c, m\_1, ..., m\_\theArity\ = m in \\
+     %    \tabTT if m\_c then assert(\theTI); \\
+     %    \tabTT }a\ttt{, if not m\_c \&\& nondet () then true, }a\ttt{ else m }  } \\
+     %  \\
+      \algLet \tselEnter\ = \algFunction \\
+      \tabT \algCase{\theFunction\ \expr[1]} \\ \tabTT
+      \quo{ \ttt{fun v -> 
+          fun ((\_\!\_, a$_2$, ..., a$_\theArity$), m) -> 
+          (v, a$_2$, ..., a$_\theArity$), m} }
+      \\
+      \tabT \hspace{.5ex} \vdots\\
+      \tabT \algCase{( \ldots\ (\theFunction\ \expr[1]) \dots\ \expr[\theArity-1])} \\ \tabTT
+      \quo{ \ttt{fun v -> 
+          fun ((a$_1$, ..., a$_{\theArity-2}$, \_\!\_, a$_\theArity$), m) -> 
+%          \\ \hspace*{25ex}
+          (a$_1$, ..., a$_{\theArity-2}$, v, a$_\theArity$), m} }
+      \\
+      \tabT \algCase{( \ldots\ (\theFunction\ \expr[1]) \dots\
+        \expr[\theArity])} \\ 
+%     \tabTT
+%       \quo{ \ttt{fun v -> 
+%           fun ((a$_1$, ..., a$_{\theArity-1}$, \_\!\_), m) -> 
+% %          \\ \hspace*{25ex}
+%           \aq{
+%             \tiCheck\ 
+%             \quo{(a$_1$, ..., a$_{\theArity-1}$, v)}} }}
+%       \\
+      \tabTT
+      \quo{ \ttt{fun v -> 
+          fun ((a$_1$, ..., a$_{\theArity-1}$, \_\!\_), m) -> \\ \hspace*{25ex}
+          % let a$_{\theArity}$ =  v in           \\ \hspace*{25ex}
+          let a = a$_1$, ..., a$_{\theArity-1}$, v in           \\ \hspace*{25ex}
+          let m\_c, m\_1, ..., m\_\theArity\ = m in \\ \hspace*{25ex}
+           if m\_c then assert\ \theTI ; \\ \hspace*{25ex}
+          a, if not m\_c \&\& nondet () then true, a else m} } \\
+      \tabT \algCase{\_\!\_}\ \quo{ \ttt{fun \_\!\_ -> id} }
+      \\
+      \\
+      \algLet \tselExit\ = \algFunction \\
+      \tabT \hspace{1ex}$|$ \theFunction\ \expr[1] $| \, \ldots \, |$ ( \ldots\ (\theFunction\ \expr[1]) \dots\ \expr[\theArity - 1]) $\rightarrow$
+      \quo{ \ttt{fun \_\!\_ s -> (fun \_\!\_ -> s) } }
+      \\
+      \tabT \algCase{( \ldots\ (\theFunction\ \expr[1]) \dots\ \expr[\theArity])}
+      \quo{ \ttt{fun s \_\!\_ -> (fun \_\!\_ -> s) } }
+      \\
+      \tabT \algCase{\_\!\_}\ \quo{ \ttt{fun \_\!\_ \_\!\_ -> id} }
+    \end{minipage}
+  \end{minipage}
+  \caption{The transformer selector functions \tselEnter\ and \tselExit.  
+    The operator \quo{$\;\cdot\;$} emits a \miniocaml\ expression after evaluating
+    expressions that are embedded using~\aq{$\;\cdot\;$}.  }
+  \label{fig-tsel}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

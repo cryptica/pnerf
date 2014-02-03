@@ -1,0 +1,276 @@
+\newcommand{\myexp}[1]{}
+
+\newcommand{\setOf}[1]{\{ #1 \}}
+\newcommand{\ltrue}{\mathit{true}}
+\newcommand{\lfalse}{\mathit{false}}
+
+\newcommand{\theFunction}{\ensuremath{f}}
+\newcommand{\theTI}{\ensuremath{\mathit{TI}}}
+\newcommand{\theArity}{\ensuremath{N}}
+
+\newcommand{\todo}[1]{\textcolor{red}{\bf #1}}
+% tuning
+
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\tsf}[1]{\textsf{#1}}
+\newcommand{\trm}[1]{\textrm{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+
+% \newcommand{\gray}[1]{\textcolor{Gray}{#1}} % not used
+
+% misc
+
+\newcommand{\versimple}{}
+% \newcommand{\versimple}{simple version of\ }
+
+\newcommand{\dsolve}{\tsf{Dsolve}}
+\newcommand{\ocaml}{OCaml}
+\newcommand{\miniocaml}{\mbox{Mini-OCaml}\xspace}
+\newcommand{\camlp}{\tsf{Camlp4}}
+\newcommand{\haskell}{Haskell}
+
+\newcommand{\nats}{\ensuremath{\mathbb{N}}}
+\newcommand{\ints}{\ensuremath{\mathbb{Z}}}
+
+% illustration section
+
+\newcommand{\simple}{\ttt{iter\_down}}
+\newcommand{\bodysimple}{\expr[\ttt{id}]}
+\newcommand{\sttranssimple}{\ttt{mtrans\_id}}
+\newcommand{\simplem}{\ttt{simple\_m}}
+
+\newcommand{\foldleft}{\ttt{fold\_left}}
+\newcommand{\bodyfl}{\expr[\ttt{fold\_left}]}
+\newcommand{\sttransfl}{\ttt{mtrans\_fl}}
+\newcommand{\foldleftm}{\ttt{fold\_left\_m}}
+
+\newcommand{\ack}{\ttt{ack}}
+\newcommand{\bodyack}{\expr[\ttt{ack}]}
+\newcommand{\sttransack}{\ttt{mtrans\_ack}}
+\newcommand{\ackm}{\ttt{ack\_m}}
+
+\newcommand{\mccarthy}{\ttt{mccarthy}}
+\newcommand{\bodymc}{\expr[\ttt{mccarthy91}]}
+\newcommand{\sttransmc}{\ttt{mtrans\_mc}}
+\newcommand{\mccarthym}{\ttt{mccarthy\_m}}
+
+% syntax
+
+\newcommand{\vars}{\ensuremath{X}}
+\newcommand{\csts}{\ensuremath{C}}
+\newcommand{\cstrs}{\ensuremath{\vec{C}}}
+
+\newcommand{\freevars}{\tsf{FreeVars}}
+
+\newcommand{\patts}{\ensuremath{P}}
+\newcommand{\exprs}{\ensuremath{E}}
+
+\newcommand{\patt}[1][]{\ensuremath{p_{#1}}}
+\newcommand{\expr}[1][]{\ensuremath{e_{#1}}}
+\newcommand{\cst}{\ensuremath{c}}
+\newcommand{\vst}[1][]{\ensuremath{s_{#1}}}
+\newcommand{\var}[1][]{\ensuremath{x_{#1}}}
+\newcommand{\cstr}[1][]{\ensuremath{\vec{c}_{#1}}}
+
+% semantics
+
+\newcommand{\vals}{\ensuremath{V}}
+\newcommand{\evjs}{\ensuremath{J}}
+
+\newcommand{\val}[1][]{\ensuremath{v_{#1}}}
+\newcommand{\evjvar}[1][]{\ensuremath{j_{#1}}}
+\newcommand{\evt}[1][]{\ensuremath{\mathfrak{t}_{#1}}}
+\newcommand{\evtP}[1][]{\ensuremath{\mathfrak{t}'_{#1}}}
+
+\newcommand{\patternmatch}{\textsf{Bindings}}
+\newcommand{\dom}{\ensuremath{\mathit{Dom}}}
+
+\newcommand{\ectx}[1][]{\ensuremath{\mathcal{E}_{#1}}}
+\newcommand{\emptyectx}{\ensuremath{\emptyset}}
+\newcommand{\eext}{\ensuremath{+}}
+\newcommand{\emapsto}{\ensuremath{\mapsto}}
+
+\newcommand{\evj}[3]{\ensuremath{#1~\vdash~#2~\Rightarrow~#3}}
+
+\newcommand{\scst}{(Cst)}
+\newcommand{\svar}{(Var)}
+\newcommand{\svarerr}{(Var Error)}
+\newcommand{\stup}{(Tuple)}
+\newcommand{\stuperr}{(Tuple Error)}
+\newcommand{\stupexn}{(Tuple Exn)}
+\newcommand{\scstr}{(Constr)}
+\newcommand{\scstrerr}{(Constr Error)}
+\newcommand{\sapp}{(App)}
+\newcommand{\sapprec}{(App Rec)}
+\newcommand{\sappcst}{(App Cst)}
+\newcommand{\sapperrfun}{(App Error)}
+\newcommand{\sapperrparam}{(App Param Error)}
+\newcommand{\sfun}{(Fun)}
+\newcommand{\sletrec}{(Let Rec)}
+\newcommand{\slet}{(Let)}
+\newcommand{\sleterrmatch}{(Let Error Match)}
+\newcommand{\sleterrbound}{(Let Error Bound)}
+\newcommand{\sasserttrue}{(Assert True)}
+\newcommand{\sassertfalse}{(Assert False)}
+\newcommand{\sasserterr}{(Assert Error)}
+\newcommand{\siftrue}{(If True)}
+\newcommand{\siffalse}{(If False)}
+\newcommand{\siferr}{(If Cond Error)}
+\newcommand{\smatch}{(Match)}
+\newcommand{\smatcherr}{(Match Error)}
+
+%%%\input{eval_rules}
+\input{eval_rules_noname}
+
+% types
+
+\newcommand{\basetypes}{\ensuremath{B}}
+\newcommand{\typevars}{\ensuremath{A}}
+\newcommand{\typecstrs}{\ensuremath{\vec{B}}}
+
+\newcommand{\type}[1][]{\ensuremath{\tau_{#1}}}
+\newcommand{\tybase}[1][]{\ensuremath{\iota_{#1}}}
+\newcommand{\tyvar}{\ensuremath{\alpha}}
+\newcommand{\tycstr}{\ensuremath{\vec{\iota}}}
+
+\newcommand{\arity}{\tsf{Arity}}
+
+% frequently used expressions and values
+
+\newcommand{\ntupleexpr}{\ttt{\expr[1],\ \ldots,\ \expr[n]}}
+\newcommand{\appexpr}{\expr[f]~\expr[p]}
+\newcommand{\funexpr}{\ttt{fun~\var~->~\expr[b]}}
+
+\newcommand{\ntupleval}{\ensuremath{\val[1],\ \ldots,\ \val[n]}}
+\newcommand{\closure}[1][]{
+  \ensuremath{(\funexpr,\ \ectx[#1])}
+}
+\newcommand{\recclosure}[1][]{
+  \ensuremath{(\var[f], \funexpr,\ \ectx[#1])}
+}
+
+\newcommand{\vstup}[1][]{\ensuremath{s_{#1}^{\uparrow}}}
+\newcommand{\vstdown}[1][]{\ensuremath{s_{#1}^{\downarrow}}}
+\newcommand{\varapp}{\var[\mathit{app}]}
+
+\newcommand{\ncstrpatt}[1]{\ttt{\cstr[#1](\var[\ensuremath{#1,1}],\ \ldots,\ \var[\ensuremath{#1,j_{#1}}])}}
+
+
+\newcommand{\ncstrpattDots}[1]{\ttt{\cstr[#1](\ensuremath{\ldots_{#1}})}}
+
+% monitors and monitored evaluation trees
+
+\newcommand{\mon}{\ensuremath{\mathcal{M}}}
+\newcommand{\states}{\ensuremath{\Sigma}}
+\newcommand{\st}[1][]{\ensuremath{\sigma_{#1}}}
+\newcommand{\trans}{\ensuremath{\rho}}
+
+\newcommand{\monplus}{\ensuremath{\mon_{\ttt{+}}}}
+\newcommand{\transplus}{\ensuremath{\trans_{\ttt{+}}}}
+
+\newcommand{\monps}{\ensuremath{\mon_{\ttt{+}/\ttt{-}}}}
+\newcommand{\transps}{\ensuremath{\trans_{\ttt{+}/\ttt{-}}}}
+
+\newcommand{\rt}{\evjvar}
+
+\newcommand{\mevjs}{\ensuremath{J^{m}}}
+\newcommand{\mevjvar}[1][]{\ensuremath{j^{m}_{#1}}}
+%%%\newcommand{\mevj}[3]{\ensuremath{#2,\ #1,\ #3}}
+\newcommand{\mevj}[3]{\ensuremath{#1,\ #3}}
+\newcommand{\mevt}[1][]{\ensuremath{\mathfrak{t}^{m}_{#1}}}
+
+\newcommand{\stupa}[1][]{\ensuremath{\st[#1]^{\uparrow}}}
+\newcommand{\stdown}[1][]{\ensuremath{\st[#1]^{\downarrow}}}
+
+\newcommand{\monitor}{\tsf{Augment}\xspace}
+
+\input{simple_msteps}
+\input{msteps}
+
+% monitor specifications
+
+\newcommand{\stransformers}{\ensuremath{T}}
+
+\newcommand{\ms}[1][]{\ensuremath{\tsf{Spec}_{#1}}}
+\newcommand{\tsel}{\tsf{transsel}}
+\newcommand{\tiCheck}{\tsf{trans}}
+\newcommand{\tselEnter}{\tsf{enter}}
+\newcommand{\tselExit}{\tsf{exit}}
+
+
+\newcommand{\monfun}{\ttt{f}} % the monitored function
+\newcommand{\sttrans}{\ensuremath{mtrans}} % state transformer
+
+\newcommand{\sem}[1]{\ensuremath{[|#1|]}}
+
+\newcommand{\msplus}{\ensuremath{\ms[\ttt{+}]}}
+\newcommand{\tselplus}{\ensuremath{\tsel_{\ttt{+}}}}
+
+\newcommand{\msid}{\ensuremath{\ms[\mathit{id}]}}
+\newcommand{\tselid}{\ensuremath{\tsel_{\mathit{id}}}}
+
+% product construction
+
+\newcommand{\moncstr}{\ttt{m}}
+
+\newcommand{\monadic}{\tsf{monadic}\xspace}
+\newcommand{\premonadic}{\tsf{pre\_m}}
+
+\newcommand{\freshvars}{\tsf{FreshVars}}
+\newcommand{\freshvar}{\tsf{FreshVar ()}}
+
+\newcommand{\quo}[1]{\tsf{``}#1\tsf{''}}
+\newcommand{\aq}[1]{`#1`}
+\newcommand{\depremon}{\tsf{de\_premonadize}}
+\newcommand{\product}{\tsf{Transform}\xspace}
+
+\input{simple_prod_cases}
+\input{prod_cases}
+
+% correctness
+
+\newcommand{\seq}[1][]{\ensuremath{\tsf{Seq}_{#1}}}
+\newcommand{\seqm}[1][]{\ensuremath{\tsf{Seqm}_{#1}}}
+
+\newcommand{\peelval}{\tsf{peel\_val}}
+\newcommand{\peelenv}{\tsf{peel\_env}}
+\newcommand{\simpprod}{\mbox{\tsf{remove\_update}}}
+
+\newcommand{\pectx}{\peelenv~\ectx}
+\newcommand{\valprod}{\val[\mathit{prod}]}
+\newcommand{\exprprod}{\expr[\mathit{prod}]}
+\newcommand{\exprprodid}{\expr[\mathit{id}]}
+\newcommand{\exprprodsimp}{\expr[\mathit{simp}]}
+
+\newcommand{\correctness}{Theorem~\ref{thm-correctness}}
+\newcommand{\lemmsimpprod}{Lemma~\ref{lem-simpprod}}
+\newcommand{\lemmvals}{Lemma~\ref{lem-vals}}
+\newcommand{\lemmvalsconcr}{Lemma~\ref{lem-valsconcr}}
+\newcommand{\lemmstates}{Lemma~\ref{lem-states}}
+
+% \newtheorem{corrproof}[thm]{Proof~of~Theorem~\ref{thm-correctness}} % incompatible w/ llncs
+
+% comparing monitored evaluation steps and instrumentation cases
+
+\newcommand{\mstepprodrel}{\ensuremath{\leftrightarrow}}
+
+% experiments
+
+\newcommand{\rpt}{\tsf{Prod}}
+\newcommand{\funv}{\tsf{FunV}}
+
+\newcommand{\sflinear}{\tsf{LinIneq}\xspace}
+\newcommand{\sfchan}{\tsf{Set}\xspace} 
+\newcommand{\liter}{\tsf{TI-Term}\xspace} 
+\newcommand{\literrank}{\tsf{R-Term}\xspace} 
+
+\newcommand{\hobenchmark}{\texttt{(H)}}
+%\newcommand{\hobenchmark}{{\tiny\ensuremath{\heartsuit}}}
+\newcommand{\benchmarkontrees}{{\tiny\ensuremath{\clubsuit}}}
+\newcommand{\benchmarkonfiledescriptors}{{\tiny\ensuremath{\spadesuit}}}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

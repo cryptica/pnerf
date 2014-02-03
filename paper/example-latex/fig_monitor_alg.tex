@@ -1,0 +1,52 @@
+\begin{figure}[t]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+    \linespread{1.2}
+    \begin{minipage}[t]{.03\linewidth}
+      \small
+      \gutternumbering{1}{13}
+    \end{minipage}
+    \begin{minipage}[t]{.95\linewidth}
+      \small
+      \algLet \monitor\ ((c, \_\!\_) \textbf{as} \st)\ \evt\ = \\
+      \tabT \algLet \rt\ = \tsf{root}\ \evt\ \algIn \\
+      \tabT \algMatch \rt\ \algWith\\
+      \tabT \algCase{\evj{\ectx}{\theFunction\ \expr[1]\ \dots\
+          \expr[\theArity]}{\val}} \\
+      \tabTT \algLet \val[1], \dots, \val[\theArity]  = 
+      \tsf{eval}\ \ectx\ \expr[1], \dots,
+      \tsf{eval}\ \ectx\ \expr[\theArity]\ \algIn \\
+      \tabTT \algLet \st'\ = 
+      \algIf $\neg c \land \textbf{nondet()}$ \algThen
+      ($\ltrue$, \val[1], \dots, \val[\theArity])
+      \algElse \st\ \algIn \\
+      \tabTT \algLet \evt[p], \evt[f], \evt[b] = 
+      immediate subtrees of \evt\ \algIn \\
+      \tabTT \algLet \evtP[p], \evtP[f], \evtP[b]\ = 
+      \monitor\ \st\ \evt[p], \monitor\ \st\ \evt[p], \monitor\ \st'\ \evt[b]\ \algIn\\
+      \tabTT $(\setOf{\tsf{root}\ \evtP[p], 
+        \tsf{root}\ \evtP[f], \tsf{root}\ \evtP[b], (\rt, \st))} 
+      \cup \evtP[p] \cup \evtP[f] \cup \evtP[b]
+      $ \\
+      \tabT \algCase{\_\!\_} \\
+      \tabTT \algLet \evt[1], \dots, \evt[n] = 
+      immediate subtrees of \evt\ \algIn \\
+      \tabTT \algLet \evtP[1], \dots, \evtP[n]\ = 
+      \monitor\ \st\ \evt[1], \dots, \monitor\ \st\ \evt[n]\ \algIn\\
+      \tabTT $(\setOf{\tsf{root}\ \evtP[1], \dots,
+        \tsf{root}\ \evtP[n], (\rt, \st))} 
+      \cup \evtP[1] \cup \dots \cup \evtP[n]
+      $ 
+   \end{minipage}
+ \end{minipage}
+ \caption{Evaluation tree monitoring.  The input consists of a
+    monitor state $\st$ and an evaluation tree~\evt.
+    $\textbf{nondet()}$ non-deterministically returns either $\ltrue$
+    or $\lfalse$.
+  }
+  \label{fig-monitor-alg}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

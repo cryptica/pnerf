@@ -1,0 +1,93 @@
+\section{Binary reachability on evaluation trees}
+\label{sec-semantics}
+
+In this section we make the first step towards our program
+transformation.
+We present an augmentation of evaluation trees that allows us to
+reduce the binary reachability analysis to the validity analysis of
+annotated judgement.
+Each judgement is augmented with a Boolean and an $\theArity$-ary
+tuple of values, which we will refer to as a \emph{state}.
+
+\input{fig_ex_monitoring} 
+
+Before presenting the augmentation procedure, we consider examples of
+tree augmentation shown in Figure~\ref{fig-monitoring}.
+The root of the tree is augmented with a state $\vstf = (\lfalse, 0)$,
+where $\lfalse$ indicates that no argument has been used for the
+augmentation yet.
+We use $\vst$ to augment judgements in the subtree for the branches
+that do not correspond to the evaluation of the body of~\texttt{f}.
+When augmenting the subtree that deals with the body, we can
+nondeterministically decide to start augmenting with a state that
+records the argument of the current application.
+That is, in the body subtree we augment with the state $\vstone =
+\stone$.
+Here, $\ltrue$ indicates that we took a snapshot of the current
+application argument, and $1$ is the argument value.
+The remaining judgements are augmented with $\vstone$, since we will
+not change the snapshot if it was taken, i.e., if the first component
+of the augmenting state is~$\ltrue$.
+
+We proceed with an algorithm \monitor that takes as input an initial
+state and an evaluation tree and produces an augmented tree.
+Each augmented judgement is of the form
+\mevj{\evj{\ectx}{\expr}{\val}}{\stupa}{\st}, where \st\ is a state.
+As an \emph{initial} state we take a pair $(\lfalse, (v_1 \dots,
+v_\theArity))$ where $v_1\ \dots, v_\theArity$ are some values.
+
+See Figure~\ref{fig-monitor-alg}.
+\monitor traverses the input tree recursively, by starting from the
+root.
+Whenever the current judgement is a
+$\theFunction/\theArity$-application judgement, then we choose whether
+to create a snapshot of the arguments and store them in the state that
+is used to augment the subtree that evaluates the body.
+We only create a snapshot if the Boolean component of the current
+state is~$\lfalse$.
+In case we currently do not deal with a
+$\theFunction/\theArity$-application judgement, no state change
+happens and we proceed with the subtrees.
+Once we obtain the augmented versions of the subtrees, we put them
+together by creating a node that connects the roots of the subtrees.
+
+
+  % \begin{tabular}{r@{\ }l l}
+  %   $\mevjs \ni$ & \mevjvar \;\; ::=
+  %   \mevj{\evj{\ectx}{\expr}{\val}}{\stupa}{\stdown}
+  %   & monitored judgement \\[\jot]
+  %   $2^{{\mevjs}^+} \ni$ & \mevt  & monitored evaluation tree
+  % \end{tabular}
+
+\input{fig_monitor_alg}
+
+We establish a formal relationship between the
+$\theFunction/\theArity$-recursion relation with the augmented
+judgements obtained by applying \monitor using the following theorem.
+%
+\begin{theorem}[\monitor keeps track of
+$\theFunction/\theArity$-recursion relation]
+\label{thm-monitor}
+%
+A pair $(v_1, \dots, v_\theArity)$ and~$(u_1, \dots, u_\theArity)$ is
+in the $\theFunction/\theArity$-recursion relation if and only if the
+result of applying \monitor wrt.\ some sequence of nondeterministic
+choices on \evjvar and an initial state contains an augmented
+judgement of the form
+%
+\begin{center}
+  \mevj{\evj{\ectx}{$\theFunction$\ \expr[1] \dots
+      \expr[\theArity]}{\val}}{\stupa}{
+    (\ltrue, (v_1, \dots, v_\theArity))}
+\end{center}
+%
+such that for each $i \in 1..\theArity$ we have $\tsf{eval}\ \ectx\
+\expr[i] = u_i$
+%
+\end{theorem}
+%
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

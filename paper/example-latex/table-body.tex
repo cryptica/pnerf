@@ -1,0 +1,656 @@
+% 1
+%  & \verb,rev_aux, %% Name
+%  & List reversal helper function. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:08.11 %% RunInfo 
+% %%  & 6
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 2
+%  & \verb,reverse, %% Name
+%  & List reversal function. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:07.54 %% RunInfo 
+% %%  & 8
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 3
+%  & \verb,ins, %% Name
+%  & Ordered insert function %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + 1 + mlength l? %% Harnesses 
+% % &
+% %% 0:14.78 %% RunInfo 
+% %%  & 7
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 4
+%  & \verb,clone, %% Name
+%  & Create a pair of copies of a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 1:04.69 %% RunInfo 
+% %%  & 9
+% %%  & \cite{Hofmann03} %% Source 
+%  \\
+% 5
+%  & \verb,tpo, %% Name
+%  & Insert an element in every third position of a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 0:20.50 %% RunInfo 
+% %%  & 8
+% %%  & \cite{Hofmann03} %% Source 
+%  \\
+% 6
+%  & \verb,sec, %% Name
+%  & Remove every third element from a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:31.61 %% RunInfo 
+% %%  & 10
+% %%  & \cite{Hofmann03} %% Source 
+%  \\
+% 7
+%  & \verb,tos, %% Name
+%  & Replace each third element of a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 1:18.71 %% RunInfo 
+% %%  & 19
+% %%  & \cite{Hofmann03} %% Source 
+%  \\
+% 8
+%  & \verb,append, %% Name
+%  & List append. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l1? %% Harnesses 
+% % &
+% %% 0:06.99 %% RunInfo 
+% %%  & 4
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 9
+%  & \verb,split_by, %% Name
+%  & Split list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:26.02 %% RunInfo 
+% %%  & 8
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 10
+%  & \verb,append, %% Name
+%  & List append. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_heap\_consumption\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre? %% Harnesses 
+% % &
+% %% 0:07.79 %% RunInfo 
+% %%  & 4
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 11
+%  & \verb,breadth_aux,\benchmarkontrees %% Name
+%  & Breadth first tree fold auxiliary function. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_heap\_consumption\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre? %% Harnesses 
+% % &
+% %% 2:12.97 %% RunInfo 
+% %%  & 15
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 12
+%  & \verb,breadth,\benchmarkontrees %% Name
+%  & Breadth first tree fold function. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_heap\_consumption\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre - 1? %% Harnesses 
+% % &
+% %% 2:15.13 %% RunInfo 
+% %%  & 16
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 13
+%  & \verb,app_tail,\hobenchmark %% Name
+%  & Apply function to tail of list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_heap\_consumption\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre? %% Harnesses 
+% % &
+% %% 0:20.07 %% RunInfo 
+% %%  & 7
+% %%  & \cite{Hofmann02} %% Source 
+%  \\
+% 14
+%  & \verb,compose_list,\hobenchmark %% Name
+%  & Hofmann's composing (or folding) all functions in a list %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_heap\_consumption\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:10.91 %% RunInfo 
+% %%  & 6
+% %%  & \cite{Hofmann02} %% Source 
+%  \\
+% 15
+%  & \verb,processfile1,\benchmarkonfiledescriptors %% Name
+%  & Open, read, and close one file. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_in\_st\_man.cmo %% MonSpec 
+% %%  & \verb?Myset.eq (Myset.mns pos pre) Myset.empty? %% Harnesses 
+% % &
+% %% 0:26.32 %% RunInfo 
+% %%  & 12
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 16
+%  & \verb,processfile2,\benchmarkonfiledescriptors %% Name
+%  & Open, read, and close one file, version 2. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_multiple\_st\_man.cmo %% MonSpec 
+% %%  & \verb?begin ... end? %% Harnesses 
+% % &
+% %% 3:39.51 %% RunInfo 
+% %%  & 12
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 17
+%  & \verb,processtwofiles1,\benchmarkonfiledescriptors %% Name
+%  & Manipulate two files at the same time. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_multiple\_st\_man.cmo %% MonSpec 
+% %%  & \verb?begin ... end? %% Harnesses 
+% % &
+% %% 12:17.07 %% RunInfo 
+% %%  & 17
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 18
+%  & \verb,processtwofiles2,\benchmarkonfiledescriptors %% Name
+%  & Manipulate two files at the same time, version 2. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_multiple\_st\_man.cmo %% MonSpec 
+% %%  & \verb?begin ... end? %% Harnesses 
+% % &
+% %% 6:19.56 %% RunInfo 
+% %%  & 16
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 19
+%  & \verb,mem, %% Name
+%  & Function \verb,mem, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:28.46 %% RunInfo 
+% %%  & 5
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 20
+%  & \verb,exists,\hobenchmark %% Name
+%  & Function \verb,exists, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:13.61 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 21
+%  & \verb,for_all,\hobenchmark %% Name
+%  & Function \verb,for_all, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:13.55 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 22
+%  & \verb,rev_map,\hobenchmark %% Name
+%  & Function \verb,rev_map, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:15.52 %% RunInfo 
+% %%  & 7
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 23
+%  & \verb,iter,\hobenchmark %% Name
+%  & Function \verb,iter, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:06.99 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 24
+%  & \verb,fold_right,\hobenchmark %% Name
+%  & Function \verb,fold_right, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:07.90 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 25
+%  & \verb,fold_left,\hobenchmark %% Name
+%  & Function \verb,fold_left, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:09.48 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 26
+%  & \verb,map,\hobenchmark %% Name
+%  & Function \verb,map, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:09.14 %% RunInfo 
+% %%  & 4
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 27
+%  & \verb,memq, %% Name
+%  & Function \verb,memq, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:15.10 %% RunInfo 
+% %%  & 5
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 28
+%  & \verb,mem_assoc, %% Name
+%  & Function \verb,mem_assoc, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:35.60 %% RunInfo 
+% %%  & 6
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 29
+%  & \verb,mem_assq, %% Name
+%  & Function \verb,mem_assq, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:18.04 %% RunInfo 
+% %%  & 6
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 30
+%  & \verb,remove_assoc, %% Name
+%  & Function \verb,remove_assoc, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:31.70 %% RunInfo 
+% %%  & 7
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 31
+%  & \verb,find_all,\hobenchmark %% Name
+%  & Function \verb,find_all, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 0:24.44 %% RunInfo 
+% %%  & 14
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 32
+%  & \verb,partition,\hobenchmark %% Name
+%  & Function \verb,partition, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 5:42.12 %% RunInfo 
+% %%  & 14
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 33
+%  & \verb,split, %% Name
+%  & Function \verb,split, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 0:14.65 %% RunInfo 
+% %%  & 6
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 34
+%  & \verb,remove_assq, %% Name
+%  & Function \verb,remove_assq, from list.ml. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + mlength l? %% Harnesses 
+% % &
+% %% 0:17.94 %% RunInfo 
+% %%  & 7
+% %%  & stdlib/list.ml %% Source 
+%  \\
+% 35
+%  & \verb,list_of_tree_aux,\benchmarkontrees %% Name
+%  & Auxiliary function for depth first tree fold to list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreesize t? %% Harnesses 
+% % &
+% %% 0:14.24 %% RunInfo 
+% %%  & 9
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 36
+%  & \verb,list_of_tree,\benchmarkontrees %% Name
+%  & Function for depth first tree fold to list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreesize t? %% Harnesses 
+% % &
+% %% 0:14.53 %% RunInfo 
+% %%  & 10
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 37
+%  & \verb,list_of_tree2,\benchmarkontrees %% Name
+%  & Function for depth first tree fold to list, version 2. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreecost t? %% Harnesses 
+% % &
+% %% 0:36.08 %% RunInfo 
+% %%  & 9
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 38
+%  & \verb,tree_of_list,\benchmarkontrees %% Name
+%  & Function for constructing a tree from a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l? %% Harnesses 
+% % &
+% %% 0:16.43 %% RunInfo 
+% %%  & 6
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 39
+%  & \verb,tree_of_list2,\benchmarkontrees %% Name
+%  & Function for folding a tree into a list, version 2. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlistcost l? %% Harnesses 
+% % &
+% %% 2:30.75 %% RunInfo 
+% %%  & 9
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 40
+%  & \verb,tree_flip,\benchmarkontrees %% Name
+%  & Function for folding a tree into a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreecost t? %% Harnesses 
+% % &
+% %% 0:25.08 %% RunInfo 
+% %%  & 6
+% %%  & Dsolve/postests/treeset.ml %% Source 
+%  \\
+% 41
+%  & \verb,qsort, %% Name
+%  & Quicksort. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + msquaredlen l? %% Harnesses 
+% % &
+% %% 1:26.75 %% RunInfo 
+% %%  & 17
+% %%  & \cite{Hofmann03} %% Source 
+%  \\
+% 42
+%  & \verb,ins_sort, %% Name
+%  & Insertion sort. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + 1 + mlength l && pos <= pre + mcostlist l? %% Harnesses 
+% % &
+% %% 0:31.20 %% RunInfo 
+% %%  & 10
+% %%  & \cite{Hofmann00} %% Source 
+%  \\
+% 43
+%  & \verb,processfile3,\benchmarkonfiledescriptors %% Name
+%  &  Open, read, and close one file, version 3. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_in\_st\_man.cmo %% MonSpec 
+% %%  & \verb?Myset.eq (Myset.mns pos pre) Myset.empty? %% Harnesses 
+% % &
+% %% 0:14.96 %% RunInfo 
+% %%  & 11
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 44
+%  & \verb,processfile4,\benchmarkonfiledescriptors %% Name
+%  &  Open, read, and close one file, version 4. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_multiple\_st\_man.cmo %% MonSpec 
+% %%  & \verb?begin ... end? %% Harnesses 
+% % &
+% %% 2:03.84 %% RunInfo 
+% %%  & 11
+% %%  & \cite{Kobayashi09} %% Source 
+%  \\
+% 45
+%  & \verb,compose_list, ver.2 %% Name
+%  & Variant of Hofmann's composing (or folding) all functions in a list %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & mh\_compose\_list\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre? %% Harnesses 
+% % &
+% %% 0:07.61 %% RunInfo 
+% %%  & 6
+% %%  & \cite{Hofmann02} %% Source 
+%  \\
+% 46
+%  & \verb,list_of_leaves,\benchmarkontrees %% Name
+%  & Left to right list of leaves of a tree. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreecost t? %% Harnesses 
+% % &
+% %% 0:27.52 %% RunInfo 
+% %%  & 9
+% %%  & Original creation %% Source 
+%  \\
+% 47
+%  & \verb,left_path,\benchmarkontrees %% Name
+%  & Given a tree, the path from the leftmost leave to the root. %% Desc 
+%  & \sflinear, %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreecost t && pos <= pre + mtreesize t? %% Harnesses 
+% % &
+% %% 0:56.68 %% RunInfo 
+% %%  & 9
+% %%  & Original creation %% Source 
+%  \\
+% 48
+%  & \verb,twice, %% Name
+%  & Duplicate every element of a list. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & conses\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mlength l + mlength l? %% Harnesses 
+% % &
+% %% 0:07.81 %% RunInfo 
+% %%  & 4
+% %%  & \cite{Hofmann02} %% Source 
+%  \\
+% 49
+%  & \verb,add_if_pos1, %% Name
+%  & Add a number if it is a positive integer, version 1. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos <= pre + 1? %% Harnesses 
+% % &
+% %% 0:05.54 %% RunInfo 
+% %%  & 2
+% %%  & Original creation %% Source 
+%  \\
+% 50
+%  & \verb,add_if_pos2, %% Name
+%  & Add a number if it is a positive integer, version2. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?(u <= 0 || pos <= pre + 1) && (u > 0 || pos = pre)? %% Harnesses 
+% % &
+% %% 0:06.75 %% RunInfo 
+% %%  & 2
+% %%  & Original creation %% Source 
+%  \\
+% 51
+%  & \verb,fold_tree,\hobenchmark\benchmarkontrees %% Name
+%  & Pre-order list fold. %% Desc 
+%  & \sflinear %% SpecDesc 
+% %%  & f\_apps\_count\_st\_man.cmo %% MonSpec 
+% %%  & \verb?pos = pre + mtreesize t? %% Harnesses 
+% % &
+% %% 0:30.12 %% RunInfo 
+% %%  & 8
+% %%  & Original creation %% Source 
+%  \\
+% 52
+%  & \verb,write_byte,\benchmarkonfiledescriptors %% Name
+%  & Write byte to file. %% Desc 
+%  & \sfchan %% SpecDesc 
+% %%  & kobayashi\_cfu\_out\_st\_man.cmo %% MonSpec
+% %%  & \verb?Myset.eq (Myset.mns pos pre) Myset.empty? %% Harnesses
+% % &
+% %% 0:12.33 %% RunInfo 
+% %%  & 4
+% %%  & Original creation %% Source 
+%  \\
+
+1
+& \ttt{ack}
+& The Ackermann function
+\\ %& \liter \\
+
+2
+& \ttt{chop}
+& Chop the first $n$ elements of a list
+\\ %& \liter \\
+
+3
+& \ttt{dictionary}
+&  An algebraic data type recursive  manipulation
+\\ %& \liter \\
+
+4
+& \ttt{fold2} \hobenchmark
+& Fold a pair of lists
+\\ %& \liter \\
+
+5
+& \ttt{mccarthy91}
+& The McCarthy 91 function
+\\ %& \liter \\
+
+6
+& \ttt{mult}
+& Recursive definition of multiplication
+\\ %& \liter \\
+
+7
+& \ttt{rev\_append}
+& Append a list reversed
+\\ %& \liter \\
+
+8
+& \ttt{rev\_merge}
+& Merge two lists
+\\ %& \liter \\
+
+9
+& \ttt{simple-rec}
+& A simple recursive function
+\\ %& \liter \\
+
+10
+& \ttt{sum}
+& The sum of the first $n$ naturals
+\\ %& \liter \\
+
+% sereni's examples
+
+11
+& \ttt{sereni29} \hobenchmark
+& \ttt{map} applied  to a function constructed with
+\ttt{compose} and a list
+\\ %& \literrank \\
+
+12
+& \ttt{sereni56} \hobenchmark
+& Computation of the n-th Church numeral using \ttt{compose}
+\\ %& \literrank \\
+
+13
+& \ttt{sereni81} \hobenchmark
+& Fold left defined using fold right
+\\ %& \literrank \\
+
+14
+& \ttt{sereni85} \hobenchmark
+& A program with two call sites to map
+\\ %& \literrank \\
+
+15
+& \ttt{sereni163} \hobenchmark
+& A parameter function applied to a
+non-terminating parameter function
+\\ %& \literrank \\
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

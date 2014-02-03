@@ -1,0 +1,192 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 114
+TITLE: Binary Reachability Analysis of Functional Programs
+AUTHORS: (anonymous)
+
+OVERALL RATING: -2 (reject)
+REVIEWER'S CONFIDENCE: 3 (high)
+IMPORTANCE: 2 (Okay: The paper addresses a problem that has good, or many, solutions.)
+NOVELTY: 2 (Incremental. A straightforward next step to an existing idea.)
+CLARITY: 2 (Needs Improvement)
+
+A program transformation that makes it possible to reduce (an aspect of) the problem of termination checking to the problem of reachability (in the normal sense of model checking of safety properties), for higher-order functional programs.  In particular, the functionality in this paper takes as input a program and a proposed termination relation for one of the functions, and the tool verifies that this relation really proves termination.
+
+My higher-level take: This paper presents one piece of a Terminator-like checker for (a subset of?) OCaml programs.  A full tool for this termination checking problem would use abstract interpretation, abstraction refinement, etc., to learn appropriate relations explaining termination of all recursive definitions.  The technique in this paper just helps check a single such relation, and the contribution is not to show how the checking may be done, but rather to show how to reduce it to a different verification problem.  Thus, it's important to demonstrate that the reduced programs fall into a set that can be verified in practice.  The experiments provide some evidence of such tractability, but it's not overwhelmingly convincing.  I found the exposition to be disorganized and confusing, and would expect it to be even trickier for readers not used to thinking about such concepts as functional programming, monads, and metaprogramming with quotations and antiquotations.
+
+A significant amount of verbiage and OCaml code is used to explain a program instrumentation strategy.  In the first pages of this discussion, I was very confused about how what I was reading related to the termination-checking problem.  By the end, I thought it was a simple enough idea to deserve no more than a page of prose.  Basically, we want to prove that some binary relation over procedure argument lists characterizes every recursive call that may be made in the course of evaluating some original call.  We instrument a program to nondeterministically record the arguments used in some call to the function we are focusing on.  While we continue to evaluate that call, every further argument list is checked against the saved list with the relation.  There are certainly details to be gotten right in implementing the instrumentation, but they don't strike me as "research contribution" level.  This reduction seems like one that most CAV folks would be ready to believe as sound
+just from the high-level description, and it's not surprising that it can be implemented for a Turing-complete language.
+
+I don't know if anyone has considered this idea before.  The practicality rests on the tractability of the new verification problem that we reduce to.  (Actually, it's not clear to me that it wouldn't be simpler to treat the original termination problem directly.)  The set of experiment programs used in this paper seems mildly misleading.  As mentioned in the paper, it's true that traditional techniques like size change termination work on inductive types like natural numbers, while OCaml's int's are a different story.  However, most of the experiment programs here either (a) work with simple restriction to primitive recursion (like in Coq) or (b) use int's as if they were naturals, with recursive functions whose base cases are "n <= 0" rather than just "n = 0".  These programs are trivially handled by (perhaps minor tweaks to) techniques lightweight enough that they are already incorporated into the type checkers of several production-quality functional language implementati
+ons.
+
+Of the 15 experiment programs, I identify 5 that don't fit within the above criteria.
+- The usual suspects of the Ackermann function and McCarthy's 91.  These are reasonable examples where fancy termination checking is called for, though I question whether such reasoning is common enough to deserve tool support.
+- Sorted list merging, which is well-founded under a relation comparing sums of lengths of argument lists.  Another reasonable example.
+- A strange recursive function to manipulate an algebraic datatype seemingly inspired by red-black trees, but using code that does not seem to bear any relationship to useful tree manipulations.  I don't think there's anything practical to be learned from this one.
+- A program with an intentional definition of a diverging recursive function, which appears as an argument within a non-trivial tree of combinator calls, such that the diverger is never called.  This strikes me as undermotivated, since the program can simply be run to see that it terminates, in few enough steps that one can imagine a heuristic to try exactly this for any input program!  This would be similar to the partial evaluation that goes on during termination checking in Agda or Coq.
+
+So, in my opinion, there are 3 programs among the 15 experiments that provide any sort of interesting exercise for termination checking, and all 3 are purely first-order.  As a result, I don't believe this paper makes a persuasive case for advancing the state of the art in termination checking for higher-order programs.
+
+Fig. 3's Augment function is not total if argument expressions to "f" may diverge.  Is that a problem?
+
+Minor points:
+
+In the abstract, the close repetition of the word "imperative" with two different meanings seems a bit like a bad joke. ;)
+
+Page 2: Missing word "is" in "variables responsible for"
+Page 2: Missing "order" in "higher functional"
+Page 5: "defived"?  More spelling errors appear later.  Please use spell-check.
+Page 6: Missing "we" before "will refer to"
+Page 7: Accidential inclusion of text "dots" instead of a LaTeX operator?
+Page 7: Something wrong in "Once the obtained the"
+Page 8: Fig. 3: What is the use of OCaml code like "_ as sigma"?  Why not just write "sigma"?
+Page 8: Fig. 3: Line 8 seems to pass wrong argument in middle recursive call.
+Page 9: Missing "a" between "is Mini-OCaml"
+Page 9: "and return" should be "and returns"
+Page 9: Fig. 5: Why make "monadic" mutually recursive with "pre_m"?
+Page 10: The monadic example at the top of the page doesn't make sense.  The notation doesn't explain the connection between the two lines of the example, and OCaml parsing rules would imply that you are using a type family "int" with a single argument "pre_m" (just as you could use "list" with "int", for instance).
+Page 10: Notation like "dot" (where the quotes are taken literally from the paper) is confusing for introducing an operator.  I assumed you were talking about an infix operator "dot", where actually it is the quotes you are introducing as an operator!
+Page 14: Missing "on" between "transformation sereni163"?  (Not sure what's going on here, since the benchmark ID changes within the paragraph.)
+Page 14: Fig. 9: What is "dros"?
+Page 14: "infinite decent" should be "infinite descent"
+Page 15: "a iterative" should be "an iterative"
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 114
+TITLE: Binary Reachability Analysis of Functional Programs
+AUTHORS: (anonymous)
+
+OVERALL RATING: 1 (weak accept)
+REVIEWER'S CONFIDENCE: 1 (low)
+IMPORTANCE: 2 (Okay: The paper addresses a problem that has good, or many, solutions.)
+NOVELTY: 2 (Incremental. A straightforward next step to an existing idea.)
+CLARITY: 3 (Well written)
+
+This paper, which is perhaps closer to the area of ICFP than CAV,
+describes a method for proving termination of higher order functional
+programs written in a subset of OCaml.
+
+The paper is written for termination experts and is likely to be hard
+to understand by non-experts. Its contribution is to successfully
+adapt and extend ideas used to establish termination of imperative
+programs, by reduction to reachability analysis, to functional programs. 
+
+The method is quite complex, involving monads, program transformation,
+binary reachability analysis and other things this reviewer admits to
+not being completely familiar with. It is hard for me to judge how
+well presented the material is for suitably expert readers. There seem
+to be quite complex interlocking ideas going into the algorithm: the
+paper appears to be a substantial contribution, but one wonders how
+incremental it is.
+
+Termination of higher order recursive functions is a major concern in
+theorem proving when using systems like Isabelle/HOL or Coq. It would
+be interesting to know whether the work described has potential
+relevance to this. There is no comparison, for example, with recent
+work like that of Alexander Krauss at TUM. Is there any connection
+between the termination problem Krauss solves, or are they completely
+separate.
+
+I think this is a substantial paper, though from a low confidence
+perspective. Possible criticisms are that it is incremental and too
+narrow to be of general interest.
+
+Typos spotted: "candiate", "An program", "$v_1 dots, v_N$"
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 114
+TITLE: Binary Reachability Analysis of Functional Programs
+AUTHORS: (anonymous)
+
+OVERALL RATING: 2 (accept)
+REVIEWER'S CONFIDENCE: 3 (high)
+IMPORTANCE: 4 (Critical: The paper addresses a problem that is important and is in dire need of solutions.)
+NOVELTY: 3 (Solid. A new approach in an established field.)
+CLARITY: 4 (Lucid)
+
+This paper presents a "binary reachability analysis" -- a core
+component of termination analysis using transition invariants -- for
+higher-order functional programs. The main technical idea is to reduce
+the binary reachability analysis problem to an ordinary reachability
+problem, using a sort of a product construction. The reachability
+problem is then solved using an existing higher-order safety checker
+(DSolve). Some empirical results about the method's utility are
+presented.
+
+This is a good paper that should be accepted for the following reasons:
+
+* The paper is trying to solve a problem that is interesting
+as well as important. Research on software verification has
+traditionally neglected higher-order features, and given the
+importance of such features in modern languages, it is important that
+this state of affairs changes. Also, higher-order programs pose a lot
+of interesting challenges for verification.
+
+* The technical approach is elegant and utilizes the existing
+capabilities of DSolve. Of course, a lot of this ground has previously
+been trod in the context of Terminator. However, some intriguing new
+issues (e.g., partial application) arise from the higher-order aspects
+of the problem, and the paper resolves them nicely.
+
+However, I wonder: how easy would be it for DSolve to verify the kind 
+of conditions generated by your reduction on larger programs? These
+monadic programs seem quite complex, and I can imagine DSolve
+stumbling on them.
+
+An evaluation on a large, more "real-world" example would alleviate 
+this concern. 
+
+* The paper is well-written. I really liked the
+examples in Sec. 2, which bring out the additional challenges of
+higher-order verification nicely. 
+
+Questions/comments:
+
+
+* If you had references and/or imperative features in your language,
+would things change too much?
+
+* The paper would benefit from a discussion of the limitations of
+the approach. Can you give some examples of programs that you were
+NOT able to verify?
+
+* Table 9 should probably be augmented with runtimes for your method.
+
+Minor:
+
+Pg. 5, last line: "the the"
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 114
+TITLE: Binary Reachability Analysis of Functional Programs
+AUTHORS: (anonymous)
+
+OVERALL RATING: -2 (reject)
+REVIEWER'S CONFIDENCE: 2 (medium)
+IMPORTANCE: 2 (Okay: The paper addresses a problem that has good, or many, solutions.)
+NOVELTY: 2 (Incremental. A straightforward next step to an existing idea.)
+CLARITY: 2 (Needs Improvement)
+
+Pro: reduction to reachability
+Con: doesn't demonstrate scaling
+
+The authors consider the construction of "transition invariants" for
+higher order programs written in a mini dialect of Ocaml. The key insight
+of the authors is that the construction of such invariants can be
+reduced to reachability questions. This allows leveraging previous
+work on deciding reachability for higher order programs.
+
+On the positive side the reduction is technically interesting. The 
+authors clearly lay out how evaluation trees can be "augmented" with
+a state vector, then how information is passed during evaluation.
+
+My major concern with the paper, and why I do not support acceptance,
+is that the paper claims to demonstrate scaling but then the experiments
+do not support the claim. Section 6 lists the programs that were 
+considered, but nothing about the speed of verification, the size 
+of state required, the size of the programs, 
+or any other performance metric. It is not possible to conclude much
+from this without prior detailed knowledge of the evaluation programs.

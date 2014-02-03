@@ -1,0 +1,222 @@
+*** PROGRAM ***
+let rec f x = if x > 0 then f (x - 1) else fun y -> y + 1 in f 1
+
+							  
+*** TRANSFORMATION ***
+
+Subexpressions: 
+
+e = let rec f x = if x > 0 then f (x - 1) else fun y -> y + 1 in f 1
+e1 = if x > 0 then f (x - 1) else fun y -> y + 1
+e2 = x > 0
+e3 = 0
+e4 = (>) x
+e5 = x
+e6 = (>)
+e7 = f (x - 1)
+e8 = x - 1
+e9 = 1
+e10 = (-) x
+e11 = x
+e12 = (-)
+e13 = f
+e14 = fun y -> y + 1
+e15 = y + 1
+e16 = 1
+e17 = (+) y
+e18 = y
+e19 = (+)
+e20 = f 1
+e21 = 1
+e22 = f
+
+Product subexpressions:
+Transform e = let rec f = fun x -> 'Transform e1' in 'Transform e20'
+Transform e1 = 'Transform e2' >>= fun x2 -> (if x2 then 'Transform e7' else 'Transform e14')
+Transform e2 =
+  fun s_full ->
+   ('Transform e3' >>= fun x3 ->
+    'Transform e4' >>= fun x4 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x4 x3 >>= fun xapp2 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp2) s_partial) s_full
+Transform e3 = unit 0
+Transform e4 = 
+  fun s_full ->
+   ('Transform e5' >>= fun x5 ->
+    'Transform e6' >>= fun x6 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x6 x5 >>= fun xapp4 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp4) s_partial) s_full
+Transform e5 = unit x
+Transform e6 = unit (fun z1 -> unit (fun z2 -> unit (z1 > z2)))
+Transform e7 = 
+  fun s_full ->
+   ('Transform e8' >>= fun x8 ->
+    'Transform e13' >>= fun x13 ->
+    update (fun ( _, m ) ->
+      let m_c, m_1 = m in
+      if m_c then assert ( x8 > 0 && m_1 > x8 );
+      x8, if not m_c && nondet () then true, x8 else m
+    ) >>= fun () s_partial ->
+   (x13 x8 >>= fun xapp7 ->
+    update (fun _ -> s_full) >>= fun () ->
+    unit xapp7) s_partial) s_full
+Transform e8 = 
+  fun s_full ->
+   ('Transform e9' >>= fun x9 ->
+    'Transform e10' >>= fun x10 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x6 x5 >>= fun xapp4 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp4) s_partial) s_full
+Transform e9 = unit 1
+Transform e10 =
+  fun s_full ->
+   ('Transform e11' >>= fun x11 ->
+    'Transform e12' >>= fun x12 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x12 x11 >>= fun xapp10 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp10) s_partial) s_full
+Transform e11 = unit x
+Transform e12 = unit (fun z1 -> unit (fun z2 -> unit (z1 - z2)))
+Transform e13 = unit f
+Transform e14 = unit (fun x -> 'Transform e15')
+Transform e15 =
+  fun s_full ->
+   ('Transform e16' >>= fun x16 ->
+    'Transform e17' >>= fun x17 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x17 x16 >>= fun xapp15 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp15) s_partial) s_full
+Transform e16 = unit 1
+Transform e17 =
+  fun s_full ->
+   ('Transform e18' >>= fun x18 ->
+    'Transform e19' >>= fun x19 ->
+    update (fun s -> s) >>= fun () s_partial ->
+   (x19 x18 >>= fun xapp17 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp17) s_full) s_partial
+Transform e18 = unit y
+Transform e19 = unit (fun z1 -> unit (fun z2 -> unit (z1 + z2)))
+Transform e20 = 
+  fun s_full ->
+   ('Transform e21' >>= fun x21 ->
+    'Transform e22' >>= fun x22 ->
+    update (fun ( _, m ) ->
+      let m_c, m_1 = m in
+      if m_c then assert ( x21 > 0 && m_1 > x21 );
+      x21, if not m_c && nondet () then true, x21 else m
+    ) >>= fun () s_partial ->
+   (x22 x21 >>= fun xapp20 ->
+    update (fun _ -> s_full) >>= fun () ->
+    unit xapp20) s_full) s_partial
+Transform e21 = unit 1
+Transform e22 = unit f
+
+
+
+Partial evaluation 1:
+p2 =
+  fun s ->
+    p4 >>= fun x4 ->
+    x4 0 >>= fun xapp2 ->
+    unit xapp2
+p4 = 
+  fun s ->
+    unit (fun z2 -> unit (x > z2))
+p7 =
+  fun s ->
+    p8 >>= fun x8 ->
+    update (fun ( _, m ) ->
+      let m_c, m_1 = m in
+      if m_c then assert ( x8 > 0 && m_1 > x8 );
+      x8, if not m_c && nondet () then true, x13 else m
+    ) >>= fun () ->
+    f x8 >>= fun xapp7 ->
+    update (fun _ -> s) >>= fun () ->
+    unit xapp7
+p8 =
+  fun s ->
+    p9 >>= fun x9 ->
+    p10 >>= fun x10 ->
+    update (fun s -> s) >>= fun () ->
+    x6 x5 >>= fun xapp4 ->
+    update (fun s -> s) >>= fun () ->
+    unit xapp4
+
+
+
+Final product:
+
+let rec f = fun x ->
+  if x > 0 then
+    fun s ->
+      update (fun ( _, m ) ->
+   	let m_c, m_1 = m in
+	if m_c then assert ( (x - 1) > 0 && m_1 > (x - 1) );
+	(x - 1), if not m_c && nondet () then true, (x - 1) else m
+      ) >>= fun () ->
+      f (x - 1) >>= fun xapp7 ->
+      update (fun _ -> s) >>= fun () ->
+      unit xapp7
+  else
+    unit (fun y -> unit (y + 1))
+in
+fun s ->
+  update (fun ( _, m ) ->
+    let m_c, m_1 = m in
+    if m_c then assert ( 1 > 0 && m_1 > 1 );
+    1, if not m_c && nondet () then true, 1 else m
+  ) >>= fun () ->
+  f 1 >>= fun xapp20 ->
+  update (fun _ -> s) >>= fun () ->
+  unit xapp20
+
+    
+
+*** DECORATION ***
+
+Consider the following declarations.
+sf = (false, 0)
+s0 = (true, 0)
+s1 = (true, 1)
+
+Consider the following two decorated trees.
+
+                                                                                             ---------------------  -----------------------------
+                                                                ...                          .. |- x>0 => false,s1  .. |- fun y -> ... => vfx, s1
+                                                        -----------------  ----------------  ----------------------------------------------------
+                                             ...        .. |- x-1 => 0,s1  .. |- f => vf,s1  f=vf; x=0 |- if ... => vfx, s1
+                                ----------------------  -------------------------------------------------------------------
+                                ... |- x>0 => true, s1          ... |- f (x-1) => vfx, s1
+------------------------------  ---------------------------------------------------------------
+f=vf |- 1 => 1, sf                           f=vf; x=1 |- if ... => vfx, s1
+--------------------------------------------------------------------------------------------
+f = (f, fun x -> ..., \emptyset) |- f 1 => (fun y -> ..., [f=...; x=0]), sf
+    ============================           ============================
+                 |                                       |
+                 vf                                      vfx
+
+
+
+                                                                                             ---------------------  -----------------------------
+                                                                ...                          .. |- x>0 => false,s0  .. |- fun y -> ... => vfx, s0
+                                                        -----------------  ----------------  ----------------------------------------------------
+                                             ...        .. |- x-1 => 0,sf  .. |- f => vf,sf  f=vf; x=0 |- if ... => vfx, s0
+                                ----------------------  -------------------------------------------------------------------
+                                ... |- x>0 => true, sf          ... |- f (x-1) => vfx, sf
+------------------------------  ---------------------------------------------------------------
+f=vf |- 1 => 1, sf                           f=vf; x=1 |- if ... => vfx, sf
+--------------------------------------------------------------------------------------------
+f = (f, fun x -> ..., \emptyset) |- f 1 => (fun y -> ..., [f=...; x=0]), sf
+    ============================           ============================
+                 |                                       |
+                 vf                                      vfx
+
+

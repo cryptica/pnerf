@@ -1,0 +1,193 @@
+% \newcommand{\functx}{\ectx[\mathit{fun}]}
+% \newcommand{\rcl}{\trm{(\var[f],
+% \exprFun \var[p] \exprArrow \ensuremath{\expr[b],}
+% \functx)}}
+
+\newcommand{\mstepcst}{
+  \inference[\scst]{
+  }{
+    \mevj{\evj{\ectx}{\cst}{\cst}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\mstepvar}{
+  \inference[\svar]{
+  }{
+    \mevj{\evj{\ectx}{\var}{\ectx\ \var}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\msteptup}{
+  \inference[\stup]{
+    \mevj{\evj{\ectx}{\expr[n]}{\val[n]}}{\stupa[n]}{\stdown[n]}
+    &
+    \ldots
+    &
+    \mevj{\evj{\ectx}{\expr[1]}{\val[1]}}{\stupa[1]}{\stdown[1]}
+  }{
+    \mevj{\evj{\ectx}{\ntupleexpr}{\ntupleval}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\mstepcstr}{
+  \inference[\scstr]{
+    \mevj{\evj{\ectx}{\expr[n]}{\val[n]}}{\stupa[n]}{\stdown[n]}
+    &
+    \ldots
+    &
+    \mevj{\evj{\ectx}{\expr[1]}{\val[1]}}{\stupa[1]}{\stdown[1]}
+  }{
+    \mevj{\evj{\ectx}{\cstr(\ntupleexpr)}{\cstr(\ntupleval)}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\mstepappcst}{
+  \inference[\sappcst]{
+    \mevj{\evj{\ectx}{\expr[p]}{\val[p]}}{\stupa[p]}{\stdown[p]}
+    &
+    \mevj{\evj{\ectx}{\expr[f]}{\cst}}{\stupa[f]}{\stdown[f]}
+  }{
+    \mevj{\evj{\ectx}{\appexpr}{\cst\ \val[p]}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\mstepapp}{
+  \inference[\sapp]{
+    \mevj{\evj{\ectx}{\expr[p]}{\val[p]}}{\stupa[p]}{\stdown[p]}
+    &
+    \mevj{\evj{\ectx}{\expr[f]}{\closure[b]}}{\stupa[f]}{\stdown[f]}
+    &
+    \mevj{\evj{\ectx[b] \eext \var \emapsto \val[p]}{\expr[b]}{\val}}{\stupa[b]}{\stdown[b]}
+  }{
+    \mevj{\evj{\ectx}{\appexpr}{\val}}{\stupa}{\stdown}
+  }
+}
+
+\newcommand{\msteplet}{
+  \inference[\slet]{
+    \mevj{\evj{\ectx}{\expr[1]}{\val[1]}}{\stupa[1]}{\stdown[1]}
+    &
+    \mevj
+    {
+      \evj
+      { \ectx \eext \patternmatch~\patt~\val[1] }
+      {\expr[2]}
+      {\val}
+    }{
+      \stupa[2]
+    }{
+      \stdown[2]
+    }
+  }{
+    \mevj
+    {
+      \evj
+      {\ectx}
+      {\ensuremath{
+          \underbrace{
+            \ttt{let \patt\ = \expr[1]\ in \expr[2]}
+          }_{\expr}
+        }}
+      {\val}
+    }{
+      \stupa
+    }{
+      \stdown
+    }
+  }
+}
+
+\newcommand{\mstepfun}{
+  \inference[\sfun]{
+  }{
+    \mevj
+    {
+      \evj
+      {\ectx}
+      {\funexpr}
+      {\closure}
+    }{
+      \stupa
+    }{
+      \stdown
+    }
+  }
+}
+
+\newcommand{\mstepletrec}{
+  \inference[\sletrec]{
+    \mevj
+    {
+      \evj
+      { \ectx \eext \var[f] \emapsto \recclosure}
+      {\expr[2]}
+      {\val}
+    }{
+      \stupa[2]
+    }{
+      \stdown[2]
+    }
+  }{
+    \mevj
+    {
+      \evj
+      {\ectx}
+      {\ensuremath{
+          \underbrace{
+            \ttt{let rec \var[f] = \funexpr\ in \expr[2]}
+          }_{\expr}
+        }}
+      {\val}
+    }{
+      \stupa
+    }{
+      \stdown
+    }
+  }
+}
+
+\newcommand{\mstepmatch}{
+  \inference[\smatch]{
+    \mevj{\evj{\ectx}{\expr[m]}{\val[m]}}{\stupa[m]}{\stdown[m]}
+    &
+    \mevj
+    {
+      \evj
+      { \ectx \eext \patternmatch~(\ncstrpatt{k})~\val[m] }
+      {\expr[k]}
+      {\val}
+    }{
+      \stupa[k]
+    }{
+      \stdown[k]
+    }
+  }{
+    \mevj
+    {
+      \evj
+      {\ectx}
+      {\ensuremath{
+          \underbrace{
+            \left(
+              \begin{array}{l}
+                \ttt{match \expr[m]\ with} \\
+                \ttt{\tabT | \ncstrpatt{1}\ -> \expr[1]} \\
+                \ttt{\tabT \ldots} \\
+                \ttt{\tabT | \ncstrpatt{i}\ -> \expr[i]}
+              \end{array}
+            \right)
+          }_{\expr}
+        }}
+      {\val}
+    }{
+      \stupa
+    }{
+      \stdown
+    }
+  }
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

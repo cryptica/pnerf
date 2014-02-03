@@ -1,0 +1,41 @@
+\newcommand{\scstprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \cst} >>= fun () -> \\
+      unit (fun \var[1] -> \\
+      \tabT \ldots \\
+      \tabTT unit (fun \var[n] -> \\
+      \tabTTT unit (\cst\ \var[1] \ldots\ \var[n])) \ldots\ )
+    }
+  \end{minipage}
+}
+
+\newcommand{\svarprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \var} >>= fun () -> \\
+      unit \var
+    }
+  \end{minipage}
+}
+
+\newcommand{\sappprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{\aq{\product\ \expr[p]} >>= fun \var[p] -> \\
+      \aq{\product\ \expr[f]} >>= fun \var[f] -> \\
+      \var[f] \var[p]
+    }
+  \end{minipage}
+}
+
+% \newcommand{\sletprod}{
+%   \begin{minipage}{1.0\linewidth}
+%     \ttt{(fun \vst\ -> \\
+%       \tabT let \patt, $\vst[1]'$\ = \aq{\product\ \expr[1]} \vst\ in \\
+%       \tabT \aq{\product\ \expr[2]} $\vst[1]'$)
+%     }
+%   \end{minipage}
+% }
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

@@ -1,0 +1,93 @@
+\section{Introduction}
+
+Tools and techniques for proving program termination are important for
+increasing software quality~\cite{CACM}.
+System routines written in imperative programming languages received a
+significant amount of attention recently,
+e.g.,~\cite{copytrick,Julia,KroeningCAV10,GieslBytecode,YangESOP08,SepLogTerm}. 
+A number of the proposed approaches rely on transition invariants -- a
+termination argument that can be constructed incrementally using
+abstract interpretation~\cite{transitioninvariants}.
+Transition invariants are binary relations over program states.
+Checking if an incrementally constructed candidate is in fact a
+transition invariant of the program is called binary reachability
+analysis.
+For imperative programs, its efficient implementation can be obtained
+by a reduction to the reachability analysis, for which practical tools
+are available, e.g.,~\cite{Slam,Blast,fsoft,Impact}.
+The reduction is based on a program transformation that stores one
+component of the pair of states under consideration in auxiliary program
+variables, and then checks if the pair is in the transition
+invariant~\cite{copytrick}. 
+The transformed program is verified using an existing safety checker. 
+If the safety checker succeeds then the original program terminates on all inputs.  
+% The set of reachable program states of the transformed program can be
+% directly used in the binary reachability analysis.
+
+For functional programs, recent approaches for proving termination
+apply the size change termination (SCT) argument~\cite{SCTPOPL2001}.
+This argument requires checking the presence of an infinite descent within
+data values passed to application sites of the program on any infinite
+traversal of the call graph.
+This check can be realized in two steps.
+First, every program function is translated into a set of so-called
+size-change graphs that keep track of decrease in values between the
+actual arguments and values at the application sites in the
+function.
+Second, the presence of a descent is checked by computing a transitive
+closure of the size-change graphs. 
+Originally, the SCT analysis was formulated for first order functional
+programs manipulating well-founded data, yet using an appropriate
+control-flow analysis, it can be extended to higher order programs,
+see
+e.g.,~\cite{SereniICFP07,Sereni05terminationanalysis,SereniAPLAS05}.
+Alternatively, an encoding into term rewriting can be used to make
+sophisticated decidable well-founded orderings on terms applicable to proving
+termination of higher order programs~\cite{GieslHaskell}.
+
+The SCT analysis is a decision problem (that checks if there is an infinite descent in the abstract program defined by size change graphs), however it is an incomplete method for proving termination. 
+SCT can return ``don't know'' for terminating programs that
+manipulate non-well-founded data, e.g., integers, or when an interplay
+of several variables witnesses program termination. 
+In such cases, a termination prover needs to apply a more general termination argument.
+Usually, such termination arguments require proving that certain expressions over program variables decrease as the computation progresses and yet the decrease cannot happen beyond a certain bound.
+
+In this paper, we present a general approach for proving termination of higher order functional programs that goes beyond the SCT analysis.
+Our approach explores the applicability of transition invariants to
+this task by proposing an extension (wrt.\ imperative case) that deals
+with partial applications, a programming construct that is particular for functional programs.
+Partial applications of curried functions, i.e., functions that return other functions, represent a major obstacle for the binary reachability analysis. 
+For a curried function, the set of variables whose values need to be stored in auxiliary variables keeps increasing as the function is subsequently applied to its arguments. 
+However these arguments are not necessarily supplied simultaneously,
+which requires intermediate storage of the argument values given so
+far.
+In this paper, we address such complications.
+
+We develop the binary reachability analysis for higher order programs in two steps.
+First, we show how intermediate nodes of program evaluation trees, \mbox{so-called} judgements, can be augmented with auxiliary values needed for tracking binary reachability. 
+The auxiliary values store arguments provided at application sites.
+Then, we show how this augmentation can be performed on the program source code such that the evaluation trees of the augmented program correspond to the result of augmenting the evaluation trees of the original program.
+The source code transformation introduces additional parameters to functions occurring in the program. For curried functions, these additional parameters are interleaved with the original parameters, which allows us to deal with partial applications.
+
+Our binary reachability analysis for higher order programs opens up an approach for termination proving in the presence of higher order functions that exploits a highly optimized safety checker, e.g.,~\cite{TerauchiPOPL10,RupakRanjit,KobayashiPLDI11,Dsolve,HMC},
+for checking the validity of a candidate termination argument.
+Hence, we can directly benefit from sophisticated abstraction
+techniques and algorithmic improvements offered by these tools, as inspired by~\cite{copytrick}.
+
+In summary, this paper makes the following contributions.
+%
+\begin{itemize}
+\item A notion of binary reachability analysis for 
+  higher order functional programs.
+\item A program transformation that reduces the binary
+  reachability analysis to the reachability analysis.
+  % code   transformation. 
+\item An implementation of our approach and its evaluation on micro
+  benchmarks from the literature.
+\end{itemize}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

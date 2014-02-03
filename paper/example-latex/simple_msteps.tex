@@ -1,0 +1,72 @@
+\newcommand{\smstepcst}{
+    \inference[\scst]{
+    }{
+      \mevj{\evj{\ectx}{\cst}{\cst}}{\st}{\st'}
+    }
+}
+
+\newcommand{\smstepvar}{
+    \inference[\svar]{
+    }{
+      \mevj{\evj{\ectx}{\var}{\ectx\ \var}}{\st}{\st'}
+    }
+}
+
+\newcommand{\smstepappcst}{
+  \inference[\sappcst]{
+    \mevj{\evj{\ectx}{\expr[p]}{\val[p]}}{\st}{\st'}
+    &
+    \mevj{\evj{\ectx}{\expr[f]}{\cst}}{\st'}{\st''}
+  }{
+    \mevj{\evj{\ectx}{\appexpr}{\cst\ \val[p]}}{\st}{\st''}
+  }
+}
+
+% \newcommand{\smstepapp}{
+%   \inference[\sapp]{
+%     \mevj{\evj{\ectx}{\expr[p]}{\val[p]}}{\st}{\st'}
+%     &
+%     \mevj{\evj{\ectx}{\expr[f]}{\closure[b]}}{\st'}{\st''}
+%     &
+%     \mevj{\evj{\ectx[b] \eext \var \emapsto \val[p]}{\expr[b]}{\val}}{\st''}{\st'''}
+%   }{
+%     \mevj{\evj{\ectx}{\appexpr}{\val}}{\st}{\st'''}
+%   }
+% }
+
+% \newcommand{\smsteplet}{
+%   \inference[\slet]{
+%     \mevj{\evj{\ectx}{\expr[1]}{\val[1]}}{\st}{\st'}
+%     &
+%     \mevj
+%     {
+%       \evj
+%       { \ectx \eext \patternmatch~\patt~\val[1] }
+%       {\expr[2]}
+%       {\val}
+%     }{
+%       \st'
+%     }{
+%       \st''
+%     }
+%   }{
+%     \mevj
+%     {
+%       \evj
+%       {\ectx}
+%       {\ensuremath{
+%           \ttt{let \patt\ = \expr[1]\ in \expr[2]}
+%        }}
+%       {\val}
+%     }{
+%       \st
+%     }{
+%       \st''
+%     }
+%   }
+% }
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

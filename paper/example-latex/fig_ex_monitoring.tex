@@ -1,0 +1,187 @@
+\newcommand{\stf}{\ensuremath{(\mathit{false}, 0)}}
+\newcommand{\stzero}{\ensuremath{(\mathit{true}, 0)}}
+\newcommand{\stone}{\ensuremath{(\mathit{true}, 1)}}
+\newcommand{\vstf}{\ensuremath{\st[f]}}
+\newcommand{\vstzero}{\ensuremath{\st[0]}}
+\newcommand{\vstone}{\ensuremath{\st[1]}}
+
+
+\newcommand{\vf}{\ensuremath{(\ttt{f},
+    \ttt{fun~x~->~if~x~>~0~then~f~(x~-~1)~else~fun~y~->~y~+~1}, \emptyectx)}}
+\newcommand{\vvf}{\val[f]}
+\newcommand{\vfx}{\ensuremath{(\ttt{fun~y~->~y~+~1}, [\ttt{f} \emapsto \vvf; \ttt{x} \emapsto 0])}}
+\newcommand{\vvfx}{\val[\ttt{f\ x}]}
+% \newcommand{\ectxf}{\ensuremath{\ttt{f} \emapsto \vf}}
+\newcommand{\vectxf}{\ectx[\ttt{f}]}
+\newcommand{\vectxfxone}{\ectx[\ttt{f\ 1}]}
+\newcommand{\vectxfxzero}{\ectx[\ttt{f\ 0}]}
+
+\begin{figure}[t]
+\begin{minipage}{\linewidth}
+  \small
+
+    \[
+    \scalebox{.95}{
+      \inference{
+        \begin{sideways}
+        \inference{}{
+          \mevj{\evj{\vectxf}{\ttt{1}}{\ttt{1}}}{}{\vstf}
+        }
+        \end{sideways}
+        &
+        \begin{sideways}
+        \inference{}{
+          \mevj{\evj{\vectxf}{\ttt{f}}{\vvf}}{}{\vstf}
+        }
+        \end{sideways}
+        &
+        \inference{
+          \begin{sideways}
+          \inference{
+            \vdots
+          }{
+            \mevj{\evj{\vectxfxone}{\ttt{x~>~0}}{\ttt{true}}}{}{\vstone}
+          }
+          \end{sideways}
+          &
+          \inference{
+            \begin{sideways}
+            \inference{
+              \vdots
+            }{
+              \mevj{\evj{\vectxfxone}{\ttt{x~-~1}}{\ttt{0}}}{}{\vstone}
+            }
+            \end{sideways}
+            &
+            \begin{sideways}
+            \inference{
+            }{
+              \mevj{\evj{\vectxfxone}{\ttt{f}}{\vvf}}{}{\vstone}
+            }
+            \end{sideways}
+            &
+            \inference{
+              \begin{sideways}
+              \inference{
+                \vdots
+              }{
+                \mevj{\evj{\vectxfxzero}{\ttt{x~>~0}}{\ttt{true}}}{}{\vstone}
+              }
+              \end{sideways}
+              &
+              \begin{sideways}
+              \inference{
+              }{
+                \mevj{\evj{\vectxfxzero}{\ttt{fun~y~->~y~+~1}}{\vvfx}}{}{\vstone}
+              }
+              \end{sideways}
+            }{
+              \mevj{\evj{ \underbrace{\vectxf \eext \ttt{x} \emapsto \ttt{0}}_{\vectxfxzero} }{\ttt{if~\ldots}}{\vvfx}}{}{\vstone}
+            }
+          }{
+            \mevj{\evj{\vectxfxone}{\ttt{f (x - 1)}}{\vvfx}}{}{\vstone}
+          }
+        }{
+          \mevj{\evj{ \underbrace{\vectxf \eext \ttt{x} \emapsto \ttt{1}}_{\vectxfxone} }{\ttt{if~x~>~0~then~\ldots}}{\vvfx}}{}{\vstone}
+        }
+      }{
+        \mevj{\evj{
+            \vectxf 
+            % \underbrace{
+            %   \ttt{f} \emapsto \underbrace{\vf}_{\vvf}
+            % }_{\vectxf} 
+          }{\ttt{f\ 1}}{\underbrace{\vfx}_{\vvfx}}}{}{\vstf} 
+      }
+    }
+   \]
+
+   \iffalse
+    % 
+    \begin{center}
+      (a) 
+    \end{center}
+    \vspace{2ex}
+    % 
+    \[
+    \scalebox{.45}{
+      \inference{
+        \inference{}{
+          \mevj{\evj{\vectxf}{\ttt{1}}{\ttt{1}}}{}{\vstf}
+        }
+        &
+        \inference{}{
+          \mevj{\evj{\vectxf}{\ttt{f}}{\vvf}}{}{\vstf}
+        }
+        &
+        \inference{
+          \inference{
+            \vdots
+          }{
+            \mevj{\evj{\vectxfxone}{\ttt{x~>~0}}{\ttt{true}}}{}{\vstf}
+          }
+          &
+          \inference{
+            \inference{
+              \vdots
+            }{
+              \mevj{\evj{\vectxfxone}{\ttt{x~-~1}}{\ttt{0}}}{}{\vstf}
+            }
+            &
+            \inference{
+            }{
+              \mevj{\evj{\vectxfxone}{\ttt{f}}{\vvf}}{}{\vstf}
+            }
+            &
+            \inference{
+              \inference{
+                \vdots
+              }{
+                \mevj{\evj{\vectxfxzero}{\ttt{x~>~0}}{\ttt{true}}}{}{\vstzero}
+              }
+              &
+              \inference{
+              }{
+                \mevj{\evj{\vectxfxzero}{\ttt{fun~y~->~y~+~1}}{\vvfx}}{}{\vstzero}
+              }
+            }{
+              \mevj{\evj{ \underbrace{\vectxf \eext \ttt{x} \emapsto \ttt{0}}_{\vectxfxzero} }{\ttt{if~x~>~0~then~\ldots}}{\vvfx}}{}{\vstzero}
+            }
+          }{
+            \mevj{\evj{\vectxfxone}{\ttt{f (x - 1)}}{\vvfx}}{}{\vstf}
+          }
+        }{
+          \mevj{\evj{ \underbrace{\vectxf \eext \ttt{x} \emapsto \ttt{1}}_{\vectxfxone} }{\ttt{if~x~>~0~then~\ldots}}{\vvfx}}{}{\vstf}
+        }
+      }{
+        \mevj{\evj{\underbrace{\ttt{f} \emapsto \underbrace{\vf}_{\vvf}}_{\vectxf}}{\ttt{f\ 1}}{\underbrace{\vfx}_{\vvfx}}}{}{\vstf}
+      }
+    }
+    \]
+    \begin{center}
+      (b)
+    \end{center}
+    \fi
+  \end{minipage}
+
+  \caption{Annotation of the evalution tree for \ttt{f\ 1} in the 
+     environment \vectxf\ = \vf.
+     The initial judgement is annotated with $\vstf = \stf$. 
+     The annotation changes from $\vstf$ to $\vstone = \stone$ 
+     after the first call to \ttt{f}.
+     Due to the lack of width, we had to turn several judgements.
+   }
+
+%    $\vectxf  = \vf$
+            % \underbrace{
+            %   \ttt{f} \emapsto \underbrace{\vf}_{\vvf}
+            % }_{\vectxf} 
+
+
+
+  \label{fig-monitoring}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

@@ -1,0 +1,124 @@
+\newcommand{\cstprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \cst\ $\uparrow$} >>= fun () -> \\
+      update \aq{\tsel\ \cst\ $\downarrow$} >>= fun () -> \\
+      unit (fun \var[1] -> \\
+      \tabT \ldots \\
+      \tabTT unit (fun \var[n] -> \\
+      \tabTTT unit (\cst\ \var[1] \ldots\ \var[n])) \ldots\ )
+    }
+  \end{minipage}
+}
+
+\newcommand{\varprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \var\ $\uparrow$} >>= fun () -> \\
+      update \aq{\tsel\ \var\ $\downarrow$} >>= fun () -> \\
+      unit \var
+    }
+  \end{minipage}
+}
+
+\newcommand{\tupleprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ $($\ntupleexpr$)$ $\uparrow$} >>= fun () ->\\
+      \aq{\product\ \expr[n]} >>= fun \var[n] -> \\
+      \ldots \\
+      \aq{\product\ \expr[1]} >>= fun \var[1] -> \\
+      update \aq{\tsel\ $($\ntupleexpr$)$ $\downarrow$} >>= fun () -> \\
+      unit (\var[1], \ldots, \var[n])
+    }
+  \end{minipage}
+}
+
+\newcommand{\cstrprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ $($\cstr(\ntupleexpr)$)$ $\uparrow$} >>= fun () ->\\
+      \aq{\product\ \expr[n]} >>= fun \var[n] -> \\
+      \ldots \\
+      \aq{\product\ \expr[1]} >>= fun \var[1] -> \\
+      update \aq{\tsel\ $($\cstr(\ntupleexpr)$)$ $\downarrow$} >>= fun () -> \\
+      unit (\cstr (\var[1], \ldots, \var[n]))
+    }
+  \end{minipage}
+}
+
+\newcommand{\appcstprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ $($\appexpr$)$ $\uparrow$} >>= fun () ->\\
+      \aq{\product\ \expr[p]} >>= fun \var[p] -> \\
+      \aq{\product\ \expr[f]} >>= fun \var[f] -> \\
+      \var[f] \var[p] >>= fun \var[{\cst\,\val[p]}] -> \\
+      update \aq{\tsel\ $($\appexpr$)$ $\downarrow$} >>= fun () -> \\
+      unit \var[{\cst\,\val[p]}]
+    }
+  \end{minipage}
+}
+
+\newcommand{\appprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ $($\appexpr$)$ $\uparrow$} >>= fun () ->\\
+      \aq{\product\ \expr[p]} >>= fun \var[p] -> \\
+      \aq{\product\ \expr[f]} >>= fun \var[f] -> \\
+      \var[f] \var[p] >>= fun \varapp -> \\
+      update \aq{\tsel\ $($\appexpr$)$ $\downarrow$} >>= fun () -> \\
+      unit \varapp
+    }
+  \end{minipage}
+}
+
+\newcommand{\funprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ $($\funexpr$)$ $\uparrow$} >>= fun () ->\\
+      update \aq{\tsel\ $($\funexpr$)$ $\downarrow$} >>= fun () -> \\
+      unit (fun \var\ -> \aq{\product\ \expr[b]})
+    }
+  \end{minipage}
+}
+
+\newcommand{\letprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+      (\aq{\product\ \expr[1]}\hspace{1.3ex} >>= fun \patt\ -> \\
+      \tabT\hspace{-2ex}  \aq{\product\ \expr[2]}) >>= fun \var[v] -> \\
+      update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+      unit \var[v]
+      % update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () ->\\
+      % (fun \vstup -> \\
+      % \tabT let \patt, \vstdown[1]\ = \aq{\product\ \expr[1]} \vstup\ in \\
+      % \tabT \aq{\product\ \expr[2]} \vstdown[1]) >>= fun \var[v] -> \\
+      % update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+      % unit \var[v]
+    }
+  \end{minipage}
+}
+
+\newcommand{\letrecprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () ->\\
+      (let rec \var[f] = fun \var\ -> \aq{\product\ \expr[b]} \\
+      \tabT\hspace{-2ex} in \aq{\product\ \expr[2]}) >>= fun \var[v]\ -> \\
+      update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+      unit \var[v]
+    }
+  \end{minipage}
+}
+
+\newcommand{\matchprod}{
+  \begin{minipage}{1.0\linewidth}
+    \ttt{update \aq{\tsel\ \expr\ $\uparrow$} >>= fun () -> \\
+      \aq{\product\ \expr[m]} >>= fun \var[m]\ -> \\
+      (match \var[m] with \\
+      \tabT | \ncstrpatt{1}\ -> \aq{\product\ \expr[1]} \\
+      \tabT \ldots \\
+      \tabT | \ncstrpatt{i}\ -> \aq{\product\ \expr[i]}) >>= fun \var[v]\ -> \\
+      update \aq{\tsel\ \expr\ $\downarrow$} >>= fun () -> \\
+      unit \var[v]
+    }
+  \end{minipage}
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

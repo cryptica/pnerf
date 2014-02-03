@@ -1,0 +1,28 @@
+\begin{minipage}[t]{\columnwidth}
+  \small
+  \centering
+  \begin{tabular}{r l l}
+    % \vals $\ni \val$ ::= &
+    % & value \\[\jot]
+%\vals $\ni \val$ ::=    & \ \ \ \cst
+    & \vals\ $\ni \val$ ::=\ \cst \myexp{constant} \\[\jot]
+    % & $|$ \ \ensuremath{\val,\ \ldots,\ \val}
+    % & tuple value \\[\jot]
+    & $|$ \ \ensuremath{\cstr(\val,\ \ldots,\ \val)}
+    & \myexp{construction} \\[\jot]
+    & $|$ \ \ensuremath{(\ttt{fun \var\ -> \expr},\ \ectx)}
+    & \myexp{regular closure} \\[\jot]
+    & $|$ \ \ensuremath{(\var, \ttt{fun \var\ -> \expr}, \ectx)}
+    & \myexp{recursive closure}  %\\[\jot]
+    % \evjs  $\ni \evjvar ::= $ & \evj{\ectx}{\expr}{\val}  & \myexp{judgement}
+    % \\[\jot]
+    % $2^{\evjs^+} \ni \evt$ \mbox{\quad\;\;}  & & \myexp{tree}
+  \end{tabular}
+
+  \centering
+    (c) 
+\end{minipage}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

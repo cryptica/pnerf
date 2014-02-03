@@ -1,0 +1,130 @@
+\section{Preliminaries}
+\label{sec-preliminaries}
+
+\input{fig_syn_and_sem}
+
+In this section we describe \miniocaml, the programming language that
+we use to represent programs. We also present the logger
+monad~\cite{freetheorems} extended with an update operation.
+
+\paragraph{\bf \miniocaml syntax}
+
+Let \vars\ be a set of \emph{variables}, e.g., \ttt{x},
+\ttt{List.map}, and~\ttt{myVar}.  Let \csts\ be a set of
+\emph{constants}, e.g., \ttt{+}, \ttt{1}, \ttt{2.5}, and \ttt{"h"}.
+Let \cstrs\ be a set of \emph{constructors}, e.g., \ttt{::},
+\ttt{Some}, \ttt{[]}, and \ttt{true}.  We assume $\vst, \var \in
+\vars$, $\cst\in \csts$, and $\cstr\in\cstrs$.
+Figure~\ref{fig-syn-and-sem}(a) presents the syntax of \miniocaml
+expressions. 
+We encode \ttt{if-then-else} expressions using match expressions. 
+Function applications are left associative. 
+We assume that tuples of values are encoded using tuple constructors.
+We assume that text in \ttt{type writer font} is \miniocaml code.
+
+\paragraph{\bf \miniocaml types}
+
+We use the \ocaml\ type system~\cite{LeroyPhD92} to type \miniocaml\
+expressions. Let \basetypes\ be a set of base types, e.g., \ttt{int},
+\ttt{string}, and \ttt{in\_channel}. Let \typevars\ be a set of type
+variables, e.g., \ttt{'a} and \ttt{'b}. Let \typecstrs\ be a set of
+type constructors, e.g., \ttt{list}, \ttt{option}, and \ttt{bool}.  We assume
+$\tybase \in \basetypes$, $\tyvar \in \typevars$, and $\tycstr \in
+\typecstrs$.  Figure~\ref{fig-syn-and-sem}(b) presents the set of \miniocaml\
+types.  We write the typing proposition $\expr~:~\type$ if expression
+\expr\ is of type \type\ under some typing context. We say that expression \expr\ is well-typed
+if there exists a type \type\ such that $\expr~:~\type$. Examples of
+valid propositions are $ \ttt{1}~:~\ttt{int} $ and $
+\ttt{+}~:~\ttt{int~->~int~->~int} $.
+
+
+\paragraph{\bf \miniocaml semantics}
+
+Figure~\ref{fig-syn-and-sem}(c) presents  \emph{values} computed by \miniocaml
+programs using judgements $\evjvar$ of the form
+%
+\begin{equation*}
+  \evjs  \ni \evjvar ::=  \evj{\ectx}{\expr}{\val}
+\end{equation*} 
+%
+Every judgement is derived by applying rules shown in
+Figure~\ref{fig-syn-and-sem}(d).
+A judgement \evjvar\ is \emph{valid} if there exists an evaluation
+tree with \evjvar\ as the root.
+Each evaluation tree is given by the set of its edges.
+Each edge is a sequence of judgements $\evjvar[1], \dots, \evjvar[n],
+\evjvar$, where $\evjvar[1], \dots, \evjvar[n]$ are the predecessor
+nodes and \evjvar\ is the successor node.
+If $n=0$ then the edge represents a leaf node. 
+
+For example, we consider the evaluation tree \evt\ for \ttt{1 + 2} as
+shown below.
+\begin{center}
+  \small
+  \[
+  \inference{ \inference{}{ \evj{\emptyectx}{\ttt{2}}{\ttt{2}} } &
+    \inference{ \inference{}{ \evj{\emptyectx}{\ttt{1}}{\ttt{1}} } &
+      \inference{}{ \evj{\emptyectx}{\ttt{+}}{\ttt{+}} } }{
+      \evj{\emptyectx}{\ttt{(+) 1}}{\ttt{+}_1} } }{
+    \evj{\emptyectx}{\ttt{1 + 2}}{\ttt{3}} }
+  \]
+\end{center}
+Let
+$\evjvar[1]~=~(\evj{\emptyectx}{\ttt{1+2}}{\ttt{3}})$, 
+$\evjvar[2]~=~(\evj{\emptyectx}{\ttt{2}}{\ttt{2}})$, 
+$\evjvar[3]~=~(\evj{\emptyectx}{\ttt{(+)~1}}{\ttt{+}_1})$, 
+$\evjvar[4]~=~(\evj{\emptyectx}{\ttt{1}}{\ttt{1}})$, 
+$\evjvar[5]~=~(\evj{\emptyectx}{\ttt{+}}{\ttt{+}})$.
+The evaluation tree \evt\ is given by the set of five edges below.
+%
+\[
+\evt~=~\{ \evjvar[2], \evjvar[4], \evjvar[5], (\evjvar[4],
+\evjvar[5], \evjvar[3]), (\evjvar[2], \evjvar[3], \evjvar[1]) \}
+\]
+%
+Let $\tsf{eval}\ \ectx\ \expr$ be the value of expression \expr\ in
+the environment \ectx, i.e., $v = \tsf{eval}\ \ectx\ \expr$
+if there is an evaluation tree for \evj{\ectx}{\expr}{\val}.
+
+\paragraph{\bf Recursion relations and binary reachability}
+
+We are interested in keeping track of (possibly partial) applications
+of a function defined in a program.
+Let $f$ be a function identifier of type $\type[1] \rightarrow \ldots
+\rightarrow \type[m] \rightarrow \type$ that is bound using a let-rec
+binding, and $\theArity$ be a number between $1$ and $m$.  
+An \emph{$\theFunction/\theArity$-application judgement} describes evaluation of
+an application of $f$ to $\theArity$-many actual parameters, i.e., it
+is a judgement of the form~\evj{\ectx}{f\ \expr[1]\ \ldots\
+\expr[n]}{\val}.
+A \emph{$\theFunction/\theArity$-recursion relation} consists of pairs
+of value tuples $(v_1, \dots, v_\theArity)$ and~$(u_1, \dots,
+u_\theArity)$ that satisfy the following condition.
+For each $(v_1, \dots, v_\theArity)$ and~$(u_1, \dots, u_\theArity)$
+in the relation we require existence of a pair of valid
+$\theFunction/\theArity$-application judgements $\evjvar[1] =
+\evj{\ectx[1]}{f\ \expr[1]\ \ldots\ \expr[\theArity]}{\val[]}$ and
+$\evjvar[2] = \evj{\ectx[2]}{f\ \expr[1]\ \ldots\
+\expr[\theArity]}{u}$ such that $\evjvar[2]$ appears in the evaluation
+tree of $\evjvar[1]$ and for each $i \in 1..\theArity$ we have
+$\tsf{eval}\ \ectx[1]\ \expr[i] = \val[i]$ and $\tsf{eval}\ \ectx[2]\
+\expr[i] = u_i$.
+
+The goal of \emph{binary reachability analysis} is to check if the
+$\theFunction/\theArity$-recursion relation of the program is
+contained in a given binary relation.
+
+We fix $\theFunction$, $\theArity$, and a binary relation~$\theTI$ for
+the rest of this paper.
+Furthermore, we assume that $\theTI$ is represented as an assertion
+over tuples of variables $(\mathtt{a}_1, \dots, \mathtt{a}_\theArity)$
+and $(\mathtt{m}_1, \dots, \mathtt{m}_\theArity)$.
+This assumption will be used in Figure~\ref{fig-tsel}.
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
