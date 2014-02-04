@@ -11,6 +11,8 @@
 
 \begin{document}
 
+\nocite{DOsualdoSAS13}
+
 \ifthenelse{\equal{\isDraft}{false}}{
   \title{An SMT-based Approach to Coverability Analysis}
   \author{
@@ -75,101 +77,14 @@ This paper makes the following contributions.
   minimal invariant.
 \end{itemize}
 
-
-\section{Preliminaries}
-
-
-\begin{verbatim}
-* Petri net:
- N = (S, T, E, M0), where
- S : places
- T : transitions
- E : edges
- M0: initial marking
-
-* Property:
- P, linear arithmetic formula
-\end{verbatim}
-\iffalse
-\begin{verbatim}
- Examples:
-  x + y < 0
-  x + y < 0 \\and x + z > 0
-  x + y < 0 \\or  x + z > 0
-
- ~P = (x + y <  0 \\and x + z >  0) \\or  x + z >  0
-  P = (x + y >= 0 \\or  x + z <= 0) \\and x + z <= 0
-\end{verbatim}
-\fi
+\input{sec_illustration}
+\input{sec_preliminaries}
 
 \newpage
 \section{Method Safety}
 
 The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
 We present the method Safety by example on Lamport's 1-bit algorithm [Esparza1997].
-
-\begin{verbatim}
-* Code
-
-Process 1:
-
-    bit1 := false
-    while true do
-p1:   bit1 := true
-p2:   while bit2 do skip od
-p3:   <critical section>
-      bit1 := false
-    od
-
-Process 2:
-
-    bit2 := false
-    while true do
-q1:   bit2 := true
-q2:   if bit1 then
-q3:     bit2 := false
-q4:     while bit1 do skip od
-        goto q1
-      fi
-q5:   <critical section>
-      bit2 := false
-od
-
-* Property: Process 1 and Process 2 are never in their respective critical section at the same time.
-
-* Petri net:
-
-\end{verbatim}
-
-\begin{center}
-  \includegraphics[width=10cm]{lamport}
-\end{center}
-
-\begin{verbatim}
-
-* Subnet of Petri net:
-
-\end{verbatim}
-
-\begin{center}
-\begin{tikzpicture}[node distance=1cm]
-  \node[transition, label=left:t1] (t1) {};
-  \node[place, tokens=1, label=left:a, below of=t1] (a) {};
-  \node[transition, label=left:t2, below of=a] (t2) {};
-  \node[place, tokens=0, label=left:b, below of=t2] (b) {};
-  \node[place, tokens=0, label=right:$\neg bit2$, right of=t2] (nbit2) {};
-  \draw (t1) edge[pre, bend left, min distance=2cm, out=225, in=-45] (b);
-  \draw (t1) edge[post] (a);
-  \draw (t2) edge[pre] (nbit2);
-  \draw (t2) edge[post] (nbit2);
-  \draw (t2) edge[pre] (a);
-  \draw (t2) edge[post] (b);
-\end{tikzpicture}
-\end{center}
-
-\begin{verbatim}
-* Property P: a + b <= 1
-\end{verbatim}
 
 \begin{verbatim}
 * Method Safety:
@@ -198,41 +113,6 @@ od
 
 \begin{verbatim}
 * Property of state constraints C: If C U {\neg P} is unsat then N |= P.
-\end{verbatim}
-
-\newpage
-
-\begin{verbatim}
-* Example:
-  - State constraints C:
-
-    Place equations:
-  
-    a     = 1 + t1 - t2
-    ^       ^   ^    ^
-    |       |   |    |
-    |       |   |    |
-    |       |   |    |
-    |       |   |   # of tokens taken from a
-    |       |   |    
-    |       |  # of tokens given to a
-    |       |
-    |      initial number of tokens in a
-    |
-    number of tokens in a
-
-    b     = 0 - t1 + t2
-    nbit2 = 0
-    
-Non-negativity conditions:
-  
-    a     >= 0
-    b     >= 0
-    nbit2 >= 0
-
-  - Negated Property \neg P:
-
-    a + b >= 2
 
 * Place equation:
   
@@ -256,7 +136,8 @@ Non-negativity conditions:
 
   Pseudocode:
 
-  \end{verbatim}
+\end{verbatim}
+
 \begin{align*}
   C(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left(
     s = M_0(s) + \sum_{(t, s) \in E} t - \sum_{(s, t) \in E} t
@@ -264,6 +145,71 @@ Non-negativity conditions:
     \left( \bigwedge_{s \in S} s \ge 0 \right) \land
     \left( \bigwedge_{t \in T} t \ge 0 \right)
 \end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example
+
+  - Code:
+
+  Process 1:                     |      Process 2:
+                                 |
+      bit1 := false              |      bit2 := false
+      while true do              |      while true do
+  p1:   bit1 := true             |  q1:   bit2 := true
+  p2:   while bit2 do skip od    |  q2:   if bit1 then
+  p3:   <critical section>       |  q3:     bit2 := true
+        bit1 := false            |  q4:     while bit1 do skip od
+      od                         |          goto q1
+                                 |        fi
+                                 |  q5:   <critical section>
+                                 |        bit2 := false
+                                 |      od
+
+  - Property: Process 1 and Process 2 are never in their respective critical section at the same time.
+
+  - Petri net:
+
+\end{verbatim}
+
+\begin{center}
+  \includegraphics[width=10cm]{lamport}
+\end{center}
+
+\newpage
+
+\begin{verbatim}
+  - State constraints C:
+
+    Place equations:
+  
+    a     = 1 + t1 - t2
+    ^       ^   ^    ^
+    |       |   |    |
+    |       |   |    |
+    |       |   |    |
+    |       |   |   # of tokens taken from a
+    |       |   |    
+    |       |  # of tokens given to a
+    |       |
+    |      initial number of tokens in a
+    |
+    number of tokens in a
+
+    b     = 0 - t1 + t2
+    nbit2 = 0
+    
+    Non-negativity conditions:
+  
+    a     >= 0
+    b     >= 0
+    nbit2 >= 0
+
+  - Negated Property \neg P:
+
+    a + b >= 2
+\end{verbatim}
 
 \newpage
 
@@ -321,8 +267,47 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 \end{verbatim}
 
 \newpage
+
+\begin{verbatim}
+* Subprocedure TrapConditions:
+
+  Input:
+    (S, T, E, M0) : Petri net
+    A             : Satisfying assignment for C \cup { ~P }
+  Output:
+    C_\theta      : Trap conditions
+
+  Pseudocode:
+  
+\end{verbatim}
+\begin{align*}
+  C_\theta(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left( s \Rightarrow
+      \bigwedge_{(s, t) \in E} \bigvee_{(t, p) \in E} p
+    \right) \right) \land
+    \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
+    \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
+\end{align*}
+\begin{verbatim}
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  Pseudocode:
+
+\end{verbatim}
+\begin{align*}
+  & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)
+\end{align*}
+
+\newpage
+
 \begin{verbatim}
 * Example
+
   - State constraints C same as in the example for method Safety.
  
   - Property P:
@@ -398,42 +383,10 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   A(s)
 
   "At least one place in S is always marked"
-
-* Subprocedure TrapConditions:
-
-  Input:
-    (S, T, E, M0) : Petri net
-    A             : Satisfying assignment for C \cup { ~P }
-  Output:
-    C_\theta      : Trap conditions
-
-  Pseudocode:
-  
 \end{verbatim}
-\begin{align*}
-  C_\theta(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left( s \Rightarrow
-      \bigwedge_{(s, t) \in E} \bigvee_{(t, p) \in E} p
-    \right) \right) \land
-    \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
-    \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
-\end{align*}
-\begin{verbatim}
-
-* Subprocedure \Delta:
-
-  Input:
-    A_\theta      : Satisfying assignment for C_\theta
-  Output:
-    \delta        : Refinement constraint \delta
-
-  Pseudocode:
-
-\end{verbatim}
-\begin{align*}
-  & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)
-\end{align*}
 
 \newpage
+
 \section{Method Invariant}
 
 The method Invariant constructs an invariant \verb=I= for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
@@ -482,35 +435,56 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 \end{verbatim}
 
 \newpage
+
 \begin{verbatim}
-* Example:
+* Subprocedure \mathcal{C'}:
 
-  - Dual state constraints C':
+  Input:
+    N = (S, T, E, M0)  : Petri net
+    \neg P = (p_1,1 + ... + p_1,m_1 >= b_1 /\ p_2,1 + ... + p_2,m_2 >= b_2 /\
+              ... /\ p_n,1 + ... + p_n,m_n >= b_n ) : Negated property
+  Output:
+    C'            : Dual state constraints
 
-    0        >=    a  - b
-    0        >= (- a) + b
+Input:
+ N      = (S, T, E, M0)
+        = ( (a b nbit2 ) (t1 t2) (e1 ... en) (1 0 0) )
+\neg P  = ( a + b >= 2 )
 
-    a        <  2 * target_1
-
-    a        >= target_1
-    b        >= target_1
-    nbit2    >= 0
-    target_1 >= 0
-
-  - Model A':
-
-    a        = 1
-    b        = 1
-    nbit2    = 1
-    target_1 = 1
-    
-  - Invariant:
-
-    a + b + nbit2 <= 1
-
+Pseudocode:
 \end{verbatim}
 
+\begin{align*}
+  C'(N, \neg P) =& \left( \bigwedge_{t \in T} \left( 0 \ge
+                      \sum_{(t, s) \in E} s
+                    - \sum_{(s, t) \in E} s \right) \right) \land
+     \left( \sum_{s \in S} M_0(s) \cdot s <
+       \sum_{i=1}^n b_i \cdot target_i \right) \land \\
+     & \left( \bigwedge_{s \in S} \left ( s \ge 
+       \sum_{i : s \in \{ p_{i,1}, \ldots, p_{i,m_i} \} } target_i \right) \right) \land
+     \left( \bigwedge_{i=1}^n \left( target_i \ge 0 \right) \right)
+\end{align*}
+
+\begin{verbatim}
+* Subprocedure Inv:
+
+  Input:
+    N = (S, T, E, M0) : Petri net
+    A'                : Satisfying assignment for C'
+
+  Output:
+    I                 : Invariant
+
+  Pseudocode:
+\end{verbatim}
+
+\begin{align*}
+  I(N, A') =& \left( \sum_{s \in S} A'(s) \cdot s \le
+                     \sum_{s \in S} A'(s) \cdot M_0(s) \right)
+\end{align*}
+
 \newpage
+
 \begin{verbatim}
 * Derivation of invariant I for Petri net N that satisfies property P:
 
@@ -569,54 +543,37 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
 \end{verbatim}
 
 \newpage
-\begin{verbatim}
-* Subprocedure \mathcal{C'}:
-
-  Input:
-    N = (S, T, E, M0)  : Petri net
-    \neg P = (p_1,1 + ... + p_1,m_1 >= b_1 /\ p_2,1 + ... + p_2,m_2 >= b_2 /\
-              ... /\ p_n,1 + ... + p_n,m_n >= b_n ) : Negated property
-  Output:
-    C'            : Dual state constraints
-
-Input:
- N      = (S, T, E, M0)
-        = ( (a b nbit2 ) (t1 t2) (e1 ... en) (1 0 0) )
-\neg P  = ( a + b >= 2 )
-
-Pseudocode:
-\end{verbatim}
-
-\begin{align*}
-  C'(N, \neg P) =& \left( \bigwedge_{t \in T} \left( 0 \ge
-                      \sum_{(t, s) \in E} s
-                    - \sum_{(s, t) \in E} s \right) \right) \land
-     \left( \sum_{s \in S} M_0(s) \cdot s <
-       \sum_{i=1}^n b_i \cdot target_i \right) \land \\
-     & \left( \bigwedge_{s \in S} \left ( s \ge 
-       \sum_{i : s \in \{ p_{i,1}, \ldots, p_{i,m_i} \} } target_i \right) \right) \land
-     \left( \bigwedge_{i=1}^n \left( target_i \ge 0 \right) \right)
-\end{align*}
 
 \begin{verbatim}
-* Subprocedure Inv:
+* Example:
 
-  Input:
-    N = (S, T, E, M0) : Petri net
-    A'                : Satisfying assignment for C'
+  - Dual state constraints C':
 
-  Output:
-    I                 : Invariant
+    0        >=    a  - b
+    0        >= (- a) + b
 
-  Pseudocode:
+    a        <  2 * target_1
+
+    a        >= target_1
+    b        >= target_1
+    nbit2    >= 0
+    target_1 >= 0
+
+  - Model A':
+
+    a        = 1
+    b        = 1
+    nbit2    = 1
+    target_1 = 1
+    
+  - Invariant:
+
+    a + b + nbit2 <= 1
+
 \end{verbatim}
-
-\begin{align*}
-  I(N, A') =& \left( \sum_{s \in S} A'(s) \cdot s \le
-                     \sum_{s \in S} A'(s) \cdot M_0(s) \right)
-\end{align*}
 
 \newpage
+
 \section{Method Invariant with Minimization}
 
 The method Invariant with Minimization constructs an invariant \verb=I=
@@ -667,8 +624,34 @@ that uses a minimal number of places for given Petri net \verb=N= and
 \end{verbatim}
 
 \newpage
+
+\begin{verbatim}
+* Subprocedures \mathcal{C'} and Inv are the same as in Method Invariant
+
+* Subprocedure \text{MinConstraints}:
+
+  Input:
+    N = (S, T, E, M0)  : Petri net
+    A'                 : Satisfying assignment for C'
+  Output:
+    C_M                : Minimization Constraints
+
+  Pseudocode:
+
+\end{verbatim}
+
+\begin{align*}
+  C_M(N, A') =& \left( \bigwedge_{s \in S} \left(
+      (s > 0 \Rightarrow b_s = 1) \land (s = 0 \Rightarrow b_s = 0)
+    \right) \right) \land
+    \left( \sum_{s \in S} b_s < \sum_{s \in S : A'(s) > 0} 1 \right)
+\end{align*}
+
+\newpage
+
 \begin{verbatim}
 * Example:
+
   - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant
 
   - Minimization constraints C_M:
@@ -710,29 +693,8 @@ that uses a minimal number of places for given Petri net \verb=N= and
   - Minimized Invariant:
 
     a + b <= 1
-    
-* Subprocedures \mathcal{C'} and Inv are the same as
-  in Method Invariant
-
-* Subprocedure \text{MinConstraints}:
-
-  Input:
-    N = (S, T, E, M0)  : Petri net
-    A'                 : Satisfying assignment for C'
-  Output:
-    C_M                : Minimization Constraints
-
-  Pseudocode:
-
 \end{verbatim}
-
-\begin{align*}
-  C_M(N, A') =& \left( \bigwedge_{s \in S} \left(
-      (s > 0 \Rightarrow b_s = 1) \land (s = 0 \Rightarrow b_s = 0)
-    \right) \right) \land
-    \left( \sum_{s \in S} b_s < \sum_{s \in S : A'(s) > 0} 1 \right)
-\end{align*}
-
+    
 \newpage
 
 \section{Method Invariant by Refinement}
@@ -786,6 +748,14 @@ that uses a minimal number of places for given Petri net \verb=N= and
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 
+\begin{verbatim}
+* Subprocedures TrapConditions and \Delta are the same as
+  in Method Safety by Refinement
+
+* Subprocedures \mathcal{C'} and Inv are the same as
+  in Method Invariant
+\end{verbatim}
+
 \newpage
 
 \begin{verbatim}
@@ -818,106 +788,11 @@ that uses a minimal number of places for given Petri net \verb=N= and
 
     a     + nbit2 >= 1
     a + b + nbit2 <= 1
-
-* Subprocedures TrapConditions and \Delta are the same as
-  in Method Safety by Refinement
-
-* Subprocedures \mathcal{C'} and Inv are the same as
-  in Method Invariant
-
 \end{verbatim}
 
-
-\iffalse
-
-\newpage
-\section{Benchmarks of \bfc}
-
-We experimented on the benchmarks \ttt{cprover-PN} and
-\ttt{cprover\_software\_analysis} available at \\
-\ttt{http://www.mpi-sws.org/\~{}jkloos/iic-experiments/cprover.zip}.
-The set of benchmarks consists 77 benchmarks, 26 positive and 51 negative.
-Table~\ref{bfc-experiments} shows the corresponding experimental results.
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | p{7cm} | r | r | r | r | } %
-    \hline
-    Method & pos & neg & don't know & TO \\
-    \hline
-    Safety (over real numbers or naturals)      & 23 &  0 & 54 &  0 \\
-    Invariant \& Invariant with Minimization    & 23 &  0 & 54 &  0 \\
-    Safety by Refinement                        & 23 &  0 & 54 &  0 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \bfc}
-\label{bfc-experiments}
-\end{table}
-
-\section{Benchmarks of \mist}
-
-We experimented on the benchmarks available at \\
-\ttt{https://github.com/pierreganty/mist/tree/master/examples/boundedPN}
-and \\
-\ttt{https://github.com/pierreganty/mist/tree/master/examples/PN}.
-The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
-Table~\ref{mist-experiments} shows the corresponding experimental results.
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | p{6cm} | r | r | r | r | }
-    \hline
-    Method & pos & neg & don't know & TO \\
-    \hline
-    Safety (over real numbers or naturals)      & 14 &  0 & 13 &  0 \\
-    Invariant \& Invariant with Minimization    & 14 &  0 & 13 &  0 \\
-    Safety by Refinement                        & 20 &  0 &  7 &  0 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \mist}
-\label{mist-experiments}
-\end{table}
-
-\section{Benchmarks of \iic}
-
-We experimented on the benchmarks available at \\
-\ttt{https://svn.rse.mpi-sws.org/RSE/IC3forWSTS/code/trunk/examples/soter}.
-The set of benchmarks consists 38 benchmarks, 28 positive and 10 negative.
-Table~\ref{iic-experiments} shows the corresponding experimental results.
-
-\begin{table}[h]
-\begin{center}
-  \begin{tabular}{ | p{6cm} | r | r | r | r | }
-    \hline
-    Method & pos & neg & don't know & TO \\
-    \hline
-    Safety (over real numbers or naturals)      & 2 & 0 & 36 & 0 \\
-    Invariant \& Invariant with Minimization    & 2 & 0 & 26 & 0 \\
-    Safety by Refinement                        & 2 & 0 & 36 & 0 \\
-    \hline
-  \end{tabular}
-\end{center}
-\caption{Experimental results for the benchmarks of \iic}
-\label{iic-experiments}
-\end{table}
-
-We constructed the following two invariants by applying the method
-Invariant with Minimization.
-
-\begin{itemize}
-\item \verb?firewall__no_pred_called_with_zero__depth_1__fixed?: \verb?(assert (<= l739 0))?
-\item \verb?firewall__no_pred_called_with_zero__depth_2__fixed?: \verb?(assert (<= l3849 0))?
-\end{itemize}
-
-\iic\ constructs the following two invariants.
-
-\begin{itemize}
-\item \verb=firewall__no_pred_called_with_zero__depth_1__fixed.spec=: \verb=(l739 < 1)=
-\item \verb=firewall__no_pred_called_with_zero__depth_2__fixed.spec=: \verb=(l3849 < 1)=
-\end{itemize}
-
-\fi
+\input{sec_experiments}
+\bibliographystyle{abbrv}
+\bibliography{references}
 
 \end{document}
+
