@@ -1,0 +1,12 @@
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $C := \mathcal C(N)$
+    \If {SAT$(C \cup \{\neg P\})$}
+    \State \Return 'The petri net may not satisfy the property'
+    \Else
+    \State \Return 'The petri net satisfies the property!'
+    \EndIf
+  \end{algorithmic}
+  \caption{Pseudocode for Method Safety}
+  \label{fig:method-safety-pseudocode}
+\end{figure}

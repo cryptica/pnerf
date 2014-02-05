@@ -1,0 +1,15 @@
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $C' := \mathcal C'(N, \neg P)$
+    \If {SAT$(C')$}
+    \State $A' := $Model$(C')$
+    \State $I := $Inv$(N, A')$
+    \State \Return 'Invariant I for the petri net: $I$'
+    \Else
+    \State \Return 'Failed at finding an invariant'
+    \EndIf
+  \end{algorithmic}
+  \caption{Pseudocode for Method Invariant}
+  \label{fig:method-invariant-pseudocode}
+\end{figure}
+

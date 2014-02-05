@@ -1,0 +1,48 @@
+\begin{figure}
+  \begin{tikzpicture}[
+    every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
+    ]
+    \node[state] (begin) {BEGIN};
+    \node[action, below=of begin] (c) {$C:=\mathcal C(N)$\\
+      $D:=\{\}$};
+    \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+    \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+      $C_{\theta}:=\text{TrapConditions}(N, A)$};
+    \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+    \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+      $\delta:=\Delta(A_\theta)$\\
+      $C:=C \cup \{\delta\}$\\
+      $D:=D \cup \{\delta\}$};
+    \node[print, right=of satctheta] (noinv2) {No Invariant};
+    \node[state, below=of noinv2] (end3) {END};
+    
+    \node[action, right=of satc] (cprime) {$C':=\mathcal C'(N, \neg P \land D)$};
+    \node[decision, right=of cprime] (satcprime) {$\text{SAT}(C')$};
+    \node[action, below=of satcprime] (inv) {$A':=\text{Model}(C')$\\
+      $I:=D \land \text{Inv}(N, A')$};
+    \node[print, below=of inv] (printinv) {Invariant: $I$};
+    \node[print, right=of satcprime] (noinv) {No Invariant};
+    \node[state, below=of noinv] (end1) {END};
+    \node[state, below=of printinv] (end2) {END};
+    
+    \draw (cprime) edge (satcprime);
+    \draw (satcprime) edge node[above]{NO} (noinv);
+    \draw (satcprime) edge node[right]{YES} (inv);
+    \draw (inv) edge (printinv);
+    \draw (noinv) edge (end1);
+    \draw (printinv) edge (end2);
+    
+    \draw (begin) edge (c);
+    \draw (c) edge coordinate[pos=.5] (edgein) (satc);
+    \draw (satc) edge node[above]{NO} (cprime);
+    \draw (satc) edge node[right]{YES} (modelc);
+    \draw (modelc) edge (satctheta);
+    \draw (satctheta) edge node[above]{NO} (noinv2);
+    \draw (noinv2) edge (end3);
+    \draw (satctheta) edge node[right]{YES} (modelctheta);
+    \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+    -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+  \end{tikzpicture}
+  \caption{Diagram for Method Invariant by Refinement}
+  \label{fig:method-invariant-by-refinement-diagram}
+\end{figure}
