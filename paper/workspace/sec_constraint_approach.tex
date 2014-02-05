@@ -76,6 +76,11 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
   - Property 2: Process 1 is in at most one state at a time
 
   - Property 2: p1 + p2 + p3 <= 1
+  
+  - Property 3: Variable bit1 is either true or false
+
+  - Property 3: bit1 + nbit1 = 1, alternatively written as
+                bit1 + nbit1 <= 1 /\ bit1 + nbit1 >= 1
 
   - Petri net:
 
@@ -130,11 +135,26 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
     q5    >= 0
     nbit2 >= 0
 
-  - Using property 2
-  
-  - Negated property 2 \neg P:
+  - Using property 1, with negated property \neg P:
+
+    p3 + q5 >= 2
+
+    The constraints are satisfiable, therefore we can not
+    prove safety with this method.
+
+  - Using property 2, with negated property \neg P:
 
     p1 + p2 + p3 >= 2
+    
+    The constraints are unsatisfiable, therefore we
+    prove safety with this method.
+  
+  - Using property 3, with negated property \neg P:
+
+    nbit1 + nbit1 <= 0 \/ nbit1 + nbit1 >= 2
+    
+    The constraints are unsatisfiable, therefore we
+    prove safety with this method.
 \end{verbatim}
 
 \newpage
@@ -211,9 +231,7 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
   - State constraints C same as in the example for method Safety.
   
-  - Using property 1
-  
-  - Negated property 1 \neg P:
+  - Using property 1, with negated property 1 \neg P:
 
     p3 + q5 >= 2
  

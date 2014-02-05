@@ -4,7 +4,7 @@ The method Invariant constructs an invariant \verb=I= for given Petri
 net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
 
 \begin{verbatim}
-* Code, property, and Petri net: same as in section Method Safety.
+* Code and Petri net: same as in section Method Safety.
 \end{verbatim}
 
 \begin{verbatim}
@@ -39,11 +39,6 @@ net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
               ... /\ p_n,1 + ... + p_n,m_n >= b_n ) : Negated property
   Output:
     C'            : Dual state constraints
-
-Input:
- N      = (S, T, E, M0)
-        = ( (a b nbit2 ) (t1 t2) (e1 ... en) (1 0 0) )
-\neg P  = ( a + b >= 2 )
 
 Pseudocode:
 \end{verbatim}
@@ -145,9 +140,9 @@ Pseudocode:
 
   - Dual state constraints C':
 
-    0 >= - p1 + p2      + bit1 - nbit2
+    0 >= - p1 + p2      + bit1 - nbit1
     0 >=      - p2 + p3
-    0 >= + p1      - p3 - bit1 + nbit2
+    0 >= + p1      - p3 - bit1 + nbit1
 
     0 >= - q1 + q2                - nbit2
     0 >=      - q2 + q3
@@ -156,7 +151,7 @@ Pseudocode:
     0 >=      - q2           + q5
     0 >= + q1                - q5 + nbit2
 
-    p1 + q1 + nb1 + nb2 < 2 * target_1
+    p1 + q1 + nbit1 + nbit2 < 2 * target_1
 
     p1    >= target_1
     p2    >= target_1
@@ -247,7 +242,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
 \begin{verbatim}
 * Example:
 
-  - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant
+  - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant with property 2
 
   - Minimization constraints C_M:
 
@@ -373,7 +368,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
     0 >=      - q2           + q5
     0 >= + q1                - q5 + nbit2
 
-    p1 + q1 + nb1 + nb2 < 2 * target_1 + trap_1
+    p1 + q1 + nbit1 + nbit2 < 2 * target_1 + trap_1
 
     p1    >= 0
     p2    >= trap_1
