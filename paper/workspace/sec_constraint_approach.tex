@@ -1,0 +1,308 @@
+\section{Method Safety}
+
+The method Safety checks that a given Petri net \verb=N= never violates a property \verb=P=.
+We present the method Safety by example on Lamport's 1-bit algorithm [Esparza1997].
+
+\begin{verbatim}
+* Method Safety:
+
+  Subprocedure \mathcal{C} constructs state constraints C corresponding to N.
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety}}{}
+
+\input{fig_method_safety}
+
+\begin{verbatim}
+* Property of state constraints C: If C U {\neg P} is unsat then N |= P.
+
+* Place equation:
+  
+  For a given place s the place equation is
+
+  # of tokens in s = initial number of tokens of place s
+                     + # times each input transition of s fires
+                     - # times each output transition of s fires
+
+* Non-negativity conditions:
+
+  # of tokens in place s           >= 0
+  # of times transition t is fired >= 0
+
+* Subprocedure \mathcal{C}:
+
+  Input:
+    (S, T, E, M0) : Petri net
+  Output:
+    C : State constraints
+
+  Pseudocode:
+
+\end{verbatim}
+
+\begin{align*}
+  C(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left(
+    s = M_0(s) + \sum_{(t, s) \in E} t - \sum_{(s, t) \in E} t
+  \right) \right) \land
+    \left( \bigwedge_{s \in S} s \ge 0 \right) \land
+    \left( \bigwedge_{t \in T} t \ge 0 \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example
+
+  - Code:
+
+  Process 1:                     |      Process 2:
+                                 |
+      bit1 := false              |      bit2 := false
+      while true do              |      while true do
+  p1:   bit1 := true             |  q1:   bit2 := true
+  p2:   while bit2 do skip od    |  q2:   if bit1 then
+  p3:   <critical section>       |  q3:     bit2 := true
+        bit1 := false            |  q4:     while bit1 do skip od
+      od                         |          goto q1
+                                 |        fi
+                                 |  q5:   <critical section>
+                                 |        bit2 := false
+                                 |      od
+
+  - Property 1: Process 1 and Process 2 are never in their respective critical section at the same time.
+
+  - Property 1: p3 + q5 <= 1
+
+  - Property 2: Process 1 is in at most one state at a time
+
+  - Property 2: p1 + p2 + p3 <= 1
+
+  - Petri net:
+
+\end{verbatim}
+
+\input{fig_lamport_net}
+
+\newpage
+
+\begin{verbatim}
+  - State constraints C:
+
+    Place equations:
+  
+
+
+    p1    = 1 - s1      + s3
+    ^       ^   ^         ^
+    |       |   |         |
+    |       |   |         |
+    |       |   |         |
+    |       |   |        # of tokens given to p1
+    |       |   |    
+    |       |  # of tokens taken from p1
+    |       |
+    |      initial number of tokens in p1
+    |
+    number of tokens in p1
+
+    p2    = 0 + s1 - s2
+    p3    = 0      + s2 - s3
+    bit1  = 0 + s1      - s3
+    nbit1 = 1 - s1      + s3
+    q1    = 1 +              - t1           + t4      + t6
+    q2    = 0 +              + t1 - t2           - t5
+    q3    = 0 +                   + t2 - t3
+    q4    = 0 +                        + t3 - t4
+    q5    = 0 +                                  + t5 - t6
+    nbit2 = 1 +              - t1      + t3           + t6
+    
+    Non-negativity conditions:
+  
+    p1    >= 0
+    p2    >= 0
+    p3    >= 0
+    bit1  >= 0
+    nbit1 >= 0
+    q1    >= 0
+    q2    >= 0
+    q3    >= 0
+    q4    >= 0
+    q5    >= 0
+    nbit2 >= 0
+
+  - Using property 2
+  
+  - Negated property 2 \neg P:
+
+    p1 + p2 + p3 >= 2
+\end{verbatim}
+
+\newpage
+
+\section{Method Safety by Refinement}
+
+The method Safety by Refinement applies trap conditions to check that a given Petri net \verb=N= never violates a property \verb=P=.
+
+\begin{verbatim}
+* Method Safety by Refinement:
+
+  Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
+  Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety_by_refinement}}{}
+
+\input{fig_method_safety_by_refinement}
+
+\begin{verbatim}
+* Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
+  1. S is a trap in the net N
+  2. S is marked in the initial marking M0
+  3. S is unmarked in the assignment A
+
+* Property of A_\theta: for each place s, A_\theta(s) iff s \in S
+
+* Property of refinement constraint \delta: Constraint \delta refines the abstraction, i.e.
+  1. A ^ \delta is unsat (\delta excludes A)
+  2. N |= \delta is sat  (\delta is a property of N)
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Subprocedure TrapConditions:
+
+  Input:
+    (S, T, E, M0) : Petri net
+    A             : Satisfying assignment for C \cup { ~P }
+  Output:
+    C_\theta      : Trap conditions
+
+  Pseudocode:
+  
+\end{verbatim}
+\begin{align*}
+  C_\theta(S, T, E, M_0) :=& \left( \bigwedge_{s \in S} \left( s \Rightarrow
+      \bigwedge_{(s, t) \in E} \bigvee_{(t, p) \in E} p
+    \right) \right) \land
+    \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
+    \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
+\end{align*}
+\begin{verbatim}
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  Pseudocode:
+
+\end{verbatim}
+\begin{align*}
+  & \delta(A_\theta) := \left( \sum_{A_\theta(s)} s \ge 0 \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example
+
+  - State constraints C same as in the example for method Safety.
+  
+  - Using property 1
+  
+  - Negated property 1 \neg P:
+
+    p3 + q5 >= 2
+ 
+  - Assignment A:
+    p1    = 0
+    p2    = 0
+    p3    = 1
+    bit1  = 1
+    nbit1 = 0
+    q1    = 0
+    q2    = 0
+    q3    = 0
+    q4    = 0
+    q5    = 1
+    nbit2 = 0
+
+  - Trap conditions C_\theta:
+
+    - Trap implications:
+                s1
+             ----------
+    p1    => p2 \/ bit1
+    ^           ^      ^
+    |           |      |
+    |           |     bit1 \in S
+    |           |
+    |          p2 \in S
+    |
+    p1 \in S
+    
+    p2    => p3 \/ nbit2
+    p3    => p1 \/ nbit1
+    bit1  => (p1 \/ nbit1) /\ (q3 \/ bit1)
+    nbit1 => (p2 \/ bit1) /\ (q1 \/ nbit1) /\ (q5 \/ nbit1)
+    q1    => q2
+    q2    => (q3 \/ bit1) /\ (q5 \/ nbit1)
+    q3    => q4 \/ nbit2
+    q4    => q1 \/ nbit1
+    q5    => q1 \/ nbit2
+    nbit2 => q2 /\ (p3 \/ nbit2)
+
+    - At least one of the initially marked places belongs to S:
+    p1 \/ q1 \/ nbit1 \/ nbit2
+
+    - None of the marked places in A belongs to S:
+    ~p3 /\ ~q5 /\ ~bit1
+  
+  - Assignment A_\theta:
+    p1    = false
+    p2    = true
+    p3    = false
+    bit1  = false
+    nbit1 = true
+    q1    = false
+    q2    = true
+    q3    = true
+    q4    = false
+    q5    = false
+    nbit2 = true
+
+  - Refinement constraint \delta:
+    p2 + q2 + q3 + nbit1 + nbit2 >= 1
+    ^    ^    ^    ^       ^
+    |    |    |    |       |
+    ------------------------
+      |
+      S = {p2, q2, q3, nbit1, nbit2}, therefore \delta excludes
+      assignment A in the next iteration
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+
+* Trap implication:
+
+  place s \in S =>    /\       \    /
+                     /  \       \  /     place p \in S
+                    /    \       \/
+                   t \in s*   p \in t*   
+
+
+  "if s is in trap S then for each output transition t at least one successor p is in trap S"
+
+
+* Refinement constraint \delta:
+
+  \Sigma s >= 1  
+  A(s)
+
+  "At least one place in S is always marked"
+\end{verbatim}
