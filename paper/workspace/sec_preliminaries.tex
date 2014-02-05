@@ -41,19 +41,15 @@ formulas. The property $P$ holds on a marking $M$ iff $M \models P$.
 Examples of properties are $s_1 \le 2$, $s_1 + s_2 \ge 1$ and
 $((s_1 \le 1) \land (s_2 \ge 1)) \lor (s_3 \le 1)$.
 
-A Petri net $P$ satisfies a property $P$ (denoted by $N \models P$)
+A Petri net $N$ satisfies a property $P$ (denoted by $N \models P$)
 iff for all reachable markings $M_0 \xrightarrow{\sigma} M$
 $M \models P$ holds.
 
+An invariant $I$ of a Petri net $N$ is a property such that $N$ satisfies $I$.
+The invariant $I$ is inductive iff for all markings
+$M$, if $M \models I$ and $M \xrightarrow{t} M'$ for some $t$, then
+$M' \models I$.
 
-\iffalse
-\begin{verbatim}
- Examples:
-  x + y < 0
-  x + y < 0 \\and x + z > 0
-  x + y < 0 \\or  x + z > 0
+A trap is a set of places $S \subseteq P$ such that $\post{S} \subseteq \pre{S}$.
+If a trap $S$ is marked in $M_0$, i.e. $\sum_{p \in S} M_0(p) > 0$, then it is also marked in all reachable markings.
 
- ~P = (x + y <  0 \\and x + z >  0) \\or  x + z >  0
-  P = (x + y >= 0 \\or  x + z <= 0) \\and x + z <= 0
-\end{verbatim}
-\fi
