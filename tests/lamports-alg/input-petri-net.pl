@@ -1,30 +1,30 @@
-place(cs1).
-place(idle1).
-place(nid1).
-place(req1).
-place(id1).
+place(p1).
+place(p2).
+place(p3).
+place(bit1).
+place(nbit1).
 
-place(cs2).
-place(idle2).
-place(req2).
-place(after_you2).
-place(await2).
-place(id2).
+place(q1).
+place(q2).
+place(q3).
+place(q4).
+place(q5).
+place(nbit2).
 
-transition(u1, [cs1, nid1], [idle1, id1]).
-transition(u2, [idle1, id1], [req1, nid1]).
-transition(u3, [req1, id2], [cs1, id2]).
+transition(s1, [p1,nbit1], [p2,bit1]).
+transition(s2, [p2,nbit2], [p3,nbit2]).
+transition(s3, [p3,bit1], [p1,nbit1]).
 
-transition(v1, [req2, nid1], [after_you2, nid1]).
-transition(v2, [after_you2], [id2, await2]).
-transition(v3, [id1, await2], [id1, idle2]).
-transition(v4, [req2, id1], [cs2, id1]).
-transition(v5, [cs2], [idle2, id2]).
-transition(v6, [idle2, id2], [req2]).
+transition(t1, [q1, nbit2], [q2]).
+transition(t2, [q2, bit1], [q3, bit1]).
+transition(t3, [q3], [q4, nbit2]).
+transition(t4, [q4, nbit1], [q1, nbit1]).
+transition(t5, [q2, nbit1], [q5, nbit1]).
+transition(t6, [q5], [q1, nbit2]).
 
-init(id1).
-init(id2).
-init(idle1).
-init(idle2).
+init(p1).
+init(q1).
+init(nbit1).
+init(nbit2).
 
-target(1, [([cs1,cs2],2)]).
+target(1, [([p3,q5],2)]).
