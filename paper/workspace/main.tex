@@ -203,40 +203,47 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
 
     Place equations:
   
-    a     = 1 + t1 - t2
-    ^       ^   ^    ^
-    |       |   |    |
-    |       |   |    |
-    |       |   |    |
-    |       |   |   # of tokens taken from a
+    p1    = 1 - s1      + s3
+    ^       ^   ^         ^
+    |       |   |         |
+    |       |   |         |
+    |       |   |         |
+    |       |   |        # of tokens given to p1
     |       |   |    
-    |       |  # of tokens given to a
+    |       |  # of tokens taken from p1
     |       |
-    |      initial number of tokens in a
+    |      initial number of tokens in p1
     |
-    number of tokens in a
+    number of tokens in p1
 
-    p1    = 1 + s3 + 
-    p2    = 0 + 
-    p3    = 
-    bit1  = 
-    nbit1 = 
-    q1    = 
-    q2    = 
-    q3    = 
-    q4    = 
-    q5    = 
-    nbit2 = 
+    p2    = 0 + s1 - s2
+    p3    = 0      + s2 - s3
+    bit1  = 0 + s1      - s3
+    nbit1 = 1 - s1      + s3
+    q1    = 1 +              - t1           + t4      + t6
+    q2    = 0 +              + t1 - t2           - t5
+    q3    = 0 +                   + t2 - t3
+    q4    = 0 +                        + t3 - t4
+    q5    = 0 +                                  + t5 - t6
+    nbit2 = 1 +              - t1      + t3           + t6
     
     Non-negativity conditions:
   
-    a     >= 0
-    b     >= 0
+    p1    >= 0
+    p2    >= 0
+    p3    >= 0
+    bit1  >= 0
+    nbit1 >= 0
+    q1    >= 0
+    q2    >= 0
+    q3    >= 0
+    q4    >= 0
+    q5    >= 0
     nbit2 >= 0
 
   - Negated Property \neg P:
 
-    a + b >= 2
+    p3 + q5 >= 2
 \end{verbatim}
 
 \newpage
@@ -365,56 +372,71 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
   - State constraints C same as in the example for method Safety.
  
-  - Property P:
-
-    b = 0 
-  
-  - Negated Property \neg P:
-    
-    b >= 1
-
   - Assignment A:
-    a     = 0
-    b     = 1
+    p1    = 0
+    p2    = 0
+    p3    = 1
+    bit1  = 1
+    nbit1 = 0
+    q1    = 0
+    q2    = 0
+    q3    = 0
+    q4    = 0
+    q5    = 0
     nbit2 = 0
-    t1    = 0
-    t2    = 1
 
   - Trap conditions C_\theta:
 
     - Trap implications:
-               t2
+                s1
              ----------
-    a     => b \/ nbit2
+    p1    => p2 \/ bit1
     ^           ^      ^
     |           |      |
-    |           |     nbit2 \in S
+    |           |     bit1 \in S
     |           |
-    |          b \in S
+    |          p2 \in S
     |
-    a \in S
+    p1 \in S
     
-    nbit2 => b \/ nbit2
-    b     => a
+    p2    => p3 \/ nbit2
+    p3    => p1 \/ nbit1
+    bit1  => (p1 \/ nbit1) /\ (q3 \/ bit1)
+    nbit1 => (p2 \/ bit1) /\ (q1 \/ nbit1) /\ (q5 \/ nbit1)
+    q1    => q2
+    q2    => (q3 \/ bit1) /\ (q5 \/ nbit1)
+    q3    => q4 \/ nbit2
+    q4    => q1 \/ nbit1
+    q5    => q1 \/ nbit2
+    nbit2 => q2 /\ (p3 \/ nbit2)
 
     - At least one of the initially marked places belongs to S:
-    a
+    p1 \/ q1 \/ nbit1 \/ nbit2
 
     - None of the marked places in A belongs to S:
-    ~b
+    ~p3 /\ ~q5 /\ ~bit1
   
   - Assignment A_\theta:
-    a     = true
-    b     = false
+    p1    = false
+    p2    = true
+    p3    = false
+    bit1  = false
+    nbit1 = true
+    q1    = false
+    q2    = true
+    q3    = true
+    q4    = false
+    q5    = false
     nbit2 = true
 
   - Refinement constraint \delta:
-    a + b >= 1
-    ^   ^
-    |   |
-    -----
+    p2 + q3 + q5 + nbit1 + nbit2 >= 1
+    ^    ^    ^    ^       ^
+    |    |    |    |       |
+    ------------------------
       |
-      S = {a, b}, therefore \delta excludes assignment A in the next iteration
+      S = {p2, q3, q5, nbit1, nbit2}, therefore \delta excludes
+      assignment A in the next iteration
 \end{verbatim}
 
 \newpage

@@ -49,8 +49,8 @@
   \draw (t4) edge[flow] (q1);
   
   \node[place, label=above:bit1] (bit1) at (2,6) {};
-  \node[place, label=below:$\neg$bit1] (nbit1) at (2,4) {};
-  \node[place, label=below:$\neg$bit2] (nbit2) at (2,2) {};
+  \node[place, tokens=1, label=below:$\neg$bit1] (nbit1) at (2,4) {};
+  \node[place, tokens=1, label=below:$\neg$bit2] (nbit2) at (2,2) {};
   
   \draw (bit1) edge[flow] (s3);
   \draw (s3) edge[flow] (nbit1);
