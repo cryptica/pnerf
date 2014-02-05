@@ -301,7 +301,7 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
     q2    = 0
     q3    = 0
     q4    = 0
-    q5    = 0
+    q5    = 1
     nbit2 = 0
 
   - Trap conditions C_\theta:
@@ -349,12 +349,12 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
     nbit2 = true
 
   - Refinement constraint \delta:
-    p2 + q3 + q5 + nbit1 + nbit2 >= 1
+    p2 + q2 + q3 + nbit1 + nbit2 >= 1
     ^    ^    ^    ^       ^
     |    |    |    |       |
     ------------------------
       |
-      S = {p2, q3, q5, nbit1, nbit2}, therefore \delta excludes
+      S = {p2, q2, q3, nbit1, nbit2}, therefore \delta excludes
       assignment A in the next iteration
 \end{verbatim}
 
@@ -665,6 +665,10 @@ that uses a minimal number of places for given Petri net \verb=N= and
     q2    = 0 => b_q2    = 0
     q3    > 0 => b_q3    = 1
     q3    = 0 => b_q3    = 0
+    q4    > 0 => b_q4    = 1
+    q4    = 0 => b_q4    = 0
+    q5    > 0 => b_q5    = 1
+    q5    = 0 => b_q5    = 0
     nbit2 > 0 => b_nbit2 = 1
     nbit2 = 0 => b_nbit2 = 0
 
@@ -691,6 +695,18 @@ that uses a minimal number of places for given Petri net \verb=N= and
     q5       = 0
     nbit2    = 0
     target_1 = 1
+    
+    b_p1     = 1
+    b_p2     = 1
+    b_p3     = 1
+    b_bit1   = 0
+    b_nbit1  = 0
+    b_q1     = 0
+    b_q2     = 0
+    b_q3     = 0
+    b_q4     = 0
+    b_q5     = 0
+    b_nbit2  = 0
     
     
   - Minimized Invariant:
@@ -731,29 +747,55 @@ that uses a minimal number of places for given Petri net \verb=N= and
   
   - Dual state constraints C':
 
-    0        >=    a  - b
-    0        >= (- a) + b
+    0 >= - p1 + p2      + bit1 - nbit2
+    0 >=      - p2 + p3
+    0 >= + p1      - p3 - bit1 + nbit2
 
-    a        <  target_1 + trap_1
+    0 >= - q1 + q2                - nbit2
+    0 >=      - q2 + q3
+    0 >=           - q3 + q4      + nbit2
+    0 >= + q1           - q4
+    0 >=      - q2           + q5
+    0 >= + q1                - q5 + nbit2
 
-    a        >= trap_1
-    b        >= target_1
-    nbit2    >= trap_1
+    p1 + q1 + nb1 + nb2 < 2 * target_1 + trap_1
+
+    p1    >= 0
+    p2    >= trap_1
+    p3    >= target_1
+    bit1  >= 0
+    nbit1 >= trap_1
+    q1    >= 0
+    q2    >= trap_1
+    q3    >= trap_1
+    q4    >= 0
+    q5    >= target_1
+    nbit2 >= trap_1
+
     target_1 >= 0
     trap_1   >= 0
 
   - Model A':
 
-    a        = 1
-    b        = 1
+    p1       = 0
+    p2       = 1
+    p3       = 1
+    bit1     = 0
+    nbit1    = 1
+    q1       = 0
+    q2       = 1
+    q3       = 1
+    q4       = 0
+    q5       = 1
     nbit2    = 1
     target_1 = 1
     trap_1   = 1
     
   - Invariant:
 
-    a     + nbit2 >= 1
-    a + b + nbit2 <= 1
+    p2        q2 + q3      + nbit1 + nbit2 >= 1
+    p2 + p3 + q2 + q3 + q5 + nbit1 + nbit2 <= 2
+
 \end{verbatim}
 
 \input{sec_experiments}
