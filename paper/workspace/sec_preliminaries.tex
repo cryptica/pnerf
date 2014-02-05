@@ -1,26 +1,50 @@
 \section{Preliminaries}
 
+A \emph{Petri net} is a tuple $(P, T, F, M_0)$, where $P$ is the set of
+\emph{places}, $T$ is the set of \emph{transitions},
+$F \subseteq P\times T \cup T\times P$ is the \emph{flow relation}
+and $M_0$ is the initial marking.
+We identify $F$ with its characteristic function
+$P\times T \cup T\times P \to \{0, 1\}$.
 
-\begin{verbatim}
-* Petri net: definition
- N = (S, T, E, M0), where
-     S : places
-     T : transitions
-     E : edges
-     M0: initial marking
+For $x\in P\cup T$, the \emph{pre-set} is
+$\pre{x}=\{y\in P\cup T\mid (y,x) \in F\}$
+and the \emph{post-set} is $\post{x}=\{y\in P\cup T\mid (x,y) \in F\}$.
+The pre- and post-set of a subset of $P \cup T$ are the union of
+the pre and post-sets of its elements.
 
-* Marking: definition
+A \emph{marking} of a Petri net is a function $M\colon P \to \mathbb{N}$,
+which describes the number of tokens $M(p)$ that the marking puts in
+each place $p$.
 
-* Visual representation of Petri Nets: description, example
+Petri nets are represented graphically as follows: places and transitions
+are represented as circles and boxes, respectively. An element $(x,y)$
+of the flow relation is represented by an arc leading from $x$ to $y$.
+A token on a place $p$ is represented by a black dot in the circle
+corresponding to $p$.
 
-* Property P: safety property expressed over linear arithmetic formulas.
+A transition $t \in T$ is \emph{enabled at $M$} iff
+$\forall p \in \pre{t} \colon M(p) \ge F(p, t)$.
+If $t$ is enabled at $M$, then $t$ may \emph{fire} or \emph{occur},
+yielding a new marking $M'$ (denoted as $M \xrightarrow{t} M'$),
+where $M'(p) = M(p) + F(t,p) - F(p,t)$.
 
-* Linear arithmetic formula: examples
+A sequence of transitions, $\sigma = t_1 t_2 \ldots t_r$ is an
+$\emph{occurence sequence}$ of $N$ iff there exist markings
+$M_1, \ldots, M_r$ such that $M_0 \xrightarrow{t_1} M_1
+\xrightarrow{t_2} M_2 \ldots \xrightarrow{t_r} M_r$. The marking
+$M_r$ is said to be \emph{reachable} from $M_0$ by the occurence
+of $\sigma$ (denoted $M \xrightarrow{\sigma} M_r$).
 
-* N \models P: definition
+A property $P$ is a safety property expressed over linear arithmetic
+formulas. The property $P$ holds on a marking $M$ iff $M \models P$.
+Examples of properties are $s_1 \le 2$, $s_1 + s_2 \ge 1$ and
+$((s_1 \le 1) \land (s_2 \ge 1)) \lor (s_3 \le 1)$.
 
-* Whatever you believe should be defined for the paper.
-\end{verbatim}
+A Petri net $P$ satisfies a property $P$ (denoted by $N \models P$)
+iff for all reachable markings $M_0 \xrightarrow{\sigma} M$
+$M \models P$ holds.
+
 
 \iffalse
 \begin{verbatim}

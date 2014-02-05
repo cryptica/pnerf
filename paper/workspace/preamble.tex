@@ -1,5 +1,6 @@
 \usepackage{ifthen}
 \usepackage{mathtools} % Instead of amsmath
+\usepackage{amssymb}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{listings}
 \usepackage{graphicx}
@@ -15,6 +16,9 @@
 \newcommand{\safetyref}{{\bf Safety by Refinement}}
 
 \newcommand{\ttt}[1]{\texttt{#1}}
+
+\newcommand{\pre}[1]{\prescript{\bullet}{}{#1}}
+\newcommand{\post}[1]{#1^{\bullet}}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,shapes.multipart,shapes.geometric,
