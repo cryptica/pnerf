@@ -1,6 +1,6 @@
 \documentclass{llncs}
 
-\newcommand{\isDraft}{true}
+\newcommand{\isDraft}{false}
 
 \input{preamble}
 
@@ -83,7 +83,7 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
   Subprocedure \mathcal{C} constructs state constraints C corresponding to N.
 \end{verbatim}
 
-\input{fig_dia_method_safety}
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety}}{}
 
 \input{fig_method_safety}
 
@@ -224,7 +224,7 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
 \end{verbatim}
 
-\input{fig_dia_method_safety_by_refinement}
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety_by_refinement}}{}
 
 \input{fig_method_safety_by_refinement}
 
@@ -400,7 +400,7 @@ net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
   Subprocedure Inv constructs invariant I corresponding to N and A'.
 \end{verbatim}
 
-\input{fig_dia_method_invariant}
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant}}{}
 
 \input{fig_method_invariant}
 
@@ -594,7 +594,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
   Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
 \end{verbatim}
 
-\input{fig_dia_method_invariant_w_minimization}
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant_w_minimization}}{}
 
 \input{fig_method_invariant_w_minimization}
 
@@ -724,7 +724,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
 * Method Invariant by Refinement
 \end{verbatim}
 
-\input{fig_dia_method_invariant_by_refinement}
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant_by_refinement}}{}
 
 \input{fig_method_invariant_by_refinement}
 
