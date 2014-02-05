@@ -92,6 +92,7 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
   Subprocedure \mathcal{C} constructs state constraints C corresponding to N.
 \end{verbatim}
 
+\begin{figure}
 \begin{center}
   \begin{tikzpicture}
     \node[state] (begin) {BEGIN};
@@ -110,6 +111,22 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
     \draw (dontknow) edge (end2);
   \end{tikzpicture}
 \end{center}
+\caption{Diagram for Method Safety}
+\label{fig:method-safety-pseudocode}
+\end{figure}
+
+\begin{figure}
+\begin{algorithmic}[1]
+\State $C := \mathcal C(N)$
+\If {SAT$(C \cup \{\neg P\})$}
+  \State \Return 'The petri net may not satisfy the property'
+\Else
+  \State \Return 'The petri net satisfies the property!'
+\EndIf
+\end{algorithmic}
+\caption{Pseudocode for Method Safety}
+\label{fig:method-safety-pseudocode}
+\end{figure}
 
 \begin{verbatim}
 * Property of state constraints C: If C U {\neg P} is unsat then N |= P.
@@ -223,6 +240,8 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
   Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
 \end{verbatim}
+
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}
   \node[state] (begin) {BEGIN};
@@ -252,6 +271,29 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
 \end{center}
+\caption{Diagram for Method Safety by Refinement}
+\label{fig:method-safety-by-refinement-diagram}
+\end{figure}
+
+\begin{figure}
+\begin{algorithmic}[1]
+\State $C := \mathcal C(N)$
+\While {SAT$(C \cup \{\neg P\})$}
+  \State $A := $Model$(C \cup \{\neg P\})$
+  \State $C_\theta := $TrapConditions$(N, A)$
+  \If {SAT$(C_\theta)$}
+    \State $A_\theta := $Model$(C_\theta)$
+    \State $\delta := \Delta(A_\theta)$
+    \State $C := C \cup \{\delta\}$
+  \Else
+    \State \Return 'The petri net may not satisfy the property'
+  \EndIf
+\EndWhile
+\State \Return 'The petri net satisfies the property!'
+\end{algorithmic}
+\caption{Pseudocode for Method Safety by Refinement}
+\label{fig:method-safety-by-refinement-pseudocode}
+\end{figure}
 
 \begin{verbatim}
 * Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
@@ -403,6 +445,7 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
   Subprocedure Inv constructs invariant I corresponding to N and A'.
 \end{verbatim}
 
+\begin{figure}
 \begin{center}
   \begin{tikzpicture}
     \node[state] (begin) {BEGIN};
@@ -424,6 +467,24 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
     \draw (printinv) edge (end2);
   \end{tikzpicture}
 \end{center}
+\caption{Diagram for Method Invariant}
+\label{fig:method-invariant-diagram}
+\end{figure}
+
+\begin{figure}
+\begin{algorithmic}[1]
+\State $C' := \mathcal C'(N, \neg P)$
+\If {SAT$(C')$}
+  \State $A' := $Model$(C')$
+  \State $I := $Inv$(N, A')$
+  \State \Return 'Invariant I for the petri net: $I$'
+\Else
+  \State \Return 'Failed at finding an invariant'
+\EndIf
+\end{algorithmic}
+\caption{Pseudocode for Method Invariant}
+\label{fig:method-invariant-pseudocode}
+\end{figure}
 
 \begin{verbatim}
 * Property of dual state constraints C':  If C' is sat then N |= P.
@@ -588,10 +649,11 @@ that uses a minimal number of places for given Petri net \verb=N= and
   Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
 \end{verbatim}
 
+\begin{figure}
 \begin{center}
   \begin{tikzpicture}
     \node[state] (begin) {BEGIN};
-    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, P)$};
+    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, \neg P)$};
     \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
     \node[print, right=of satc] (noinv) {No Invariant};
     \node[action, below=of satc] (model1) {$A':=\text{Model}(C')$};
@@ -617,6 +679,29 @@ that uses a minimal number of places for given Petri net \verb=N= and
     \draw (printinv) edge (end2);
   \end{tikzpicture}
 \end{center}
+\caption{Diagram for Method Invariant with Minimization}
+\label{fig:method-invariant-with-minimization-diagram}
+\end{figure}
+
+\begin{figure}
+\begin{algorithmic}[1]
+\State $C' := \mathcal C'(N, \neg P)$
+\If {SAT$(C')$}
+  \State $A' := $Model$(C')$
+  \State $C_M := $MinConstraints$(N, A')$
+  \While {SAT$(C' \cup C_M)$}
+    \State $A' := $Model$(C' \cup C_M)$
+    \State $C_M := $MinConstraints$(N, A')$
+  \EndWhile
+  \State $I := $Inv$(N, A')$
+  \State \Return 'Invariant I for the petri net: $I$'
+\Else
+  \State \Return 'Failed at finding an invariant'
+\EndIf
+\end{algorithmic}
+\caption{Pseudocode for Method Invariant with Minimization}
+\label{fig:method-invariant-with-minimization-pseudocode}
+\end{figure}
 
 \begin{verbatim}
 * Property of minimization constraints C_M generated from A': 
@@ -705,6 +790,7 @@ that uses a minimal number of places for given Petri net \verb=N= and
 * Method Invariant by Refinement
 \end{verbatim}
 
+\begin{figure}
 \begin{tikzpicture}
   \node[state] (begin) {BEGIN};
   \node[action, below=of begin] (c) {$C:=\mathcal C(N)$\\
@@ -747,6 +833,37 @@ that uses a minimal number of places for given Petri net \verb=N= and
   \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
   -| ([xshift=-2cm] modelctheta.west) |- (edgein);
 \end{tikzpicture}
+\caption{Diagram for Method Invariant by Refinement}
+\label{fig:method-invariant-by-refinement-diagram}
+\end{figure}
+
+\begin{figure}
+\begin{algorithmic}[1]
+\State $C := \mathcal C(N)$
+\State $D := $true
+\While {SAT$(C \cup \{\neg P\})$}
+  \State $A := $Model$(C \cup \{\neg P\})$
+  \State $C_\theta := $TrapConditions$(N, A)$
+  \If {SAT$(C_\theta)$}
+    \State $A_\theta := $Model$(C_\theta)$
+    \State $\delta := \Delta(A_\theta)$
+    \State $C := C \cup \{\delta\}$
+    \State $D := D \land \delta$
+  \Else
+    \State \Return 'Failed at finding an invariant'
+  \EndIf
+\EndWhile
+\State $C' := \mathcal C'(N, \neg P \land D)$
+\If {SAT$(C')$}
+  \State $I := D \land $Inv$(N, A')$
+  \State \Return 'Invariant I for the petri net: $I$'
+\Else
+  \State \Return 'Failed at finding an invariant'
+\EndIf
+\end{algorithmic}
+\caption{Pseudocode for Method Invariant by Refinement}
+\label{fig:method-invariant-by-refinement-pseudocode}
+\end{figure}
 
 \begin{verbatim}
 * Subprocedures TrapConditions and \Delta are the same as
