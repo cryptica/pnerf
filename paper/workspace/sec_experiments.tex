@@ -1,1 +1,68 @@
 \section{Experiments}
+
+To evaluate the described methods, we implemented them in a tool called
+\emph{Petrinizer}. Petrinizer is essentially a set of Bash and Prolog scripts
+that mediate between the input, specified in the input format of
+MIST2\footnote{\url{https://github.com/pierreganty/mist}}, and the SMT
+solver Z3\footnote{\url{http://z3.codeplex.com/}} \cite{DeMouraTACAS08}. With
+the choice of Bash and Prolog over languages with bindings for Z3 API, we
+restricted Z3's full power. Indeed, by using Z3 as an external tool, we
+were not able to fully exploit the incremental nature of its linear arithmetic
+solver (TODO: cite appropriate papers). However, even the non-optimal
+implementation turned out to be robust and scalable, with the main advantage of
+being able to tackle problem instances that are out of reach for
+state-of-the-art coverability checkers.
+
+The evaluation of Petrinizer had three main goals. First, we wanted to compare
+its performance against state-of-the-art tools like MIST2, BFC
+and IIC (cite!). Second, as the method it
+implements is incomplete, we wanted to measure its rate of success on safe problem instances. As a
+subgoal, we wanted to investigate the usefulness and necessity of traps, as
+well as to what extent real arithmetic suffices over integer arithmetic in
+proving safety. And last, since the language of linear arithmetic, used by
+Petrinizer, allows for a more succint representation of formulas than the
+language used by IIC, we wanted to compare sizes of invariants the two tools produce.
+
+Inputs that were used in tests come from various sources (TODO: write a
+sentence to justify the variety).
+One source is the collection of Petri nets from the literature that is part of the MIST2 toolkit.
+The second source are Petri nets originating from the analysis of concurrent C
+programs that were used in the evaluation of BFC \cite{KaiserCONCUR12}. Then
+there are inputs originating from the provenance analysis of a medical and a
+bug-tracking system \cite{MajumdarSAS13}. Finally, we generated a set of Petri
+nets from Erlang programs, using an Erlang verification tool Soter
+\cite{DOsualdoSAS13}. (TODO: Acknowledge Emanuele D'Osualdo for help.)
+
+All experiments were performed on the identical machines, equipped with
+Intel Xeon 2.66 GHz CPUs and 48 GB of memory, running Linux 3.2.48.1 in 64-bit
+mode. Execution time was limited to 100,000 seconds (27 hours, 46 minutes and
+40 seconds), and memory to 2 GB.
+
+\subsection{Performance}
+
+Explain what we observe:
+\begin{itemize}
+  \item On small examples IIC mostly outperforms Petrinizer. Probably due
+    to a slower parser, setting up and invoking Z3.
+  \item On examples of a similar size, coming from the same source,
+    unlike with IIC, resource consumption is fairly uniform. (Medical examples.)
+  \item Petrinizer is able to handle some huge examples that are out of
+    scope for IIC.
+  \item There were no cases when IIC was able to finish, but Petrinizer ran
+    out of resources. As a matter of fact, Petrinizer finishes in all cases,
+    whereas other tools somethimes fail.
+\end{itemize}
+
+\emph{Invariant sizes.} Again, explain how we measure it. For IIC, we measure
+the number of non-null literals, the number of clauses, total length of
+the invariant in characters. For Petrinizer, we measure the number of
+non-null coefficients in the linear expressions and the total length of the
+invariant in characters. Argue why it makes sense to compare any of these
+quantities. Point out the difference in size with and without the invariant
+minimization.
+  
+\emph{Rate of success.} Point out that Petrinizer mostly successfully proves
+safety. Specifically, it proves safety in all of the safe Soter examples.
+Point out the cases where traps were actually useful, and potentially progress
+into some pseudo-philosophical discussion on what constitutes a good set of examples.
+
