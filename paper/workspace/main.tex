@@ -67,16 +67,7 @@
 }
 
 
-\section{Introduction}
-
-This paper makes the following contributions.
-\begin{itemize}
-\item An application of \zthree\ to the constraint approach and its
-  corresponding evaluation.
-\item A method that given a network and a property constructs a
-  minimal invariant.
-\end{itemize}
-
+\input{sec_introduction}
 \input{sec_illustration}
 \input{sec_preliminaries}
 
@@ -92,43 +83,9 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
   Subprocedure \mathcal{C} constructs state constraints C corresponding to N.
 \end{verbatim}
 
-\begin{figure}
-\begin{center}
-  \begin{tikzpicture}[
-      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
-    ]
-    \node[state] (begin) {BEGIN};
-    \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
-    \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-    \node[print, right=of satc] (yes) {N satisfies P};
-    \node[print, below=of satc] (dontknow) {Don't know};
-    \node[state, right=of yes] (end1) {END};
-    \node[state, below=of dontknow] (end2) {END};
-    
-    \draw (begin) edge (c);
-    \draw (c) edge (satc);
-    \draw (satc) edge node[above]{NO} (yes);
-    \draw (yes) edge (end1);
-    \draw (satc) edge node[right]{YES} (dontknow);
-    \draw (dontknow) edge (end2);
-  \end{tikzpicture}
-\end{center}
-\caption{Diagram for Method Safety}
-\label{fig:method-safety-pseudocode}
-\end{figure}
+\input{fig_dia_method_safety}
 
-\begin{figure}
-\begin{algorithmic}[1]
-\State $C := \mathcal C(N)$
-\If {SAT$(C \cup \{\neg P\})$}
-  \State \Return 'The petri net may not satisfy the property'
-\Else
-  \State \Return 'The petri net satisfies the property!'
-\EndIf
-\end{algorithmic}
-\caption{Pseudocode for Method Safety}
-\label{fig:method-safety-pseudocode}
-\end{figure}
+\input{fig_method_safety}
 
 \begin{verbatim}
 * Property of state constraints C: If C U {\neg P} is unsat then N |= P.
@@ -203,6 +160,8 @@ We present the method Safety by example on Lamport's 1-bit algorithm [Esparza199
 
     Place equations:
   
+
+
     p1    = 1 - s1      + s3
     ^       ^   ^         ^
     |       |   |         |
@@ -259,61 +218,9 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
   Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
 \end{verbatim}
 
-\begin{figure}
-\begin{center}
-  \begin{tikzpicture}[
-      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
-    ]
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                               	$C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                    	$\delta:=\Delta(A_\theta)$\\
-                                    	$C:=C \cup \{\delta\}$};
-  \node[print, right=of satc] (yes) {N satisfies P};
-  \node[print, right=of satctheta] (dontknow) {Don't know};
-  \node[state, right=of yes] (end1) {END};
-  \node[state, right=of dontknow] (end2) {END};
+\input{fig_dia_method_safety_by_refinement}
 
-  \draw (begin) edge (c);
-  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge node[above]{NO} (yes);
-  \draw (yes) edge (end1);
-  \draw (satc) edge node[right]{YES} (modelc);
-  \draw (modelc) edge (satctheta);
-  \draw (satctheta) edge node[above]{NO} (dontknow);
-  \draw (dontknow) edge (end2);
-  \draw (satctheta) edge node[right]{YES} (modelctheta);
-  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-\end{center}
-\caption{Diagram for Method Safety by Refinement}
-\label{fig:method-safety-by-refinement-diagram}
-\end{figure}
-
-\begin{figure}
-\begin{algorithmic}[1]
-\State $C := \mathcal C(N)$
-\While {SAT$(C \cup \{\neg P\})$}
-  \State $A := $Model$(C \cup \{\neg P\})$
-  \State $C_\theta := $TrapConditions$(N, A)$
-  \If {SAT$(C_\theta)$}
-    \State $A_\theta := $Model$(C_\theta)$
-    \State $\delta := \Delta(A_\theta)$
-    \State $C := C \cup \{\delta\}$
-  \Else
-    \State \Return 'The petri net may not satisfy the property'
-  \EndIf
-\EndWhile
-\State \Return 'The petri net satisfies the property!'
-\end{algorithmic}
-\caption{Pseudocode for Method Safety by Refinement}
-\label{fig:method-safety-by-refinement-pseudocode}
-\end{figure}
+\input{fig_method_safety_by_refinement}
 
 \begin{verbatim}
 * Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
@@ -466,7 +373,8 @@ The method Safety by Refinement applies trap conditions to check that a given Pe
 
 \section{Method Invariant}
 
-The method Invariant constructs an invariant \verb=I= for given Petri net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
+The method Invariant constructs an invariant \verb=I= for given Petri
+net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
 
 \begin{verbatim}
 * Code, property, and Petri net: same as in section Method Safety.
@@ -480,48 +388,9 @@ The method Invariant constructs an invariant \verb=I= for given Petri net \verb=
   Subprocedure Inv constructs invariant I corresponding to N and A'.
 \end{verbatim}
 
-\begin{figure}
-\begin{center}
-  \begin{tikzpicture}[
-      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
-    ]
-    \node[state] (begin) {BEGIN};
-    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, \neg P)$};
-    \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
-    \node[print, right=of satc] (noinv) {No Invariant};
-    \node[action, below=of satc] (inv) {$A':=\text{Model}(C')$\\
-      $I := \text{Inv}(N, A')$};
-    \node[print, below=of inv] (printinv) {Invariant: $I$};
-    \node[state, right=of noinv] (end1) {END};
-    \node[state, below=of printinv] (end2) {END};
-    
-    \draw (begin) edge (c);
-    \draw (c) edge (satc);
-    \draw (satc) edge node[above]{NO} (noinv);
-    \draw (satc) edge node[right]{YES} (inv);
-    \draw (noinv) edge (end1);
-    \draw (inv) edge (printinv);
-    \draw (printinv) edge (end2);
-  \end{tikzpicture}
-\end{center}
-\caption{Diagram for Method Invariant}
-\label{fig:method-invariant-diagram}
-\end{figure}
+\input{fig_dia_method_invariant}
 
-\begin{figure}
-\begin{algorithmic}[1]
-\State $C' := \mathcal C'(N, \neg P)$
-\If {SAT$(C')$}
-  \State $A' := $Model$(C')$
-  \State $I := $Inv$(N, A')$
-  \State \Return 'Invariant I for the petri net: $I$'
-\Else
-  \State \Return 'Failed at finding an invariant'
-\EndIf
-\end{algorithmic}
-\caption{Pseudocode for Method Invariant}
-\label{fig:method-invariant-pseudocode}
-\end{figure}
+\input{fig_method_invariant}
 
 \begin{verbatim}
 * Property of dual state constraints C':  If C' is sat then N |= P.
@@ -686,61 +555,9 @@ that uses a minimal number of places for given Petri net \verb=N= and
   Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
 \end{verbatim}
 
-\begin{figure}
-\begin{center}
-  \begin{tikzpicture}[
-      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
-    ]
-    \node[state] (begin) {BEGIN};
-    \node[action, below=of begin] (c) {$C':=\mathcal C'(N, \neg P)$};
-    \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
-    \node[print, right=of satc] (noinv) {No Invariant};
-    \node[action, below=of satc] (model1) {$A':=\text{Model}(C')$};
-    \node[action, below=of model1] (cm) {$C_M:=\text{MinConstraints}(N, A')$};
-    \node[decision, below=of cm] (satcm) {$\text{SAT}(C' \cup C_M)$};
-    \node[action, right=of satcm] (model2) {$A':=\text{Model}(C' \cup C_M)$};
-    \node[action, below=of satcm] (inv) {$I := \text{Inv}(N, A')$};
-    \node[print, below=of inv] (printinv) {Invariant: $I$};
-    \node[state, right=of noinv] (end1) {END};
-    \node[state, below=of printinv] (end2) {END};
-    
-    \draw (begin) edge (c);
-    \draw (c) edge (satc);
-    \draw (satc) edge node[above]{NO} (noinv);
-    \draw (noinv) edge (end1);
-    \draw (satc) edge node[right]{YES} (model1);
-    \draw (model1) edge coordinate[pos=.5] (edgein) (cm);
-    \draw (cm) edge (satcm);
-    \draw (satcm) edge node[above]{YES} (model2);
-    \draw (model2) |- (edgein);
-    \draw (satcm) edge node[right]{NO} (inv);
-    \draw (inv) edge (printinv);
-    \draw (printinv) edge (end2);
-  \end{tikzpicture}
-\end{center}
-\caption{Diagram for Method Invariant with Minimization}
-\label{fig:method-invariant-with-minimization-diagram}
-\end{figure}
+\input{fig_dia_method_invariant_w_minimization}
 
-\begin{figure}
-\begin{algorithmic}[1]
-\State $C' := \mathcal C'(N, \neg P)$
-\If {SAT$(C')$}
-  \State $A' := $Model$(C')$
-  \State $C_M := $MinConstraints$(N, A')$
-  \While {SAT$(C' \cup C_M)$}
-    \State $A' := $Model$(C' \cup C_M)$
-    \State $C_M := $MinConstraints$(N, A')$
-  \EndWhile
-  \State $I := $Inv$(N, A')$
-  \State \Return 'Invariant I for the petri net: $I$'
-\Else
-  \State \Return 'Failed at finding an invariant'
-\EndIf
-\end{algorithmic}
-\caption{Pseudocode for Method Invariant with Minimization}
-\label{fig:method-invariant-with-minimization-pseudocode}
-\end{figure}
+\input{fig_method_invariant_w_minimization}
 
 \begin{verbatim}
 * Property of minimization constraints C_M generated from A': 
@@ -829,82 +646,9 @@ that uses a minimal number of places for given Petri net \verb=N= and
 * Method Invariant by Refinement
 \end{verbatim}
 
-\begin{figure}
-  \begin{tikzpicture}[
-      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
-    ]
-  \node[state] (begin) {BEGIN};
-  \node[action, below=of begin] (c) {$C:=\mathcal C(N)$\\
-                                        $D:=\{\}$};
-  \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
-  \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
-                                        $C_{\theta}:=\text{TrapConditions}(N, A)$};
-  \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
-  \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
-                                                $\delta:=\Delta(A_\theta)$\\
-                                                $C:=C \cup \{\delta\}$\\
-                                                $D:=D \cup \{\delta\}$};
-  \node[print, right=of satctheta] (noinv2) {No Invariant};
-  \node[state, below=of noinv2] (end3) {END};
-   
-  \node[action, right=of satc] (cprime) {$C':=\mathcal C'(N, \neg P \land D)$};
-  \node[decision, right=of cprime] (satcprime) {$\text{SAT}(C')$};
-  \node[action, below=of satcprime] (inv) {$A':=\text{Model}(C')$\\
-                                        $I:=D \land \text{Inv}(N, A')$};
-  \node[print, below=of inv] (printinv) {Invariant: $I$};
-  \node[print, right=of satcprime] (noinv) {No Invariant};
-  \node[state, below=of noinv] (end1) {END};
-  \node[state, below=of printinv] (end2) {END};
- 
-  \draw (cprime) edge (satcprime);
-  \draw (satcprime) edge node[above]{NO} (noinv);
-  \draw (satcprime) edge node[right]{YES} (inv);
-  \draw (inv) edge (printinv);
-  \draw (noinv) edge (end1);
-  \draw (printinv) edge (end2);
- 
-  \draw (begin) edge (c);
-  \draw (c) edge coordinate[pos=.5] (edgein) (satc);
-  \draw (satc) edge node[above]{NO} (cprime);
-  \draw (satc) edge node[right]{YES} (modelc);
-  \draw (modelc) edge (satctheta);
-  \draw (satctheta) edge node[above]{NO} (noinv2);
-  \draw (noinv2) edge (end3);
-  \draw (satctheta) edge node[right]{YES} (modelctheta);
-  \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
-  -| ([xshift=-2cm] modelctheta.west) |- (edgein);
-\end{tikzpicture}
-\caption{Diagram for Method Invariant by Refinement}
-\label{fig:method-invariant-by-refinement-diagram}
-\end{figure}
+\input{fig_dia_method_invariant_by_refinement}
 
-\begin{figure}
-\begin{algorithmic}[1]
-\State $C := \mathcal C(N)$
-\State $D := $true
-\While {SAT$(C \cup \{\neg P\})$}
-  \State $A := $Model$(C \cup \{\neg P\})$
-  \State $C_\theta := $TrapConditions$(N, A)$
-  \If {SAT$(C_\theta)$}
-    \State $A_\theta := $Model$(C_\theta)$
-    \State $\delta := \Delta(A_\theta)$
-    \State $C := C \cup \{\delta\}$
-    \State $D := D \land \delta$
-  \Else
-    \State \Return 'Failed at finding an invariant'
-  \EndIf
-\EndWhile
-\State $C' := \mathcal C'(N, \neg P \land D)$
-\If {SAT$(C')$}
-  \State $I := D \land $Inv$(N, A')$
-  \State \Return 'Invariant I for the petri net: $I$'
-\Else
-  \State \Return 'Failed at finding an invariant'
-\EndIf
-\end{algorithmic}
-\caption{Pseudocode for Method Invariant by Refinement}
-\label{fig:method-invariant-by-refinement-pseudocode}
-\end{figure}
+\input{fig_method_invariant_by_refinement}
 
 \begin{verbatim}
 * Subprocedures TrapConditions and \Delta are the same as

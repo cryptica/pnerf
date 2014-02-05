@@ -1,0 +1,35 @@
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[
+      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
+      ]
+      \node[state] (begin) {BEGIN};
+      \node[action, below=of begin] (c) {$C:=\mathcal C(N)$};
+      \node[decision, below=of c] (satc) {$\text{SAT}(C \cup \{\neg P\})$};
+      \node[action, below=of satc] (modelc) {$A:=\text{Model}(C \cup \{\neg P\})$\\
+        $C_{\theta}:=\text{TrapConditions}(N, A)$};
+      \node[decision, below=of modelc] (satctheta) {$\text{SAT}(C_\theta)$};
+      \node[action, below=of satctheta] (modelctheta) {$A_\theta:=\text{Model}(C_\theta)$\\
+        $\delta:=\Delta(A_\theta)$\\
+        $C:=C \cup \{\delta\}$};
+      \node[print, right=of satc] (yes) {N satisfies P};
+      \node[print, right=of satctheta] (dontknow) {Don't know};
+      \node[state, right=of yes] (end1) {END};
+      \node[state, right=of dontknow] (end2) {END};
+
+      \draw (begin) edge (c);
+      \draw (c) edge coordinate[pos=.5] (edgein) (satc);
+      \draw (satc) edge node[above]{NO} (yes);
+      \draw (yes) edge (end1);
+      \draw (satc) edge node[right]{YES} (modelc);
+      \draw (modelc) edge (satctheta);
+      \draw (satctheta) edge node[above]{NO} (dontknow);
+      \draw (dontknow) edge (end2);
+      \draw (satctheta) edge node[right]{YES} (modelctheta);
+      \draw (modelctheta.south) -- ([yshift=-0.5cm] modelctheta.south)
+      -| ([xshift=-2cm] modelctheta.west) |- (edgein);
+    \end{tikzpicture}
+  \end{center}
+  \caption{Diagram for Method Safety by Refinement}
+  \label{fig:method-safety-by-refinement-diagram}
+\end{figure}

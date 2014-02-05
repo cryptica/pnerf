@@ -1,0 +1,20 @@
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $C' := \mathcal C'(N, \neg P)$
+    \If {SAT$(C')$}
+    \State $A' := $Model$(C')$
+    \State $C_M := $MinConstraints$(N, A')$
+    \While {SAT$(C' \cup C_M)$}
+    \State $A' := $Model$(C' \cup C_M)$
+    \State $C_M := $MinConstraints$(N, A')$
+    \EndWhile
+    \State $I := $Inv$(N, A')$
+    \State \Return 'Invariant I for the petri net: $I$'
+    \Else
+    \State \Return 'Failed at finding an invariant'
+    \EndIf
+  \end{algorithmic}
+  \caption{Pseudocode for Method Invariant with Minimization}
+  \label{fig:method-invariant-with-minimization-pseudocode}
+\end{figure}
+

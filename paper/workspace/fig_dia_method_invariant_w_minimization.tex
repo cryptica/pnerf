@@ -1,0 +1,35 @@
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[
+      every path/.style={draw, ->, >=stealth, shorten >=2pt, shorten <=2pt}
+      ]
+      \node[state] (begin) {BEGIN};
+      \node[action, below=of begin] (c) {$C':=\mathcal C'(N, \neg P)$};
+      \node[decision, below=of c] (satc) {$\text{SAT}(C')$};
+      \node[print, right=of satc] (noinv) {No Invariant};
+      \node[action, below=of satc] (model1) {$A':=\text{Model}(C')$};
+      \node[action, below=of model1] (cm) {$C_M:=\text{MinConstraints}(N, A')$};
+      \node[decision, below=of cm] (satcm) {$\text{SAT}(C' \cup C_M)$};
+      \node[action, right=of satcm] (model2) {$A':=\text{Model}(C' \cup C_M)$};
+      \node[action, below=of satcm] (inv) {$I := \text{Inv}(N, A')$};
+      \node[print, below=of inv] (printinv) {Invariant: $I$};
+      \node[state, right=of noinv] (end1) {END};
+      \node[state, below=of printinv] (end2) {END};
+      
+      \draw (begin) edge (c);
+      \draw (c) edge (satc);
+      \draw (satc) edge node[above]{NO} (noinv);
+      \draw (noinv) edge (end1);
+      \draw (satc) edge node[right]{YES} (model1);
+      \draw (model1) edge coordinate[pos=.5] (edgein) (cm);
+      \draw (cm) edge (satcm);
+      \draw (satcm) edge node[above]{YES} (model2);
+      \draw (model2) |- (edgein);
+      \draw (satcm) edge node[right]{NO} (inv);
+      \draw (inv) edge (printinv);
+      \draw (printinv) edge (end2);
+    \end{tikzpicture}
+  \end{center}
+  \caption{Diagram for Method Invariant with Minimization}
+  \label{fig:method-invariant-with-minimization-diagram}
+\end{figure}

@@ -1,0 +1,28 @@
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $C := \mathcal C(N)$
+    \State $D := $true
+    \While {SAT$(C \cup \{\neg P\})$}
+    \State $A := $Model$(C \cup \{\neg P\})$
+    \State $C_\theta := $TrapConditions$(N, A)$
+    \If {SAT$(C_\theta)$}
+    \State $A_\theta := $Model$(C_\theta)$
+    \State $\delta := \Delta(A_\theta)$
+    \State $C := C \cup \{\delta\}$
+    \State $D := D \land \delta$
+    \Else
+    \State \Return 'Failed at finding an invariant'
+    \EndIf
+    \EndWhile
+    \State $C' := \mathcal C'(N, \neg P \land D)$
+    \If {SAT$(C')$}
+    \State $I := D \land $Inv$(N, A')$
+    \State \Return 'Invariant I for the petri net: $I$'
+    \Else
+    \State \Return 'Failed at finding an invariant'
+    \EndIf
+  \end{algorithmic}
+  \caption{Pseudocode for Method Invariant by Refinement}
+  \label{fig:method-invariant-by-refinement-pseudocode}
+\end{figure}
+
