@@ -1,0 +1,414 @@
+\section{Method Invariant}
+
+The method Invariant constructs an invariant \verb=I= for given Petri
+net \verb=N= and \verb=P= when \verb=N= never violates \verb=P=.
+
+\begin{verbatim}
+* Code, property, and Petri net: same as in section Method Safety.
+\end{verbatim}
+
+\begin{verbatim}
+* Method Invariant
+
+  Subprocedure \mathcal{C'} constructs dual state constraints C' corresponding to N and P.
+  Subprocedure Model returns assignment A such that A satisfies C'.
+  Subprocedure Inv constructs invariant I corresponding to N and A'.
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant}}{}
+
+\input{fig_method_invariant}
+
+\begin{verbatim}
+* Property of dual state constraints C':  If C' is sat then N |= P.
+
+* Property of invariant I:
+  - I is reachable: For each reachable marking M, I(M) is valid
+  - I is safe:      For markings that violate the property, I(M) is unsat
+  - I is inductive: For each marking M, if I(M) is valid and M -> M1 then I(M1) is valid
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Subprocedure \mathcal{C'}:
+
+  Input:
+    N = (S, T, E, M0)  : Petri net
+    \neg P = (p_1,1 + ... + p_1,m_1 >= b_1 /\ p_2,1 + ... + p_2,m_2 >= b_2 /\
+              ... /\ p_n,1 + ... + p_n,m_n >= b_n ) : Negated property
+  Output:
+    C'            : Dual state constraints
+
+Input:
+ N      = (S, T, E, M0)
+        = ( (a b nbit2 ) (t1 t2) (e1 ... en) (1 0 0) )
+\neg P  = ( a + b >= 2 )
+
+Pseudocode:
+\end{verbatim}
+
+\begin{align*}
+  C'(N, \neg P) =& \left( \bigwedge_{t \in T} \left( 0 \ge
+                      \sum_{(t, s) \in E} s
+                    - \sum_{(s, t) \in E} s \right) \right) \land
+     \left( \sum_{s \in S} M_0(s) \cdot s <
+       \sum_{i=1}^n b_i \cdot target_i \right) \land \\
+     & \left( \bigwedge_{s \in S} \left ( s \ge 
+       \sum_{i : s \in \{ p_{i,1}, \ldots, p_{i,m_i} \} } target_i \right) \right) \land
+     \left( \bigwedge_{i=1}^n \left( target_i \ge 0 \right) \right)
+\end{align*}
+
+\begin{verbatim}
+* Subprocedure Inv:
+
+  Input:
+    N = (S, T, E, M0) : Petri net
+    A'                : Satisfying assignment for C'
+
+  Output:
+    I                 : Invariant
+
+  Pseudocode:
+\end{verbatim}
+
+\begin{align*}
+  I(N, A') =& \left( \sum_{s \in S} A'(s) \cdot s \le
+                     \sum_{s \in S} A'(s) \cdot M_0(s) \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Derivation of invariant I for Petri net N that satisfies property P:
+
+  M                                    : marking          ~ places
+  C                                    : incidence matrix ~ rows correspond to places, columns correspond to transitions, relates places to transitions
+  X                                    : firing vector    ~ transitions
+
+  The following constraints C1 are unsat.
+  M = M0 + C*X                         : place equations
+  M >= 0                               : non-negativity conditions for places
+  X >= 0                               : non-negativity conditions for transitions
+  AM >= b                              : property P negated
+
+  Substitute M to obtain constraints C2.
+  A(M0 + CX) >= b                      : property P negated
+  M0 + CX >= 0                         : non-negativity conditions for places
+  X >= 0                               : non-negativity conditions for transitions
+
+  Rewrite each system to obtain constraints C3.
+  (-A*C)      (A*M0-b)                 : property P negated
+  (  -C)*X <= (  M0  )                 : non-negativity conditions for places
+  (  -I)      (   0  )                 : non-negativity conditions for transitions
+
+  Apply Farkas' Lemma to obtain constraints C4.
+  yT*(-A*C)                            : 
+     (  -C) = 0                        : 
+     (  -I)                            : 
+
+  yT*(A*M0-b)                          : 
+     (  M0  ) < 0                      : 
+     (   0  )                          : 
+
+  y >= 0                               : 
+
+  The constraints C4 are sat iff the following constraints C5 are sat.
+  y1 * A * C + y2 * C + y3 = 0         : 
+  y1 * (A*M - b) + y2 * M0 < 0         : 
+  y1 >= 0                              : 
+  y2 >= 0                              : 
+  y3 >= 0                              : 
+
+  The constraints C5 are sat iff the following constraints C6 are sat.
+  (y1 * A + y2) * C  <= 0              : 
+  (y1 * A + y2) * M0 < y1 * b          : 
+  y1 >= 0                              : 
+  y2 >= 0                              : 
+
+  The constraints C6 are sat iff the following constraints C' are sat.
+  \lambda * C  <= 0                    : inductivity constraint
+  \lambda * M0 < y1 * b                : safety constraint
+  \lambda >= y1 * A                    : property constraint
+  y1 >= 0                              : non-negativity constraint
+
+  For \lambda satisfying C' the invariant is the following.
+  I(M) = (\lambda * M <= \lambda * M0) : invariant
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Example:
+  
+  - Using property 2
+
+  - Dual state constraints C':
+
+    0 >= - p1 + p2      + bit1 - nbit2
+    0 >=      - p2 + p3
+    0 >= + p1      - p3 - bit1 + nbit2
+
+    0 >= - q1 + q2                - nbit2
+    0 >=      - q2 + q3
+    0 >=           - q3 + q4      + nbit2
+    0 >= + q1           - q4
+    0 >=      - q2           + q5
+    0 >= + q1                - q5 + nbit2
+
+    p1 + q1 + nb1 + nb2 < 2 * target_1
+
+    p1    >= target_1
+    p2    >= target_1
+    p3    >= target_1
+    bit1  >= 0
+    nbit1 >= 0
+    q1    >= 0
+    q2    >= 0
+    q3    >= 0
+    q4    >= 0
+    q5    >= 0
+    nbit2 >= 0
+
+    target_1 >= 0
+
+  - Model A':
+
+    p1       = 3
+    p2       = 2
+    p3       = 2
+    bit1     = 1
+    nbit1    = 0
+    q1       = 0
+    q2       = 0
+    q3       = 0
+    q4       = 0
+    q5       = 0
+    nbit2    = 0
+    target_1 = 2
+    
+  - Invariant:
+
+    3 * p1 + 2 * p2 + 2 * p3 + bit1 <= 3
+
+\end{verbatim}
+
+\newpage
+
+\section{Method Invariant with Minimization}
+
+The method Invariant with Minimization constructs an invariant \verb=I=
+that uses a minimal number of places for given Petri net \verb=N= and
+\verb=P= when \verb=N= never violates \verb=P=. 
+
+\begin{verbatim}
+* Code, property, and Petri net: same as in section Method Safety.
+
+* Method Invariant with Minimization
+
+  Subprocedure \text{MinConstraints} constructs minimization constraints C_M corresponding to N and A'
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant_w_minimization}}{}
+
+\input{fig_method_invariant_w_minimization}
+
+\begin{verbatim}
+* Property of minimization constraints C_M generated from A': 
+    If A'' satisfies C' u C_M, then Inv(N, A'') uses less places than Inv(N, A')
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Subprocedures \mathcal{C'} and Inv are the same as in Method Invariant
+
+* Subprocedure \text{MinConstraints}:
+
+  Input:
+    N = (S, T, E, M0)  : Petri net
+    A'                 : Satisfying assignment for C'
+  Output:
+    C_M                : Minimization Constraints
+
+  Pseudocode:
+
+\end{verbatim}
+
+\begin{align*}
+  C_M(N, A') =& \left( \bigwedge_{s \in S} \left(
+      (s > 0 \Rightarrow b_s = 1) \land (s = 0 \Rightarrow b_s = 0)
+    \right) \right) \land
+    \left( \sum_{s \in S} b_s < \sum_{s \in S : A'(s) > 0} 1 \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example:
+
+  - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant
+
+  - Minimization constraints C_M:
+
+    p1     > 0 => b_p1   = 1
+    |            -----------
+    |               |
+    |            place p1 appears in invariant
+    |
+    place p1 coefficient in the invariant
+
+    p1     = 0 => b_p1   = 0
+    |           ------------
+    |               |
+    |            place p1 does not appear in invariant
+    |
+    place p1 coefficient in the invariant
+
+    p2    > 0 => b_p2    = 1
+    p2    = 0 => b_p2    = 0
+    p3    > 0 => b_p3    = 1
+    p3    = 0 => b_p3    = 0
+    bit1  > 0 => b_bit1  = 1
+    bit1  = 0 => b_bit1  = 0
+    nbit1 > 0 => b_nbit1 = 1
+    nbit1 = 0 => b_nbit1 = 0
+
+    q1    > 0 => b_q1    = 1
+    q1    = 0 => b_q1    = 0
+    q2    > 0 => b_q2    = 1
+    q2    = 0 => b_q2    = 0
+    q3    > 0 => b_q3    = 1
+    q3    = 0 => b_q3    = 0
+    q4    > 0 => b_q4    = 1
+    q4    = 0 => b_q4    = 0
+    q5    > 0 => b_q5    = 1
+    q5    = 0 => b_q5    = 0
+    nbit2 > 0 => b_nbit2 = 1
+    nbit2 = 0 => b_nbit2 = 0
+
+    b_p1 + b_p2 + b_p3 + b_bit1 + b_nbit1 + b_q1 + b_q2 + b_q3 + b_q4 + b_q5
+         + b_nbit2 < 4
+    --------------   |
+                |    |
+                |    number of places appearing in current invariant for A'
+                |    = #{s | A'(s) > 0} = #{p1, p2, p3, bit1}
+                |
+  number of places appearing in new invariant
+  
+  - Model A' for C' \cup C_M:
+
+    p1       = 1
+    p2       = 1
+    p3       = 1
+    bit1     = 0
+    nbit1    = 0
+    q1       = 0
+    q2       = 0
+    q3       = 0
+    q4       = 0
+    q5       = 0
+    nbit2    = 0
+    target_1 = 1
+    
+    b_p1     = 1
+    b_p2     = 1
+    b_p3     = 1
+    b_bit1   = 0
+    b_nbit1  = 0
+    b_q1     = 0
+    b_q2     = 0
+    b_q3     = 0
+    b_q4     = 0
+    b_q5     = 0
+    b_nbit2  = 0
+    
+    
+  - Minimized Invariant:
+
+    p1 + p2 + p3 <= 1
+\end{verbatim}
+    
+\newpage
+
+\section{Method Invariant by Refinement}
+
+\begin{verbatim}
+* Code, property, and Petri net: same as in section Method Safety by Refinement.
+
+* Method Invariant by Refinement
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant_by_refinement}}{}
+
+\input{fig_method_invariant_by_refinement}
+
+\begin{verbatim}
+* Subprocedures TrapConditions and \Delta are the same as
+  in Method Safety by Refinement
+
+* Subprocedures \mathcal{C'} and Inv are the same as
+  in Method Invariant
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Example:
+
+  - Using property 1
+
+  - Trap constraints as in example from section Method Safety by Refinement.
+  
+  - Dual state constraints C':
+
+    0 >= - p1 + p2      + bit1 - nbit2
+    0 >=      - p2 + p3
+    0 >= + p1      - p3 - bit1 + nbit2
+
+    0 >= - q1 + q2                - nbit2
+    0 >=      - q2 + q3
+    0 >=           - q3 + q4      + nbit2
+    0 >= + q1           - q4
+    0 >=      - q2           + q5
+    0 >= + q1                - q5 + nbit2
+
+    p1 + q1 + nb1 + nb2 < 2 * target_1 + trap_1
+
+    p1    >= 0
+    p2    >= trap_1
+    p3    >= target_1
+    bit1  >= 0
+    nbit1 >= trap_1
+    q1    >= 0
+    q2    >= trap_1
+    q3    >= trap_1
+    q4    >= 0
+    q5    >= target_1
+    nbit2 >= trap_1
+
+    target_1 >= 0
+    trap_1   >= 0
+
+  - Model A':
+
+    p1       = 0
+    p2       = 1
+    p3       = 1
+    bit1     = 0
+    nbit1    = 1
+    q1       = 0
+    q2       = 1
+    q3       = 1
+    q4       = 0
+    q5       = 1
+    nbit2    = 1
+    target_1 = 1
+    trap_1   = 1
+    
+  - Invariant:
+
+    p2        q2 + q3      + nbit1 + nbit2 >= 1
+    p2 + p3 + q2 + q3 + q5 + nbit1 + nbit2 <= 2
+
+\end{verbatim}
