@@ -1,0 +1,91 @@
+\iffalse
+
+\newpage
+\section{Benchmarks of \bfc}
+
+We experimented on the benchmarks \ttt{cprover-PN} and
+\ttt{cprover\_software\_analysis} available at \\
+\ttt{http://www.mpi-sws.org/\~{}jkloos/iic-experiments/cprover.zip}.
+The set of benchmarks consists 77 benchmarks, 26 positive and 51 negative.
+Table~\ref{bfc-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | p{7cm} | r | r | r | r | } %
+    \hline
+    Method & pos & neg & don't know & TO \\
+    \hline
+    Safety (over real numbers or naturals)      & 23 &  0 & 54 &  0 \\
+    Invariant \& Invariant with Minimization    & 23 &  0 & 54 &  0 \\
+    Safety by Refinement                        & 23 &  0 & 54 &  0 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \bfc}
+\label{bfc-experiments}
+\end{table}
+
+\section{Benchmarks of \mist}
+
+We experimented on the benchmarks available at \\
+\ttt{https://github.com/pierreganty/mist/tree/master/examples/boundedPN}
+and \\
+\ttt{https://github.com/pierreganty/mist/tree/master/examples/PN}.
+The set of benchmarks consists 27 benchmarks, 23 positive and 4 negative.
+Table~\ref{mist-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | p{6cm} | r | r | r | r | }
+    \hline
+    Method & pos & neg & don't know & TO \\
+    \hline
+    Safety (over real numbers or naturals)      & 14 &  0 & 13 &  0 \\
+    Invariant \& Invariant with Minimization    & 14 &  0 & 13 &  0 \\
+    Safety by Refinement                        & 20 &  0 &  7 &  0 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \mist}
+\label{mist-experiments}
+\end{table}
+
+\section{Benchmarks of \iic}
+
+We experimented on the benchmarks available at \\
+\ttt{https://svn.rse.mpi-sws.org/RSE/IC3forWSTS/code/trunk/examples/soter}.
+The set of benchmarks consists 38 benchmarks, 28 positive and 10 negative.
+Table~\ref{iic-experiments} shows the corresponding experimental results.
+
+\begin{table}[h]
+\begin{center}
+  \begin{tabular}{ | p{6cm} | r | r | r | r | }
+    \hline
+    Method & pos & neg & don't know & TO \\
+    \hline
+    Safety (over real numbers or naturals)      & 2 & 0 & 36 & 0 \\
+    Invariant \& Invariant with Minimization    & 2 & 0 & 26 & 0 \\
+    Safety by Refinement                        & 2 & 0 & 36 & 0 \\
+    \hline
+  \end{tabular}
+\end{center}
+\caption{Experimental results for the benchmarks of \iic}
+\label{iic-experiments}
+\end{table}
+
+We constructed the following two invariants by applying the method
+Invariant with Minimization.
+
+\begin{itemize}
+\item \verb?firewall__no_pred_called_with_zero__depth_1__fixed?: \verb?(assert (<= l739 0))?
+\item \verb?firewall__no_pred_called_with_zero__depth_2__fixed?: \verb?(assert (<= l3849 0))?
+\end{itemize}
+
+\iic\ constructs the following two invariants.
+
+\begin{itemize}
+\item \verb=firewall__no_pred_called_with_zero__depth_1__fixed.spec=: \verb=(l739 < 1)=
+\item \verb=firewall__no_pred_called_with_zero__depth_2__fixed.spec=: \verb=(l3849 < 1)=
+\end{itemize}
+
+\fi
