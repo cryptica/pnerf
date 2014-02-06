@@ -1,0 +1,110 @@
+\documentclass{sigplanconf}
+\sloppy
+
+
+\usepackage{graphicx,pgf,tikz,tikz-qtree}
+\usepackage{macros,ar-alg}
+\usepackage{amsmath,amssymb,xspace}
+%\usepackage{mathabx} % provides \smalltriangleright
+\usepackage{color} % graphicx scaprs ams symbols and we don't use it anyway
+%\usepackage{extarrows}
+\usetikzlibrary{arrows,automata}
+\usepackage{ifthen}
+
+\newcommand{\isTechReport}{true} % true or false
+\newcommand{\includeProof}[1]{
+  \ifthenelse{\equal{\isTechReport}{true}}{
+    #1
+  }{
+  }
+}
+
+\begin{document}
+
+\conferenceinfo{POPL'11,} {January 26--28, 2011, Austin, Texas, USA.}
+\CopyrightYear{2011}
+\copyrightdata{978-1-4503-0490-0/11/01}
+
+\titlebanner{}        % These are ignored unless
+\preprintfooter{}   % 'preprint' option specified.
+
+%\title{Predicate Abstraction and Refinement with Horn Clauses for Verifying Multi-Threaded Programs}
+\title{Predicate Abstraction and Refinement for Verifying Multi-Threaded Programs}
+%\title{Constraint Based Iterative Inference of Auxiliary Variables 
+%  and Relies/Guarantees}
+%\title{Constrained Environment Inference for\\ 
+% Verification of Multi-Threaded Programs}
+%\title{Constraint Based Inference of Auxiliary Variables 
+%  and Relies/Guarantees for Verifying Multi-Threaded Programs}
+% \subtitle{Draft. Please don't distribute.}
+
+
+
+\authorinfo{Ashutosh Gupta \and Corneliu Popeea \and Andrey Rybalchenko}
+           {Institut f\"ur Informatik, Technische Universit\"at M\"unchen\\Germany}
+           {\{guptaa,popeea,rybal\}@in.tum.de}
+%\authorinfo{Corneliu Popeea}{\TUM}{}
+%\authorinfo{Andrey Rybalchenko}{\TUM}{}
+
+\maketitle
+
+\begin{abstract}
+  \input{abstract}
+\end{abstract}
+
+\category{D.2.4}{Software Engineering}{Software/Program Verification}
+\category{F.3.1}{Logics and Meanings of Programs}{Specifying and Verifying and Reasoning about Programs}
+\terms
+Algorithms, Languages, Reliability, Verification.
+\keywords
+Multi-threaded programs, safety, proof rule,
+modular reasoning, environment transitions, (transition) predicate
+abstraction, abstraction refinement, Horn clauses.
+
+\input{intro}
+\input{illustration}
+\input{prelim-symb}
+\input{proof-rule-symb}
+\input{algo-symb}
+\input{refinement}
+\input{horn-solving}
+\input{experiments}
+\input{related}
+%\input{conclusion}
+
+% TBD in final version
+\vspace{-0.3cm}
+\acks
+
+The first author was supported by the DFG Graduiertenkolleg 1480 (PUMA).
+We thank Byron Cook, Rusl\'an Ledesma Garza, and Peter O'Hearn for
+comments and suggestions.
+
+
+
+% We recommend abbrvnat bibliography style.
+
+
+\bibliographystyle{abbrvnat}
+
+% The bibliography should be embedded for final submission.
+\bibliography{biblio}
+\iffalse
+\appendix
+% \input{auxiliaries}
+% \input{redundancy}
+% \input{algorithms}
+% \input{tables}
+
+\clearpage
+\input{fig-alg-main}
+\input{fig-alg-abst-reach}
+\input{fig-alg-cex-path}
+\input{fig-alg-refine}
+\input{fig-alg-mkHornClauses}
+\input{fig-alg-solveHorn}
+\fi
+%\clearpage
+%\input{fig-ex-mk-tree}
+
+\end{document}

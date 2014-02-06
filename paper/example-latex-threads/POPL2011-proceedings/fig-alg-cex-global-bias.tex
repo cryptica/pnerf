@@ -1,0 +1,35 @@
+\begin{figure}[t]
+\small
+\hrule
+  \centering
+  \begin{minipage}[t]{\columnwidth}
+    \begin{minipage}[t]{.04\columnwidth}
+      \mbox{} \\  4a \\ 4 \\ 
+    \end{minipage}
+    \begin{minipage}[t]{.94\columnwidth}
+      \mbox{}\\
+      $V_g$ \algAssgn $\algRenameLocals(V)$ \\
+      $\cnode_i$ \algAssgn $\algRecMkCexTree(S_i,V_g)$\\
+    \end{minipage}\\
+  \caption{ Modification for global bias in $\algMkCexTree$}
+   \label{fig-alg-cex-global-bias-mkcex}
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ 7a \\ 7 \\ 8 
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    $(V^{s}_g,V^{d}_g)$ \algAssgn $\algRenameLocals(V^{s},V^{d})$ \\
+    $\cnodeOrig$ \algAssgn $\algRecMkCexTree(\StateOrig,V^{s}_g)$ \\
+    $\cnodeOrigRel$ \algAssgn $\algFreshCnode(\OrigRel(V^{s}_g,V^{d}_g), \emptyset)$ \\
+  \end{minipage}
+  \caption{ Modification for global bias in $\algRecMkCexTree$}
+  \label{fig-alg-cex-global-bias-mkrec}
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

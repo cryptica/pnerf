@@ -1,0 +1,72 @@
+\linespread{1.2}
+\begin{figure}[t]
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\
+   11 \\ 12 \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 \\ 18 \\ 19 \\ 20 \\
+   21 \\ 22 \\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 %\\ 29 \\ 30 \\
+%   31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algProcedure \algAbstReachEnvSolve\\
+    \algBegin\\
+    \tabT $\artParent$ \algAssgn $\artTId$ \algAssgn $\bot$ \hfill
+    \algComment{the empty function}\\
+    \tabT \algForeach $i \in \ThreadIds$ \algDo\\
+    \tabTT $\artReachOf{i}$ \algAssgn $\set{\abst_i(\SymbInit)}$\\
+    \tabTT $\EnvTransOf{i}$ \algAssgn $\emptyset$\\
+    \tabT \algRepeat\\
+    \tabTT $\doneFlag$ \algAssgn $\ltrue$\\
+    \tabTT \algForeach $i \in \ThreadIds$ and $S \in \artReachOf{i}$
+    \algDo \\
+    \tabTTT \algComment{states}\\
+    \tabTTT \algForeach $\rel \in \Trans_i \cup \EnvTransOf{i}$ \algDo \\
+%    \tabTTTT $S'$ \algAssgn $\abst_i(\post(\rel, S))$\\
+    \tabTTTT $S'$ \algAssgn 
+    \begin{array}[t]{@{}l}
+      \algIf\  \rel \in \Trans_i \ \algThen\  \abst_i(\post(\rel, S))\\
+      \algElse\ \abst_i(\post(\rel\land \relLocEqOf{i}, S))\\
+    \end{array}\\
+    \tabTTTT \algIf $\neg(\exists S''\in \artReachOf{i}\; \forall \Vars : S' \limplies
+    S'')$ \algThen\\
+    \tabTTTTT $\artReachOf{i}$ \algAssgn $\set{S'} \cup \artReachOf{i}$\\
+    \tabTTTTT $\artParent(S')$ \algAssgn $(S, \rel)$\\
+    \tabTTTTT $\artTIdOf{S'}$ \algAssgn $i$\\
+    \tabTTTTT $\doneFlag$ \algAssgn $\lfalse$\\
+    \tabTTT \algDone\\
+    \tabTTT \algComment{environment transitions}\\
+    \tabTTT \algForeach $\rel \in \Trans_i$ and $j \in \ThreadIds \setminus 
+    \set{i}$ \algDo \\
+    \tabTTTT $\rel'$ \algAssgn $\abstTrans_{\envFromTo{i}{j}}(S \land
+    \rel) $\\
+    \tabTTTT \algIf $\neg(\exists \rel''\in \Trans_j\cup\EnvTransOf{j} \;
+    \forall \Vars, \Vars' : \rel' \limplies \rel'')$ \algThen\\
+    \tabTTTTT $\EnvTransOf{j}$ \algAssgn $\set{\rel'} \cup \EnvTransOf{j}$\\
+    \tabTTTTT $\artParent(\rel')$ \algAssgn $(S,\rel)$\\
+    \tabTTTTT $\artTIdOf{\rel'}$ \algAssgn $i$\\
+    \tabTTTTT $\doneFlag$ \algAssgn $\lfalse$\\
+    \tabTTT \algDone\\
+    \tabTT \algDone\\
+    \tabT \algUntil $\doneFlag$\\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Procedure \algAbstReachEnvSolve implements \aret
+    computation.
+We assume that the iterator statements in lines 7 and 9 make an
+immutable snapshot of their domains~$\artReachOf{i}$ and
+$\EnvTransOf{i}$, respectively. 
+For example, this implies that each addition of $S'$ in line 12 is
+unnoticed in line 7 until the next iteration of the \algRepeat
+loop. 
+}
+  \label{fig-alg-abst-reach}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

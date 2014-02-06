@@ -1,0 +1,73 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{}
+   \\ \\ \\ \\ \\ 
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\ 11 \\ 12 \\ 13
+   \\ 14 \\ 15 \\ 16
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \algMkHornTree\\
+    \algInput\\
+    \tabT $g$ - relation, either $\HornHead(\FixVars)$ or $\lfalse$\\
+%    \tabT $\HornClauses$ - set of Horn clauses \\
+    \algBegin\\
+    \tabT $p, q$ \algAssgn new nodes \\
+    \tabT \algMatch $g$ \algWith \\
+    \tabT \algCase{$\lfalse$}\\
+    \tabTTT $\set{\HornBody_1(\FreeVars_1)\land \dots\land \HornBody_n(\FreeVars_n)
+      \rightarrow \lfalse, \; \dots}$ \algAssgn $\HornClauses$\\
+    \tabTTT $\FreshVars_1, \dots, \FreshVars_n$ \algAssgn fresh copies
+    of $\FreeVars_1, \dots, \FreeVars_n$\\
+    \tabTTT $\headSubst$ \algAssgn $\substXtoY{\FreshVars_1}{\FreeVars_1}\cdots\substXtoY{\FreshVars_n}{\FreeVars_n}$\\
+    \tabT \algCase{$\HornHead(\FixVars)$}\\
+    \tabTTT $\set{\HornBody_1(\FreeVars_1)\land \dots\land \HornBody_n(\FreeVars_n)
+      \rightarrow \HornBody(\FreeVars), \; \dots}$ \algAssgn
+    $\HornClauses$\\
+    \tabTTT $\FreshVars_1, \dots, \FreshVars_n, \FreshVars$ \algAssgn fresh copies
+    of $\FreeVars_1, \dots, \FreeVars_n, \FreeVars$\\
+    \tabTTT $\headSubst$ \algAssgn $\substXtoY{\FreshVars_1}{\FreeVars_1}\cdots\substXtoY{\FreshVars_n}{\FreeVars_n}\substXtoY{\FixVars}{\FreshVars}$\\
+    \tabT $\cFormulaOf{p}$ \algAssgn 
+    $\set{
+      \HornBody_i(\FreeVars_i)\headSubst
+      \mid i\in\betweenOf{1}{n}\land\HornBody_i = (\leq)
+    }
+    $\\
+    \tabT $\cChildren(p)$ \algAssgn $\emptyset$\\
+    \tabT $\cFormulaOf{q}$ \algAssgn $g$ \\ 
+    \tabT $\cChildren(q)$ \algAssgn \\
+    \mbox{} \hfill $
+    \begin{array}[t]{@{}l}
+      \set{p}\mathrel{\cup} 
+      \bigcup
+      \set{
+        \algMkHornTree(
+        \HornBody_i(\FreeVars_i)\headSubst
+        ) 
+        \mid
+        \begin{array}[t]{@{}l}
+          i \in \betweenOf{1}{n}\mathrel{\land} 
+          \HornBody_i \neq (\leq)}
+        \end{array}
+      \end{array}
+    $ \\
+    \tabT \algReturn $q$ \\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Function \algMkHornTree.
+  Fresh copies are created consistent, e.g., fresh copies of $\set{v_1,
+    v_2}$, $\set{v_3, v_1}$ returns $\set{f_1, f_2}$, $\set{f_3 f_1}$, where
+  $f_1$, $f_2$, $f_3$ are fresh variables that do not appear anywhere
+  else. }
+  \label{fig-alg-mkTree}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

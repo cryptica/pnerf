@@ -1,0 +1,44 @@
+\begin{table*}[t]
+  \begin{center}
+  \begin{tabular}{||l|c|c|cc|cc||}
+    \hline
+    \multicolumn{3}{||c|}{Benchmark programs} &\multicolumn{4}{|c||}{Our algorithm}\\\hline
+    Name                                  &LOC&Has a modular proof?&\cc{With bias} & \ccbars{No bias} \\\hline 
+    \hline
+    Fig2-cex\cite{LuASPLOS08}             &  33 & No & \ipNo     & 0.2s     & \ipNo         & 0.2s \\\hline
+    Fig2-fixed\cite{LuASPLOS08}           &  38 & Yes& \ipYes-Modular& 0.8s & \ipYes-Modular& 0.7s \\\hline
+    Fig4-cex\cite{LuASPLOS08}             & 175 & No & \ipNo     & 4.5s     & \ipNo         & 3.7s \\\hline
+    Fig4-fixed\cite{LuASPLOS08}           & 168 & Yes& \ipYes-Modular& 1.5s & \ipYes        & 11.1s\\\hline
+    Bluetooth2\cite{QadeerPLDI04}         &  90 & No & \ipYes    & 29.1s    & \ipYes        & 11.2s\\\hline
+    Bluetooth2-fixed                      &  90 & No & \ipYes    & 3.7s     & \ipYes        & 0.4s \\\hline
+    Bluetooth3-fixed                      &  90 & No & \ipYes    & 135s     & \ipYes        & 9.7s \\\hline
+    Scull\cite{CorbetBook05}              & 451 & Yes& \ipYes-Modular&128.5s& \ccbars{\ipTO}   \\\hline
+    \hline
+    Dekker\cite{BarDavidDISC03}           &  39 & No & \ipYes        &11.1s & \ipYes        & 6s   \\\hline
+    Peterson\cite{BarDavidDISC03}         &  26 & No & \ipYes        & 4.7s & \ipYes        & 3.9s \\\hline
+    Readers-writer-lock\cite{CalvinESOP}  &  22 & Yes& \ipYes-Modular& 0.2s & \ipYes        & 0.4s \\\hline
+    Time varying mutex\cite{CalvinESOP}  &  29 & No & \ipYes         &11.8s & \ipYes        & 3.1s \\\hline
+    Szymanski\cite{SzymanskiICS88}        &  43 & No & \ipYes        & 32s  & \ipYes        & 8.8s \\\hline
+    Na\"{i}veBakery\cite{MannSafetyBook95}&  22 & Yes& \ipYes-Modular& 2.5s & \ipYes        & 3s   \\\hline
+    Bakery\cite{LamportCACM74}            &  37 & No & \ipYes        &105.4s& \ipYes        & 101s \\\hline
+    Lamport\cite{LamportTCS87}            &  62 & No & \ipYes        &120.8s& \ipYes        &  97s \\\hline
+    QRCU\cite{McKenneyLWN07}              & 120 & Yes& \ipYes-Modular& 34.5s& \ccbars{\ipTO}   \\\hline
+  \end{tabular}
+  \end{center}
+\nocaptionrule
+\caption{``Has a modular proof?'' indicates whether the program has a
+  modular proof of correctness.
+  ``\ipYes'' and ``\ipNo''
+  indicate whether the program is proven safe or a 
+  counterexample is returned, while ``\ipTO'' stands for time out
+  after 15 minutes.
+  \ipYes-Modular indicates that a modular proof is found by our
+  tool.}
+  \label{table-vs-no-bias}
+\end{table*}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

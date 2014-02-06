@@ -1,0 +1,32 @@
+ \begin{figure}[t]
+  \hrule
+  \mbox{}\\
+  For assertions $\Reach_1, \dots, \Reach_\Num$ over $\Vars$\ ,\\
+  and $\Env_1, \dots, \Env_\Num$ over $\Vars$ and $\Vars'$%\\[.5\jot]
+
+ \begin{equation*}
+   \begin{array}[t]{c@{:\quad}l@{\;\rightarrow\;}l@{\qquad}c}
+     \ruleInit & \SymbInit & \Reach_i & \text{for } i\in\ThreadIds\\[\jot]
+     \ruleTransStep & \Reach_i \land \relTIdOf{i}
+     &  \Reach_i' &  \text{for } i\in\ThreadIds\\[\jot]
+     \ruleEnvStep & \Reach_i \land \Env_i \land \relLocEqOf{i} & \Reach_i' & \text{for } i\in\ThreadIds\\[\jot]
+     \ruleTransEnv & (\Lor_{i\in\ThreadIds\setminus\set{j}} \Reach_i  \land \relTIdOf{i}) & \Env_j & \text{for } j\in\ThreadIds\\[\jot]
+     \ruleCheck & \Reach_1  \land \dots \land \Reach_\Num \land
+     \SymbError & \lfalse & 
+   \end{array}
+ \end{equation*}
+ \centering
+ \rule{.85\linewidth}{.5pt}\\
+ program $\program$ is safe
+ \caption{Proof rule \ProofRule for compositional safety proofs
+   of multi-threaded programs.
+   $\Reach_i'$ stands for~$\Reach_i\substXtoY{\Vars'}{\Vars}\ $.
+   \ProofRule yields a pre-fixpoint characterization through
+   Equations~\eqref{eq-pre-func}.
+ }
+  \label{fig-eq-abst-mod-reach}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

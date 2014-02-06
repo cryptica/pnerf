@@ -1,0 +1,51 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+    \mbox{} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+    1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\ 11 \\ 12
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \algSolveLinearHornClauses\\
+    \algInput \\
+    \tabT $\HornClauses$ - recursion-free Horn clauses over linear inequalities \\
+    \tabT $\Unknowns$ - unknown relations \\
+    \algVars\\
+    \tabT $\cFormula$ - map from node to attribute \\
+    \tabT $\cChildren$ - map from node to a set of nodes \\
+    \tabT $\cInterPol$ - map from node to an atomic predicate \\
+    \tabT $\proofVec$ - weight function for inequalities \\
+    \algBegin\\
+    \tabT $\cFormula$\algAssgn $\cChildren$ \algAssgn $\bot$ \hfill
+    \algComment{the empty function}\\
+    \tabT $\rcnode$ \algAssgn $\algMkHornTree(\lfalse)$ \\
+    \tabT $\cLeaves$ \algAssgn $\bigcup\set{\cFormulaOf{\cnode} \mid \cChildren(\cnode) = \emptyset}$\\
+    \tabT \algIf
+    \begin{array}[t]{@{}l}
+      \text{exists } \proofVec: \cLeaves \rightarrow \Rationals_{\geq
+        0} \text{ such that}\\
+      \sum \set{\proofVec(\HornBody(\FixVars)) \cdot \HornBody(\FixVars)
+        \mid \HornBody(\FixVars) \in \cLeaves} = (\linfalse)
+    \end{array}\\
+    \tabT \algThen\\
+    \tabTT $ \algBuildPred(\rcnode)$ \\
+    \tabTT \algForeach $\HornHead(\FreeVars)\in\Unknowns$ \algDo\\
+    \tabTTT $\SolutionOf{\HornHead(\FreeVars)}:=\Land\{\cInterPolOf{n}[\FreeVars/\FixVars]| \cFormulaOf{\cnode}=\HornHead(\FixVars)\}$\\ 
+    \tabTT \algReturn $\Solution$ \\
+    \tabT \algElse \\
+    \tabTT \algThrow \algUnsolvable\\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Function \algSolveLinearHornClauses returns a solution for
+    a set of recursion-free Horn clauses over linear arithmetic.}
+  \label{fig-alg-solveHorn}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

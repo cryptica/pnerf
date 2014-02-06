@@ -1,0 +1,78 @@
+\begin{figure}[t]
+%\small
+\hrule
+%  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} 
+   \\ \\ \\ \\ 
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 
+   \\ \\ \\ \\ \\ \\ \\ \\
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\
+   11 \\ 12 \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 %\\ 18 \\ 19 
+   \\ \\ \\ \\ \\ \\
+   1 \\ 2 \\ 3 \\ 4
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \algMkCexTree\\
+    \algInput \tabT $S_1, \dots, S_\Num$ - abstract states\\
+    \algBegin\\
+    \tabT $V$ \algAssgn fresh program variables \\
+    \tabT \algForeach $i \in 1\dots \Num$ \algDo\\
+    \tabTT $\cnode_i$ \algAssgn $\algRecMkCexTree(S_i,V)$\\
+    \tabT $\cnode_e$ \algAssgn $\algFreshCnode(\StatesError(V),\emptyset)$ \\
+    \tabT $\rcnode$ \algAssgn $\algFreshCnode(\lfalse,\{\cnode_1,\dots,\cnode_n,\cnode_e\})$ \\
+    \tabT $\cLeaves$ \algAssgn set of reachable leaves from node $\rcnode$ \\
+    \tabT $\cNodes$  \algAssgn set of reachable nodes from node $\rcnode$ \\
+    \tabT \algReturn  $(\cLeaves,\cNodes)$ \\
+    \algEnd \\
+
+    \algFunction \algRecMkCexTree\\
+    \algInput \\
+    \tabT $\StateDst$ - abstract state \\
+    \tabT $V^{d}$ - program variables\\
+    \algBegin\\
+    \tabT \algMatch $\artParent(\StateDst)$ \algWith\\
+    \tabT \algCase{$(\StateSrc,\rel)$} \\
+    \tabTT $V^{s}$ \algAssgn fresh program variables\\
+    \tabTT $\cnodeSrc$ \algAssgn $\algRecMkCexTree(\StateSrc,V^{s})$\\
+    \tabTT \algMatch $\artParent(\rel)$ \algWith \\
+    \tabTT \algCase{$(\StateOrig,\OrigRel)$} \\
+    \tabTTTT $\cnodeOrig$ \algAssgn $\algRecMkCexTree(\StateOrig,V^{s})$ \\
+    \tabTTTT $\cnodeOrigRel$ \algAssgn $\algFreshCnode(\OrigRel(V^{s},V^{d}), \emptyset)$ \\
+    \tabTTTT $\cnodeRel$ \algAssgn $\algFreshCnode(\rel, \{\cnodeOrig,\cnodeOrigRel\})$ \\
+    \tabTTTT $\cnode_{eq}$  \algAssgn $\algEqOtherThreadLocals(V^{s},V^{d},O)$ \\
+    \tabTTTT \algReturn $\algFreshCnode(\StateDst,\{\cnodeSrc,\cnodeRel,\cnode_{eq}\})$ \\
+    \tabTT \algCase{$\bot$} \\
+    \tabTTTT $\cnodeRel$ \algAssgn $\algFreshCnode(\rel(V^{s},V^{d}),\emptyset)$ \\
+    \tabTTTT \algReturn $\algFreshCnode(\StateDst,\{\cnodeSrc,\cnodeRel\})$ \\
+    \tabT \algCase{$\bot$} \\
+    \tabTT $\cnode_i$ \algAssgn $\algFreshCnode(\StatesInit(V^{d}),\emptyset)$ \\
+    \tabTT \algReturn $\algFreshCnode(\StateDst,\{\cnode_i\})$ \\
+    \algEnd \\
+
+    \algFunction \algFreshCnode\\
+    \algInput $A$ - label;\tabTTT $C$ - set of nodes \\
+    \algBegin \\
+    \tabT $\cnode$ \algAssgn new node\\
+    \tabT $\cFormulaOf{\cnode}$ \algAssgn $A$ \\
+    \tabT $\cChildren(\cnode)$ \algAssgn $C$\\
+    \tabT \algReturn $\cnode$ \\
+    \algEnd \\
+     
+  \end{minipage}
+  \vspace{1ex}
+    \mbox{}\\
+  \linespread{1}
+  \caption{
+    Function \algMkCexTree takes a counterexample as input and 
+    produces a tree which represents the constraints.
+  }
+  \label{fig-alg-cex-tree}
+\end{figure}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

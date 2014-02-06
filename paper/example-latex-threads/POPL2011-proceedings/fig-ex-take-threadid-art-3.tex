@@ -1,0 +1,25 @@
+% ===================== ART of 3rd iteration from TakeLockThreadId =============
+\begin{figure}[t]
+  \hrule
+  \centering
+  \vspace{2ex} 
+  \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, 
+      node distance=\nodeDistance, semithick]
+    % Reachability from thread 1
+    \node[stateBox] (m1) {$m_1$};
+    \node[stateBox, below of=m1] (m2) {$m_2$};
+    \path (m1) edge node[left]{$\rel_1$} (m2);
+    % Reachability from thread 2
+    \node[stateBox, right of=m1, node distance=\artDistance{1}] (n1) {$n_1$};
+    \node[stateBox, below of=n1] (n2) {$n_2$};
+    \path (n1) edge node[right]{$\rel_2$} (n2);
+  \end{tikzpicture}
+  \caption{Tree that shows all the reachable abstract states found
+    during the last \aret computation for~\TakeLockThreadId.}
+  \label{fig-ex-take-threadid-art-3}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

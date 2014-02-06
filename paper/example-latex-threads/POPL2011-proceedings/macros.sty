@@ -1,0 +1,312 @@
+\newcommand{\todo}[1]{\textbf{TODO:} \textcolor{red}{ #1 } \textbf{!!!}}
+\newcommand{\TUM}{Institut f\"ur Informatik\\Technische Universit\"at M\"unchen\\Germany}
+
+% Logic
+\newcommand{\downin}{\mathbin{\rotatebox[origin=c]{270}{$\in$}}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\betweenOf}[2]{#1..#2}
+\newcommand{\ltrue}{\mathit{true}}
+\newcommand{\lfalse}{\mathit{false}} 
+\newcommand{\linfalse}{1 \leq 0}
+\newcommand{\lintrue}{0 \leq 0}
+\newcommand{\limplies}{\rightarrow} 
+\newcommand{\lequivalent}{\leftrightarrow}
+%\newcommand{\defeq}{\;\stackrel{\text{def}}{=}\;}
+\newcommand{\defeq}{\;=\;}
+\newcommand{\comp}{\circ}
+\newcommand{\range}[1]{\mathit{ran}(#1)}
+\newcommand{\Land}{\bigwedge}
+\newcommand{\Lor}{\bigvee}
+\newcommand{\domOf}[1]{\mathit{dom}(#1)}
+\newcommand{\Rationals}{\mathbb{Q}}
+\newcommand{\substXtoY}[2]{[#1/#2]}
+\newcommand{\mgu}{\mathit{mgu}}
+\newcommand{\arrSpace}{\;}
+
+\newcommand{\eofClaim}{\hfill$\blacksquare$}
+
+% Programs and computations
+\newcommand{\program}{P}
+\newcommand{\parcomp}{\mid\mid}
+\newcommand{\var}{v}
+\newcommand{\Vars}{V}
+\newcommand{\GlobVars}{\Vars_G}
+\newcommand{\LocVarsOf}[1]{\Vars_{#1}}
+\newcommand{\Glob}{G}
+\newcommand{\Loc}{L}
+\newcommand{\valuation}{\mathcal{V}}
+\newcommand{\stateOf}[1]{(#1)}
+\newcommand{\States}{\Sigma}
+\newcommand{\SymbReach}{\varphi_\mathit{reach}}
+\newcommand{\initLab}{\mathit{init}}
+\newcommand{\errLab}{\mathit{err}}
+\newcommand{\SymbInit}{\varphi_\initLab}
+\newcommand{\SymbError}{\varphi_\errLab}
+\newcommand{\Num}{\mathsf{N}}
+\newcommand{\ThreadIds}{\betweenOf{1}{\Num}}
+\newcommand{\Trans}{\mathcal{T}}
+\newcommand{\tr}{\tau}
+\newcommand{\path}{\pi}
+\newcommand{\emptypath}{\epsilon}
+\newcommand{\rel}{\rho}
+\newcommand{\relLocEqOf}[1]{\rel^=_{#1}}
+\newcommand{\trel}{\rel_\tr}
+\newcommand{\relTIdOf}[1]{\rel_{#1}}
+\newcommand{\relProg}{\rel_\Trans}
+\newcommand{\Reach}{R}
+\newcommand{\Env}{E}
+\newcommand{\EnvTrans}{\mathcal{E}}
+\newcommand{\EnvTransOf}[1]{\mathcal{E}_{#1}}
+\newcommand{\Rely}{\mathcal{R}}
+\newcommand{\Guarantee}{\mathcal{G}}
+\newcommand{\eqFunc}{{F^{\#}}}
+\newcommand{\eqPreFunc}{F}
+\newcommand{\eqBot}{\bot_{\eqFunc}}
+\newcommand{\eqPreBot}{\bot_{\eqPreFunc}}
+\newcommand{\projOf}[2]{#1\!\!\downarrow_{#2}}
+\newcommand{\idOf}[1]{\mathit{Id}_{#1}}
+\newcommand{\post}{\mathit{post}}
+\newcommand{\postSharp}{\post^{\sharp}}
+\newcommand{\lfp}{\mathit{lfp}}
+\newcommand{\least}{\mu}
+\newcommand{\abst}{\dot{\alpha}}
+\newcommand{\abstTIdOf}[1]{\abst_{#1}}
+\newcommand{\abstTrans}{\ddot{\alpha}}
+\newcommand{\abstTransTIdOf}[2]{\abstTrans_{\envFromTo{#1}{#2}}}
+\newcommand{\envFromTo}[2]{#1\triangleright #2}
+
+% Algorithms
+\newcommand{\ProofRule}{\textsc{ReachEnv}\xspace}
+\newcommand{\ruleInit}{\textrm{CS1}\xspace}
+\newcommand{\ruleTransStep}{\textrm{CS2}\xspace}
+\newcommand{\ruleEnvStep}{\textrm{CS3}\xspace}
+\newcommand{\ruleTransEnv}{\textrm{CS4}\xspace}
+\newcommand{\ruleCheck}{\textrm{CS5}\xspace}
+
+\newcommand{\aret}{\textsc{Aret}\xspace}
+\newcommand{\algAbstReachEnvSolveOf}{\textsc{AbstReachEnv}}
+\newcommand{\algAbstReachEnvSolve}{\algAbstReachEnvSolveOf\xspace}
+%%%\newcommand{\artReach}{\mathit{Reach}}
+%%%\newcommand{\artReachOf}[1]{\mathit{Reach}_{#1}}
+\newcommand{\artReach}{\mathcal{R}}
+\newcommand{\artReachOf}[1]{\mathcal{R}_{#1}}
+\newcommand{\artParent}{\mathit{Parent}}
+\newcommand{\artTId}{\mathit{ParentTId}}
+\newcommand{\artTIdOf}[1]{\mathit{ParentTId}(#1)}
+\newcommand{\doneFlag}{\mathit{finished}}
+
+\newcommand{\artPreds}{\dot{\mathcal{P}}}
+\newcommand{\artTPreds}{\ddot{\mathcal{P}}}
+\newcommand{\artTPredsOf}[2]{\ddot{\mathcal{P}}_{#1\triangleright #2}}
+
+\newcommand{\extractPreds}{\mathit{PredsOf}}
+\newcommand{\extractPredsOf}[1]{\mathit{PredsOf}(#1)}
+
+\newcommand{\algMkRefConstOf}{\textsc{CexConstraint}}
+\newcommand{\algMkRefConst}{\algMkRefConstOf\xspace}
+
+\newcommand{\algMainOf}{\textsc{Main}}
+\newcommand{\algMain}{\algMainOf\xspace}
+\newcommand{\algAddAux}{\textsc{AddAux}\xspace}
+\newcommand{\algMainReturnSafe}{11\xspace}
+\newcommand{\algInterpolateOf}{\textsc{Inter}}
+\newcommand{\algInterpolate}{\algInterpolateOf\xspace}
+\newcommand{\mkrResConst}{\Phi}
+\newcommand{\mkrResConstVars}{\mathit{Vars}}
+\newcommand{\mkrSol}{\sigma}
+\newcommand{\algCexPathOf}[1]{\textsc{MkPath}(#1)}
+\newcommand{\algCexPath}{\textsc{MkPath}\xspace}
+\newcommand{\prefixes}{\mathit{prefixes}}
+\newcommand{\multilineDefinition}[1]{\left\{ \begin{matrix} #1 \end{matrix} \right.}
+\newcommand{\algSolveConstraintOf}{\textsc{SolveConstraint}}
+\newcommand{\algSolveConstraint}{\algSolveConstraintOf\xspace}
+
+\newcommand{\algUnsolvable}{\textsc{Unsatisfiable}\xspace}
+
+% macros for refinement
+\newcommand{\algRefine}{\textsc{Refine}\xspace}
+\newcommand{\algRefinePC}{\textsc{RefinePC}\xspace}
+\newcommand{\algPushConstraints}{\textsc{PushConstraints}\xspace}
+\newcommand{\algMkHornClauses}{\textsc{MkHornClauses}\xspace}
+\newcommand{\algMkTMHornClauses}{\textsc{MkTMHornClauses}\xspace}
+\newcommand{\algRecMkHornClauses}{\textsc{RecMkHornClauses}\xspace}
+\newcommand{\algSolveHornClauses}{\textsc{SolveHC}\xspace}
+\newcommand{\algSolveLinearHornClauses}{\textsc{SolveLinearHC}\xspace}
+\newcommand{\algMkCexTree}{\textsc{MkCexTree}\xspace}
+\newcommand{\algRecMkCexTree}{\textsc{MkRecCexTree}\xspace}
+\newcommand{\algMkHornTree}{\textsc{MkTree}\xspace}
+\newcommand{\algBuildPred}{\textsc{AnnotPred}\xspace}
+\newcommand{\algFreshCnode}{\textsc{NewNode}\xspace}
+\newcommand{\algRenameLocals}{\textsc{FreshLocals}\xspace}
+\newcommand{\algPCFilt}{\textsc{PCSplit}\xspace}
+\newcommand{\algSolve}{\textsc{Solve}\xspace}
+\newcommand{\algLinearUnsatProof}{\textsc{UnsatProof}\xspace}
+\newcommand{\algEqOtherThreadLocals}{\textsc{EqOtherThrLocals}\xspace}
+
+\newcommand{\varLocalEqs}{\textsc{LclEqs}\xspace}
+\newcommand{\HornClauses}{\textit{HC}}
+\newcommand{\Unknowns}{\textit{UnkRel}}
+\newcommand{\HornGuard}{G}
+\newcommand{\HornHead}{b}
+\newcommand{\HornBody}{b}
+%\newcommand{\nameit}[1]{\texttt{`}#1\texttt{'}}
+\newcommand{\freshClauseVarsOf}[1]{{#1}^\texttt{*}}
+\newcommand{\arithBodyRel}{R^{\leq,=}}
+\newcommand{\unkBodyRel}{R^\mathit{unk}}
+\newcommand{\headSubst}{\sigma}
+\newcommand{\emptySubst}{[]}
+
+% hcOf{KnownBody}{UnknownBody}{Head}
+\newcommand{\hcOf}[4]{\forall#1:#2#3\limplies#4}
+\newcommand{\Solution}{\textsc{Sol}}
+\newcommand{\SolutionOf}[1]{\Solution(#1)}
+\newcommand{\FreeVars}{w}
+\newcommand{\FreshVars}{z}
+\newcommand{\FixVars}{u}
+
+\newcommand{\proofVec}{\mathit{Proof}}
+\newcommand{\proofVecOf}[1]{\proofVec(#1)}
+
+\newcommand{\cnode}{n}
+\newcommand{\StateOrig}{O}
+\newcommand{\StateSrc}{S}
+\newcommand{\StateDst}{D}
+\newcommand{\OrigRel}{\rel_{\StateOrig}}
+\newcommand{\unkOf}[1]{\text{``}#1\text{''}}
+\newcommand{\cnodeSrc}{\cnode_{\StateSrc}}
+\newcommand{\cnodeDst}{\cnode_{\StateDst}}
+\newcommand{\cnodeRel}{\cnode_{\rel}}
+\newcommand{\cnodeOrig}{\cnode_{\StateOrig}}
+\newcommand{\cnodeOrigRel}{\cnode_{\rel_{\StateOrig}}}
+\newcommand{\rcnode}{root}
+\newcommand{\cChildren}{\mathit{Children}}
+\newcommand{\cLeaves}{\mathit{Atoms}}
+\newcommand{\cNodes}{\mathit{Nodes}}
+\newcommand{\cFormula}{\mathit{Label}}
+\newcommand{\cFormulaOf}[1]{\cFormula(#1)}
+\newcommand{\cInterPol}{\mathit{Pred}}
+\newcommand{\cInterPolOf}[1]{\cInterPol(#1)}
+
+% Proofs
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+\newenvironment{proof}{\textit{Proof.}}{\ProofEnd}
+\newcommand{\ClaimEnd}{\hfill$\blacksquare$}
+\newcommand{\ProofEnd}{\hfill$\square$\\
+
+
+\smallskip}
+
+% Auxiliary variables
+\newcommand{\auxVarsOne}{\dot{A}} 
+\newcommand{\auxVarsTwo}{\dot{B}}
+\newcommand{\auxTVarsOne}{\ddot{A}}
+\newcommand{\auxTVarsTwo}{\ddot{B}}
+\newcommand{\auxVarOne}{\dot{v}}
+\newcommand{\auxVarTwo}{\dot{v}}
+\newcommand{\auxTVarOne}{\ddot{v}}
+\newcommand{\auxTVarTwo}{\ddot{v}}
+\newcommand{\aux}[1]{#1^A}
+
+% program variables in TT font
+\newcommand{\Main}{\mathtt{Main}}
+\newcommand{\Tone}{\mathtt{T_1}}
+\newcommand{\Ttwo}{\mathtt{T_2}}
+\newcommand{\g}{\mathtt{g}}
+\newcommand{\local}{\mathtt{cnt}}
+\newcommand{\gone}{\mathtt{g_1}}
+\newcommand{\gtwo}{\mathtt{g_2}}
+\newcommand{\lx}{\mathtt{x}}
+\newcommand{\ly}{\mathtt{y}}
+\newcommand{\lone}{\mathtt{l_1}}
+\newcommand{\ltwo}{\mathtt{l_2}}
+\newcommand{\pcone}{\mathtt{pc_1}}
+\newcommand{\pctwo}{\mathtt{pc_2}}
+\newcommand{\pcthree}{\mathtt{pc_3}}
+\newcommand{\lock}{\mathtt{lock}}
+\newcommand{\TakeLock}{\texttt{take\_lock}}
+\newcommand{\TakeLockBit}{\texttt{LockBit}\xspace}
+\newcommand{\TakeLockThreadId}{\texttt{LockId}\xspace}
+\newcommand{\TakeLockBitCnt}{\texttt{LockBitCnt}\xspace}
+
+% experimental evaluation
+\newcommand{\ipNo}{$\times$}
+\newcommand{\ipYes}{\checkmark}
+\newcommand{\ipTO}{T/O}
+\newcommand{\best}[1]{\textbf{#1}}
+\newcommand{\ipBad}{$\dagger$}
+
+% programs to verify
+\newcommand{\SumLocal}{\textsc{Sum-local}\xspace}
+\newcommand{\SumGlobal}{\textsc{Sum-global}\xspace}
+\newcommand{\SumLocalJunk}{\textsc{Sum-local-plus}\xspace}
+\newcommand{\SumGlobalJunk}{\textsc{Sum-global-plus}\xspace}
+\newcommand{\FigTwoCex}{\textsc{Fig2-cex}\xspace}
+\newcommand{\FigTwoFixed}{\textsc{Fig2-fixed}\xspace}
+\newcommand{\FigFourCex}{\textsc{Fig4-cex}\xspace}
+\newcommand{\FigFourFixed}{\textsc{Fig4-fixed}\xspace}
+\newcommand{\CousotExB}{\textsc{Ex-B2}\xspace}
+\newcommand{\Mozilla}{\textsc{Mozilla}\xspace}
+\newcommand{\Dekker}{\textsc{Dekker}\xspace}
+\newcommand{\Peterson}{\textsc{Peterspm}\xspace}
+\newcommand{\NaiveBakery}{\textsc{Na\"iveBakery}\xspace}
+\newcommand{\NaiveBakeryAtomic}{\textsc{Na\"iveBakery-a}\xspace}
+\newcommand{\Lamport}{\textsc{Lamport}\xspace}
+\newcommand{\BluetoothTwo}{\textsc{Bluetooth2}\xspace}
+\newcommand{\BluetoothThree}{\textsc{Bluetooth3}\xspace}
+\newcommand{\BluetoothTwoFixed}{\textsc{Bluetooth2-fixed}\xspace}
+\newcommand{\BluetoothThreeFixed}{\textsc{Bluetooth3-fixed}\xspace}
+\newcommand{\Bakery}{\textsc{Bakery}\xspace}
+\newcommand{\QRCU}{\textsc{Qrcu}\xspace}
+\newcommand{\Scull}{\textsc{Scull}\xspace}
+
+% tools
+\newcommand{\Blast}{\textsc{Blast}\xspace}
+\newcommand{\Magic}{\textsc{Magic}\xspace}
+\newcommand{\Armc}{\textsc{Armc}\xspace}
+\newcommand{\Foci}{\textsc{FOCI}\xspace}
+\newcommand{\Csisat}{\textsc{CSISAT}\xspace}
+
+\newcommand{\cc}[1]{\multicolumn{2}{|c|}{#1}} % shorthand for two cells
+\newcommand{\ccbars}[1]{\multicolumn{2}{|c||}{#1}} % shorthand for two cells
+
+% Styles for figures with ARTs
+\tikzset{
+  errorState/.style={
+    fill=gray!40,
+  },
+}
+\tikzset{
+  envTransition/.style={
+    dashed,
+    double,
+  },
+}
+\tikzset{
+  stateBox/.style={
+    rectangle,
+    rounded corners,
+    draw=black, thick,
+    minimum height=2em,
+    minimum width=2em,
+    inner sep=2pt,
+    text centered,
+  },
+}
+
+% Distances inside an ART
+\newcommand{\nodeDistance}{1.6cm} % redefined for iteration 4 from Take-Lock_Bit 
+\newcommand{\shiftLeft}{-0.8cm}
+\newcommand{\shiftRight}{0.8cm}
+% Distances between ARTs
+\newcommand{\artDistance}[1]{1.6cm*{#1}}
+\newcommand{\shiftEnv}{0.3cm}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

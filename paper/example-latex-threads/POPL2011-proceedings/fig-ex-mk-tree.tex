@@ -1,0 +1,150 @@
+
+\begin{figure*}[t]
+  \centering
+\begin{minipage}[t]{1.0\linewidth}
+%  \begin{tikzpicture}[grow'=up, ->]
+
+  \begin{tikzpicture}[grow'=right, ->]
+
+    \tikzset{level distance=60pt,sibling distance=3pt}
+    \tikzset{execute at begin node=\strut}
+
+    
+    \iffalse
+    edge from parent/.style=
+    {draw, edge from parent path={(\tikzparentnode.north)
+                                  -- +(0,+3pt)
+                                  -| (\tikzchildnode)}}
+    \fi
+
+    \Tree 
+    [.\node [draw] {\small $\lfalse$};
+      [.\node [stateBox] {\small $\unkOf{m_4}(\Vars^1)$};
+        [.\node [stateBox] {\small $\unkOf{m_3}(\Vars^2)$};
+          [.\node [stateBox] {\small $\unkOf{m_2}(\Vars^6)$};
+            [.\node [stateBox] {\small $\unkOf{m_1}(\Vars^8)$};
+            \node [draw] {\small $\StatesInit(\Vars^8)$};
+            ]
+            [.\node[draw] {\small $\rel_0(\Vars^8,\Vars^6)$};]
+          ]
+          [.\node [draw] {\small $\rel_1(\Vars^6,\Vars^2)$};]
+        ]
+        [.\node [draw]
+        {\small $\set{
+            \begin{array}[t]{@{}l@{}}
+              \pcone^2 = \pcone^1\ , \\ 
+              \local^2 = \local^1}
+          \end{array}
+          $};
+        ]
+        [.\node [draw] {\small $\unkOf{e_2}(\Vars^2,\Vars^1)$};
+          [.\node [stateBox] {\small $\unkOf{n_1}(\Vars^2)$};
+          \node [draw] {\small $\StatesInit(\Vars^2)$};
+          ]
+          [.\node [draw] {\small $\rel_2(\Vars^2,\Vars^1)$};]
+        ]
+        ]
+      [.\node [stateBox] {\small $\unkOf{n_3}(\Vars^1)$};
+        [.\node [stateBox] {\small $\unkOf{n_2}(\Vars^{11})$};
+          [.\node [stateBox] {\small $\unkOf{n_1}(\Vars^{15})$};
+          \node [draw] {\small $\StatesInit(\Vars^{15})$};
+          ]
+          [.\node [draw] {\small $\rel_2(\Vars^{15},\Vars^{11})$};]
+        ]
+        [.\node [draw] {\small $\set{\pctwo^{11}=\pctwo^{1}}$};]
+        [.\node [stateBox] {\small $\unkOf{e_1}(\Vars^{11},\Vars^{1})$};
+          [.\node [stateBox] {\small $\unkOf{m_2}(\Vars^{11})$};]
+          [.\node [draw] {\small $\rel_1(\Vars^{11},\Vars^1)$};]
+        ]
+      ]
+      [.\node [draw] {\small $\StatesError(\Vars^1)$};]
+     ]
+
+  \iffalse
+
+  \node [stateBox, above of=m36 ] (m25) {$\unkOf{m_2}(\Vars^3)$}; \path (m25) edge (m36);
+
+  \node [draw,xshift=1cm,yshift=2.5mm,above right of=m25]  (te1) {$\rel_{0}(\Vars^4,\Vars^3)$};\path (te1) edge(m25);
+  \node [draw, above of=m14]  (i1)  {$\StatesInit(\Vars^4)$};    \path (i1) edge (m14);
+
+  \node [stateBox,xshift=24mm,yshift=2mm,above right of=err] (n37) {$\unkOf{n_3}(\Vars^1)$};\path (n37) edge (err);
+
+  \node [draw,xshift=1cm,yshift=2.5mm,above right of=n23] (t2)  {$\rel_2(\Vars^6,\Vars^5)$}; \path (t2) edge (n23);
+  \node [draw, above of=n12] (i2)  {$\StatesInit(\Vars^6)$}; \path (i2) edge (n12);
+
+  \node [stateBox,xshift=14mm,yshift=2mm,above right of=m47] (e2) {$\unkOf{e_2}(\Vars^2,\Vars^1)$};
+  \path (e2) edge (m47);
+
+ \node [draw, above of=n16] (ei2){$\StatesInit(\Vars^2)$};  \path (ei2) edge (n16);
+
+ \node [stateBox, above of=m23] (m11) {$\unkOf{m_1}(\Vars^6)$}; \path (m11) edge (m23);
+
+  \node[draw,xshift=1cm,yshift=2.5mm,above right of=e1] (et1) {$\rel_1(\Vars^5,\Vars^1)$};\path (et1) edge (e1);
+ \node[draw, above of=m11]  (ei1)  {$\StatesInit(\Vars^6)$};\path (ei1) edge (m11);
+
+%----------------------------
+
+ \fi
+  \end{tikzpicture}\\
+\end{minipage}
+\\
+\begin{minipage}[t]{1.0\linewidth}
+  \begin{tikzpicture}[<-,>=stealth',shorten >=1pt,auto, node distance=9mm,
+                    semithick]
+  \node[stateBox] (err) {$\lfalse$}; 
+  \node [draw, xshift=8cm, above of=err] (errn) {$\StatesError(\Vars^1)$};\path (errn) edge (err);
+
+  \node [stateBox,xshift=-3.6cm,yshift=2mm,above left of=err] (m47) {$\unkOf{m_4}(\Vars^1)$}; \path (m47) edge (err);
+  \node [stateBox,xshift=-17mm,yshift=2mm, above left of=m47] (m36) {$\unkOf{m_3}(\Vars^2)$};\path (m36) edge (m47);
+  \node [stateBox, above of=m36 ] (m25) {$\unkOf{m_2}(\Vars^3)$}; \path (m25) edge (m36);
+  \node [stateBox, above of=m25 ] (m14) {$\unkOf{m_1}(\Vars^4)$}; \path (m14) edge (m25);
+
+  \node [draw,xshift=1cm,yshift=3mm,above right of=m36] (t1) {$\rel_1(\Vars^3,\Vars^2)$}; \path (t1) edge (m36);
+  \node [draw,xshift=1cm,yshift=2.5mm,above right of=m25]  (te1) {$\rel_{0}(\Vars^4,\Vars^3)$};\path (te1) edge(m25);
+  \node [draw, above of=m14]  (i1)  {$\StatesInit(\Vars^4)$};    \path (i1) edge (m14);
+
+  \node [stateBox,xshift=24mm,yshift=2mm,above right of=err] (n37) {$\unkOf{n_3}(\Vars^1)$};\path (n37) edge (err);
+  \node [stateBox,xshift=-12mm,yshift=2mm,above left of=n37 ] (n23) {$\unkOf{n_2}(\Vars^5)$};\path (n23) edge (n37);
+  \node [stateBox,     above of=n23 ] (n12) {$\unkOf{n_1}(\Vars^6)$}; \path (n12) edge (n23);
+
+  \node [draw,xshift=1cm,yshift=2.5mm,above right of=n23] (t2)  {$\rel_2(\Vars^6,\Vars^5)$}; \path (t2) edge (n23);
+  \node [draw, above of=n12] (i2)  {$\StatesInit(\Vars^6)$}; \path (i2) edge (n12);
+
+  \node [stateBox,xshift=14mm,yshift=2mm,above right of=m47] (e2) {$\unkOf{e_2}(\Vars^2,\Vars^1)$};
+  \path (e2) edge (m47);
+  \node [stateBox, above of=e2 ] (n16) {$\unkOf{n_1}(\Vars^2)$}; \path (n16) edge (e2);
+
+  \node [draw,xshift=1cm,yshift=2.5mm,above right of=e2] (et2) {$\rel_2(\Vars^2,\Vars^1)$}; \path (et2) edge (e2);
+  \node [draw, above of=n16] (ei2){$\StatesInit(\Vars^2)$};  \path (ei2) edge (n16);
+
+  \node [stateBox,xshift=14mm,yshift=2.5mm,above right of=n37] (e1)  {$\unkOf{e_1}(\Vars^5,\Vars^1)$};
+  \path (e1) edge (n37);
+  \node [stateBox, above of=e1 ] (m23) {$\unkOf{m_2}(\Vars^5)$}; \path (m23) edge (e1);
+  \node [stateBox, above of=m23] (m11) {$\unkOf{m_1}(\Vars^6)$}; \path (m11) edge (m23);
+
+  \node[draw,xshift=1cm,yshift=2.5mm,above right of=e1] (et1) {$\rel_1(\Vars^5,\Vars^1)$};\path (et1) edge (e1);
+  \node[draw,xshift=1cm,yshift=2.5mm,above right of=m23] (ete1) {$\rel_0(\Vars^6,\Vars^5)$};\path (ete1) edge (m23);
+  \node[draw, above of=m11]  (ei1)  {$\StatesInit(\Vars^6)$};\path (ei1) edge (m11);
+
+%----------------------------
+
+  \node [draw, yshift=1mm, above of=m47,text centered] (eq2) 
+  {    
+    \begin{array}[t]{@{}l@{}}
+      \pcone^{1}=\pcone^{2}\\ 
+      \local^{1}=\local^{2}\vspace{-1ex}
+    \end{array}
+
+  }; \path (eq2) edge (m47);
+
+  \node [draw,yshift=-1mm,above of=n37,text centered ] (eq1) 
+  {$\pctwo^{5}=\pctwo^{1}$}; \path (eq1) edge (n37);
+
+  \end{tikzpicture}\\
+\end{minipage}
+  
+\end{figure*}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

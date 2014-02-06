@@ -1,0 +1,259 @@
+\section{Solving Horn clauses over linear inequalities} \label{sec-horn-solving}
+
+As presented in the previous section, \algRefine calls the function
+\algSolveHornClauses.
+In this section we present a function \algSolveLinearHornClauses that
+can be used as an implementation of \algSolveHornClauses takes as
+input a set of clauses $\HornClauses$ over linear inequalities that is
+recursion-free.
+
+To simplify the presentation of the algorithm, we make two additional
+assumptions on~$\HornClauses$.
+First, we assume that for each pair of clauses $(\dots\!\,) \limplies
+\HornBody(\FreeVars)$ and $(\dots\!\,) \limplies
+\HornBody'(\FreeVars')$ from $\HornClauses$ we have~$\HornBody \neq
+\HornBody'$ and~$\HornBody \neq (\leq)\neq \HornBody'$.
+Second, we assume that $\HornClauses$ contains a clause $(\dots\!\,)
+\limplies \lfalse\ $. 
+
+The additional assumptions are satisfied by the clauses generated in
+Section~\ref{sec-refinement}.
+In case \algSolveLinearHornClauses is applied on a set of
+recursion-free Horn clauses over linear arithmetic that violates the
+two assumptions above, we can apply a certain renaming of relation
+symbols and introduction of additional clauses to meet the
+assumptions.
+
+
+
+%-----------------------------------------------------------------------------------
+
+\input{fig-ex-cex}
+
+\paragraph{Function \algMkHornTree} 
+
+The function \algMkHornTree generates a tree representation for a set
+of Horn clauses and is shown in Figure~\ref{fig-alg-mkTree}.
+For every relation appearing in the Horn clauses, the algorithm
+generates a corresponding tree node.
+The children of a node are maintained in a function $\cChildren$ as follows.
+Nodes that correspond to linear arithmetic relations have no children,
+see lines~11--12.
+A node that corresponds to an unknown relation with a relation symbol
+$b$ has as children those nodes that represent relation symbols that
+depend on~$b\ $.
+The $\cFormula$ attribute of the tree nodes is initialized to a linear
+arithmetic constraint for leaves of the tree in line~11, and to an
+unknown relation for internal tree nodes in line~13.
+
+\paragraph{Function \algSolveLinearHornClauses}
+See Figure~\ref{fig-alg-solveHorn} for the pseudocode of the procedure
+$\algSolveLinearHornClauses\ $.
+This procedure creates a tree representation for $\HornClauses$ at line~2.
+At line~3, we build a set containing all the $\cFormula$ attributes of
+leaf nodes and store this set in $\cLeaves\ $ .
+The input set of Horn clauses is satisfiable if and only if
+$\Land \cLeaves$ is unsatisfiable.
+If $\Land \cLeaves$ is unsatisfiable, the test at lines~4--5 succeeds
+and returns a proof of unsatisfiability in the form of weights for
+each linear inequality. 
+This test can be implemented using some linear arithmetic constraint
+solver.
+If the constraint solver fails to find a proof, an exception
+$\algUnsolvable$ is thrown at line~12.
+
+At line~7, $\algSolveLinearHornClauses$ calls the procedure
+$\algBuildPred\ $, which is presented in Figure~\ref{fig-alg-annotPred}.
+This procedure recursively traverses the input tree in postorder.
+If this procedure is invoked for a leaf node $\cnode\ $, it directly
+computes the value of $\cInterPolOf{\cnode}$ as a linear combination
+of atomic formulas with weights given by the $\proofVec$ function (see
+line~2).
+If this procedure is invoked for an internal node $\cnode\ $, the
+attribute $\cInterPol$ of $\cnode$'s children is computed using a
+recursive call at line~5.
+After completing the recursive call, $\cInterPolOf{\cnode}$ is
+calculated by adding the values of the $\cInterPol$ attributes of
+$\cnode$'s children.
+
+Since there may be multiple nodes in the tree corresponding to the
+same unknown relation, the algorithm has to account for the
+$\cInterPol$ attributes of all these nodes.
+Therefore, at lines~8--9 we compute solutions for each
+$\HornBody(\FreeVars)$ in $\Unknowns$ by taking conjunction of
+$\cInterPol$ of each node of the tree that is labeled with
+$\HornBody(u)$ for some~$u\ $.
+
+%The algorithm $\algSolveLinearHornClauses$ is closely related to the
+%interpolation generation method described in \cite{McMillanTACAS04}.
+
+%----------------------------------------------------------------------------------- 
+
+\begin{theorem}
+\algSolveLinearHornClauses computes a solution for a set of Horn
+clauses  $\HornClauses$ if and only if the conjunction of the clauses
+in $\HornClauses$ is satisfiable.
+\end{theorem}
+\iffalse
+\todo{proof sketch}
+\includeProof{
+\begin{proof}
+  Given that each relational variable appears only once as the head of
+  a Horn clause in $\HornClauses\ $, we denote by $body(b(w))$ the left
+  hand side of this particular clause.
+  Given the recursion-free structure of the set of clauses
+  $\HornClauses\ $, we can replace each relational variable $b_i(w_i)$
+  that appears in a body of a clause with $body(b_i(w_i))$ (with
+  proper renamings).
+  This replacement preserves the solutions of $\HornClauses\ $.
+  After replacement, the set of Horn clauses is reduced to one Horn
+  clause such that all the terms that appear in the body of this
+  clause are known predicates.
+
+  From the hypothesis that $\HornClauses$ has a solution, we can
+  deduce that the conjunction of the terms in the body of the clause
+  is unsatisfiable.
+  From the fact that the solution of $\HornClauses$ is in the
+  conjunctive linear inequality domain, we can guarantee that a proof
+  of the unsatisfiability is found using a linear arithmetic solver.
+  Therefore the test at lines~4--5 from \algSolveLinearHornClauses
+  succeeds and returns a function $\proofVec\ $.
+  From the $\proofVec$ function, \algBuildPred computes solutions for
+  each relational variable which satisfy the input set of Horn
+  clauses.
+\end{proof}
+}
+\fi
+
+\paragraph{Example}
+We illustrate the solving procedure using the same example from the
+previous section. 
+Given the Horn clauses from Figure~\ref{fig-ex-cex}(b), \algMkHornTree
+constructs a tree that is shown in Figure~\ref{fig-ex-cex}(d).
+This tree contains nodes which we label for convenience with
+identifiers from $1$ to $26\ $.
+In Figure~\ref{fig-ex-cex}(d) we show the $\cFormula$ map of the tree.
+A witness of the unsatisfiability of $\Land \cLeaves$ is given by the
+following atomic formulas:
+\begin{equation*}  
+  \begin{array}[t]{l}
+    \begin{array}[t]{@{}c@{}}
+      (\local^{3} \geq 1 )\\
+      {\downin}\\
+      {\cFormulaOf{7}}    
+    \end{array}
+    \land 
+    \begin{array}[t]{@{}c@{}}
+      (\local^{3} = \local^{2})\\
+      {\downin} \\ 
+      {\cFormulaOf{8}}
+    \end{array}
+    \land 
+    \begin{array}[t]{@{}c@{}}
+      (\local^{2}=0)\\
+      {\downin}\\ 
+      {\cFormulaOf{11}}
+    \end{array}
+\end{array}\end{equation*}
+Our solver treats each linear equality as a conjunction of two linear
+inequalities.
+The equality $\local^{2}=0$ is split in two inequalities
+$\local^{2}\leq0\land -\local^{2}\leq0\ $.
+The proof of unsatisfiability is:
+%
+\begin{equation*}  \begin{array}[t]{l}
+(1 \leq \local^{3} )+
+(\local^{3} \leq \local^{2} ) +
+( \local^{2} \leq 0) = (\linfalse).
+\end{array}\end{equation*}
+%
+This is encoded in the $\proofVec$ map with values of $1$ at locations
+corresponding to the three atomic formulas above and values of $0$ for
+all the other atomic formula.
+Next, we show in Figure~\ref{fig-ex-cex}(e) the values for the
+$\cInterPol$ map as computed by $\algBuildPred\ $.
+The final solution of the Horn clauses is built by a conjunction of
+the $\cInterPol$ attributes for nodes with the same unknown label. 
+The resulting solution $\Solution$ is shown below.
+%
+\begin{equation*} 
+  \begin{array}[t]{l@{\;\;=\;\;}l@{\;\;=\;\;}l}
+    \SolutionOf{\unkOf{m_1}(\Vars)} & \SolutionOf{\unkOf{n_2}(\Vars)} &
+    (\lintrue)\\[\jot]
+    \SolutionOf{\unkOf{e_1}(\Vars,\Vars')}& & (\lintrue) \\[\jot]
+    \SolutionOf{\unkOf{m_2}(\Vars)} & \SolutionOf{\unkOf{m_3}(\Vars)} &
+    (1 \leq \local) \\[\jot]
+    \SolutionOf{\unkOf{n_1}(\Vars)} & \SolutionOf{\unkOf{e_2}(\Vars,\Vars')} & 
+    (\local \leq 0) 
+  \end{array}
+\end{equation*}
+
+\input{fig-alg-solveHorn}
+\input{fig-alg-mkTree}
+\input{fig-alg-annotPred}
+
+\paragraph{Solving the clauses shown in Figure~\ref{fig-ex-cex}(c)}
+Given the Horn clauses shown in this figure, \algMkHornTree returns a
+tree representation with a similar $\cChildren$ map structure but with
+different $\cFormula$ attributes.
+The part of the tree that contributes to the proof of unsatisfiability
+is shown in Figure~\ref{fig-ex-cex}(f).
+The variable $\local^2$ does not appear in the subtree of the node $9$
+since $\cFormulaOf{9}=\unkOf{e_2}(\GlobVars^2,\GlobVars^1)\ $. 
+Part of this subtree is the node 11.
+Let us name the variable at this node as $\local^{\textsc{VIII}}\ $.
+The proof of unsatisfiability shown above does no longer hold, since
+the following formula is satisfiable:
+\[
+ (1\leq\local^{3} ) \land (\local^{3} = \local^{2}) \land (\local^{\textsc{VIII}}=0)
+\]
+However, the conjunction of the elements from the $\cLeaves$ set is
+still unsatisfiable, indicating that a modular solution exists.
+We find that the following atoms contribute to a proof of unsatisfiability:
+\begin{equation*}
+  \begin{array}[t]{@{}c@{}}
+      \lock^2=1\\
+      \downin\\
+      {\cFormulaOf{8}}    
+    \end{array}
+  \land 
+  \begin{array}[t]{@{}c@{}}
+      \lock^2=0\\
+      \downin\\
+      {\cFormulaOf{12}}
+  \end{array}
+\end{equation*}
+After splitting the equalities in equivalent inequalities, our
+algorithm computes the following solution:
+\begin{equation*}  
+  \begin{array}[t]{r@{\;}lr@{\;}l}
+    \cInterPolOf{8} &= (1\leq\lock^{2} ) & \cInterPolOf{12} &= (\lock^{2}\leq 0 ) \\
+    \cInterPolOf{3} &= (1\leq\lock^{2} ) & \cInterPolOf{9} &= (\lock^{2} \leq 0 ) \\
+    \cInterPolOf{2} &= (\linfalse)  
+  \end{array} 
+\end{equation*}
+%
+From this $\cInterPol$ map, our algorithm derives a solution
+$\Solution$ in lines 8--9 and succeeds in computing modular
+predicates.
+
+% \todo{ PC vs. Data.
+% Each constraint originating from the initial states, the transition
+% relations and the error states can be split in to two parts.
+% The first constraint is over program counter variables and the other
+% constraint relates the data variables. 
+% The splitting procedure preserves unsatisfiability of the original
+% constraint since there in no atomic formula that relates both program
+% counter variables and data variables.
+% The original constraint system is unsatisfiable if and only if either
+% of the two parts is unsatisfiable.
+% For solving the program counter constraints, \algRefinePC at line 13
+% implements an algorithm proposed in our earlier work
+% \cite{GuptaATVA10}.
+% }
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

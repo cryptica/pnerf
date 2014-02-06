@@ -1,0 +1,105 @@
+\section{Introduction}
+
+The ubiquitous availability of parallel computing infrastructures
+facilitated by the advent of multicore architectures requires a shift
+towards multi-threaded programming to take full advantage of the
+available computing resources.
+Writing correct multi-threaded software is a difficult task, as the
+programmer needs to keep track of a very large number of possible
+interactions between the program threads.
+Automated program analysis and verification tools can support
+programmer in dealing with this challenge by systematically and
+exhaustively exploring program behaviours and checking their
+correctness.
+
+Direct treatment of all possible thread interleavings by reasoning
+about the program globally is a prohibitively expensive task, even for
+small programs. 
+By applying rely-guarantee techniques, see
+e.g.~\cite{RelyGuarantee,OwickiAI76}, such global reasoning can be
+avoided by considering each program thread in isolation, using
+environment transitions to summarize the effect of executing other
+threads, and applying them on the thread at hand.
+The success of such an approach depends on the ability to
+automatically discover environment transitions that are precise enough
+to deliver a conclusive analysis/verification outcome, and yet do not
+keep track of unnecessary details in order to avoid sub-optimal
+efficiency.
+
+%\todo{Modular proofs play an important role in rely-guarantee
+%approaches.}
+  
+In this paper we present a method that automates rely-guarantee
+reasoning for verifying safety of multi-threaded programs.
+Our method relies on an automated discovery of environment transitions
+using (transition) predicate abstraction~\cite{GrafSaidi,TransPred05}.
+It performs a predicate abstraction-based reachability computation for
+each thread and interleaves it with the construction of environment
+transitions that over-approximate the effect of executing thread
+transitions using transition predicates.
+The success of our method crucially depends on an abstraction
+refinement procedure that discovers (transition) predicates.
+The refinement procedure attempts to minimize the amount of details
+that are exposed by the environment transitions, in order to avoid
+unnecessary details about thread interaction.
+
+The crux of our refinement approach is in using a declarative
+formulation of the abstraction refinement algorithm that can deal with
+the thread reachability, environment transitions, and their mutual
+dependencies.
+We use Horn clauses to describe constraints on the desired
+(transition) predicates, and solve these constraints using a general
+algorithm for recursion-free Horn clauses.
+Our formalization can accommodate additional requirements that express
+the preference for modular predicates that do not refer to the local
+variables of environment threads, together with the preference for
+modular transition predicates that only deal with global variables and
+their primed versions.
+
+We implemented the proposed method in a verification tool for
+multi-threaded programs and applied it on a range of benchmarks,
+which includes fragments of open source software, ticket-based mutual
+exclusion protocols, and multi-threaded Linux device drivers.
+%We observed that some of the discovered environment assumptions are
+%thread-modular, while some others involve reasoning about thread-local
+%variables.
+The results of the experimental evaluation indicate that our
+declarative abstraction refinement approach can be effective in
+finding adequate environment transitions for the verification of
+multi-threaded programs.
+
+This paper makes the following contributions:
+\begin{enumerate}
+\item the automatic, rely-guarantee based method for verifying
+multi-threaded programs using (transition) predicate abstraction;
+%together with a corresponding abstraction refinement algorithm;
+\item the novel formulation of abstraction refinement schemes using
+Horn clauses, and its application for the (transition) abstraction
+discovery for multi-threaded programs;
+\item the algorithm for solving recursion-free Horn clauses over
+linear arithmetic constraints;
+\item the prototype implementation and its evaluation.
+\end{enumerate}
+
+
+The rest of the paper is organized as follows. 
+First, we illustrate our method in Section~\ref{sec-illustration}.
+In Section~\ref{sec-prelim} we present necessary definitions.
+Section~\ref{sec-proof-rule} presents a proof rule that provides a
+basis for our method, and shows how the proof rule can be automated
+using the connection to fixpoints and abstraction techniques.
+We present the main algorithm in Section~\ref{sec-algo-safety}.
+Section~\ref{sec-refinement} focuses on the abstraction refinement using
+Horn clauses, while Section~\ref{sec-horn-solving} presents a
+constraint solving algorithm for Horn clauses over linear
+inequalities.
+We discuss the experimental evaluation in
+Section~\ref{sec-experiments}.
+Related work is presented in Section~\ref{sec-related}.
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

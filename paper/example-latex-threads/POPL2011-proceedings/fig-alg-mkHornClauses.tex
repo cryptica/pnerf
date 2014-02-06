@@ -1,0 +1,60 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{}
+   \\ \\ \\ \\ \\
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\ 11 \\ 12 \\ 13
+   \\ 14 
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+ \algFunction \algMkHornClauses\\
+ \algInput \\
+ \tabT $\StateDst$ - abstract state\\
+ \algBegin \\
+ \tabT $i$ \algAssgn $\artTIdOf{\StateDst}$\\
+ \tabT \algReturn\\
+ \tabTT \algMatch $\artParent(\StateDst)$ \algWith\\
+ \tabTT \algCase{$(\StateSrc,\rel)$} \\
+ \tabTTT $\algMkHornClauses(\StateSrc) \mathrel{\cup}$\\
+ \tabTTT \algBegin \\
+ \tabTTTT \algMatch $\artParent(\rel)$ \algWith \\
+ \tabTTTT \algCase{$(\StateOrig,\OrigRel)$}\\
+ \tabTTTTT
+ $
+ \begin{array}[t]{@{}l}
+   \set{
+     \begin{array}[t]{@{}l}
+       \unkOf{\StateOrig}(\Vars) \land \OrigRel
+       \rightarrow \unkOf{\rel}(\Vars, \Vars')\ ,\\
+       \begin{array}[t]{@{}l@{}}
+         \unkOf{\StateSrc}(\Vars) \land \unkOf{\rel}(\Vars, \Vars')
+         \land \relLocEqOf{i} 
+         \rightarrow \unkOf{\StateDst}(\Vars')}
+     \end{array}
+   \end{array}\\
+   \mathrel{\cup} \algMkHornClauses(\StateOrig)
+ \end{array}
+ $ \\
+ \tabTTT \algCase{$\bot$} 
+ $\set{\unkOf{\StateSrc}(\Vars)\land \rel
+   \rightarrow \unkOf{\StateDst}(\Vars')}$\\
+ \tabTTT \algEnd\\
+ \tabTT \algCase{$\bot$}
+ $\set{\SymbInit \rightarrow\unkOf{\StateDst}(\Vars)}$ \\
+ \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Function \algMkHornClauses.}
+  \label{fig-alg-MkHornClauses}
+\end{figure}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

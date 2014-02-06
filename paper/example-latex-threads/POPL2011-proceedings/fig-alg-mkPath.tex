@@ -1,0 +1,39 @@
+\linespread{1.1}
+\begin{figure}[t]
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ 
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 % \\ 8 \\ 9  \\ 10 %\\ 11 \\ 12 
+% \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 \\ 18 %\\ 19 \\ 20 \\
+%   21 \\ 22 \\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 \\ 29 % \\ 30 \\
+%      31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \algCexPath\\
+    \algInput \\
+    \tabT $\StateDst$ - abstract state\\
+    \algBegin\\
+    \tabT \algMatch $\artParent(\StateDst)$ \algWith\\
+    \tabT \algCase{$(\StateSrc, \rel)$} \\
+    \tabTT $\path$ \algAssgn $\algCexPath(\StateSrc)$\\
+    \tabTT \algMatch $\artParent(\rel)$ \algWith\\
+    \tabTT \algCase{$(\StateOrig, \OrigRel)$} \algReturn $\path \cdot \OrigRel$\\
+    \tabTT \algCase{$\bot$} \algReturn $\path\cdot\rel$\\
+    \tabT \algCase{$\bot$} \algReturn $\emptypath$ \hfill 
+    \algComment{the empty sequence}\\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Function \algCexPath takes as input an abstract state
+    $\StateDst$ and returns a sequence of transitions that lead to
+    $\StateDst$.
+  }
+  \label{fig-alg-cex-path}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

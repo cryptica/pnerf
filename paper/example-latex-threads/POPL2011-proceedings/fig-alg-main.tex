@@ -1,0 +1,87 @@
+\linespread{1.1}
+\begin{figure}[t]
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\[\jot] 
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\
+   11 \\ 12 \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 \\ 18 \\ 19 % \\ 20 \\
+%   21 \\ 22 \\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 \\ 29 % \\ 30 \\ 
+%   31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \algMain\\
+    \algInput\\
+    \tabT $\program$ - program with $\Num$ threads\\
+    \algVars\\
+    \tabT $\artPreds_i, \abst_i$ - 
+    \begin{array}[t]{@{}l}
+      \text{predicates for thread } i \text{ and}\\ 
+      \text{corresponding state abstraction function} 
+    \end{array}\\
+    \tabT $\artTPredsOf{i}{j}, \abstTrans_{\envFromTo{i}{j}}$ - 
+    \begin{array}[t]{@{}l@{}}
+      \text{transition predicates for pair of threads } i, j \text{ and}\\ 
+      \text{corresponding transition abstraction function}
+    \end{array}\\
+    \tabT $\artReachOf{i}$ - abstract states of thread $i$\\
+    \tabT $\EnvTransOf{i}$ - abstract environment transitions of thread $i$\\
+    \tabT $\artParent$ - 
+    \begin{array}[t]{@{}l}
+      \text{parent function for abstract states and}\\
+      \text{environment transitions}
+    \end{array}\\
+    \tabT $\artTId$ - 
+    \begin{array}[t]{@{}l}
+      \text{parent thread function for abstract states and}\\
+      \text{environment transitions}
+    \end{array}\\
+    \algBegin\\
+    \tabT \algForeach $i \neq j \in \ThreadIds$ \algDo \\
+    \tabTT $\artPreds_i$ \algAssgn $\artTPredsOf{i}{j}$ \algAssgn
+    $\emptyset$\\
+    \tabT \algRepeat\\
+    \tabTT \algForeach $i \neq j \in \ThreadIds$ \algDo \\
+    \tabTTT $\abst_i$ \algAssgn $\lambda S. \Land \set{\dot{p}\in\artPreds_i\mid 
+      \forall \Vars : S \limplies \dot{p}}$ \\
+    \tabTTT $\abstTrans_{\envFromTo{i}{j}}$ \algAssgn $\lambda T.\Land\set{\ddot{p}
+    \in\artTPredsOf{i}{j}\mid \forall \Vars, \Vars' : T\limplies
+    \ddot{p}}$ \\
+    \tabTT $\algAbstReachEnvSolveOf{()}$ \\
+    \tabTT \algIf 
+    \begin{array}[t]{@{}l}
+      \text{exists } S_1\in\artReachOf{1}, \dots, S_{\Num} \in
+      \artReachOf{\Num} \text{ such that}\\
+      \quad \exists \Vars : S_1 \land \dots \land S_\Num \land
+      \SymbError 
+    \end{array}
+    \\
+    \tabTT \algThen\\
+    \tabTTT \algTry \\
+    \tabTTTT $\algRefine(S_1,\dots,S_\Num)$\\
+    \tabTTT \algWith \algUnsolvable\\
+    \tabTTTT $\StateDst$ \algAssgn some $S_i$ from $\set{S_1, \dots, S_\Num}$\\
+    \tabTTTT \algReturn ``counterexample $\algCexPathOf{\StateDst}$'' \\
+    \tabTT \algElse \\
+    \tabTTT \algReturn ``% ''
+    \begin{array}[t]{@{}l}
+      \text{program }\program\text{ is safe with the proof}\\
+      \Lor\artReachOf{1},\dots,\Lor\artReachOf{\Num}, \Lor\EnvTransOf{1},\dots,\Lor\EnvTransOf{\Num}\text{''}
+    \end{array}
+    \\
+    \tabT \algUntil $\ltrue$ \\
+    \algEnd.
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Function \algMain for verifying safety of the
+    multi-threaded program~$\program$.
+  }
+  \label{fig-alg-main}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

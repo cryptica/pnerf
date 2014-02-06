@@ -1,0 +1,91 @@
+\section{Related work}\label{sec-related}
+
+The main inspiration for our work draws from the rely-guarantee
+reasoning method \cite{JonesTOPLAS83, RelyGuarantee} and automatic
+abstraction refinement approach to verification \cite{ClarkeCEGAR}.
+
+The seminal work on rely-guarantee reasoning \cite{JonesTOPLAS83,
+  RelyGuarantee} initially offered an approach to reason about
+multi-threaded programs by making explicit the interference between
+threads.
+Subsequently, rely-guarantee reasoning was used to tackle the problem
+of state explosion in verification of multi-threaded programs.
+Rely-guarantee reasoning was mechanized and firstly implemented in the 
+Calvin model checker \cite{CalvinESOP} for Java shared-memory programs.
+Calvin reduces the verification of the multi-threaded program to the
+verification of several sequential programs with the help of a
+programmer specified environment assumption.
+In \cite{ThreadModularFlanaganQadeer}, thread-modular model checking
+was proposed to infer automatically environment assumptions that
+propagate only global variable changes to other threads. 
+The algorithm has low complexity, polynomial in the number of threads,
+but is incomplete and fails to discover environment assumptions that
+refer to the local states of a thread.
+Thread-modular verification is formalized by \cite{MalkisICTAC06} in
+the framework of abstract interpretation as Cartesian product of sets
+of states. 
+
+% we - weakest environment and refinement by strengthening
+% RR - strongest environment and refinement by weakening
+
+The method of \cite{HenzingerPLDI04} uses a richer abstraction scheme
+that computes contextual thread reachability, where the context in
+which a thread executes includes information on both global and local
+states of threads.
+The context (or environment) is computed using bisimilarity quotients
+in steps that are interleaved with abstract reachability computations.
+The verification starts with the strongest possible environment
+assumption and, by refinement, the environment is weakened until
+it over-approximates the transitions of the other threads.
+In contrast, our approach refines iteratively the environment based on
+over-approximation, starting with the weakest environment and
+strengthening it at every iteration. 
+% More importantly, our algorithm integrates the computation of
+% environment assumptions with the abstract state reachability.
+For abstraction refinement, a counterexample from
+\cite{HenzingerPLDI04} is reduced to a concrete sequential path by
+replacing environment transitions with their corresponding local
+transitions.
+
+The approach of \cite{CohenFMSD09} presents another
+solution to overcome the incompleteness of local reasoning.
+Guided by counterexamples, it refines the abstraction by exposing 
+a local variable of a thread as a global variable. 
+This refinement recovers the completeness of reasoning, but is
+applicable to finite-state systems and may compute an unnecessarily
+precise abstraction.
+In contrast, our refinement procedure relies on interpolation and
+includes predicates on local variables as needed during verification.
+
+Another approach to overcome the state explosion problem of monolithic
+reasoning over multi-threaded programs is to translate the
+multi-threaded program to a sequential program assuming a bound on the
+number of context switches.
+This scheme was initially proposed and implemented in KISS
+\cite{QadeerPLDI04}, a multi-threaded checker for C programs, and later
+evolved to handle and reproduce even difficult to find Heisenbugs
+\cite{MusuvathiOSDI08}.
+Monolithic reasoning can be greatly facilitated by using techniques
+evolved from partial-order reduction \cite{GodefroidPhd94}, like
+dynamic partial-order reduction \cite{FlanaganPOPL05} or peephole
+partial order reduction \cite{WangTACAS08}.
+Yet another technique to fight state explosion is to factor out
+redundancy due to thread replication as proposed in counter
+abstraction \cite{PnueliCAV02} and implemented in the 
+model checker Boom \cite{BaslerCAV09,BaslerTACAS10}.
+% shape analysis for concurrent programs: 
+% GotsmanPLDI07, RGSep-Action-Inference VMCAI10, HongseokYang-RCU-unpublished
+We view these techniques as paramount in obtaining practical
+multi-threaded verifiers, but orthogonal to our proposal for automatic
+environment inference.
+
+% Future work:
+% - distribute the model checking algorithm: as in DArmc-VMCAI'11. Even more natural for
+% compositional model checking algorithms like ours (as also suggested in Cohen-EC'09).
+% - prove that multi-threaded programs eventually do something good Cook-POPL'07
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

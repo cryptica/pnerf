@@ -1,0 +1,48 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+    \mbox{}\\
+    9 \\ 10 \\ 11 \\ 12\\ 13 \\ 14 \\ 15
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \tabTTTTT
+    $
+    \begin{array}[t]{@{}l}
+      \set{
+        \begin{array}[t]{@{}l}
+          \unkOf{\StateOrig}(\GlobVars, \LocVarsOf{i}) \land \OrigRel
+          \rightarrow \unkOf{\rel}(\GlobVars, \GlobVars')\ ,\\
+          \begin{array}[t]{@{}l}
+            \unkOf{\StateSrc}(\GlobVars, \LocVarsOf{i})
+            \mathrel{\land}
+            \unkOf{\rel}(\GlobVars, \GlobVars')
+            \mathrel{\land}\\
+            \qquad\relLocEqOf{i}
+            \rightarrow \unkOf{\StateDst}(\GlobVars', \LocVarsOf{i}')}
+        \end{array}
+      \end{array}\\
+      \mathrel{\cup} \algMkHornClauses(\StateOrig)
+    \end{array}
+    $ \\
+    \tabTTT \algCase{$\bot$} 
+    $\set{\unkOf{\StateSrc}(\GlobVars, \LocVarsOf{i})\land \rel
+      \rightarrow \unkOf{\StateDst}(\GlobVars', \LocVarsOf{i}')}$\\
+    \tabTTT \algEnd\\
+    \tabTT \algCase{$\bot$}
+    $\set{\SymbInit \rightarrow\unkOf{\StateDst}(\GlobVars, \LocVarsOf{i})}$
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Modifications to \algMkHornClauses to admit only modular solutions.}
+  \label{fig-alg-TMMkHornClauses}
+\end{figure}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

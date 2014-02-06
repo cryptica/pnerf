@@ -1,0 +1,678 @@
+\section{Illustration}\label{sec-illustration}
+
+In this section we illustrate our algorithm using two multi-threaded
+examples.
+The first example does not have a modular proof, hence our algorithm
+reasons about relationship between the local variables of different
+threads.
+For the second example, our algorithm succeeds in finding a modular
+proof by applying an abstraction refinement procedure that guarantees
+the discovery of a modular abstraction whenever it exists.
+
+\iffalse
+
+Firstly, the algorithm generates thread reachability assertions
+in the form of trees of reachable states for each thread.
+If a reachable state is found to violate the mutual exclusion
+property, then our algorithm generates a set of Horn clauses that
+encodes how the abstract error state was reached.
+If the set of Horn clauses is satisfiable, our solving procedure
+returns a solution which is used for abstraction refinement.
+
+The first multi-threaded program does not have a thread-modular proof
+and hence its verification leads to environment transitions that
+reveal some facts about the local state of the threads. 
+The second program can be proven correct using a thread-modular proof,
+however, non-modular proofs that (unnecessarily) involve local
+variables can also be used to prove correctness of this program. 
+\fi
+
+\subsection{Example \TakeLockBit}\label{subsec-takebit}
+
+See Figure~\ref{fig-take-lock} for the program \TakeLockBit that
+consists of two threads.
+The threads attempt to access a critical section, and synchronize their
+accesses using a global variable~$\lock\ $.
+We assume that initially the lock is not taken, i.e., $\lock = 0\ $,
+and that the locking statement \verb|take_lock| waits until the lock
+is released and then assigns the value of its second parameter
+to~$\lock\ $, thus taking the lock.
+We write $\Vars = (\lock, \pcone, \pctwo)$ for the program variables,
+where $\pcone$ and $\pctwo$ are local program counter variables of the
+first and second thread, respectively.
+
+% ===================== Program description =============== 
+
+
+We start by representing the program using assertions $\SymbInit$ and
+$\SymbError$ over program variables that describe the initial and
+error states of the program, together with assertions over unprimed
+and primed program variables $\rel_1$ and $\rel_2$ that describe the
+transition relations for program statements.
+%
+\begin{equation*}
+  \begin{array}[t]{r@{}l@{}}
+    \SymbInit = (&\pcone=a \land \pctwo=p \land \lock=0)\ , \\[\jot]
+    \SymbError = (&\pcone=b \land \pctwo=q)\ ,\\[\jot]
+    \rel_1 = (&\lock=0 \land \lock'=1 \land \pcone=a \land
+    \pcone'=b \land  \relLocEqOf{2})\ ,
+    \\[\jot]
+    \relLocEqOf{1} = (&\pcone=\pcone')\ , \\[\jot]
+    \rel_2 = (&\lock=0 \land \lock'=1 \land \pctwo=p \land \pctwo'=q
+    \land \relLocEqOf{1})\ , \\[\jot]
+    \relLocEqOf{2} = (&\pctwo=\pctwo')\ .
+ \end{array}
+\end{equation*} 
+%
+The auxiliary assertions $\relLocEqOf{1}$ and $\relLocEqOf{2}$ state
+that the local variable of the first and second thread, respectively,
+is preserved during the transition.
+
+\iffalse
+The transition relations $\rel_1$ and $\rel_2$ refer to all program
+variables, i.e., the global variable $\lock$ as well as the local
+variables $\pcone$ and $\pctwo\ $.
+
+For example, the transition relation $\rel_1$ of the first thread
+requires that the local variable of the second thread does not change,
+which is expressed by the conjunct $\pctwo = \pctwo'$ in~$\rel_1\ $.
+\fi
+
+To verify \TakeLockBit, our algorithm computes a sequence of \aret{}s
+(Abstract Reachability and Environment Trees).
+Each tree computation amounts to a combination of i) a standard
+abstract reachability computation that is performed for each thread
+and is called thread reachability, and ii) a construction and
+application of environment transitions.
+Abstract states represent sets of (concrete) program states, while
+environment transitions are binary relations of program states.
+
+\begin{figure}[h!]
+\hrule
+\centering
+\begin{minipage}[t]{.48\columnwidth} 
+\begin{verbatim} 
+
+// Thread 1 
+a: take_lock(lock, 1); 
+b: // critical 
+\end{verbatim}
+\end{minipage}
+%
+\begin{minipage}[t]{.48\columnwidth} 
+\begin{verbatim}
+
+  // Thread 2
+  p: take_lock(lock, 1);
+  q: // critical
+
+\end{verbatim}
+\end{minipage}
+\caption{Example program \TakeLockBit.
+  Each thread waits until the lock is released, and then assigns the
+integer $1$ to~$\lock\ $.
+}
+\label{fig-take-lock}
+\end{figure}
+
+
+% ===================== Iteration 1 =======================
+\paragraph{First \aret computation}
+
+
+The thread reachability computation for the first thread starts by
+computing an abstraction of the initial program states~$\SymbInit\ $.
+Here, we use an abstraction function $\abst_1\ $, where the dot
+indicates that this function over-approximates sets of program states
+(and not sets of pairs of states, as will take place later) and the
+index $1$ indicates that this abstraction function is used for the
+first thread.
+In this example, we assume that the abstraction function only tracks
+the value of the program counter of the first thread, i.e.,
+$\artPreds_1 = \set{\pcone=a, \pcone=b}\ $, and is computed as
+follows: $\abst_1(S) = \Land \set{\dot{p} \in \artPreds_1 \mid \forall
+\Vars:S \limplies \dot{p}}\ $.
+We obtain the initial abstract state $m_1$ as follows:
+%
+\begin{equation*}
+  m_1  = \abst_1(\SymbInit) = (\pcone = a)\ .
+\end{equation*}
+%
+ Next, we compute an abstract successor of $m_1$ with respect to the
+transition~$\rel_1$ using the strongest postcondition operator $\post\
+$ that is combined with $\abstTIdOf{1}$:
+%
+\begin{equation*}
+  m_2 = \abst_1(\post(\rel_1, m_1)) = (\pcone = b)\ .
+\end{equation*}
+
+\input{fig-ex-takebit-art} 
+
+Similarly, we compute the thread reachability for the second thread.
+Using predicates over the program counter of the second thread, i.e.,
+$\artPreds_2 = \set{\pctwo=p, \pctwo=q}\ $, we compute the following
+two abstract states:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}l@{\;=\;}l}
+    n_1 &  \abst_2(\SymbInit) &  (\pctwo = p)\ ,\\[\jot]
+    n_2 &  \abst_2(\post(\rel_2, n_1)) &  (\pctwo = q)\ .
+  \end{array}
+\end{equation*}
+%
+For each thread, we organize the computed abstract states in a tree,
+see Figure~\ref{fig-ex-takebit-art}(a). 
+
+We stop the \aret computation since we discover that the error states
+overlap with the intersection of the abstract state $m_2$ from the
+thread reachability of the first thread and $n_2$ from the second
+thread, i.e., $m_2 \land n_2 \land \SymbError$ is satisfiable.
+
+
+\paragraph{First abstraction refinement} 
+
+We treat the pair $m_2$ and $n_2$ as a possible evidence that the
+error states of the program can be reached.
+Yet, we cannot assert that the program is incorrect, since abstraction
+was involved when computing $m_2$ and $n_2\ $.
+
+We check if the discovered evidence is spurious by formulating a
+constraint that is satisfiable if and only if the abstraction can be
+refined to exclude the spuriousness.
+For each abstract state involved in the reachability of and including
+$m_2$ and $n_2$ we create an unknown predicate that denotes a set of
+program states. 
+We obtain $\unkOf{m_1}(\Vars)$, $\unkOf{n_1}(\Vars)$,
+$\unkOf{m_2}(\Vars)$, and~$\unkOf{n_2}(\Vars)\ $, which correspond to
+$m_1$, $n_1$, $m_2$, and~$n_2$, respectively.
+Then, we record the relation between the unknown predicates using
+constraints in the form of Horn clauses.
+For example, since $m_1$ was an abstraction of the initial program
+states, we require that $\unkOf{m_1}(\Vars)$ over-approximates
+$\SymbInit$ as well, and represent this requirement by a Horn clause
+$\SymbInit \limplies \unkOf{m_1}(\Vars)\ $.
+As a result, we obtain the following set of clauses.
+%
+\begin{equation*}
+  \HornClauses_1 = \set{
+  \begin{array}[t]{@{}l}
+    \SymbInit \limplies \unkOf{m_1}(\Vars),\ 
+    \unkOf{m_1}(\Vars) \land \rel_1 \limplies \unkOf{m_2}(\Vars'),\\[\jot]
+    \SymbInit \limplies \unkOf{n_1}(\Vars),\ 
+    \unkOf{n_1}(\Vars) \land \rel_2 \limplies \unkOf{n_2}(\Vars'),\\[\jot]
+    \unkOf{m_2}(\Vars) \land \unkOf{n_2}(\Vars) \land \SymbError \limplies 
+    \lfalse }
+  \end{array}
+\end{equation*}
+%
+The last clause in $\HornClauses_1$ requires that the intersection of
+the refined versions of the abstract states $m_2$ and $n_2$ is
+disjoint from the error states of the program.
+
+We check if the conjunction of the clauses in $\HornClauses_1$ is
+satisfiable using a SAT-based algorithm presented
+in~\cite{GuptaATVA10}.
+(Section~\ref{sec-horn-solving} presents an algorithm for solving Horn
+clauses over linear inequalities.)
+We obtain the following satisfying assignment~$\Solution$ that maps
+each unknown predicate to an assertion of the program variables.
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}ll@{\;=\;}l}
+    \SolutionOf{\unkOf{m_1}(\Vars)} & (\pctwo=p) & 
+    \SolutionOf{\unkOf{n_1}(\Vars)} & (\pcone=a)\\[\jot]
+    \SolutionOf{\unkOf{m_2}(\Vars)} & (\pctwo=p) & 
+    \SolutionOf{\unkOf{n_2}(\Vars)} & (\pcone=a)
+  \end{array}
+\end{equation*} 
+%
+The existence of $\Solution$ indicates that the discovered evidence is
+spurious. 
+We use $\Solution$ to refine the abstraction functions and hence
+eliminate the source of spuriousness.
+We collect the predicates that appear in the solution for abstract
+states from the first thread, add them to the sets of predicates
+$\artPreds_1$, and perform a similar step for the second thread.
+The resulting sets of predicates are shown below.
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}l}
+  \artPreds_1 & \set{\pcone=a, \pcone=b, \pctwo=p}\\[\jot]
+  \artPreds_2 & \set{\pctwo=p, \pctwo=q, \pcone=a}
+  \end{array}
+\end{equation*}
+%
+They guarantee that the same spuriousness will not appear during
+subsequent \aret computations.
+
+\iffalse
+\todo{Drop?}
+We observe that the assignments for $\unkOf{m_1}(\Vars)$ and
+$\unkOf{m_2}(\Vars)$ from the first thread involve the local variable
+$\pctwo$ of the second thread, and the assignments for
+$\unkOf{n_1}(\Vars)$ and $\unkOf{n_2}(\Vars)$ involve the variable
+$\pcone\ $. 
+While unavoidable for this constraint system, such solutions lead to
+non modular reasoning in the next \aret computation.
+\fi
+
+
+% ===================== Iteration 2 =======================
+\paragraph{Second \aret computation}
+We re-start the \aret computation using the previously discovered 
+predicates. 
+Figure~\ref{fig-ex-takebit-art}(b) shows the two trees computed with
+the refined abstraction functions where
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}ll@{\;=\;}l}
+    m_1 & (\pcone=a \land \pctwo=p)\ , & n_1 & (\pcone=a \land
+    \pctwo=p)\ ,
+    \\[\jot] 
+    m_2 & (\pcone=b \land \pctwo=p)\ , & n_2 & (\pcone=a \land
+    \pctwo=q)\ .
+  \end{array}
+\end{equation*}
+%
+Due to the first abstraction refinement step, $m_2 \land n_2 \land
+\SymbError$ is unsatisfiable.
+The thread reachability computation for each thread does not discover
+any further abstract states.
+
+The \aret computation proceeds by considering interleaving of the
+transitions from one thread with the transitions from the other
+thread. 
+We account for thread interleaving by constructing and applying
+environment transitions.
+First, we construct an environment transition $e_1$ that records the
+effect of applying $\rel_1$ on $m_1$ in the first thread on the thread
+reachability in the second thread.
+This effect is over-approximated by using an abstraction
+function~$\abstTransTIdOf{1}{2}$.
+In this function, the double dot indicates that the function abstracts
+binary relations over states (and not sets of states).
+The index $\envFromTo{1}{2}$ indicates that this function is applied
+to abstract effect of the first thread on the second thread.
+Initially, we use the empty set of transition predicates (over pairs
+of states) $\artTPreds_{\envFromTo{1}{2}}=\emptyset\ $ to
+define~$\abstTransTIdOf{1}{2}$.
+The environment transition $e_1$ is defined as
+%
+\begin{equation*}
+  e_1 = \abstTrans_{\envFromTo{1}{2}}(m_1 \land \rel_1) = \ltrue\ ,
+\end{equation*}
+%
+and it non-deterministically updates the program variables (since
+$\ltrue$ does not impose any restrictions on the successor states of
+the transition).
+
+Next, we add $e_1$ to the transitions of the second thread.
+Then, its thread reachability computation uses $e_1$ during the
+abstract successor computation, and creates an abstract state $n_3$ by
+applying $e_1$ on~$n_2$ as follows:
+%
+\begin{equation*}
+  n_3 = \abstTIdOf{2}(\post(e_1 \land \relLocEqOf{2}, n_2)) = (\pctwo
+  = q)\ .
+\end{equation*}
+%
+The conjunct $\relLocEqOf{2}$ ensures that the local variable of the
+second thread is not changed by the environment transition.
+
+Symmetrically, we use a function $\abstTransTIdOf{2}{1}$ to abstract
+the effect of applying transitions in the second thread on the thread
+reachability of the first thread.
+The application of $\rel_2$ on $n_1$ results in the environment
+transition $e_2$ such that
+%
+\begin{equation*}
+  e_2 = \abstTransTIdOf{2}{1}(n_1 \land \rel_2) = \ltrue\ .
+\end{equation*}
+%
+We apply $e_2$ to contribute an abstract successor $m_3$ of the
+abstract state $m_2$ to the thread reachability of the first thread:
+%
+\begin{equation*}
+  m_3 = \abstTIdOf{1}(\post(e_2 \land \relLocEqOf{1}, m_2)) = (\pcone=b)\ .
+\end{equation*}
+%
+
+\iffalse
+We denote by $\EnvTransOf{j}$ the set of all environment
+transitions that are to be applied in thread $j\ $. 
+For example, after the previous step, $\EnvTransOf{1} = \set{e_2}$ and
+$\EnvTransOf{2} = \set{e_1}\ $.
+The effect of the environment transitions $e_1$ and, respectively,
+$e_2$ is to havoc the values of all program variables except $\pctwo$
+and respectively $\pcone$ (local variables in the thread that applies
+the environment transition).
+%
+\begin{equation*}
+  \begin{array}[t]{r@{\arrSpace}l@{\arrSpace}l}
+    m_3 & = \abst_1(\post(e_2 \land \pcone=\pcone', m_2)) & =(\pcone=b)\\[\jot]
+    n_3 & = \abst_2(\post(e_1 \land \pctwo=\pctwo', n_2)) & =(\pctwo=q)\\[\jot]
+  \end{array}
+\end{equation*}
+%
+\fi
+
+We observe that the intersection of the abstract states $m_3$ and
+$n_3$ contains a non-empty set of error states, i.e., $m_3 \land n_3
+\land \SymbError$ is satisfiable, thus delivering a possible evidence
+for incorrectness.
+
+
+% Note that the branches that give the tree-shape of the counterexample
+% originate either from the error check or from the application of
+% environment transitions.
+ 
+\paragraph{Second abstraction refinement} 
+
+
+Similarly to the first abstraction refinement step, we construct a set
+of Horn clauses $\HornClauses_2$ to check if the discovered evidence
+is spurious.
+We consider predicates $\unkOf{m_1}(\Vars)$, $\unkOf{n_1}(\Vars)$,
+$\unkOf{m_2}(\Vars)$, $\unkOf{n_2}(\Vars)$, $\unkOf{m_3}(\Vars)$, and
+$\unkOf{n_3}(\Vars)$ that represent unknown sets of program states,
+together with $\unkOf{e_1}(\Vars,\Vars')$ and
+$\unkOf{e_2}(\Vars,\Vars')$ that represent unknown binary relations
+over program states.
+%
+\begin{equation*}
+  \HornClauses_2 = \set{
+    \begin{array}[t]{@{}l}
+      \SymbInit \limplies \unkOf{m_1}(\Vars),\ 
+      \unkOf{m_1}(\Vars) \land \rel_1 \limplies \unkOf{m_2}(\Vars'), \\[\jot]
+      \SymbInit \limplies \unkOf{n_1}(\Vars),\ 
+      \unkOf{n_1}(\Vars) \land \rel_2 \limplies \unkOf{n_2}(\Vars'), \\[\jot]
+      \unkOf{m_1}(\Vars) \land \rel_1 \limplies \unkOf{e_1}(\Vars,\Vars'),
+      \\[\jot]
+      \unkOf{n_2}(\Vars) \land \unkOf{e_1}(\Vars,\Vars') \land \relLocEqOf{2}
+      \limplies \unkOf{n_3}(\Vars'), \\[\jot]
+      \unkOf{n_1}(\Vars) \land \rel_2 \limplies \unkOf{e_2}(\Vars,\Vars'),
+      \\[\jot]
+      \unkOf{m_2}(\Vars) \land \unkOf{e_2}(\Vars,\Vars') \land \relLocEqOf{1}
+      \limplies \unkOf{m_3}(\Vars'),\\[\jot]
+      \unkOf{m_3}(\Vars) \land \unkOf{n_3}(\Vars) \land \SymbError \limplies 
+      \lfalse }
+  \end{array}
+\end{equation*}
+%
+The conjunction of clauses in $\HornClauses_2$ is satisfiable.
+We obtain the following satisfying assignment~$\Solution$.
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}ll@{\;=\;}l}
+    \SolutionOf{\unkOf{m_1}(\Vars)}&\ltrue & 
+    \SolutionOf{\unkOf{m_2}(\Vars)}&(\lock=1) \\[\jot]
+    \SolutionOf{\unkOf{n_1}(\Vars)}&\ltrue &
+    \SolutionOf{\unkOf{n_2}(\Vars)}&(\lock=1)\\[\jot]
+    \SolutionOf{\unkOf{m_3}(\Vars)}&\lfalse & 
+    \SolutionOf{\unkOf{e_1}(\Vars,\Vars')}&(\lock=0) \\[\jot]
+    \SolutionOf{\unkOf{n_3}(\Vars)}&\lfalse &
+    \SolutionOf{\unkOf{e_2}(\Vars,\Vars')}&(\lock=0)
+  \end{array}
+\end{equation*}
+%
+This solution constrains $\unkOf{m_2}(\Vars)$ and $\unkOf{n_2}(\Vars)$
+to states where the lock is held $(\lock=1)\ $, while the environment
+transitions $\unkOf{e_1}(\Vars,\Vars')$ and
+$\unkOf{e_2}(\Vars,\Vars')$ are applicable only in states for which
+the lock is not held by the respective thread $(\lock=0)\ $.
+
+We add the (transition) predicates that appear in the environment
+transition $e_2$ of the first thread to the set $\artTPredsOf{2}{1}\ $,
+and, symmetrically, we add the predicates from $e_1$ to
+$\artTPredsOf{1}{2}$.
+For the next \aret computation we have the following set of
+predicates:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}l}
+    \artPreds_1 & \set{\pcone=a, \pcone=b, \pctwo=p, \lock=1}\ ,\\[\jot]
+    \artPreds_2 & \set{\pctwo=p, \pctwo=q, \pcone=a, \lock=1}\ ,\\[\jot]
+    \artTPredsOf{1}{2} & \set{\lock=0}\ ,\\[\jot]
+    \artTPredsOf{2}{1} & \set{\lock=0}\ .
+  \end{array}
+\end{equation*}
+%
+
+
+% ===================== Iteration 4 =======================
+\paragraph{Last \aret computation}
+
+We perform another \aret computation and a subsequent abstraction
+refinement step.
+We add the predicate $\lock'=1$ to both $\artTPredsOf{1}{2}$
+and~$\artTPredsOf{2}{1}$, and proceed with the final \aret computation.
+%
+Figure~\ref{fig-ex-takebit-art}(c) shows the resulting trees.
+The application of thread transitions produces the following abstract
+states and environment transitions:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\arrSpace}l@{\arrSpace}l@{}}
+    m_1 & = \abst_1(\SymbInit) & = (\pcone = a \land \pctwo = p)\ ,  \\[\jot]
+    n_1 & = \abst_2(\SymbInit) & = (\pcone = a \land \pctwo = p)\ , \\[\jot] 
+    m_2 & = \abst_1(\post(\rel_1, m_1)) & = (\pcone = b \land \pctwo = p 
+    \land \lock = 1)\ , \\[\jot] 
+    n_2 & = \abst_2(\post(\rel_2, n_1)) & = (\pcone = a \land \pctwo = q 
+    \land \lock = 1)\ , \\[\jot] 
+    e_1 & = \abstTrans_{\envFromTo{1}{2}}(m_1 \land \rel_1) & = (\lock = 0 
+    \land \lock'=1)\ , \\[\jot]
+    e_2 & = \abstTrans_{\envFromTo{2}{1}}(n_1 \land \rel_2) & = (\lock = 0 
+    \land \lock'=1)\ .
+  \end{array}
+\end{equation*}
+%
+The environment transitions $e_1$ and $e_2$ produce the abstract
+states $m_3$ and $n_3$ whose intersection does not contain any error
+states.
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\arrSpace}l@{\arrSpace}l}
+    m_3 &= \abst_1(\post(e_2 \land \relLocEqOf{1}, m_2)) &= (\pcone = a 
+    \land \lock = 1) \\[\jot] 
+    n_3 &= \abst_2(\post(e_1 \land \relLocEqOf{2}, n_2)) &= (\pctwo = p 
+    \land \lock = 1)
+  \end{array}
+\end{equation*}
+
+Neither thread nor environment transitions can be applied from the
+abstract states $m_3$ and $n_3$, while no further abstract states are
+found.
+Since each pair of abstract states from different threads yields an
+intersection that is disjoint from the error states, we conclude that
+\TakeLockBit is safe.
+The labeling of the computed trees can be directly used to construct a
+safety proof for \TakeLockBit, as Sections~\ref{sec-proof-rule}
+and~\ref{sec-algo-safety} will show.
+
+\iffalse
+We denote by $\artReachOf{1}$ and $\artReachOf{2}$ the set of all
+abstract reachable states found in this last \aret computation.
+\fi
+
+\subsection{Example \TakeLockThreadId} \label{subsec-takethreadid}
+
+\begin{figure}[t]
+\small
+\hrule
+\begin{minipage}[t]{.48\columnwidth} 
+\begin{verbatim} 
+
+    // Thread 1 
+    a: take_lock(lock, 1); 
+    b: // critical 
+\end{verbatim}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.48\columnwidth} 
+\begin{verbatim}
+
+    // Thread 2
+    p: take_lock(lock, 2);
+    q: // critical
+
+\end{verbatim}
+\end{minipage}
+  \caption{Example program $\TakeLockThreadId\ $.}
+  \label{fig-take-lock-2}
+\end{figure}
+
+
+Our second example \TakeLockThreadId, shown in
+Figure~\ref{fig-take-lock-2}, is a variation of \TakeLockBit.
+\TakeLockThreadId uses an integer variable $\lock$ (instead of a
+single bit) to record which thread holds the lock.
+Due to this additional information recorded in the global variable,
+the example \TakeLockThreadId has a modular proof, which does not
+refer to any local variables.
+We show how our algorithm discovers such a proof by only admitting
+modular predicates in the abstraction refinement step.
+
+\TakeLockThreadId differs from \TakeLockBit in its transition relation
+$\rho_2$:
+%
+% ===================== Program description ===============
+\begin{equation*}
+  \rel_2 = (\lock=0 \land \lock'=2 \land \pctwo=p \land \pctwo'=q
+  \land \relLocEqOf{1})\ .
+\end{equation*}
+
+% ===================== Iteration 1 =======================
+\paragraph{First \aret computation} 
+
+Similarly to \TakeLockBit, we discover that $m_2 \land n_2 \land
+\SymbError$ is satisfiable, and compute the following set of Horn
+clauses:
+%
+\begin{equation*}
+  \HornClauses_3 = \set{
+  \begin{array}[t]{@{}l}
+     \SymbInit \limplies \unkOf{m_1}(\Vars),\
+     \unkOf{m_1}(\Vars) \land \rel_1 \limplies \unkOf{m_2}(\Vars'),\\[\jot]
+     \SymbInit \limplies \unkOf{n_1}(\Vars),\ 
+     \unkOf{n_1}(\Vars) \land \rel_2 \limplies \unkOf{n_2}(\Vars'),\\[\jot]
+     \unkOf{m_2}(\Vars) \land \unkOf{n_2}(\Vars) \land \SymbError \limplies 
+     \lfalse }\ .
+  \end{array}
+\end{equation*}
+%
+One possible satisfying assignment $\Solution$ is:
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}ll@{\;=\;}l@{}}
+    \SolutionOf{\unkOf{m_1}(\Vars)} & (\pctwo=p)\ , & 
+    \SolutionOf{\unkOf{n_1}(\Vars)} & (\pcone=a)\ , \\[\jot]
+    \SolutionOf{\unkOf{m_2}(\Vars)} & (\pctwo=p)\ , & 
+    \SolutionOf{\unkOf{n_2}(\Vars)} & (\pcone=a)\ .
+  \end{array}
+\end{equation*} 
+%
+This assignment uses a predicate $\pctwo=p$ over the local variable of
+the second thread as a solution for the abstract state
+$\unkOf{m_1}(\Vars)$ in the thread reachability of the first thread.
+By collecting and using the corresponding predicates, we will discover
+a non-modular proof.
+
+To avoid the drawbacks of non-modular proofs, our algorithm does not
+use $\HornClauses_3$ and attempts to find modular predicates for
+abstraction refinement instead.
+We express the preference for modular predicates declaratively, using
+a set of Horn clauses in which the unknown predicates are restricted
+to the desired variables, as described in
+Sections~\ref{sec-refinement}.
+For the abstract states in the first thread, we require that the
+corresponding solutions are over the global variable $\lock$ and the
+local variable $\pcone$ of the first thread, i.e., we have the unknown
+predicates $\unkOf{m_1}(\lock, \pcone)$ and~$\unkOf{m_2} (\lock,
+\pcone)$.
+Similarly, for the second thread we obtain $\unkOf{n_1}(\lock,
+\pctwo)$ and~$\unkOf{n_2}(\lock, \pctwo)$.
+Instead of~$\HornClauses_3$,  we use a set of Horn clauses $\HornClauses_4$ shown below:
+%
+\begin{equation*}
+  \HornClauses_4 = \set{
+    \begin{array}[t]{@{}l@{}}
+       \SymbInit \limplies \unkOf{m_1}(\lock, 
+       \pcone),\\[\jot]
+       \unkOf{m_1}(\lock, \pcone) \land \rel_1 \limplies \unkOf{m_2}(\lock', \pcone'),\\[\jot]
+       \SymbInit \limplies \unkOf{n_1}(\lock, \pctwo),\\[\jot]
+       \unkOf{n_1}(\lock, \pctwo) \land \rel_2 \limplies \unkOf{n_2}(\lock', \pctwo'),\\[\jot]
+       \unkOf{m_2}(\lock, \pcone) \land \unkOf{n_2}(\lock, \pctwo) \land \SymbError \limplies 
+       \lfalse }\ .
+  \end{array}
+\end{equation*}
+%
+The conjunction of clauses from $\HornClauses_4$ can be satisfied by
+an assignment $\Solution$ such that
+%
+\begin{equation*}
+  \begin{array}[t]{r@{\;=\;}l}
+    \SolutionOf{\unkOf{m_1}(\lock, \pcone)} &\ltrue\ , \\[\jot]
+    \SolutionOf{\unkOf{m_2}(\lock, \pcone)} &(\lock=1)\ , \\[\jot]
+    \SolutionOf{\unkOf{n_1}(\lock, \pctwo)} &\ltrue\ ,\\[\jot]
+    \SolutionOf{\unkOf{n_2}(\lock, \pctwo)} &(\lock=2)\ ,
+  \end{array}
+\end{equation*}
+%
+which contains only modular predicates.
+
+\input{fig-ex-take-threadid-art-3} 
+
+\paragraph{Last \aret computation} 
+
+We present the last \aret computation for \TakeLockBit, which uses on
+the following (transition) predicates collected so far:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\arrSpace}l}
+    \artPreds_1 &= \set{\pcone=a, \pcone=b, \lock=1}\ ,\\[\jot]
+    \artPreds_2 &= \set{\pctwo=p, \pctwo=q, \lock=2}\ ,\\[\jot]
+    \artTPreds_{\envFromTo{2}{1}} &= \set{\lock=0}\ ,\\[\jot]
+    \artTPreds_{\envFromTo{1}{2}} &= \set{\lock=0}\ .\\[\jot]
+  \end{array}
+\end{equation*}
+%
+Figure~\ref{fig-ex-take-threadid-art-3} shows the resulting abstract
+reachability and environment trees constructed as follows:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\;=\;}l@{\;=\;}l}
+    m_1 & \abst_1(\SymbInit) &  (\pcone=a) \\[\jot] 
+    n_1 & \abst_2(\SymbInit) &  (\pctwo=p) \\[\jot]
+    m_2 & \abst_1(\post(\rel_1, m_1)) & (\pcone=b \land \lock = 1)\\[\jot]
+    n_2 & \abst_2(\post(\rel_2, n_1)) & (\pctwo=q \land \lock = 2)\\[\jot]
+    e_1 & \abstTransTIdOf{1}{2}(m_1 \land \rel_1) & (\lock = 0) \\[\jot]
+    e_2 & \abstTransTIdOf{2}{1}(n_1 \land \rel_2) & (\lock = 0)  \\[\jot]
+  \end{array}
+\end{equation*}
+%
+The \aret construction is completed, since
+\begin{equation*}
+\begin{array}[t]{l@{\;\limplies\;}ll@{\;=\;}l@{}}
+    \abst_1(\post(e_2 \land \relLocEqOf{1}, m_1)) & m_1\ ,
+    & \abst_1(\post(e_2, m_2)) & \lfalse\ ,\\[\jot] 
+    \abst_2(\post(e_1 \land \relLocEqOf{2}, n_1)) & n_1\ ,
+    &
+    \abst_2(\post(e_1, n_2)) & \lfalse\ .
+  \end{array}
+\end{equation*}
+%
+By inspecting pairs of abstract states from different trees we
+conclude that \TakeLockThreadId is safe.
+
+Furthermore no predicate in $\artPreds_1$ refers to the local variable
+of the second thread, the symmetric condition holds for
+$\artPreds_2$, and the predicates in $\artTPredsOf{1}{2}$ as well as
+$\artTPredsOf{2}{1}$ do not refer to any local variables.
+Thus, from the trees in Figure~\ref{fig-ex-take-threadid-art-3} we can
+construct a modular safety proof.
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

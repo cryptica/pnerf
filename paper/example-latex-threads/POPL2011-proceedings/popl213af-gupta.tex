@@ -1,0 +1,293 @@
+\documentclass{sigplanconf}
+\sloppy
+
+
+\usepackage{graphicx,pgf,tikz,tikz-qtree}
+\usepackage{macros,ar-alg}
+\usepackage{amsmath,amssymb,xspace}
+%\usepackage{mathabx} % provides \smalltriangleright
+\usepackage{color} % graphicx scaprs ams symbols and we don't use it anyway
+%\usepackage{extarrows}
+\usetikzlibrary{arrows,automata}
+\usepackage{ifthen}
+
+\newcommand{\isTechReport}{true} % true or false
+\newcommand{\includeProof}[1]{
+  \ifthenelse{\equal{\isTechReport}{true}}{
+    #1
+  }{
+  }
+}
+
+\begin{document}
+
+\conferenceinfo{POPL'11,} {January 26--28, 2011, Austin, Texas, USA.}
+\CopyrightYear{2011}
+\copyrightdata{978-1-4503-0490-0/11/01}
+
+\titlebanner{}        % These are ignored unless
+\preprintfooter{}   % 'preprint' option specified.
+
+%\title{Predicate Abstraction and Refinement with Horn Clauses for Verifying Multi-Threaded Programs}
+\title{Predicate Abstraction and Refinement for Verifying Multi-Threaded Programs}
+%\title{Constraint Based Iterative Inference of Auxiliary Variables 
+%  and Relies/Guarantees}
+%\title{Constrained Environment Inference for\\ 
+% Verification of Multi-Threaded Programs}
+%\title{Constraint Based Inference of Auxiliary Variables 
+%  and Relies/Guarantees for Verifying Multi-Threaded Programs}
+% \subtitle{Draft. Please don't distribute.}
+
+
+
+\authorinfo{Ashutosh Gupta \and Corneliu Popeea \and Andrey Rybalchenko}
+           {Institut f\"ur Informatik, Technische Universit\"at M\"unchen\\Germany}
+           {\{guptaa,popeea,rybal\}@in.tum.de}
+%\authorinfo{Corneliu Popeea}{\TUM}{}
+%\authorinfo{Andrey Rybalchenko}{\TUM}{}
+
+\maketitle
+
+\category{D.2.4}{Software Engineering}{Software/Program Verification}
+\category{F.3.1}{Logics and Meanings of Programs}{Specifying and Verifying and Reasoning about Programs}
+\terms
+Algorithms, Languages, Reliability, Verification.
+\keywords
+Multi-threaded programs, safety, proof rule,
+modular reasoning, environment transitions, (transition) predicate
+abstraction, abstraction refinement, Horn clauses.
+
+
+% TBD in final version
+\vspace{-0.3cm}
+\acks
+
+The first author was supported by the DFG Graduiertenkolleg 1480 (PUMA).
+We thank Byron Cook, Rusl\'an Ledesma Garza, and Peter O'Hearn for
+comments and suggestions.
+
+
+
+% We recommend abbrvnat bibliography style.
+
+
+\bibliographystyle{abbrvnat}
+
+% The bibliography should be embedded for final submission.
+%%%%%%% \bibliography{biblio}
+
+\begin{thebibliography}{34}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bar-David and Taubenfeld(2003)]{BarDavidDISC03}
+Y.~Bar-David and G.~Taubenfeld.
+\newblock Automatic discovery of mutual exclusion algorithms.
+\newblock In \emph{DISC}, pages 136--150, 2003.
+
+\bibitem[Basler et~al.(2009)Basler, Mazzucchi, Wahl, and Kroening]{BaslerCAV09}
+G.~Basler, M.~Mazzucchi, T.~Wahl, and D.~Kroening.
+\newblock Symbolic counter abstraction for concurrent software.
+\newblock In \emph{CAV}, pages 64--78, 2009.
+
+\bibitem[Basler et~al.(2010)Basler, Hague, Kroening, Ong, Wahl, and
+  Zhao]{BaslerTACAS10}
+G.~Basler, M.~Hague, D.~Kroening, C.-H.~L. Ong, T.~Wahl, and H.~Zhao.
+\newblock Boom: Taking boolean program model checking one step further.
+\newblock In \emph{TACAS}, pages 145--149, 2010.
+
+\bibitem[Clarke et~al.(2000)Clarke, Grumberg, Jha, Lu, and Veith]{ClarkeCEGAR}
+E.~M. Clarke, O.~Grumberg, S.~Jha, Y.~Lu, and H.~Veith.
+\newblock Counterexample-guided abstraction refinement.
+\newblock In \emph{CAV}, pages 154--169, 2000.
+
+\bibitem[Cohen and Namjoshi(2009)]{CohenFMSD09}
+A.~Cohen and K.~S. Namjoshi.
+\newblock Local proofs for global safety properties.
+\newblock \emph{FMSD}, 34\penalty0 (2):\penalty0 104--125, 2009.
+
+\bibitem[Corbet et~al.(2005)Corbet, Rubini, and Kroah-Hartman]{CorbetBook05}
+J.~Corbet, A.~Rubini, and G.~Kroah-Hartman.
+\newblock \emph{Linux Device Drivers, 3rd Edition}.
+\newblock O'Reilly Media, Inc., 2005.
+
+\bibitem[Cousot and Cousot(1977)]{lattice77}
+P.~Cousot and R.~Cousot.
+\newblock Abstract interpretation: A unified lattice model for static analysis
+  of programs by construction or approximation of fixpoints.
+\newblock In \emph{POPL}, pages 238--252, 1977.
+
+\bibitem[Flanagan and Godefroid(2005)]{FlanaganPOPL05}
+C.~Flanagan and P.~Godefroid.
+\newblock Dynamic partial-order reduction for model checking software.
+\newblock In \emph{POPL}, pages 110--121, 2005.
+
+\bibitem[Flanagan and Qadeer(2003)]{ThreadModularFlanaganQadeer}
+C.~Flanagan and S.~Qadeer.
+\newblock Thread-modular model checking.
+\newblock In \emph{SPIN}, pages 213--224, 2003.
+
+\bibitem[Flanagan et~al.(2002)Flanagan, Freund, and Qadeer]{CalvinESOP}
+C.~Flanagan, S.~N. Freund, and S.~Qadeer.
+\newblock Thread-modular verification for shared-memory programs.
+\newblock In \emph{ESOP}, pages 262--277, 2002.
+
+\bibitem[Godefroid(1994)]{GodefroidPhd94}
+P.~Godefroid.
+\newblock \emph{Partial-Order Methods for the Verification of Concurrent
+  Systems - An Approach to the State-Explosion Problem}.
+\newblock PhD thesis, University of Liege, Computer Science Department, 1994.
+
+\bibitem[Graf and Sa\"{\i}di(1997)]{GrafSaidi}
+S.~Graf and H.~Sa\"{\i}di.
+\newblock Construction of abstract state graphs with {PVS}.
+\newblock In \emph{CAV}, pages 72--83, 1997.
+
+\bibitem[Gupta et~al.(2010)Gupta, Popeea, and Rybalchenko]{GuptaATVA10}
+A.~Gupta, C.~Popeea, and A.~Rybalchenko.
+\newblock Non-monotonic refinement of control abstraction for concurrent
+  programs.
+\newblock In \emph{ATVA}, pages 188--202, 2010.
+
+\bibitem[Henzinger et~al.(2002)Henzinger, Jhala, Majumdar, and
+  Sutre]{BlastLazy02}
+T.~A. Henzinger, R.~Jhala, R.~Majumdar, and G.~Sutre.
+\newblock Lazy abstraction.
+\newblock In \emph{POPL}, pages 58--70, 2002.
+
+\bibitem[Henzinger et~al.(2004)Henzinger, Jhala, and Majumdar]{HenzingerPLDI04}
+T.~A. Henzinger, R.~Jhala, and R.~Majumdar.
+\newblock Race checking by context inference.
+\newblock In \emph{PLDI}, pages 1--13, 2004.
+
+\bibitem[Jones(1983{\natexlab{a}})]{JonesTOPLAS83}
+C.~B. Jones.
+\newblock Tentative steps toward a development method for interfering programs.
+\newblock \emph{ACM Trans. Program. Lang. Syst.}, 5\penalty0 (4):\penalty0
+  596--619, 1983{\natexlab{a}}.
+
+\bibitem[Jones(1983{\natexlab{b}})]{RelyGuarantee}
+C.~B. Jones.
+\newblock Specification and design of (parallel) programs.
+\newblock In \emph{IFIP Congress}, pages 321--332, 1983{\natexlab{b}}.
+
+\bibitem[Lamport(1974)]{LamportCACM74}
+L.~Lamport.
+\newblock A new solution of {D}ijkstra's concurrent programming problem.
+\newblock \emph{Commun. ACM}, 17\penalty0 (8):\penalty0 453--455, 1974.
+
+\vfill\eject
+
+\bibitem[Lamport(1987)]{LamportTCS87}
+L.~Lamport.
+\newblock A fast mutual exclusion algorithm.
+\newblock \emph{ACM Trans. Comput. Syst.}, 5\penalty0 (1):\penalty0 1--11,
+  1987.
+
+\bibitem[Lu et~al.(2008)Lu, Park, Seo, and Zhou]{LuASPLOS08}
+S.~Lu, S.~Park, E.~Seo, and Y.~Zhou.
+\newblock Learning from mistakes: a comprehensive study on real world
+  concurrency bug characteristics.
+\newblock In \emph{ASPLOS}, pages 329--339, 2008.
+
+\bibitem[Malkis et~al.(2006)Malkis, Podelski, and Rybalchenko]{MalkisICTAC06}
+A.~Malkis, A.~Podelski, and A.~Rybalchenko.
+\newblock Thread-modular verification is cartesian abstract interpretation.
+\newblock In \emph{ICTAC}, pages 183--197, 2006.
+
+\bibitem[Manna and Pnueli(1995)]{MannSafetyBook95}
+Z.~Manna and A.~Pnueli.
+\newblock \emph{Temporal verification of reactive systems: safety}.
+\newblock Springer-Verlag, 1995.
+
+\bibitem[McKenney(2007)]{McKenneyLWN07}
+P.~McKenney.
+\newblock Using {Promela} and {Spin} to verify parallel algorithms.
+\newblock \emph{LWN.net weekly edition}, 2007.
+
+\bibitem[Musuvathi et~al.(2008)Musuvathi, Qadeer, Ball, Basler, Nainar, and
+  Neamtiu]{MusuvathiOSDI08}
+M.~Musuvathi, S.~Qadeer, T.~Ball, G.~Basler, P.~A. Nainar, and I.~Neamtiu.
+\newblock Finding and reproducing {Heisenbugs} in concurrent programs.
+\newblock In \emph{OSDI}, pages 267--280, 2008.
+
+\bibitem[Necula et~al.(2002)Necula, McPeak, Rahul, and Weimer]{NeculaCC02}
+G.~C. Necula, S.~McPeak, S.~P. Rahul, and W.~Weimer.
+\newblock {CIL}: Intermediate language and tools for analysis and
+  transformation of {C} programs.
+\newblock In \emph{CC}, pages 213--228, 2002.
+
+\bibitem[Owicki and Gries(1976)]{OwickiAI76}
+S.~S. Owicki and D.~Gries.
+\newblock An axiomatic proof technique for parallel programs {I}.
+\newblock \emph{Acta Inf.}, 6:\penalty0 319--340, 1976.
+
+\bibitem[Pnueli et~al.(2002)Pnueli, Xu, and Zuck]{PnueliCAV02}
+A.~Pnueli, J.~Xu, and L.~D. Zuck.
+\newblock Liveness with (0, 1, infty)-counter abstraction.
+\newblock In \emph{CAV}, pages 107--122, 2002.
+
+\bibitem[Podelski and Rybalchenko(2005)]{TransPred05}
+A.~Podelski and A.~Rybalchenko.
+\newblock Transition predicate abstraction and fair termination.
+\newblock In \emph{POPL}, pages 132--144, 2005.
+
+\bibitem[Podelski and Rybalchenko(2007)]{RybalPodelskiPADL07}
+A.~Podelski and A.~Rybalchenko.
+\newblock {ARMC}: The logical choice for software model checking with
+  abstraction refinement.
+\newblock In \emph{PADL}, pages 245--259, 2007.
+
+\bibitem[Qadeer and Wu(2004)]{QadeerPLDI04}
+S.~Qadeer and D.~Wu.
+\newblock {KISS}: keep it simple and sequential.
+\newblock In \emph{PLDI}, pages 14--24, 2004.
+
+\bibitem[Rybalchenko()]{RybalchenkoARMC}
+A.~Rybalchenko.
+\newblock {The ARMC tool}.
+\newblock \emph{Available from http://www7.in.tum.de/\~{}rybal/armc/}.
+
+\bibitem[Szymanski(1988)]{SzymanskiICS88}
+B.~K. Szymanski.
+\newblock A simple solution to {L}amport's concurrent programming problem with
+  linear wait.
+\newblock In \emph{ICS}, pages 621--626, 1988.
+
+\bibitem[{The Intelligent Systems Laboratory}(2001)]{sicstus}
+{The Intelligent Systems Laboratory}.
+\newblock \emph{SICStus Prolog User's Manual}.
+\newblock Swedish Institute of Computer Science, 2001.
+\newblock Release 3.8.7.
+
+\bibitem[Wang et~al.(2008)Wang, Yang, Kahlon, and Gupta]{WangTACAS08}
+C.~Wang, Z.~Yang, V.~Kahlon, and A.~Gupta.
+\newblock Peephole partial order reduction.
+\newblock In \emph{TACAS}, pages 382--396, 2008.
+
+\end{thebibliography}
+
+
+
+\iffalse
+\appendix
+% \input{auxiliaries}
+% \input{redundancy}
+% \input{algorithms}
+% \input{tables}
+
+\clearpage
+\input{fig-alg-main}
+\input{fig-alg-abst-reach}
+\input{fig-alg-cex-path}
+\input{fig-alg-refine}
+\input{fig-alg-mkHornClauses}
+\input{fig-alg-solveHorn}
+\fi
+%\clearpage
+%\input{fig-ex-mk-tree}
+
+\end{document}

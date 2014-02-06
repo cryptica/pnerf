@@ -1,0 +1,182 @@
+\section{Preliminaries}\label{sec-prelim}
+
+In this section we briefly describe multi-threaded programs, their
+computations and correctness. 
+We also introduce auxiliary definitions that we apply for reasoning
+about programs.
+
+\paragraph{Programs}
+
+% = \program_1 \parcomp \dots \parcomp \program_\Num 
+
+We consider a \emph{multi-threaded} program $\program$ that consists
+of $\Num\geq 1$ concurrent threads.
+Let $\ThreadIds$ be the set~$\set{1, \dots, \Num}\ $.
+We assume that the \emph{program} variables $\Vars = (\GlobVars,
+\LocVarsOf{1}, \dots, \LocVarsOf{\Num})$ are partitioned into
+\emph{global} variables $\GlobVars$ that are shared by all threads,
+and \emph{local} variables $\LocVarsOf{1}, \dots, \LocVarsOf{\Num}$
+that are only accessible by the threads $1, \dots, \Num\ $,
+respectively.
+
+The set of \emph{global states} $\Glob$ consists of the valuations of
+global variables, and the sets of \emph{local states} $\Loc_1, \dots,
+\Loc_\Num$ consist of the valuations of the local variables of
+respective threads.
+By taking the product of the global and local state spaces, we obtain
+the set of \emph{program states} $\States = \Glob \times \Loc_1 \times
+\dots \times \Loc_\Num\ $.
+We represent sets of program states using assertions over program
+variables. 
+Binary relations between sets of program states are represented using
+assertions over unprimed and primed variables.
+Let $\models$ denote the satisfaction relation between (pairs) of
+states and assertions.
+
+The set of \emph{initial} program states is denoted by $\SymbInit\ $,
+and the set of \emph{error} states is denoted by~$\SymbError\ $.
+For each thread $i\in\ThreadIds$ we have a finite set of transition
+relations~$\Trans_i\ $, which are abbreviated as \emph{transitions}.
+Each transition $\rel \in \Trans_i$ can change the values of the
+global variables and the local variables of the thread~$i\ $. 
+Let $\relLocEqOf{i}$ be a constraint requiring that the local
+variables of the thread $i$ do not change, i.e., $\relLocEqOf{i} =
+(\LocVarsOf{i} = \LocVarsOf{i}')\ $.
+Then, $\rel \in\Trans_i$ has the form
+%
+\begin{equation*}
+  \rel^{\text{update}}(\GlobVars, \LocVarsOf{i}, \GlobVars', \LocVarsOf{i}') \land
+  \Land_{j\in\ThreadIds\setminus{\set{i}}} \relLocEqOf{j}\ ,
+\end{equation*}
+%
+where the first conjunct represents the update of the variables in the
+scope of the thread $i$ and the remaining conjuncts ensure that the
+local variables of other threads do not change.
+%\todo{add notation for update and eq part?}
+We write $\relTIdOf{i}$ for the union of the transitions of the thread
+$i\ $, i.e., $\relTIdOf{i} = \Lor \Trans_i\ $.
+The transition relation of the program is $\relProg =
+\relTIdOf{1} \lor \dots \lor \relTIdOf{\Num}\ $.
+
+
+
+
+\paragraph{Computations}
+
+A \emph{computation} of $\program$ is a sequence of program states
+$s_1, s_2, \dots$ such that $s_1$ is an initial state, i.e., $s_1
+\models \SymbInit\ $, and each pair of consecutive states $s_i$ and
+$s_{i+1}$ in the sequence is connected by some transition $\rel$ from
+a program thread, i.e., $(s_i, s_{i+1})\models \rel\ $.
+A \emph{path} is a sequence of transitions.
+We write $\emptypath$ for the \emph{empty} sequence.
+
+Let $\substXtoY{\FreshVars}{\FreeVars}$ be a substitution function
+such that $\varphi\substXtoY{\FreshVars}{\FreeVars}$ replaces
+$\FreeVars$ by $\FreshVars$ in~$\varphi\ $.
+Let $\comp$ be the \emph{relational composition} function for binary
+relations given by assertions over unprimed and primed variables such
+that for assertions $\varphi$ and $\psi$ we have
+%
+$
+\varphi \comp \psi \defeq
+\exists \Vars'' : \varphi\substXtoY{\Vars''}{\Vars'} \land \psi\substXtoY{\Vars''}{\Vars} \ .
+$
+%
+Then, a \emph{path relation} is a relational composition of transition
+relations along the path, i.e., for $\path = \rho_1 \cdots \rho_n$ we
+have $\rho_\path = \rho_1 \comp \dots \comp \rho_n\ $. 
+A path $\path$ is \emph{feasible} if its path relation is not empty,
+i.e.,~$\exists \Vars, \Vars' : \rho_\path\ $. 
+
+A program state is \emph{reachable} if it appears in some computation.
+Let $\SymbReach$ denote the set of reachable states.
+The program is \emph{safe} if \emph{none} of its error states is
+reachable, i.e., $\SymbReach \land \SymbError \limplies \lfalse\ $.
+
+
+\paragraph{Auxiliary definitions}
+
+We define a \emph{successor} function $\post$ such that for a
+binary relation over states $\rel$ and a set of states $\varphi$ we
+have
+%
+\begin{equation*}
+  \post(\rel, \varphi) \defeq 
+  \exists \Vars'': \varphi\substXtoY{\Vars''}{\Vars} \land \rel\substXtoY{\Vars''}{\Vars}\substXtoY{\Vars}{\Vars'}\ .
+\end{equation*}
+%
+We also extend the logical implication to tuples of equal length, i.e.,
+%
+\begin{equation*}
+  (\varphi_1, \dots, \varphi_n) \limplies (\psi_1, \dots, \psi_n) \defeq
+  \varphi_1 \limplies \phi_1 \land \dots \land
+  \varphi_n \limplies \phi_n\ ,
+\end{equation*}
+%
+where each implication is implicitly universally quantified over the
+free variables occurring in it.
+From now on, we assume that tuples of assertions are partially ordered
+by the above extension of~$\limplies\ $.
+
+A \emph{Horn clause} 
+%
+$%\begin{equation*}
+  \HornBody_1(\FreeVars_1)\land \dots\land \HornBody_n(\FreeVars_n)
+  \rightarrow \HornBody(\FreeVars)\ 
+$%\end{equation*} 
+% 
+consists of relation symbols $\HornBody_1$,\dots, $\HornBody_n$,
+$\HornBody$, and vectors of variables $\FreeVars_1$,\dots,
+$\FreeVars_n$,~$\FreeVars$.
+\iffalse
+The left-hand side of the implication is called the \emph{body} of the
+clause and right-hand side is called the \emph{head}.
+\fi 
+For the algorithm \algSolveLinearHornClauses in
+Section~\ref{sec-horn-solving} we only consider Horn clauses over linear
+arithmetic.
+We say that $\HornBody$ \emph{depends} on the relation symbols
+$\set{\HornBody_i \mid i\in\betweenOf{1}{n}\land \HornBody_i \neq
+(\leq)}\ $.
+A set of Horn clauses is \emph{recursion-free} if the transitive
+closure of the corresponding dependency relation is well founded.
+
+
+\iffalse
+We reason about program safety by computing approximations of
+reachable states and relations between reachable states. 
+The following auxiliary notions provide fundamental building blocks
+for the development of algorithms for program
+verification~\cite{Floyd,lattice77,CousotAPCT84}.
+
+The set of reachable program states is the least fixpoint of $\post$
+applied on the program transition relation that is above the initial
+program states, i.e.,
+%
+\begin{equation*}
+  \SymbReach \lequivalent \lfp(\lambda
+  \varphi.\post(
+  \relProg, \varphi),
+  \SymbInit)\ .
+\end{equation*}
+%
+
+\todo{Move/drop this?}
+Unfortunately, the precise least fixpoint computation is not practical
+for programs with very large or infinite state spaces.
+To obtain a practical solution, we can apply abstraction to achieve
+approximate, yet sound results.
+We formalize abstraction as over-approximation following the framework
+of abstract interpretation~\cite{lattice77,CousotAPCT84}.
+For this purpose, we will use abstraction functions $\abst$ and
+$\abstTrans$ that over-approximate sets and binary relations over
+programs states, respectively.
+
+\fi
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

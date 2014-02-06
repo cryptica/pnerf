@@ -1,0 +1,37 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{}
+   \\ \\ \\ \\ \\ 
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 % \\ 7 \\ 8 
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algProcedure \algBuildPred\\
+    \algInput \\
+    \tabT $\cnode$ - node of Horn tree\\
+    \algBegin \\
+    \tabT \algIf $\cChildren(\cnode) = \emptyset$ \algThen \\
+    \tabTT $\cInterPolOf{\cnode}$ \algAssgn 
+    $
+    \sum\set{\proofVecOf{\HornHead(\FixVars)}\cdot\HornHead(\FixVars) \mid
+      \HornHead(\FixVars)\in\cFormulaOf{\cnode}}
+    $ \\
+    \tabT \algElse \\
+    \tabTT  \algForeach $\cnode'\in\cChildren(\cnode)$ \algDo \\
+    \tabTTT $\algBuildPred(\cnode')$\\
+    \tabTT $\cInterPolOf{\cnode} \algAssgn \sum\{\cInterPolOf{\cnode'}|\cnode'\in\cChildren(\cnode)\}$ \\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Procedure \algBuildPred.}
+  \label{fig-alg-annotPred}
+\end{figure}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

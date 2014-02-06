@@ -1,0 +1,41 @@
+digraph main {
+"4-(2,4)" -> "1-t(4,(2,4))"[style = bold, weight = 0.1];
+"4-(2,4)" -> "11-t(4,(2,4))"[style = bold, weight = 10];
+
+subgraph cluster1 {
+"Main" [color = green];
+"17" [label = "Start"];
+"1" [label = "(1,1)"];
+"11" [label = "(1,*)"];
+"13" [label = "(1,*)"];
+"17-(1,-6)" [shape = box,label ="Theta = [g1'=0, g2'=0, g'>0, pc1'=1, pc2'=1"];
+"1-t(4,(2,4))" [shape = box,label ="T1(X,X')"];
+"11-t(4,(2,4))" [shape = box,label ="T1(X',X'')"];
+"13-(1,4)" [shape = box,label ="rho1 = [g1 > g]"];
+"15" [label = "Error", color = red, fillcolor = red];
+"17" -> "17-(1,-6)"; 
+"17-(1,-6)"->"1";
+"1" -> "1-t(4,(2,4))"; 
+"1-t(4,(2,4))"->"11";
+"11" -> "11-t(4,(2,4))"; 
+"11-t(4,(2,4))"->"13";
+"13" -> "13-(1,4)"; 
+"13-(1,4)"->"15";
+}
+
+subgraph cluster2 {
+"Thr1" [color = green];
+"18" [label = "Start"];
+"2" [label = "(1,1)"];
+"4" [label = "(1,2)"];
+"_61266" [label = "(1,1)"];
+"18-(2,-7)" [shape = box,label ="Theta = [g1'=0, g2'=0, g'>0, pc1'=1, pc2'=1]"];
+"2-(2,2)" [shape = box,label ="rho2 = [g1<g, g'=g, g1'=g1, pc2=1, pc2'=2]"];
+"4-(2,4)" [shape = box,label ="rho3 = [g1'=g1+1, pc2=2, pc2'=1]"];
+"18" -> "18-(2,-7)"; 
+"18-(2,-7)"->"2";
+"2" -> "2-(2,2)"; 
+"2-(2,2)"->"4";
+"4" -> "4-(2,4)"; 
+"4-(2,4)"->"_61266";}
+}

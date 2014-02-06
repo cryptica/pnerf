@@ -1,0 +1,89 @@
+\begin{figure}[t]
+  \hrule
+  \centering
+  \vspace{2ex} 
+% ===================== ART computed in 1st iteration
+(a)
+  \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, 
+      node distance=\nodeDistance, semithick]
+%    \tikzstyle{every stateBox}=[draw=black]
+    % 1st thread
+    \node[stateBox] (m1) {$m_1$};
+    \node[stateBox, errorState, below of=m1] (m2) {$m_2$};
+    \path (m1) edge node[left]{$\rel_1$} (m2);
+    % 2nd thread
+    \node[stateBox,right of=m1, node distance=\artDistance{1}] (n1) {$n_1$};
+    \node[stateBox, errorState, below of=n1] (n2) {$n_2$};
+    \path (n1) edge node[right]{$\rel_2$} (n2);
+  \end{tikzpicture}
+  \hspace{2cm}
+% ===================== ART computed in 2nd iteration
+(b)
+  \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, 
+      node distance=\nodeDistance, semithick]
+%    \tikzstyle{every state}=[draw=black]
+    % 1st thread
+    \node[stateBox] (m1) {$m_1$};
+    \node[stateBox, below of=m1] (m2) {$m_2$};
+    \path (m1) edge node[left]{$\rel_1$} (m2);
+    \node[stateBox, errorState, below of=m2] (m3) {$m_3$};
+    \path (m2) edge node[left]{$e_2$} (m3);
+    % 2nd thread
+    \node[stateBox,right of=m1, node distance=\artDistance{1}] (n1) {$n_1$};
+    \node[stateBox, below of=n1] (n2) {$n_2$};
+    \path (n1) edge node[right]{$\rel_2$} (n2);
+    \node[stateBox, errorState, below of=n2] (n3) {$n_3$};
+    \path (n2) edge node[right]{$e_1$} (n3);
+    % environment arrows
+    \path (0+\shiftEnv,-\nodeDistance/2) edge[envTransition] % edge[out=0,in=180]
+    (\artDistance{1}-\shiftEnv,-\nodeDistance-\nodeDistance/2);
+    \path (\artDistance{1}-\shiftEnv, -\nodeDistance/2) edge[envTransition]% edge[out=180,in=0]
+    (\shiftEnv,-\nodeDistance-\nodeDistance/2);
+  \end{tikzpicture}
+  \vspace{2ex} \hrule \vspace{2ex}
+% ===================== ART computed in 4th iteration
+\renewcommand{\nodeDistance}{2cm}
+(c)\quad
+  \begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, 
+      node distance=\nodeDistance, semithick]
+%    \tikzstyle{every state}=[draw=black]
+    % 1st thread    
+    \node[stateBox] (m1) {$m_1$};
+    \node[stateBox, below of=m1, xshift=\shiftLeft] (m2) {$m_2$};
+    \path (m1) edge node[left, near start]{$\rel_1$} (m2);
+    \node[stateBox, below of=m1, xshift=\shiftRight] (m3) {$m_3$};
+    \path (m1) edge node[left, near end]{$e_2$} (m3);
+    % 2nd thread
+    \node[stateBox,right of=m1, node distance=\artDistance{2}] (n1) {$n_1$};
+    \node[stateBox, below of=n1, xshift=\shiftRight] (n2) {$n_2$};
+    \path (n1) edge node[right, near end]{$\rel_2$} (n2);
+    \node[stateBox, below of=n1, xshift=\shiftLeft] (n3) {$n_3$};
+    \path (n1) edge node[left, near start]{$e_1$} (n3);
+    % environment arrows
+    \path (-0.4cm+\shiftEnv,-\nodeDistance/2+0.3cm) 
+      edge[envTransition] %edge[out=5,in=165] 
+      (\artDistance{2}-0.4cm-\shiftEnv,-\nodeDistance/2+0.3cm);
+    \path (\artDistance{2}+0.6cm-\shiftEnv,-\nodeDistance/2-0.3cm) 
+      edge[envTransition] %edge[out=185,in=345] 
+      (0.4cm+\shiftEnv,-\nodeDistance/2-0.3cm);
+  \end{tikzpicture}
+  \caption{
+    Reachability trees constructed using different abstraction functions.
+    Edges are labeled with a transition. 
+    Nodes with gray background represent (spurious) error tuples:
+    $(m_2, n_2)$ from (a) and $(m_3, n_3)$ from (b).
+    No pair of states from (c) intersects $\SymbError$.
+  }
+  \label{fig-ex-takebit-art}
+\end{figure}
+
+% System of coordinates (x,y):
+%    (0,0)      (1,0)
+%
+%    (0,-1)     (1,-1)
+%
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

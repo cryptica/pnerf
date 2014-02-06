@@ -1,0 +1,103 @@
+\section{Thread reachability and environment transitions}
+\label{sec-algo-safety}
+
+In this section, we present our rely-guarantee based verification
+algorithm for proving safety properties of multi-threaded programs.
+The algorithm is based on Theorem~\ref{thm-abst-fix} and consists of
+three  main steps.
+The first step computes for each thread a tree that is decorated by
+abstract states and environment transitions, so-called \aret, and
+analyses the discovered abstract states.
+If an intersection with the error states of the program is found, then
+the second step generates a set of corresponding Horn clauses, see
+Section~\ref{sec-refinement}.
+At the third step, we solve the constraint defined by the conjunction
+of the generated Horn clauses and use the solutions to the refine the
+abstraction functions used for the \aret computation, see
+Section~\ref{sec-horn-solving}. 
+
+\input{fig-alg-main}
+
+\paragraph{Function \algMain}
+
+The main function of our algorithm \algMain is shown in
+Figure~\ref{fig-alg-main}.
+\algMain takes as input the multi-threaded program $\program\ $.
+The \algRepeat loop iterates through the three main steps of the
+algorithm.
+First, we construct the abstraction functions $\abst_i$ and
+$\abstTrans_{\envFromTo{i}{j}}$ at lines~4--6 from a given set of
+(transition) predicates, which is empty initially.
+Next, the \aret computation is performed in line~7 using these
+abstraction functions.
+In lines~8--9, the abstract states in the computed \aret's are
+analyzed wrt.\ the safety property.
+In case of a positive outcome of this check, \algMain constructs and
+returns a safety proof in lines~17--18.
+If the safety check fails, then \algRefine is executed on the
+violating abstract states.
+If \algRefine terminates normally, and hence succeeds in eliminating
+the violation by refining the abstraction functions, then \algMain
+continues with the next iteration of the \algRepeat loop.
+In case an \algUnsolvable exception is thrown, \algCexPath from
+Figure~\ref{fig-alg-cex-path} constructs a counterexample path that we
+report to the user.
+
+\paragraph{Procedure \algAbstReachEnvSolve}
+\input{fig-alg-abst-reach}
+
+See Figure~\ref{fig-alg-abst-reach} for the procedure
+\algAbstReachEnvSolve that implements \aret computation using the
+abstraction functions $\abst_i$ and $\abstTrans_{\envFromTo{i}{j}}\ $.
+We use $\artParent$ and $\artTId$ to maintain information about the
+constructed trees, and initialize them with the empty function $\bot$
+in line~1.
+$\artReachOf{i}$ and $\EnvTransOf{i}$ keep track of abstract states
+and environment transitions for a thread $i\in\ThreadIds\ $. 
+$\EnvTransOf{i}$ is initialized to an empty set in line~4, while
+$\artReachOf{i}$ contains the abstraction of the initial program
+states computed for the thread~$i\ $.
+The \aret computation is performed iteratively in the \algRepeat loop,
+see lines~5--27.
+
+% =========== compute states
+
+The first part of the loop (see lines~7--17) implements a standard, 
+least fixpoint computation over reachable states.
+At line~7, the algorithm picks an already reachable states
+$S\in\artReachOf{i}$ in order to compute its abstract successors. 
+After computing at lines~10--11 one successor of $S\ $, line~12 implements
+a fixpoint check, which succeeds if $S'$ contains program states that
+have not been reached yet.
+The new states reachable in thread $i$ are stored in
+$\artReachOf{i}\ $.
+At line~14, the function $\artParent$ is updated to keep track of the
+child-parent relation between abstract states, while $\artTId$ maps
+the new reachable state to its parent thread.
+
+% ======= compute environment transitions
+
+The second part of the loop (see lines~$19$--$26$) performs a least
+fixpoint computation over environment transitions. 
+Each time a transition from a thread $i$ is picked at line~7, the
+abstraction of its effect computed in line~20 is propagated to each
+other thread~$j\ $.
+Note however, that the propagation only happens for environment
+transitions that are not subsumed by the existing ones, which is
+checked in line~21.
+Additional environment transitions are recorded in line~22.
+Environment transitions are taken into consideration when computing
+abstract state reachability, see line~9.
+
+Upon termination, which is guaranteed by the finiteness of our
+abstract domains, the function \algAbstReachEnvSolve computes sets of
+abstract states $\artReachOf{1}, \dots, \artReachOf{\Num}$ and sets of
+environment transitions $\EnvTransOf{1}, \dots, \EnvTransOf{\Num}\ $.
+
+\input{fig-alg-mkPath}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

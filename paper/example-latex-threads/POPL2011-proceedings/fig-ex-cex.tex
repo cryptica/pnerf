@@ -1,0 +1,247 @@
+\begin{figure*}[p]
+  \small
+  \centering
+  \hrule
+%-----------------------------------------------------------------------------
+\begin{minipage}[t]{0.13\linewidth} 
+  \vspace{12pt}
+  \centering
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto, node distance=1.1cm,
+                    semithick]
+
+  \node[stateBox,node distance=4cm] (m1) {$m_1$};
+  \node[stateBox, below of=m1] (m2) {$m_2$};
+  \path (m1) edge node[left]{$\rel_{0}$} (m2);
+  \node[stateBox, below of=m2] (m3) {$m_3$};
+  \path (m2) edge node[left]{$\rel_1$} (m3);
+  \node[stateBox, errorState, below of=m3] (m4) {$m_4$};
+  \path (m3) edge node[left]{$e_2$} (m4);
+
+
+  \node[stateBox,right of=m2, node distance=1.2cm] (n1) {$n_1$};
+  \node[stateBox, below of=n1] (n2) {$n_2$};
+  \path (n1) edge node[right]{$\rel_2$} (n2);
+  \node[stateBox,errorState, below of=n2] (n3) {$n_3$};
+  \path (n2) edge node[right]{$e_1$} (n3);
+  \path (2mm, -16mm) edge[envTransition] (10mm,-29mm);
+  \path (10mm,-16mm) edge[envTransition]( 2mm,-29mm);
+  \end{tikzpicture}~\vspace{12pt}\\
+\textbf{(a)}
+\end{minipage}
+%---------------------------------------------------------------------------
+\begin{minipage}[t]{0.38\linewidth}
+\centering
+\begin{equation*}
+  \begin{array}[t]{ll}
+  \SymbInit \limplies \unkOf{m_1}(\Vars)           \\
+  \unkOf{m_1}(\Vars) \land  \rel_{0} \limplies \unkOf{m_2}(\Vars')  \\
+  \unkOf{m_2}(\Vars) \land  \rel_1 \limplies \unkOf{m_3}(\Vars')  \\
+  \unkOf{m_2}(\Vars) \land  \rel_1 \limplies
+  \unkOf{e_1}(\Vars,\Vars')  \\
+  \unkOf{m_3}(\Vars) \land \unkOf{e_2}(\Vars,\Vars') \land \relLocEqOf{1} \limplies\unkOf{m_4}(\Vars')
+  \vspace{10pt}\\
+  \SymbInit \limplies \unkOf{n_1}(\Vars) \\
+  \unkOf{n_1}(\Vars) \land \rel_{2} \limplies \unkOf{n_2}(\Vars') \\
+  \unkOf{n_1}(\Vars) \land \rel_{2} \limplies \unkOf{e_2}(\Vars,\Vars') \\
+  \unkOf{n_2}(\Vars) \land \unkOf{e_1}(\Vars,\Vars')  \land  \relLocEqOf{2} \limplies \unkOf{n_3}(\Vars')
+  \vspace{10pt}\\
+  \unkOf{m_4}(\Vars) \land \unkOf{n_3}(\Vars) \land  \SymbError \limplies \lfalse 
+\end{array}
+\end{equation*}
+\textbf{(b)}
+\end{minipage}
+\hfill
+%----------------------------------------------------------------------------
+\begin{minipage}[t]{0.46\linewidth}
+\centering
+\begin{equation*}
+  \begin{array}[t]{ll}
+  \SymbInit \limplies \unkOf{m_1}(\GlobVars,\LocVarsOf{1})           \\
+  \unkOf{m_1}(\GlobVars,\LocVarsOf{1}) \land  \rel_{0} \limplies \unkOf{m_2}(\GlobVars',\LocVarsOf{1}')  \\
+  \unkOf{m_2}(\GlobVars,\LocVarsOf{1}) \land  \rel_1 \limplies \unkOf{m_3}(\GlobVars',\LocVarsOf{1}')  \\
+  \unkOf{m_2}(\GlobVars,\LocVarsOf{1}) \land  \rel_1 \limplies
+  \unkOf{e_1}(\GlobVars,\GlobVars')  \\
+  \unkOf{m_3}(\GlobVars,\LocVarsOf{1}) \land \unkOf{e_2}(\GlobVars,\GlobVars')
+  \land \relLocEqOf{1} \limplies \unkOf{m_4}(\GlobVars',\LocVarsOf{1}') 
+  \vspace{10pt}\\
+  \SymbInit \limplies \unkOf{n_1}(\GlobVars,\LocVarsOf{2}) \\
+  \unkOf{n_1}(\GlobVars,\LocVarsOf{2}) \land \rel_{2} \limplies \unkOf{n_2}(\GlobVars',\LocVarsOf{2}') \\
+  \unkOf{n_1}(\GlobVars,\LocVarsOf{2}) \land \rel_{2} \limplies \unkOf{e_2}(\GlobVars,\GlobVars') \\
+  \unkOf{n_2}(\GlobVars,\LocVarsOf{2}) \land \unkOf{e_1}(\GlobVars,\GlobVars')  \land\relLocEqOf{2} \limplies 
+  \unkOf{n_3}(\GlobVars',\LocVarsOf{2}')\vspace{10pt}\\
+
+  \unkOf{m_4}(\GlobVars,\LocVarsOf{1})\land\unkOf{n_3}(\GlobVars,\LocVarsOf{2})\land\SymbError\limplies\lfalse 
+\end{array}
+\end{equation*}
+\textbf{(c)}
+\end{minipage}
+\hfill 
+\vspace{1ex}
+%----------------------------------------------------------------------------------------------
+\hrule
+\begin{minipage}[t]{\linewidth} 
+\centering
+\vspace{1pt}
+  \begin{tikzpicture}[<-,>=stealth',shorten >=1pt,auto, node distance=9mm,
+                    semithick]
+ \node[stateBox] (err) {$1:\lfalse$};
+
+%----------------------------
+ \node [stateBox,xshift=-83mm,yshift=2mm,above left of=err] (m47) {$2:\unkOf{m_4}(\Vars^1)$};\path (m47) edge (err);
+ \node [stateBox,xshift=-34mm,yshift=3mm, above left of=m47] (m36) {$3:\unkOf{m_3}(\Vars^2)$};\path (m36) edge (m47);
+ \node [stateBox, above of=m36 ] (m25) {$4:\unkOf{m_2}(\Vars^3)$}; \path (m25) edge (m36);
+ \node [stateBox, above of=m25 ] (m14) {$5:\unkOf{m_1}(\Vars^4)$}; \path (m14) edge (m25);
+
+ \node [draw,xshift=13.5mm,yshift=3mm,above right of=m36] (t1) {$8:\rel_1(\Vars^3,\Vars^2)$};\path (t1) edge (m36);
+ \node [draw,xshift=13.5mm,yshift=3mm,above right of=m25] (te1) {$7:\rel_{0}(\Vars^4,\Vars^3)$};\path (te1)edge(m25);
+ \node [draw, above of=m14]  (i1)  {$6:\SymbInit(\Vars^4)$};    \path (i1) edge (m14);
+
+ \node [stateBox,above of=m47] (e2) {$9:\unkOf{e_2}(\Vars^2,\Vars^1)$}; \path (e2) edge (m47);
+ \node [stateBox, above of=e2 ] (n16) {$10:\unkOf{n_1}(\Vars^2)$}; \path (n16) edge (e2);
+
+ \node [draw,xshift=17mm,yshift=3mm,above right of=e2] (et2) {$12:\rel_2(\Vars^2,\Vars^1)$}; \path (et2) edge (e2);
+ \node [draw, above of=n16] (ei2){$11:\SymbInit(\Vars^2)$};  \path (ei2) edge (n16);
+
+ \node [draw,xshift=17mm,yshift=3mm, above right of=m47,text centered] (eq2) 
+ {$13:\relLocEqOf{1}(\Vars^2,\Vars^1)$}; \path (eq2) edge (m47);
+
+%---------------------------
+
+ \node [stateBox,above of=err] (n37) {$14:\unkOf{n_3}(\Vars^1)$};\path (n37) edge (err);
+ \node [stateBox,xshift=-36mm,yshift=3mm,above left of=n37 ] (n23) {$15:\unkOf{n_2}(\Vars^5)$};\path (n23)edge(n37);
+ \node [stateBox,     above of=n23 ] (n12) {$16:\unkOf{n_1}(\Vars^6)$}; \path (n12) edge (n23);
+ 
+ \node [draw,xshift=14.5mm,yshift=2.5mm,above right of=n23](t2){$18:\rel_2(\Vars^6,\Vars^5)$}; \path (t2) edge (n23);
+ \node [draw, above of=n12] (i2)  {$17:\SymbInit(\Vars^6)$}; \path (i2) edge (n12);
+ 
+ \node [stateBox,above of=n37] (e1)  {$19:\unkOf{e_1}(\Vars^5,\Vars^1)$};\path (e1) edge (n37);
+ \node [stateBox, above of=e1 ] (m23) {$20:\unkOf{m_2}(\Vars^5)$}; \path (m23) edge (e1);
+ \node [stateBox, above of=m23] (m11) {$21:\unkOf{m_1}(\Vars^7)$}; \path (m11) edge (m23);
+ 
+ \node[draw,xshift=17mm,yshift=3mm,above right of=e1] (et1) {$24:\rel_1(\Vars^5,\Vars^1)$};\path (et1) edge (e1);
+ \node[draw,xshift=17mm,yshift=3mm,above right of=m23] (ete1) {$23:\rel_0(\Vars^7,\Vars^5)$};\path (ete1) edge (m23);
+ \node[draw, above of=m11]  (ei1)  {$22:\SymbInit(\Vars^7)$};\path (ei1) edge (m11);
+ 
+ \node [draw,xshift=17mm,yshift=3mm,above right of=n37,text centered ] (eq1) 
+ {$25:\relLocEqOf{2}(\Vars^5,\Vars^1)$}; \path (eq1) edge (n37);
+
+%---------------------------
+  \node [draw, xshift=22mm, yshift=-1mm, above of=err] (errn) {$26:\SymbError(\Vars^1)$};\path (errn) edge (err);
+  \end{tikzpicture}\vspace{-10pt}\\
+\textbf{(d)}
+\end{minipage}
+\hrule
+%-------------------------------------------------------------------------------
+% Pred map
+\begin{minipage}[t]{\linewidth} 
+\centering
+\vspace{1pt}
+  \begin{tikzpicture}[<-,>=stealth',shorten >=1pt,auto, node distance=9mm,
+                    semithick]
+ \node[stateBox] (err) {$1:\linfalse$};
+
+%----------------------------
+ \node [stateBox,xshift=-83mm,yshift=2mm,above left of=err] (m47) {$2:\linfalse$};\path (m47) edge (err);
+ \node [stateBox,xshift=-34mm,yshift=3mm, above left of=m47] (m36) {$3:1\leq\local^2$};\path (m36) edge (m47);
+ \node [stateBox, above of=m36 ] (m25) {$4:1\leq\local^3$}; \path (m25) edge (m36);
+ \node [stateBox, above of=m25 ] (m14) {$5:\lintrue$}; \path (m14) edge (m25);
+
+ \node [draw,xshift=13.5mm,yshift=3mm,above right of=m36] (t1) {$8:$$\local^3\leq\local^2$};\path (t1) edge (m36);
+ \node [draw,xshift=13.5mm,yshift=3mm,above right of=m25] (te1) {$7:1\leq\local^3$};\path (te1)edge(m25);
+ \node [draw, above of=m14]  (i1)  {$6:\lintrue$};    \path (i1) edge (m14);
+
+ \node [stateBox,above of=m47] (e2) {$9:\local^2\leq0$}; \path (e2) edge (m47);
+ \node [stateBox, above of=e2 ] (n16) {$10:\local^2\leq0$}; \path (n16) edge (e2);
+
+ \node [draw,xshift=16mm,yshift=3mm,above right of=e2] (et2) {$12:\lintrue$}; \path (et2) edge (e2);
+ \node [draw, above of=n16] (ei2){$11:\local^2\leq0$};  \path (ei2) edge (n16);
+
+ \node [draw, xshift=16mm,yshift=2mm, above right of=m47,text centered] (eq2) {$13:\lintrue$}; \path (eq2) edge (m47);
+
+%---------------------------
+ \node [stateBox,above of=err] (n37) {$14:\lintrue$};\path (n37) edge (err);
+ \node [stateBox,xshift=-36mm,yshift=3mm,above left of=n37 ] (n23) {$15:\lintrue$};\path (n23)edge(n37);
+ \node [stateBox,     above of=n23 ] (n12) {$16:\lintrue$}; \path (n12) edge (n23);
+ 
+ \node [draw,xshift=14.5mm,yshift=2.5mm,above right of=n23](t2){$18:\lintrue$}; \path (t2) edge (n23);
+ \node [draw, above of=n12] (i2)  {$17:\lintrue$}; \path (i2) edge (n12);
+ 
+ \node [stateBox,above of=n37] (e1)  {$19:\lintrue$};\path (e1) edge (n37);
+ \node [stateBox, above of=e1 ] (m23) {$20:\lintrue$}; \path (m23) edge (e1);
+ \node [stateBox, above of=m23] (m11) {$21:\lintrue$}; \path (m11) edge (m23);
+ 
+ \node[draw,xshift=18mm,yshift=3mm,above right of=e1] (et1) {$24:\lintrue$};\path (et1) edge (e1);
+ \node[draw,xshift=18mm,yshift=3mm,above right of=m23] (ete1) {$23:\lintrue$};\path (ete1) edge (m23);
+ \node[draw, above of=m11]  (ei1)  {$22:\lintrue$};\path (ei1) edge (m11);
+ 
+ \node [draw,xshift=19mm,yshift=2.5mm,above right of=n37,text centered ] (eq1) 
+ {$25:\lintrue$}; \path (eq1) edge (n37);
+
+%---------------------------
+  \node [draw, xshift=22mm, yshift=-1mm, above of=err] (errn) {$26:\lintrue$};\path (errn) edge (err);
+  \end{tikzpicture}\vspace{-10pt}\\
+\textbf{(e)}
+\end{minipage}
+%-------------------------------------------------------------------------------
+% 
+\hrule
+\begin{minipage}[t]{\linewidth} 
+\centering
+\vspace{1pt}
+  \begin{tikzpicture}[<-,>=stealth',shorten >=1pt,auto, node distance=9mm,
+                    semithick]
+ \node [stateBox] (m47) {$2:\unkOf{m_4}(\GlobVars^1,\LocVarsOf{1}^1)$};
+ \node [stateBox,xshift=-70mm,yshift=3mm, above left of=m47] (m36) {$3:\unkOf{m_3}(\GlobVars^2,\LocVarsOf{1}^2)$};
+ \path (m36) edge (m47);
+ \node [stateBox, above of=m36 ] (m25) {$4:\unkOf{m_2}(\GlobVars^3,\LocVarsOf{1}^3)$}; \path (m25) edge (m36);
+ \node [stateBox, above of=m25 ] (m14) {$5:\unkOf{m_1}(\GlobVars^4,\LocVarsOf{1}^4)$}; \path (m14) edge (m25);
+
+ \node [draw,xshift=29mm,yshift=2mm,above right of=m36] (t1)
+ {$8:\rel_1(\GlobVars^3,\LocVarsOf{1}^3,\LocVarsOf{2}^{\textsc{IV}},
+            \GlobVars^2,\LocVarsOf{1}^2,\LocVarsOf{2}^{\textsc{V}})$};
+ \path (t1) edge (m36);
+ \node [draw,xshift=29mm,yshift=2mm,above right of=m25] (te1) 
+ {$7:\rel_{0}(\GlobVars^4,\LocVarsOf{1}^4,\LocVarsOf{2}^{\textsc{II}},
+              \GlobVars^3,\LocVarsOf{1}^3,\LocVarsOf{2}^{\textsc{III}})$};
+ \path (te1) edge (m25);
+ \node [draw, above of=m14] (i1)
+ {$6:\SymbInit(\GlobVars^4,\LocVarsOf{1}^4,\LocVarsOf{2}^{\textsc{I}})$};
+ \path (i1) edge (m14);
+
+ \node [stateBox,above of=m47] (e2) {$9:\unkOf{e_2}(\GlobVars^2,\GlobVars^1)$}; \path (e2) edge (m47);
+ \node [stateBox, above of=e2 ] (n16) {$10:\unkOf{n_1}(\GlobVars^2,\LocVarsOf{2}^2)$}; \path (n16) edge (e2);
+
+ \node [draw,xshift=30mm,yshift=2mm,above right of=e2] (et2) 
+ {$12:\rel_2(\GlobVars^2,\LocVarsOf{1}^{\textsc{VI}},\LocVarsOf{2}^2,
+             \GlobVars^2,\LocVarsOf{1}^{\textsc{VII}},\LocVarsOf{2}^1)$};
+ \path (et2) edge (e2);
+ \node [draw, above of=n16] (ei2)
+ {$11:\SymbInit(\GlobVars^2,\LocVarsOf{1}^{\textsc{VIII}},\LocVarsOf{2}^2)$};
+ \path (ei2) edge (n16);
+
+ \node [draw, xshift=18mm,yshift=2mm, above right of=m47,text centered] (eq2) 
+ {$13:\dots$}; \path (eq2) edge (m47);
+%---------------
+  \node [xshift=20mm, yshift=5mm, below right of=m47] (errt) {};\path (m47) edge (errt);
+  \node [xshift=20mm, yshift=5mm, below right of=errt] (err) {};\path (errt) edge[-,dashed] (err);
+  \end{tikzpicture}\vspace{-7pt}\\
+\textbf{(f)}
+\end{minipage}
+\caption{
+(a) Reachability trees constructed by \aret computation.
+(b) Corresponding Horn clauses generated using \algMkHornClauses.
+(c) Horn clauses generated with preference for modular solutions.
+(d) A tree representation of the clauses from (b) as generated by \algMkHornTree.
+Each node shows its $\cFormula$ attribute.
+The superscript of the node name identifies the set of
+variables appearing in the attribute of the node.
+(e) The $\cInterPol$ map generated by \algSolveLinearHornClauses from the clauses in (b).
+(f) The $\cFormula$ map generated by \algMkHornClauses from the clauses in (c).
+}
+\label{fig-ex-cex}
+\end{figure*}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

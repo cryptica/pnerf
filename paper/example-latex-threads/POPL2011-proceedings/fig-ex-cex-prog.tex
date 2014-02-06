@@ -1,0 +1,58 @@
+\begin{figure}[t]
+  \hrule
+%-------------------------------------------------------------------
+  \centering
+  \begin{minipage}[t]{.44\columnwidth} 
+\begin{verbatim} 
+
+// Thread 1 
+x:  cnt++;
+    assume(cnt >= 1);
+a:  take_lock(lock,1);
+b:  // critical 
+\end{verbatim}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{.44\columnwidth} 
+\begin{verbatim}
+
+// Thread 2
+p: take_lock(lock,1);
+q: // critical
+\end{verbatim}
+  \end{minipage}
+%-------------
+  \begin{minipage}[t]{\columnwidth}
+  \centering
+    \begin{equation*}
+     \begin{array}[t]{r@{\;=\;}l@{}}
+       \SymbInit  &(\pcone=x \land \pctwo=p \land \lock=0 \land\local=0)      \\[\jot]
+       \relLocEqOf{1} & (\pcone=\pcone' \land \local = \local' ) \\[\jot]
+       \relLocEqOf{2} & ( \pctwo=\pctwo' ) \\[\jot]
+       \rel_{0}    &(
+       \begin{array}[t]{@{}l}
+         \pcone=x \land \pcone'=a \land \lock=\lock' \mathrel{\land}  \\[\jot]
+         \local+1 = \local' \land 1\leq\local' \land \relLocEqOf{2}  ) \\[\jot]
+       \end{array}\\
+       \rel_{1}     &( 
+       \begin{array}[t]{@{}l}
+         \pcone=a \land \pcone'=b \land \lock=0 \land \lock'=1 \mathrel{\land} \\[\jot]
+         \local = \local' \land \relLocEqOf{2} ) \\[\jot]
+       \end{array}\\
+       \rel_{2}    & (
+       \begin{array}[t]{@{}l}
+         \pctwo=p \land \pctwo'=q \land \lock=0 \land \lock'=1 \mathrel{\land} \relLocEqOf{1} ) \\[\jot]
+       \end{array}\\
+       \SymbError &(\pcone=b \land \pctwo=q)
+     \end{array}
+   \end{equation*}
+ \end{minipage}
+%-------------------------------------------------------------------
+\caption{$\TakeLockBitCnt$ is an expanded version of the program $\TakeLockBit\ $.}
+\label{fig-ex-cex-prog}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

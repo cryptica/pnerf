@@ -1,0 +1,136 @@
+\section{Experimental results} \label{sec-experiments}
+
+In this section, we describe a proof-of-concept implementation of our
+proposed algorithm as an extension of the model checker ARMC 
+\cite{RybalPodelskiPADL07}.
+
+
+\paragraph{Tool description}
+The verifier we built takes as input a number of functions (written in
+the C language) representing threads that should execute concurrently.
+The input file also contains the description of an initial state and
+a number of assertions to be proven correct.
+Our tool uses a frontend based on the CIL infrastructure
+\cite{NeculaCC02} to translate a C program to its corresponding
+multi-threaded transition system that is formalized in
+Section~\ref{sec-prelim}.
+The main component of our tool is an implementation of our algorithm
+done using SICStus Prolog \cite{sicstus}.
+
+An important design decision in our implementation concerns the 
+treatment of control-location and data variables.
+Even if both control-location variables and data variables can be
+handled uniformly by our algorithm, we found that different
+abstraction domains and refinement for the two domains can lead to
+significant improvement.
+In our implementation, the \algRefine procedure first splits the
+constraints into data variable constraints and control-location
+constraints. 
+The splitting procedure preserves satisfiability/unsatisfiability of
+the original constraint since there is no atomic formula in the
+program transitions that relates both control variables and data
+variables.
+If the data constraints are satisfiable, the algorithm proceeds as in
+Figure~\ref{fig-alg-refine}.
+If the data constraints are unsatisfiable, our implementation relies
+on a specialized refinement procedure (described in
+\cite{GuptaATVA10}) that takes advantage of the simpler form of
+control counterexamples.
+For these counterexamples, control variables range over a finite
+domain and no atomic formula from the program transitions involves
+different control variables.
+
+\input{table-vs-no-bias}
+
+\paragraph{Benchmark programs} 
+
+We tested our prototype implementation using a collection of programs
+that have intricate correctness proofs for their safety assertions.
+The first four programs shown in Table~\ref{table-vs-no-bias} are
+derived from two buggy examples highlighted as figures in
+\cite{LuASPLOS08}, together with their fixes from the \Mozilla CVS
+repository.
+The property to verify is that two operations performed by different
+threads are executed in the correct order.
+The next three examples model the stopping procedure of a Windows NT
+Bluetooth driver \cite{QadeerPLDI04}.
+\BluetoothTwo contains two threads, one worker thread and another thread
+to model the stopping procedure of the driver.
+%\BluetoothThree includes an additional stopper thread and illustrates
+%a bug in the driver model. 
+%(The bug cannot be triggered for the two-thread model.)
+\BluetoothTwoFixed and \BluetoothThreeFixed are the fixed versions of
+the model with two and respectively three threads.
+\Scull\cite{CorbetBook05} is a Linux character device driver that
+implements access to a global memory area.
+The property to verify is that read and write operations are performed
+in critical section.
+
+We also include some examples which are not particularly favorable to
+a modular reasoning approach.
+These examples are algorithms that establish mutual exclusion and mainly
+deal with global variables (no local computation is included in the
+critical region).
+The mutual exclusion property of the na\"ive version of the Bakery
+algorithm \cite{MannSafetyBook95} holds only when assuming
+assignments are performed atomically. 
+(Our verifier was able to confirm the bug present in the code without
+such atomicity assumption.)
+\Bakery\cite{LamportCACM74} is the complete version of the Bakery
+algorithm, while \Lamport\cite{LamportTCS87} is an algorithm with an
+optimized path in the absence of memory contention.
+\QRCU\cite{McKenneyLWN07} is an algorithm implementing the
+Read-copy-update synchronization algorithm.
+It is an alternative to a readers-writer lock having wait-free read
+operations.
+
+
+\paragraph{Performance of our tool} 
+
+To explain our experimental results, we first articulate a working
+hypothesis.
+This hypothesis suggests that, when verifying a program that does not
+have a modular proof, the algorithm with preference for modular
+solutions (denoted as \emph{verification with bias}) is expected to
+pay a penalty by insisting to search for modular solutions that do
+not exist.
+On the other hand, for cases where a modular proof does exist, the
+non-biased verification could fail to find a modular proof and instead
+return a more detailed non-modular proof.
+Therefore, the hypothesis suggests that in these cases the biased
+verification is expected to succeed faster compared to the non-biased
+verification.
+
+We report statistical data for each of the programs in
+Table~\ref{table-vs-no-bias}.
+We show the number of lines of code (LOC) and whether a modular proof
+exists for a program (see Column 3).
+Our implementation has two modes. 
+Column 4 shows the verification results, when using our algorithm with
+a preference for modular solutions.
+The last column of the table shows the verification results for the 
+non-biased implementation of our algorithm.
+The results demonstrate that our approach to verification of
+multi-threaded programs is feasible and that the constraint solving
+procedure with bias is able to produce modular proofs more
+often than the non-biased verification.
+Furthermore, without the bias, the verification procedure times-out
+for Scull and QRCU examples showing the benefits of modular proofs.
+
+As another experiment, we tested some of our smaller examples
+using two state-of-the-art model checkers for sequential C programs,
+Blast \cite{BlastLazy02} and ARMC\cite{RybalchenkoARMC}.
+For each of the tested programs (Fig2-fixed, Fig4-fixed, Dekker,
+Peterson, and Lamport), we instrumented the program counter as
+explicit program variables ($\pcone$ and $\pctwo$) and obtained a
+sequential model of the multi-threaded examples.
+Both Blast and ARMC eagerly consider all interleavings and obtained
+timeouts after 30 minutes for both Fig4-fixed and Lamport.
+Comparatively, our tool exploits the thread structure of these
+programs and obtains conclusive verification results fast.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

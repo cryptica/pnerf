@@ -1,0 +1,295 @@
+\section{Proof rule, fixpoints, and abstraction}\label{sec-proof-rule}
+\input{fig-eq-abst-mod-reach}
+
+In this section we develop the foundations for our verification
+algorithm.
+We present a compositional proof rule and then derive a corresponding
+characterization in terms of least fixpoints and their approximations.
+We present the ability of our proof rule to facilitate modular
+reasoning, when admitted by the program, without losing the ability
+for global reasoning otherwise.
+
+\paragraph{Proof rule}
+
+Figure~\ref{fig-eq-abst-mod-reach} presents a proof rule \ProofRule
+for compositional verification of program safety.
+The proof rule is inspired by the existing proof rules for
+compositional safety reasoning, see
+e.g.~\cite{OwickiAI76,JonesTOPLAS83,CohenFMSD09,HenzingerPLDI04}.
+Our formulation of \ProofRule directly leads to a pre-fixpoint
+characterization, thus, providing a basis for the proof rule
+automation using abstraction and refinement techniques.
+
+\ProofRule relies on \emph{thread reachability} assertions $\Reach_1,
+\dots, \Reach_\Num$ that keep track of program states reached
+by threads $1, \dots, \Num\ $ together with their respective
+\emph{environment transitions} $\Env_1, \dots, \Env_\Num\ $.
+The environment transition of each thread keeps track of modifications
+of program states by other threads.
+The auxiliary assertions used in our proof rule can refer to all
+program variables, that is, they are not restricted to a combination
+of global variables and local variables of a particular thread. 
+
+
+If the provided auxiliary assertions satisfy all premises of the proof
+rule, i.e., \ruleInit, \dots, \ruleCheck, then the program is safe.
+The premise \ruleInit requires that each thread reachability
+over-approximates the initial program states.
+\ruleTransStep ensures that the thread reachability of each thread is
+invariant under the application of the thread transitions.
+In addition, \ruleEnvStep requires invariance under the environment
+transitions of the thread. 
+The conjunct $\relLocEqOf{i}$ in \ruleEnvStep selects the subset of
+the environment transition that does not modify the local variables of
+the thread.
+Given a thread $j\ $, the premise \ruleTransEnv collects transitions
+that start from states in the thread reachability of other threads and
+combines them into the environment transition for~$j\ $.
+Finally, \ruleCheck checks that there is no error state that appears
+in each thread reachability set.
+
+The proof rule \ProofRule can be directly used to prove program safety
+following a two-step procedure. 
+First, we need to identify candidate assertions for the thread
+reachability and environment transitions.
+Second, we need to check that these candidate assertions satisfy the
+premises of proof rule.
+The correctness of the conclusion is formalized by the following
+theorems.
+
+%
+\begin{theorem}[Soundness]
+  \label{thm-rule-sound}
+  % 
+The proof rule \ProofRule is sound.\,\eofClaim
+%
+\end{theorem}
+\includeProof{
+\begin{proof}
+%  See Appendix~\ref{app-proofs}.
+% 
+Let $\Reach_1, \dots, \Reach_\Num$ and $\Env_1, \dots, \Env_\Num$
+satisfy the premises \ruleInit, \dots, \ruleCheck.
+We show that the program is safe.
+To prove safety, for each reachable state $s\models\SymbReach$ we
+prove that $s\models\Reach_1\land\dots\land\Reach_\Num$ by induction
+over the length $k$ of a shortest computation segment $s_1, \dots,
+s_k$ such that $s_1\models \SymbInit$ and~$s_k=s\ $.
+
+
+For the base case $k=1$, the inclusion holds due to the premise
+\ruleInit.
+For the induction step, we assume that the above statement holds for
+states reachable in $k \geq 1$ steps and prove the statement for their
+immediate successors.
+That is, let $s_k\models\SymbReach$ and hence $s_k \models
+\Reach_1\land\dots\land\Reach_\Num\ $.
+If $s_k$ does not have any successor, i.e., $\neg (\exists s_{k+1} :
+(s_k, s_{k+1}) \models \relProg)\ $, then there are no more states to
+consider.
+Otherwise, we choose a successor state $s_{k+1}$ of $s_k$ that is
+reached by taking a transition in a thread~$i\ $, i.e., $(s_k,
+s_{k+1})\models\relTIdOf{i}\ $.
+From \ruleTransStep follows that~$s_{k+1}\models\Reach_i\ $.
+
+To show that $s_{k+1}\models\Reach_j$ for each
+$j\in\ThreadIds\setminus\set{i}$ we rely on the premises \ruleTransEnv
+and \ruleEnvStep.
+By induction hypothesis $s_k\models\Reach_i$ and due to \ruleTransEnv
+we have $(s_k, s_{k+1})\models\Env_j\ $.
+Now $s_{k+1}\in\Reach_j$ follows from \ruleEnvStep.
+\end{proof}
+}
+%
+\begin{theorem}[Relative completeness]\label{thm-rule-complete}
+%
+The proof rule \ProofRule is complete relative to first-order
+reasoning.\eofClaim
+%
+\end{theorem}
+%
+\includeProof{
+\begin{proof} 
+Let $\program$ be safe.
+We define $\Reach_1 = \dots = \Reach_\Num = \SymbReach$ and 
+$\Env_1 = \dots = \Env_\Num = \SymbReach \land \relProg\ $.
+Then, the premises \ruleInit, \dots, \ruleCheck are immediately
+satisfied.
+\end{proof}
+}
+
+\paragraph{Modular and  global proofs}
+
+Reasoning about multi-threaded program is more complex than reasoning
+about sequential programs since thread interaction needs to be taken
+into account.
+Some programs admit modular reasoning that deals with each thread in
+isolation, i.e., assertions used in the proof only refer to the global
+variables and the local variables of one thread at a time.
+
+The proof rule \ProofRule facilitates \emph{modular} reasoning about
+multi-threaded programs. 
+If a program has a modular safety proof, then the following
+\emph{modular} assertions satisfy the proof rule premises:
+%
+\begin{equation*}
+  \begin{array}[t]{l@{\defeq}l@{\qquad}c@{}}
+    \Reach_i & \exists \Vars\setminus (\GlobVars \cup \LocVarsOf{i}) :
+    \SymbReach\ , & \text{for }
+    i \in \ThreadIds\\[\jot]
+    \Env_i & \exists (\Vars\cup \Vars')\setminus (\GlobVars \cup
+    \GlobVars') : \SymbReach\land \relProg\ . & \text{for }
+    i  \in \ThreadIds
+  \end{array}
+\end{equation*}
+% 
+
+\ProofRule is \emph{not} restricted to modular proofs. 
+Since the assertions used in \ProofRule can refer to each of the program
+variables, non-modular proofs can be directly used.
+In fact, the proof of Theorem~\ref{thm-rule-complete} relies on
+non-modular assertions, since $\SymbReach$ may refer to local
+variables of different threads.
+
+In Section~\ref{sec-algo-safety} we will present our algorithm that
+can discover modular assertions for \ProofRule if the program admits
+modular proofs, and delivers non-modular assertions otherwise.
+
+
+
+
+\paragraph{Fixpoints}
+
+The proof rule \ProofRule in Figure~\ref{fig-eq-abst-mod-reach}
+directly leads to a fixpoint-based characterization, which defines our
+algorithm in Section~\ref{sec-algo-safety}.
+
+From the premises \ruleTransStep, \ruleEnvStep, and \ruleTransEnv we
+obtain a function $\eqPreFunc$ on $\Num$-tuples of assertions over the
+program variables and $\Num$-tuples of assertions over the unprimed
+and primed program variables such that
+%
+\begin{equation}\label{eq-pre-func}
+  \begin{split}
+    & \eqPreFunc(S_1, \dots, S_\Num, T_1, \dots, T_\Num) \defeq \\[\jot]
+    &\;\,\,  (
+    \begin{array}[t]{@{}l@{\; \dots,\; }l}
+      \post(\relTIdOf{1} \lor T_1\land \rho^=_1, S_1), 
+      &
+      \post(\relTIdOf{\Num} \lor T_\Num\land \rho^=_\Num, S_\Num),\\[2\jot]
+      \Lor_{i\in\ThreadIds\setminus\set{1}}S_i \land \relTIdOf{i},
+      &
+      \Lor_{i\in\ThreadIds\setminus\set{\Num}}S_i \land \relTIdOf{i} )\ .
+    \end{array}
+\end{split}
+\end{equation} 
+%
+We formalize the relation between $\eqPreFunc$ and \ProofRule as
+follows.
+%
+\begin{lemma}\label{lem-rule-fix}
+  %
+      Each pre-fixpoint of $\eqPreFunc$ satisfies the premises
+\emph{\ruleTransStep,} \emph{\ruleEnvStep,} and \emph{\ruleTransEnv}
+of \ProofRule.
+That is, if
+%
+\begin{equation*}
+  \eqPreFunc(\Reach_1, \dots, \Reach_\Num, \Env_1, \dots, \Env_\Num) \limplies
+  (\Reach_1, \dots, \Reach_\Num, \Env_1, \dots, \Env_\Num)
+\end{equation*}
+%
+then $\Reach_1, \dots, \Reach_\Num, \Env_1, \dots, \Env_\Num$
+satisfies \emph{\ruleTransStep,} \emph{\ruleEnvStep,} and
+\emph{\ruleTransEnv}.\eofClaim
+%
+\end{lemma}
+%
+We define a distinguished tuple $\eqPreBot$:
+%
+\begin{equation}\label{eq-pre-bot}
+  \eqPreBot \defeq (\SymbInit,\dots,\SymbInit, \underbrace{\lfalse, \dots,
+    \lfalse}_{\Num \text{ times}})\ .
+\end{equation}
+%
+Then, each pre-fixpoint of $\eqPreFunc$ that is greater than
+$\eqPreBot$ satisfies the premise \ruleInit.
+By choosing a pre-fixpoint $(\Reach_1, \dots, \Reach_\Num, \Env_1,
+\dots, \Env_\Num)$ above $\eqPreBot$ such that $\Reach_1 \land \dots,
+\Reach_\Num \land \SymbError \limplies \lfalse$ we will satisfy all
+premises of the proof rule \ProofRule, and hence prove the program
+safety.
+
+
+\paragraph{Fixpoint abstraction}
+
+Computing pre-fixpoints of $\eqPreFunc$ that satisfy \ruleInit and
+\ruleCheck is a difficult task.
+We automate this computation using the framework of abstract
+interpretation~\cite{lattice77}, which uses over-approximation to
+strike a balance between reasoning precision and efficiency.
+To implement required over-approximation functions, we will use a
+collection of abstraction functions $\abstTIdOf{i}$ and
+$\abstTransTIdOf{i}{j}$, where $i \neq j \in\ThreadIds$, that
+over-approximate sets and binary relations over programs states,
+respectively.
+
+We define a function $\eqFunc$ that over-approximates $\eqPreFunc$
+using given abstraction functions:
+%
+\begin{equation}\label{eq-func}
+  \begin{split}
+    & \eqFunc(S_1, \dots, S_\Num, T_1, \dots, T_\Num) \defeq \\[\jot]
+    &\qquad  (
+    \begin{array}[t]{@{}l}
+      \abst_1(\post(\relTIdOf{1}, S_1)) \lor 
+      \abst_1(\post(T_1 \land \relLocEqOf{1}, S_1))\ , \\[\jot]
+      \qquad\qquad\cdots\\
+      \abst_\Num(\post(\relTIdOf{\Num}, S_\Num) \lor 
+      \abst_\Num(\post(T_\Num \land \relLocEqOf{\Num}, S_\Num))\ ,
+    \\[3\jot]
+    \Lor_{i\in\ThreadIds\setminus\set{1}}\abstTransTIdOf{i}{1}(S_i \land \relTIdOf{i})\ ,\\[2\jot]
+    \qquad\qquad\cdots \\[\jot]
+    \Lor_{i\in\ThreadIds\setminus\set{\Num}}\abstTransTIdOf{i}{\Num}(S_i \land \relTIdOf{i} ))\ .
+  \end{array}
+\end{split}
+\end{equation} 
+%
+Let $\eqBot$ be an over-approximation of $\eqPreFunc$ such that
+%
+\begin{equation}\label{eq-bot}
+  \eqBot \defeq (\abst_1(\SymbInit),\dots,\abst_\Num(\SymbInit), \underbrace{\lfalse, \dots,
+    \lfalse}_{\Num \text{ times}})\ .
+\end{equation}
+%
+The least pre-fixpoint of $\eqFunc$ above $\eqBot$ can be used to
+prove program safety by applying the following theorem, and is the key
+outcome of our algorithm in Section~\ref{sec-algo-safety}.
+%
+\begin{theorem}[Abstract fixpoint checking]\label{thm-abst-fix}
+  % 
+    If the least pre-fixpoint of $\eqFunc$ above $\eqBot$, say
+$(\Reach_1, \dots, \Reach_\Num, \Env_1, \dots, \Env_\Num)$, satisfies
+the premise \emph{\ruleCheck} then the program is safe.\eofClaim
+  %
+\end{theorem}
+%
+\includeProof{
+\begin{proof} The theorem follows directly from the soundness of the
+proof rule \ProofRule, Lemma~\ref{lem-rule-fix}, and
+over-approximations introduced by the applied abstraction functions.
+\end{proof}
+}
+
+The choice of the abstract domains, i.e., the range sets of the
+abstraction functions, determines if the least fixpoint of $\eqFunc$
+yields a modular proof.
+Our abstraction discovery algorithm in Section~\ref{sec-refinement}
+automatically chooses the abstraction such that modular proofs are
+preferred.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

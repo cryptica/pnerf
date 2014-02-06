@@ -1,0 +1,61 @@
+\linespread{1.2}
+\begin{figure}[t]
+%\small
+\hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\
+   1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\ 11 \\ 12 
+%   \\ 13 \\ 14 % \\ 15 \\ 16 \\ 17 % \\ 18 \\ 19 \\
+%   20 \\ 21 \\ 22 \\ 23 \\ 24 \\ 25 \\
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algProcedure \algRefine\\
+    \algInput \\
+    \tabT $S_1, \dots, S_{\Num}$ - abstract error tuple\\
+    \algBegin\\
+    \tabT  $\HornClauses$ \algAssgn $
+    \begin{array}[t]{@{}l}
+      \set{\unkOf{S_1}(\Vars) \land \dots \land
+        \unkOf{S_{\Num}}(\Vars) \land \SymbError \rightarrow \lfalse}\\
+      \mathrel{\cup} \algMkHornClauses(S_1) \\
+      \dots \\
+      \mathrel{\cup} \algMkHornClauses(S_{\Num})
+    \end{array}
+    $ \\
+    \tabT $\Solution$ \algAssgn $\algSolveHornClauses(
+    \begin{array}[t]{@{}l}
+      \HornClauses,\\
+      \set{\unkOf{S}(\Vars) \mid i \in \ThreadIds \land S \in \artReachOf{i}} \mathrel{\cup}\\
+      \set{\unkOf{\rel}(\Vars, \Vars') \mid i \in \ThreadIds \land \rel \in \EnvTransOf{i}} 
+      )
+    \end{array}
+    $ \\
+    \tabT \algForeach $i \in \ThreadIds$ and $S \in \artReachOf{i}$ \algDo \\
+    \tabTT $\artPreds_i$ \algAssgn $\extractPredsOf{\SolutionOf{\unkOf{S}(\Vars)}}
+    \cup \artPreds_i$\\
+    \tabT \algForeach $j \in \ThreadIds$ and $\rel
+    \in \EnvTransOf{j}$ \algDo \\
+    \tabTT $i$ \algAssgn $\artTIdOf{\rel}$ \\
+    \tabTT $\artTPredsOf{i}{j}$ \algAssgn
+    $\extractPredsOf{\SolutionOf{\unkOf{\rel}(\Vars, \Vars')}}
+    \cup \artTPredsOf{i}{j}$\\
+    \algEnd
+  \end{minipage}
+  \vspace{1ex}
+  \linespread{1}
+  \caption{Procedure \algRefine. 
+    The quotation function $\unkOf{\cdot}$ creates a relation symbol
+    from a given abstract state/abstract transition.
+    The function $\extractPreds$ extracts atomic predicates from the
+    solutions to the set of Horn clauses~$\HornClauses$.
+  }
+  \label{fig-alg-refine}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+

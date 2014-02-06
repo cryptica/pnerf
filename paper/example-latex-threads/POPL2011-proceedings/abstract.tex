@@ -1,0 +1,87 @@
+%
+Automated verification of multi-threaded programs requires explicit
+identification of the interplay between interacting threads, so-called
+environment transitions, to enable scalable, compositional reasoning.  
+Once the environment transitions are identified, we can prove program
+properties by considering each program thread in isolation, as the
+environment transitions keep track of the interleaving with other
+threads.
+Finding adequate environment transitions that are sufficiently precise
+to yield conclusive results and yet do not overwhelm the verifier with
+unnecessary details about the interleaving with other threads is a
+major challenge.
+In this paper we propose a method for safety verification of
+multi-threaded programs that applies (transition) predicate
+abstraction-based discovery of environment transitions, exposing a
+minimal amount of information about the thread interleaving.
+The crux of our method is an abstraction refinement procedure that
+uses recursion-free Horn clauses to declaratively state abstraction
+refinement queries.
+Then, the queries are resolved by a corresponding constraint solving
+algorithm.
+We present preliminary experimental results for mutual exclusion
+protocols and multi-threaded device drivers.
+
+
+
+\iffalse % popl submission abstract
+%
+In order to scale, verification of multi-threaded programs requires
+definition of auxiliary variables that reveal some details about the
+local state of the concurrent threads and construction of
+rely/guarantee assertions that describe the thread interaction in
+terms of shared and auxiliary variables.
+%
+In this paper we present an automatic method for the discovery of
+auxiliary variables and relies/guarantees.
+Our method is based on a generalization of counterexample guided
+abstraction refinement to the multi-threaded setting.
+The crux of the generalization is a notion of tree-like
+counterexamples that explicitly account for thread interleaving.
+By solving the corresponding tree-like path constraints, our method
+reveals additional local facts through auxiliary variables and
+iteratively strengthens relies/guarantees.
+Furthermore, the tree-like path constraints can avoid the introduction
+of auxiliary variables when they are not necessary.
+%Furthermore, the tree-like path constraints enable the discovery of
+%modular relies/guarantees (whose auxiliary variables do not reveal any
+%local facts) whenever a modular proof exists.
+We devised a solver for the tree-like constraints that is based on
+Craig interpolation and used it in a prototype implementation of our
+method.
+We present preliminary experimental results for mutual exclusion
+protocols and concurrent device drivers.
+\fi
+
+
+\iffalse % PLDI abstract
+Automated verification of multi-threaded programs requires explicit
+identification of the interplay between interacting threads, so-called
+environment assumptions, to enable scalable reasoning.  
+Once identified, these assumptions can be used for reasoning with one
+program thread at a time, which is possible by using the respective
+environment assumption to model the interleaving with other threads.
+Finding adequate assumptions that are sufficiently precise to yield
+conclusive results and yet keep track only of necessary facts about
+the execution environment in order to scale well is a major challenge.
+In this paper we propose a constraint-based technique for the
+inference of such assumptions.
+Our technique automatically steers towards an optimal
+precision/efficiency trade-off between the extremes of efficient, but
+incomplete thread-modular reasoning and complete, but prohibitively
+expensive consideration of all interleavings.
+For this task, we pinpoint a declarative formulation of modular
+verification that allows one to express requisite environment
+assumptions using constraints and admits algorithmic solutions based
+on abstract fixpoint checking.
+We describe an application of our environment assumption inference for
+the verification of reachability and termination properties of
+multi-threaded programs, and present our experience with its
+implementation as well as evaluation in practice. 
+\fi
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+
