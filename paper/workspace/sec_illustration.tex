@@ -1,1 +1,138 @@
-\section{Illustration}
+\section{An Example: Lamport's 1-bit Algorithm}
+
+We illustrate three constraint-based functions for
+invariant construction on Lamport's 1-bit algorithm for mutual
+exclusion\cite{LamportJACM86}.
+Figure~\ref{fig_lamport_src} shows the instance of the algorithm 
+for two processes. Figure~\ref{fig_lamport_net} 
+shows the corresponding Petri net.
+
+\input{fig_lamport_src}
+
+\subsection{An Invariant for Process 1}
+
+We consider the property that the program counter of process 1 is
+always either at location $p_1$, $p_2$, or $p_3$, i.e. $p_1 + p_2 +
+p_3 \leq 1$. For the given network and property we construct an
+invariant in the following way.
+
+We obtain the following set of state constraints \setCp\ corresponding
+to the initial marking, flow relation, and the property.
+The set \setCp\ is such that a solution to the set corresponds to an
+invariant.
+\\ \mbox{ } \\
+\begin{minipage}{\columnwidth}
+  \emph{Inductivity constraints} \\[-2em]
+  \begin{minipage}[t]{.49\columnwidth}
+    \centering
+    \begin{alignat*}{25}
+      &{}-{}& p_1 &{}+{}& p_2 &     &     &{}+{}& bit_1 &{}-{}& notbit_1 &{}\le{}& 0 \\[-0.4em]
+      &     &     &{}-{}& p_2 &{}+{}& p_3 &     &       &     &          &{}\le{}& 0 \\[-0.4em]
+      &     & p_1 &     &     &{}-{}& p_3 &{}-{}& bit_1 &{}+{}& notbit_1 &{}\le{}& 0
+    \end{alignat*}
+  \end{minipage}
+  \begin{minipage}[t]{.49\columnwidth}
+    \centering
+    \begin{alignat*}{25}
+      &{}-{}& q_1 &{}+{}& q_2 &     &     &     &     &     &     &{}-{}& notbit_2 &{}\le{}& 0  \\[-0.4em]
+      &     &     &{}-{}& q_2 &{}+{}& q_3 &     &     &     &     &     &          &{}\le{}& 0  \\[-0.4em]
+      &     &     &     &     &{}-{}& q_3 &{}+{}& q_4 &     &     &{}+{}& notbit_2 &{}\le{}& 0  \\[-0.4em]
+      &     & q_1 &     &     &     &     &{}-{}& q_4 &     &     &     &          &{}\le{}& 0  \\[-0.4em]
+      &     &     &{}-{}& q_2 &     &     &     &     &{}+{}& q_5 &     &          &{}\le{}& 0  \\[-0.4em]
+      &     & q_1 &     &     &     &     &     &     &{}-{}& q_5 &{}+{}& notbit_2 &{}\le{}& 0 
+    \end{alignat*}
+  \end{minipage} \\
+  \emph{Safety constraint}\\[-2em]
+  \begin{align*}
+    p_1 + q_1 + \neg bit_1 + \neg bit_2 & < 2 * target_1
+  \end{align*}
+\end{minipage}
+\begin{minipage}{\columnwidth}
+  \emph{Property constraints} \\[-2em]
+  \begin{minipage}[t]{.49\columnwidth}
+    \centering
+    \begin{align*}
+      p_1   & \ge target_1 \\[-0.4em]
+      p_2   & \ge target_1 \\[-0.4em]
+      p_3   & \ge target_1 \\[-0.4em]
+      bit_1 & \ge 0        \\[-0.4em]
+      notbit_1 & \ge 0
+    \end{align*}
+  \end{minipage}
+  \begin{minipage}[t]{.49\columnwidth}
+    \centering
+    \begin{align*}
+      q_1   & \ge 0 \\[-0.4em]
+      q_2   & \ge 0 \\[-0.4em]
+      q_3   & \ge 0 \\[-0.4em]
+      q_4   & \ge 0 \\[-0.4em]
+      q_5   & \ge 0 \\[-0.4em]
+      notbit_2 & \ge 0
+    \end{align*}
+  \end{minipage}
+\end{minipage}
+\begin{minipage}{\columnwidth}
+  \emph{Non-negativity constraint}\\[-2em]
+  \begin{align*}
+    target_1 & \ge 0
+  \end{align*}
+\end{minipage}
+\\ \mbox{ } \\
+The \emph{inductivity constraints} correspond to the flow relation of the
+Petri~net.
+The \emph{safety constraint} corresponds to the initial marking and
+the property.
+The \emph{property constraint} corresponds to the property and the set
+of places.
+The \emph{non-negativity constraints} corresponds to the property.
+
+For the construction of an invariant, we consider the
+following solution \solA\ to the set \setCp.
+\\[-2em]
+\begin{minipage}[t]{.49\columnwidth}
+  \begin{align*}
+    p_1      & = 3 \\[-0.4em]
+    p_2      & = 2 \\[-0.4em]
+    p_3      & = 2 \\[-0.4em]
+    bit_1    & = 1 \\[-0.4em]
+    notbit_1 & = 0 \\[-0.4em]
+  \end{align*}
+\end{minipage}
+\begin{minipage}[t]{.49\columnwidth}
+  \begin{align*}
+    q_1      & = 0 \\[-0.4em]
+    q_2      & = 0 \\[-0.4em]
+    q_3      & = 0 \\[-0.4em]
+    q_4      & = 0 \\[-0.4em]
+    q_5      & = 0 \\[-0.4em]
+    notbit_2 & = 0 \\[-0.4em]
+    target_1 & = 2
+  \end{align*}
+\end{minipage}
+
+Given the solution, we construct the following
+invariant \invI.
+\begin{align*}
+  3 p_1 + 2 p_2 + 2 p_3 + bit_1 & \le 3
+\end{align*}
+The invariant corresponds to the property that the program
+counter of process 1 is always either at location $p_1$, $p_2$, or
+$p_3$ and when the counter is at $p_1$ the flag $bit_1$ is not set.
+The left-hand-side is a linear combination of the places of the
+Petri~net where the coefficients are given by the solution.
+The right hand side is the value of the combination at the initial
+marking.
+
+\input{fig_lamport_net}
+
+\subsection{Example: minimal invariant for process 1}
+
+
+\subsection{Example: invariant by refinement for process 1}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

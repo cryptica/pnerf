@@ -1,0 +1,187 @@
+\section{Constructing Invariants from Constraints}
+\label{sec_method_invariant}
+
+\subsection{A first approach}
+
+We make a simple observation which, combined with the flexibility of
+SMT-solvers, leads to an interesting improvement on the Safety
+Method. We propose method \invariant\ with the same power as the
+method \safety\ over the rational numbers, but dual to it: the
+constraints of method \safety\ are unfeasible over the rational
+numbers if{}f the constraints of method \invariant\ are
+feasible. The advantage is that the solution delivered by the
+method \invariant\ is an inductive linear invariant satisfied by all
+reachable markings, but violated by all markings that do not satisfy
+the property. So this invariant provides an {\em explanation} of why
+the property holds.
+
+We now derive the constraints given by method \invariant.
+Consider the matrix form of the negation of property $P$ below.
+$$ \neg P = ( A M \ge b ) $$
+for some matrix $A$ and vector $b$.
+Consider the following primal system of linear inequations $C$.
+\begin{align*}
+  \mathcal{C}&(S, T, F, M_0)  && \text{constraints given by \safety} \\
+  A M & \ge b                 && \text{negation of property $P$}
+\end{align*}
+
+We have the following theorem:
+
+\begin{theorem}
+\label{thm:dual}
+The system $C'$ of constraints given by
+\begin{align*}
+  \lambda C    & \le 0     && \text{inductivity constraint} \\
+  \lambda M_0  & <   Y_1 b && \text{safety constraint} \\
+  \lambda      & \ge Y_1 A && \text{property constraint} \\
+  Y_1          & \ge 0     && \text{non-negativity constraint} 
+\end{align*}
+is feasible over the rational numbers if{}f the system $C$ is unfeasible
+over teh rational numbers.
+\end{theorem}
+\begin{proof}
+See the Appendix.
+\end{proof}
+
+We can now easily interpret the meaning of a solution $\lambda$ of $C'$. Recall that
+for every reachable marking $M$ we find a solution of 
+$M = M_0 + CX$. Multiplying by $\lambda$, and since $\lambda$ is a solution
+of $C'$, we get 
+$$\lambda M = \lambda M_0 + \lambda CX \leq \lambda M_0$$
+\noindent On the other hand, for every marking $M$ violating the property
+we have $ AM \geq b$, and so
+$$\lambda M \geq Y_1 AM \geq Y_1 b > \lambda M_0$$
+
+Therefore, the linear constraint
+$$I(M) = \lambda M \leq \lambda M_0$$
+is an invariant satisfied by all reachable markings $M$, 
+but by no marking violating the property.
+
+We can now prove that $I(M)$ is an inductive invariant, that is, if
+$I(M)$ holds for some marking $M$ (reachable or not), and $M \xrightarrow{t} M'$
+for some transition $t$, then $I(M')$ holds as well.
+Indeed, in this case we have $M' = M + C e_t$ where $e_t = (0,\ldots,0,\underbrace{1}_{t},0,\ldots,0)^T$ is the vector whose components are all $0$ but the one
+corresponding to $t$, which has value $1$. So we get
+$$\lambda M' = \lambda(M + Ce_t) = \lambda M + \lambda Ce_t
+\le \lambda M \le \lambda M_0$$
+\noindent and so $I(M')$ holds.
+
+\subsection{Example}
+
+Again, we consider Lamport's algorithm and the mutual
+exclusion property.  As in this case, we can not prove safety 
+without using trap constraints, we can also
+not obtain an invariant by simply applying method \invariant.
+
+However, let us assume we wanted to prove that there is no marking
+violating the mutual exclusion property and also marking each trap
+found by method \safetyref. We can do this by adding
+the trap constraints to the negation of the property, which yields
+$$(p_3 \ge 1) \land (q_5 \ge 1) \land
+(p_2 + q_2 + q_3 + notbit_1 + notbit_2 \ge 1)$$
+
+The constraints constructed by the method \invariant\ then are
+
+\noindent \emph{Inductivity constraints}
+$$
+\begin{array}[t]{clclclclclcl}
+    -  & p_1 &  +  & p_2 &     &     &  +  & bit_1 &  -  & notbit_1 &  \le  & 0 \\
+       &     &  -  & p_2 &  +  & p_3 &     &       &     &          &  \le  & 0 \\
+       & p_1 &     &     &  -  & p_3 &  -  & bit_1 &  +  & notbit_1 &  \le  & 0
+\end{array}\quad
+\begin{array}[t]{clclclclclclclclclcl}
+    -  & q_1 &  +  & q_2 &     &     &     &     &     &     &  -  & notbit_2 &  \le  & 0  \\
+       &     &  -  & q_2 &  +  & q_3 &     &     &     &     &     &          &  \le  & 0  \\
+       &     &     &     &  -  & q_3 &  +  & q_4 &     &     &  +  & notbit_2 &  \le  & 0  \\
+       & q_1 &     &     &     &     &  -  & q_4 &     &     &     &          &  \le  & 0  \\
+       &     &  -  & q_2 &     &     &     &     &  +  & q_5 &     &          &  \le  & 0  \\
+       & q_1 &     &     &     &     &     &     &  -  & q_5 &  +  & notbit_2 &  \le  & 0 
+\end{array}
+$$
+\emph{Safety constraint}
+$$    
+p_1 + q_1 + \neg bit_1 + \neg bit_2 < target_1 + target_2 + trap_1
+$$
+\emph{Property constraints}
+$$
+\begin{array}[t]{rcl}
+  p_1   & \ge & 0 \\
+  p_2   & \ge & trap_1 \\
+  p_3   & \ge & target_1 \\
+  bit_1 & \ge & 0 \\
+  notbit_1 & \ge 0
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  bit_1 & \ge & 0 \\
+  notbit_1 & \ge & trap_1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  notbit_2 & \ge & trap_1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  q_1   & \ge & 0 \\
+  q_2   & \ge & trap_1 \\
+  q_3   & \ge & trap_1 \\
+  q_4   & \ge & 0 \\
+  q_5   & \ge & target_2 \\
+\end{array}
+$$
+\emph{Non-negativity constraints}
+$$
+\begin{array}[t]{rcl}
+  target_1 & \ge & 0 \\
+  target_2 & \ge & 0 \\
+  trap_1   & \ge & 0
+\end{array}
+$$
+
+\noindent where $\lambda$ corresponds to the places and $Y_1 = (target_1\ target_2\ trap_1)$
+corresponds to the two parts of the property and the added trap.
+
+For the construction of an invariant, we consider the
+following solution
+$$
+\begin{array}[t]{rcl}
+  p_1      & = & 1 \\
+  p_2      & = & 2 \\
+  p_3      & = & 2 \\
+  bit_1    & = & 0 \\
+  notbit_1 & = & 0
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  bit_1    & = & 0 \\
+  notbit_1 & = & 1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  notbit_2 & = & 1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  q_1   & = & 0 \\
+  q_2   & = & 1 \\
+  q_3   & = & 1 \\
+  q_4   & = & 0 \\
+  q_5   & = & 1 \\
+\end{array}
+\begin{array}[t]{rcl}
+  target_1 & = & 2 \\
+  target_2 & = & 1 \\
+  trap_1   & = & 1
+\end{array}
+$$
+
+Given the solution, we construct the following
+invariant \invI.
+$$
+I(M) = (p_1 + 2 p_2 + 2 p_3 + notbit_1 + notbit_2 + q_2 + q_3 + q_5 \le 3)
+$$
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

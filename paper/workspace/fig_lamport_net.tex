@@ -1,70 +1,78 @@
-\begin{figure}
-\begin{center}
-  \begin{tikzpicture}
-  \draw[box] (-2,8.5) rectangle (1,0);
-  \draw[box] (3,8.5) rectangle (7.5,0);
-  
-  \node at (-0.5, 0.5) {First Process};
-  \node at (5, 0.5) {Second Process};
+\begin{figure}[t]
+  \begin{center}
+    \begin{tikzpicture}[
+        scale=0.6,
+        every node/.style={scale=0.6}
+      ]
+      \draw[box] (-2,8.5) rectangle (1,0);
+      \draw[box] (3,8.5) rectangle (7.5,0);
+      
+      \node at (-0.5, 0.5) {First Process};
+      \node at (5, 0.5) {Second Process};
 
-  \node[place, label=left:p3] (p3) at (0,7) {};
-  \node[transition, label=left:s3] (s3) at (0,6) {};
-  \node[place, tokens=1, label=left:p1] (p1) at (0,5) {};
-  \node[transition, label=left:s1] (s1) at (0,4) {};
-  \node[place, label=left:p2] (p2) at (0,3) {};
-  \node[transition, label=left:s2] (s2) at (0,2) {};
+      \node[place, label=left:$p_3$] (p3) at (0,7) {};
+      \node[transition, label=left:$s_3$] (s3) at (0,6) {};
+      \node[place, tokens=1, label=left:$p_1$] (p1) at (0,5) {};
+      \node[transition, label=left:$s_1$] (s1) at (0,4) {};
+      \node[place, label=left:$p_2$] (p2) at (0,3) {};
+      \node[transition, label=left:$s_2$] (s2) at (0,2) {};
 
-  \draw (p3) edge[flow] (s3);
-  \draw (s3) edge[flow] (p1);
-  \draw (p1) edge[flow] (s1);
-  \draw (s1) edge[flow] (p2);
-  \draw (p2) edge[flow] (s2);
-  \draw[rounded corners=4mm] (s2) |- (-1.5,1) -- (-1.5,8) [flow] -| (p3);
- 
-  \node[transition, label=above:t2] (t2) at (4,7) {};
-  \node[place, label=right:q3] (q3) at (4,6) {};
-  \node[transition, label=right:t3] (t3) at (4,5) {};
-  \node[place, label=right:q4] (q4) at (4,4) {};
-  \node[transition, label=left:t4] (t4) at (4,3) {};
+      \draw (p3) edge[flow] (s3);
+      \draw (s3) edge[flow] (p1);
+      \draw (p1) edge[flow] (s1);
+      \draw (s1) edge[flow] (p2);
+      \draw (p2) edge[flow] (s2);
+      \draw[flow, rounded corners=4mm] (s2) |- (-1.5,1) -- (-1.5,8) -| (p3);
+      
+      \node[transition, label=above:$t_2$] (t2) at (4,7) {};
+      \node[place, label=right:$q_3$] (q3) at (4,6) {};
+      \node[transition, label=right:$t_3$] (t3) at (4,5) {};
+      \node[place, label=right:$q_4$] (q4) at (4,4) {};
+      \node[transition, label=left:$t_4$] (t4) at (4,3) {};
 
-  \node[place, label=right:q2] (q2) at (5.5,7) {};
-  \node[transition, label=right:t5] (t5) at (5.5,6) {};
-  \node[place, label=right:q5] (q5) at (5.5,5) {};
-  \node[transition, label=right:t6] (t6) at (5.5,4) {};
-  \node[place, tokens=1, label=right:q1] (q1) at (5.5,3) {};
-  \node[transition, label=right:t1] (t1) at (5.5,2) {};
-  
-  \draw (q2) edge[flow] (t5);
-  \draw (t5) edge[flow] (q5);
-  \draw (q5) edge[flow] (t6);
-  \draw (t6) edge[flow] (q1);
-  \draw (q1) edge[flow] (t1);
-  \draw[rounded corners=4mm] (t1) |- (7,1) -- (7,8) [flow] -| (q2);
-  
-  \draw (q2) edge[flow] (t2);
-  \draw (t2) edge[flow] (q3);
-  \draw (q3) edge[flow] (t3);
-  \draw (t3) edge[flow] (q4);
-  \draw (q4) edge[flow] (t4);
-  \draw (t4) edge[flow] (q1);
-  
-  \node[place, label=above:bit1] (bit1) at (2,6) {};
-  \node[place, tokens=1, label=below:$\neg$bit1] (nbit1) at (2,4) {};
-  \node[place, tokens=1, label=below:$\neg$bit2] (nbit2) at (2,2) {};
-  
-  \draw (bit1) edge[flow] (s3);
-  \draw (s3) edge[flow] (nbit1);
-  \draw (nbit1) edge[flow] (s1);
-  \draw (s1) edge[flow] (bit1);
-  \draw (t2) edge[flow, <->] (bit1);
-  \draw (nbit1) edge[flow, <->, bend left=18] (t5);
-  \draw (nbit1) edge[flow, <->] (t4);
-  \draw (nbit2) edge[flow, <->] (s2);
-  \draw (t3) edge[flow] (nbit2);
-  \draw (t6) edge[flow, bend left=30] ([xshift=-0.2mm, yshift=1mm] nbit2.east);
-  \draw (nbit2) edge[flow] (t1.west);
-\end{tikzpicture}
-\end{center}
-\caption{Petri net for Lamport's 1-bit algorithm}
-\label{fig:lamport-petri-net}
+      \node[place, label=right:$q_2$] (q2) at (5.5,7) {};
+      \node[transition, label=right:$t_5$] (t5) at (5.5,6) {};
+      \node[place, label=right:$q_5$] (q5) at (5.5,5) {};
+      \node[transition, label=right:$t_6$] (t6) at (5.5,4) {};
+      \node[place, tokens=1, label=right:$q_1$] (q1) at (5.5,3) {};
+      \node[transition, label=right:$t_1$] (t1) at (5.5,2) {};
+      
+      \draw (q2) edge[flow] (t5);
+      \draw (t5) edge[flow] (q5);
+      \draw (q5) edge[flow] (t6);
+      \draw (t6) edge[flow] (q1);
+      \draw (q1) edge[flow] (t1);
+      \draw[rounded corners=4mm, flow] (t1) |- (7,1) -- (7,8) -| (q2);
+      
+      \draw (q2) edge[flow] (t2);
+      \draw (t2) edge[flow] (q3);
+      \draw (q3) edge[flow] (t3);
+      \draw (t3) edge[flow] (q4);
+      \draw (q4) edge[flow] (t4);
+      \draw (t4) edge[flow] (q1);
+      
+      \node[place, label=above:$bit_1$] (bit1) at (2,6) {};
+      \node[place, tokens=1, label=below:$notbit_1$] (notbit1) at (2,4) {};
+      \node[place, tokens=1, label=below:$notbit_2$] (notbit2) at (2,2) {};
+      
+      \draw (bit1) edge[flow] (s3);
+      \draw (s3) edge[flow] (notbit1);
+      \draw (notbit1) edge[flow] (s1);
+      \draw (s1) edge[flow] (bit1);
+      \draw (t2) edge[flow, <->] (bit1);
+      \draw (notbit1) edge[flow, <->, bend left=18] (t5);
+      \draw (notbit1) edge[flow, <->] (t4);
+      \draw (notbit2) edge[flow, <->] (s2);
+      \draw (t3) edge[flow] (notbit2);
+      \draw (t6) edge[flow, bend left=30] ([xshift=-0.2mm, yshift=1mm] notbit2.east);
+      \draw (notbit2) edge[flow] (t1.west);
+    \end{tikzpicture}
+  \end{center}
+  \caption{Petri net for Lamport's 1-bit algorithm.}
+  \label{fig_lamport_net}
 \end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

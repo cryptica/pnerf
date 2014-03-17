@@ -5,6 +5,8 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{algpseudocode}
+\usepackage{gnuplot-lua-tikz}
+\usepackage{ar-alg}
 
 \newcommand{\bfc}{{\sc Bfc}}
 \newcommand{\mist}{{\sc Mist}}
@@ -12,13 +14,26 @@
 \newcommand{\pnerf}{{\sc Pnerf}}
 \newcommand{\zthree}{{\sc Z3}}
 
-\newcommand{\safety}{{\bf Safety}}
-\newcommand{\safetyref}{{\bf Safety by Refinement}}
+\newcommand{\safety}{\textsc{Safety}}
+\newcommand{\safetyref}{\textsc{SafetyByRefinement}}
+\newcommand{\invariant}{\textsc{Invariant}}
+\newcommand{\invariantref}{\textsc{InvariantByRefinement}}
+\newcommand{\invariantwmin}{\textsc{InvariantWithMinimization}}
+
+\newcommand{\funC}{\ensuremath{\mathcal{C}}}
 
 \newcommand{\ttt}[1]{\texttt{#1}}
 
+\def\set#1{{\{ #1 \}}}
 \newcommand{\pre}[1]{\prescript{\bullet}{}{#1}}
 \newcommand{\post}[1]{#1^{\bullet}}
+\newcommand{\setC}{\ensuremath{C}}
+\newcommand{\setCp}{\ensuremath{C'}}
+\newcommand{\solA}{\ensuremath{A}}
+\newcommand{\solAp}{\ensuremath{A'}}
+\newcommand{\invI}{\ensuremath{I}}
+\newcommand{\mathfalse}{\ensuremath{\mathit{false}}}
+\newcommand{\mathtrue}{\ensuremath{\mathit{true}}}
 
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,shapes.multipart,shapes.geometric,
@@ -34,4 +49,35 @@
 \tikzstyle{state}=[draw, ellipse, aspect=2]
 \tikzstyle{action}=[draw, rectangle, align=center]
 \tikzstyle{decision}=[draw, diamond, aspect=2, align=center]
-\tikzstyle{print}=[draw, trapezium, trapezium left angle=70, trapezium right angle=-70]
+\tikzstyle{print}=[draw, trapezium, trapezium left angle=70, trapezium
+right angle=-70]
+
+% COMMENTS
+\newcommand{\RM}[1]{\textcolor{red}{\textsf{RM}: #1}}
+\newcommand{\JE}[1]{\textcolor{blue}{\textsf{JE}: #1}}
+\newcommand{\FN}[1]{\textcolor{green}{\textsf{FN}: #1}}
+\newcommand{\RLG}[1]{\textcolor{cyan}{\textsf{RLG}: #1}}
+\newcommand{\PM}[1]{\textcolor{magenta}{\textsf{PM}: #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% added by Javier for the Appendix %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{mycounter}
+\newcommand{\theoremlike}[2]{\par\medskip\penalty-250\refstepcounter{theorem}{{\bfseries\noindent#2
+\ref{#1}.}}}
+
+\newcommand{\thmhelperpre}[2]{\theoremlike{#1}{#2}}
+\newcommand{\thmhelperpost}{\par\medskip}
+
+\newenvironment{reftheorem}[1]{\thmhelperpre{#1}{Theorem}}{\thmhelperpost}
+\newenvironment{reflemma}[1]{\thmhelperpre{#1}{Lemma}}{\thmhelperpost}
+\newenvironment{refobservation}[1]{\thmhelperpre{#1}{Observation}}{
+\thmhelperpost}
+\newenvironment{refcorollary}[1]{\thmhelperpre{#1}{Corollary}}{\thmhelperpost}
+\newenvironment{refproposition}[1]{\thmhelperpre{#1}{Proposition}}{
+\thmhelperpost }
+
+%\newtheorem{claim}[theorem]{Claim}
+%\theoremstyle{plain}
+%\newtheorem{proposition}[theorem]{Proposition}

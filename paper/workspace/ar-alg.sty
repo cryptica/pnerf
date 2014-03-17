@@ -1,0 +1,59 @@
+%% ar-alg.sty
+%%
+%% Set of Pseudocode Macros by Andrey Rybalchenko
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ar-alg}[2008/04/30 Useful macros for typesetting pseudocode]
+
+\RequirePackage{xspace}
+
+\newcommand{\tabUnit}{2.3ex}
+\newcommand{\tabT}{\hspace*{\tabUnit}}
+\newcommand{\tabTT}{\hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTTTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTTTTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTTTTTTT}{\hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit} \hspace*{\tabUnit}}
+\newcommand{\tabTTt}{\hspace*{\tabUnit} \hspace*{\tabUnit} \;\;}
+\newcommand{\tabTt}{\hspace*{\tabUnit} \;}
+\newcommand{\tabt}{\quad}
+\newcommand{\algComment}[1]{$(\ast$ #1 $\ast)$}
+\newcommand{\algAssgn}{\;:=\;\;}
+\newcommand{\algGlobalvars}{\textbf{global variables}\xspace}
+\newcommand{\algInput}{\textbf{input}\xspace}
+\newcommand{\algOutput}{\textbf{output}\xspace}
+\newcommand{\algVars}{\textbf{vars}\xspace}
+\newcommand{\algProcedure}{\textbf{procedure}\xspace}
+\newcommand{\algFunction}{\textbf{function}\xspace}
+\newcommand{\algMethod}{\textbf{method}\xspace}
+\newcommand{\algAlgorithm}{\textbf{algorithm}\xspace}
+\newcommand{\algIf}{\textbf{if}\xspace}
+\newcommand{\algThen}{\textbf{then}\xspace}
+\newcommand{\algElsif}{\textbf{elsif}\xspace}
+\newcommand{\algElse}{\textbf{else}\xspace}
+\newcommand{\algFi}{\textbf{fi}\xspace}
+\newcommand{\algPick}{\textbf{pick}\xspace}
+\newcommand{\algForeach}{\textbf{for} each\xspace}
+\newcommand{\algFor}{\textbf{for}\xspace}
+\newcommand{\algSt}{\textbf{such that}\xspace}
+\newcommand{\algWhile}{\textbf{while}\xspace}
+\newcommand{\algRepeat}{\textbf{repeat}\xspace}
+\newcommand{\algUntil}{\textbf{until}\xspace}
+\newcommand{\algBreak}{\textbf{break}\xspace}
+\newcommand{\algDo}{\textbf{do}\xspace}
+\newcommand{\algOd}{\textbf{od}\xspace}
+\newcommand{\algBegin}{\textbf{begin}\xspace}
+\newcommand{\algEnd}{\textbf{end}\xspace}
+\newcommand{\algDone}{\textbf{done}\xspace}
+\newcommand{\algReturn}{\textbf{return}\xspace}
+\newcommand{\algContext}{\textbf{context}\xspace}
+\newcommand{\algMatch}{\textbf{match}\xspace}
+\newcommand{\algTry}{\textbf{try}\xspace}
+\newcommand{\algWith}{\textbf{with}\xspace}
+\newcommand{\algCase}[1]{\hspace{1ex}\texttt{|} #1 \texttt{->}}
+\newcommand{\algInit}{\textbf{init}\xspace}
+\newcommand{\algThrow}{\textbf{throw}\xspace}
+\newcommand{\algSkip}{\textbf{skip}\xspace}
+\newcommand{\algGoto}{\textbf{goto}\xspace}

@@ -1,0 +1,51 @@
+\begin{figure}[t]
+  \hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ $p_1$: \\ $p_2$: \\ $p_3$:
+  \end{minipage}
+  \begin{minipage}[t]{.44\columnwidth}
+    \mbox{}\\
+    \algProcedure \textsc{Process 1} \\
+    \algBegin \\
+    \tabT $bit_1$ \algAssgn \mathfalse \\
+    \tabT \algWhile \mathtrue\ \algDo \\
+    \tabTT $bit_1$ \algAssgn \mathtrue \\
+    \tabTT \algWhile $bit_2$ \algDo \algSkip \algOd \\
+    \tabTT \algComment{critical section} \\
+    \tabTT $bit_1$ \algAssgn \mathfalse \\
+    \tabT \algOd \\
+    \algEnd
+  \end{minipage}
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ $q_1$: \\ $q_2$: \\ $q_3$: \\
+   $q_4$: \\ \\ \\ $q_5$:
+  \end{minipage}
+  \begin{minipage}[t]{.44\columnwidth}
+    \mbox{}\\
+    \algProcedure \textsc{Process 2} \\
+    \algBegin \\
+    \tabT $bit_2$ \algAssgn \mathfalse \\
+    \tabT \algWhile \mathtrue\ \algDo \\
+    \tabTT $bit_2$ \algAssgn \mathtrue \\
+    \tabTT \algIf $bit_1$ \algThen \\
+    \tabTTT $bit_2$ \algAssgn \mathfalse \\
+    \tabTTT \algWhile $bit_1$ \algDo \algSkip \algOd \\
+    \tabTTT \algGoto $q_1$ \\
+    \tabTT \algFi \\
+    \tabTT \algComment{critical section} \\
+    \tabTT $bit_2$ \algAssgn \mathfalse \\
+    \tabT \algOd \\
+    \algEnd
+  \end{minipage}
+  \vspace{1.5ex}
+  \hrule
+  \caption{Lamport's 1-bit algorithm for mutual exclusion
+    \cite{LamportJACM86}.}
+  \label{fig_lamport_src}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

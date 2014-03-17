@@ -1,55 +1,71 @@
 \section{Preliminaries}
+\label{sec_preliminaries}
 
-A \emph{Petri net} is a tuple $(P, T, F, M_0)$, where $P$ is the set of
-\emph{places}, $T$ is the set of \emph{transitions},
-$F \subseteq P\times T \cup T\times P$ is the \emph{flow relation}
-and $M_0$ is the initial marking.
-We identify $F$ with its characteristic function
-$P\times T \cup T\times P \to \{0, 1\}$.
-
+A \emph{Petri net} is a tuple $(P, T, F, m_0)$, where $P$ is a set of
+\emph{places}, $T$ is a (disjoint) set of \emph{transitions},
+$F : (P\times T) \cup (T\times P) \to \set{0,1}$ is the \emph{flow function},
+and $m_0: P \rightarrow \mathbb{N}$ is the initial marking.
+%
 For $x\in P\cup T$, the \emph{pre-set} is
-$\pre{x}=\{y\in P\cup T\mid (y,x) \in F\}$
-and the \emph{post-set} is $\post{x}=\{y\in P\cup T\mid (x,y) \in F\}$.
-The pre- and post-set of a subset of $P \cup T$ are the union of
-the pre and post-sets of its elements.
+$\pre{x}=\{y\in P\cup T\mid F(y,x) =1\}$
+and the \emph{post-set} is $\post{x}=\{y\in P\cup T\mid F(x,y) = 1\}$.
+We extend the pre- and post-set to a subset of $P \cup T$ as the union of
+the pre- and post-sets of its elements.
 
-A \emph{marking} of a Petri net is a function $M\colon P \to \mathbb{N}$,
-which describes the number of tokens $M(p)$ that the marking puts in
-each place $p$.
+A \emph{marking} of a Petri net is a function $m\colon P \to \mathbb{N}$,
+which describes the number of tokens $m(p)$ in 
+each place $p\in P$. 
+Assuming an enumeration $p_1, \ldots, p_n$ of $P$, we
+often identify $m$ and the vector $(m(p_1), \ldots, m(p_n))$.
+For a subset $P'\subseteq P$ of places, we write $m(P') = \sum_{p\in P'} m(p)$.
 
-Petri nets are represented graphically as follows: places and transitions
-are represented as circles and boxes, respectively. An element $(x,y)$
-of the flow relation is represented by an arc leading from $x$ to $y$.
-A token on a place $p$ is represented by a black dot in the circle
-corresponding to $p$.
-
-A transition $t \in T$ is \emph{enabled at $M$} iff
-$\forall p \in \pre{t} \colon M(p) \ge F(p, t)$.
-If $t$ is enabled at $M$, then $t$ may \emph{fire} or \emph{occur},
-yielding a new marking $M'$ (denoted as $M \xrightarrow{t} M'$),
-where $M'(p) = M(p) + F(t,p) - F(p,t)$.
+A transition $t \in T$ is \emph{enabled at $m$} iff
+for all $p \in \pre{t}$, we have $m(p) \ge F(p, t)$.
+A transition $t$ enabled at $m$ may \emph{fire},
+yielding a new marking $m'$ (denoted $m \xrightarrow{t} m'$),
+where $m'(p) = m(p) + F(t,p) - F(p,t)$.
 
 A sequence of transitions, $\sigma = t_1 t_2 \ldots t_r$ is an
-$\emph{occurence sequence}$ of $N$ iff there exist markings
-$M_1, \ldots, M_r$ such that $M_0 \xrightarrow{t_1} M_1
-\xrightarrow{t_2} M_2 \ldots \xrightarrow{t_r} M_r$. The marking
-$M_r$ is said to be \emph{reachable} from $M_0$ by the occurence
-of $\sigma$ (denoted $M \xrightarrow{\sigma} M_r$).
+$\emph{occurrence sequence}$ of $N$ iff there exist markings
+$m_1, \ldots, m_r$ such that $m_0 \xrightarrow{t_1} m_1
+\xrightarrow{t_2} m_2 \ldots \xrightarrow{t_r} m_r$. The marking
+$m_r$ is said to be \emph{reachable} from $m_0$ by the occurrence
+of $\sigma$ (denoted $m_0 \xrightarrow{\sigma} m_r$).
 
-A property $P$ is a safety property expressed over linear arithmetic
-formulas. The property $P$ holds on a marking $M$ iff $M \models P$.
-Examples of properties are $s_1 \le 2$, $s_1 + s_2 \ge 1$ and
-$((s_1 \le 1) \land (s_2 \ge 1)) \lor (s_3 \le 1)$.
+A \emph{property} $\varphi$ is a linear arithmetic constraint over the free variables $P$. 
+The property $\varphi$ holds on a marking $m$ iff $m \models \varphi$.
+% Examples of properties are $s_1 \le 2$, $s_1 + s_2 \ge 1$ and
+% $((s_1 \le 1) \land (s_2 \ge 1)) \lor (s_3 \le 1)$.
+% 
+A Petri net $N$ satisfies a property $\varphi$ (denoted by $N \models \varphi$)
+iff for all reachable markings $m_0 \xrightarrow{\sigma} m$, we have
+$m \models \varphi$.
+A property $\varphi$ is an \emph{invariant} of $N$ if it holds for every reachable marking.
+A property is inductive if whenever $m\models \varphi$ and $m \xrightarrow{t} m'$ for some $t\in T$
+and marking $m'$, we have $m'\models \varphi$.
 
-A Petri net $N$ satisfies a property $P$ (denoted by $N \models P$)
-iff for all reachable markings $M_0 \xrightarrow{\sigma} M$
-$M \models P$ holds.
+% A trap is a set of places $S \subseteq P$ such that $\post{S} \subseteq \pre{S}$.
+% If a trap $S$ is marked in $m_0$, i.e. $\sum_{p \in S} m_0(p) > 0$, then it is also marked in all reachable markings.
 
-An invariant $I$ of a Petri net $N$ is a property such that $N$ satisfies $I$.
-The invariant $I$ is inductive iff for all markings
-$M$, if $M \models I$ and $M \xrightarrow{t} M'$ for some $t$, then
-$M' \models I$.
+Petri nets are represented graphically as follows: places and transitions
+are represented as circles and boxes, respectively. For $x, y \in P \cup T$,
+there is an arc leading from $x$ to $y$ if{}f $F(x,y)=1$.
 
-A trap is a set of places $S \subseteq P$ such that $\post{S} \subseteq \pre{S}$.
-If a trap $S$ is marked in $M_0$, i.e. $\sum_{p \in S} M_0(p) > 0$, then it is also marked in all reachable markings.
+\input{fig_lamport_src}
+\input{fig_lamport_net}
+
+Petri nets can be used to model behavior of concurrent software. As an
+example, consider Lamport's 1-bit
+algorithm for mutual exclusion \cite{LamportJACM86}, shown in
+Fig.~\ref{fig_lamport_src}. 
+A Petri net model for the code is shown in Fig.~\ref{fig_lamport_net}.
+The two grey blocks model the control flow of the two
+processes. For instance, the token on place $p_1$ models the current
+position of process 1 at program location $p_1$. The three places in the middle of the
+diagram model the current values of the variables. For instance, a
+token on place $notbit_1$ indicates that the variable ${\it bit}_1$ is currently
+set to ${\it false}$.
+The mutual exclusion property, which states that the two processes cannot be in the
+critical section at the same time, corresponds to the property that
+places $p_3$ and $q_5$ cannot both have a token at the same time.
 

@@ -1,0 +1,189 @@
+\subsection{Minimizing Invariants}
+\label{sec_invariant_w_minimization}
+
+There may be multiple solutions to the system $\mathcal{S}'$
+leading to different invariants. 
+We now propose a method \invariantwmin\ to obtain a minimal
+invariant, where we define the size of an invariant as the number of 
+place variables appearing in it.
+
+Given an assignment $\lambda$ to the dual state constraints,
+we add further constraints whose solution yields a
+smaller invariant, if one exists. 
+We iterate this process to obtain the minimal invariant.
+
+To minimize a given invariant, we define a binary vector $b_\lambda$ which projects the
+non-zero components of $\lambda$ to 1 and the other components to 0.
+The sum of this vector is then equal to the number of places appearing
+in the invariant.
+We add constraints of the following form for each place $p$:
+\begin{align*}
+p &> 0 \implies b_{p} = 1 && \text{$p$ appears in the invariant} \\
+p &= 0 \implies b_{p} = 0 && \text{$p$ does not appear in the invariant}
+\end{align*}
+Finally, we add the constraint $\sum_{p\in P} b_p < K$, where $K$ is the number
+of places appearing in the current invariant.
+For the invariant~\eqref{eq:invariant} for mutual exclusion, this constraint is
+$$
+    b_{p_1} + b_{p_2} + b_{p_3} + b_{bit_1} + b_{notbit_1} + b_{notbit_2} +
+    b_{q_1} + b_{q_2} + b_{q_3} + b_{q_4} + b_{q_5} < 8\,.
+$$
+With the addded constraints, we obtain a new solution for our 
+example, setting $p_2$, $p_3$, $notbit_1$, $notbit_2$, $q_2$, $q_3$,
+$target_1$, $target_2$, and $trap_1$ to $1$, and all other variables
+to $0$. The invariant for this solution is
+$$
+I(M)\ ::\  p_2 + p_3 + notbit_1 + notbit_2 + q_2 + q_3 + q_5 \le 2\,.
+$$
+which is the minimal invariant. Together with the trap constraint we 
+finally get:
+\begin{align*}
+I'(M)\ ::&\ 
+(p_2 + q_2 + notbit_1 + notbit_2 + q_3 \ge 1 ) \; \land \\
+&\ (p_2 + p_3 + notbit_1 + notbit_2 + q_2 + q_3 + q_5 \le 2)\,.
+\end{align*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%I think this remark can be removed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Note that with the added trap constraints, the invariant might not be
+%minimal as we are not guaranteed to find traps of minimal size
+%or a minimal number of traps. However, we might still be able to
+%reduce the size of the invariant.
+
+% \input{fig_method_invariant_w_minimization}
+
+\iffalse
+
+\begin{verbatim}
+* Property of minimization constraints C_M generated from A': 
+    If A'' satisfies C' u C_M, then Inv(N, A'') uses less places than Inv(N, A')
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Subprocedures \mathcal{C'} and Inv are the same as in Method Invariant
+
+* Subprocedure \text{MinConstraints}:
+
+  Input:
+    N = (S, T, E, M0)  : Petri net
+    A'                 : Satisfying assignment for C'
+  Output:
+    C_M                : Minimization Constraints
+
+  Pseudocode:
+
+\end{verbatim}
+
+\begin{align*}
+  \text{MinConstraints}(N, A') =& \left( \bigwedge_{s \in S} \left(
+      (s > 0 \Rightarrow b_s = 1) \land (s = 0 \Rightarrow b_s = 0)
+    \right) \right) \land
+    \left( \sum_{s \in S} b_s < \sum_{s \in S : A'(s) > 0} 1 \right)
+\end{align*}
+
+\iffalse
+\begin{verbatim}
+* Example:
+
+  - Dual state constraints C' and satisfying assignment A' for C' as in example for method Invariant with property 2
+
+  - Minimization constraints C_M:
+\end{verbatim}
+
+\begin{verbatim}
+    p1     > 0 => b_p1   = 1
+    |            -----------
+    |               |
+    |            place p1 appears in invariant
+    |
+    place p1 coefficient in the invariant
+
+    p1     = 0 => b_p1   = 0
+    |           ------------
+    |               |
+    |            place p1 does not appear in invariant
+    |
+    place p1 coefficient in the invariant
+\end{verbatim}
+
+\begin{align*}
+(     p_1    > 0 & \implies b_{p_1}   = 1 ) & &\land &
+(     p_1    = 0 & \implies b_{p_1}    = 0 ) \\
+(     p_2    > 0 & \implies b_{p_2}    = 1 ) & &\land &
+(     p_2    = 0 & \implies b_{p_2}    = 0 ) \\
+(     p_3    > 0 & \implies b_{p_3}    = 1 ) & &\land &
+(     p_3    = 0 & \implies b_{p_3}    = 0 ) \\
+(     bit_1  > 0 & \implies b_{bit_1}  = 1 ) & &\land &
+(     bit_1  = 0 & \implies b_{bit_1}  = 0 ) \\
+( notbit_1 > 0 & \implies b_{notbit_1} = 1 ) & &\land &
+( notbit_1 = 0 & \implies b_{notbit_1} = 0 ) \\
+(     q_1    > 0 & \implies b_{q_1}    = 1 ) & &\land &
+(     q_1    = 0 & \implies b_{q_1}    = 0 ) \\
+(     q_2    > 0 & \implies b_{q_2}    = 1 ) & &\land &
+(     q_2    = 0 & \implies b_{q_2}    = 0 ) \\
+(     q_3    > 0 & \implies b_{q_3}    = 1 ) & &\land &
+(     q_3    = 0 & \implies b_{q_3}    = 0 ) \\
+(     q_4    > 0 & \implies b_{q_4}    = 1 ) & &\land &
+(     q_4    = 0 & \implies b_{q_4}    = 0 ) \\
+(     q_5    > 0 & \implies b_{q_5}    = 1 ) & &\land &
+(     q_5    = 0 & \implies b_{q_5}    = 0 ) \\
+( notbit_2 > 0 & \implies b_{notbit_2} = 1 ) & &\land &
+( notbit_2 = 0 & \implies b_{notbit_2} = 0 )
+\end{align*}
+
+\begin{align*}
+    b_{p_1} + b_{p_2} + b_{p_3} + b_{bit_1} + b_{notbit_1} +
+    b_{q_1} + b_{q_2} + b_{q_3} + b_{q_4} + b_{q_5} + b_{notbit_2} & < 4
+\end{align*}
+
+\iffalse
+\begin{verbatim}
+    b_p1 + b_p2 + b_p3 + b_bit1 + b_nbit1 + b_q1 + b_q2 + b_q3 + b_q4 + b_q5
+         + b_nbit2 < 4
+    --------------   |
+                |    |
+                |    number of places appearing in current invariant for A'
+                |    = #{s | A'(s) > 0} = #{p1, p2, p3, bit1}
+                |
+  number of places appearing in new invariant
+\end{verbatim}
+\fi
+  
+\begin{verbatim}
+  - Model A' for C' \cup C_M:
+\end{verbatim}
+
+\begin{align*}
+     p_1      & = 1 &    b_{p_1}     & = 1 \\
+     p_2      & = 1 &    b_{p_2}     & = 1 \\
+     p_3      & = 1 &    b_{p_3}     & = 1 \\
+     bit_1    & = 0 &    b_{bit_1}   & = 0 \\
+notbit_1    & = 0 &    b_{notbit_1}  & = 0 \\
+     q_1      & = 0 &    b_{q_1}     & = 0 \\
+     q_2      & = 0 &    b_{q_2}     & = 0 \\
+     q_3      & = 0 &    b_{q_3}     & = 0 \\
+     q_4      & = 0 &    b_{q_4}     & = 0 \\
+     q_5      & = 0 &    b_{q_5}     & = 0 \\
+notbit_2    & = 0 &    b_{notbit_2}  & = 0 \\
+     target_1 & = 1 \\
+\end{align*}
+    
+\begin{verbatim}
+  - Minimized Invariant:
+\end{verbatim}
+
+\begin{align*}
+    p_1 + p_2 + p_3 & \le 1
+\end{align*}
+\fi
+
+\fi
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

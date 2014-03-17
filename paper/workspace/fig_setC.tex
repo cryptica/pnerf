@@ -1,0 +1,36 @@
+\begin{figure}
+  \begin{minipage}{.79\columnwidth}
+    \emph{Place equations} \\ \\[-2em]
+    \begin{alignat*}{22}
+         p_1   &{}={}& 1 &{}-{}& s1 &     &    &{}+{}& s3 &&&&&&&&&&&&& \\[-0.4em]
+         p_2   &{}={}& 0 &{}+{}& s1 &{}-{}& s2 &     &    &&&&&&&&&&&&& \\[-0.4em]
+         p_3   &{}={}& 0 &     &    &{}+{}& s2 &{}-{}& s3 &&&&&&&&&&&&& \\[-0.4em]
+         bit_1 &{}={}& 0 &{}+{}& s1 &     &    &{}-{}& s3 &&&&&&&&&&&&& \\[-0.4em]
+    notbit_1 &{}={}& 1 &{}-{}& s1 &     &    &{}+{}& s3 &&&&&&&&&&&&& \\[-0.4em]
+         q_1   &{}={}& 1 &&{}-{}& t1 &     &    &     &    &{}+{}& t4 &     &    &{}+{}& t6 & \\[-0.4em]
+         q_2   &{}={}& 0 &&&&&&&{}+{}& t1 &{}-{}& t2 &     &    &     &    &{}-{}& t5 &     &    & \\[-0.4em]
+         q_3   &{}={}& 0 &&&&&&&     &    &{}+{}& t2 &{}-{}& t3 &     &    &     &    &     &    & \\[-0.4em]
+         q_4   &{}={}& 0 &&&&&&&     &    &     &    &{}+{}& t3 &{}-{}& t4 &     &    &     &    & \\[-0.4em]
+         q_5   &{}={}& 0 &&&&&&&     &    &     &    &     &    &     &    &{}+{}& t5 &{}-{}& t6 & \\[-0.4em]
+    notbit_2 &{}={}& 1 &&&&&&&{}-{}& t1 &     &    &{}+{}& t3 &     &    &     &    &{}+{}& t6 &
+    \end{alignat*}
+  \end{minipage}
+  \begin{minipage}{.19\columnwidth}
+    \emph{Non-negativity conditions} \\[-2em]
+    \begin{align*}
+         p_1   & \ge 0 \\[-0.4em]
+         p_2   & \ge 0 \\[-0.4em]
+         p_3   & \ge 0 \\[-0.4em]
+         bit_1 & \ge 0 \\[-0.4em]
+      notbit_1 & \ge 0 \\[-0.4em]
+         q_1   & \ge 0 \\[-0.4em]
+         q_2   & \ge 0 \\[-0.4em]
+         q_3   & \ge 0 \\[-0.4em]
+         q_4   & \ge 0 \\[-0.4em]
+         q_5   & \ge 0 \\[-0.4em]
+      notbit_2 & \ge 0
+    \end{align*}
+  \end{minipage}
+  \caption{Constraints \setC\ given by function \safety\ for
+    Lamport's 1-bit algorithm}
+\end{figure}

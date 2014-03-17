@@ -14,52 +14,40 @@
 \nocite{DOsualdoSAS13}
 
 \ifthenelse{\equal{\isDraft}{false}}{
-  \title{An SMT-based Approach to Coverability Analysis}
+  \title{An SMT-based Approach to\\
+         Coverability Analysis}
   \author{
     Javier~Esparza\inst{1}
+    \and
+    Rusl\'{a}n~Ledesma-Garza\inst{1}
     \and
     Rupak~Majumdar\inst{2}
     \and
     Philipp~Meyer\inst{1}
     \and
     Filip~Niksic\inst{2}
-    \and
-    Rusl\'{a}n~Ledesma-Garza\inst{1}
   }
   \institute{
     Technische Universit\"at M\"unchen
     \and
-    MPI-SWS,~Kaiserslautern~and~Saarbr\"ucken
+    Max Planck Institute for Software Systems (MPI-SWS)
   }
   
   \maketitle
 
+
   \begin{abstract}
     Model checkers based on Petri net coverability have been used
     successfully in recent years to verify safety properties of concurrent
-    shared-memory or asynchronous message-passing software. The bottleneck
-    in the verification process is the iterative computation of the
-    (backward) reachable or (forward) coverable set, and most recent
-    research has focused on non-trivial heuristics to speed it up.
-
-    In this paper, we revisit a constraint approach to the problem based on
-    classical Petri net analysis techniques: marking equation, place
-    invariants, and traps. Given a marking M to be covered, the approach
-    constructs constraints corresponding to increasingly precise
-    overapproximations of the reachable markings covering M. If one of
-    these constraints is unsatisfiable, then M is not coverable.
-
-    Previous work on this approach suffered from the absence of efficient
-    decision procedures for linear arithmetic, which nowadays exist as a
-    part of SMT solvers. We show how to utilize an SMT solver to implement
+    shared-memory or asynchronous message-passing software. We revisit 
+    a constraint approach to the problem based on
+    classical Petri net analysis techniques. We show how to 
+    utilize an SMT solver to implement
     the constraint approach, and additionally, to generate a minimized
-    inductive invariant from a safety proof.
-
-    We empirically evaluate our procedure on a large set of existing Petri
-    net benchmarks arising out of software verification. Surprisingly, even
-    though our technique is incomplete, we show that it can quickly
-    discharge all safe instances, usually competitive with, and occasionally
-    much faster than, state-of-the-art techniques. Additionally, the
+    inductive invariant from a safety proof. We empirically evaluate 
+    our procedure on a large set of existing Petri
+    net benchmarks. Even though our technique is incomplete, 
+    it can quickly discharge all safe instances. Additionally, the
     inductive invariants computed are usually orders of magnitude smaller
     than those produced by existing solvers.
   \end{abstract}
@@ -67,19 +55,26 @@
 }
 
 \input{sec_introduction}
-\input{sec_illustration}
-\input{sec_preliminaries}
-\newpage
-\input{sec_constraint_approach}
-\newpage
-\input{sec_invariants}
-\newpage
-\input{sec_experiments}
 \input{sec_rel_work}
-\input{sec_conclusions}
+\input{sec_preliminaries}
+\input{sec_safety}
+\input{sec_safety_by_refinement}
+%\input{sec_invariant}
+\input{sec_invariant_by_refinement}
+\input{sec_invariant_w_minimization}
+\input{sec_experiments}
+% \input{sec_conclusions}
 
 \bibliographystyle{abbrv}
 \bibliography{references}
 
+\newpage
+\appendix
+\input{appendix}
+
 \end{document}
 
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

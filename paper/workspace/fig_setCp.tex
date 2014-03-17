@@ -1,0 +1,66 @@
+\begin{figure}[t]
+  \begin{minipage}{\columnwidth}
+    \emph{Inductivity constraints} \\[-2em]
+    \begin{minipage}[t]{.49\columnwidth}
+      \centering
+      \begin{alignat*}{25}
+        &{}-{}& p_1 &{}+{}& p_2 &     &     &{}+{}& bit_1 &{}-{}& notbit_1 &{}\le{}& 0 \\[-0.4em]
+        &     &     &{}-{}& p_2 &{}+{}& p_3 &     &       &     &          &{}\le{}& 0 \\[-0.4em]
+        &     & p_1 &     &     &{}-{}& p_3 &{}-{}& bit_1 &{}+{}& notbit_1 &{}\le{}& 0
+      \end{alignat*}
+    \end{minipage}
+    \begin{minipage}[t]{.49\columnwidth}
+      \centering
+      \begin{alignat*}{25}
+        &{}-{}& q_1 &{}+{}& q_2 &     &     &     &     &     &     &{}-{}& notbit_2 &{}\le{}& 0  \\[-0.4em]
+        &     &     &{}-{}& q_2 &{}+{}& q_3 &     &     &     &     &     &          &{}\le{}& 0  \\[-0.4em]
+        &     &     &     &     &{}-{}& q_3 &{}+{}& q_4 &     &     &{}+{}& notbit_2 &{}\le{}& 0  \\[-0.4em]
+        &     & q_1 &     &     &     &     &{}-{}& q_4 &     &     &     &          &{}\le{}& 0  \\[-0.4em]
+        &     &     &{}-{}& q_2 &     &     &     &     &{}+{}& q_5 &     &          &{}\le{}& 0  \\[-0.4em]
+        &     & q_1 &     &     &     &     &     &     &{}-{}& q_5 &{}+{}& notbit_2 &{}\le{}& 0 
+      \end{alignat*}
+    \end{minipage} \\
+    \emph{Safety constraint}\\[-2em]
+    \begin{align*}
+      p_1 + q_1 + \neg bit_1 + \neg bit_2 & < 2 * target_1
+    \end{align*}
+  \end{minipage}
+  \begin{minipage}{\columnwidth}
+    \emph{Property constraints} \\[-2em]
+    \begin{minipage}[t]{.49\columnwidth}
+      \centering
+      \begin{align*}
+        p_1   & \ge target_1 \\[-0.4em]
+        p_2   & \ge target_1 \\[-0.4em]
+        p_3   & \ge target_1 \\[-0.4em]
+        bit_1 & \ge 0        \\[-0.4em]
+        notbit_1 & \ge 0
+      \end{align*}
+    \end{minipage}
+    \begin{minipage}[t]{.49\columnwidth}
+      \centering
+      \begin{align*}
+        q_1   & \ge 0 \\[-0.4em]
+        q_2   & \ge 0 \\[-0.4em]
+        q_3   & \ge 0 \\[-0.4em]
+        q_4   & \ge 0 \\[-0.4em]
+        q_5   & \ge 0 \\[-0.4em]
+        notbit_2 & \ge 0
+      \end{align*}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}{\columnwidth}
+    \emph{Non-negativity constraint}\\[-2em]
+    \begin{align*}
+      target_1 & \ge 0
+    \end{align*}
+  \end{minipage}
+  \caption{Constraints \setCp\ given by method \invariant\ for
+    Lamport's 1-bit algorithm}
+  \label{fig_setCp}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

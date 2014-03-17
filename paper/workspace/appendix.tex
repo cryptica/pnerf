@@ -1,0 +1,95 @@
+\section{Proof of Theorem \ref{thm:dual}}
+
+We use the following version of Farkas' Lemma:
+
+\begin{theorem}[Farkas' lemma (variant) \cite{Schrijver86}]
+\label{lem:farkas}
+Let $A$ be a matrix and let $b$ be a vector.
+Then the system $Ax \le b$ of linear inequalities has a solution $x$,
+if and only if $yb \ge 0$ for each row vector $y \ge 0$ with $yA = 0$.
+\end{theorem}
+
+\begin{reftheorem}{thm:dual}
+The system $\mathcal{S}'$ of constraints given by
+\begin{align*}
+  \lambda C    & \le 0            && \text{inductivity constraint} \\
+  \lambda m_0  & <   Y_1 b + Y_2 1 && \text{safety constraint} \\
+  \lambda      & \ge Y_1 A + Y_2 D && \text{property constraint} \\
+  Y_1, Y_2     & \ge 0     && \text{non-negativity constraint} 
+\end{align*}
+is feasible over the rational numbers if{}f the system $\mathcal{S}$ is infeasible.
+\end{reftheorem}
+\begin{proof}
+Recall that the system $\mathcal{S}$ is given by:
+\begin{align*}
+  \mathcal{C}&(P, T, F, m_0)  && \text{state constraints} \\
+  A M & \ge b                 && \text{negation of property $P$} \\
+  D M & \ge 1                 && \text{trap constraints}
+\end{align*}
+Eliminating $M$ we get
+\begin{align*}
+A (m_0 + C X) & \ge b && \text{property $P$ negated} \\
+D (m_0 + C X) & \ge 1 && \text{trap constraints} \\
+   m_0 + C X  & \ge 0 && \text{non-negativity conditions for places} \\
+           X  & \ge 0 && \text{non-negativity conditions for transitions}
+\end{align*}
+which can be rewritten in matrix form as
+%
+\begin{align*}
+\begin{pmatrix}
+  -  A  C \\
+  -  D  C \\
+  -     C \\
+  -     I
+\end{pmatrix} X & \le
+\begin{pmatrix}
+  A m_0 - b \\
+  D m_0 - 1 \\
+    m_0     \\
+     0
+\end{pmatrix}
+\end{align*}
+%
+Lemma \ref{lem:farkas} yields the set $\mathcal{S}_1$ given by  
+%
+\begin{align*}
+  Y^T
+\begin{pmatrix}
+  -  A  C \\
+  -  D  C \\
+  -     C \\
+  -     I
+\end{pmatrix} & = 0  &
+  Y^T
+\begin{pmatrix}
+  A m_0 - b \\
+  D m_0 - 1 \\
+    m_0     \\
+     0
+\end{pmatrix} & < 0  &
+Y & \ge 0
+\end{align*}
+So, by the Lemma, $\mathcal{S}_1$ is satisfiable if and only if $\mathcal{S}$ is unsatisfiable. 
+Splitting the vector $Y$ into four segments $Y := (Y_1|Y_2|Y_3|Y_4)$ 
+we obtain that $\mathcal{S}_1$ is equisatisfiable with 
+\begin{align*}
+  Y_1 A C         + Y_2 D C         + Y_3 C  + Y_4    & = 0 \\
+  Y_1 (A m_0 - b) + Y_2 (D m_0 - 1) + Y_3 m_0         & < 0 \\
+  Y_i                               & \ge 0 \ \ i=1,2,3,4
+\end{align*}
+and, since $Y_4\ge 0$ is only requiring that $Y_1 D C + Y_2 A C + Y_3 C \leq 0$ holds,
+also with 
+\begin{align*}
+  (Y_1 A + Y_2 D + Y_3) C    & \le 0          \\
+  (Y_1 A + Y_2 D + Y_3) m_0  & < Y_1 b + Y_2 1 \\
+  Y_1,Y_2,Y_3 & \ge 0 
+\end{align*}
+Finally, defining $\lambda := Y_1 A + Y_2 D + Y_3$, we obtain that
+$\mathcal{S}_1$ is equisatisfiable with $\mathcal{S}'$:
+\begin{align*}
+  \lambda C    & \le 0             \\
+  \lambda m_0  & <   Y_1 b + Y_2 1  \\
+  \lambda      & \ge Y_1 A + Y_2 D  \\
+  Y_1, Y_2        & \ge 0    
+\end{align*}
+\end{proof}

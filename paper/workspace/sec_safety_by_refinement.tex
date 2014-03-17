@@ -1,0 +1,262 @@
+\section{Refining Marking Equations with Traps}
+\label{sec_method_safety_by_refinement}
+
+The bottom line of the work of Esparza and Melzer \cite{EsparzaM00} was to
+strengthen \safety{} with additional
+\emph{trap constraints}. A {\em trap} of a Petri net $N=(P, T, F, m_0)$ is a subset of places
+$Q \subseteq P$ satisfying the following condition for every
+transition $t \in T$: if $t$ is an output transition of at least one
+place of $Q$, then it is also an input transition of at least one
+place of $Q$. Equivalently, $Q$ is a trap if its set of output
+transitions is included in its set of input transitions, i.e., if
+$\post{Q} \subseteq \pre{Q}$. Here we present a variant of Esparza's and
+Melzer's method that encodes traps using Boolean constraints. We
+call the new method \safetyref.
+
+The method \safetyref\ is based on the following observation about traps.
+If $Q$ is a trap and a marking $m$ marks $Q$, i.e., $m(p) > 0$ for some $p\in Q$,
+then for each occurrence sequence $\sigma$ and marking $m'$ such that $m \xrightarrow{\sigma} m'$,
+we also have $m'(p') > 0$ for some $p'\in Q$.  
+Indeed, by the trap property any transition removing tokens from places of
+$Q$ also adds at least one token to some place of $Q$. 
+So, while $m'(Q)$ can be smaller than $m(Q)$, it can never become $0$. 
+In particular, if a trap $Q$ satisfies $m_0(Q) > 0$, then every
+reachable marking $m$ satisfies $m(Q) > 0$ as well.
+
+Since the above property must hold for any trap, we can restrict the constrains
+from method \safety{} as follows.
+We additionally add a Boolean variable for each place $p\in P$.
+These variables will be used as indicators for traps.
+First, we write a constraint to specify that the Boolean variables encode a trap:
+\[
+\mathit{trap}(B) ::= \bigwedge_{t\in T}\left[ \bigvee_{p \in \pre{t}} B(p) \Rightarrow \bigvee_{p\in \post{t}} B(p) \right]\,.
+\]
+Next, we define a predicate $\mathit{mark}(m, B)$ that specifies that a marking marks a trap:
+\[
+\mathit{mark}(m, B) ::= \bigvee_{p\in P} B(p)\wedge (m(p) > 0)\,.
+\]
+Finally, we conjoin the following constraint to the constraints~\eqref{eq:safety}: 
+\begin{equation}\label{eq:trap}
+\forall B: \mathit{trap}(B) \wedge \mathit{mark}(m_0, B) \Rightarrow \mathit{mark}(M, B)\,.
+\end{equation}
+%
+This constraint conceptually enumerates over all subsets of places, and ensures that if
+the subset forms a trap, and this trap is marked by the initial marking, then
+it is also marked in the current marking. 
+Thus, markings violating the trap constraint are eliminated.
+
+While the above constraint provides a refinement of the \safety\ method, it requires the
+SMT solver to reason with universally quantified variables.
+Instead of directly using universal quantifiers, we use a counterexample-guided
+heuristic \cite{EsparzaM00,CEGIS} of adding trap constraints one-at-a-time in
+the following way.
+
+If the set of constraints constructed so far (for instance, the set
+given by the method \safety) is feasible, the SMT solver delivers a
+model that assigns values to each place, corresponding to a potentially reachable marking $m$.  
+We search for a trap $P_m$ that violates the trap condition \eqref{eq:trap} for this specific model $m$.
+If we find such a trap, then we know that $m$ is unreachable, and we can
+add the constraint $\sum_{p \in P_m} M(p) \geq 1$ to exclude all markings that violate
+this specific trap condition.
+
+The search for $P_m$ is a pure Boolean satisfiability question.
+We ask for an assignment to 
+\begin{equation}\label{eq:booltrap}
+\mathit{trap}(B) \wedge \mathit{mark}(m_0,B) \wedge \lnot \mathit{mark}(m, B)
+\end{equation}
+(and notice that for a fixed marking $m$, the predicate $\mathit{mark}(m,B)$ can
+be evaluated to a Boolean predicate).
+Given a satisfying assignment $b$ for this formula, we add the constraint
+\begin{equation}\label{eq:trapcons}
+\sum_{p \in P \mid b(p) = 1} M(p) \geq 1
+\end{equation} 
+to the constraints to rule out solutions that
+do not satisfy this trap constraint.
+We iteratively add such constraints until either the constraints are unsatisfiable
+or the Boolean constraints~\eqref{eq:booltrap} are unsatisfiable (i.e., no traps are found
+to invalidate the current solution). 
+% How do we find $P_M$? The integration of boolean and arithmetic
+% constraints allows to use the SMT-solver. The constraint problem
+% delivering a trap that is marked at $M_0$ but not marked at a given
+% marking $M$ is constructed as follows. As in the method \safety, we
+% introduce a variable $p$ for every place $P$, but this time of {\em
+%   boolean type}, with the following intended meaning: if $p$ has the
+% value {\it true}, then $p$ belongs to the trap.
+% 
+% For each transition $t$ we add the constraint
+% $$\bigvee_{p \in \pre{t}} p  \Rightarrow \bigvee_{p' \in \post{t}} p'$$
+% \noindent which formalizes the trap property. Moreover we add
+% %
+% $$\bigvee_{p \in P, M_0(p) > 0} p \wedge \bigwedge_{p' \in P, M(p') > 0} \neg p'$$
+% 
+% \noindent modelling that the trap is marked at $M_0$ but not at $M$.
+ 
+This yields the method \safetyref.  The method is still not
+complete \cite{EsparzaM00}: one can find nets and unreachable markings that 
+mark all traps of the net.
+
+Let us apply the algorithm \safetyref{} to Lamport's algorithm and the
+mutual exclusion property. 
+Recall that the markings violating the property are those satisfying $ p_3 \geq 1$ and  $q_5 \geq 1$. \safety{} yields a
+satisfying assignment with $p_3 = bit_1 = q_5 = 1$,
+and $p=0$ for all other places $p$, 
+which corresponds to a potentially reachable marking $m$. 
+We search for a trap marked at $m_0$ but not at $m$. The constraints 
+derived from the trap property are:
+$$\begin{array}{l}
+\begin{array}[t]{lcl}
+  p_1 \lor notbit_1 &\implies& p_2 \lor    bit_1 \\
+  p_2 \lor notbit_2 &\implies& p_3 \lor notbit_2 \\
+  p_3 \lor    bit_1 &\implies& p_1 \lor notbit_1
+\end{array} \qquad
+\begin{array}[t]{lcl}
+  q_1 \lor notbit_2 &\implies& q_2               \\
+  q_2 \lor    bit_1 &\implies& q_3 \lor    bit_1 \\
+  q_3               &\implies& q_4 \lor notbit_2 \\
+  q_4 \lor notbit_1 &\implies& q_1 \lor notbit_1 \\
+  q_2 \lor notbit_1 &\implies& q_5 \lor notbit_1 \\
+  q_5               &\implies& q_1 \lor notbit_2
+\end{array}
+\end{array}
+$$
+and the following constraints model that at least one of the places 
+initially marked belongs to the trap, but none of the places marked at 
+the satisfying assigment do:
+$$p_1 \lor q_1 \lor notbit_1 \lor notbit_2  \qquad \neg p_3 \land \neg q_5 \land
+\neg bit_1$$ For this set of constraints we find the satisfying assignment 
+that sets $p_2$, $notbit_1$, $notbit_2$, $q_2$, $q_3$ to $\mathit{true}$ and all
+other variables to $\mathit{false}$. 
+So this set of places is an initially marked trap, and 
+so every reachable marking should put at least one token in it. 
+Hence we can add the refinement constraint to marking
+constraints~\eqref{eq:safety}:
+\begin{align*}
+  p_2 + q_2 + q_3 + notbit_1 + notbit_2 & \ge 1\,.
+\end{align*}
+%
+On running the SMT solver again, we find the constraints are unsatisfiable, 
+proving that the mutual exclusion property holds.
+
+
+\iffalse
+
+\begin{verbatim}
+* Method Safety by Refinement:
+
+  Subprocedure TrapConditions constructs trap conditions C_\theta corresponding to N and A.
+  Subprocedure \Delta constructs refinement constraint \delta corresponding to A_\theta.
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety_by_refinement}}{}
+
+\input{fig_method_safety_by_refinement}
+
+\begin{verbatim}
+* Property of trap conditions C_\theta: If C_\theta is sat then there is a set S such that
+  1. S is a trap in the net N
+  2. S is marked in the initial marking M0
+  3. S is unmarked in the assignment A
+
+* Property of A_\theta: for each place s, A_\theta(s) iff s \in S
+
+* Property of refinement constraint \delta: Constraint \delta refines the abstraction, i.e.
+  1. A ^ \delta is unsat (\delta excludes A)
+  2. N |= \delta is sat  (\delta is a property of N)
+\end{verbatim}
+
+\newpage
+
+\begin{verbatim}
+* Subprocedure TrapConditions:
+
+  Input:
+    N = (S, T, F, M0) : Petri net
+    A             : Satisfying assignment for C \cup { ~P }
+  Output:
+    C_\theta      : Trap conditions
+
+  Pseudocode:
+  
+\end{verbatim}
+\begin{align*}
+  \text{TrapConditions}(N, A) =& \left(
+      \bigwedge_{s \in S} \left( s \Rightarrow
+      \bigwedge_{t \in \post{s}} \bigvee_{p \in \post{t}} p
+    \right) \right) \land
+    \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
+    \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
+\end{align*}
+\begin{verbatim}
+
+* Subprocedure \Delta:
+
+  Input:
+    A_\theta      : Satisfying assignment for C_\theta
+  Output:
+    \delta        : Refinement constraint \delta
+
+  Pseudocode:
+
+\end{verbatim}
+\begin{align*}
+  & \Delta(A_\theta) = \left( \sum_{A_\theta(s)} s \ge 0 \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example
+
+  - State constraints C same as in the example for method Safety.
+  
+  - Using property 1
+  
+  - Negated property 1 \neg P:
+\end{verbatim}
+
+
+{\Large OK, but how does it continue? Is this enough to prove the property,
+or do we need another trap?}
+
+\iffalse
+\begin{verbatim}
+    p2 + q2 + q3 + nbit1 + nbit2 >= 1
+    ^    ^    ^    ^       ^
+    |    |    |    |       |
+    ------------------------
+      |
+      S = {p2, q2, q3, nbit1, nbit2}, therefore \delta excludes
+      assignment A in the next iteration
+\end{verbatim}
+\fi
+
+\newpage
+
+\begin{verbatim}
+
+* Trap implication:
+
+  place s \in S =>    /\       \    /
+                     /  \       \  /     place p \in S
+                    /    \       \/
+                   t \in s*   p \in t*   
+
+
+  "if s is in trap S then for each output transition t at least one successor p is in trap S"
+
+
+* Refinement constraint \delta:
+
+  \Sigma s >= 1  
+  A(s)
+
+  "At least one place in S is always marked"
+\end{verbatim}
+
+\fi
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

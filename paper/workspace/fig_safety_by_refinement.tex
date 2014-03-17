@@ -1,0 +1,25 @@
+\begin{figure}[t]
+  \begin{algorithmic}[1]
+    \State $C := \mathcal C(N)$
+    \While {SAT$(C \cup \{\neg P\})$}
+    \State $A := $Model$(C \cup \{\neg P\})$
+    \State $C_\theta := $TrapConditions$(N, A)$
+    \If {SAT$(C_\theta)$}
+    \State $A_\theta := $Model$(C_\theta)$
+    \State $\delta := \Delta(A_\theta)$
+    \State $C := C \cup \{\delta\}$
+    \Else
+    \State \Return 'The petri net may not satisfy the property'
+    \EndIf
+    \EndWhile
+    \State \Return 'The petri net satisfies the property!'
+  \end{algorithmic}
+  \caption{Pseudocode for Function Safety by Refinement}
+  \label{fig_function_safety_by_refinement_pseudocode}
+\end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+

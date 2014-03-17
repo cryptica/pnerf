@@ -1,19 +1,50 @@
 \begin{figure}
-  \begin{algorithmic}[1]
-    \State $C := \mathcal C(N)$
-    \While {SAT$(C \cup \{\neg P\})$}
-    \State $A := $Model$(C \cup \{\neg P\})$
-    \State $C_\theta := $TrapConditions$(N, A)$
-    \If {SAT$(C_\theta)$}
-    \State $A_\theta := $Model$(C_\theta)$
-    \State $\delta := \Delta(A_\theta)$
-    \State $C := C \cup \{\delta\}$
-    \Else
-    \State \Return 'The petri net may not satisfy the property'
-    \EndIf
-    \EndWhile
-    \State \Return 'The petri net satisfies the property!'
-  \end{algorithmic}
-  \caption{Pseudocode for Method Safety by Refinement}
-  \label{fig:method-safety-by-refinement-pseudocode}
+  \hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+   \raggedleft 1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\
+   11 \\ 12 \\ 13 \\ 14 %\\ 15 \\ 16 \\ 17 \\ 18 \\ 19 % \\ 20 \\
+%   21 \\ 22 \\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 \\ 29 % \\ 30 \\ 
+%   31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algMethod \safetyref \\
+    \algInput\\
+    \tabT $N$ - Petri net \\
+    \tabT $P$ - property \\
+    \algVars\\
+    \tabT $C$ - state constraints \\
+    \tabT $A$ - satisfying assignment for the state constraints \\
+    \tabT $C_\theta$ - trap conditions \\
+    \tabT $A_\theta$ - satisfying assignment for the trap conditions \\
+    \tabT $\delta$ - trap refinement constraint \\
+    \tabT $C_T$ - accumulated trap refinement constraints \\
+    \algBegin\\
+    \tabT $C$ \algAssgn $\mathcal C(N)$ \\
+    \tabT $C_T$ \algAssgn $\{\}$ \\
+    \tabT \algWhile SAT$(C \cup \{\neg P\} \cup C_T)$ \algDo \\
+    \tabTT $A$ \algAssgn Model$(C \cup \{\neg P\} \cup C_T)$ \\
+    \tabTT $C_\theta$ \algAssgn TrapConditions$(N, A)$ \\
+    \tabTT \algIf SAT$(C_\theta)$ \algThen \\
+    \tabTTT $A_\theta$ \algAssgn Model$(C_\theta)$ \\
+    \tabTTT $\delta$ \algAssgn $\Delta(A_\theta)$ \\
+    \tabTTT $C_T$ \algAssgn $C_T \cup \{\delta\}$ \\
+    \tabTT \algElse \\
+    \tabTTT \algReturn ``The petri net may not satisfy the property'' \\
+    \tabTT \algFi \\
+    \tabT \algOd \\
+    \tabT \algReturn ``The petri net satisfies the property'' \\
+    \algEnd
+  \end{minipage}
+  \vspace{1.5ex}
+  \hrule
+  \caption{Method Safety by Refinement}
+  \label{fig_method_safety_by_refinement}
 \end{figure}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

@@ -1,0 +1,77 @@
+\section{Introduction}
+
+<<<<<<< .mine
+This paper makes the following contributions.
+\begin{itemize}
+\item An application of \zthree\ to the constraint approach and its
+  corresponding evaluation.
+\item A function that given a network and a property constructs an
+  invariant when the invariant is readily available.
+\item A function that given a network and a property constructs a
+  \emph{minimal} invariant when the invariant is readily available.
+\item A function that given a network and a property constructs an
+  invariant by iteratively refining the abstraction.
+\end{itemize}=======
+In recent years many papers have proposed and developed techniques
+for the verification of concurrent software \cite{}. In particular, model 
+checkers based on Petri net coverability have been successfully applied.
+Petri nets are a natural model for this problem for two resons.
+The first and obvious one is that they are a simple and natural
+automata-like model for concurrent systems. The second, more specific, is that
+they can model certain programs with an unbounded number of threads or
+thread creation. In a nutshell, the places of the net correspond to
+program points, and the number of tokens in a place models the number of
+threads that are currently at that point. This point, which was first observed in 
+\cite{}, was later revisited in \cite{}, and more recently in \cite{}.
+
+The problem whether at least one
+thread can reach a given program point (modelling some kind of error),
+naturally reduces to the {\em coverability problem} for Petri nets:
+given a net $N$ and a marking $M$, decide whether some reachable marking
+of $N$ {\em covers} $M$, i.e. puts at lest as many tokens as $M$ on each
+place. While the decidability and EXPSPACE-completeness of the
+coverability problem were settled long ago \cite{}, new algorithmic 
+ideas have been developed in recent years \cite{}. The techniques are 
+based on forward or backward state-space exploration, which is accelerated 
+in a number of ways in order to cope with the possibly infinite number of states. 
+
+In this paper we revisit an approach to the coverability problem 
+based on classical Petri net analysis techniques: the marking equation
+and traps \cite{murata,esparza_and_melzer}. The marking equation
+is a system of linear constraint that can be easily derived from the net, and
+whose set of solutions overapproximates the set of reachable markings. 
+The marking equation can be supplemented with linear constraints specifying
+a set of unsafe markings, and solved using standard linear or integer 
+programming. If the equations are unfeasible, then all reachable markings
+are safe. If not, then, as suggested in \cite{}, one can use a counterexample
+to derive an additional constraint in the shape of a {\em trap}:  a set of
+places that, loosely speaking, once marked cannot be ``emptied'' \cite{}.
+
+While these techniques are well known, their application has always
+suffered from the absence of efficient decision procedures for linear arithmetic.
+Moreover, and to the best of our knowledge, their
+systematic application to verification of concurrent software has not 
+been studied yet. Profiting from recent advances in SMT-solving technology, 
+we reimplement the techniques on top of
+the Z3 SMT solver, and apply them to a large collection of benchmarks
+coming from ??? and ??? and ???. 
+
+Our first and surprising finding is that, 
+while the technique is not complete, it is powerful enough to prove safety 
+of XX\% of the safe benchmarks. Moreover, and possibly due to the characteristics
+of the application domain, even the simplest version of the technique is
+succesful in XX\% of the cases. As a second contribution, and inspired by work
+on interpolation, we show that a dual version of the classical set 
+of constraints, equivalent in expressive power, can be used not only
+to check safety, but to produce an inductive invariant explaining why it holds. 
+While some of the existing solvers based on state-space exploration can also
+produce such invariants, ours are usually orders of magnitude smaller. 
+And, once again, while we show how to use the SMT 
+solver to produce a minimal invariant, the tool almost always provides a 
+minimal one at the first attempt.
+
+The paper is organized as follows ...
+
+
+
+>>>>>>> .r477

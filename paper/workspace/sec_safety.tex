@@ -1,0 +1,195 @@
+\section{Marking Equation}
+\label{sec_method_safety}
+
+We now recall a well-known method, which we call \safety, that provides a sufficient
+condition for a given Petri net $N$ to satisfy a property $\varphi$ 
+by reducing the problem to checking satisfiability of a linear arithmetic formula.
+We illustrate the method on Lamport's 1-bit algorithm for mutual
+exclusion. 
+
+Before going into details, we state several conventions. For a
+Petri net $N = (P, T, F, m_0)$, we introduce a vector of
+$|P|$ variables $M$, and a vector of $|T|$ variables $X$.
+$M$ and $X$ will be used to represent the current
+marking, and the number of occurrences
+of transitions in the occurrence sequence leading to the current marking.
+If a place or a transition is given a specific
+name, we use the same name for its associated variable. Given a place
+$p$, the intended meaning of a constraint like $p \geq 3$ is 
+``at the current marking place $p$ must have at least 3 tokens''. 
+Given a transition $t$, the intended meaning of a constraint like $t \leq 2$ is ``in
+the occurrence sequence leading to the current marking, transition $t$
+must fire at most twice''. 
+
+The key idea of the \safety{} method lies in the \emph{marking
+  equation}:
+$$M = m_0 + C X\,,$$
+where the incidence matrix $C$ is a $|P| \times |T|$ matrix given by
+$$C(p,t) = F(t,p) - F(p,t)\,.$$
+For each place $p$, the marking equation contains a constraint
+that formulates a simple token conservation law: the number of tokens in
+$p$ at the current marking is equal to the initial number of tokens $m_0(p)$,
+plus the number of tokens added by the input transitions of $p$, minus
+the number of tokens removed by the output transitions. 
+So, for instance, in Lamport's algorithm the constraint for place $notbit_1$
+is:
+$$notbit_1 = 1 + s_3 + t_5 + t_4 - s_1 - t_4 - t_5 = 1 +s_3
+-s_1\,.$$
+
+We equip the marking equation with the non-negativity conditions,
+modeling that the number of tokens in a place, or the number of
+occurrences of a transition in an occurrence sequence cannot become
+negative. All together, we get the following set of \emph{marking constraints}:
+\begin{align*}
+  \mathcal{C}(P, T, F, m_0) ::&
+  \begin{cases}
+    M = m_0 + C X  & \text{marking equation} \\
+    M \ge 0        & \text{non-negativity conditions for places} \\
+    X \ge 0        & \text{non-negativity conditions for transitions} \\
+  \end{cases}
+\end{align*}
+
+Method \safety{} for checking that a property $\varphi$ is
+invariant for a Petri net $N=(P,T,F,m_0)$ consists of checking for
+satisfiability of the constraints
+\begin{equation}\label{eq:safety}
+\mathcal{C}(P,T,F,m_0) \wedge \lnot \varphi(M)\,.
+\end{equation}
+If the constraints are unsatisfiable, then no reachable marking
+violates $\varphi$. To see that this is true, consider the converse:
+If there exists an occurrence sequence $m_0
+\xrightarrow{\sigma} m$ leading to a marking $m$ that violates the
+property, then we can construct a valuation of the variables that assigns $m(p)$ to
+$M(p)$ for each place $p$, and the number of occurrences of $t$ in
+$\sigma$ to $X(t)$ for each transition $t$. This valuation then
+satisfies the constraints.
+
+The method does not work in the other direction: If the constraints
+\eqref{eq:safety} are satisfiable, we cannot conclude that the
+property $\varphi$ is violated.
+
+As an example, consider the Lamport's algorithm. \safety{}
+successfully proves the property ``if process
+1 is at location $p_3$, then $\mathit{bit_1}={\it true}$'' by showing
+that $\mathcal{C}(P,T,F,m_0) \wedge p_3 \geq 1 \wedge \mathit{bit}_1
+\neq 1$ is unsatisfiable. However, if we apply it to the mutual
+exclusion property, i.e.~check for satisfiability of
+$\mathcal{C}(P,T,F,m_0) \wedge p_3 \geq 1\wedge q_5 \geq 1$, we obtain
+a solution, and we cannot conclude that the mutual exclusion property
+does not hold.
+
+Note that the marking constraints~\eqref{eq:safety} are interpreted over integer
+variables.
+As usual in program analysis, one can solve the constraints over rationals to get an approximation
+of the method. Solving the constraints over rationals will become
+useful in Section \ref{sec_method_invariant_by_refinement}.
+
+\iffalse
+
+\begin{verbatim}
+* Method Safety:
+
+  Subprocedure \mathcal{C} constructs state constraints C corresponding to N.
+\end{verbatim}
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_safety}}{}
+
+\input{fig_method_safety}
+
+\begin{verbatim}
+* Property of state constraints C: If C U {\neg P} is unsat then N |= P.
+
+* Place equation:
+  
+  For a given place s the place equation is
+
+  # of tokens in s = initial number of tokens of place s
+                     + # times each input transition of s fires
+                     - # times each output transition of s fires
+
+* Non-negativity conditions:
+
+  # of tokens in place s           >= 0
+  # of times transition t is fired >= 0
+
+* Subprocedure \mathcal{C}:
+
+  Input:
+    N = (S, T, F, M0) : Petri net
+  Output:
+    C : State constraints
+
+  Pseudocode:
+
+\end{verbatim}
+
+\begin{align*}
+  \mathcal{C}(N) =& \left( \bigwedge_{s \in S} \left(
+    s = M_0(s) + \sum_{t \in \pre{s}} t - \sum_{t \in \post{s}} t
+  \right) \right) \land
+    \left( \bigwedge_{s \in S} s \ge 0 \right) \land
+    \left( \bigwedge_{t \in T} t \ge 0 \right)
+\end{align*}
+
+\newpage
+
+\begin{verbatim}
+* Example
+
+  - Property 1: Process 1 and Process 2 are never in their respective critical section at the same time.
+
+  - Property 1: p3 < 1 \/ q5 < 1
+
+  - Petri net:
+
+\end{verbatim}
+
+% \input{fig_lamport_net}
+
+\newpage
+
+\begin{verbatim}
+  
+\end{verbatim}
+
+\iffalse
+\begin{verbatim}
+  - State constraints C:
+    p1    = 1 - s1      + s3
+    ^       ^   ^         ^
+    |       |   |         |
+    |       |   |         |
+    |       |   |         |
+    |       |   |        # of tokens given to p1
+    |       |   |    
+    |       |  # of tokens taken from p1
+    |       |
+    |      initial number of tokens in p1
+    |
+    number of tokens in p1
+\end{verbatim}
+\fi
+
+\begin{verbatim}
+- State constraints C:
+\end{verbatim}
+
+\input{fig_setC}
+
+\begin{verbatim}
+  - Using property 1
+  
+  - Negated property 1 \neg P:
+\end{verbatim}
+
+\begin{align*}
+     p3 \ge 1 & \land q5 \ge 1
+\end{align*}
+
+\fi
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

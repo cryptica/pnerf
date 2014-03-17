@@ -1,3 +1,64 @@
-\section{Related work}
+\smallskip
+\noindent\textbf{Related Work.\ }
+%
+Our starting point was the work of Esparza and Melzer on
+extending the marking equation with trap conditions to gain a stronger method
+for proving safety of Petri nets \cite{EsparzaM00}. We combined the
+constraint-based approach there with modern SMT solvers.
+Their focus on (integer) linear programming tools of the time enforced some limitations. 
+First, while traps are naturally encoded using Boolean variables,
+\cite{EsparzaM00} encoded traps and the marking equation together into a set of 
+linear constraints.
+This encoding came at a practical cost: the encoding required (roughly) $n\times m$ constraints
+for a Petri net with $n$ places and $m$ transitions, whereas the natural Boolean encoding
+requires $m$ constraints.
+Moreover, (I)LP solvers were not effective in searching large Boolean state
+spaces; our use of modern SAT techniques alleviates this problem. 
+%    constraints is cumbersome: it requires $n\times k$ constraints, where $n$ is
+%    the number of places, and $k$ is the number of arcs from places to
+%    transitions (succintly: $\#\{(p,t)\mid F(p,t)>0\}$. Expressing the trap
+%    condition using boolean constraints requires only $m$ constraints, where $m$
+%    is the number of transitions. 
+Second, (I)LP solvers used by \cite{EsparzaM00} did not handle strict inequalities. 
+Because of this, the authors used additional tricks, such as posing the problem that includes a 
+strict inequality as a minimization problem, with the goal of minimizing the involved expression, 
+and testing if the minimal value equaled zero. 
+Unfortunately, this trick led to numerical instabilities. 
+All of these concerns vanish by using an SMT solver.
 
-TODO
+In contrast to other recent techniques for coverability \cite{GantyFI08,KaiserKWCONCUR12,KloosMNP13},
+our technique is incomplete.
+However, we empirically demonstrate that for safe instances arising out of software verification,
+our technique is extremely effective, often beating well-optimized techniques in terms of time or memory usage.
+At the same time, our technique applies not only to coverability but also to \emph{reachability}.
+It will be interesting to see whether the techniques can effectively verify liveness properties for concurrent
+programs, which can be reduced to Petri net reachability questions.
+
+% Main differences:
+% \begin{itemize}
+%     \item We have extended the techniques to construct inductive invariants,
+%     which serve as certificates of safety.
+%     \item Their focus on (integer) linear programming tools of the time enforced
+%     some limitations. First, expressing the trap condition using linear
+%     constraints is cumbersome: it requires $n\times k$ constraints, where $n$ is
+%     the number of places, and $k$ is the number of arcs from places to
+%     transitions (succintly: $\#\{(p,t)\mid F(p,t)>0\}$. Expressing the trap
+%     condition using boolean constraints requires only $m$ constraints, where $m$
+%     is the number of transitions. Second, (I)LP solvers of the time could not
+%     handle strict inequalities. Because of this, tricks were used, such as
+%     posing the problem that includes a strict inequality as a minimization
+%     problem, with the goal of minimizing the involved expression, and testing
+%     if the minimal value equals zero. Subsequently, this trick led to numerical
+%     problems. All of these concerns vanish by using an SMT solver.
+%     \item They focused their evaluation on proving safety mostly for mutual
+%     exclusion protocols (check!). We have evaluated the methods on a
+%     variety of examples that appear in software verification, provenance
+%     analysis\ldots
+% \end{itemize}
+% 
+% Other methods and tools \cite{KloosMNP13, KaiserKWCONCUR12, GeeraertsRB06,
+% GantyFI08, ValmariH12}\ldots Even though the methods are complete, the tools
+% suffer from time and memory limitations. However, they can also give refutations in the form of
+% conterexamples.
+% 
+% Theoretical results \cite{KarpM69, Rackoff78}?

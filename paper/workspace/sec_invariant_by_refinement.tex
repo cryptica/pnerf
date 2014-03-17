@@ -1,0 +1,243 @@
+\section{Constructing Invariants from Constraints}
+\label{sec_method_invariant_by_refinement}
+
+
+We now show that one can compute inductive invariants from the method \safetyref.
+That is, given a Petri net $N$ and a property $\varphi$, if \safetyref\ (over the rationals)
+can prove $N$ satisfies $\varphi$, then in fact we can construct a linear inductive invariant
+that contains $m_0$ and does not intersect $\lnot\varphi$. We call the
+new method \invariantref.
+
+The key observation is to use a constraint system dual to the constraint system for \safetyref.
+%
+% We make a simple observation which, combined with the flexibility of
+% SMT-solvers, leads to an interesting improvement on the method \safetyref.
+% We propose method \invariantref\ with the same power as the
+% method \safetyref\ over the rational numbers, but dual to it: the
+% constraints of method \safetyref\ are infeasible over the rational
+% numbers if{}f the constraints of method \invariantref\ are
+% feasible. 
+% The advantage is that the solution delivered by the
+% method \invariantref\ is an inductive linear invariant satisfied by all
+% reachable markings, but violated by all markings that do not satisfy
+% the property. 
+% So this invariant provides an {\em explanation} of why
+% the property holds.
+We assume the negation of property $\varphi$ is represented as the constraints:
+$$ \neg \varphi\  :: \ A M \ge b $$
+for some matrix $A$ and vector $b$.
+% consider the matrix form of the trap constraints $C_T$ below
+% $$ C_T = ( D M \ge 1 ) $$
+% for some matrix $D$.
+Consider the following primal system $\mathcal{S}$:
+\begin{align*}
+  \mathcal{C}&(P, T, F, m_0)  && \text{marking constraints} \\
+  A M & \ge b                 && \text{negation of property $\varphi$} \\
+  D M & \ge 1                 && \text{trap constraints}
+\end{align*}
+%
+Note that the trap constraints~\eqref{eq:trapcons} are collected in matrix form $D M \geq 1$.
+We have the following theorem. (The proof is in Appendix A.)
+
+\begin{theorem}
+\label{thm:dual}
+The system $\mathcal{S}'$ of constraints given by
+\begin{align*}
+  \lambda C    & \le 0            && \text{inductivity constraint} \\
+  \lambda m_0  & <   Y_1 b + Y_2 1 && \text{safety constraint} \\
+  \lambda      & \ge Y_1 A + Y_2 D && \text{property constraint} \\
+  Y_1, Y_2     & \ge 0     && \text{non-negativity constraint} 
+\end{align*}
+is feasible over the rational numbers if{}f the system $\mathcal{S}$ is infeasible
+over the rational numbers.
+\end{theorem}
+
+
+So $\mathcal{S}'$ is satisfiable if{}f $\mathcal{S}$ is unsatisfiable. We can
+interpret the meaning of a solution $\lambda$. Recall that
+for every reachable marking $m$ we find a solution of 
+$m = m_0 + CX$. Multiplying by $\lambda$, and since $\lambda$ is a solution
+of $\mathcal{S}'$, we get 
+$$\lambda m = \lambda m_0 + \lambda CX \leq \lambda m_0\,.$$
+Furthermore, any reachable marking will satisfy the trap constraints $DM\geq 1$.
+On the other hand, for every marking $m$ violating the property
+and satisfying the trap constraints, 
+we have $ Am \geq b$ and $ Dm \geq 1$, and so
+$$\lambda m \geq (Y_1 A + Y_2 D)m = Y_1 A m + Y_2 D m \geq
+Y_1 b + Y_2 1 > \lambda m_0\,.$$
+%
+Therefore, the linear constraint
+$$I(M)\  :: \  DM\geq 1 \land (\lambda M \leq \lambda m_0)$$
+is an invariant satisfied by all reachable markings $m$, 
+but by no marking violating the property.
+
+We can now prove that $I(M)$ is an inductive invariant, that is, if
+$I(m)$ holds for some marking $m$ (reachable or not), and $m \xrightarrow{t} m'$
+for some transition $t$, then $I(m')$ holds as well.
+Indeed, in this case we have $m' = m + C e_t$ where
+$e_t$ is the unit vector which has a $1$ in the $t$th component and $0$ everywhere else.
+% $e_t = (0,\ldots,0,\underbrace{1}_{t},0,\ldots,0)^T$ is the vector whose
+% components are all $0$ but the one corresponding to $t$, which has value $1$.
+So we get $$\lambda m' = \lambda(m + Ce_t) = \lambda m + \lambda Ce_t
+\le \lambda m \le \lambda m_0\,,$$
+and furthermore, as $m$ marks all traps in the trap constraints, 
+$m'$ also marks all traps, so $I(m')$ holds.
+
+% \begin{enumerate}
+% \item The constraints given by \safetyref\ are unsat if{}f the
+%   constraints by \invariantref\ are satisfiable.
+% \item If the constraints by \invariantref\ are sat, then there is some
+%   inductive invariant.
+% \end{enumerate}
+
+% \\ \mbox{ } \\
+% \\ \mbox{ } \\
+% \\ \mbox{ } \\
+% \\ \mbox{ } \\
+
+% Note we can express a set of trap constraints as a linear equation
+% of the form $DM \ge 1$, where $D$ encodes the places in each trap.
+% We can combine these with the negation of the property $AM \ge b$
+% to obtain a new constraint $A'M \ge b'$, with
+% $A' = (D A)^T$ and $b' = (1 b)^T$.
+% The new constraint is then equivalent to $DM \ge 1 \land AM \ge b$.
+
+% We can use this constraint instead of the negation of the property
+% to obtain a linear constraint $I(M)$ with method Invariant.
+% However, to obtain an invariant which only excludes violations of
+% the property, we have to add back the trap constraints.
+% By this, we obtain the invariant
+
+% $$I'(M) := DM \ge 1 \land I(M)$$
+
+% The invariant $I'(M)$ holds for all reachable markings, as the traps are marked
+% initially and therefore also marked in all reachable markings and
+% $I(M)$ holds for all reachable markings. 
+
+% Let $M$ be a marking $M$ violating the property, i.e. $AM \ge b$.
+% If $DM \ge 1$ does not hold, then $I'(M)$ does not hold.
+% Otherwise, $DM \ge 1 \land AM \ge b$ holds and by the
+% the properties of $I(M)$ also $I(M)$ and $I'(M)$ do not hold.
+
+% The invariant $I'(M)$ is inductive, as traps are inductive and $I(M)$ is inductive.
+
+\subsection{Example}
+
+Consider again Lamport's algorithm and the mutual
+exclusion property. Recall that the negation of the property for this example is $p_3 \ge 1 \land q_5 \ge 1$, and the trap constraint is
+$$p_2 + q_2 + q_3 + notbit_1 + notbit_2 \ge 1\,.$$
+%
+Method \invariantref{} constructs the following constraints: 
+
+\smallskip
+\noindent \emph{Inductivity constraints}
+$$
+\begin{array}[t]{clclclclclcl}
+    -  & p_1 &  +  & p_2 &     &     &  +  & bit_1 &  -  & notbit_1 &  \le  & 0 \\
+       &     &  -  & p_2 &  +  & p_3 &     &       &     &          &  \le  & 0 \\
+       & p_1 &     &     &  -  & p_3 &  -  & bit_1 &  +  & notbit_1 &  \le  & 0
+\end{array}\quad
+\begin{array}[t]{clclclclclclclclclcl}
+    -  & q_1 &  +  & q_2 &     &     &     &     &     &     &  -  & notbit_2 &  \le  & 0  \\
+       &     &  -  & q_2 &  +  & q_3 &     &     &     &     &     &          &  \le  & 0  \\
+       &     &     &     &  -  & q_3 &  +  & q_4 &     &     &  +  & notbit_2 &  \le  & 0  \\
+       & q_1 &     &     &     &     &  -  & q_4 &     &     &     &          &  \le  & 0  \\
+       &     &  -  & q_2 &     &     &     &     &  +  & q_5 &     &          &  \le  & 0  \\
+       & q_1 &     &     &     &     &     &     &  -  & q_5 &  +  & notbit_2 &  \le  & 0 
+\end{array}
+$$
+\emph{Safety constraint}
+$$    
+p_1 + q_1 + \neg bit_1 + \neg bit_2 < target_1 + target_2 + trap_1
+$$
+\emph{Property constraints}
+$$
+\begin{array}[t]{rcl}
+  p_1   & \ge & 0 \\
+  p_2   & \ge & trap_1 \\
+  p_3   & \ge & target_1 \\
+  bit_1 & \ge & 0 \\
+  notbit_1 & \ge & 0
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  bit_1 & \ge & 0 \\
+  notbit_1 & \ge & trap_1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  notbit_2 & \ge & trap_1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  q_1   & \ge & 0 \\
+  q_2   & \ge & trap_1 \\
+  q_3   & \ge & trap_1 \\
+  q_4   & \ge & 0 \\
+  q_5   & \ge & target_2 \\
+\end{array}
+$$
+\emph{Non-negativity constraints}
+$$
+\begin{array}[t]{rcl}
+  target_1, target_2, trap_1  & \ge & 0 
+%  target_2 & \ge & 0 \\
+% trap_1   & \ge & 0
+\end{array}
+$$
+%
+where $\lambda$ corresponds to the places,
+$Y_1 = (target_1\ target_2)$ corresponds to the two parts of the property, and
+$Y_2 = (trap_1)$ corresponds to the trap.
+
+The SMT solver yields the following solution
+$$
+\begin{array}[t]{rcl}
+  p_1      & = & 1 \\
+  p_2      & = & 2 \\
+  p_3      & = & 2 \\
+  bit_1    & = & 0 \\
+  notbit_1 & = & 0
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  bit_1    & = & 0 \\
+  notbit_1 & = & 1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  notbit_2 & = & 1
+\end{array}
+\qquad
+\begin{array}[t]{rcl}
+  q_1   & = & 0 \\
+  q_2   & = & 1 \\
+  q_3   & = & 1 \\
+  q_4   & = & 0 \\
+  q_5   & = & 1 \\
+\end{array}
+\begin{array}[t]{rcl}
+  target_1 & = & 2 \\
+  target_2 & = & 1 \\
+  trap_1   & = & 1
+\end{array}
+$$
+\noindent which leads to the invariant
+\begin{align}\label{eq:invariant}
+& (p_2 + q_2 + q_3 + notbit_1 + notbit_2 \ge 1 ) \; \land \nonumber \\
+& (p_1 + 2 p_2 + 2 p_3 + notbit_1 + notbit_2 + q_2 + q_3 + q_5 \le 3)\,.
+\end{align}
+\noindent This ``explains'' why the mutual exclusion property holds: every
+reachable marking satisfies this invariant, but no marking putting at least 
+a token in $p_3$ and $q_5$ does. 
+However, it is not the ``simplest'' explanation; we show next how to simplify invariants.
+% The next section shows how to get a simpler one.
+
+\ifthenelse{\equal{\isDraft}{true}}{\input{fig_dia_method_invariant_by_refinement}}{}
+
+% \input{fig_method_invariant_by_refinement}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

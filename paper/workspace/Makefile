@@ -9,4 +9,4 @@ main:
 pdf: all
 
 clean:
-	rm -f *.aux *.pdf *.log *.gz *.bbl *.blg *.aux *.out
+	rm -f *.aux *.pdf *.log *.gz *.bbl *.blg *.aux *.out _region_.tex *.tmp~

@@ -1,15 +1,41 @@
 \begin{figure}
-  \begin{algorithmic}[1]
-    \State $C' := \mathcal C'(N, \neg P)$
-    \If {SAT$(C')$}
-    \State $A' := $Model$(C')$
-    \State $I := $Inv$(N, A')$
-    \State \Return 'Invariant I for the petri net: $I$'
-    \Else
-    \State \Return 'Failed at finding an invariant'
-    \EndIf
-  \end{algorithmic}
-  \caption{Pseudocode for Method Invariant}
-  \label{fig:method-invariant-pseudocode}
+  \hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+   \raggedleft 1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 %\\ 9 \\ 10 \\
+%   11 \\ 12 \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 \\ 18 \\ 19 % \\ 20 \\
+%   21 \\ 22 \\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 \\ 29 % \\ 30 \\ 
+%   31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algMethod \textsc{Invariant} \\
+    \algInput\\
+    \tabT $N$ - Petri net \\
+    \tabT $P$ - property \\
+    \algVars\\
+    \tabT $C'$ - dual state constraints \\
+    \tabT $A'$ - satisfying assignment for the dual state constraints \\
+    \tabT $I$ - invariant \\
+    \algBegin\\
+    \tabT $C'$ \algAssgn $\mathcal C'(N, \neg P)$ \\
+    \tabT \algIf SAT$(C')$ \algThen \\
+    \tabTT $A'$ \algAssgn Model$(C')$ \\
+    \tabTT $I$ \algAssgn Inv$(N, A')$ \\
+    \tabTT \algReturn ``Invariant I for the petri net: $I$'' \\
+    \tabT \algElse \\
+    \tabTT \algReturn ``Failed at finding an invariant'' \\
+    \tabT \algFi \\
+    \algEnd
+  \end{minipage}
+  \vspace{1.5ex}
+  \hrule
+  \caption{Method Invariant}
+  \label{fig_method_invariant}
 \end{figure}
 
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

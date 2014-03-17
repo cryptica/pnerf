@@ -1,28 +1,94 @@
 \begin{figure}
-  \begin{algorithmic}[1]
-    \State $C := \mathcal C(N)$
-    \State $D := $true
-    \While {SAT$(C \cup \{\neg P\})$}
-    \State $A := $Model$(C \cup \{\neg P\})$
-    \State $C_\theta := $TrapConditions$(N, A)$
-    \If {SAT$(C_\theta)$}
-    \State $A_\theta := $Model$(C_\theta)$
-    \State $\delta := \Delta(A_\theta)$
-    \State $C := C \cup \{\delta\}$
-    \State $D := D \land \delta$
-    \Else
-    \State \Return 'Failed at finding an invariant'
-    \EndIf
-    \EndWhile
-    \State $C' := \mathcal C'(N, \neg P \land D)$
-    \If {SAT$(C')$}
-    \State $I := D \land $Inv$(N, A')$
-    \State \Return 'Invariant I for the petri net: $I$'
-    \Else
-    \State \Return 'Failed at finding an invariant'
-    \EndIf
-  \end{algorithmic}
-  \caption{Pseudocode for Method Invariant by Refinement}
-  \label{fig:method-invariant-by-refinement-pseudocode}
+  \hrule
+  \centering
+  \begin{minipage}[t]{.04\columnwidth}
+   \mbox{} \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+   \raggedleft 1 \\ 2 \\ 3 \\ 4 \\ 5 \\ 6 \\ 7 \\ 8 \\ 9 \\ 10 \\
+   11 \\ 12 \\ 13 \\ 14 \\ 15 \\ 16 \\ 17 \\ 18 \\ 19 \\ 20 \\
+   21 \\ 22 %\\ 23 \\ 24 \\ 25 \\ 26 \\ 27 \\ 28 \\ 29 % \\ 30 \\ 
+%   31 \\ 32 \\ 33 \\ 34 \\ 35 \\ 36
+  \end{minipage}
+  \begin{minipage}[t]{.94\columnwidth}
+    \mbox{}\\
+    \algFunction \invariantref \\
+    \algInput\\
+    \tabT $N$ - Petri net \\
+    \tabT $P$ - property \\
+    \algVars\\
+    \tabT $C$ - state constraints \\
+    \tabT $A$ - satisfying assignment for the state constraints \\
+    \tabT $C_\theta$ - trap conditions \\
+    \tabT $A_\theta$ - satisfying assignment for the trap conditions \\
+    \tabT $\delta$ - trap refinement constraint \\
+    \tabT $C_T$ - accumulated trap refinement constraints \\
+    \tabT $C'$ - dual state constraints \\
+    \tabT $A'$ - satisfying assignment for the dual state constraints \\
+    \tabT $I$ - invariant \\
+    \algBegin\\
+    \tabT $C$ \algAssgn $\mathcal C(N)$ \\
+    \tabT $C_T$ \algAssgn $\{\}$ \\
+    \tabT \algWhile SAT$(C \cup \{\neg P\} \cup C_T)$ \algDo \\
+    \tabTT $A$ \algAssgn Model$(C \cup \{\neg P\} \cup C_T)$ \\
+    \tabTT $C_\theta$ \algAssgn TrapConditions$(N, A)$ \\
+    \tabTT \algIf SAT$(C_\theta)$ \algThen \\
+    \tabTTT $A_\theta$ \algAssgn Model$(C_\theta)$ \\
+    \tabTTT $\delta$ \algAssgn $\Delta(A_\theta)$ \\
+    \tabTTT $C_T$ \algAssgn $C_T \cup \{\delta\}$ \\
+    \tabTT \algElse \\
+    \tabTTT \algReturn ``Failed at finding an invariant'' \\
+    \tabTT \algFi \\
+    \tabT \algOd \\
+    \tabT $C'$ \algAssgn $\mathcal C'(N, \neg P, C_T)$ \\
+    \tabT \algIf SAT$(C')$ \algThen \\
+    \tabTT $A'$ \algAssgn Model$(C')$ \\
+    \tabTT $I$ \algAssgn $C_T \land \text{Inv}(N, A')$ \\
+    \tabTT \algReturn ``Invariant I for the petri net: $I$'' \\
+    \tabT \algElse \\
+    \tabTT \algReturn ``Failed at finding an invariant'' \\
+    \tabT \algFi \\
+    \algEnd
+  \end{minipage}
+  \vspace{1.5ex}
+  \hrule
+  \vspace{1.5ex}
+  (a) Function Invariant by Refinement
+  \vspace{2.5ex}
+  \begin{minipage}{\columnwidth}
+    \centering
+    \begin{align*}
+      \text{TrapConditions}(N, A) =& \left(
+        \bigwedge_{s \in S} \left( s \Rightarrow
+          \bigwedge_{t \in \post{s}} \bigvee_{p \in \post{t}} p
+        \right) \right) \land
+      \left( \bigvee_{s \in S: M_0(s) > 0} s \right) \land
+      \left( \bigwedge_{s \in S: A(s) > 0} \neg s \right)
+    \end{align*}
+    \vspace{1.5ex}
+    (b) Function TrapConditions
+  \end{minipage}
+  \vspace{2.5ex}
+  \begin{minipage}{.4\columnwidth}
+    \centering
+    \begin{align*}
+      & \Delta(A_\theta) = \left( \sum_{A_\theta(s)} s \ge 0 \right)
+    \end{align*}
+    \vspace{1.5ex}
+    (c) Function $\Delta$
+  \end{minipage}
+  \begin{minipage}{.4\columnwidth}
+    \centering
+    \begin{align*}
+      \text{Inv}(N, A') =& \left( \sum_{s \in S} A'(s) \cdot s \le
+        \sum_{s \in S} A'(s) \cdot M_0(s) \right)
+    \end{align*}
+    \vspace{1.5ex}
+    (d) Function Inv
+  \end{minipage}
+  \caption{Function \invariantref\ and auxiliary functions}
+  \label{fig_function_invariant_by_refinement_pseudocode}
 \end{figure}
 
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
