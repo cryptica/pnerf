@@ -27,4 +27,4 @@ init(q1).
 init(nb1).
 init(nb2).
 
-target(1, [([p3, q5], 2)]).
+target(1, [([p3], 1), ([q5], 1)]).
